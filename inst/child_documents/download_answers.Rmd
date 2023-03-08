@@ -12,9 +12,9 @@ question_text(
 ###
 
 ```{r context = "setup"}
-submission_ui
+tutorial.helpers::submission_ui
 ```
 
 ```{r context = "server"}
-submission_server()
+tutorial.helpers::submission_server()
 ```

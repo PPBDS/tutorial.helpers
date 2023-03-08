@@ -9,7 +9,10 @@ Authors@R:
            comment = c(ORCID = "0000-0002-6660-3934"))
 Description: This package includes helper functions for creating and processing 
   tutorials which use the **learnr** package. 
-Depends: R (>= 3.5.0)   
+Depends: 
+    knitr,
+    R (>= 3.5.0),
+    tidyverse
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -22,7 +25,6 @@ Imports:
     dplyr,
     gmailr,
     googledrive,
-    knitr,
     learnr,
     parsermd,
     purrr,
