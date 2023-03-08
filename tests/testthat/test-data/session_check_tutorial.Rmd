@@ -1,0 +1,1686 @@
+---
+title: 'Data: Webscraping'
+tutorial:
+  id: data-webscraping
+output:
+  learnr::tutorial:
+    progressive: yes
+    allow_skip: yes
+runtime: shiny_prerendered
+description: Scraping data from the web.
+---
+
+```{r setup, include = FALSE}
+library(learnr)
+library(all.primer.tutorials)
+library(tidyverse)
+library(rvest)
+
+knitr::opts_chunk$set(echo = FALSE)
+options(tutorial.exercise.timelimit = 600, 
+        tutorial.storage = "local") 
+
+### HTML Set up objects
+
+raw_html_1 <- "<html>Hello World</html>"
+
+raw_html_2 <- "<html>
+<table>
+  <tr>
+    <td>
+      Hello World
+    </td>
+  </tr>
+</table>
+</html>"
+
+raw_html_3 <- "<html>
+<table>
+  <tr>
+    <td>
+      Hello World
+    </td>
+    <td>
+      foo
+    </td>
+    <td>
+      bar
+    </td>
+  </tr>
+</table>
+</html>"
+
+td_tags <- minimal_html(raw_html_3) |> html_elements("td")
+
+### CSS Set Up
+
+anchor <- '<a https://ppbds.github.io/primer/index.htm" id="abcd1234" class="hello hi">link to primer</a>'
+
+### Open Secrets Set Up
+
+web_url <- "https://www.opensecrets.org/political-action-committees-pacs/foreign-connected-pacs/2020"
+
+local_url <- "data/opensecrets_backup.html"
+
+raw_data_opensecrets <- read_html(local_url) |> 
+  html_element("table.DataTable-Partial") |> 
+  html_table()
+
+### Wikipedia Set Up
+
+wiki_url <- "https://en.wikipedia.org/w/index.php?title=%22,%22Gun_violence_in_the_United_States_by_state%22,%22&direction=prev&oldid=810166167"
+
+raw_data_wiki <- read_html(wiki_url) |>
+  html_element("#mw-content-text") |>
+  html_element("table.wikitable") |>
+  html_table()
+```
+
+<!-- DK: I think that all objects need to be created in the initial set up chunk. This is required if a student is to use Run Tutorial from the Tutorial window. I *think* however, that this is not needed if a student chooses Run Document after opening the .Rmd for the tutorial. That is a guess! Or maybe this has something to do with us testing our tutorials from withi nall.primer.tutorials itself. That seems less likely. -->
+
+<!-- DK: Why did I need to move the html_raw creation into this code chunk? Why didn't it work in its own code chunk? All the other set up code chunks seem to work fine? At least they do when I do the tutorial from Run Document . . . -->
+
+<!-- DK: You skip lines a lot. Is this good or bad? I am not sure! Does it make it more likely that students will read things? -->
+
+<!-- DK: Explain somewhere what abbreviations like "td" stand for. -->
+
+
+```{r copy-code-chunk, child = "../../child_documents/copy_button.Rmd"}
+```
+
+```{r info-section, child = "../../child_documents/info_section.Rmd"}
+```
+
+## HTML
+
+HTML, or "HyperText Markup Language" is a markup language that is used to display webpages on browsers. You might have seen html files as a result of knitting Rmd files.
+
+### 
+
+### Exercise 1
+
+In this tutorial, you will use the **rvest** package to read the HTML of websites and extract data. First, load the **rvest** package.
+
+You may need to install the **rvest** package in RStudio's console if the code box below outputs an error. If so, use `install.packages("rvest")` in Console. Do not issue this command within the tutorial itself.
+
+```{r html-1, exercise = TRUE}
+
+```
+
+```{r html-1-hint-1, eval = FALSE}
+library(...)
+```
+
+### 
+
+**[rvest](https://rvest.tidyverse.org/)** is part of the **tidyverse**, a collection of packages, but it is not part of the core **tidyverse** package so you have to load it in separately.
+
+### Exercise 2
+
+HTML uses many nested layers of different tags to organize structure. For example: An html file like this:
+
+```{r echo = TRUE, eval = FALSE}
+<html>
+<p>
+Hello World
+</p>
+</html>
+```
+
+creates the following:
+
+<br>
+<html>
+<p  style="background-color:lightgray">
+Hello World
+</p>
+</html>
+<br>
+
+Tags are created with an "opening" tag like `<...>` and a "closing" tag like `</...>`, similar to parentheses. Note how the closing tag includes a forward slash. This example uses the html tag `<html>`, which is the main tag that includes the entire webpage.
+
+### 
+
+You will be parsing the following html structure:
+
+```{r echo = TRUE, eval = FALSE}
+<html>
+<p>
+Hello World
+</p>
+</html>
+```
+
+<!-- DK: This question is awkward. It had two versions of the html, one with <p> and one without. If we want to do both, this should be split into two questions. Parse the simple Hello World first. I tried to fix this by deleting the <p> tags. Is that correct? Or should the p tags be everywhere, like they seem to be with Exercise 4? Looks like the p tag is there by default, that we don't need to include it specifically. Make that clear. -->
+
+<!-- NWL: The <p>, <body>, and <head> tags are all supplied by the function minimal_html(), so I think it would make more sense to include <p> tags in the example since usually when webscraping they would be there. -->
+
+Assign the provided html code into the variable `raw_html_1` for easy access.
+
+```{r html-2, exercise = TRUE}
+"<html><p>Hello World</p></html>"
+
+```
+
+```{r html-2-hint-1, eval = FALSE}
+raw_html_1 <- "<html>Hello World</html>"
+
+```
+
+<!-- DK: Instead of creating permanent R objects --- which can lead to all sorts of problems --- why not just do everything as a pipe. Like:  -->
+
+<!-- "<html>Hello World</html>"  |>  -->
+<!--     minimal_html() -->
+
+<!-- Then each example is guaranteed to work.     -->
+
+<!-- NWL: I just think it would be easier to copy/paste with variables. -->
+
+### 
+
+You can now use the `raw_html_1` variable
+
+### Exercise 3
+
+Run `minimal_html()` on `raw_html_1`. This function takes the raw html text and creates an object to easily access information.
+
+Later, you will read html directly from websites.
+
+
+```{r html-3, exercise = TRUE}
+
+```
+
+```{r html-3-hint-1, eval = FALSE}
+raw_html_1 |>
+  minimal_html()
+```
+
+### 
+
+**rvest** reads html data and constructs a nested list-like object to represent the usual nested structure of html.
+
+The output is similar to the output of a list.
+
+### Exercise 4
+
+Copy/paste your code from above and extend it using `|>`. Use the function `html_element()` to select the first paragraph tag `<p>` inside the structure.
+
+`html_element()` takes a string that shows the type of a tag.
+For example, `<p>` can be found with `"p"`.
+
+```{r html-4, exercise = TRUE}
+
+```
+
+```{r html-4-hint-1, eval = FALSE}
+... |>
+  html_element(...)
+```
+
+```{r html-4-hint-2, eval = FALSE}
+... |>
+  html_element("p")
+```
+
+### 
+
+You can see it returned an `{html_node}` object that is the tag `<p>`
+
+### Exercise 5
+
+Copy/paste your pipe from above and extend it. Use the function `html_text2()`, which prints the text inside a tag.
+
+```{r html-5, exercise = TRUE}
+
+```
+
+```{r html-5-hint-1, eval = FALSE}
+... |>
+  html_text2()
+```
+
+### 
+
+The output should be "Hello World". Now you can access the inside of a tag.
+
+### Exercise 6
+
+Usually, html tag structures are nested like the following:
+
+```{r echo = TRUE, eval = FALSE}
+<html>
+<table>
+  <tr>
+    <td>
+      Hello World
+    </td>
+  </tr>
+</table>
+</html>
+```
+
+<!-- DK: Maybe show what this looks like? Maybe explain it in a sentence or two? -->
+
+This html, for example, represents a `<table>` that has one table row `<tr>`, and one table data `<td>` in that `<tr>`.
+
+<!-- AG: I'll be putting HTML code in here that includes the picture. This also lines up with the primer. -->
+
+<html>
+<table style="border: 1px solid black">
+  <tr style="border: 1px solid black">
+    <td style="border: 1px solid black">
+      Hello World
+    </td>
+  </tr>
+</table>
+</html>
+
+### 
+
+You will parse the above html
+
+Assign the provided html to a variable named `raw_html_2`
+
+```{r html-6, exercise = TRUE}
+"<html>
+<table>
+  <tr>
+    <td>
+      Hello World
+    </td>
+  </tr>
+</table>
+</html>"
+```
+
+```{r html-6-hint-1, eval = FALSE}
+raw_html_2 <- "..."
+```
+
+### 
+
+Now you have access to `raw_html_2`
+
+### Exercise 7
+
+<!-- DK: Pipes beginw ith objects. Should be raw_html_2 |> minimal_html(). -->
+
+Start a pipe using the function `minimal_html()` and `raw_html_2` as its argument
+
+```{r html-7, exercise = TRUE}
+
+```
+
+```{r html-7-hint-1, eval = FALSE}
+... |>
+  minimal_html()
+```
+
+### 
+
+Now you can search for elements inside the html.
+
+### Exercise 8
+
+Copy/paste your code from above and extend it with `|>`. Using `html_element()`, find the first `<table>` tag.
+
+Remember that `html_element()` takes the type of tag you want to search for as an argument.
+
+So to search for `<table>`, you can use `"table"` as an argument.
+
+```{r html-8, exercise = TRUE}
+
+```
+
+<!-- DK: Format all hints correctly: new lines after the pipe symbol. -->
+
+```{r html-8-hint-1, eval = FALSE}
+... |> 
+  html_element(...)
+```
+
+```{r html-8-hint-2, eval = FALSE}
+... |>
+  html_element("table")
+```
+
+### 
+
+The output like last time returns an `{html_node}` object that has the `<table>` tag.
+
+The lines after the `<table>` show the elements inside `<table>`.
+
+### Exercise 9
+
+Copy/paste your pipe from above and extend it. Use the function `html_element()` again to search for `<td>` tag inside the `<table>` tag.
+
+```{r html-9, exercise = TRUE}
+
+```
+
+```{r html-9-hint-1, eval = FALSE}
+... |>
+  html_element(...)
+```
+
+```{r html-9-hint-2, eval = FALSE}
+... |>
+  html_element("td")
+```
+
+### 
+
+By extending your pipe from the resulting `<table>` tag, you are limiting your searches and functions to only inside the `<table>` tag. You can see from the results that you have selected the `<td>` tag that is inside the `<table>` tag.
+
+### Exercise 10
+
+Copy/paste your pipe from above and extend it. Use the `html_text2()` function to view the text inside the `<td>` tag.
+
+```{r html-10, exercise = TRUE}
+
+```
+
+```{r html-10-hint-1, eval = FALSE}
+... |>
+  html_text2()
+```
+
+### 
+
+Note that there is an older function called `html_text()`, but its default behavior is much less convenient than `html_text2()`. You should always use `html_text2()` unless you have a good reason not to.
+
+### Exercise 11
+
+Usually there are many elements with the same tag on a webpage, which means selecting only the first element with a tag using `html_element()` will not work.
+
+### 
+
+Consider the following html:
+```{r echo = TRUE, eval = FALSE}
+<html>
+<table>
+  <tr>
+    <td>
+      Hello World
+    </td>
+    <td>
+      foo
+    </td>
+    <td>
+      bar
+    </td>
+  </tr>
+</table>
+</html>
+```
+
+There are 3 separate `<td>` tags. If you want to select the middle `<td>` with `foo` as its text, it will be hard for you to use `html_element()`.
+
+### 
+
+You will parse the above html
+
+Assign the provided html to a variable named `raw_html_3`
+
+```{r html-11, exercise = TRUE}
+"<html>
+<table>
+  <tr>
+    <td>
+      Hello World
+    </td>
+    <td>
+      foo
+    </td>
+    <td>
+      bar
+    </td>
+  </tr>
+</table>
+</html>"
+```
+
+```{r html-11-hint-1, eval = FALSE}
+raw_html_3 <- "..."
+```
+
+### 
+
+You now have access to `raw_html_3`
+
+### Exercise 12
+
+Start a pipe using `minimal_html()` and `raw_html_3` as its argument.
+
+```{r html-12, exercise = TRUE}
+
+```
+
+```{r html-12-hint-1, eval = FALSE}
+raw_html_3 |>
+  minimal_html()
+```
+
+### 
+
+You can now search through `raw_html_3` for elements.
+
+### Exercise 13
+
+Copy/paste your code from above and extend it with `|>`. You will use the function `html_elements()` (Note that it is `elements`, not `element`) to find all `<td>` tags.
+
+`html_elements()` takes the same argument as `html_element()`. Use the tag type of `<td>`, which is `"td"`.
+
+```{r html-13, exercise = TRUE}
+
+```
+
+```{r html-13-hint-1, eval = FALSE}
+... |>
+  html_elements("...")
+```
+
+```{r html-13-hint-2, eval = FALSE}
+... |>
+  html_elements("td")
+```
+
+### 
+
+`html_elements()` is very similar to `html_element()`, only that it returns all results compared to `html_element()` first result.
+
+The output returns a `{xml_nodeset (3)}` object, which is basically a list, and then lists all the results.
+
+### Exercise 14
+
+Since the result is a list, you can navigate it exactly like how you would with a list.
+
+### 
+
+Copy/paste your pipe from above and assign it to a variable called `td_tags`. You will use it in the next exercise.
+
+```{r html-14, exercise = TRUE}
+
+```
+
+```{r html-14-hint-1, eval = FALSE}
+td_tags <- raw_html_3 |>
+  minimal_html() |> ...
+```
+
+### 
+
+You now have `td_tags`, which is essentially a list object.
+
+### Exercise 15
+
+Index `td_tags` and extract the second object using brackets.
+
+```{r html-15, exercise = TRUE}
+
+```
+
+```{r html-15-hint-1, eval = FALSE}
+td_tags[[...]]
+```
+
+### 
+
+Remember to use double brackets to extract an object from a list.
+
+You have selected the second object in `td_tags`, which should print out an `{html_node}` object like you've seen before in earlier exercises.
+
+### Exercise 16
+
+Copy/paste your indexing code and pass it into `html_text2()` as an argument. This will extract the text of the `<td>` tag that you have selected.
+
+```{r html-16, exercise = TRUE}
+
+```
+
+```{r html-16-hint-1, eval = FALSE}
+td_tags[[...]] |> 
+  html_text2()
+```
+
+<!-- DK: Note how I changed the above hint to be a pipe. Everything is a pipe. Much easier for beginning students. -->
+
+### 
+
+Well done! This is the basic structure of HTML. It is tags inside tags inside tags.
+
+Now you can navigate the nested structure of html, select  tags based on position and tag type, and extract the inner text of tags.
+
+## CSS Selectors
+
+<!-- AG: This section is very long. I plan on changing it so that it goes into less detail on what CSS is, as that should be left to the primer. -->
+
+CSS, or Cascading Style Sheets is a language that defines the style of webpages (colors, boxes, spacing, etc).
+
+CSS uses different attributes of tags to find which tags should be formatted in which way.
+
+### 
+
+Consider the following CSS code:
+```{r eval = FALSE, echo = TRUE}
+p {
+color: red
+}
+```
+
+This code formats all the `<p>` tags red.
+
+You can utilize this system to find the tags that you want.
+
+### Exercise 1
+
+A tag's attributes are shown like such in html:
+``` {r echo = TRUE, eval = FALSE}
+
+<a href="https://ppbds.github.io/primer/index.html" id="abcd1234" class="hello hi">
+link to primer
+</a>
+
+```
+
+In the above example, the anchor, or hyperlink tag `<a>` has 3 different attributes:<br>
+`href` which contains the destination link<br>
+`id` which contains a unique id<br>
+`class` which contains the classes that this tag is a part of.
+
+### 
+
+Assign the html for the `<a>` tag into a variable named `anchor`
+
+```{r css-selectors-1, exercise = TRUE}
+'<a href="https://ppbds.github.io/primer/index.html" id="abcd1234" class="hello hi">link to primer</a>'
+
+```
+
+```{r css-selectors-1-hint-1, eval = FALSE}
+anchor <- '...'
+```
+
+### 
+
+You now have access to the `anchor` variable.
+
+The anchor tag `<a>` is simply a link to another page.
+
+### Exercise 2
+
+Start a pipe with `minimal_html()` and `anchor` as its argument.
+
+```{r css-selectors-2, exercise = TRUE}
+
+```
+
+```{r css-selectors-2-hint-1, eval = FALSE}
+anchor |> 
+  minimal_html()
+```
+
+### 
+
+You have loaded the html and can now start to select elements inside.
+
+### Exercise 3
+
+You have been using `html_element()` to find elements with the type of tag (`<a>`, `<p>`, `<table>`, etc), but you can also select an element with CSS attributes.
+
+### 
+
+``` {r echo = TRUE, eval = FALSE}
+
+<a href="https://ppbds.github.io/primer/index.html" id="abcd1234" class="hello hi">
+link to primer
+</a>
+
+```
+
+Copy/paste your code from above and extend it with `|>`. Then use the function `html_element()`.
+
+Select the `<a>` tag using its `id` attribute, `"abcd1234"`.
+
+You specify that you are filtering by `id` in `html_element()` by using `"#id_name"`.
+
+```{r css-selectors-3, exercise = TRUE}
+
+```
+
+```{r css-selectors-3-hint-1, eval = FALSE}
+... |>
+  html_element("#abcd1234")
+```
+
+### 
+
+Since `id` is a unique identifier, every page should only have one tag that uses that `id`, which is helpful to select specific elements.
+
+### Exercise 4
+
+Copy/paste your pipe from above and extend it with the function `html_text2()`. This prints out the text inside the `<a>` tag that you have selected.
+
+```{r css-selectors-4, exercise = TRUE}
+
+```
+
+```{r css-selectors-4-hint-1, eval = FALSE}
+... |>
+  html_text2()
+```
+
+### 
+
+The output is the text inside, which is "link to primer"
+
+### Exercise 5
+
+Start a new pipe using `minimal_html()` and `anchor`.
+
+```{r css-selectors-5, exercise = TRUE}
+
+```
+
+### 
+
+Now we will try to select using the `class` attribute instead of `id`.
+
+### Exercise 6
+
+``` {r echo = TRUE, eval = FALSE}
+
+<a href="https://ppbds.github.io/primer/index.html" id="abcd1234" class="hello hi">
+link to primer
+</a>
+
+```
+
+Copy/paste your code from above and extend it with `|>`. Then use the function `html_element()`.
+
+Select the `<a>` tag using its class attribute, `"hello"`. You specify that you are filtering by `class` in `html_element()` by preceding a class name with `"."`.
+
+```{r css-selectors-6, exercise = TRUE}
+
+```
+
+```{r css-selectors-6-hint-1, eval = FALSE}
+... |>
+  html_element(".hello")
+```
+
+### 
+
+You will notice that the `<a>` tag's full class attribute is actually `"hello hi"`. This means that this `<a>` tag belongs to both the `hello` class and the `hi` class. (You can try selecting with `".hi"` instead of `".hello"`)
+
+Classes are not unique to one tag, so usually there are multiple tags with the same class and tags with multiple classes.
+
+### Exercise 7
+
+Since there can be multiple tags with the same class, it is often safer to use the `html_elements()` to return all results, so you can better find the element you want.
+
+### 
+
+Copy/paste your pipe from above and extend it with `html_text2()`. You can view the inner text of the `<a>` tag.
+
+```{r css-selectors-7, exercise = TRUE}
+
+```
+
+```{r css-selectors-7-hint-1, eval = FALSE}
+... |>
+  html_text2()
+```
+
+### 
+
+Now you can select with class and id as well as extract text from that element.
+
+### Exercise 8
+
+You can also filter by id, class, and type of tag at the same time by chaining them together.
+
+Consider the following code:
+```{r eval = FALSE, echo = TRUE}
+
+some_html |>
+  minimal_html() |>
+  html_element("p#id_name")
+
+```
+
+This code selects the first `<p>` tag with `"id_name"` as its `id`
+
+### 
+
+Start a new pipe with `minimal_html()` and `anchor`, then extend it with `|>`. Use the `html_element()` function to select the anchor tag by specifying its tag type and `id`.
+
+Remember that to select `id`, you have to precede the `id` value with a `#`.
+
+The `<a>` tag's `id` is `"abcd1234"`
+
+```{r css-selectors-8, exercise = TRUE}
+
+```
+
+```{r css-selectors-8-hint-1, eval = FALSE}
+anchor |>
+  minimal_html() |>
+  html_element("a#abcd1234")
+```
+
+### 
+
+Though it may seem redundant to be even more specific, there are always weird website html that could break the constraint of having only one unique `id`.
+
+Adding this extra layer of specificity just makes your selection more accurate.
+
+### Exercise 9
+
+Copy/paste your pipe from above and extend it. Use the function `html_text2()` to see the inner text of the tag.
+
+```{r css-selectors-9, exercise = TRUE}
+
+```
+
+```{r css-selectors-9-hint-1, eval = FALSE}
+... |> 
+  html_text2()
+```
+
+### 
+
+You can now select by chaining tag type and id value, then extract the text.
+
+### Exercise 10
+
+Consider the following code:
+```{r eval = FALSE, echo = TRUE}
+
+some_html |>
+  minimal_html() |>
+  html_element("p.class_name")
+
+```
+
+This code selects the first `<p>` tag with `"class_name"` as one of its `class`
+
+### 
+
+Start a new pipe with `minimal_html()` and `anchor`, then extend it with `|>`. Use the `html_element()` function to select the anchor tag by specifying its tag type and `class`.
+
+Remember that to select `class`, you have to precede the `class` value with a `.`.
+
+The `<a>` tag's `class` attribute is `"hello hi"`
+
+```{r css-selectors-10, exercise = TRUE}
+
+```
+
+```{r css-selectors-10-hint-1, eval = FALSE}
+... |>
+  html_element("a.hello")
+
+# or 
+
+... |>
+  html_element("a.hi")
+```
+
+### 
+
+Now you can select using class and tag type at the same time.
+
+### Exercise 11
+
+Copy/paste your pipe from above and extend it. Use the function `html_text2()` to see the inner text of the tag.
+
+```{r css-selectors-11, exercise = TRUE}
+
+```
+
+```{r css-selectors-11-hint-1, eval = FALSE}
+... |> 
+  html_text2()
+```
+
+### 
+
+Well done.
+
+### Exercise 12
+
+Finally, consider the following code:
+```{r eval = FALSE, echo = TRUE}
+
+some_html |>
+  minimal_html() |>
+  html_element("p#id_name.class_name")
+
+```
+
+This code selects the first `<p>` tag with both `"id_name"` as its `id` AND `"class_name"` as one of its `class`
+
+### 
+
+Start a new pipe with `minimal_html()` and `anchor`.
+
+```{r css-selectors-12, exercise = TRUE}
+
+```
+
+### Exercise 13
+
+Copy/paste your code from above and extend it with `|>`. Use the `html_element()` function to select the anchor tag by specifying its tag type, `id`, and `class`.
+
+html of `<a>` tag:
+``` {r echo = TRUE, eval = FALSE}
+
+<a href="https://ppbds.github.io/primer/index.html" id="abcd1234" class="hello hi">
+link to primer
+</a>
+
+```
+
+Remember:
+To select `class`, you have to precede the `class` value with a `.`.
+
+To select `id`, you have to precede the `id` value with a `#`.
+
+```{r css-selectors-13, exercise = TRUE}
+
+```
+
+```{r css-selectors-13-hint-1, eval = FALSE}
+minimal_html(anchor) |>
+  html_element("a#abcd1234.hello")
+
+# or 
+
+minimal_html(anchor) |>
+  html_element("a#abcd1234.hi")
+
+```
+
+### 
+
+Now you can select using id, class, and tag type at the same time.
+
+### Exercise 14
+
+Copy/paste your pipe from above and extend it. Use the function `html_text2()` to see the inner text of the tag.
+
+```{r css-selectors-14, exercise = TRUE}
+
+```
+
+```{r css-selectors-14-hint-1, eval = FALSE}
+... |>
+  html_text2()
+```
+
+### 
+
+Well done.
+
+### Exercise 15
+
+Up until now, you have been extracting only the inner text of tags. However, there are times when the data you want is in the tag's attribute.
+
+Consider again the following tag:
+``` {r echo = TRUE, eval = FALSE}
+
+<a href="https://ppbds.github.io/primer/index.html" id="abcd1234" class="hello hi">
+link to primer
+</a>
+
+```
+
+The `href` attribute can be helpful if you are collecting urls.
+
+### 
+
+Start a new pipe with `minimal_html()` and `anchor`.
+
+```{r css-selectors-15, exercise = TRUE}
+
+```
+
+```{r css-selectors-15-hint-1, eval = FALSE}
+anchor |>
+  minimal_html()
+```
+
+### 
+
+You now loaded in the html in `anchor`.
+
+### Exercise 16
+
+Copy/paste your pipe from above and extend it with `|>`. Use the function `html_element()` to select the `<a>` tag with both its tag type and `id` attribute, `"abcd1234"`.
+
+```{r css-selectors-16, exercise = TRUE}
+
+```
+
+```{r css-selectors-16-hint-1, eval = FALSE}
+... |>
+  html_element("#...")
+```
+
+```{r css-selectors-16-hint-2, eval = FALSE}
+... |>
+  html_element("#abcd1234")
+```
+
+### 
+
+You have now selected the `<a>` tag.
+
+### Exercise 17
+
+Copy/paste your pipe from above and extend it with `html_attr()`.
+This function takes as an argument the name of the attribute that you want to select in quotes. Select the `href` attribute of the `<a>` tag.
+
+```{r css-selectors-17, exercise = TRUE}
+
+```
+
+```{r css-selectors-17-hint-1, eval = FALSE}
+... |> 
+  html_attr("...")
+```
+
+```{r css-selectors-17-hint-2, eval = FALSE}
+... |> 
+  html_attr("href")
+```
+
+### 
+
+Now you can also extract data from the attributes of tags. You can try `"class"` or `"id"` since both are also attributes.
+
+Nice work!
+
+<!-- AG: I want to move this to after Wikipedia just because it lines up a bit more with the primer. -->
+
+## Open Secrets table
+
+<a href="https://www.opensecrets.org">Open Secrets</a> contains <a href="https://www.opensecrets.org/political-action-committees-pacs/foreign-connected-pacs/2020">data</a> associated with the amount and sources of money donated to Democratic and Republican parties in 2020. <a href="https://www.opensecrets.org/political-action-committees-pacs/foreign-connected-pacs/2020">Check out the page</a>. You will be reading the table underneath the map.
+
+### 
+
+### Exercise 1
+
+Assign the url provided below to a variable named `web_url`.
+
+```{r open-secrets-table-1, exercise = TRUE}
+"https://www.opensecrets.org/political-action-committees-pacs/foreign-connected-pacs/2020"
+
+```
+
+```{r open-secrets-table-1-hint-1, eval = FALSE}
+web_url <- "..."
+```
+
+### Exercise 2
+
+Start a pipe with `web_url` and the function `read_html()`.
+
+`read_html()` takes a link and reads the html of that webpage.
+
+If you tried the hint for this exercise and it is giving you an error like: `Error in open.connection(x, "rb") : HTTP error 403.`, use the variable `local_url` instead for all exercises in the Open Secrets section.
+
+```{r open-secrets-table-2, exercise = TRUE}
+
+```
+
+```{r open-secrets-table-2-hint-1, eval = FALSE}
+web_url |> read_html()
+```
+
+### 
+
+You now loaded the html of the webpage into R, similar to how you did with `minimal_html()` in earlier sections.
+
+You can begin to select elements in the page.
+
+### Exercise 3
+
+The following html shows the `table` tag's attributes:
+```{r echo = TRUE, eval = FALSE}
+<table class="DataTable-Partial dataTable no-footer" data-title="Foreign Connected PACs, 2019-2020" data-paging="true" data-page-length="25">...</table>
+```
+
+### 
+
+Copy/paste your pipe from above and extend it with `|>`. Select the table using the function `html_element()` with both the tag type and its first `class` attribute.
+
+```{r open-secrets-table-3, exercise = TRUE}
+
+```
+
+```{r open-secrets-table-3-hint-1, eval = FALSE}
+... |>
+  html_element("tag.class_name")
+```
+
+```{r open-secrets-table-3-hint-2, eval = FALSE}
+... |>
+  html_element("table.DataTable-Partial")
+```
+
+### 
+
+You have selected the desired table.
+
+You can see that it has a lot of different attributes and items inside the tag. It can be overwhelming at times but if you focus on the parts you know like `id` or `class`, you will be fine.
+
+
+### Exercise 4
+
+The **rvest** package provides a great table-parsing function, `html_table()`, that allows you to load in web-scraped tables easily.
+
+### 
+
+Copy/paste your pipe from above and extend it with the function `html_table()`. This allows you to load in data in the table in the form of a tibble.
+
+```{r open-secrets-table-4, exercise = TRUE}
+
+```
+
+```{r open-secrets-table-4-hint-1, eval = FALSE}
+... |>
+  html_table()
+```
+
+Your resulting tibble should look something like this:
+
+```{r open_example, echo = FALSE}
+raw_data_opensecrets
+```
+
+### 
+
+Nice work!
+
+Now you have a tibble web-scraped directly from OpenSecrets.
+
+## Wikipedia table
+
+<!-- AG: I'm going to change this to the Canadian Wikipedia since we already have a SelectorGadget video -->
+
+Now you will try your hand in scraping data from a Wikipedia page about <a href="https://en.wikipedia.org/w/index.php?title=%22,%22Gun_violence_in_the_United_States_by_state%22,%22&direction=prev&oldid=810166167">gun violence in the United States by state</a> and plotting it.
+
+Let's create the following plot:
+```{r make-wiki_graph, echo = FALSE}
+clean_data <- raw_data_wiki |>
+  rename(population = 'Population (total inhabitants) (2015) [1]',
+  total_deaths = 'Murders and Nonnegligent\nManslaughter(total deaths) (2015) [2]',
+  death_rate = 'Murder and Nonnegligent\nManslaughter Rate(per 100,000 inhabitants) (2015)') |>
+  select(population, death_rate) |>
+  mutate(population = parse_number(population)) |>
+  mutate(pop_tile = ntile(population, 20)) |>
+  group_by(pop_tile) |>
+  summarize(sum_rate = sum(death_rate),
+            num_states = n()) |>
+  mutate(avg_rate = sum_rate/num_states) |>
+  mutate(percent_rate = avg_rate/sum(avg_rate))
+
+wiki_graph <- ggplot(clean_data, aes(x=pop_tile, y=percent_rate)) + 
+geom_col() +
+geom_smooth(method="loess", formula=y~x, se=FALSE) +
+scale_x_continuous(breaks=1:20) +
+scale_y_continuous(labels=scales::percent_format(accuracy=1)) +
+theme_classic() +
+labs(title="Distribution of US Death Rate by Guns in 2015",
+subtitle="Death rate of less populated states fluctuate\nmore than states with a denser population",
+x = "Quantile by Population (least to most)",
+y="Percent of Average Death Rate",
+caption = "Wikipedia: Gun Violence in the United States (2017)")
+
+
+wiki_graph
+```
+
+### Exercise 1
+
+Assign the url provided below to a variable called `wiki_url`.
+
+```{r wikipedia-table-1, exercise = TRUE}
+"https://en.wikipedia.org/w/index.php?title=%22,%22Gun_violence_in_the_United_States_by_state%22,%22&direction=prev&oldid=810166167"
+
+```
+
+```{r wikipedia-table-1-hint-1, eval = FALSE}
+wiki_url <- "..."
+```
+
+### 
+
+To make sure that updates to the Wikipedia page does not affect this tutorial, the url used is specifically for how the page looked in 2017.
+
+### Exercise 2
+
+Use the function `read_html()` and `wiki_url` as argument to read the html of the Wikipedia webpage.
+
+
+```{r wikipedia-table-2, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-2-hint-1, eval = FALSE}
+wiki_url |> 
+  read_html()
+```
+
+### 
+
+You now loaded the html of the webpage into R, similar to how you did with `minimal_html()` in earlier sections.
+
+You can begin to select elements in the page.
+
+### Exercise 3
+
+The following html is the section that contains the main content of the page:
+
+```{r echo = TRUE, eval = FALSE}
+<div id="mw-content-text" class="mw-body-content mw-content-ltr" lang="en" dir="ltr">...</div>
+```
+
+### 
+
+Copy/paste your pipe from above and extend it with `|>`. Select the main content element with the function `html_element()` using its `id` attribute.
+
+Remember to put `#` before `mw-content-text` to specify that you are searching by `id`.
+
+```{r wikipedia-table-3, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-3-hint-1, eval = FALSE}
+... |> 
+  html_element("#...")
+```
+
+```{r wikipedia-table-3-hint-2, eval = FALSE}
+... |> 
+  html_element("#mw-content-text")
+```
+
+<!-- DK: Explain why we need the "#" here, when, before we just did "p" and the like. Is that because mw-content-text is an id and not a tag? -->
+
+### 
+
+You have selected the main content section of the page.
+
+### Exercise 4
+
+The following is the tag for the table inside the section selected in the previous exercise:
+```{r echo = TRUE, eval = FALSE}
+<table class="wikitable sortable jquery-tablesorter">...</table>
+```
+
+### 
+
+Copy/paste your pipe from above and extend it with the function `html_element()`. Select the table with both its tag type AND one of its `class`.
+
+```{r wikipedia-table-4, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-4-hint-1, eval = FALSE}
+... |>
+  html_element("tag_type.class_name")
+```
+
+```{r wikipedia-table-4-hint-2, eval = FALSE}
+... |>
+  html_element("table.wikitable")
+```
+
+### 
+
+Now you have access to the data table. You can see some of the elements inside listed.
+
+### Exercise 5
+
+The **rvest** package provides a great table-parsing function, `html_table()`, that allows you to load in web-scraped tables easily.
+
+### 
+
+Copy/paste your pipe from above and extend it with the function `html_table()`. This allows you to load in data in the table in the form of a tibble
+
+```{r wikipedia-table-5, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-5-hint-1, eval = FALSE}
+... |>
+  html_table()
+```
+
+### 
+
+Nice work!
+
+Now you have a tibble webscraped directly from Wikipedia.
+
+### Exercise 6
+
+Copy/paste your pipe from above and assign it to a variable named `raw_data_wiki`.
+
+```{r wikipedia-table-6, exercise = TRUE}
+
+```
+
+### 
+
+Now you saved the Wikipedia data into a variable, so you do not have to repeatedly web-scrape the page every time you re-run the pipe.
+
+### Exercise 7
+
+Run `glimpse()` on `raw_data_wiki` to understand the structure of the data.
+
+```{r wikipedia-table-7, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-7-hint-1, eval = FALSE}
+glimpse(...)
+```
+
+### 
+
+`Population (total inhabitants) (2015) [1]` and `Murders and Nonnegligent\nManslaughter(total deaths) (2015) [2]` should be integer columns, obviously. However, they were read in as character columns because of the commas in the numbers on the Wikipedia page.
+
+More often than not, data that's web-scraped are unclean. Therefore, before doing any plotting, you must clean the data.
+
+### Exercise 8
+
+Start a pipe with `raw_data_wiki`.
+
+First, let's rename the columns to make referencing them easier.
+
+Using the `rename()` function, rename all the columns as such: <br><br>
+`Population (total inhabitants) (2015) [1]` to `population`<br><br>
+`Murders and Nonnegligent\nManslaughter(total deaths) (2015) [2]` to `total_deaths`<br><br>
+`Murder and Nonnegligent\nManslaughter Rate(per 100,000 inhabitants) (2015)` to `death_rate`<br><br>
+
+Remember that `rename()` is similar to `mutate()` in the way it is used:<br>
+`rename(new_column_name = old_column_name, 
+        new_col2 = old_col2, ...)`
+
+```{r wikipedia-table-8, exercise = TRUE}
+
+```
+
+<!-- DK: Should we be using backticks rather than quotes for idenifying weird column names? -->
+
+```{r wikipedia-table-8-hint-1, eval = FALSE}
+raw_data_wiki |> 
+  rename(... = `...`,
+         ... = `...`)
+```
+
+```{r wikipedia-table-8-hint-2, eval = FALSE}
+raw_data_wiki |> 
+  rename(population = `Population (total inhabitants) (2015) [1]`,
+         total_deaths = `...`)
+```
+
+### 
+
+In order to select the weird column names, you have to put either \` or " around it.
+
+\` is preferred.
+
+Now it is easier for you to refer to the columns.
+
+### Exercise 9
+
+Copy/paste your pipe and extend it. Use the function `select()` to select only the columns you need, which are `population` and `death_rate`.
+
+```{r wikipedia-table-9, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-9-hint-1, eval = FALSE}
+... |>
+  select(...)
+```
+
+### 
+
+The only column that is unclean now is `population`.
+
+### Exercise 10
+
+Copy/paste your pipe and extend it.
+
+Remove all the commas in `population` and change the column into a numeric column using `parse_number()`.
+
+Then use `mutate()` to store the results in the same column.
+
+```{r wikipedia-table-10, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-10-hint-1, eval = FALSE}
+... |>
+  mutate(population = parse_number(population))
+```
+
+### 
+
+As you can see from the output, right below the column name, `population` is now a `<dbl>`, or double column, which is numeric.
+
+### Exercise 11
+
+Now you can begin dividing the data into quantiles.
+
+### 
+
+Copy/paste your pipe from above and extend it. Use the `ntile()` function to split `population` into 20 quantiles.
+
+Then use `mutate()` to store the results in a new column called `pop_tile`.
+
+Remember that `ntile()` takes as arguments the data that it is splitting and the number of groups to split into.
+
+```{r wikipedia-table-11, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-11-hint-1, eval = FALSE}
+... |>
+  mutate(pop_tile = ntile(...))
+```
+
+```{r wikipedia-table-11-hint-2, eval = FALSE}
+... |>
+  mutate(pop_tile = ntile(population, 20))
+```
+
+### 
+
+You can see the new column in the output, `pop_tile`, which has values between 1 and 20. This refers to which quantile that row is in.
+
+### Exercise 12
+
+Copy/paste your pipe from above and extend it. Group your data by `pop_tile`.
+
+```{r wikipedia-table-12, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-12-hint-1, eval = FALSE}
+.. |>
+  group_by(...)
+```
+
+### 
+
+The output may look like a normal table, but the grouping has already been done.
+
+### Exercise 13
+
+Copy/paste your pipe from above and extend it. Summarize your data with 2 columns:
+Number of States in quantile as `num_states`
+Sum of death rate in quantile as `sum_rate`
+
+```{r wikipedia-table-13, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-13-hint-1, eval = FALSE}
+... |>
+  summarize(...)
+```
+
+```{r wikipedia-table-13-hint-2, eval = FALSE}
+... |>
+  summarize(num_states = n(),
+            sum_rate = sum(...))
+```
+
+### 
+
+The resulting tibble is your summarized data. You can see from the `num_states` column that some of the quantiles have more states than others.
+
+### Exercise 14
+
+In order to counter the imbalanced number of states, you will average the `sum_rate` of each quantile.
+
+### 
+
+Copy/paste your pipe from above and extend it. Create a new column using `mutate()` called `avg_rate`, which is the average rate in quantile per state.
+
+```{r wikipedia-table-14, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-14-hint-1, eval = FALSE}
+... |>
+  mutate(avg_rate=...)
+```
+
+```{r wikipedia-table-14-hint-2, eval = FALSE}
+... |>
+  mutate(avg_rate = sum_rate/num_states)
+```
+
+### 
+
+Now you can see the new column called `avg_rate`.
+
+### Exercise 15
+
+Now let's calculate the percentage of each quantile's average rate over all quantiles' average rates. 
+
+### 
+
+Copy/paste your pipe from above and extend it. Create a new column using `mutate()` called `percent_rate`, which is the percentage of each quantile's average rate over the sum of all quantiles'.
+
+```{r wikipedia-table-15, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-15-hint-1, eval = FALSE}
+... |>
+  mutate(percent_rate = .../sum(...))
+```
+
+```{r wikipedia-table-15-hint-2, eval = FALSE}
+... |>
+  mutate(percent_rate = avg_rate/sum(avg_rate))
+```
+
+### 
+
+Now you finally have everything you need for plotting!
+
+### Exercise 16
+
+Copy/paste your pipe from above and assign it to a variable named `clean_data`.
+
+```{r wikipedia-table-16, echo = FALSE}
+clean_data <- raw_data_wiki |>
+  rename(population = 'Population (total inhabitants) (2015) [1]',
+  total_deaths = 'Murders and Nonnegligent\nManslaughter(total deaths) (2015) [2]',
+  death_rate = 'Murder and Nonnegligent\nManslaughter Rate(per 100,000 inhabitants) (2015)') |>
+  select(population, death_rate) |>
+  mutate(population = parse_number(population)) |>
+  mutate(pop_tile = ntile(population, 20)) |>
+  group_by(pop_tile) |>
+  summarize(sum_rate = sum(death_rate),
+            num_states = n()) |>
+  mutate(avg_rate = sum_rate/num_states) |>
+  mutate(percent_rate = avg_rate/sum(avg_rate))
+```
+
+```{r wiki16, exercise = TRUE}
+
+```
+
+### 
+
+Now you have access to `clean_data`.
+
+### Exercise 17
+
+Start a plot with `ggplot()`. Use `clean_data` as data and map `pop_tile` to the x-axis and `percent_rate` to the y-axis. Add a `geom_col()` to create a bar graph.
+
+```{r wikipedia-table-17, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-17-hint-1, eval = FALSE}
+ggplot(data = ...,
+       mapping = aes(...)) +
+  geom_col()
+```
+
+### 
+
+You can now see the distribution.
+
+### Exercise 18
+
+Copy/paste you code from above and add another layer with `geom_smooth()`. Use `"loess"` as its method, `y~x` as its formula, and set `se` to `FALSE`. This adds a kind of trend line that visualizes the data better.
+
+```{r wikipedia-table-18, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-18-hint-1, eval = FALSE}
+... +
+  geom_smooth(method = ...,
+              formula = ...,
+              se = ...)
+```
+
+### 
+
+The data visualization itself is basically done, but you'll notice that the x-axis isn't chunked properly and the y-axis should be in percentage.
+
+### Exercise 19
+
+Copy/paste your code from above and add another layer using the function `scale_x_continuous()`. Assign to its `breaks` argument `1:20` to break the x-axis into 1 through 20.
+
+```{r wikipedia-table-19, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-19-hint-1, eval = FALSE}
+... +
+  scale_x_continuous(breaks = ...)
+```
+
+```{r wikipedia-table-19-hint-2, eval = FALSE}
+... +
+  scale_x_continuous(breaks = 1:20)
+```
+
+### 
+
+Now the x-axis makes sense.
+
+### Exercise 20
+
+Next let's format the y-axis into percentages.
+
+### 
+
+Copy/paste your code from above and add another layer with `scale_y_continuous()`. Assign to its `labels` argument `scales::percent_format(accuracy=1)`, which changes the y-axis into percentage format.
+
+```{r wikipedia-table-20, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-20-hint-1, eval = FALSE}
+... +
+  scale_y_continuous(labels = ...)
+```
+
+```{r wikipedia-table-20-hint-2, eval = FALSE}
+... +
+  scale_y_continuous(labels = scales::percent_format(accuracy=1))
+```
+
+### 
+
+Now both the axes are labeled accordingly.
+
+### Exercise 21
+
+Copy/paste your code from above and add a `theme_classic()` layer to the plot. Then add the appropriate labels with `labs()`.
+
+```{r wikipedia-table-21, exercise = TRUE}
+
+```
+
+```{r wikipedia-table-21-hint-1, eval = FALSE}
+... +
+  labs(title = "...",
+       subtitle = "...",
+       x = "...",
+       y = "...",
+       caption = "...")
+```
+
+Reminder: this is how your plot should look like.
+```{r show-wiki_graph, echo = FALSE}
+wiki_graph
+```
+
+### 
+
+Well done!
+
+### (Optional) Exercise 22
+
+A part of web-scraping that is not covered here is actually finding the element you want to scrape from the website's html.
+
+Below is a page explaining how to install and use SelectorGadget, which helps you find the html tag that you want:
+
+<a href="https://rvest.tidyverse.org/articles/selectorgadget.html">Link to SelectorGadget page</a>
+
+
+
+<!-- This should be a 60 to 90 minutes worth of exercises devoted to webscraping, with a big focus on the rvest package. Also need to teach some CSS and Selector Gadget. Resources: -->
+
+<!-- If students would just read this paper closely and try out the associated commands -->
+
+<!-- https://github.com/mdogucu/web-scrape -->
+
+<!-- then a tutorial would not be necessary. But they won't! And, even if most of them would, teachers still need a way of knowing that they did. Hence, tutorials. Can we write something that, in essence, forces students to type out everything in that article and understand what it is doing? That is the goal! -->
+
+<!-- https://github.com/rstudio-education/dsbox/tree/master/inst/tutorials/05-moneyinpolitics -->
+<!-- https://minecr.shinyapps.io/dsbox-05-moneyinpolitics/ -->
+
+
+<!-- There is no need to reinvest the wheel. All this code is CC0, so we can just copy/paste it, including the links to images which appear on the web. But how do we ensure that students do things? What questions do we ask? -->
+
+<!-- https://rvest.tidyverse.org/ -->
+<!-- https://github.com/tidyverse/rvest/blob/master/vignettes/rvest.Rmd -->
+<!-- https://github.com/tidyverse/rvest/blob/master/vignettes/articles/selectorgadget.Rmd -->
+
+<!-- Maybe the tutorial starts the same way as this chapter, with a concrete example of what we are trying to do. Note that we just used this prose in our chapter. Again, it is all CC0. -->
+
+<!-- https://rafalab.github.io/dsbook/web-scraping.html -->
+
+<!-- Reminders: -->
+
+<!-- 1) This tutorial is just about raw webscraping, not about working with APIs or JSON. Other tutorials handle that. -->
+
+<!-- 2) Key structure is to, first, begin with sections which highlights the key issues and key commands. Then, have 5 or so concrete examples, each of which works with an html file which we have a permanent copy of. (But how do we show how that file looks in a browser? I am confused about that.) Nothing wrong with all the examples being from Wikipedia and referencing specific versions, even if they are old. -->
+
+<!-- 3) Plan is to write this tutorial and then, afterwards, update the Chapter to be consistent with it. -->
+
+<!-- 4) Use html_text2(). Background: https://www.tidyverse.org/blog/2021/03/rvest-1-0-0/ -->
+
+ 
+
+```{r download-answers, child = "../../child_documents/download_answers.Rmd"}
+```

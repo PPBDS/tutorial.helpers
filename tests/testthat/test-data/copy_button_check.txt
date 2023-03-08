@@ -1,0 +1,2 @@
+```{r copy-code-chunk, child = "../../child_documents/copy_button.Rmd"}
+```

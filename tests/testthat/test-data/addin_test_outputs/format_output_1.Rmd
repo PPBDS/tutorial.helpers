@@ -1,0 +1,127 @@
+---
+title: format_test_1
+author: Nuo Wen Lei
+date: 7/27/2021
+output: html_document
+---
+
+This is test 1 for the addin that formats code chunk labels. This covers the basic usage of the addin, which is changing the chunk labels based on section name and exercise number. It also covers the mix of different kinds of questions.
+
+## Section 1
+### 
+
+### Exercise 1
+
+```{r section-1-1, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{r section-1-1-hint-1, eval = FALSE}
+
+```
+
+### 
+
+### Exercise 2
+
+```{r section-1-2, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{r section-1-2-hint-1, eval = FALSE}
+
+```
+
+### 
+
+### Exercise 3
+
+```{r section-1-3}
+question_text(NULL,
+	message = "answer here",
+	answer(NULL,
+	correct = TRUE),
+	allow_retry = FALSE,
+	incorrect = NULL,
+	rows = 6)
+```
+
+### 
+
+### Exercise 4
+
+```{r section-1-4, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{r section-1-4-hint-1, eval = FALSE}
+
+```
+
+### 
+
+## Section 2
+### 
+
+### Exercise 1
+
+```{r section-2-1, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{r section-2-1-hint-1, eval = FALSE}
+
+```
+
+### 
+
+### Exercise 2
+
+```{r section-2-2}
+question_text(
+	"prompt here",
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Text for button",
+	incorrect = NULL)
+```
+
+### 
+
+### Exercise 3
+
+aslkdjasld
+
+```{r section-2-3, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{r section-2-3-hint-1, eval = FALSE}
+
+```
+
+### 
+
+### Exercise 4
+
+```{r section-2-4, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{r section-2-4-hint-1, eval = FALSE}
+
+```
+
+###

@@ -1,0 +1,110 @@
+---
+title: "format_test_2"
+author: "Nuo Wen Lei"
+date: "7/27/2021"
+output: html_document
+---
+
+This is test 2 for the addin that formats code chunk labels. This covers testing for the function of fixing exercise headings while fixing chunk labels
+
+## Section 1
+
+###
+
+### Exercise 3000
+
+
+```{r section-1-3000, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{r section-1-3000-hint, eval = FALSE}
+
+```
+
+###
+
+### Exercise 29
+
+
+```{r section-1-3000, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{r section-1-3000-hint, eval = FALSE}
+
+```
+
+###
+
+
+### Exercise 5
+
+
+```{r section-1-3000, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{r section-1-3000-hint, eval = FALSE}
+
+```
+
+###
+
+### Exercise 1
+
+
+```{r section-1-3000, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{r section-1-3000-hint, eval = FALSE}
+
+```
+
+###
+
+## Section 2
+###
+
+### Exercise 6
+
+
+```{r section-6}
+question_text(
+	"prompt here",
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Text for button",
+	incorrect = NULL)
+```
+
+###
+
+### Exercise 7
+
+
+```{r section-7}
+question_text(NULL,
+	message = "answer here",
+	answer(NULL,
+	correct = TRUE),
+	allow_retry = FALSE,
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+
+
+
+
