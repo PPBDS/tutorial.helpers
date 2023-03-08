@@ -1,2 +1,3 @@
-# tutorial.helpers
-Package of helper functions for creating and processing tutorials
+# Tutorial Helpers
+
+Package of helper functions for creating and processing tutorials.

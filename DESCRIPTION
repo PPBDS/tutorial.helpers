@@ -1,0 +1,15 @@
+Package: tutorial.helpers
+Title: Helper Functions for Creating and Processing Tutorials
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "David",
+           family = "Kane",
+           role = c("aut", "cre"),
+           email = "dave.kane@gmail.com",
+           comment = c(ORCID = "0000-0002-6660-3934"))
+Description: This package includes helper functions for creating and processing 
+  tutorials which use the **learnr** package. 
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.1
