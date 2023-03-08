@@ -13,6 +13,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
+VignetteBuilder: knitr
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -20,6 +21,7 @@ Imports:
     dplyr,
     gmailr,
     googledrive,
+    knitr,
     learnr,
     parsermd,
     purrr,
@@ -29,3 +31,4 @@ Imports:
     shiny,
     stringr,
     tibble
+BugReports: https://github.com/ppbds/tutorial.helpers/issues
