@@ -10,6 +10,12 @@ vignette: >
 
 
 
+<!-- Change the approach so that the advice covers all sorts of tutorials, not just all.primer.tutorials. -->
+
+<!-- Explain how testing with test_knit_tutorials() works. -->
+
+<!-- Does this appear on the website? -->
+
 <!-- I hate the way that all the weird formatting we do messes up the document outline. You can see that effect within R Studio and on the web page. Fixable? -->
 
 <!-- Tutorial answers should require the smallest incremental number of characters for students to type. That is how you know that your learning curve is shallow. geom_smooth() example. -->
