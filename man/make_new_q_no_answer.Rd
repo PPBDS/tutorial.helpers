@@ -10,7 +10,7 @@ make_new_q_no_answer()
 question skeleton with appropriate labels and numbers
 }
 \description{
-An add-in for writing all.primer.tutorials.
+An add-in for writing tutorials.
 
 It reads the latest exercise and section name
 and then adds a question skeleton (with no answers and allows retries).

@@ -496,7 +496,7 @@ Once you are done writing your tutorial, you need to make sure it works before y
 
 1. Read the error message at the bottom of the Build pane. You want to see "R CMD check succeeded." If not, there is a problem. The error message will often provide a clue as to where in your code the error occurred.
 
-2. If that error message is not detailed enough, go to the `all.primer.tutorials.rcheck` folder, which should be located in the same directory as `all.primer.tutorials` on your computer. This is a folder created by the R CMD check process, and it will be automatically deleted if the check process succeeds. If the process fails, the `all.primer.tutorials.rcheck` folder stays around so that you can examine it. The key file is `testthat.Rout.fail`, which should be in the `tests` directory. It has more details.
+2. If that error message is not detailed enough, go to the `your.package.name.rcheck` folder, which should be located in the same directory as `your.package.name` on your computer. This is a folder created by the R CMD check process, and it will be automatically deleted if the check process succeeds. If the process fails, the `your.package.name.rcheck` folder stays around so that you can examine it. The key file is `testthat.Rout.fail`, which should be in the `tests` directory. It has more details.
 
 The most common source of errors is something wrong with the hint code chunks, which are not evaluated when you just Run Document. Make sure the `eval = FALSE` argument is set in the code chunk for all hints. Check also to see if you included the Information and Submission lines. 
 

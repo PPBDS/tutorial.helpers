@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' An add-in for writing all.primer.tutorials.
+#' An add-in for writing tutorials.
 #'
 #' It reads the latest exercise and section name
 #' and then adds a question skeleton (with answers and no retries).

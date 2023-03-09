@@ -10,7 +10,7 @@ make_new_exercise()
 exercise skeleton with appropriate labels and numbers
 }
 \description{
-An add-in for writing all.primer.tutorials.
+An add-in for writing tutorials.
 
 It reads the latest exercise and section name
 and then adds an exercise skeleton.

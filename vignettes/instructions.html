@@ -447,7 +447,7 @@ include_graphics(&quot;images/example.png&quot;)
 <p>Read the error message at the bottom of the Build pane. You want to see “R CMD check succeeded.” If not, there is a problem. The error message will often provide a clue as to where in your code the error occurred.</p>
 </li>
 <li>
-<p>If that error message is not detailed enough, go to the <code>all.primer.tutorials.rcheck</code> folder, which should be located in the same directory as <code>all.primer.tutorials</code> on your computer. This is a folder created by the R CMD check process, and it will be automatically deleted if the check process succeeds. If the process fails, the <code>all.primer.tutorials.rcheck</code> folder stays around so that you can examine it. The key file is <code>testthat.Rout.fail</code>, which should be in the <code>tests</code> directory. It has more details.</p>
+<p>If that error message is not detailed enough, go to the <code>your.package.name.rcheck</code> folder, which should be located in the same directory as <code>your.package.name</code> on your computer. This is a folder created by the R CMD check process, and it will be automatically deleted if the check process succeeds. If the process fails, the <code>your.package.name.rcheck</code> folder stays around so that you can examine it. The key file is <code>testthat.Rout.fail</code>, which should be in the <code>tests</code> directory. It has more details.</p>
 </li>
 </ol>
 <p>The most common source of errors is something wrong with the hint code chunks, which are not evaluated when you just Run Document. Make sure the <code>eval = FALSE</code> argument is set in the code chunk for all hints. Check also to see if you included the Information and Submission lines.</p>

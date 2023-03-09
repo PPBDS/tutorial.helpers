@@ -12,9 +12,7 @@ description: "ADD DESCRIPTION (a single sentence)"
 
 ```{r setup, include = FALSE}
 library(learnr)
-library(all.primer.tutorials)
-library(tidyverse)
-library(primer.data)
+library(YOUR TUTORIAL NAME)
 knitr::opts_chunk$set(echo = FALSE)
 options(tutorial.exercise.timelimit = 60, 
         tutorial.storage = "local") 

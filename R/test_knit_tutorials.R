@@ -10,17 +10,20 @@ test_knit_tutorials <- function(package){
   # Would be nice if the function could automatically discover the library it is
   # currently operating within.
 
+  # Make code rely on fewer packages.
+
   # This testing approach only works, I think, when you click `Build -> Check`.
   # Otherwise, the tutorials you are testing might be those you installed
-  # previously, not the ones you just edited. See discussion in
-  # all.primer.tutorials.
+  # previously, not the ones you just edited.
 
   package_location <- system.file("tutorials", package = package)
 
   tutorial_paths <-
-    available_tutorials(package) |>
-    mutate(path = paste0(package_location, "/", name, "/tutorial.Rmd")) |>
-    pull(path)
+    learnr::available_tutorials(package) |>
+    dplyr::mutate(path = paste0(package_location, "/",
+                                name,
+                                "/tutorial.Rmd")) |>
+    dplyr::pull(path)
 
   # stopifnot(length(tutorial_paths) >= 1)
 
@@ -38,8 +41,8 @@ test_knit_tutorials <- function(package){
 
   for(i in tutorial_paths){
     cat(paste("Testing tutorial:", i, "\n"))
-    test_that(paste("rendering", i), {
-      expect_output(rmarkdown::render(i, output_file = "tutorial.html"),
+    testthat::test_that(paste("rendering", i), {
+      testthat::expect_output(rmarkdown::render(i, output_file = "tutorial.html"),
                     "tutorial.html")
     })
   }
@@ -52,3 +55,7 @@ test_knit_tutorials <- function(package){
 
   NULL
 }
+
+# Never understand what this hack does or why it is necessary.
+
+utils::globalVariables(c("name", "path"))
