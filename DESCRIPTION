@@ -34,3 +34,4 @@ Imports:
     stringr,
     tibble
 BugReports: https://github.com/ppbds/tutorial.helpers/issues
+URL: https://ppbds.github.io/tutorial.helpers/
