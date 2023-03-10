@@ -29,6 +29,7 @@ Imports:
     purrr,
     readr,
     rmarkdown,
+    rsconnect,
     rstudioapi,
     shiny,
     stringr,
