@@ -47,7 +47,7 @@ The top of your file should look like the text below.
 
 ![plot of chunk unnamed-chunk-4](images/tutorial-rmd-beginning.png)
 
-Every tutorial must load the **learnr** package in order to function. `library(all.primer.tutorials)` is always included because it contains the file, `submissions_functions.R`, which enables answer downloading. All our tutorials need the **tidyverse**. You may need to add other packages which are used in your tutorial. Any such packages also need to be included in the DESCRIPTION file.
+Every tutorial must load the **learnr** package in order to function. `library(tutorial.helpers)` is always included because it contains the file, `submissions_functions.R`, which enables answer downloading. All our tutorials need the **tidyverse**. You may need to add other packages which are used in your tutorial. Any such packages also need to be included in the DESCRIPTION file.
 
 `echo = FALSE` is a handy default because, most of the time, we don't show users the code. Setting the `tutorial.exercise.timelimit` to 60 seconds is safe, but probably not necessary. `tutorial.storage` must be set to `local` to ensure that user work is saved between sessions.
 

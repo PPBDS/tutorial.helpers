@@ -1,7 +1,7 @@
 library(tidyverse)
 library(learnr)
 library(stringr)
-library(all.primer.tutorials)
+library(tutorial.helpers)
 library(parsermd)
 
 for(i in tutorial_paths){

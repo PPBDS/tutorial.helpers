@@ -27,7 +27,7 @@ options(tutorial.exercise.timelimit = 60,
 <!-- CHECKLIST BEFORE STARTING: -->
 <!-- * Load necessary libraries for tutorial in the first code chunk -->
 <!-- * Edit yaml at the TOP OF THIS FILE -->
-<!-- * Review: https://ppbds.github.io/all.primer.tutorials/articles/instructions.html -->
+<!-- * Review: https://ppbds.github.io/tutorial.helpers/articles/instructions.html -->
 <!-- * Delete this and the other comment instructions below. -->
 
 ## Introduction

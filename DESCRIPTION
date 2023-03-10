@@ -10,13 +10,11 @@ Authors@R:
 Description: This package includes helper functions for creating and processing 
   tutorials which use the **learnr** package. 
 Depends: 
-    knitr,
-    R (>= 3.5.0),
-    tidyverse
+    R (>= 3.5.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 Suggests: 
     testthat (>= 3.0.0)
@@ -25,6 +23,7 @@ Imports:
     dplyr,
     gmailr,
     googledrive,
+    knitr,
     learnr,
     parsermd,
     purrr,

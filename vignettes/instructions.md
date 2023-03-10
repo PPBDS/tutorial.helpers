@@ -10,7 +10,7 @@ vignette: >
 
 
 
-<!-- Change the approach so that the advice covers all sorts of tutorials, not just all.primer.tutorials. -->
+<!-- Change the approach so that the advice covers all sorts of tutorials, not just tutorial.helpers. -->
 
 <!-- Explain how testing with test_knit_tutorials() works. -->
 
@@ -48,7 +48,7 @@ A tutorial should take about 1 to 2 hours. Depending on the topic difficulty, th
 
 ## Set Up
 
-To make additions to **all.primer.tutorials**, follow the [set up guide](https://ppbds.github.io/primer/set-up.html) to fork/download a copy of [PPBDS/all.primer.tutorials](https://github.com/PPBDS/all.primer.tutorials). Press "Install and Restart" from the "Build" tab to ensure that you have the latest copy installed. (You should not do `remotes::install_github("PPBDS/all.primer.tutorials")` since that gets the version from Github. You want the version from your computer so that you get any changes you make.) 
+To make additions to **tutorial.helpers**, follow the [set up guide](https://ppbds.github.io/primer/set-up.html) to fork/download a copy of [PPBDS/tutorial.helpers](https://github.com/PPBDS/tutorial.helpers). Press "Install and Restart" from the "Build" tab to ensure that you have the latest copy installed. (You should not do `remotes::install_github("PPBDS/tutorial.helpers")` since that gets the version from Github. You want the version from your computer so that you get any changes you make.) 
 
 Tutorials themselves live in `inst/tutorials`. Each directory name is a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and the order in which to do it) and a name, which corresponds to the `id'` of the tutorial. Within each directory is a `tutorial.Rmd` file and, sometimes, other material like an `images` and `data` directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. Take for example the tutorial that says `052`. The "05" indicates that this is a Week 5 tutorial, and the "2" indicates that it is the second tutorial of that week. 
 
@@ -277,14 +277,14 @@ x <- read_csv("data/myfile.csv")
 ```
 
 
-in an R code chunk, presumably in the global `setup` chunk. But, if you try to execute that line of code with CMD-Return, it will fail because, by default, you are located in the `all.primer.tutorials` directory when you start working on the tutorials. Using `setwd()` will solve this problem.
+in an R code chunk, presumably in the global `setup` chunk. But, if you try to execute that line of code with CMD-Return, it will fail because, by default, you are located in the `tutorial.helpers` directory when you start working on the tutorials. Using `setwd()` will solve this problem.
 
 ````markdown
 > getwd()
-[1] "/Users/davidkane/Desktop/projects/all.primer.tutorials"
+[1] "/Users/davidkane/Desktop/projects/tutorial.helpers"
 > setwd("inst/tutorials/031-data-files/")
 > getwd()
-[1] "/Users/davidkane/Desktop/projects/all.primer.tutorials/inst/tutorials/031-data-files"
+[1] "/Users/davidkane/Desktop/projects/tutorial.helpers/inst/tutorials/031-data-files"
 > 
 ````
 
@@ -305,7 +305,7 @@ You then build up the graphic, line by line, over a series of Exercises, providi
 
 We have provided four additions to the Addins menu: "Tutorial Code Exercise", "Tutorial Written Exercise (with Answer)", "Tutorial Written Exercise (no Answer)" and "Format Tutorial Chunk Labels." Give them a try! The first three each insert the skeleton for the next Exercise, featuring all the key component parts. It even takes a guess at the correct Exercise number.  The "Format Tutorial Chunk Labels" Addin is the most useful. Always run it before testing your tutorial. It ensures that all the Exercises are sequentially numbered and that all the code chunk names are correct and unique.
 
-You can find the addins in the "Addins" tab on the top toolbar of RStudio. Please make sure that your cursor located at the point at which you want to insert the new Exercise. You may need to "Install and Restart" the **all.primer.tutorials** package for the Addins to appear.
+You can find the addins in the "Addins" tab on the top toolbar of RStudio. Please make sure that your cursor located at the point at which you want to insert the new Exercise. You may need to "Install and Restart" the **tutorial.helpers** package for the Addins to appear.
 
 <img src="images/code-exercise-1.png" alt="plot of chunk unnamed-chunk-7" width="75%" height="75%" />
 
@@ -480,7 +480,7 @@ The simplest way to test the `tutorial.Rmd` with which you are working on is:
 rmarkdown::render("inst/tutorials/02-terminal/tutorial.Rmd")
 ```
 
-This assumes that you are located in the main directory of **all.primer.tutorials**, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace `02-terminal` with the appropriate directory.
+This assumes that you are located in the main directory of **tutorial.helpers**, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace `02-terminal` with the appropriate directory.
 
 You can also just hit the "Run Document" button. I think that this is the (exact?) same thing has `render()`.
 

@@ -12,7 +12,7 @@ description: Scraping data from the web.
 
 ```{r setup, include = FALSE}
 library(learnr)
-library(all.primer.tutorials)
+library(tutorial.helpers)
 library(tidyverse)
 library(rvest)
 
@@ -76,7 +76,7 @@ raw_data_wiki <- read_html(wiki_url) |>
   html_table()
 ```
 
-<!-- DK: I think that all objects need to be created in the initial set up chunk. This is required if a student is to use Run Tutorial from the Tutorial window. I *think* however, that this is not needed if a student chooses Run Document after opening the .Rmd for the tutorial. That is a guess! Or maybe this has something to do with us testing our tutorials from withi nall.primer.tutorials itself. That seems less likely. -->
+<!-- DK: I think that all objects need to be created in the initial set up chunk. This is required if a student is to use Run Tutorial from the Tutorial window. I *think* however, that this is not needed if a student chooses Run Document after opening the .Rmd for the tutorial. That is a guess! Or maybe this has something to do with us testing our tutorials from withi ntutorial.helpers itself. That seems less likely. -->
 
 <!-- DK: Why did I need to move the html_raw creation into this code chunk? Why didn't it work in its own code chunk? All the other set up code chunks seem to work fine? At least they do when I do the tutorial from Run Document . . . -->
 

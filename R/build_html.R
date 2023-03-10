@@ -15,7 +15,7 @@ build_html <- function(file, session, is_test = FALSE){
   # Copy over a report Rmd template to write to.
 
   tempReport <- file.path(tempdir(), "submission-temp.Rmd")
-  file.copy(system.file("www/submission-temp.Rmd", package = "all.primer.tutorials"), tempReport, overwrite = TRUE)
+  file.copy(system.file("www/submission-temp.Rmd", package = "tutorial.helpers"), tempReport, overwrite = TRUE)
 
   # Get submissions from learnr
 
