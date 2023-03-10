@@ -13,7 +13,6 @@ description: Scraping data from the web.
 ```{r setup, include = FALSE}
 library(learnr)
 library(tutorial.helpers)
-library(tidyverse)
 library(rvest)
 
 knitr::opts_chunk$set(echo = FALSE)

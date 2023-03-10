@@ -1,6 +1,3 @@
-## ----not-setup, include=FALSE-------------------------------------------------
-library(tidyverse)
-
 ## ---- eval=FALSE--------------------------------------------------------------
 #  > .libPaths()
 #  [1] "/Users/dkane/Library/Caches/org.R-project.R/R/renv/library/primer.tutorials-07f29d85/R-4.2/aarch64-apple-darwin20"

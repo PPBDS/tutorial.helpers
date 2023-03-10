@@ -8,10 +8,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r not-setup, include=FALSE}
-library(tidyverse)
-library(knitr)
-```
 
 <!-- Change the approach so that the advice covers all sorts of tutorials, not just tutorial.helpers. -->
 

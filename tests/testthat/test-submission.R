@@ -1,5 +1,4 @@
 library(tutorial.helpers)
-library(tidyverse)
 library(rvest)
 
 # This script tests the components of the downloading functions for

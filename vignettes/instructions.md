@@ -9,7 +9,6 @@ vignette: >
 ---
 
 
-
 <!-- Change the approach so that the advice covers all sorts of tutorials, not just tutorial.helpers. -->
 
 <!-- Explain how testing with test_knit_tutorials() works. -->

@@ -1,6 +1,6 @@
 library(learnr)
 library(tutorial.helpers)
-library(tidyverse)
+library(readr)
 
 # This test is created to test the formatting addin.
 #

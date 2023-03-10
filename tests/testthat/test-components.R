@@ -1,6 +1,5 @@
 library(learnr)
 library(tutorial.helpers)
-library(tidyverse)
 
 # Goal is to make sure that each tutorial includes the required Information and
 # Submission sections. Unfortunately, I could not figure out how to check that a

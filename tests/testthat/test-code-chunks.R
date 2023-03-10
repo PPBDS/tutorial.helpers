@@ -1,4 +1,4 @@
-library(tidyverse)
+library(readr)
 library(learnr)
 library(stringr)
 library(tutorial.helpers)
