@@ -96,15 +96,7 @@ If you are using a new library, there are several things you need to check. Firs
 
 We have seen weird situations in which even doing all of the above did not work. The required hack was to install the new package in your main (default) library. Now, it seems weird that this would help since, with **renv**, we should never be using that location. I suspect that there is a bug involved in the interaction between R CMD check and **renv**.
 
-## Revisit use of functions from **learnr**
 
-Unexported objects imported by ':::' calls:
-  ‘learnr:::get_all_state_objects’ ‘learnr:::read_request’
-  ‘learnr:::submissions_from_state_objects’
-
-Because learnr will not export the three functions which we use in submission_functions.R, we have no choice but to use ::: in order to access them. Doing do produces a NOTE when we run R CMD check. I find that annoying. I tried just providing my own copies in submission_functions.R, but that did not work. (Perhaps the problem is that they themselves use other learnr functions which I don't have access to?)
-
-NWL Update August 14th: In the last few days, learnr has exported the functions, learnr::get_tutorial_state() and learnr::get_tutorial_info(), which eliminates the need for all functions with ':::'. All uses of ':::' has been replaced in this package.
 
 ## Tour of the Package Functions
 
@@ -126,15 +118,6 @@ NWL Update August 14th: In the last few days, learnr has exported the functions,
 
 **get_submissions_from_learnr_session** is a function that gets submissions of the current tutorial session through learnr functions, specifically `learnr:::get_all_state_objects()` and `learnr::submissions_from_state_objects()`. It returns a list of submission objects, each containing details about the question and answer.
 
-### Submission Processing Functions
-
-**gmail_access** is a function that establish a connection with the submission gmail account and downloads submission attachments based on a provided filter.
-
-**gdrive_access** is a function that establish a connection with the submission google drive account and creates a new folder to store submissions and submission info in.
-
-**create_submission_aggregation** is a function that processes downloaded rds submissions and creates a tibble with data about the tutorial user's name, email, time spent on the tutorial, questions answered, and link to submission rds.
-
-**google_submission_collection** is the main function that's called by the user to collect, organize, and save all submissions.
 
 ### Add-in Functions
 
@@ -148,64 +131,9 @@ NWL Update August 14th: In the last few days, learnr has exported the functions,
 
 **make_new_q_with_answer** is an add-in function that creates a question exercise that does have an answer to display with correctly formatted labels and general structure.
 
-## Discussion of Tutorials
-
-Let's discuss the six broad categories of tutorials which we might add, especially to chapters 5 through 11.
-
-First, we can just do more examples. Use different data with a different question, but all the same steps as in the chapter itself. Such examples will generally, like 082, do two analyses: one with all the data (to show the truth) and one in which representativeness fails in a way which we define, thereby showing how we can be led astray. Last step is to compare the answers from these two approaches, thus emphasizing the importance of humility.
-
-Second, stand-alone tutorials on useful topics, like text modeling or networks or rtweet or whatever. These could go in any chapter and would not be restricted to having X number of parameters.
-
-Third, we could cover many other model families, again perhaps not worrying too much about whether or not they have the "right" number of parameters. Simplest here would be other stan_glm families. That is, show a weird data set in which the outcome variable is something that should be fit with poisson or something, and then use family = poisson. Goal would be to emphasize that there are many possible models.
-
-Fourth, expanding on the above, we might have some machine learning examples. After all, a machine-learning model is just a different kind of black box, not different conceptually than a linear or logistic model. We could fit a machine learning model on chapter 8 scenarios. Even though there are way more than three parameters in such models, they still can (I think!) be made to work in cases with just one input variable.
-
-Fifth, real world data science examples which do not hide the messy complexity of the world. I guess that these would be a lot like the overview tutorials, but with 30 minutes of data cleaning first. These might also explicitly assume that you have done all the other tutorials in the chapter and that, therefore, we do not need to walk you through how to estimate a `stan_glm()` with five baby questions. Instead, the questions would be, not really harder, but messier.
-
-Sixth, tutorials about interpreting parameters. We could have one of these in every chapter from 6 onward. These could be short! They would only cover parameter interpretation, perhaps only using the models which were used in the chapter.
-
-Obviously, we could also combine these in various ways. Upon reflection, we should save the machine learning examples for later chapters in which we have several righthand side variables. Indeed, we could have three machine learning tutorials in chapter 11.
-
-### Later tutorials in later chapters 
-
-The first tutorial for each of the later chapters is easy. Just do more or less exactly what the chapter does. Recall that, one day, we expect to incorporate those questions directly into the chapter itself. So, the more that it just forces students to type in the same commands as in the chapter, the better. But, for the most part, the chapters are not that long! There is only about one tutorial worth of material.
-
-What do we do for the other 5 or so tutorials for each chapter? Good question! Honestly, I am not sure. Here are some ideas:
-
-* The second tutorial could be very similar to the first -- and, therefore, to the chapter. Just use a different variable(s) and/or a different tibble, but answer the same sorts of questions in the same way.
-
-* Don't be repetitive in the written questions. It is fine, in the first tutorial for each chapter, to ask students to write a definition of the Preceptor Table. Indeed, we should always have that question in each first tutorial. But, we don't want that question in each of the 5 tutorials for a single chapter.
-
-* Use written questions which do require different answers depending in the data/variable used. We can't resuse "Define a Preceptor Table" because that question has the same answer every time. Consider a different question:
-
-> Write a paragraph which explores reasons why we should **not** consider the Preceptor Table and our data set as being drawn from the same population?
-
-That is a good question, not least because it needs a different answer for each data science problem we confront. Another good example:
-
-> Write a paragraph explaining why, even though the data is not a random sample, we may still consider it to be "respsentative" enough to move forward?
-
-Again, this requires a different answer for each new tibble.
-
-* We don't usually (ever?) ask questions about the four Cardinal Virtues directly. They are simply a pedagogical device we use to help students organize their work. But we do ask written questions about the key concepts (population, representativeness, validity) in each and every tutorial. These are difficult concepts with no "right" answers. We need to wrestle with them every week.
-
-* A tutorial after the first might do a very similar exercise but with three differences. First, it can go faster, given that students have already seen the basics fairly slowly in the first tutorial. Second, it can add some complexity, make the modeling problem just a little more difficult than the basic case. Third, it can add some new magic. Perhaps it grabs data using a new package instead of just using another boring data set from **primer.data**. Perhaps it creates a nicer plot with some geoms we have not used before. 
-
-* I will distribute the problem sets we used last semester. Turning them into tutorials might work well. But always remember that tutorials are easy, while problem sets are hard. So, we need to split up a big problem set question into 15 exercises and then walk the students slowly (and with hints) through those 10 exercises.
-
-* Maybe there are easy ways, in tutorial 2 or 3, to take the problem we solved in tutorial 1 and have it loosen the assumption that the data we have is representative of the population. This is a nice assumption to loosen since it is never true. I am not sure how one would do this . . .
-
-* If the main example is the chapter is one which uses a linear model, then tutorial 2 could use a logistic model and then tutorial 3 could use the third kind of model (which we have not chosen yet). Similarly, if the chapter (and first tutorial) does a predictive mode, then tutorial 3 should do a causal model.
-
-* The last tutorial might, in some sense, try to set the stage for the next chapter, provide a teaser for what we are learning next.
-
-* Another type of tutorial is one which uses fake data which has been manipulated to violate the assumptions which students are making. Show them Preceptor's Posterior and compare it to their own.
 
 
-## Miscellaneous topics
 
-**install_only_binary_packages** is a function that updates the user's .Rprofile file to only download the binary version of packages. The reason of this function is that students are often prompted to download from the source of the packages, which we do not want to happen. Therefore, by changing the .Rprofile to only downloading binary packages, students can only download from CRAN.
-
-The `copy-code-chunk`, `info-section`, and `download-answers` are [imported](https://community.rstudio.com/t/include-custom-code-chunks-from-separate-files/109216) into each tutorial. The actual Rmd of these sections are saved in the `inst/child_documents` folder. Note that the `setup` code chunk must come before all of them.
 
 ## Permanent objects
 
