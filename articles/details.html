@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9002</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,11 +41,8 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/assignment_management.html">Assignment Management</a>
-    <a class="dropdown-item" href="../articles/class_management.html">Class Management</a>
     <a class="dropdown-item" href="../articles/details.html">Technical Details</a>
     <a class="dropdown-item" href="../articles/instructions.html">Instructions for Writing Tutorials</a>
-    <a class="dropdown-item" href="../articles/oauth_walkthrough.html">Google OAuth App Walkthrough</a>
   </div>
 </li>
       </ul>
@@ -88,36 +85,39 @@ It also includes some items worth investigating and/or fixing.</p>
 <div class="section level2">
 <h2 id="package-locations">Package locations<a class="anchor" aria-label="anchor" href="#package-locations"></a>
 </h2>
+<!-- DK: Not sure this is true with new version of renv. Maybe there are more? -->
 <p>Keep in mind that there are (at least) two versions of
-<strong>primer.tutorials</strong> installed on your machine. In my case,
-we have</p>
+<strong>your.tutorial.package</strong> installed on your machine. In my
+case (using <strong>all.primer.tutorials</strong>), we have</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> /Library/Frameworks/R.framework/Versions/4.1/Resources/library</span></code></pre></div>
 <p>and</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> /Users/dkane/Library/Caches/org.R-project.R/R/renv/library/primer.tutorials-07f29d85/R-4.2/aarch64-apple-darwin20<span class="st">"</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> /Users/dkane/Library/Caches/org.R-project.R/R/renv/library/all.primer.tutorials-07f29d85/R-4.2/aarch64-apple-darwin20<span class="st">"</span></span></code></pre></div>
 <p>The first is the default location for packages. This is where things
 go unless you do something special. The second is installed by
 <code>renv</code>, which was used within the
-<code>primer.tutorials</code> project. When you are working in your
-<code>primer.tutorials</code> project, as you generally will, the
-<code>renv</code> version of the <strong>primer.tutorials</strong>
+<code>all.primer.tutorials</code> project. When you are working in your
+<code>all.primer.tutorials</code> project, as you generally will, the
+<code>renv</code> version of the <strong>all.primer.tutorials</strong>
 library is what you will be using. You can check this by running
 <code><a href="https://rdrr.io/r/base/libPaths.html" class="external-link">.libPaths()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">.libPaths</span>()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"/Users/dkane/Library/Caches/org.R-project.R/R/renv/library/primer.tutorials-07f29d85/R-4.2/aarch64-apple-darwin20"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"/Users/dkane/Library/Caches/org.R-project.R/R/renv/library/all.primer.tutorials-07f29d85/R-4.2/aarch64-apple-darwin20"</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>] <span class="st">"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/library"</span> </span></code></pre></div>
 <p>Whenever you <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code> a package, R looks through, in
 order, the values returned by <code><a href="https://rdrr.io/r/base/libPaths.html" class="external-link">.libPaths()</a></code>.
 <strong>renv</strong> sets things up so that the first item is its
 collection of packages. Note that these are placed in a weird location,
-including a temp directory name <code>primer.tutorials-07f29d85</code>.
-I am not sure how <strong>renv</strong> decided to create a new one of
-these. It does not delete the old ones. In the case of major breakdowns,
-deleting these directories by hand can fix things.</p>
+including a temp directory name
+<code>all.primer.tutorials-07f29d85</code>. I am not sure how
+<strong>renv</strong> decided to create a new one of these. It does not
+delete the old ones. In the case of major breakdowns, deleting these
+directories by hand can fix things.</p>
 </div>
 <div class="section level2">
 <h2 id="yaml-and-setup-code-chunk">YAML and setup code chunk<a class="anchor" aria-label="anchor" href="#yaml-and-setup-code-chunk"></a>
 </h2>
 <p>The top of your file should look like the text below.</p>
+<!-- DK: Replace with text. -->
 <p><img src="images/tutorial-rmd-beginning.png"><!-- --></p>
 <p>Every tutorial must load the <strong>learnr</strong> package in order
 to function. <code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code> is always included
@@ -143,38 +143,8 @@ to implement them easily without taking too much space.</p>
 <div class="section level3">
 <h3 id="current-process">Current Process<a class="anchor" aria-label="anchor" href="#current-process"></a>
 </h3>
-<p>This function was suggested by Preceptor for simpler user experience
-in long tutorials that require pipe-building across multiple exercises.
-There were 2 main options in achieving this.</p>
-<p>First was to have the code of the current exercise automatically
-copied to user clipboards when clicking the <code>"Run Code"</code>
-button.</p>
-<p>Second was to have the code of the current exercise automatically
-copied and pasted to the next exercise chunk after some simplified
-action.</p>
-<p>After a swift response from user grrrck on this <a href="https://community.rstudio.com/t/learnr-clipboard-extension/107812" class="external-link">RStudio
-Community Thread</a>, a clearer direction was laid out. I implemented
-the answer suggested but Preceptor pointed out that a lot of
-copy/pasting from the tutorial-maker’s side was required. The problem
-then was how to minimize the amount of code needed to be repeatedly
-copied/pasted. Since the answer suggested used actionButtons from Shiny
-which had little room for customization, we thought there wasn’t a way
-to know which exercise was locally close to the button.</p>
-<p>Therefore, I created a second version that was a bit “brute-force” by
-having arguments for the code chunks that had the actionButtons, then
-reading the file itself to find those arguments and extract the labels
-of the exercise. But that was still a lot of code to copy/paste and God
-forbid someone wants to insert a new exercise at the beginning because
-you’ll have to manually change so many exercise names that come
-after.</p>
-<p>Here I realized that I don’t have to use Shiny’s actionButtons and
-can just use normal html buttons with trigger events that call a
-javascript function, which can directly communicate with the Shiny
-server, thus finally reaching the current version. Now no more
-exercise-specific information needs to be specified, only the exact same
-button for each exercise.</p>
-<p>That means that in order to implement copy-pasting for an exercise,
-you need to add the line
+<p>In order to implement copy-pasting for an exercise, you need to add
+the line
 <code>&lt;button onclick = "transfer_code(this)"&gt;Copy previous code&lt;/button&gt;</code>
 either before or after the exercise that you want to copy-paste to. This
 will add a button that looks like this:</p>
@@ -196,59 +166,25 @@ and could offer a better solution.</p>
 </div>
 </div>
 <div class="section level2">
-<h2 id="rstudio-setting-questions">RStudio setting questions<a class="anchor" aria-label="anchor" href="#rstudio-setting-questions"></a>
-</h2>
-<p>In many settings, it is natural for a set up question to have three
-parts. First, run a line of code that reports on the value of something.
-Example:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">rstudioapi</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/rstudioapi/reference/readRStudioPreference.html" class="external-link">readRStudioPreference</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"load_workspace"</span>, default <span class="op">=</span> <span class="st">"Code failed."</span><span class="op">)</span></span></code></pre></div>
-<p>This will return TRUE, which is the default value.</p>
-<p>Second, change the setting. This generally won’t return anything.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">rstudioapi</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/rstudioapi/reference/writeRStudioPreference.html" class="external-link">writeRStudioPreference</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"load_workspace"</span>, value <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p>See how the first was “read” and the second was “write”? Then, the
-third and final step is to confirm that the change worked by re-running
-the first code again.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">rstudioapi</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/rstudioapi/reference/readRStudioPreference.html" class="external-link">readRStudioPreference</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"load_workspace"</span>, default <span class="op">=</span> <span class="st">"Code failed."</span><span class="op">)</span></span></code></pre></div>
-<p>And finish with a sentence that tells the student to notice that the
-value has changed and that it is now correct. (Of course, we “monitor”
-that by making them copy/paste this last command and its return from the
-Console into the tutorial.)</p>
-</div>
-<div class="section level2">
 <h2 id="comments-on--rbuildignore">Comments on .Rbuildignore<a class="anchor" aria-label="anchor" href="#comments-on--rbuildignore"></a>
 </h2>
 <p>For some reason, it is impossible to include comments in the
-.Rbuildignore, at least by using the “#” symbol. I think the key issue
-is that using <code>*</code> (or maybe a parenthesis) in a line which
-begins with <code>#</code> causes trouble. Regardless, here are some
-thoughts on the current version.</p>
+<code>.Rbuildignore</code>, at least by using the “#” symbol. I think
+the key issue is that using <code>*</code> (or maybe a parenthesis) in a
+line which begins with <code>#</code> causes trouble. Regardless, here
+are some thoughts on the current version.</p>
 <p>We would like to ensure that all the junk files which end up in the
 <code>tutorials/*</code> directories are not included in the build. Such
 files are often large. They also run the risk of messing things up in
 that they might cause certain tests to pass for us but which would fail
-for anyone who downloads from Github. (The .gitignore file does a
-reasonable ensuring that such files do not end up on Github.)</p>
+for anyone who downloads from Github. (The <code>.gitignore</code> file
+does a reasonable ensuring that such files do not end up on Github.)</p>
 <p>The key line is:</p>
 <pre><code>tutorials/[^/]*/(?!(data|images|.*Rmd))</code></pre>
 <p>This excludes everything in any subdirectory of the tutorials
 directory except an <code>images</code> directory (a file named images
 would also be included) or a <code>data</code> directory or a file
-suffixed with “.Rmd”.</p>
-<p>This entire document is in Perl-like Regex. The only significant
-difference from Perl in this document is that “/” do not need to be
-escaped with a “". The regex below, in plain English, matches (and so
-excludes) a path which begins with the characters”tutorials/““, and
-after those has any number (<em>) of characters except a ”/” ([^/]), and
-after those has a ”/”, and after those does not have (?!…) either the
-characters ”images” or (|) any number (</em>) of any character (.)
-followed by the characters”Rmd”. If we used .* instead of defining the
-character class in [^/]*, the regex would evaluate the negative
-lookahead after the last “/” in the path. The files within the images
-directory would then be excluded, because they do neither the characters
-“images” or a string ending in “Rmd” after their last “/”.</p>
+suffixed with <code>.Rmd</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="adding-more-libraries">Adding more libraries<a class="anchor" aria-label="anchor" href="#adding-more-libraries"></a>

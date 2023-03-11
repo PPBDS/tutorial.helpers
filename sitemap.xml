@@ -10,12 +10,6 @@
     <loc>https://ppbds.github.io/tutorial.helpers/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/articles/assignment_management.html</loc>
-  </url>
-  <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/articles/class_management.html</loc>
-  </url>
-  <url>
     <loc>https://ppbds.github.io/tutorial.helpers/articles/details.html</loc>
   </url>
   <url>
@@ -23,9 +17,6 @@
   </url>
   <url>
     <loc>https://ppbds.github.io/tutorial.helpers/articles/instructions.html</loc>
-  </url>
-  <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/articles/oauth_walkthrough.html</loc>
   </url>
   <url>
     <loc>https://ppbds.github.io/tutorial.helpers/authors.html</loc>
@@ -43,28 +34,13 @@
     <loc>https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.html</loc>
   </url>
   <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/reference/create_submission_aggregation.html</loc>
-  </url>
-  <url>
     <loc>https://ppbds.github.io/tutorial.helpers/reference/create_tibble_from_submissions.html</loc>
   </url>
   <url>
     <loc>https://ppbds.github.io/tutorial.helpers/reference/format_tutorial.html</loc>
   </url>
   <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/reference/gdrive_access.html</loc>
-  </url>
-  <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/reference/get_label_list.html</loc>
-  </url>
-  <url>
     <loc>https://ppbds.github.io/tutorial.helpers/reference/get_submissions_from_learnr_session.html</loc>
-  </url>
-  <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/reference/gmail_access.html</loc>
-  </url>
-  <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/reference/google_submission_collection.html</loc>
   </url>
   <url>
     <loc>https://ppbds.github.io/tutorial.helpers/reference/index.html</loc>
