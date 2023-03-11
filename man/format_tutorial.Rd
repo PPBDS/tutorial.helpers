@@ -13,9 +13,9 @@ format_tutorial(file_path)
 formatted document with correct code and hint chunk labels
 }
 \description{
-A function for formatting primer tutorials.
+A function for formatting tutorial Rmd files.
 
-It adjusts the code and hint chunk labels correctly.
+It adjusts code chunk labels correctly.
 
 This should make things easier for tutorial-writers
 because it will allow fast chunk label updating and quick formatting

@@ -13,7 +13,9 @@ This document reviews some of the technical details behind the special modificat
 
 ## Package locations
 
-Keep in mind that there are (at least) two versions of **primer.tutorials** installed on your machine. In my case, we have
+<!-- DK: Not sure this is true with new version of renv. Maybe there are more? -->
+
+Keep in mind that there are (at least) two versions of **your.tutorial.package** installed on your machine. In my case (using **all.primer.tutorials**), we have
 
 
 ```bash
@@ -24,25 +26,27 @@ and
 
 
 ```bash
-> /Users/dkane/Library/Caches/org.R-project.R/R/renv/library/primer.tutorials-07f29d85/R-4.2/aarch64-apple-darwin20"
+> /Users/dkane/Library/Caches/org.R-project.R/R/renv/library/all.primer.tutorials-07f29d85/R-4.2/aarch64-apple-darwin20"
 ```
 
-The first is the default location for packages. This is where things go unless you do something special. The second is installed by `renv`, which was used within the `primer.tutorials` project. When you are working in your `primer.tutorials` project, as you generally will, the `renv` version of the **primer.tutorials** library is what you will be using. You can check this by running `.libPaths()`.
+The first is the default location for packages. This is where things go unless you do something special. The second is installed by `renv`, which was used within the `all.primer.tutorials` project. When you are working in your `all.primer.tutorials` project, as you generally will, the `renv` version of the **all.primer.tutorials** library is what you will be using. You can check this by running `.libPaths()`.
 
 
 ```r
 > .libPaths()
-[1] "/Users/dkane/Library/Caches/org.R-project.R/R/renv/library/primer.tutorials-07f29d85/R-4.2/aarch64-apple-darwin20"
+[1] "/Users/dkane/Library/Caches/org.R-project.R/R/renv/library/all.primer.tutorials-07f29d85/R-4.2/aarch64-apple-darwin20"
 [2] "/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/library" 
 ```
 
-Whenever you `library()` a package, R looks through, in order, the values returned by `.libPaths()`. **renv** sets things up so that the first item is its collection of packages. Note that these are placed in a weird location, including a temp directory name `primer.tutorials-07f29d85`. I am not sure how **renv** decided to create a new one of these. It does not delete the old ones. In the case of major breakdowns, deleting these directories by hand can fix things.
+Whenever you `library()` a package, R looks through, in order, the values returned by `.libPaths()`. **renv** sets things up so that the first item is its collection of packages. Note that these are placed in a weird location, including a temp directory name `all.primer.tutorials-07f29d85`. I am not sure how **renv** decided to create a new one of these. It does not delete the old ones. In the case of major breakdowns, deleting these directories by hand can fix things.
 
 
 
 ## YAML and setup code chunk
 
 The top of your file should look like the text below.
+
+<!-- DK: Replace with text. -->
 
 ![plot of chunk unnamed-chunk-4](images/tutorial-rmd-beginning.png)
 
@@ -57,19 +61,7 @@ The other 2 code chunks load in the code for the "Copy Code" button and the Info
 
 ### Current Process
 
-This function was suggested by Preceptor for simpler user experience in long tutorials that require pipe-building across multiple exercises. There were 2 main options in achieving this.
-
-First was to have the code of the current exercise automatically copied to user clipboards when clicking the `"Run Code"` button.
-
-Second was to have the code of the current exercise automatically copied and pasted to the next exercise chunk after some simplified action.
-
-After a swift response from user grrrck on this [RStudio Community Thread](https://community.rstudio.com/t/learnr-clipboard-extension/107812), a clearer direction was laid out. I implemented the answer suggested but Preceptor pointed out that a lot of copy/pasting from the tutorial-maker's side was required. The problem then was how to minimize the amount of code needed to be repeatedly copied/pasted. Since the answer suggested used actionButtons from Shiny which had little room for customization, we thought there wasn't a way to know which exercise was locally close to the button.
-
-Therefore, I created a second version that was a bit "brute-force" by having arguments for the code chunks that had the actionButtons, then reading the file itself to find those arguments and extract the labels of the exercise. But that was still a lot of code to copy/paste and God forbid someone wants to insert a new exercise at the beginning because you'll have to manually change so many exercise names that come after.
-
-Here I realized that I don't have to use Shiny's actionButtons and can just use normal html buttons with trigger events that call a javascript function, which can directly communicate with the Shiny server, thus finally reaching the current version. Now no more exercise-specific information needs to be specified, only the exact same button for each exercise.
-
-That means that in order to implement copy-pasting for an exercise, you need to add the line `<button onclick = "transfer_code(this)">Copy previous code</button>` either before or after the exercise that you want to copy-paste to. This will add a button that looks like this:
+In order to implement copy-pasting for an exercise, you need to add the line `<button onclick = "transfer_code(this)">Copy previous code</button>` either before or after the exercise that you want to copy-paste to. This will add a button that looks like this:
 
 ![plot of chunk unnamed-chunk-5](images/copy-button.png)
 
@@ -81,41 +73,13 @@ Personally, I think the current solution is very close to the ideal solution. Th
 
 However, the possibility of automatically copying code to clipboard when clicking the `"Run Code"` button has yet been explored and could offer a better solution.
 
-## RStudio setting questions
-
-In many settings, it is natural for a set up question to have three parts. First, run a line of code that reports on the value of something. Example:
-
-
-```r
-rstudioapi::readRStudioPreference(name = "load_workspace", default = "Code failed.")
-```
-
-This will return TRUE, which is the default value. 
-
-Second, change the setting. This generally won't return anything.
-
-
-
-```r
-rstudioapi::writeRStudioPreference(name = "load_workspace", value = FALSE)
-```
-
-
-See how the first was "read" and the second was "write"? Then, the third and final step is to confirm that the change worked by re-running the first code again.
-
-
-```r
-rstudioapi::readRStudioPreference(name = "load_workspace", default = "Code failed.")
-```
-
-And finish with a sentence that tells the student to notice that the value has changed and that it is now correct. (Of course, we "monitor" that by making them copy/paste this last command and its return from the Console into the tutorial.)
 
 
 ## Comments on .Rbuildignore
 
-For some reason, it is impossible to include comments in the .Rbuildignore, at least by using the "#" symbol. I think the key issue is that using `*` (or maybe a parenthesis) in a line which begins with `#` causes trouble. Regardless, here are some thoughts on the current version.
+For some reason, it is impossible to include comments in the `.Rbuildignore`, at least by using the "#" symbol. I think the key issue is that using `*` (or maybe a parenthesis) in a line which begins with `#` causes trouble. Regardless, here are some thoughts on the current version.
 
-We would like to ensure that all the junk files which end up in the `tutorials/*` directories are not included in the build. Such files are often large. They also run the risk of messing things up in that they might cause certain tests to pass for us but which would fail for anyone who downloads from Github. (The .gitignore file does a reasonable ensuring that such files do not end up on Github.)
+We would like to ensure that all the junk files which end up in the `tutorials/*` directories are not included in the build. Such files are often large. They also run the risk of messing things up in that they might cause certain tests to pass for us but which would fail for anyone who downloads from Github. (The `.gitignore` file does a reasonable ensuring that such files do not end up on Github.)
 
 The key line is:
 
@@ -123,9 +87,8 @@ The key line is:
 tutorials/[^/]*/(?!(data|images|.*Rmd))
 ````
 
-This excludes everything in any subdirectory of the tutorials directory except an `images` directory (a file named images would also be included) or a `data` directory or a file suffixed with ".Rmd". 
+This excludes everything in any subdirectory of the tutorials directory except an `images` directory (a file named images would also be included) or a `data` directory or a file suffixed with `.Rmd`. 
 
-This entire document is in Perl-like Regex. The only significant difference from Perl in this document is that "/" do not need to be escaped with a "\". The regex below, in plain English, matches (and so excludes) a path which begins with the characters "tutorials/"", and after those has any number (*) of characters except a "/" ([^/]), and after those has a "/", and after those does not have (?!...) either the characters "images" or (|) any number (*) of any character (.) followed by the characters "Rmd". If we used .* instead of defining the character class in [^/]*, the regex would evaluate the negative lookahead after the last "/" in the path. The files within the images directory would then be excluded, because they do neither the characters "images" or a string ending in "Rmd" after their last "/".
 
 ## Adding more libraries
 
