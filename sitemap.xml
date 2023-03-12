@@ -46,6 +46,9 @@
     <loc>https://ppbds.github.io/tutorial.helpers/reference/index.html</loc>
   </url>
   <url>
+    <loc>https://ppbds.github.io/tutorial.helpers/reference/knit_tutorials.html</loc>
+  </url>
+  <url>
     <loc>https://ppbds.github.io/tutorial.helpers/reference/make_new_exercise.html</loc>
   </url>
   <url>
@@ -59,8 +62,5 @@
   </url>
   <url>
     <loc>https://ppbds.github.io/tutorial.helpers/reference/submission_functions.html</loc>
-  </url>
-  <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/reference/test_knit_tutorials.html</loc>
   </url>
 </urlset>
