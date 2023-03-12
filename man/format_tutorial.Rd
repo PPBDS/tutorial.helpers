@@ -17,10 +17,9 @@ A function for formatting tutorial Rmd files.
 
 It adjusts code chunk labels correctly.
 
-This should make things easier for tutorial-writers
-because it will allow fast chunk label updating and quick formatting
-and checking
+This should make things easier for tutorial writers because it will allow
+fast chunk label updating and quick formatting and checking.
 
-There is also no need to keep track of the exercise numbers
-because it is done for you in the add-in.
+There is also no need to keep track of the exercise numbers because it is
+done for you in the addin.
 }

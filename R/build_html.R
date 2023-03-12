@@ -42,6 +42,8 @@ build_html <- function(file, session, is_test = FALSE){
   # Pass tibble and title as parameters into the report template, then render
   # template as an html document.
 
+  # DK: Should it be " submissions" or "submissions" or "-submissions"?
+
   params <- list(output = out,
                  title = paste0(tutorial_id,
                                 " submissions"))

@@ -10,8 +10,11 @@ return_tutorial_paths(package)
 \item{package}{character vector of the package name to be tested}
 }
 \value{
-character vector of tutorial paths
+character vector of the full paths to all installed tutorials in
+\code{package}
 }
 \description{
-Return all the paths to tutorials
+Takes a package name and returns a character vector of all the
+paths to tutorialsin the installed package, if those tutorials are named
+\code{tutorial.Rmd}.
 }

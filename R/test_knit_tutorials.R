@@ -7,25 +7,13 @@
 
 test_knit_tutorials <- function(package){
 
-  # Would be nice if the function could automatically discover the library it is
-  # currently operating within.
-
-  # Make code rely on fewer packages.
-
   # This testing approach only works, I think, when you click `Build -> Check`.
   # Otherwise, the tutorials you are testing might be those you installed
   # previously, not the ones you just edited.
 
-  package_location <- system.file("tutorials", package = package)
+  tutorial_paths <- return_tutorial_paths(package)
 
-  tutorial_paths <-
-    learnr::available_tutorials(package) |>
-    dplyr::mutate(path = paste0(package_location, "/",
-                                name,
-                                "/tutorial.Rmd")) |>
-    dplyr::pull(path)
-
-  # stopifnot(length(tutorial_paths) >= 1)
+  stopifnot(length(tutorial_paths) >= 1)
 
   # We use the tutorial_paths vector in the testing functions which now get run.
 
@@ -56,6 +44,3 @@ test_knit_tutorials <- function(package){
   NULL
 }
 
-# Never understand what this hack does or why it is necessary.
-
-utils::globalVariables(c("name", "path"))

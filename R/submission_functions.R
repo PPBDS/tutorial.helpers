@@ -1,11 +1,7 @@
-# Next time we revisit this, consider some changes. First, split this file into
-# two. One part has the two functions we use: submission_server() and
-# submission_ui. The second part has all the helper functions.
-
-# Second, bringing in the learnr functions somehow. I hate being dependent on
-# learnr given how unresponsive they are. We could just make copies of the
-# functions we use. Or we could just incorporate the key code from those
-# functions where we need them.
+# Next time we revisit this, consider bringing in the learnr functions somehow.
+# I hate being dependent on learnr given how unresponsive they are. We could
+# just make copies of the functions we use. Or we could just incorporate the key
+# code from those functions where we need them.
 
 # What we really want is a single function which, when called from the tutorial,
 # does all the stuff we need. But, presumably, that is impossible. We need (?) a
@@ -19,9 +15,6 @@
 
 # But where, exactly, do we add this code given that we don't control the Shiny
 # sessions which learnr itself starts and stops?
-
-# Ought to understand and explain exactly what shiny::div() does.
-# NL: Creates an html <div></div> element.
 
 #' @title Tutorial submission functions
 #'
@@ -97,6 +90,8 @@ submission_server <- function(session) {
 
 submission_ui <- shiny::div(
 
+# shiny::div() creates an html <div></div> element.
+
   "When you have completed this tutorial, follow these steps:",
 
   shiny::tags$br(),
@@ -112,6 +107,3 @@ submission_ui <- shiny::div(
   )
 )
 
-# Never understand what this hack does or why it is necessary.
-
-utils::globalVariables(c("session", "page_num"))

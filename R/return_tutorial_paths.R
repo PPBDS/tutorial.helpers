@@ -2,32 +2,35 @@
 #'
 #' @param package character vector of the package name to be tested
 #'
-#' @return character vector of tutorial paths
+#' @return character vector of the full paths to all installed tutorials in
+#'   `package`
+#' @description Takes a package name and returns a character vector of all the
+#'   paths to tutorialsin the installed package, if those tutorials are named
+#'   `tutorial.Rmd`.
 #' @export
 
 return_tutorial_paths <- function(package){
 
-  # Would be nice if the function could automatically discover the library it is
-  # currently operating within.
+  # I am not sure if we need to worry about which installed version of the
+  # package we are getting. Presumable the first item is=n .libPaths() is used .
+  # . .
 
-  # Make code rely on fewer packages.
+  # Perhaps the package should not require the the tutorials are in files called
+  # `tutorial.Rmd`? It seems like tutorials files can have any name . . .
 
-  # This testing approach only works, I think, when you click `Build -> Check`.
-  # Otherwise, the tutorials you are testing might be those you installed
-  # previously, not the ones you just edited.
+  # Not sure how to test this given that I don't want to install any fake
+  # tutorials in this package. Maybe run it on learnr which, by default, must be
+  # installed?
 
-  package_location <- system.file("tutorials", package = package)
+  # There are three parts to the path. First, the location of the installed
+  # package. Second, the name of the tutorials (which is, I think, the name of
+  # the directory in which the tutorial lives). Third, the name of the file,
+  # which we hard code to `tutorial.Rmd`.
 
-  tutorial_paths <-
-    learnr::available_tutorials(package) |>
-    dplyr::mutate(path = paste0(package_location, "/",
-                                name,
-                                "/tutorial.Rmd")) |>
-    dplyr::pull(path)
-
-
+  paste0(system.file("tutorials", package = package),
+         learnr::available_tutorials(package)$name,
+         "/tutorial.Rmd")
 }
 
-# Never understand what this hack does or why it is necessary.
 
 

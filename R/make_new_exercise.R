@@ -16,6 +16,7 @@
 #' Keyboard shortcut should be Cmd + SHIFT + E (MAC)
 #'
 #' @return exercise skeleton with appropriate labels and numbers
+
 make_new_exercise <- function(){
 
   # Steps:
