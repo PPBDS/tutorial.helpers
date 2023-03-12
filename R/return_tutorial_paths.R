@@ -22,12 +22,15 @@ return_tutorial_paths <- function(package){
   # tutorials in this package. Maybe run it on learnr which, by default, must be
   # installed?
 
-  # There are three parts to the path. First, the location of the installed
-  # package. Second, the name of the tutorials (which is, I think, the name of
-  # the directory in which the tutorial lives). Third, the name of the file,
-  # which we hard code to `tutorial.Rmd`.
+  # There are four parts to the path. First, the location of the installed
+  # package. Second, a slash to end the path. Third, the name of the tutorials
+  # (which is, I think, the name of the directory in which the tutorial lives).
+  # Fourth, the name of the file, which we hard code to `tutorial.Rmd`.
+
+  # Warning: Does this work on Windows?
 
   paste0(system.file("tutorials", package = package),
+         "/",
          learnr::available_tutorials(package)$name,
          "/tutorial.Rmd")
 }
