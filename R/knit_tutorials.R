@@ -5,7 +5,7 @@
 #' @return NULL
 #' @export
 
-test_knit_tutorials <- function(package){
+knit_tutorials <- function(package){
 
   # This testing approach only works, I think, when you click `Build -> Check`.
   # Otherwise, the tutorials you are testing might be those you installed
