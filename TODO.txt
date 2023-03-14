@@ -8,4 +8,10 @@ Remove the label_list stuff from create_tibble_from_submissions() since it is no
 
 Is get_submissions_from_learnr_session() still necessary?
 
+Fix return_tutorial_paths to work on windows. Or maybe use here::here()?
+
 Add testing.
+
+There are some interesting formatting options discussed here: https://rstudio.github.io/learnr/reference/tutorial.html
+
+"includes" might make to easy to include the front and ending material easily. The df_print option is also interesting.

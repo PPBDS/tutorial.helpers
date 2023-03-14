@@ -4,8 +4,8 @@ tutorial:
   id: "ADD ID (same as TITLE, but all in lower case and with spaces (and special characters) replaced by dashes (-)"
 output: 
   learnr::tutorial:
-    progressive: TRUE
-    allow_skip: TRUE
+    progressive: true
+    allow_skip: true
 runtime: shiny_prerendered
 description: "ADD DESCRIPTION (a single sentence)"
 ---
@@ -18,10 +18,10 @@ options(tutorial.exercise.timelimit = 60,
         tutorial.storage = "local") 
 ```
 
-```{r copy-code-chunk, child = "../../child_documents/copy_button.Rmd"}
+```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
 
-```{r info-section, child = "../../child_documents/info_section.Rmd"}
+```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
 <!-- CHECKLIST BEFORE STARTING: -->
@@ -43,5 +43,5 @@ options(tutorial.exercise.timelimit = 60,
 
 <!-- Two to four sentences which bring the lessons of the tutorial together for the student. What do they know now that they did not know before? How does this tutorial connect to future tutorials? OK if this is very similar to the Introduction. You made a promise as to what they would learn. You (I hope!) kept that promise.-->
 
-```{r download-answers, child = "../../child_documents/download_answers.Rmd"}
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
