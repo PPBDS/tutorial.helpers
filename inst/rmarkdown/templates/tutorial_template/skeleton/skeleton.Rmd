@@ -12,7 +12,6 @@ description: "ADD DESCRIPTION (a single sentence)"
 
 ```{r setup, include = FALSE}
 library(learnr)
-library(tutorial.helpers)
 knitr::opts_chunk$set(echo = FALSE)
 options(tutorial.exercise.timelimit = 60, 
         tutorial.storage = "local") 
@@ -27,7 +26,7 @@ options(tutorial.exercise.timelimit = 60,
 <!-- CHECKLIST BEFORE STARTING: -->
 <!-- * Edit yaml at the top of this file -->
 <!-- * Save the file as "tutorial.Rmd" in a new directory under inst/tutorials/. -->
-<!-- * Load necessary libraries for the tutorial in the first code chunk -->
+<!-- * Load any necessary libraries for the tutorial in the first code chunk -->
 <!-- * Review: https://ppbds.github.io/tutorial.helpers/articles/instructions.html -->
 <!-- * Delete this and the other commented instructions below. -->
 

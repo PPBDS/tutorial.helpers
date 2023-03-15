@@ -1,3 +1,5 @@
+Instead of the code chunk trick to spit out the information and download material, maybe those should be created with new functions from tutorial.helpers.
+
 The three functions which make exercises are 98% the same. Make a new function, make_exercise(), which allows for the three possibilities. Then change addins.dcf to call the new function. BUT FIRST CHECK THAT addins.dcf allows you to connect to functions with arguments, as opposed to just function names.
 
 Combine build_html.R and build_rds.R. They are about 90% the same code. BUT FIRST CHECK the submissions_functions.R code to ensure that this would be OK.
