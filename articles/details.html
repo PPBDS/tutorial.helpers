@@ -114,30 +114,6 @@ delete the old ones. In the case of major breakdowns, deleting these
 directories by hand can fix things.</p>
 </div>
 <div class="section level2">
-<h2 id="yaml-and-setup-code-chunk">YAML and setup code chunk<a class="anchor" aria-label="anchor" href="#yaml-and-setup-code-chunk"></a>
-</h2>
-<p>The top of your file should look like the text below.</p>
-<!-- DK: Replace with text. -->
-<p><img src="images/tutorial-rmd-beginning.png"><!-- --></p>
-<p>Every tutorial must load the <strong>learnr</strong> package in order
-to function. <code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code> is always included
-because it contains the file, <code>submissions_functions.R</code>,
-which enables answer downloading. You may need to add other packages
-which are used in your tutorial. Any such packages also need to be
-included in the DESCRIPTION file.</p>
-<p><code>echo = FALSE</code> is a handy default because, most of the
-time, we don’t show users the code. Setting the
-<code>tutorial.exercise.timelimit</code> to 60 seconds is safe, but
-probably not necessary. <code>tutorial.storage</code> must be set to
-<code>local</code> to ensure that user work is saved between
-sessions.</p>
-<p>The other 2 code chunks load in the code for the “Copy Code” button
-and the Information section. <strong>Do not remove these code
-chunks</strong>. The information section and the copy code button are
-crucial infrastructure for the tutorial and these code chunks allow us
-to implement them easily without taking too much space.</p>
-</div>
-<div class="section level2">
 <h2 id="copy-code-trickery">Copy Code Trickery<a class="anchor" aria-label="anchor" href="#copy-code-trickery"></a>
 </h2>
 <div class="section level3">
