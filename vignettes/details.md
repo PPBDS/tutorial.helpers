@@ -42,28 +42,13 @@ Whenever you `library()` a package, R looks through, in order, the values return
 
 
 
-## YAML and setup code chunk
-
-The top of your file should look like the text below.
-
-<!-- DK: Replace with text. -->
-
-![plot of chunk unnamed-chunk-4](images/tutorial-rmd-beginning.png)
-
-
-Every tutorial must load the **learnr** package in order to function. `library(tutorial.helpers)` is always included because it contains the file, `submissions_functions.R`, which enables answer downloading. You may need to add other packages which are used in your tutorial. Any such packages also need to be included in the DESCRIPTION file.
-
-`echo = FALSE` is a handy default because, most of the time, we don't show users the code. Setting the `tutorial.exercise.timelimit` to 60 seconds is safe, but probably not necessary. `tutorial.storage` must be set to `local` to ensure that user work is saved between sessions.
-
-The other 2 code chunks load in the code for the "Copy Code" button and the Information section. **Do not remove these code chunks**. The information section and the copy code button are crucial infrastructure for the tutorial and these code chunks allow us to implement them easily without taking too much space.
-
 ## Copy Code Trickery
 
 ### Current Process
 
 In order to implement copy-pasting for an exercise, you need to add the line `<button onclick = "transfer_code(this)">Copy previous code</button>` either before or after the exercise that you want to copy-paste to. This will add a button that looks like this:
 
-![plot of chunk unnamed-chunk-5](images/copy-button.png)
+![plot of chunk unnamed-chunk-4](images/copy-button.png)
 
 The user just needs to click the button in order to copy the code from the previous exercise into the current one.
 

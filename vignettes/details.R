@@ -4,8 +4,5 @@
 #  [2] "/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/library"
 
 ## ---- echo = FALSE------------------------------------------------------------
-knitr::include_graphics("images/tutorial-rmd-beginning.png")
-
-## ---- echo = FALSE------------------------------------------------------------
 knitr::include_graphics("images/copy-button.png")
 

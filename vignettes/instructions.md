@@ -13,8 +13,6 @@ vignette: >
 
 <!-- Explain how testing with test_knit_tutorials() works. -->
 
-<!-- Does this appear on the website? -->
-
 <!-- I hate the way that all the weird formatting we do messes up the document outline. You can see that effect within R Studio and on the web page. Fixable? -->
 
 <!-- Tutorial answers should require the smallest incremental number of characters for students to type. That is how you know that your learning curve is shallow. geom_smooth() example. -->
@@ -29,33 +27,31 @@ vignette: >
 
 ## Introduction
 
-Imagine the *shallowest* possible learning curve. Almost every student should be able to answer almost every Exercise, albeit perhaps with the help of the Hint. There are no hard questions. In fact, there really aren't *questions* at all. Instead, there are *instructions*: Do one thing, then the next, and then the next.
+Imagine the *shallowest* possible learning curve. Almost every student should be able to answer almost every Exercise, albeit perhaps with the help of a Hint. There are no hard questions. In fact, there really aren't any *questions* at all. Instead, there are *instructions*: Do one thing, then the next, and then the next.
 
 Assume that you are giving the student a private lesson. You ask them a question. They give you an answer. What would you say to them next? What do you want to teach them, given that context?
 
-There are a million little bits of R knowledge which we might provide to students: tips, tricks, cool packages, fun websites, et cetera. We don't have time to mention all of them. The art of teaching is to, first, decide which 10,000 bits are the most important to mention and second, figure out the best time at which to mention them. Tutorials are a key  for doing that mentioning. Which bits do we mention and where do we mention them?
+There are a million little bits of R (or statistics or data science or . . .) knowledge which we might provide to students: tips, tricks, cool packages, fun websites, et cetera. We don't have time to mention all of them. The art of teaching is to, first, decide which 10,000 bits are the most important to mention and second, figure out the best time at which to mention them. Tutorials are a key  for doing that mentioning. Which bits do we mention and where do we mention them?
 
-We can only demonstrate a tiny percentage of all the packages in the world, but we can certainly at least mention the existence of dozens more. Within the packages we use, we can only demonstrate some of the functions; but we can mention more of use. Among the functions we use, we can only show some of the arguments; but we can discuss others.
+We can only demonstrate a tiny percentage of all the packages in the world, but we can certainly at least mention the existence of dozens more. Within the packages we use, we can only demonstrate some of the functions; but we can mention some of the other important ones. Among the functions we use, we can only show some of the arguments; but we can discuss others.
 
 The most important parts of the "knowledge drops" with which we pepper these tutorials are, first, the packages/functions/arguments which we mention without demonstrating, and second, links to high quality resources.
 
 We are building a "[pit of success](https://ricomariani.medium.com/the-pit-of-success-cfefc6cb64c8)." Generally, students don't do the assigned reading, at least in a large class. However, they will complete required work. They will do the assigned tutorials. *Our promise: If you complete the tutorials, you will become a data scientist. There is simply no way not to.*
 
-There will often be several tutorials associated with a given chapter. The first is an "Overview" tutorial which follows closely along with the words and examples in the chapter itself. Someday, we will [put those exercises directly](https://github.com/tinystats/teacups-giraffes-and-statistics) into the *Primer* itself, so keeping the two in sync makes sense. We can group other tutorials into three broad categories. First, some tutorials go into more detail about certain aspects of the chapter. Second, some tutorials provide further examples/extensions of the main theme of the chapter as a whole. Third, the remaining tutorials cover a topic --- like Quarto Websites or Tables --- which has no necessary connection to the chapter itself. 
-
-A tutorial should take about 1 to 2 hours. Depending on the topic difficulty, that might be around 100 to 200 or so Exercises. Some tutorials might be only 30 minutes, especially if the topic is not that important. 
 
 ## Set Up
 
-To make additions to **tutorial.helpers**, follow the [set up guide](https://ppbds.github.io/primer/set-up.html) to fork/download a copy of [PPBDS/tutorial.helpers](https://github.com/PPBDS/tutorial.helpers). Press "Install and Restart" from the "Build" tab to ensure that you have the latest copy installed. (You should not do `remotes::install_github("PPBDS/tutorial.helpers")` since that gets the version from Github. You want the version from your computer so that you get any changes you make.) 
+<!-- Not sure about this paragraph -->
+To make additions to a tutorial package, follow the [set up guide](https://ppbds.github.io/primer/set-up.html) to fork/download a copy of of the package. Press "Install and Restart" from the "Build" tab to ensure that you have the latest copy installed. (You should not do `remotes::install_github("the-tutorial-package")` since that gets the version from Github. You want the version from your computer so that you get any changes you make.) 
 
-Tutorials themselves live in `inst/tutorials`. Each directory name is a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and the order in which to do it) and a name, which corresponds to the `id'` of the tutorial. Within each directory is a `tutorial.Rmd` file and, sometimes, other material like an `images` and `data` directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. Take for example the tutorial that says `052`. The "05" indicates that this is a Week 5 tutorial, and the "2" indicates that it is the second tutorial of that week. 
+Tutorials themselves live in a directory within `inst/tutorials` in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the `id'` of the tutorial. Within each directory is a `tutorial.Rmd` file and, sometimes, other material like an `images` and `data` directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. 
 
-To create a new tutorial, use `File -> New File -> R Markdown`. Choose the "From Template" option and then select "Primer Tutorial." The "[Technical Details](details.html)" vignette provides an overview of the default material in the template. Change the `title`, `id`, and `description` parts of the YAML header. The title may include spaces. The `id` should be exactly the same as the `title`, but all in lower case and with spaces and other special characters replaced with dashes. One sentence is enough for the description.
+To create a new tutorial, use `File -> New File -> R Markdown...`. Choose the "From Template" option and then select "Helper Tutorial." Follow the instructions.
 
-The `id` value is important. It should be the same as the directory in which the tutorial is located, but with the leading numbers removed. It is used for the name of the answer file which students save at the end of the tutorial. 
+The `id` value is important. It should be the same as the directory in which the tutorial is located, but with any leading numbers removed. It is used for the name of the answer file which students save at the end of the tutorial. 
 
-Note that tutorials must be [R Markdown](https://rmarkdown.rstudio.com/) documents, meaning that their suffix is `.Rmd`. You can not use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the `{}`. Don't worry about this detail. Just use the provided addin templates.
+Note that tutorials must be [R Markdown](https://rmarkdown.rstudio.com/) documents, meaning that their suffix is `.Rmd`. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the `{}`. Don't worry about this detail. Just use the provided addin templates.
 
 ## Structure
 
@@ -69,7 +65,7 @@ The Summary section is two to four sentences which bring the lessons of the tuto
 
 If there are one or two other key resources about the topic of the tutorial, then those resources should be linked in both the Introduction and the Summary.
 
-Anything typed at the keyboard belongs in \`backticks\` (not "quotation marks"), except for package names, which are always **bolded**. Function names always include the parantheses: `read_csv()`, not `read_csv`. Example: the `+` sign is used to connect `ggplot()` components when using the **ggplot** library.
+Anything typed at the keyboard belongs in \`backticks\` (not "quotation marks"), except for package names, which are always **bolded**. Function names always include the parentheses: `read_csv()`, not `read_csv`. Example: the `+` sign is used to connect `ggplot()` components when using the **ggplot** library.
 
 ## Sections
 
@@ -470,18 +466,16 @@ If you need for an R object to be accessible in an Exercise code chunk, create i
 
 ## Check tutorial functionality 
 
-### Simple test
 
-The simplest way to test the `tutorial.Rmd` with which you are working on is:
+The simplest way to test the `tutorial.Rmd` with which you are working on is to hit the "Run Document" button. This is the same thing as running `rmarkdown::render()` on the tutorial:
 
 
 ```r
 rmarkdown::render("inst/tutorials/02-terminal/tutorial.Rmd")
 ```
 
-This assumes that you are located in the main directory of **tutorial.helpers**, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace `02-terminal` with the appropriate directory.
+This assumes that you are located in the main directory of **your.package*, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace `02-terminal` with the appropriate directory.
 
-You can also just hit the "Run Document" button. I think that this is the (exact?) same thing has `render()`.
 
 ### Test before submitting a PR
 
@@ -495,15 +489,15 @@ Once you are done writing your tutorial, you need to make sure it works before y
 
 1. Read the error message at the bottom of the Build pane. You want to see "R CMD check succeeded." If not, there is a problem. The error message will often provide a clue as to where in your code the error occurred.
 
-2. If that error message is not detailed enough, go to the `your.package.name.rcheck` folder, which should be located in the same directory as `your.package.name` on your computer. This is a folder created by the R CMD check process, and it will be automatically deleted if the check process succeeds. If the process fails, the `your.package.name.rcheck` folder stays around so that you can examine it. The key file is `testthat.Rout.fail`, which should be in the `tests` directory. It has more details.
+2. If that error message is not detailed enough, go to the `your.package.rcheck` folder, which should be located in the same directory as `your.package` on your computer. This is a folder created by the R CMD check process, and it will be automatically deleted if the check process succeeds. If the process fails, the `your.package.rcheck` folder stays around so that you can examine it. The key file is `testthat.Rout.fail`, which should be in the `tests` directory. It has more details on what went wrong.
 
-The most common source of errors is something wrong with the hint code chunks, which are not evaluated when you just Run Document. Make sure the `eval = FALSE` argument is set in the code chunk for all hints. Check also to see if you included the Information and Submission lines. 
+The most common source of errors is something wrong with the hint code chunks, which are not evaluated when you just Run Document. Make sure the `eval = FALSE` argument is set in the code chunk for all hints. 
 
 ### Difficult bugs
 
 * Note that R CMD check does not seem to catch cases in which you library() a package in a tutorial but that package is not in DESCRIPTION. But such a discrepancy will cause an error on Github Actions because, there, you only have access to packages that have been installed as part of that test.
 
-* Be careful of the way that Github is sloppy in how it deals with capitalization changes, especially when you change the name of a file. For example, you might first commit a file named `Rproj.png`. Later, you decide to change all file names for images to all lower case. So, you change the name of the file to `rproj.png`. Commit and push. Everything is great, right? No! Even if Github shows you the new file name it might still have that file as `Rproj.png` internally. This will cause errors when your run your checks on Github: 
+* Be careful of the way that Github is sloppy in how it deals with capitalization changes, especially when you change the name of a file. For example, you might first commit a file named `Rproj.png`. Later, you decide to change all file names for images to all lower case. So, you change the name of the file to `rproj.png`. Commit and push. Everything is great, right? No! Even if Github shows you the new file name it might still have that file as `Rproj.png` internally, with the capital "R". This will cause errors when your run your checks on Github: 
 
 
 ```bash
@@ -512,7 +506,7 @@ Error: Cannot find the file(s): "images/rproj.png"
 
 But the file is there! You can see it! The tests work on your local machine. The easiest solution is to delete the file (and commit that change). And then change the name of the file to something else and use it.
 
-* R CMD check will test that all tutorials have the default sections exactly as they are in the Primer Tutorial template. So, use the template. If either the "Introduction" or "Download answers" sections are missing, R CMD check will return something like "From test-components.R. Submission (or Information) lines missing from file".
+* R CMD check will test that all tutorials have the default sections exactly as they are in the Helper Tutorial template. So, use the template. If either the "Introduction" or "Download answers" sections are missing, R CMD check will return something like "From test-components.R. Submission (or Information) lines missing from file".
 
 * Be wary about the `.Rbuildignore` file. It is important, but dangerous. In particular, it ensures that only specified files are copied over to the R package. Specifically, within the `/inst/tutorials/` directories, only *Rmd files and all the files in `images` and `data` are installed. We might want to revisit this to, instead, specify files which are not copied over.
 
