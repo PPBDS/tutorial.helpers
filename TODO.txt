@@ -1,3 +1,7 @@
+Since tutorials are (?) any Rmd within a directory which is in inst/tutorials (right?), we should adjust our functions to use that, to not assume that the file is named "tutorial.Rmd".
+One benefit is that we could then test stuff on the learnr package itself.
+
+
 Instead of the code chunk trick to spit out the information and download material, maybe those should be created with new functions from tutorial.helpers.
 
 The three functions which make exercises are 98% the same. Make a new function, make_exercise(), which allows for the three possibilities. Then change addins.dcf to call the new function. BUT FIRST CHECK THAT addins.dcf allows you to connect to functions with arguments, as opposed to just function names.

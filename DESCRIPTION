@@ -1,6 +1,6 @@
 Package: tutorial.helpers
 Title: Helper Functions for Creating Tutorials
-Version: 0.0.0.9006
+Version: 0.0.0.9007
 Authors@R: 
     person(given = "David",
            family = "Kane",
@@ -8,7 +8,8 @@ Authors@R:
            email = "dave.kane@gmail.com",
            comment = c(ORCID = "0000-0002-6660-3934"))
 Description: This package includes helper functions for creating and processing 
-  tutorials which use the **learnr** package. 
+  tutorials which use the learnr package. For examples of its use, see the 
+  r4ds.tutorials and all.primer.tutorials package.
 Depends: 
     R (>= 3.5.0)
 License: MIT + file LICENSE

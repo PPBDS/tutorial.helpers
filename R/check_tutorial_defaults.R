@@ -7,6 +7,10 @@
 
 check_tutorial_defaults <- function(package){
 
+  # Perhaps this function (and others?) should be refactored so that it takes
+  # the path to a specific file, rather than a package. After all, you might not
+  # want to test it on all the tutorials in a package.
+
   # Only makes sense to run this function on a package in which all the
   # tutorials follow the pattern used in r4ds.tutorials. There are three
   # components: the use of a copy-code button, an information request, and a

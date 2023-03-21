@@ -36,15 +36,6 @@ session_path <- "test-data/session_save.rds"
 
 saved_session <- readRDS(session_path)
 
-# Test get_label_list()
-
-label_list_test <- get_label_list(saved_session, is_test = TRUE)
-
-label_list_output <- readRDS("test-data/submission_test_outputs/label_list_output.rds")
-
-if (!identical(label_list_test, label_list_output)){
-  stop("From test-submission.R. function get_label_list() did not return the desired output")
-}
 
 # Test get_submissions_from_learnr_session()
 

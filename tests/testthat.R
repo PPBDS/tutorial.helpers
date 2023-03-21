@@ -25,4 +25,4 @@
 library(testthat)
 library(tutorial.helpers)
 
-# test_check("tutorial.helpers")
+test_check("tutorial.helpers")
