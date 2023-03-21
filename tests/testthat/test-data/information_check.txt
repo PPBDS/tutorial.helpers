@@ -1,2 +1,2 @@
-```{r info-section, child = "../../child_documents/info_section.Rmd"}
+```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```

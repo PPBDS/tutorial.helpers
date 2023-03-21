@@ -1,2 +1,2 @@
-```{r copy-code-chunk, child = "../../child_documents/copy_button.Rmd"}
+```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
