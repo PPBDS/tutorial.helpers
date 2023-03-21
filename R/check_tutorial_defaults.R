@@ -1,47 +1,32 @@
-#' Check that all the tutorials in a package have standard components
+#' Check that a tutorial has the standard components
 #'
-#' @param package character vector of the package name to be tested
+#' @param path character variable of the path to the tutorial to be tested
 #'
-#' @return NULL
 #' @export
 
-check_tutorial_defaults <- function(package){
+check_tutorial_defaults <- function(path){
 
-  # Perhaps this function (and others?) should be refactored so that it takes
-  # the path to a specific file, rather than a package. After all, you might not
-  # want to test it on all the tutorials in a package.
+  # There are three components: the use of a copy-code button, an information
+  # request, and a download page. It is tricky to know where to store the
+  # "truth" of what these components should look like. For now, the truth as
+  # defined as the skeleton.Rmd which defines the template for creating a new
+  # tutorial.
 
-  # Only makes sense to run this function on a package in which all the
-  # tutorials follow the pattern used in r4ds.tutorials. There are three
-  # components: the use of a copy-code button, an information request, and a
-  # download page.
+  components <- readLines(
+    system.file(
+      "rmarkdown/templates/tutorial_template/skeleton/skeleton.Rmd",
+      package = "tutorial.helpers"))
 
-  tutorial_paths <- return_tutorial_paths(package)
+  # The true hack is reducing components to just the three lines which we want
+  # to ensure are present. This is especially dangerous because all the
+  # components in the skeleton are placed on a single line. However, a tutorial
+  # writer might format them differently. They would still work even if they
+  # included line breaks. But such components would fail this check.
 
-  stopifnot(length(tutorial_paths) >= 1)
+  components <- components[ grepl("child = system.file", components) ]
 
-  # This code/approach is very similar to the knit_tutorials() function. But, it
-  # is separate since someone might not want to use these patterns, but should
-  # still check to see that their tutorials knit.
-
-  # Check location of these files.
-
-  copy_button_lines <- readLines("test-data/copy_button_check.txt")
-  information_lines <- readLines("test-data/information_check.txt")
-  submission_lines  <- readLines("test-data/submission_check.txt")
-
-  for(i in tutorial_paths){
-    cur_file <- readLines(i)
-    cat(paste("Testing tutorial:", i, "\n"))
-    if(! all(copy_button_lines %in% cur_file)){
-      stop("Copy button lines missing from file ", i, "\n")
-      }
-    if(! all(information_lines %in% cur_file)){
-      stop("Information lines missing from file ", i, "\n")
-      }
-    if(! all(submission_lines %in% cur_file)){
-      stop("Submission lines missing from file ", i, "\n")
-      }
+  if(! all(components %in% readLines(path))){
+    stop("Missing a component part from file ", i, "\n")
     }
 }
 

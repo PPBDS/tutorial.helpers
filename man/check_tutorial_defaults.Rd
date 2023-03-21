@@ -2,13 +2,13 @@
 % Please edit documentation in R/check_tutorial_defaults.R
 \name{check_tutorial_defaults}
 \alias{check_tutorial_defaults}
-\title{Check that all the tutorials in a package have standard components}
+\title{Check that a tutorial has the standard components}
 \usage{
-check_tutorial_defaults(package)
+check_tutorial_defaults(path)
 }
 \arguments{
-\item{package}{character vector of the package name to be tested}
+\item{path}{character variable of the path to the tutorial to be tested}
 }
 \description{
-Check that all the tutorials in a package have standard components
+Check that a tutorial has the standard components
 }
