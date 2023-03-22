@@ -26,7 +26,8 @@ check_tutorial_defaults <- function(path){
   components <- components[ grepl("child = system.file", components) ]
 
   if(! all(components %in% readLines(path))){
-    stop("Missing a component part from file ", i, "\n")
+    stop("Missing a component part from file ", path, "\n")
     }
 }
+
 

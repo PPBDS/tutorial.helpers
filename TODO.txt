@@ -1,8 +1,4 @@
-Since tutorials are (?) any Rmd within a directory which is in inst/tutorials (right?), we should adjust our functions to use that, to not assume that the file is named "tutorial.Rmd".
-One benefit is that we could then test stuff on the learnr package itself.
 
-
-Instead of the code chunk trick to spit out the information and download material, maybe those should be created with new functions from tutorial.helpers.
 
 The three functions which make exercises are 98% the same. Make a new function, make_exercise(), which allows for the three possibilities. Then change addins.dcf to call the new function. BUT FIRST CHECK THAT addins.dcf allows you to connect to functions with arguments, as opposed to just function names.
 
@@ -16,8 +12,5 @@ Is get_submissions_from_learnr_session() still necessary?
 
 Fix return_tutorial_paths to work on windows. Or maybe use here::here()?
 
-Add testing.
 
-There are some interesting formatting options discussed here: https://rstudio.github.io/learnr/reference/tutorial.html
-
-"includes" might make to easy to include the front and ending material easily. The df_print option is also interesting.
+Instead of the code chunk trick to spit out the information and download material, maybe those should be created with new functions from tutorial.helpers. Or maybe the `includes` argument to `tutorial()` could solve this by adding this material at run time. See: https://rstudio.github.io/learnr/reference/tutorial.html The df_print option is also interesting.

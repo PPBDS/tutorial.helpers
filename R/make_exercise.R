@@ -1,11 +1,11 @@
-#' Tutorial Written Exercise (no Answer)
+#' Make Exercise
 #'
 #' @description
 #'
 #' An add-in for writing tutorials.
 #'
 #' It reads the latest exercise and section name
-#' and then adds a question skeleton (with no answers and allows retries).
+#' and then adds an exercise skeleton.
 #'
 #' This should make things easier for tutorial-writers
 #' because now a fast click can create most of the exercise for you.
@@ -13,16 +13,23 @@
 #' There is also no need to keep track of the exercise numbers
 #' because it is done for you in the add-in.
 #'
-#' Keyboard shortcut should be Cmd + SHIFT + E (MAC)
+#' @param type character of question type. Must be one
+#'  of c("code", "no-answer", "yes-answer")
 #'
-#' @return question skeleton with appropriate labels and numbers
-#' 
-make_new_q_no_answer <- function(){
+#' @export
+#' @return exercise skeleton with appropriate labels and numbers
+
+make_exercise <- function(type = "code"){
+
+  # DK: Need to fix behavior when it is called outside an Rmd with Section
+  # headings.
+
+  stopifnot(type %in% c("code", "no-answer", "yes-answer"))
 
   # Steps:
   # 1. get destination of add-in
   # 2. find the correct label and exercise number
-  # 3. format question skeleton with the found labels and numbers
+  # 3. format exercise skeleton with the found labels and numbers
   # 4. insert skeleton into active document
 
   # Get current active document and position
@@ -87,14 +94,36 @@ make_new_q_no_answer <- function(){
     }
   }
 
-  # Make new question skeleton by
+  # Make new exercise skeleton by
   # inserting the appropriate label
   # and exercise number at the right places
 
-  new_exercise <- sprintf("### Exercise %s\n\n\n```{r %s-%s}\nquestion_text(NULL,\n\tanswer(NULL, correct = TRUE),\n\tallow_retry = TRUE,\n\ttry_again_button = \"Edit Answer\",\n\tincorrect = NULL,\n\trows = 3)\n```\n\n###\n\n",
-                          exercise_number,
-                          section_id,
-                          exercise_number)
+  if(type == "code"){
+  new_exercise <- sprintf("### Exercise %s\n\n\n```{r %s-%s, exercise = TRUE}\n\n```\n\n<button onclick = \"transfer_code(this)\">Copy previous code</button>\n\n```{r %s-%s-hint, eval = FALSE}\n\n```\n\n###\n\n",
+                         exercise_number,
+                         section_id,
+                         exercise_number,
+                         section_id,
+                         exercise_number)
+  }
+
+  new_exercise <-
+    dplyr::case_match(
+      type,
+      "code"       ~ sprintf("### Exercise %s\n\n\n```{r %s-%s, exercise = TRUE}\n\n```\n\n<button onclick = \"transfer_code(this)\">Copy previous code</button>\n\n```{r %s-%s-hint, eval = FALSE}\n\n```\n\n###\n\n",
+                             exercise_number,
+                             section_id,
+                             exercise_number,
+                             section_id,
+                             exercise_number),
+      "no-answer"  ~ sprintf("### Exercise %s\n\n\n```{r %s-%s}\nquestion_text(NULL,\n\tanswer(NULL, correct = TRUE),\n\tallow_retry = TRUE,\n\ttry_again_button = \"Edit Answer\",\n\tincorrect = NULL,\n\trows = 3)\n```\n\n###\n\n",
+                             exercise_number,
+                             section_id,
+                             exercise_number),
+      "yes-answer" ~ sprintf("### Exercise %s\n\n\n```{r %s-%s}\nquestion_text(NULL,\n\tmessage = \"Place correct answer here.\",\n\tanswer(NULL, correct = TRUE),\n\tallow_retry = FALSE,\n\tincorrect = NULL,\n\trows = 6)\n```\n\n###\n\n",
+                             exercise_number,
+                             section_id,
+                             exercise_number))
 
   # Insert the skeleton into the current active document
 
