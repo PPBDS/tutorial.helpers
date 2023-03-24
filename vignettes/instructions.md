@@ -422,6 +422,9 @@ Note how we concisely provide both the command which brings up the help page and
 
 Think back to our initial discussion of the 10,000 pieces of information which we want to mention at some point. Among these are many pages linked to from the help pages for the core *Tidyverse* functions, like `arrange()` and `aes()`.
 
+
+
+
 <!-- DK: Everything below is worth re-writing. -->
 
 ## Inputs
@@ -509,6 +512,48 @@ But the file is there! You can see it! The tests work on your local machine. The
 * R CMD check will test that all tutorials have the default sections exactly as they are in the Helper Tutorial template. So, use the template. If either the "Introduction" or "Download answers" sections are missing, R CMD check will return something like "From test-components.R. Submission (or Information) lines missing from file".
 
 * Be wary about the `.Rbuildignore` file. It is important, but dangerous. In particular, it ensures that only specified files are copied over to the R package. Specifically, within the `/inst/tutorials/` directories, only *Rmd files and all the files in `images` and `data` are installed. We might want to revisit this to, instead, specify files which are not copied over.
+
+
+## Advice for Book-based tutorials
+
+Some tutorial packages are based on books. The idea is to provide a structured tutorial in which students type in (almost) every command which the book demonstrates, along with other commands which, in your judgment, are helpful. An example of this approach is the [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) package which is a companion to [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
+
+This section provides some idiosyncratic advice for book-based tutorials using the example of [*R for Data Science (2e)*](https://r4ds.hadley.nz/) and [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/).
+
+1) Do one or two of the tutorials before you start working on your own. One of them should be the 4-data-transform tutorial. Another might be the 21-spreadsheets tutorial. The below examples are taken from it.
+
+2) Make your Introduction look like this:
+
+````
+This tutorial covers [Chapter 21: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html) from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. You will learn how to get data from Excel spreadsheets using  `[read_excel()](https://readxl.tidyverse.org/reference/read_excel.html)` from the [**readxl**](https://readxl.tidyverse.org/) package and Google sheets using `[read_sheet()](https://googlesheets4.tidyverse.org/reference/range_read.html)` from the [**googlesheets4**](https://googlesheets4.tidyverse.org/) package.
+````
+
+  * The first sentence provides a link to your chapter as well as to R4DS.
+  * We highlight some the most important packages and functions used in the tutorial.
+  * We don't go overboard. You can't mention every package or every function used in the tutorial.
+
+3) Make your Summary look like this:
+
+````
+This tutorial covered [Chapter 21: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html) from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. You have learned how to get data from Excel spreadsheets using  `[read_excel()](https://readxl.tidyverse.org/reference/read_excel.html)` from the [**readxl**](https://readxl.tidyverse.org/) package and Google sheets using `[read_sheet()](https://googlesheets4.tidyverse.org/reference/range_read.html)` from the [**googlesheets4**](https://googlesheets4.tidyverse.org/) package.
+
+Read “[Data Organization in Spreadsheets](https://doi.org/10.1080/00031305.2017.1375989)” by Karl Broman and Kara Woo for great advice about organizing your data using spreadsheets.
+````
+
+  * The first paragraph is identical to the Introduction, expected that "covers" is replaced with "covered" and "will learn" with "have learned." We began the tutorial with a promise about what students would learn. One hopes that we kept that promise.
+  * The second paragraph gives one or two pointers about the best material which a student might look into if she is interested in learning more about the broad topic of the tutorial. These pointers were also mentioned as knowledge drops earlier in the tutorial.
+  * These pointers will often (always?) be items which were mentioned in R4DS itself. Those authors have excellent taste!
+
+4) Always have a separate Exercise for each library you load and each data set you use. An Exercise like "Load the **tidyverse** package with the `library()` command." is, obviously, not difficult for students. But it forces them to practice loading libraries, which many students forget, and it provides us with an opportunity to drop some knowledge.
+
+5) Regularly require them to look up the help page for a function, proving that they have done so by copy/pasting a portion of the help page, which means that these will be Exercises with No Answer instead of Code Exercises. Students need to get in the practice of using help.
+
+6) You want students to have to type in every line of code which is mentioned in the book. One approach is to first, set up a bunch of empty Code Exercises. Then, go through your chapter, copying each snippet of example code into the Hint of an Exercise. (If the book is sourced freely, you can also copy/paste a knowledge drop associated with each code snippet.) Then, go back and write the Exercises such that the answers are the code snippets from the book. The final step is to edit out at least a part of the Hint.
+
+7) In most books, the authors will include more than one new thing in each code example. They will add two or three lines to a pipe or pass in two or three arguments to a function. We never want to go that fast. Spread out such code snippets into two or three separate Exercises, each of which makes the smallest possible change. Recall that we are building the shallowest possible learning curve. 
+
+8) Recall the distinction between books which have a permissive license, meaning that we can copy/paste text at our own discretion, and those which do not. For the latter, you can not copy/paste text. But you can express, in your own words, the key points made in each chapter. In either case, your knowledge drops should cover the most important things for students to know.
+
 
 
 
