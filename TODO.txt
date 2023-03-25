@@ -5,8 +5,6 @@ Combine build_html.R and build_rds.R. They are about 90% the same code. BUT FIRS
 
 format_tutorial is an interesting and complex function. Revisit and clean up. Or maybe the soon-to-be arrival of webr makes this pointless . . .
 
-Remove the label_list stuff from create_tibble_from_submissions() since it is no longer (?) needed.
-
 Is get_submissions_from_learnr_session() still necessary?
 
 Fix return_tutorial_paths to work on windows. Or maybe use here::here()?

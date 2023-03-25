@@ -3,7 +3,6 @@
 export(build_html)
 export(build_rds)
 export(check_tutorial_defaults)
-export(create_tibble_from_submissions)
 export(format_tutorial)
 export(get_submissions_from_learnr_session)
 export(knit_tutorials)

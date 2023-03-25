@@ -138,7 +138,6 @@ hr { border: 1px #ddd dashed; }
 <h3>Submission Helper Functions</h3>
 <p><strong>build_html</strong> is a function that creates and downloads a tibble report of tutorial submissions in HTML.</p>
 <p><strong>build_rds</strong> is a function that creates and downloads an tibble report of tutorial submissions in RDS.</p>
-<p><strong>create_tibble_from_submissions</strong> is a function that takes in tutorial submissions and creates a formatted tibble with the columns: id, submission type, and answer. The submissions are arranged by the order these questions appear in the tutorial</p>
 <p><strong>get_submissions_from_learnr_session</strong> is a function that gets submissions of the current tutorial session through learnr functions, specifically <code>learnr:::get_all_state_objects()</code> and <code>learnr::submissions_from_state_objects()</code>. It returns a list of submission objects, each containing details about the question and answer.</p>
 <h3>Add-in Functions</h3>
 <p><strong>format_tutorial</strong> is a function that takes a tutorial path and formats the code chunk labels into a standardized format.</p>

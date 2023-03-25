@@ -96,8 +96,6 @@ We have seen weird situations in which even doing all of the above did not work.
 
 **build_rds** is a function that creates and downloads an tibble report of tutorial submissions in RDS.
 
-**create_tibble_from_submissions** is a function that takes in tutorial submissions and creates a formatted tibble with the columns: id, submission type, and answer. The submissions are arranged by the order these questions appear in the tutorial
-
 **get_submissions_from_learnr_session** is a function that gets submissions of the current tutorial session through learnr functions, specifically `learnr:::get_all_state_objects()` and `learnr::submissions_from_state_objects()`. It returns a list of submission objects, each containing details about the question and answer.
 
 

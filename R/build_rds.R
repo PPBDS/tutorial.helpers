@@ -26,9 +26,21 @@ build_rds <- function(file, session, is_test = FALSE){
     tutorial_id <- learnr::get_tutorial_info()$tutorial_id
   }
 
-  # Create tibble that is ordered by code chunk appearance
+  # Create tibble for saving.
 
-  out <- create_tibble_from_submissions(objs = objs, tutorial_id = tutorial_id)
+  out <- tibble::tibble(
+    id = purrr::map_chr(objs, "id",
+                        .default = NA),
+    submission_type = purrr::map_chr(objs, "type",
+                                     .default = NA),
+    answer = purrr::map_chr(objs, "answer",
+                            .default = NA)
+  )
+
+  # Hacky
+
+  out <- rbind(c(id = "tutorial-id", submission_type = "none", answer = tutorial_id), out)
+
 
   # save tibble object in destination
 
