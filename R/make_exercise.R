@@ -16,6 +16,8 @@
 #' @param type character of question type. Must be one
 #'  of c("code", "no-answer", "yes-answer")
 #'
+#' @importFrom rstudioapi getActiveDocumentContext
+#'
 #' @export
 #' @return exercise skeleton with appropriate labels and numbers
 
@@ -127,5 +129,5 @@ make_exercise <- function(type = "code"){
 
   # Insert the skeleton into the current active document
 
-  rstudioapi::insertText(new_exercise)
+  rstudioapi::insertText(text = new_exercise)
 }

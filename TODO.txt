@@ -1,5 +1,4 @@
 
-
 Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason.
 
 Combine build_html.R and build_rds.R. They are about 90% the same code. BUT FIRST CHECK the submissions_functions.R code to ensure that this would be OK.
