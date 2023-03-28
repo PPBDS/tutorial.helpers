@@ -141,7 +141,7 @@ that you get any changes you make.)</p>
 recommend that this directory name be a combination of a prefix number
 (which indicate the week/chapter with which a tutorial is associated
 and/or the order in which to do it) and a name, which corresponds to the
-<code>id'</code> of the tutorial. Within each directory is a
+<code>id</code> of the tutorial. Within each directory is a
 <code>tutorial.Rmd</code> file and, sometimes, other material like an
 <code>images</code> and <code>data</code> directory. The prefix number
 determines the order in which tutorials appear in the Tutorial pane.</p>
@@ -185,14 +185,14 @@ functions/techniques covered? It’s completely OK if this is very similar
 to the Introduction. You made a promise as to what they would learn. You
 kept that promise.</p>
 <p>If there are one or two other key resources about the topic of the
-tutorial, then those resources should be linked in both the Introduction
-and the Summary.</p>
+tutorial, then those resources should be mentioned somewhere in the
+tutorial and also in the Summary.</p>
 <p>Anything typed at the keyboard belongs in `backticks` (not “quotation
 marks”), except for package names, which are always
 <strong>bolded</strong>. Function names always include the parentheses:
 <code>read_csv()</code>, not <code>read_csv</code>. Example: the
 <code>+</code> sign is used to connect <code>ggplot()</code> components
-when using the <strong>ggplot</strong> library.</p>
+when using the <strong>ggplot2</strong> library.</p>
 </div>
 <div class="section level2">
 <h2 id="sections">Sections<a class="anchor" aria-label="anchor" href="#sections"></a>
@@ -254,11 +254,11 @@ in order to create a Continue button.</p></li>
 </ul>
 <!-- DK: This seems false. Rarely proceeded by a triple hash. --><ul>
 <li><p>Then comes the answer code chunk and hint(s), which is sometimes
-proceeded by a triple hash. We want students to pause before we ask them
-a question. See below for more discussion. This grouping is always
-followed by the triple hash. We want students to pause after they have
-submitted their answers so that they are more likely to consider the
-results of their submission before moving on.</p></li>
+proceeded by a triple hash if the Start was long. See below for more
+discussion. This code/hint grouping is always followed by the triple
+hash. We want students to pause after they have submitted their answers
+so that they are more likely to consider the results of their submission
+before moving on.</p></li>
 <li><p>The last part of an Exercise is the End, our main opportunity to
 drop some knowledge. Not sure what knowledge to drop? Look up the help
 page for the function which was used to answer the last question. There
@@ -449,10 +449,11 @@ effects. Doing so is annoying and error prone.</p></li>
 part of this same exercise, print out the object. This works
 well.</p></li>
 </ul>
-<p>Follow our coding <a href="https://rpubs.com/dkane/style-guide" class="external-link">Style
-Guide</a>, especially spaces around operators like ” = “. Use only one
-command per line in pipes and graphics, with proper indentation. Indent
-plotting commands after the call to <code>ggplot()</code>.</p>
+<p>Follow a coding <a href="https://ppbds.github.io/primer/style-guide.html" class="external-link">Style Guide</a>,
+especially spaces around operators like ” = “. Use only one command per
+line in pipes and graphics, with proper indentation. Indent plotting
+commands after the call to <code>ggplot()</code>.</p>
+<!-- DK: Standardize this to refer to Tidyverse Guide, or elsewhere? -->
 <p>Do not create an object in one question and then assume that it will
 be available in subsequent questions. It won’t be! Each question is
 independent of every other question. They live in separate R instances.
@@ -468,14 +469,14 @@ directory, you write:</p>
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/myfile.csv"</span><span class="op">)</span></span></code></pre></div>
 <p>in an R code chunk, presumably in the global <code>setup</code>
 chunk. But, if you try to execute that line of code with CMD-Return, it
-will fail because, by default, you are located in the
-<code>tutorial.helpers</code> directory when you start working on the
-tutorials. Using <code><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd()</a></code> will solve this problem.</p>
+will fail because, by default, you are located in the main directory of
+<strong>your.package</strong> when you start working on your tutorials.
+Using <code><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd()</a></code> will solve this problem.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; getwd()</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">1</span><span class="co">]</span><span class="at"> "/Users/davidkane/Desktop/projects/tutorial.helpers"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">1</span><span class="co">]</span><span class="at"> "/Users/davidkane/Desktop/projects/r4ds.tutorials"</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; setwd("inst/tutorials/031-data-files/")</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; getwd()</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">1</span><span class="co">]</span><span class="at"> "/Users/davidkane/Desktop/projects/tutorial.helpers/inst/tutorials/031-data-files"</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">1</span><span class="co">]</span><span class="at"> "/Users/davidkane/Desktop/projects/r4ds.tutorials/inst/tutorials/031-data-files"</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; </span></span></code></pre></div>
 <p>CMD-Return will now work because your R session is “located” in the
 same location as that from which the tutorial will be run when it is
@@ -511,10 +512,8 @@ most useful. Always run it before testing your tutorial. It ensures that
 all the Exercises are sequentially numbered and that all the code chunk
 names are correct and unique.</p>
 <p>You can find the addins in the “Addins” tab on the top toolbar of
-RStudio. Please make sure that your cursor located at the point at which
-you want to insert the new Exercise. You may need to “Install and
-Restart” the <strong>tutorial.helpers</strong> package for the Addins to
-appear.</p>
+RStudio. Please make sure that your cursor is located at the point at
+which you want to insert the new Exercise.</p>
 <p><img src="images/code-exercise-1.png" width="75%" height="75%"></p>
 <div class="section level5">
 <h5 id="tutorial-code-exercise">Tutorial Code Exercise<a class="anchor" aria-label="anchor" href="#tutorial-code-exercise"></a>
@@ -585,10 +584,6 @@ hard cutoff at 20 characters. So please make sure that your Section
 Titles are different somewhere in the first 20 characters (including
 spaces).</p></li>
 </ul>
-<p>Before:</p>
-<p><img src="images/format-labels-1.png" width="75%" height="75%"></p>
-<p>After:</p>
-<p><img src="images/format-labels-2.png" width="75%" height="75%"></p>
 </div>
 </div>
 </div>
