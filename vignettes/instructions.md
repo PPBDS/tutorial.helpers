@@ -45,7 +45,7 @@ We are building a "[pit of success](https://ricomariani.medium.com/the-pit-of-su
 <!-- Not sure about this paragraph -->
 To make additions to a tutorial package, follow the [set up guide](https://ppbds.github.io/primer/set-up.html) to fork/download a copy of of the package. Press "Install and Restart" from the "Build" tab to ensure that you have the latest copy installed. (You should not do `remotes::install_github("the-tutorial-package")` since that gets the version from Github. You want the version from your computer so that you get any changes you make.) 
 
-Tutorials themselves live in a directory within `inst/tutorials` in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the `id'` of the tutorial. Within each directory is a `tutorial.Rmd` file and, sometimes, other material like an `images` and `data` directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. 
+Tutorials themselves live in a directory within `inst/tutorials` in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the `id` of the tutorial. Within each directory is a `tutorial.Rmd` file and, sometimes, other material like an `images` and `data` directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. 
 
 To create a new tutorial, use `File -> New File -> R Markdown...`. Choose the "From Template" option and then select "Helper Tutorial." Follow the instructions.
 
@@ -63,9 +63,9 @@ The Introduction section is two to four sentence about the main topics covered i
 
 The Summary section is two to four sentences which bring the lessons of the tutorial together for the student. What do they know now that they did not know before? What are the most important functions/techniques covered? It's completely OK if this is very similar to the Introduction. You made a promise as to what they would learn. You kept that promise.
 
-If there are one or two other key resources about the topic of the tutorial, then those resources should be linked in both the Introduction and the Summary.
+If there are one or two other key resources about the topic of the tutorial, then those resources should be mentioned somewhere in the tutorial and also in the Summary.
 
-Anything typed at the keyboard belongs in \`backticks\` (not "quotation marks"), except for package names, which are always **bolded**. Function names always include the parentheses: `read_csv()`, not `read_csv`. Example: the `+` sign is used to connect `ggplot()` components when using the **ggplot** library.
+Anything typed at the keyboard belongs in \`backticks\` (not "quotation marks"), except for package names, which are always **bolded**. Function names always include the parentheses: `read_csv()`, not `read_csv`. Example: the `+` sign is used to connect `ggplot()` components when using the **ggplot2** library.
 
 ## Sections
 
@@ -106,7 +106,7 @@ Each Exercise should have a *flow* which requires that students hit the "Continu
 
 <!-- DK: This seems false. Rarely proceeded by a triple hash. -->
 
-* Then comes the answer code chunk and hint(s), which is sometimes proceeded by a triple hash. We want students to pause before we ask them a question. See below for more discussion. This grouping is always followed by the triple hash. We want students to pause after they have submitted their answers so that they are more likely to consider the results of their submission before moving on.
+* Then comes the answer code chunk and hint(s), which is sometimes proceeded by a triple hash if the Start was long. See below for more discussion. This code/hint grouping is always followed by the triple hash. We want students to pause after they have submitted their answers so that they are more likely to consider the results of their submission before moving on.
 
 * The last part of an Exercise is the End, our main opportunity to drop some knowledge. Not sure what knowledge to drop? Look up the help page for the function which was used to answer the last question. There is often an argument to that function which was not used in this Exercise but is worth mentioning to students. There are always related functions in the help page that are worth mentioning. 
 
@@ -257,7 +257,9 @@ Each coding exercise should always spit out something. Interactivity is good! St
 * You can have the student not only do the assignment but also, as part of this same exercise, print out the object. This works well.
 
 
-Follow our coding [Style Guide](https://rpubs.com/dkane/style-guide), especially spaces around operators like " = ". Use only one command per line in pipes and graphics, with proper indentation. Indent plotting commands after the call to `ggplot()`.
+Follow a coding [Style Guide](https://ppbds.github.io/primer/style-guide.html), especially spaces around operators like " = ". Use only one command per line in pipes and graphics, with proper indentation. Indent plotting commands after the call to `ggplot()`.
+
+<!-- DK: Standardize this to refer to Tidyverse Guide, or elsewhere? -->
 
 Do not create an object in one question and then assume that it will be available in subsequent questions. It won't be! Each question is independent of every other question. They live in separate R instances. The only exception (which we make use of) is that objects created in the initial `setup` chunk for the entire tutorial are available in all later questions, just the way that `library()` commands executed there do not need to be executed again. 
 
@@ -272,14 +274,14 @@ x <- read_csv("data/myfile.csv")
 ```
 
 
-in an R code chunk, presumably in the global `setup` chunk. But, if you try to execute that line of code with CMD-Return, it will fail because, by default, you are located in the `tutorial.helpers` directory when you start working on the tutorials. Using `setwd()` will solve this problem.
+in an R code chunk, presumably in the global `setup` chunk. But, if you try to execute that line of code with CMD-Return, it will fail because, by default, you are located in the main directory of **your.package** when you start working on your tutorials. Using `setwd()` will solve this problem.
 
 ````markdown
 > getwd()
-[1] "/Users/davidkane/Desktop/projects/tutorial.helpers"
+[1] "/Users/davidkane/Desktop/projects/r4ds.tutorials"
 > setwd("inst/tutorials/031-data-files/")
 > getwd()
-[1] "/Users/davidkane/Desktop/projects/tutorial.helpers/inst/tutorials/031-data-files"
+[1] "/Users/davidkane/Desktop/projects/r4ds.tutorials/inst/tutorials/031-data-files"
 > 
 ````
 
@@ -300,7 +302,7 @@ You then build up the graphic, line by line, over a series of Exercises, providi
 
 We have provided four additions to the Addins menu: "Tutorial Code Exercise", "Tutorial Written Exercise (with Answer)", "Tutorial Written Exercise (no Answer)" and "Format Tutorial Chunk Labels." Give them a try! The first three each insert the skeleton for the next Exercise, featuring all the key component parts. It even takes a guess at the correct Exercise number.  The "Format Tutorial Chunk Labels" Addin is the most useful. Always run it before testing your tutorial. It ensures that all the Exercises are sequentially numbered and that all the code chunk names are correct and unique.
 
-You can find the addins in the "Addins" tab on the top toolbar of RStudio. Please make sure that your cursor located at the point at which you want to insert the new Exercise. You may need to "Install and Restart" the **tutorial.helpers** package for the Addins to appear.
+You can find the addins in the "Addins" tab on the top toolbar of RStudio. Please make sure that your cursor is located at the point at which you want to insert the new Exercise. 
 
 <img src="images/code-exercise-1.png" alt="plot of chunk unnamed-chunk-7" width="75%" height="75%" />
 
@@ -383,14 +385,6 @@ Limitations:
 - It doesn't work well with the \`r\` that shows the entire code chunk
 
 - The code chunk labels (derived from your section titles) have a hard cutoff at 20 characters. So please make sure that your Section Titles are different somewhere in the first 20 characters (including spaces).
-
-Before:
-
-<img src="images/format-labels-1.png" alt="plot of chunk unnamed-chunk-11" width="75%" height="75%" />
-
-After:
-
-<img src="images/format-labels-2.png" alt="plot of chunk unnamed-chunk-12" width="75%" height="75%" />
 
 ### Knowledge Drops
 

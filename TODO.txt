@@ -1,3 +1,7 @@
+Post to learnr issues about https://github.com/rstudio/learnr/issues/465
+
+The latest version of learnr seems to allow for ____ as a useful placeholder in code which is left in the actual exercise code blocks without creating an error. Might be useful! Might be much better than always inserting code from previous question.
+
 
 Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason.
 
