@@ -11,17 +11,6 @@
 # should we test them here? And how do we use those functions in other tutorial
 # packages? This was all easier when everything was bundled together.
 
-# For now, I include a simple tutorial so that there is something which the
-# functions here to test. This works, but it is annoying since it means that
-# there will be a nonsense tutorial in the Tutorial tab, which will confuse
-# students, especially since it is at the bottom, which is where we want
-# r4ds.tutorials to appear.
-
-# I am also unsure if the tests really work. For example, does test-addins even
-# run?
-
-# For now, I am just commenting this test out and worrying about them later.
-
 library(testthat)
 library(tutorial.helpers)
 

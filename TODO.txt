@@ -7,15 +7,25 @@ Testing for make_exercise() is a mess. This might be connected to some poor desi
 
 Combine build_html.R and build_rds.R. They are about 90% the same code. BUT FIRST CHECK the submissions_functions.R code to ensure that this would be OK.
 
-format_tutorial is an interesting and complex function. Revisit and clean up. Or maybe the soon-to-be arrival of webr makes this pointless . . .
+format_tutorial is an interesting and complex function. Revisit and clean up.
 
-Is get_submissions_from_learnr_session() still necessary?
+Is get_submissions_from_learnr_session() still necessary? At the very least, the comments need to be cleaned up.
 
 Fix return_tutorial_paths to work on windows. Or maybe use here::here()?
 
 
 Instead of the code chunk trick to spit out the information and download material, maybe those should be created with new functions from tutorial.helpers. Or maybe the `includes` argument to `tutorial()` could solve this by adding this material at run time. See: https://rstudio.github.io/learnr/reference/tutorial.html The df_print option is also interesting.
 
+
+# Think about using ___
+
+Blanks are detected using regular expressions (since blanks may make the code unparsable), and learnr’s default pattern is to detect three or more consecutive underscores. Authors can choose the pattern for detecting blanks with the exercise.blanks chunk option. Setting exercise.blanks = "[.]{2}[a-z]+[.]{2}", for example, would allow the author to use valid R syntax for blanks. The warning message shown to students calls out the blanks they need to fill in.
+
+## This release of learnr includes a new question type, question_numeric().
+
+
+
+## Deal with all this junk left over from the old details.Rmd.
 
 
 ## Get a better understanding of package locations

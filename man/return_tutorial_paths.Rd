@@ -15,6 +15,6 @@ character vector of the full paths to all installed tutorials in
 }
 \description{
 Takes a package name and returns a character vector of all the
-paths to tutorialsin the installed package, if those tutorials are named
-\code{tutorial.Rmd}.
+paths to tutorials in the installed package. Assumes that every Rmd file in
+inst/tutorials/*/ is a tutorial, which should be true.
 }

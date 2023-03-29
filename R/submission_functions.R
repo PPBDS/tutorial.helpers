@@ -1,8 +1,3 @@
-# Next time we revisit this, consider bringing in the learnr functions somehow.
-# I hate being dependent on learnr given how unresponsive they are. We could
-# just make copies of the functions we use. Or we could just incorporate the key
-# code from those functions where we need them.
-
 # What we really want is a single function which, when called from the tutorial,
 # does all the stuff we need. But, presumably, that is impossible. We need (?) a
 # Shiny server and Shiny ui. This is not (?) any other way to produce this
@@ -23,11 +18,9 @@
 #' The following function was modified from Colin Rundel's learnrhash package,
 #' available at https://github.com/rundel/learnrhash.
 #'
-#' This note is also modified from Professor Rundel's description: Note that
-#' when including these functions in a learnr Rmd document it is necessary that
-#' the server function, `submission_server()`, be included in an R chunk where
-#' `context="server"`. Conversely, any of the ui functions, `*_ui()`, must *not*
-#' be included in an R chunk with a `context`.
+#' Note that when including these functions in a learnr Rmd document it is
+#' necessary that the server function, `submission_server()`, be included in an
+#' R chunk where `context="server"`.
 #'
 #' @param session session object from shiny with learnr
 #'
@@ -55,28 +48,17 @@ submission_server <- function(session) {
 
     output$downloadRds <- shiny::downloadHandler(
 
-      # Next code chunk is key. downloadHandler is a function, one of the
-      # arguments for which is filename. We want to have the file name be
-      # different for each tutorial. But how do we know the name of the tutorial
-      # in the middle of the session? It is easy to access some information from
-      # the session object if we know the correct learnr function. (Note that
-      # the call to session only seems to work within a reactive function like
-      # this.)
+      # downloadHandler is a function, one of the arguments for which is
+      # filename. We want to have the file name be different for each tutorial.
+      # But how do we know the name of the tutorial in the middle of the
+      # session? It is easy to access some information from the session object
+      # if we know the correct learnr function. (Note that the call to session
+      # only seems to work within a reactive function like this.)
 
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.rds"),
 
       content = function(file){
-
-        # We used to execute the next two lines in a separate step, requiring
-        # users to generate the hash by pressing a button. But this is hardly
-        # necessary. We can just do it here, whenever users press the download
-        # button. Would be nice to get the learnr people to export these
-        # functions so that the ::: hack is not necessary. I have submitted a
-        # request: https://github.com/rstudio/learnr/issues/454. The functions
-        # are small, so we might just copy them over. But given that we need
-        # learnr regardless, that seems excessive.
-
         build_rds(file, session)
       }
     )

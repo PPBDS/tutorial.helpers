@@ -20,10 +20,8 @@ submission_ui
 The following function was modified from Colin Rundel's learnrhash package,
 available at https://github.com/rundel/learnrhash.
 
-This note is also modified from Professor Rundel's description: Note that
-when including these functions in a learnr Rmd document it is necessary that
-the server function, \code{submission_server()}, be included in an R chunk where
-\code{context="server"}. Conversely, any of the ui functions, \verb{*_ui()}, must \emph{not}
-be included in an R chunk with a \code{context}.
+Note that when including these functions in a learnr Rmd document it is
+necessary that the server function, \code{submission_server()}, be included in an
+R chunk where \code{context="server"}.
 }
 \keyword{datasets}
