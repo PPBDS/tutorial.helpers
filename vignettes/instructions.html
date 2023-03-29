@@ -116,7 +116,7 @@ hr { border: 1px #ddd dashed; }
 <h2>Set Up</h2>
 <!-- Not sure about this paragraph -->
 <p>To make additions to a tutorial package, follow the <a href="https://ppbds.github.io/primer/set-up.html">set up guide</a> to fork/download a copy of of the package. Press “Install and Restart” from the “Build” tab to ensure that you have the latest copy installed. (You should not do <code>remotes::install_github(&quot;the-tutorial-package&quot;)</code> since that gets the version from Github. You want the version from your computer so that you get any changes you make.)</p>
-<p>Tutorials themselves live in a directory within <code>inst/tutorials</code> in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the <code>id</code> of the tutorial. Within each directory is a <code>tutorial.Rmd</code> file and, sometimes, other material like an <code>images</code> and <code>data</code> directory. The prefix number determines the order in which tutorials appear in the Tutorial pane.</p>
+<p>Tutorials themselves live in a directory within <code>inst/tutorials</code> in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the <code>id</code> of the tutorial. Within each directory is am R Markdown file and, sometimes, other material like an <code>images</code> and <code>data</code> directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. By default, we name the R Markdown file <code>tutorial.Rmd</code> but any name works as long as the file has the appropriate YAML header.</p>
 <p>To create a new tutorial, use <code>File -&gt; New File -&gt; R Markdown...</code>. Choose the “From Template” option and then select “Helper Tutorial.” Follow the instructions.</p>
 <p>The <code>id</code> value is important. It should be the same as the directory in which the tutorial is located, but with any leading numbers removed. It is used for the name of the answer file which students save at the end of the tutorial.</p>
 <p>Note that tutorials must be <a href="https://rmarkdown.rstudio.com/">R Markdown</a> documents, meaning that their suffix is <code>.Rmd</code>. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the <code>{}</code>. Don’t worry about this detail. Just use the provided addin templates.</p>
@@ -205,7 +205,7 @@ something else.
 </code></pre>
 <p>Fourth, tutorials should be so simple that 95% of the students can answer 95% of the questions easily. One way to ensure that is to add a <em>Hint</em> to almost every coding question.</p>
 <p>Hints must always have the same code chunk name as the exercise chunk for which they are the hint, with a “-hint-n” added at the end. So, if an exercise code chunk is named “ex-1”, then the hint associated with that exercise is named “ex-1-hint-1”. A second hint for that same question would be named “ex-1-hint-2”, and so on.</p>
-<p>When you create a hint, always use <code>eval = FALSE</code> within the parentheses in the code chunk. This is because hints will often include “…” and other symbols which do not run as correct R code. So, we need to tell R not to run it or an error will occur during R CMD check. Example:</p>
+<p>When you create a hint, always use <code>eval = FALSE</code> within the parentheses in the code chunk. This is because hints will often include “…” and other symbols which do not run as correct R code. So, we need to tell R not to run it or an error will occur during <code>R CMD check</code>. Example:</p>
 <pre><code class="language-default">```{r ex-1-hint-good, eval = FALSE}
 This is an example hint. Normally sentences like these 
 would cause an error in R because it is not proper code. 
@@ -388,7 +388,7 @@ question_text(NULL,
 <p>Links to function documentation is useful. Indeed, we should link at least once to the documentation for every function which we use. Two categories:</p>
 <ul>
 <li>Links to the help pages for base function are tricky. It is not clear to me which location is the best to use for this purpose. My suggestion is to use links involving the <code>stat.ethz.ch</code> server, which is the home base (I think) for the core R developpers.</li>
-<li>Links to functions for functions from the <em>Tidyverse</em> should use the docs maintained by Posit and located at <code>tidyverse.github.io</code>. Consider these examples for <a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a> and <a href="https://tidyverse.github.io/ggplot2-docs/reference/aes.html">aes()</a>.</li>
+<li>Links to functions from the <em>Tidyverse</em> should use the docs maintained by Posit. Consider these examples for <a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a> and <a href="https://tidyverse.github.io/ggplot2-docs/reference/aes.html">aes()</a>.</li>
 </ul>
 </li>
 <li>
@@ -401,7 +401,7 @@ question_text(NULL,
 <!-- DK: Everything below is worth re-writing. -->
 <h2>Inputs</h2>
 <h3>Tibbles</h3>
-<p>There are two main sources for tibbles for use in the tutorials. First, use built-in data sets. Run <code>library(primer.data)</code> or <code>library(tidyverse)</code> or any other package. Then, run <code>data()</code>. This will pull up a list of available data sets. Note that some of these will be data frames rather than tibbles. Second, you can store data — either as csv or rds files — in the <code>data</code> directory of the tutorial, as discussed below.</p>
+<p>There are two main sources for tibbles for use in the tutorials. First, use built-in data sets. Run <code>library(all.primer.data)</code> or <code>library(tidyverse)</code> or any other package. Then, run <code>data()</code>. This will pull up a list of available data sets. Note that some of these will be data frames rather than tibbles. Second, you can store data — either as csv or rds files — in the <code>data</code> directory of the tutorial, as discussed below.</p>
 <h3>Using images</h3>
 <p>To add images to a tutorial, first make a directory called <code>images</code> in the folder that contains the <code>tutorial.Rmd</code>. Store all images for that tutorial there. You can work with those files in all the usual ways.</p>
 <p>Use <code>include_graphics()</code> to add the image into the document. Include this code in its own chunk, in the place where you want the image to appear in the tutorial.</p>
@@ -412,7 +412,7 @@ include_graphics(&quot;images/example.png&quot;)
 <p><code>include_graphics()</code> is part of the <code>knitr</code> package, so you need <code>library(knitr)</code> in the setup code chunk. Note that you do not need to name these code chunks.</p>
 <h3>Using files</h3>
 <p>Files — most commonly text files or rds files — are handled in a similar fashion to images. Create a directory called <code>data</code> in the same directory as the <code>tutorial.Rmd</code>, just as we do with <code>images</code>. Any file in <code>data</code> will be available at run time. (Note that the directory must be named <code>data</code>. Something like <code>my_data</code> will not work.)</p>
-<p>There are two main uses for files in <code>data</code>. First, they can be used at “compile time” (when the <code>tutorial.Rmd</code> is knit to html) for making plots or doing anything else. Second, they are available to students in the exercise code blocks during “run time” (when students are doing the tutorial).</p>
+<p>There are two main uses for files in <code>data</code>. First, they can be used at “compile time” (when the <code>tutorial.Rmd</code> is knit to html) for making plots or doing anything else. Second, and more importantly, they are available to students in the exercise code blocks during “run time” (when students are doing the tutorial).</p>
 <h3>Permanent objects</h3>
 <p>If you need for an R object to be accessible in an Exercise code chunk, create it in the initial global <code>setup</code> code chunk at the top of the tutorial.</p>
 <!-- ## Tutorials which require restarts -->
@@ -420,7 +420,7 @@ include_graphics(&quot;images/example.png&quot;)
 <!-- There are some tutorials which require either an R restart or (what is more or less the same thing, I think) the creation of a new R project. Clearest examples are: RStudio and Code, Rstudio and Github, and Quarto Websites. The problem arises because restarting R or creating a new R project causes R to terminate the tutorial. That is fine when working on a local machine, since the tutorial answers are saved and you can just restart the tutorial. But it does not (alway? ever?) work in the cloud. Restarting a tutorial which you terminated causes an error in the Cloud. -->
 <!-- So, for these three tutorials and all others, we should explicitly have students create two RStudio instances, one in which they are doing the tutorial and one in which they are following the tutorial's instructions, instructions which will often require restarts and/or new projects. -->
 <h2>Check tutorial functionality</h2>
-<p>The simplest way to test the <code>tutorial.Rmd</code> with which you are working on is to hit the “Run Document” button. This is the same thing as running <code>rmarkdown::render()</code> on the tutorial:</p>
+<p>The simplest way to test the <code>tutorial.Rmd</code> with which you are working on is to hit the “Run Document” button. This is the same thing as running <code>rmarkdown::render()</code> on that file:</p>
 <pre><code class="language-r">rmarkdown::render(&quot;inst/tutorials/02-terminal/tutorial.Rmd&quot;)
 </code></pre>
 <p>This assumes that you are located in the main directory of *<em>your.package</em>, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace <code>02-terminal</code> with the appropriate directory.</p>
@@ -431,23 +431,23 @@ include_graphics(&quot;images/example.png&quot;)
 <p>Click “Install and Restart” from the Build tab. Then, hit “Start Tutorial” in the Tutorial tab. This mimics the experience that users will have. This will catch some common errors, like having two code chunks with the same name. (I am not sure if this does more or less than the simple test as above.)</p>
 </li>
 <li>
-<p>Do a full test, which means running R CMD check. Go to the top right window of RStudio. Click the Build pane and hit the “Check” button (with the green check mark). You will then see a bunch of code and tests running. Make sure it says “OK” next to “testthat”. You should always run this before submitting a pull request.</p>
+<p>Do a full test, which means running <code>R CMD check</code>. Go to the top right window of RStudio. Click the Build pane and hit the “Check” button (with the green check mark). You will then see a bunch of code and tests running. Make sure it says “OK” next to “testthat”. You should always run this before submitting a pull request.</p>
 </li>
 </ol>
-<h3>What to do if R CMD check fails</h3>
+<h3>What to do if <code>R CMD check</code> fails</h3>
 <ol>
 <li>
 <p>Read the error message at the bottom of the Build pane. You want to see “R CMD check succeeded.” If not, there is a problem. The error message will often provide a clue as to where in your code the error occurred.</p>
 </li>
 <li>
-<p>If that error message is not detailed enough, go to the <code>your.package.rcheck</code> folder, which should be located in the same directory as <code>your.package</code> on your computer. This is a folder created by the R CMD check process, and it will be automatically deleted if the check process succeeds. If the process fails, the <code>your.package.rcheck</code> folder stays around so that you can examine it. The key file is <code>testthat.Rout.fail</code>, which should be in the <code>tests</code> directory. It has more details on what went wrong.</p>
+<p>If that error message is not detailed enough, go to the <code>your.package.rcheck</code> folder, which should be located in the same directory as <code>your.package</code> on your computer. This is a folder created by the <code>R CMD check</code> process, and it will be automatically deleted if the check process succeeds. If the process fails, the <code>your.package.rcheck</code> folder stays around so that you can examine it. The key file is <code>testthat.Rout.fail</code>, which should be in the <code>tests</code> directory. It has more details on what went wrong.</p>
 </li>
 </ol>
 <p>The most common source of errors is something wrong with the hint code chunks, which are not evaluated when you just Run Document. Make sure the <code>eval = FALSE</code> argument is set in the code chunk for all hints.</p>
 <h3>Difficult bugs</h3>
 <ul>
 <li>
-<p>Note that R CMD check does not seem to catch cases in which you library() a package in a tutorial but that package is not in DESCRIPTION. But such a discrepancy will cause an error on Github Actions because, there, you only have access to packages that have been installed as part of that test.</p>
+<p>Note that <code>R CMD check</code> does not seem to catch cases in which you <code>library()</code> a package in a tutorial but that package is not in DESCRIPTION. But such a discrepancy will cause an error on Github Actions because, there, you only have access to packages that have been installed as part of that test.</p>
 </li>
 <li>
 <p>Be careful of the way that Github is sloppy in how it deals with capitalization changes, especially when you change the name of a file. For example, you might first commit a file named <code>Rproj.png</code>. Later, you decide to change all file names for images to all lower case. So, you change the name of the file to <code>rproj.png</code>. Commit and push. Everything is great, right? No! Even if Github shows you the new file name it might still have that file as <code>Rproj.png</code> internally, with the capital “R”. This will cause errors when your run your checks on Github:</p>
@@ -457,12 +457,7 @@ include_graphics(&quot;images/example.png&quot;)
 </code></pre>
 <p>But the file is there! You can see it! The tests work on your local machine. The easiest solution is to delete the file (and commit that change). And then change the name of the file to something else and use it.</p>
 <ul>
-<li>
-<p>R CMD check will test that all tutorials have the default sections exactly as they are in the Helper Tutorial template. So, use the template. If either the “Introduction” or “Download answers” sections are missing, R CMD check will return something like “From test-components.R. Submission (or Information) lines missing from file”.</p>
-</li>
-<li>
-<p>Be wary about the <code>.Rbuildignore</code> file. It is important, but dangerous. In particular, it ensures that only specified files are copied over to the R package. Specifically, within the <code>/inst/tutorials/</code> directories, only *Rmd files and all the files in <code>images</code> and <code>data</code> are installed. We might want to revisit this to, instead, specify files which are not copied over.</p>
-</li>
+<li><code>R CMD check</code> will test that all tutorials have the default sections exactly as they are in the Helper Tutorial template. So, use the template. If either the “Information” or “Download answers” sections are missing, <code>R CMD check</code> will return something like “Missing a component part from file /path/to/your/Rmd/file.Rmd”.</li>
 </ul>
 <h2>Advice for Book-based tutorials</h2>
 <p>Some tutorial packages are based on books. The idea is to provide a structured tutorial in which students type in (almost) every command which the book demonstrates, along with other commands which, in your judgment, are helpful. An example of this approach is the <a href="https://ppbds.github.io/r4ds.tutorials/"><strong>r4ds.tutorials</strong></a> package which is a companion to <a href="https://r4ds.hadley.nz/"><em>R for Data Science (2e)</em></a> by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.</p>

@@ -30,11 +30,6 @@ get_submissions_from_learnr_session <- function(sess){
   # learnr::get_tutorial_state()
   # learnr::get_tutorial_info()
 
-  # DK: Below comment still relevant?
-
-  # Unfortunately, the answers in learnr::get_tutorial_state() are not provided
-  # in order of appearance, so we still need get_label_list() to get the label
-  # order
 
   curr_state <- learnr::get_tutorial_state(session = sess)
 

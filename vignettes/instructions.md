@@ -45,7 +45,7 @@ We are building a "[pit of success](https://ricomariani.medium.com/the-pit-of-su
 <!-- Not sure about this paragraph -->
 To make additions to a tutorial package, follow the [set up guide](https://ppbds.github.io/primer/set-up.html) to fork/download a copy of of the package. Press "Install and Restart" from the "Build" tab to ensure that you have the latest copy installed. (You should not do `remotes::install_github("the-tutorial-package")` since that gets the version from Github. You want the version from your computer so that you get any changes you make.) 
 
-Tutorials themselves live in a directory within `inst/tutorials` in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the `id` of the tutorial. Within each directory is a `tutorial.Rmd` file and, sometimes, other material like an `images` and `data` directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. 
+Tutorials themselves live in a directory within `inst/tutorials` in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the `id` of the tutorial. Within each directory is am R Markdown file and, sometimes, other material like an `images` and `data` directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. By default, we name the R Markdown file `tutorial.Rmd` but any name works as long as the file has the appropriate YAML header.
 
 To create a new tutorial, use `File -> New File -> R Markdown...`. Choose the "From Template" option and then select "Helper Tutorial." Follow the instructions.
 
@@ -164,7 +164,7 @@ Fourth, tutorials should be so simple that 95% of the students can answer 95% of
 
 Hints must always have the same code chunk name as the exercise chunk for which they are the hint, with a "-hint-n" added at the end. So, if an exercise code chunk is named "ex-1", then the hint associated with that exercise is named "ex-1-hint-1". A second hint for that same question would be named "ex-1-hint-2", and so on. 
 
-When you create a hint, always use `eval = FALSE` within the parentheses in the code chunk. This is because hints will often include "..." and other symbols which do not run as correct R code. So, we need to tell R not to run it or an error will occur during R CMD check. Example:
+When you create a hint, always use `eval = FALSE` within the parentheses in the code chunk. This is because hints will often include "..." and other symbols which do not run as correct R code. So, we need to tell R not to run it or an error will occur during `R CMD check`. Example:
 
 
 ````default
@@ -406,7 +406,7 @@ The most difficult part of tutorial creation is writing the "knowledge drops," t
 
 * Links to function documentation is useful. Indeed, we should link at least once to the documentation for every function which we use. Two categories:
   * Links to the help pages for base function are tricky. It is not clear to me which location is the best to use for this purpose. My suggestion is to use links involving the `stat.ethz.ch` server, which is the home base (I think) for the core R developpers. 
-  * Links to functions for functions from the *Tidyverse* should use the docs maintained by Posit and located at `tidyverse.github.io`. Consider these examples for [arrange()](https://dplyr.tidyverse.org/reference/arrange.html) and [aes()](https://tidyverse.github.io/ggplot2-docs/reference/aes.html). 
+  * Links to functions from the *Tidyverse* should use the docs maintained by Posit. Consider these examples for [arrange()](https://dplyr.tidyverse.org/reference/arrange.html) and [aes()](https://tidyverse.github.io/ggplot2-docs/reference/aes.html). 
   
 * One common approach is like this:
 
@@ -425,7 +425,7 @@ Think back to our initial discussion of the 10,000 pieces of information which w
 
 ### Tibbles
 
-There are two main sources for tibbles for use in the tutorials. First, use built-in data sets. Run `library(primer.data)` or `library(tidyverse)` or any other package. Then, run `data()`. This will pull up a list of available data sets. Note that some of these will be data frames rather than tibbles. Second, you can store data --- either as csv or rds files --- in the `data` directory of the tutorial, as discussed below.
+There are two main sources for tibbles for use in the tutorials. First, use built-in data sets. Run `library(all.primer.data)` or `library(tidyverse)` or any other package. Then, run `data()`. This will pull up a list of available data sets. Note that some of these will be data frames rather than tibbles. Second, you can store data --- either as csv or rds files --- in the `data` directory of the tutorial, as discussed below.
 
 ### Using images
 
@@ -446,7 +446,7 @@ include_graphics("images/example.png")
 
 Files --- most commonly text files or rds files --- are handled in a similar fashion to images. Create a directory called `data` in the same directory as the `tutorial.Rmd`, just as we do with `images`. Any file in `data` will be available at run time. (Note that the directory must be named `data`. Something like `my_data` will not work.) 
 
-There are two main uses for files in `data`. First, they can be used at "compile time" (when the `tutorial.Rmd` is knit to html) for making plots or doing anything else. Second, they are available to students in the exercise code blocks during "run time" (when students are doing the tutorial).
+There are two main uses for files in `data`. First, they can be used at "compile time" (when the `tutorial.Rmd` is knit to html) for making plots or doing anything else. Second, and more importantly, they are available to students in the exercise code blocks during "run time" (when students are doing the tutorial).
 
 
 ### Permanent objects
@@ -464,7 +464,7 @@ If you need for an R object to be accessible in an Exercise code chunk, create i
 ## Check tutorial functionality 
 
 
-The simplest way to test the `tutorial.Rmd` with which you are working on is to hit the "Run Document" button. This is the same thing as running `rmarkdown::render()` on the tutorial:
+The simplest way to test the `tutorial.Rmd` with which you are working on is to hit the "Run Document" button. This is the same thing as running `rmarkdown::render()` on that file:
 
 
 ```r
@@ -480,19 +480,19 @@ Once you are done writing your tutorial, you need to make sure it works before y
 
 1. Click "Install and Restart" from the Build tab. Then, hit "Start Tutorial" in the Tutorial tab. This mimics the experience that users will have. This will catch some common errors, like having two code chunks with the same name. (I am not sure if this does more or less than the simple test as above.)
 
-2. Do a full test, which means running R CMD check. Go to the top right window of RStudio. Click the Build pane and hit the "Check" button (with the green check mark). You will then see a bunch of code and tests running. Make sure it says "OK" next to “testthat”. You should always run this before submitting a pull request.
+2. Do a full test, which means running `R CMD check`. Go to the top right window of RStudio. Click the Build pane and hit the "Check" button (with the green check mark). You will then see a bunch of code and tests running. Make sure it says "OK" next to “testthat”. You should always run this before submitting a pull request.
 
-### What to do if R CMD check fails
+### What to do if `R CMD check` fails
 
 1. Read the error message at the bottom of the Build pane. You want to see "R CMD check succeeded." If not, there is a problem. The error message will often provide a clue as to where in your code the error occurred.
 
-2. If that error message is not detailed enough, go to the `your.package.rcheck` folder, which should be located in the same directory as `your.package` on your computer. This is a folder created by the R CMD check process, and it will be automatically deleted if the check process succeeds. If the process fails, the `your.package.rcheck` folder stays around so that you can examine it. The key file is `testthat.Rout.fail`, which should be in the `tests` directory. It has more details on what went wrong.
+2. If that error message is not detailed enough, go to the `your.package.rcheck` folder, which should be located in the same directory as `your.package` on your computer. This is a folder created by the `R CMD check` process, and it will be automatically deleted if the check process succeeds. If the process fails, the `your.package.rcheck` folder stays around so that you can examine it. The key file is `testthat.Rout.fail`, which should be in the `tests` directory. It has more details on what went wrong.
 
 The most common source of errors is something wrong with the hint code chunks, which are not evaluated when you just Run Document. Make sure the `eval = FALSE` argument is set in the code chunk for all hints. 
 
 ### Difficult bugs
 
-* Note that R CMD check does not seem to catch cases in which you library() a package in a tutorial but that package is not in DESCRIPTION. But such a discrepancy will cause an error on Github Actions because, there, you only have access to packages that have been installed as part of that test.
+* Note that `R CMD check` does not seem to catch cases in which you `library()` a package in a tutorial but that package is not in DESCRIPTION. But such a discrepancy will cause an error on Github Actions because, there, you only have access to packages that have been installed as part of that test.
 
 * Be careful of the way that Github is sloppy in how it deals with capitalization changes, especially when you change the name of a file. For example, you might first commit a file named `Rproj.png`. Later, you decide to change all file names for images to all lower case. So, you change the name of the file to `rproj.png`. Commit and push. Everything is great, right? No! Even if Github shows you the new file name it might still have that file as `Rproj.png` internally, with the capital "R". This will cause errors when your run your checks on Github: 
 
@@ -503,9 +503,8 @@ Error: Cannot find the file(s): "images/rproj.png"
 
 But the file is there! You can see it! The tests work on your local machine. The easiest solution is to delete the file (and commit that change). And then change the name of the file to something else and use it.
 
-* R CMD check will test that all tutorials have the default sections exactly as they are in the Helper Tutorial template. So, use the template. If either the "Introduction" or "Download answers" sections are missing, R CMD check will return something like "From test-components.R. Submission (or Information) lines missing from file".
+* `R CMD check` will test that all tutorials have the default sections exactly as they are in the Helper Tutorial template. So, use the template. If either the "Information" or "Download answers" sections are missing, `R CMD check` will return something like "Missing a component part from file /path/to/your/Rmd/file.Rmd".
 
-* Be wary about the `.Rbuildignore` file. It is important, but dangerous. In particular, it ensures that only specified files are copied over to the R package. Specifically, within the `/inst/tutorials/` directories, only *Rmd files and all the files in `images` and `data` are installed. We might want to revisit this to, instead, specify files which are not copied over.
 
 
 ## Advice for Book-based tutorials
