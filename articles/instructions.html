@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9011</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9012</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -141,10 +141,12 @@ that you get any changes you make.)</p>
 recommend that this directory name be a combination of a prefix number
 (which indicate the week/chapter with which a tutorial is associated
 and/or the order in which to do it) and a name, which corresponds to the
-<code>id</code> of the tutorial. Within each directory is a
-<code>tutorial.Rmd</code> file and, sometimes, other material like an
-<code>images</code> and <code>data</code> directory. The prefix number
-determines the order in which tutorials appear in the Tutorial pane.</p>
+<code>id</code> of the tutorial. Within each directory is am R Markdown
+file and, sometimes, other material like an <code>images</code> and
+<code>data</code> directory. The prefix number determines the order in
+which tutorials appear in the Tutorial pane. By default, we name the R
+Markdown file <code>tutorial.Rmd</code> but any name works as long as
+the file has the appropriate YAML header.</p>
 <p>To create a new tutorial, use
 <code>File -&gt; New File -&gt; R Markdown...</code>. Choose the “From
 Template” option and then select “Helper Tutorial.” Follow the
@@ -345,8 +347,8 @@ question would be named “ex-1-hint-2”, and so on.</p>
 <p>When you create a hint, always use <code>eval = FALSE</code> within
 the parentheses in the code chunk. This is because hints will often
 include “…” and other symbols which do not run as correct R code. So, we
-need to tell R not to run it or an error will occur during R CMD check.
-Example:</p>
+need to tell R not to run it or an error will occur during
+<code>R CMD check</code>. Example:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>```{r ex-1-hint-good, eval = FALSE}</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>This is an example hint. Normally sentences like these </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>would cause an error in R because it is not proper code. </span>
@@ -643,9 +645,8 @@ clear to me which location is the best to use for this purpose. My
 suggestion is to use links involving the <code>stat.ethz.ch</code>
 server, which is the home base (I think) for the core R
 developpers.</li>
-<li>Links to functions for functions from the <em>Tidyverse</em> should
-use the docs maintained by Posit and located at
-<code>tidyverse.github.io</code>. Consider these examples for <a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a>
+<li>Links to functions from the <em>Tidyverse</em> should use the docs
+maintained by Posit. Consider these examples for <a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a>
 and <a href="https://tidyverse.github.io/ggplot2-docs/reference/aes.html" class="external-link">aes()</a>.</li>
 </ul>
 </li>
@@ -668,8 +669,8 @@ functions, like <code>arrange()</code> and <code>aes()</code>.</p>
 <h3 id="tibbles">Tibbles<a class="anchor" aria-label="anchor" href="#tibbles"></a>
 </h3>
 <p>There are two main sources for tibbles for use in the tutorials.
-First, use built-in data sets. Run <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(primer.data)</a></code> or
-<code><a href="https://tidyverse.tidyverse.org" class="external-link">library(tidyverse)</a></code> or any other package. Then, run
+First, use built-in data sets. Run <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(all.primer.data)</a></code>
+or <code><a href="https://tidyverse.tidyverse.org" class="external-link">library(tidyverse)</a></code> or any other package. Then, run
 <code><a href="https://rdrr.io/r/utils/data.html" class="external-link">data()</a></code>. This will pull up a list of available data sets.
 Note that some of these will be data frames rather than tibbles. Second,
 you can store data — either as csv or rds files — in the
@@ -704,9 +705,9 @@ available at run time. (Note that the directory must be named
 work.)</p>
 <p>There are two main uses for files in <code>data</code>. First, they
 can be used at “compile time” (when the <code>tutorial.Rmd</code> is
-knit to html) for making plots or doing anything else. Second, they are
-available to students in the exercise code blocks during “run time”
-(when students are doing the tutorial).</p>
+knit to html) for making plots or doing anything else. Second, and more
+importantly, they are available to students in the exercise code blocks
+during “run time” (when students are doing the tutorial).</p>
 </div>
 <div class="section level3">
 <h3 id="permanent-objects">Permanent objects<a class="anchor" aria-label="anchor" href="#permanent-objects"></a>
@@ -725,7 +726,7 @@ the top of the tutorial.</p>
 </h2>
 <p>The simplest way to test the <code>tutorial.Rmd</code> with which you
 are working on is to hit the “Run Document” button. This is the same
-thing as running <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> on the tutorial:</p>
+thing as running <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> on that file:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span><span class="st">"inst/tutorials/02-terminal/tutorial.Rmd"</span><span class="op">)</span></span></code></pre></div>
 <p>This assumes that you are located in the main directory of
@@ -744,15 +745,15 @@ Tutorial” in the Tutorial tab. This mimics the experience that users
 will have. This will catch some common errors, like having two code
 chunks with the same name. (I am not sure if this does more or less than
 the simple test as above.)</p></li>
-<li><p>Do a full test, which means running R CMD check. Go to the top
-right window of RStudio. Click the Build pane and hit the “Check” button
-(with the green check mark). You will then see a bunch of code and tests
-running. Make sure it says “OK” next to “testthat”. You should always
-run this before submitting a pull request.</p></li>
+<li><p>Do a full test, which means running <code>R CMD check</code>. Go
+to the top right window of RStudio. Click the Build pane and hit the
+“Check” button (with the green check mark). You will then see a bunch of
+code and tests running. Make sure it says “OK” next to “testthat”. You
+should always run this before submitting a pull request.</p></li>
 </ol>
 </div>
 <div class="section level3">
-<h3 id="what-to-do-if-r-cmd-check-fails">What to do if R CMD check fails<a class="anchor" aria-label="anchor" href="#what-to-do-if-r-cmd-check-fails"></a>
+<h3 id="what-to-do-if-r-cmd-check-fails">What to do if <code>R CMD check</code> fails<a class="anchor" aria-label="anchor" href="#what-to-do-if-r-cmd-check-fails"></a>
 </h3>
 <ol style="list-style-type: decimal">
 <li><p>Read the error message at the bottom of the Build pane. You want
@@ -762,12 +763,12 @@ occurred.</p></li>
 <li><p>If that error message is not detailed enough, go to the
 <code>your.package.rcheck</code> folder, which should be located in the
 same directory as <code>your.package</code> on your computer. This is a
-folder created by the R CMD check process, and it will be automatically
-deleted if the check process succeeds. If the process fails, the
-<code>your.package.rcheck</code> folder stays around so that you can
-examine it. The key file is <code>testthat.Rout.fail</code>, which
-should be in the <code>tests</code> directory. It has more details on
-what went wrong.</p></li>
+folder created by the <code>R CMD check</code> process, and it will be
+automatically deleted if the check process succeeds. If the process
+fails, the <code>your.package.rcheck</code> folder stays around so that
+you can examine it. The key file is <code>testthat.Rout.fail</code>,
+which should be in the <code>tests</code> directory. It has more details
+on what went wrong.</p></li>
 </ol>
 <p>The most common source of errors is something wrong with the hint
 code chunks, which are not evaluated when you just Run Document. Make
@@ -778,11 +779,11 @@ all hints.</p>
 <h3 id="difficult-bugs">Difficult bugs<a class="anchor" aria-label="anchor" href="#difficult-bugs"></a>
 </h3>
 <ul>
-<li><p>Note that R CMD check does not seem to catch cases in which you
-library() a package in a tutorial but that package is not in
-DESCRIPTION. But such a discrepancy will cause an error on Github
-Actions because, there, you only have access to packages that have been
-installed as part of that test.</p></li>
+<li><p>Note that <code>R CMD check</code> does not seem to catch cases
+in which you <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code> a package in a tutorial but that
+package is not in DESCRIPTION. But such a discrepancy will cause an
+error on Github Actions because, there, you only have access to packages
+that have been installed as part of that test.</p></li>
 <li><p>Be careful of the way that Github is sloppy in how it deals with
 capitalization changes, especially when you change the name of a file.
 For example, you might first commit a file named <code>Rproj.png</code>.
@@ -799,19 +800,13 @@ machine. The easiest solution is to delete the file (and commit that
 change). And then change the name of the file to something else and use
 it.</p>
 <ul>
-<li><p>R CMD check will test that all tutorials have the default
-sections exactly as they are in the Helper Tutorial template. So, use
-the template. If either the “Introduction” or “Download answers”
-sections are missing, R CMD check will return something like “From
-test-components.R. Submission (or Information) lines missing from
-file”.</p></li>
-<li><p>Be wary about the <code>.Rbuildignore</code> file. It is
-important, but dangerous. In particular, it ensures that only specified
-files are copied over to the R package. Specifically, within the
-<code>/inst/tutorials/</code> directories, only *Rmd files and all the
-files in <code>images</code> and <code>data</code> are installed. We
-might want to revisit this to, instead, specify files which are not
-copied over.</p></li>
+<li>
+<code>R CMD check</code> will test that all tutorials have the
+default sections exactly as they are in the Helper Tutorial template.
+So, use the template. If either the “Information” or “Download answers”
+sections are missing, <code>R CMD check</code> will return something
+like “Missing a component part from file
+/path/to/your/Rmd/file.Rmd”.</li>
 </ul>
 </div>
 </div>

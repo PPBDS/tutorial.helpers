@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9011</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9012</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,9 +79,11 @@
     
     
 <p>This document reviews some of the technical details behind the
-special modifications we have made to the basic tutorial technology. It
-is only of interest to those thinking of modifying the current approach.
-It also includes some items worth investigating and/or fixing.</p>
+special modifications which the <strong>tutorial.helpers</strong>
+package makes possible and/or necessary, beyond the defaults of the
+basic <strong>learnr</strong> tutorial technology. It is only of
+interest to those thinking of modifying the current approach. It also
+includes some items worth investigating and/or fixing.</p>
 <div class="section level2">
 <h2 id="package-locations">Package locations<a class="anchor" aria-label="anchor" href="#package-locations"></a>
 </h2>
@@ -95,11 +97,11 @@ case (using <strong>all.primer.tutorials</strong>), we have</p>
 <p>The first is the default location for packages. This is where things
 go unless you do something special. The second is installed by
 <code>renv</code>, which was used within the
-<code>all.primer.tutorials</code> project. When you are working in your
-<code>all.primer.tutorials</code> project, as you generally will, the
-<code>renv</code> version of the <strong>all.primer.tutorials</strong>
-library is what you will be using. You can check this by running
-<code><a href="https://rdrr.io/r/base/libPaths.html" class="external-link">.libPaths()</a></code>.</p>
+<strong>all.primer.tutorials</strong> project. When you are working in
+your <strong>all.primer.tutorials</strong> project, as you generally
+will, the <code>renv</code> version of the
+<strong>all.primer.tutorials</strong> library is what you will be using.
+You can check this by running <code><a href="https://rdrr.io/r/base/libPaths.html" class="external-link">.libPaths()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">.libPaths</span>()</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"/Users/dkane/Library/Caches/org.R-project.R/R/renv/library/all.primer.tutorials-07f29d85/R-4.2/aarch64-apple-darwin20"</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">2</span>] <span class="st">"/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/library"</span> </span></code></pre></div>
@@ -107,7 +109,7 @@ library is what you will be using. You can check this by running
 order, the values returned by <code><a href="https://rdrr.io/r/base/libPaths.html" class="external-link">.libPaths()</a></code>.
 <strong>renv</strong> sets things up so that the first item is its
 collection of packages. Note that these are placed in a weird location,
-including a temp directory name
+including a temp directory named something like
 <code>all.primer.tutorials-07f29d85</code>. I am not sure how
 <strong>renv</strong> decided to create a new one of these. It does not
 delete the old ones. In the case of major breakdowns, deleting these
@@ -127,18 +129,10 @@ will add a button that looks like this:</p>
 <p><img src="images/copy-button.png"><!-- --></p>
 <p>The user just needs to click the button in order to copy the code
 from the previous exercise into the current one.</p>
-</div>
-<div class="section level3">
-<h3 id="possible-improvements">Possible Improvements<a class="anchor" aria-label="anchor" href="#possible-improvements"></a>
-</h3>
-<p>Personally, I think the current solution is very close to the ideal
-solution. The only downsides being that 1) tutorial makers still have to
-include something in the exercises and 2) the button would look much
-better on the toolbar section of the exercise, next to
-<code>"Start Over"</code> and where the “hint” would be.</p>
-<p>However, the possibility of automatically copying code to clipboard
-when clicking the <code>"Run Code"</code> button has yet been explored
-and could offer a better solution.</p>
+<p>The downsides to the current approach are: 1) tutorial makers still
+have to include something in the Exercises and 2) the button would look
+much better on the toolbar section of the exercise, perhaps in between
+<code>Start Over</code> and <code>Hint</code>..</p>
 </div>
 </div>
 <div class="section level2">
@@ -148,13 +142,15 @@ and could offer a better solution.</p>
 <code>.Rbuildignore</code>, at least by using the “#” symbol. I think
 the key issue is that using <code>*</code> (or maybe a parenthesis) in a
 line which begins with <code>#</code> causes trouble. Regardless, here
-are some thoughts on the current version.</p>
+are some thoughts on the version we currently use in
+<strong>all.primer.tutorials</strong>.</p>
 <p>We would like to ensure that all the junk files which end up in the
 <code>tutorials/*</code> directories are not included in the build. Such
 files are often large. They also run the risk of messing things up in
 that they might cause certain tests to pass for us but which would fail
 for anyone who downloads from Github. (The <code>.gitignore</code> file
-does a reasonable ensuring that such files do not end up on Github.)</p>
+does a reasonable job of ensuring that such files do not end up on
+Github.)</p>
 <p>The key line is:</p>
 <pre><code>tutorials/[^/]*/(?!(data|images|.*Rmd))</code></pre>
 <p>This excludes everything in any subdirectory of the tutorials
@@ -167,22 +163,29 @@ suffixed with <code>.Rmd</code>.</p>
 </h2>
 <p>If you are using a new library, there are several things you need to
 check. First, most obviously, you should install the package within the
-<code>primer.tutorials</code> directory. Second, you must use library(X)
-in the setup chunk within the tutorial.Rmd itself. Third, you need to
-run <code><a href="https://rstudio.github.io/renv/reference/status.html" class="external-link">renv::status()</a></code>. This should report that there is a new
-package which is not part of renv.lock. Then, you will need to run
-<code><a href="https://rstudio.github.io/renv/reference/snapshot.html" class="external-link">renv::snapshot()</a></code> so that the renv.lock file is updated.
-Fourth, you need to add the package to the DESCRIPTION file, in the
-Imports: section. (And don’t forget the comma when you do so.) If you
-don’t do this, then R CMD check might work on your computer, where
-library X is already installed, but won’t work in Github actions since R
-relies on the DESCRIPTION file to know which packages to install.</p>
+<code>your.package</code> directory. Second, you must use
+<code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(X)</a></code> in the setup chunk within the
+<code>tutorial.Rmd</code> itself. Third, you need to run
+<code><a href="https://rstudio.github.io/renv/reference/status.html" class="external-link">renv::status()</a></code>. This should report that there is a new
+package which is not part of <code>renv.lock</code>. Then, you will need
+to run <code><a href="https://rstudio.github.io/renv/reference/snapshot.html" class="external-link">renv::snapshot()</a></code> so that the <code>renv.lock</code>
+file is updated. Fourth, you need to add the package to the
+<code>DESCRIPTION</code> file, in the <code>Imports:</code> section.
+(And don’t forget the comma when you do so.) If you don’t do this, then
+R CMD check might work on your computer, where library X is already
+installed, but won’t work in Github actions since it relies on the
+DESCRIPTION file to know which packages to install.</p>
+<p>It makes sense to use high quality tools for these steps. For
+example, <code><a href="https://rstudio.github.io/renv/reference/install.html" class="external-link">renv::install()</a></code> is a better way of installing
+needed packages within the <strong>renv</strong> environment.
+<code>usethis::use_package()</code> updates the <code>DESCRIPTION</code>
+file to include the package.</p>
 <p>We have seen weird situations in which even doing all of the above
 did not work. The required hack was to install the new package in your
 main (default) library. Now, it seems weird that this would help since,
 with <strong>renv</strong>, we should never be using that location. I
-suspect that there is a bug involved in the interaction between R CMD
-check and <strong>renv</strong>.</p>
+suspect that there is a bug involved in the interaction between
+<code>R CMD check</code> and <strong>renv</strong>.</p>
 </div>
 <div class="section level2">
 <h2 id="tour-of-the-package-functions">Tour of the Package Functions<a class="anchor" aria-label="anchor" href="#tour-of-the-package-functions"></a>
@@ -191,10 +194,10 @@ check and <strong>renv</strong>.</p>
 <h3 id="submission-functions">Submission Functions<a class="anchor" aria-label="anchor" href="#submission-functions"></a>
 </h3>
 <p><strong>submission_ui</strong> is an HTML structure defined through
-shiny, which is inserted to the end of every tutorial. It creates
+Shiny, which is inserted to the end of every tutorial. It creates
 buttons to download submission reports in the forms of RDS and HTML.</p>
 <p><strong>submission_server()</strong> is a function that communicates
-with the shiny server during a tutorial. It provides the download
+with the Shiny server during a tutorial. It provides the download
 functions, <strong>downloadHtml</strong> and
 <strong>downloadRds</strong>, for the user interface to call when
 downloading submission reports.</p>
@@ -207,11 +210,12 @@ a tibble report of tutorial submissions in HTML.</p>
 <p><strong>build_rds</strong> is a function that creates and downloads
 an tibble report of tutorial submissions in RDS.</p>
 <p><strong>get_submissions_from_learnr_session</strong> is a function
-that gets submissions of the current tutorial session through learnr
-functions, specifically <code>learnr:::get_all_state_objects()</code>
-and <code>learnr::submissions_from_state_objects()</code>. It returns a
-list of submission objects, each containing details about the question
-and answer.</p>
+that gets submissions of the current tutorial session through
+<strong>learnr</strong> functions, specifically
+<code>learnr::get_all_state_objects()</code> and
+<code>learnr::submissions_from_state_objects()</code>. It returns a list
+of submission objects, each containing details about the question and
+answer.</p>
 </div>
 <div class="section level3">
 <h3 id="add-in-functions">Add-in Functions<a class="anchor" aria-label="anchor" href="#add-in-functions"></a>
@@ -222,15 +226,8 @@ path and formats the code chunk labels into a standardized format.</p>
 runs <code><a href="../reference/format_tutorial.html">format_tutorial()</a></code> on the current opened tutorial. It
 is a handy add-in for tutorial makers who want to make sure their chunk
 labels are correct.</p>
-<p><strong>make_new_exercise</strong> is an add-in function that creates
-a code exercise with correctly formatted labels and general
-structure.</p>
-<p><strong>make_new_q_no_answer</strong> is an add-in function that
-creates a question exercise that does not have an answer to display with
-correctly formatted labels and general structure.</p>
-<p><strong>make_new_q_with_answer</strong> is an add-in function that
-creates a question exercise that does have an answer to display with
-correctly formatted labels and general structure.</p>
+<p><strong>make_exercise</strong> is an add-in function that creates a
+exercises with correctly formatted labels and general structure.</p>
 </div>
 </div>
 <div class="section level2">
@@ -242,7 +239,7 @@ actions taken in previous code chunks, except for three exceptions:</p>
 <ol style="list-style-type: decimal">
 <li><p>Any objects created in the global “setup” code chunk are
 available in all Exercise code chunks. The annoying thing about this
-option is that we would, ideally like to have the obects created near —
+option is that we would, ideally like to have the objects created near —
 in the Rmd — to the Exercises which use them. This also means that we
 can only use names like “fit_1” or “pp” once in each tutorial.</p></li>
 <li><p>Objects created in a setup chunk for just one exercise.</p></li>
@@ -260,13 +257,6 @@ available at run time, which is why they are not seen in Exercises.</p>
 objects. In particular, it sometimes seems like things will work with
 Run Document but not with Run Tutorial. Since students always do the
 latter, we need to test that way as well.</p>
-</div>
-<div class="section level2">
-<h2 id="verbatim-code-chunks">Verbatim Code Chunks<a class="anchor" aria-label="anchor" href="#verbatim-code-chunks"></a>
-</h2>
-<p>See <a href="https://support.rstudio.com/hc/en-us/articles/360018181633-Including-verbatim-R-code-chunks-inside-R-Markdown" class="external-link">here</a>
-for advice about how to use verbatim R code chunks within an R Markdown
-document, as we do in this document.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
