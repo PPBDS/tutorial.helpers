@@ -21,6 +21,7 @@ Suggests:
     knitr,
     roxygen2,
     rsconnect,
+    rvest,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
@@ -31,7 +32,6 @@ Imports:
     readr,
     rmarkdown,
     rstudioapi,
-    rvest,
     shiny,
     stringr,
     tibble
