@@ -1,10 +1,12 @@
-# Would like to figure out a way to add tutorials to this package for testing,
-# ones which would not show up in the Tutorial pane, thereby confusing students.
-# In the meantime, we can load some learnr tutorials and confirm that they don't
-# have the required defaults.
+# Key insight is that we can test tutorial files without installing them as
+# tutorials. Ought to expand this to check the error messages, perhaps.
 
-x <- return_tutorial_paths(package = "learnr")
+check_tutorial_defaults("test-data/tutorial_examples/good-tutorial.Rmd")
 
-expect_error(check_tutorial_defaults(x[1]))
-expect_error(check_tutorial_defaults(x[2]))
+expect_error(
+  check_tutorial_defaults("test-data/tutorial_examples/no-info-tutorial.Rmd")
+  )
 
+expect_error(
+  check_tutorial_defaults("test-data/tutorial_examples/no-tutorialhelpers-tutorial.Rmd")
+  )
