@@ -9,15 +9,10 @@
 
 build_html <- function(file, session, is_test = FALSE){
 
-  # Inspired by Matt Blackwell's implementation of a similar idea.
-  # https://github.com/mattblackwell/qsslearnr/blob/main/R/submission.R
 
-  # Copy over a report Rmd template to write to.
-
-  tempReport <- file.path(tempdir(), "submission-temp.Rmd")
-  file.copy(system.file("www/submission-temp.Rmd", package = "tutorial.helpers"), tempReport, overwrite = TRUE)
-
-  # Get submissions from learnr
+  # Get submissions from learnr. Is it worthwhile to learn more about the
+  # variables we can get from a submission object and then give the user some
+  # choice about what to include?
 
   # Data Structure of a learnr submission object
 
@@ -50,20 +45,12 @@ build_html <- function(file, session, is_test = FALSE){
 
   out <- rbind(c(id = "tutorial-id", submission_type = "none", answer = tutorial_id), out)
 
-  # Pass tibble and title as parameters into the report template, then render
-  # template as an html document.
+  # It is unclear what is the best format for providing this information.
 
-  # DK: Should it be " submissions" or "submissions" or "-submissions"?
+  z <- knitr::kable(out, format = "html")
+  write(as.character(z), file = file)
 
-  params <- list(output = out,
-                 title = paste0(tutorial_id,
-                                " submissions"))
+  # Is it really necessary for use to return the file path?
 
-  rmarkdown::render(tempReport,
-                    output_format = "html_document",
-                    output_file = file,
-                    params = params,
-                    envir = new.env(parent = globalenv()))
-
-
+  file
 }
