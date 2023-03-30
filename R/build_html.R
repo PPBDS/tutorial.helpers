@@ -50,7 +50,5 @@ build_html <- function(file, session, is_test = FALSE){
   z <- knitr::kable(out, format = "html")
   write(as.character(z), file = file)
 
-  # Is it really necessary for use to return the file path?
 
-  file
 }

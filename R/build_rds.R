@@ -46,5 +46,4 @@ build_rds <- function(file, session, is_test = FALSE){
 
   saveRDS(out, file)
 
-  file
 }

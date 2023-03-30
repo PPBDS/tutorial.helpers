@@ -43,11 +43,16 @@ saved_session <- readRDS(session_path)
 # for details on why this function is hard to test.
 
 
+# Change the functions so that they no longer return a path, which is an absurd
+# hack.
+
 # Test build_html()
 
-report_test_loc <- build_html(file.path(tempdir(), "submission_report_test.html"), saved_session, is_test = TRUE)
+html_file <- file.path(tempdir(), "submission_report_test.html")
 
-submission_report_test <- rvest::read_html(report_test_loc)
+build_html(html_file, saved_session, is_test = TRUE)
+
+submission_report_test <- rvest::read_html(html_file)
 
 submission_report_output <- rvest::read_html("test-data/submission_test_outputs/submission_report_output.html")
 
@@ -60,9 +65,11 @@ if (!identical(rvest::html_table(submission_report_test), rvest::html_table(subm
 
 # Test build_rds()
 
-rds_test_loc <- build_rds(file.path(tempdir(), "submission_test_output.rds"), saved_session, is_test = TRUE)
+rds_file <- file.path(tempdir(), "submission_test_output.rds")
 
-submission_rds_test <- readRDS(rds_test_loc)
+build_rds(rds_file, saved_session, is_test = TRUE)
+
+submission_rds_test <- readRDS(rds_file)
 
 submission_rds_output <- readRDS("test-data/submission_test_outputs/submission_desired_output.rds")
 
