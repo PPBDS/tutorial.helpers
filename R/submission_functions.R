@@ -42,7 +42,7 @@ submission_server <- function(session) {
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.html"),
       content = function(file){
-        build_html(file, session)
+        write_answers(file, session)
       }
     )
 
@@ -59,7 +59,7 @@ submission_server <- function(session) {
                         "_answers.rds"),
 
       content = function(file){
-        build_rds(file, session)
+        write_answers(file, session)
       }
     )
 

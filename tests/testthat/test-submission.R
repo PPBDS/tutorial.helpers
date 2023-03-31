@@ -50,7 +50,7 @@ saved_session <- readRDS(session_path)
 
 html_file <- file.path(tempdir(), "submission_report_test.html")
 
-build_html(html_file, saved_session, is_test = TRUE)
+write_answers(html_file, saved_session, is_test = TRUE)
 
 submission_report_test <- rvest::read_html(html_file)
 
@@ -67,7 +67,7 @@ if (!identical(rvest::html_table(submission_report_test), rvest::html_table(subm
 
 rds_file <- file.path(tempdir(), "submission_test_output.rds")
 
-build_rds(rds_file, saved_session, is_test = TRUE)
+write_answers(rds_file, saved_session, is_test = TRUE)
 
 submission_rds_test <- readRDS(rds_file)
 

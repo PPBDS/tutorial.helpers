@@ -1,14 +1,18 @@
-#' Build HTML Submission Report
+#' Write Tutorial Answers
 #'
-#' @param file location to render Rmd tibble into HTML
+#' @param file location to render answers to. Output file type determined by
+#'  file suffix.
 #' @param session session object from shiny with learnr
 #' @param is_test check if testing function
 #'
-#' @return a rendered html document with a tibble submission report
+#' @return NULL
 #' @export
 
-build_html <- function(file, session, is_test = FALSE){
-
+write_answers <- function(file, session, is_test = FALSE){
+  
+  type <- tools::file_ext(file)
+  
+  stopifnot(type %in% c("html", "rds"))
 
   # Get submissions from learnr. Is it worthwhile to learn more about the
   # variables we can get from a submission object and then give the user some
@@ -47,8 +51,13 @@ build_html <- function(file, session, is_test = FALSE){
 
   # It is unclear what is the best format for providing this information.
 
-  z <- knitr::kable(out, format = "html")
-  write(as.character(z), file = file)
+  if(type == "html"){
+    z <- knitr::kable(out, format = "html")
+    write(as.character(z), file = file)
+  }
+  if(type == "rds"){
+    saveRDS(out, file)
+  }
 
-
+  NULL
 }
