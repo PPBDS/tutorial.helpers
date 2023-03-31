@@ -22,12 +22,6 @@
     <loc>https://ppbds.github.io/tutorial.helpers/index.html</loc>
   </url>
   <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/reference/build_html.html</loc>
-  </url>
-  <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/reference/build_rds.html</loc>
-  </url>
-  <url>
     <loc>https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.html</loc>
   </url>
   <url>
@@ -59,5 +53,8 @@
   </url>
   <url>
     <loc>https://ppbds.github.io/tutorial.helpers/reference/submission_functions.html</loc>
+  </url>
+  <url>
+    <loc>https://ppbds.github.io/tutorial.helpers/reference/write_answers.html</loc>
   </url>
 </urlset>
