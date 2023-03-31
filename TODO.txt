@@ -1,5 +1,3 @@
-Our checking functions --- check_tutorial_defaults, knit_tutorials --- could either take a single tutorial path or a vector of tutorial paths, but they ought to do the same, I think.
-
 Add a pdf option to write_answers.
 
 Perhaps create a package called a.getting.started.tutorial which would be very simple and solve the problem of how to get started.
