@@ -1,5 +1,7 @@
 Add a pdf option to write_answers.
 
+Add check that file exists to knit_tutorials.
+
 Perhaps create a package called a.getting.started.tutorial which would be very simple and solve the problem of how to get started.
 
 Or just add a getting.started tutorial to this package?
