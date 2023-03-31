@@ -39,8 +39,9 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-        uses: r-lib/actions/setup-renv@v2
+      - uses: r-lib/actions/setup-renv@v2
 
+      - name: Install rcmdcheck
         shell: Rscript {0}
         run: renv::install("rcmdcheck")
 
