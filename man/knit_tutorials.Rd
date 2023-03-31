@@ -4,10 +4,11 @@
 \alias{knit_tutorials}
 \title{Knit all the tutorials in a package}
 \usage{
-knit_tutorials(package)
+knit_tutorials(tutorial_paths)
 }
 \arguments{
-\item{package}{character vector of the package name to be tested}
+\item{tutorial_paths}{character vector of the paths to the tutorials to be
+knitted}
 }
 \description{
 Knit all the tutorials in a package

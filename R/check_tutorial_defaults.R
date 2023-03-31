@@ -1,10 +1,10 @@
 #' Check that a tutorial has the standard components
 #'
-#' @param path character variable of the path to the tutorial to be tested
+#' @param tutorial_paths character vector of the paths to the tutorials to be tested
 #'
 #' @export
 
-check_tutorial_defaults <- function(path){
+check_tutorial_defaults <- function(tutorial_paths){
 
   # There are three code components: the use of a copy-code button, an
   # information request, and a download page. It is tricky to know where to
@@ -25,17 +25,19 @@ check_tutorial_defaults <- function(path){
 
   components <- skeleton_lines[ grepl("child = system.file", skeleton_lines) ]
 
-  if(! all(components %in% readLines(path))){
-    stop("Missing a component part from file ", path, "\n")
-  }
-
   # All tutorials should have library(learnr) and library(tutorial.helpers),
   # both of which exist in the skeleton.
-
+  
   libs <- skeleton_lines[ grepl("library", skeleton_lines) ]
-
-  if(! all(libs %in% readLines(path))){
-    stop("Missing a library call from file ", path, "\n")
+  
+  for(i in tutorial_paths){
+    target <- readLines(i)
+    if(! all(components %in% target)){
+      stop("Missing a component part from file ", i, "\n")
+    }
+    if(! all(libs %in% target)){
+      stop("Missing a library call from file ", i, "\n")
+    }
   }
 
 }

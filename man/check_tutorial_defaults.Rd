@@ -4,10 +4,10 @@
 \alias{check_tutorial_defaults}
 \title{Check that a tutorial has the standard components}
 \usage{
-check_tutorial_defaults(path)
+check_tutorial_defaults(tutorial_paths)
 }
 \arguments{
-\item{path}{character variable of the path to the tutorial to be tested}
+\item{tutorial_paths}{character vector of the paths to the tutorials to be tested}
 }
 \description{
 Check that a tutorial has the standard components

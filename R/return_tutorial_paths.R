@@ -13,7 +13,8 @@ return_tutorial_paths <- function(package){
 
   # I am not sure if we need to worry about which installed version of the
   # package we are getting. Presumable the first item in .libPaths() is used . .
-  # .
+  # . Maybe we should model this function on things like install.packages() and
+  # provide a lib argument with a sensible default.
 
   # First, we need the location of the installed package. Second, we need  the
   # name of the directories in which the tutorials live. (I think this is all
