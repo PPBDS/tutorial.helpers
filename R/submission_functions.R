@@ -38,6 +38,14 @@ submission_server <- function(session) {
 
   local({
 
+    # downloadHandler is a function, one of the arguments for which is
+    # filename. We want to have the file name be different for each tutorial.
+    # But how do we know the name of the tutorial in the middle of the
+    # session? It is easy to access some information from the session object
+    # if we know the correct learnr function. (Note that the call to session
+    # only seems to work within a reactive function like this.)
+    
+    
     output$downloadHtml <- shiny::downloadHandler(
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.html"),
@@ -47,17 +55,16 @@ submission_server <- function(session) {
     )
 
     output$downloadRds <- shiny::downloadHandler(
-
-      # downloadHandler is a function, one of the arguments for which is
-      # filename. We want to have the file name be different for each tutorial.
-      # But how do we know the name of the tutorial in the middle of the
-      # session? It is easy to access some information from the session object
-      # if we know the correct learnr function. (Note that the call to session
-      # only seems to work within a reactive function like this.)
-
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.rds"),
-
+      content = function(file){
+        write_answers(file, session)
+      }
+    )
+    
+    output$downloadPdf <- shiny::downloadHandler(
+      filename = paste0(learnr::get_tutorial_info()$tutorial_id,
+                        "_answers.pdf"),
       content = function(file){
         write_answers(file, session)
       }
@@ -84,7 +91,8 @@ submission_ui <- shiny::div(
     shiny::mainPanel(
       shiny::div(id = "form",
                  shiny::downloadButton(outputId = "downloadRds", label = "Download RDS"),
-                 shiny::downloadButton(outputId = "downloadHtml", label = "Download HTML"))
+                 shiny::downloadButton(outputId = "downloadHtml", label = "Download HTML"),
+                 shiny::downloadButton(outputId = "downloadPdf", label = "Download PDF"))
     )
   )
 )
