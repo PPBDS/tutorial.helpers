@@ -3,6 +3,12 @@
 
 # Tutorials Helper Functions
 
+<!-- badges: start -->
+
+[![R build
+status](https://github.com/PPBDS/tutorial.helpers/workflows/R-CMD-check/badge.svg)](https://github.com/PPBDS/tutorial.helpers/actions)
+<!-- badges: end -->
+
 ## About this package
 
 **tutorial.helpers** provides functions and RStudio Addins to help you

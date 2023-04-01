@@ -16,6 +16,10 @@ knitr::opts_chunk$set(
 
 # Tutorials Helper Functions
 
+<!-- badges: start -->
+[![R build status](https://github.com/PPBDS/tutorial.helpers/workflows/R-CMD-check/badge.svg)](https://github.com/PPBDS/tutorial.helpers/actions)
+<!-- badges: end -->
+
 ## About this package
 
 **tutorial.helpers** provides functions and RStudio Addins to help you write R tutorials, especially if you follow [our advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html) about the best way to do so. This approach is currently used in two packages: [**all.primer.tutorials**](https://ppbds.github.io/all.primer.tutorials/) and [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/).
