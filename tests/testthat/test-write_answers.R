@@ -1,8 +1,9 @@
 library(tutorial.helpers)
 library(rvest)
+library(pdftools)
 
-# This script tests the components of the downloading functions for
-# submission_server()
+# The comments below apply to work from last year. Perhaps this would now work
+# correctly, given changes in learnr exported functions.
 
 # Main problem with current submission tests is that it is not tested with a
 # saved session, instead it uses "test modes" of the functions, which bypasses
@@ -46,7 +47,7 @@ saved_session <- readRDS(session_path)
 # Change the functions so that they no longer return a path, which is an absurd
 # hack.
 
-# Test build_html()
+# Test html
 
 html_file <- file.path(tempdir(), "submission_report_test.html")
 
@@ -57,13 +58,11 @@ submission_report_test <- rvest::read_html(html_file)
 submission_report_output <- rvest::read_html("test-data/submission_test_outputs/submission_report_output.html")
 
 if (!identical(rvest::html_table(submission_report_test), rvest::html_table(submission_report_output))){
-  stop("From test-submission.R. function build_html() did not return the desired output")
-}
+  stop("From test-write_answer, html option did not return the desired output.")
+  }
 
 
-
-
-# Test build_rds()
+# Test rds
 
 rds_file <- file.path(tempdir(), "submission_test_output.rds")
 
@@ -74,8 +73,19 @@ submission_rds_test <- readRDS(rds_file)
 submission_rds_output <- readRDS("test-data/submission_test_outputs/submission_desired_output.rds")
 
 if (!identical(submission_rds_test, submission_rds_output)){
-  stop("From test-submission.R. function build_rds() did not return the desired output")
+  stop("From test-write_answer, rds option did not return the desired output.")
 }
 
+# Test pdf
 
+pdf_file <- file.path(tempdir(), "submission_test_output.pdf")
 
+write_answers(pdf_file, saved_session, is_test = TRUE)
+
+submission_pdf_test <- pdf_text(pdf_file)
+
+submission_pdf_output <- pdf_text("test-data/submission_test_outputs/submission_desired_output.pdf")
+
+if (!identical(submission_pdf_test, submission_pdf_output)){
+  stop("From test-write_answer, pdf option did not return the desired output.")
+  }

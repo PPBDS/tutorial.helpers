@@ -8,7 +8,7 @@ write_answers(file, session, is_test = FALSE)
 }
 \arguments{
 \item{file}{location to render answers to. Output file type determined by
-file suffix.}
+file suffix. Acceptable values are "html", "rds" and "pdf".}
 
 \item{session}{session object from shiny with learnr}
 

@@ -1,6 +1,6 @@
 Package: tutorial.helpers
 Title: Helper Functions for Creating Tutorials
-Version: 0.0.0.9017
+Version: 0.0.0.9018
 Authors@R: 
     person(given = "David",
            family = "Kane",
@@ -19,6 +19,7 @@ RoxygenNote: 7.2.3
 VignetteBuilder: knitr
 Suggests:
     knitr,
+    pdftools,
     roxygen2,
     rsconnect,
     rvest,
@@ -26,6 +27,8 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     dplyr,
+    grDevices,
+    gridExtra,
     learnr,
     parsermd,
     purrr,

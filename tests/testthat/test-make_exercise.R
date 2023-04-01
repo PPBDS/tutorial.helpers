@@ -1,5 +1,5 @@
 # make_exercise.R is still rough because it behaves poorly if you execute it in
-# a document which is not set up lik a tutorial, especially one which lacks a
+# a document which is not set up like a tutorial, especially one which lacks a
 # Section header.  of a tutorial file with a section header.
 
 # Alas, when I try these now, I get an error about

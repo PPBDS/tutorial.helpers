@@ -1,7 +1,7 @@
 #' Write Tutorial Answers
 #'
 #' @param file location to render answers to. Output file type determined by
-#'  file suffix.
+#'  file suffix. Acceptable values are "html", "rds" and "pdf".
 #' @param session session object from shiny with learnr
 #' @param is_test check if testing function
 #'
@@ -12,11 +12,13 @@ write_answers <- function(file, session, is_test = FALSE){
   
   type <- tools::file_ext(file)
   
-  stopifnot(type %in% c("html", "rds"))
+  stopifnot(type %in% c("html", "rds", "pdf"))
 
   # Get submissions from learnr. Is it worthwhile to learn more about the
   # variables we can get from a submission object and then give the user some
-  # choice about what to include?
+  # choice about what to include? Should we get/print more information? See 
+  # https://github.com/mattblackwell/qsslearnr/blob/main/R/submission.R
+  # for an example.
 
   # Data Structure of a learnr submission object
 
@@ -57,6 +59,34 @@ write_answers <- function(file, session, is_test = FALSE){
   }
   if(type == "rds"){
     saveRDS(out, file)
+  }
+  if(type == "pdf"){
+    rows_per_page <- 10
+    
+    # Calculate the number of pages required to display the entire table
+    
+    num_pages <- ceiling(nrow(out) / rows_per_page)
+    
+    grDevices::pdf(file, height = 11, width = 8.5) 
+    
+    for (i in 1:num_pages) {
+      # Calculate the range of rows to display on this page
+      start_row <- (i - 1) * rows_per_page + 1
+      end_row <- min(i * rows_per_page, nrow(out))
+      
+      # Subset the table to the rows to display on this page
+      x_page <- out[start_row:end_row, ]
+      
+      # Display the table on this page
+      gridExtra::grid.table(x_page)
+      
+      # Add a page break unless this is the last page
+      if (i < num_pages) {
+        grid::grid.newpage()
+      }
+    }
+    
+    grDevices::dev.off()
   }
 
   NULL

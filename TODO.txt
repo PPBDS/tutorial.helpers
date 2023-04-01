@@ -2,6 +2,12 @@ Add a pdf option to write_answers.
 
 Add check that file exists to knit_tutorials.
 
+Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. Key comment: I suspect that the problem is caused by the session_save.rds not preserving the environment of the session. 
+
+Do we really need gridExtra in order to be able to create a pdf file? Seems like overkill. Must be an easier way. I also don't like how we need pdftools just for one test.
+
+A different approach to the pdf file creation problem in write_answers() would be to create the Rmd document on the file as a character object rmd and then do render(text = rmd, output_file = filename).
+
 Perhaps create a package called a.getting.started.tutorial which would be very simple and solve the problem of how to get started.
 
 Or just add a getting.started tutorial to this package?
