@@ -27,11 +27,5 @@ knit_tutorials <- function(tutorial_paths){
                     "tutorial.html")
     })
   }
-
-  # There is no way to customize the tutorials to be knit. Sometimes, we would
-  # just like to test one tutorial, especially while we are working on it. Other
-  # times, we want to test all the tutorials but one.
-
-  NULL
 }
 

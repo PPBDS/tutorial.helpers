@@ -5,6 +5,8 @@
 #' @export
 
 check_tutorial_defaults <- function(tutorial_paths){
+  
+  stopifnot(all(file.exists(tutorial_paths)))
 
   # There are three code components: the use of a copy-code button, an
   # information request, and a download page. It is tricky to know where to

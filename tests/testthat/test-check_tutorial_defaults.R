@@ -1,14 +1,26 @@
 # Key insight is that we can test tutorial files without installing them as
-# tutorials. Ought to expand this to check the error messages, perhaps.
+# tutorials. But maybe we should also have an installed tutorial . . .
 
-# Also need a test for a vector of tutorials.
-
-check_tutorial_defaults("test-data/tutorial_examples/good-tutorial.Rmd")
-
-expect_error(
-  check_tutorial_defaults("test-data/tutorial_examples/no-info-tutorial.Rmd")
+test_that("check_tutorial() works on legal tutorials", {
+  expect_invisible(
+    check_tutorial_defaults("test-data/tutorial_examples/good-tutorial.Rmd")
   )
-
-expect_error(
-  check_tutorial_defaults("test-data/tutorial_examples/no-tutorialhelpers-tutorial.Rmd")
+  expect_invisible(
+    check_tutorial_defaults(
+      c("test-data/tutorial_examples/good-tutorial.Rmd",
+         "test-data/tutorial_examples/good-tutorial-2.Rmd"))
   )
+})
+
+
+test_that("check_tutorial() fails on illegal tutorials", {
+  expect_error(
+    check_tutorial_defaults("test-data/tutorial_examples/no-exist-tutorial.Rmd")
+  )
+  expect_error(
+    check_tutorial_defaults("test-data/tutorial_examples/no-info-tutorial.Rmd")
+    )
+  expect_error(
+    check_tutorial_defaults("test-data/tutorial_examples/no-tutorialhelpers-tutorial.Rmd")
+    )
+})

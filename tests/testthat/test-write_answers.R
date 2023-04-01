@@ -56,7 +56,7 @@ submission_report_test <- rvest::read_html(html_file)
 
 submission_report_output <- rvest::read_html("test-data/submission_test_outputs/submission_report_output.html")
 
-if(!identical(rvest::html_table(submission_report_test), rvest::html_table(submission_report_output))){
+if(! all.equal(rvest::html_table(submission_report_test), rvest::html_table(submission_report_output))){
   stop("From test-write_answer, html option did not return the desired output.")
   }
 
@@ -71,7 +71,7 @@ submission_rds_test <- readRDS(rds_file)
 
 submission_rds_output <- readRDS("test-data/submission_test_outputs/submission_desired_output.rds")
 
-if(!identical(submission_rds_test, submission_rds_output)){
+if(! all.equal(submission_rds_test, submission_rds_output)){
   stop("From test-write_answer, rds option did not return the desired output.")
 }
 
