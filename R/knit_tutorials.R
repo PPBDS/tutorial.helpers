@@ -7,6 +7,8 @@
 #' @export
 
 knit_tutorials <- function(tutorial_paths){
+  
+  stopifnot(all(file.exists(tutorial_paths)))
 
   # Our definition of "test" for a tutorial file is to run render() and hope there
   # is no error. There is no check to see if "tutorial.html" looks OK, just that
