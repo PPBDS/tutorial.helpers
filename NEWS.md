@@ -1,4 +1,4 @@
-# tutorial.helpers 0.0.0.9021
+# tutorial.helpers 0.1.0
 
 * Basic working version. Big code clean up since spinning out of **all.primer.tutorials** package.
 

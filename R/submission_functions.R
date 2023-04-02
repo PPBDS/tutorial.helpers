@@ -3,11 +3,6 @@
 # Shiny server and Shiny ui. This is not (?) any other way to produce this
 # effect.
 
-# Want to change the color to the OK box so that it is green when students enter
-# their email or other text. This seem relevant:
-
-# https://stackoverflow.com/questions/33620133/change-the-color-of-action-button-in-shiny/35871042
-
 # But where, exactly, do we add this code given that we don't control the Shiny
 # sessions which learnr itself starts and stops?
 
@@ -29,12 +24,21 @@
 
 submission_server <- function(session) {
   p = parent.frame()
+  
+  # This code is called from within inst/child_documents/download_answers.Rmd.
+  # Note that the call is submission_server(), with no argument. Perhaps the
+  # session object just exists somehow? In parent environment? I don't know how
+  # this works!
 
   # We need information from the parent frame --- from the learnr code which is
   # running this tutorial. This is the environment which is calling this
   # function, submission_server. Only this parent environment has access to
   # objects (like input, output, and session) which we need to access. So,
   # local() makes everything below evaluated in the parent frame.
+  
+  # Sure seems like a better approach would be to make use of the same mechanism
+  # by which Shiny stores the student's work in between sessions. Couldn't we
+  # just find that and load it up somehow?
 
   local({
 
@@ -44,6 +48,10 @@ submission_server <- function(session) {
     # session? It is easy to access some information from the session object
     # if we know the correct learnr function. (Note that the call to session
     # only seems to work within a reactive function like this.)
+    
+    # Since the filename is just the tutorial_id plus the suffix, and since the
+    # id information also exists in the session object, we don't really need the
+    # call to get_tutorial_info() here.
     
     
     output$downloadHtml <- shiny::downloadHandler(

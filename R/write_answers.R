@@ -10,15 +10,22 @@
 
 write_answers <- function(file, session, is_test = FALSE){
   
-  type <- tools::file_ext(file)
+  suffix <- tools::file_ext(file)
   
-  stopifnot(type %in% c("html", "rds", "pdf"))
+  stopifnot(suffix %in% c("html", "rds", "pdf"))
 
-  # Get submissions from learnr. Is it worthwhile to learn more about the
-  # variables we can get from a submission object and then give the user some
-  # choice about what to include? Should we get/print more information? See 
-  # https://github.com/mattblackwell/qsslearnr/blob/main/R/submission.R
-  # for an example.
+  # Get submissions from learnr session. Is it worthwhile to learn more about
+  # the variables we can get from a submission object and then give the user
+  # some choice about what to include? Should we get/print more information? See
+  # https://github.com/mattblackwell/qsslearnr/blob/main/R/submission.R for an
+  # example.
+  
+  # Right now, we only keep track of the questions/exercises that the student
+  # has completed. So, if she only answers three questions, the resulting output
+  # will only have 5 rows (the three answers plus the header row plus the first
+  # row with tutorial info). The other obvious approach is to keep all the
+  # questions/exercises and leave unanswered ones as NA. I think that approach
+  # might be better. Not sure if it is possible.
 
   # Data Structure of a learnr submission object
 
@@ -50,17 +57,33 @@ write_answers <- function(file, session, is_test = FALSE){
   # Hacky
 
   out <- rbind(c(id = "tutorial-id", submission_type = "none", answer = tutorial_id), out)
+  
+  # Long answers to the written exercises mess up the formatting. So, we need
+  # to insert our own newline characters. (This will mess up things for any
+  # student who uses their own carriage returns. Could clean this up in the
+  # future.) No need to do this for the rds output.
+  
+  # if(suffix %in% c("html", "pdf")){
+  #   out$answer <- gsub("(.{1,80})(\\s+|$)", "\\1\n", out$answer)
+  # }
 
   # It is unclear what is the best format for providing this information.
 
-  if(type == "html"){
+  if(suffix == "html"){
     z <- knitr::kable(out, format = "html")
     write(as.character(z), file = file)
   }
-  if(type == "rds"){
+  if(suffix == "rds"){
     saveRDS(out, file)
   }
-  if(type == "pdf"){
+  if(suffix == "pdf"){
+    
+    # There are several problems with pdf output. First, there is no simple
+    # approach (that I can find) like the ones above for html and RDS. So, we
+    # need to hack it up. Second, we need to do the pagination by hand. 
+    
+    # Key code: gsub("(.{1,80})(\\s+|$)", "\\1\n", x)
+    
     rows_per_page <- 10
     
     # Calculate the number of pages required to display the entire table

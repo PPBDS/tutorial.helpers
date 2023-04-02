@@ -1,8 +1,28 @@
+# Thoughts on geting information from a tutorial, and on testing.
+
+learnr::get_tutorial_info() returns an ordinary list, with an `items` entry that is a "data frame with columns order, label, type and data describing the items (questions and exercises) in the tutorial." Right now, we only use this to get the valye of `tutorial_id`. 
+
+learnr::get_tutorial_state() is a complex function. See the help page for details. "Note that get_tutorial_state() will only work for the tutorial author and must be used in a reactive context, i.e. within shiny::observe(), shiny::observeEvent(), or shiny::reactive(). Any logic observing the user's tutorial state must be written inside a context="server" chunk in the tutorial's R Markdown source."
+
+The result is a reactiveValues object. Huh? The names of the object correspond to the labels of the questions/exercises. 
+
+The downloadthis package looks very interesting. It seems easy to download a file without all the rigamarole of the Shiny server. But it requires that the file exists. Can we automatically run the code to create the files? Yes! We can write the code in the final exercise and then 
+
+
+
+write_exercise has a problem with the pdf option because the answers are sometimes long and should be wrapped.
+
+Look at get_submissions_from_learnr_session() function. It is only used in one function. Is it still necessary?
+
 Add test cases for format_tutorial() (at least) and maybe, if it is possible, for check_current_tutorial().
 
-Should get_submissions_from_learnr_session() be its own function? Doesn't do much.
-
 Do something about test-return_tutorial_paths(). 
+
+Want to change the color to the OK box so that it is green when students enter
+their email or other text. This seem relevant:
+
+# https://stackoverflow.com/questions/33620133/change-the-color-of-action-button-in-shiny/35871042
+
 
 
 Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. Key comment: I suspect that the problem is caused by the session_save.rds not preserving the environment of the session. Maybe we just need a better test case. Maybe save() rather than saveRDS() is the key. Alas, we did not record the code we used to create session_save.rds.

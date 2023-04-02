@@ -30,6 +30,8 @@ get_submissions_from_learnr_session <- function(sess){
   # learnr::get_tutorial_state()
   # learnr::get_tutorial_info()
 
+  # Why not just make this a tibble, rather than a nested list? Certainly makes
+  # later code better.
 
   curr_state <- learnr::get_tutorial_state(session = sess)
 
