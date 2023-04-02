@@ -6,7 +6,7 @@ learnr::get_tutorial_state() is a complex function. See the help page for detail
 
 The result is a reactiveValues object. Huh? The names of the object correspond to the labels of the questions/exercises. 
 
-The downloadthis package looks very interesting. It seems easy to download a file without all the rigamarole of the Shiny server. But it requires that the file exists. Can we automatically run the code to create the files? Yes! We can write the code in the final exercise and then 
+The **downloadthis** package looks very interesting. It seems easy to download a file without all the rigamarole of the Shiny server. But it requires that the file exists. Can we automatically run the code to create the files? Yes! We can write the code in the final exercise and then tell students to hit Run Code. They can then hit the download button. But would that really work? Isn't an Exercise code chunk its own separate world, with no notion of the tutorial of which it is a part. Maybe the same local{()} nonense that we use 
 
 
 
