@@ -9,3 +9,5 @@ docs
 # Deal with this in a more sensible way.
 
 tests/testthat/test-data/tutorial_examples/*html
+
+inst/tutorials/*/*html

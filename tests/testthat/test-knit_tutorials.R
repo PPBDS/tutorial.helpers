@@ -13,6 +13,13 @@ test_that("knit_tutorials() works on legal tutorials", {
   )
 })
 
+
+test_that("knit_tutorials() works on Getting Started tutorial", {
+  expect_invisible(
+    knit_tutorials("../../inst/tutorials/getting-started/tutorial.Rmd")
+  )
+})
+
 test_that("knit_tutorials() fails on illegal tutorials", {
   expect_error(
     knit_tutorials("test-data/tutorial_examples/no-exist.Rmd")

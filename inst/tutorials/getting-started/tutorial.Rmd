@@ -1,0 +1,30 @@
+---
+title: "Getting Started"
+author: "David Kane"
+tutorial:
+  id: "getting-started"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+description: "Tutorial for introducing students to tutorials in general and to some of the     defaults from tutorial.helpers in particular."
+---
+
+```{r setup, include = FALSE}
+library(learnr)
+library(tutorial.helpers)
+knitr::opts_chunk$set(echo = FALSE)
+options(tutorial.exercise.timelimit = 60, 
+        tutorial.storage = "local") 
+```
+
+```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
+```
+
+```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```
+
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
