@@ -16,7 +16,10 @@ test_that("knit_tutorials() works on legal tutorials", {
 
 test_that("knit_tutorials() works on Getting Started tutorial", {
   expect_invisible(
-    knit_tutorials("../../inst/tutorials/getting-started/tutorial.Rmd")
+    knit_tutorials(
+      system.file("tutorials/getting-started/tutorial.Rmd", 
+                  package = "tutorial.helpers")
+      )
   )
 })
 

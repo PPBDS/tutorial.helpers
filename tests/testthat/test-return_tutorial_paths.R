@@ -1,18 +1,27 @@
 # For now, there is only one tutorial in this package. But one is good enough
 # for testing. 
 
-x <- return_tutorial_paths(package = testing_package())
 
-stopifnot(any(grepl("tutorial.Rmd", x)))
+test_that("Can find path for tutorial.helpers tutorial", {
+  paths <- return_tutorial_paths(package = "tutorial.helpers")
+  
+  expect_true(
+    any(grepl("tutorial.Rmd", paths))
+  )
+})
+
 
 # We can't assume that the tutorials in learnr won't change since we don't
 # control that package. The best approach would be to add the (useful!)
 # return_tutorial_paths() function to learnr itself.
 
-x <- return_tutorial_paths(package = "learnr")
+test_that("Can find path for learnr tutorials", {
+  
+  paths <- return_tutorial_paths(package = "learnr")
+  
+  expect_true(
+    any(grepl("ex-data-basics.Rmd", paths)),
+    any(grepl("quiz_question.Rmd", paths))
+  )
+})
 
-# In the meantime, we will just test that two specific learnr tutorials are
-# still present.
-
-stopifnot(any(grepl("ex-data-basics.Rmd", x)))
-stopifnot(any(grepl("quiz_question.Rmd", x)))
