@@ -9,7 +9,7 @@ output:
     allow_skip: yes
 runtime: shiny_prerendered
 description: Tutorial for introducing students to tutorials in general and to some
-  of the     defaults from the tutorial.helpers package in particular.
+  of the defaults from the tutorial.helpers package in particular.
 ---
 
 ```{r setup, include = FALSE}

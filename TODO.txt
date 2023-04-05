@@ -13,6 +13,8 @@ Arrg. Neither learnr::get_tutorial_state() nor learnr::get_tutorial_info() seem 
 
 Should the getting started tutorial go here or in r4ds.tutorials. It really "belongs" in r4ds but there are advantages to having it here. For now, it stays here.
 
+Document process for building the Shiny App which hosts the tutorial. Maybe in _package_yaml.
+
 write_exercise has a problem with the pdf option because the answers are sometimes long and should be wrapped.
 
 Look at get_submissions_from_learnr_session() function. It is only used in one function. Is it still necessary?

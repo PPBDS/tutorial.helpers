@@ -11,3 +11,4 @@ docs
 tests/testthat/test-data/tutorial_examples/*html
 
 inst/tutorials/*/*html
+inst/tutorials/*/rsconnect

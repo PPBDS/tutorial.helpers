@@ -1,6 +1,8 @@
 # tutorial.helpers (development version)
 
-* Move prep_rstudio_settings() to r4ds.tutorials
+* Move prep_rstudio_settings() to r4ds.tutorials.
+
+* Publish Getting Started tutorial to Shiny Apps and adjust _pkgdown.yml to make use of it.
 
 # tutorial.helpers 0.1.1
 

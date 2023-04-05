@@ -1,4 +1,17 @@
 url: https://ppbds.github.io/tutorial.helpers/
 template:
   bootstrap: 5
+  
+# Tutorials are tricky. All we really want is a reference page which we can 
+# link to. pkgdown::create_tutorials() is not overly flexible. In particular,
+# it seems like you must provide a url, even if you don't really have one.
 
+# So, we need to knit the tutorial and then publish it on Shiny Apps by hitting
+# the Publish/Republish button.
+
+# The source option does not seem to do anything.
+  
+tutorials:
+- name: getting-started
+  title: Getting Started
+  url: https://davidkane9.shinyapps.io/tutorial/
