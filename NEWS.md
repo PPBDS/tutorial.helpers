@@ -1,5 +1,7 @@
 # tutorial.helpers (development version)
 
+* Move prep_rstudio_settings() to r4ds.tutorials
+
 # tutorial.helpers 0.1.1
 
 * Add prep_rstudio_settings().
