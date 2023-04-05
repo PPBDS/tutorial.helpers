@@ -22,7 +22,8 @@ Suggests:
     roxygen2,
     rsconnect,
     rvest,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tidyverse
 Config/testthat/edition: 3
 Imports: 
     dplyr,
