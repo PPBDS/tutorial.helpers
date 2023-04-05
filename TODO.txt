@@ -10,10 +10,9 @@ The **downloadthis** package looks very interesting. It seems easy to download a
 
 Arrg. Neither learnr::get_tutorial_state() nor learnr::get_tutorial_info() seem to work in an Exercise code chunk, as perhaps I should have expected.
 
+Would be nice to automate the update of the tutorial so that when we make changes in the tutorial the Shiny Apps installation is updated as well.
 
-Should the getting started tutorial go here or in r4ds.tutorials. It really "belongs" in r4ds but there are advantages to having it here. For now, it stays here.
-
-Document process for building the Shiny App which hosts the tutorial. Maybe in _package_yaml.
+Does build_tutorials() really work? First, it seems to fail if you don't provide a url. Second, it does not seem to make use of a source option if one is provided.
 
 write_exercise has a problem with the pdf option because the answers are sometimes long and should be wrapped.
 

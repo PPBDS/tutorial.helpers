@@ -7,7 +7,8 @@ template:
 # it seems like you must provide a url, even if you don't really have one.
 
 # So, we need to knit the tutorial and then publish it on Shiny Apps by hitting
-# the Publish/Republish button.
+# the Publish/Republish button. Ensure that the resulting url matches what we
+# have below.
 
 # The source option does not seem to do anything.
   
