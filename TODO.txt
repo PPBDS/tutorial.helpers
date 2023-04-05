@@ -10,7 +10,9 @@ The **downloadthis** package looks very interesting. It seems easy to download a
 
 Arrg. Neither learnr::get_tutorial_state() nor learnr::get_tutorial_info() seem to work in an Exercise code chunk, as perhaps I should have expected.
 
+Create a test case for prep_rstudio_settings().
 
+Should the getting started tutorial go here or in r4ds.tutorials. It really "belongs" in r4ds but there are advantages to having it here. For now, it stays here.
 
 write_exercise has a problem with the pdf option because the answers are sometimes long and should be wrapped.
 

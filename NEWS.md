@@ -1,5 +1,13 @@
 # tutorial.helpers (development version)
 
+# tutorial.helpers 0.1.1
+
+* Add prep_rstudio_settings().
+
+* Add Getting Started tutorial.
+
+* Change copy_button to only use base R.
+
 # tutorial.helpers 0.1.0
 
 * Basic working version. Big code clean up since spinning out of **all.primer.tutorials** package.

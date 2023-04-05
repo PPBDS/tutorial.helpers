@@ -26,8 +26,6 @@ return_tutorial_paths <- function(package){
   # Sadly, we can't simplify this since available_tutorials() does not return a
   # path. Maybe we submit a PR to available_tutorials() to add this?
 
-  # Warning: Does this work on Windows?
-
   x <- list.files(paste0(system.file("tutorials", package = package),
                     "/",
                     learnr::available_tutorials(package)$name), pattern = "Rmd$", full.names = TRUE)
