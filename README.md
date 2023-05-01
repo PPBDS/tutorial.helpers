@@ -21,6 +21,12 @@ and [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/).
 
 ## Installation
 
+To install the package from CRAN:
+
+``` r
+install.packages("tutorial.helpers")
+```
+
 You can install the development version from
 [GitHub](https://github.com/) with:
 
