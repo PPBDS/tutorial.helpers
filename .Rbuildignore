@@ -10,3 +10,4 @@
 ^README\.Rmd$
 ^TODO\.txt$
 ^inst/tutorials/getting-started/rsconnect$
+^cran-comments\.md$
