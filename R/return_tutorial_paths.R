@@ -1,12 +1,17 @@
 #' Return all the paths to tutorials
 #'
 #' @param package character vector of the package name to be tested
-#'
-#' @return character vector of the full paths to all installed tutorials in
-#'   `package`
+#' 
 #' @description Takes a package name and returns a character vector of all the
 #'   paths to tutorials in the installed package. Assumes that every Rmd file in
 #'   inst/tutorials/*/ is a tutorial, which should be true.
+#'   
+#' @return character vector of the full paths to all installed tutorials in
+#'   `package`
+#'   
+#' @examples
+#' return_tutorial_paths('learnr')
+#'   
 #' @export
 
 return_tutorial_paths <- function(package){

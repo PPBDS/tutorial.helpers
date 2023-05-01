@@ -1,5 +1,5 @@
 ---
-title: "Instructions for Writing Tutorials"
+title: "Instructions for Writing R Tutorials"
 author: David Kane
 output: rmarkdown::html_vignette
 vignette: >
@@ -18,6 +18,7 @@ vignette: >
 <!-- Tutorial answers should require the smallest incremental number of characters for students to type. That is how you know that your learning curve is shallow. geom_smooth() example. -->
 
 <!-- Get rid of screenshot examples. Instead use the new file = code chunk option to read in the actual files which are used as part of the macro. Is this even possible? -->
+
 
 *There are no questions here. There are only instructions.*
 
@@ -42,26 +43,23 @@ We are building a "[pit of success](https://ricomariani.medium.com/the-pit-of-su
 
 ## Set Up
 
-<!-- Not sure about this paragraph -->
-To make additions to a tutorial package, follow the [set up guide](https://ppbds.github.io/primer/set-up.html) to fork/download a copy of of the package. Press "Install and Restart" from the "Build" tab to ensure that you have the latest copy installed. (You should not do `remotes::install_github("the-tutorial-package")` since that gets the version from Github. You want the version from your computer so that you get any changes you make.) 
-
-Tutorials themselves live in a directory within `inst/tutorials` in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the `id` of the tutorial. Within each directory is am R Markdown file and, sometimes, other material like an `images` and `data` directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. By default, we name the R Markdown file `tutorial.Rmd` but any name works as long as the file has the appropriate YAML header.
+Tutorials themselves live in a directory within `inst/tutorials` in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the `id` of the tutorial. Within each directory is an R Markdown file and, sometimes, other material like an `images` or `data` directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. By default, we name the R Markdown file `tutorial.Rmd`, but any name works as long as the file has the appropriate YAML header.
 
 To create a new tutorial, use `File -> New File -> R Markdown...`. Choose the "From Template" option and then select "Helper Tutorial." Follow the instructions.
 
 The `id` value is important. It should be the same as the directory in which the tutorial is located, but with any leading numbers removed. It is used for the name of the answer file which students save at the end of the tutorial. 
 
-Note that tutorials must be [R Markdown](https://rmarkdown.rstudio.com/) documents, meaning that their suffix is `.Rmd`. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the `{}`. Don't worry about this detail. Just use the provided addin templates.
+Note that tutorials must be [R Markdown](https://rmarkdown.rstudio.com/) documents, meaning that their suffix is `.Rmd`. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the `{}`. Don't worry about this detail. Just use the provided RStudio addin tools.
 
 ## Structure
 
 The beginning of every tutorial includes the `copy-code-chunk` and the `info-section` code chunks. The tutorial is then divided into different *Sections* that appear as side panels. The first section is the "Introduction" and the last is the "Summary". 
 
-Within the Sections after the Introduction and before the Summary, there are a series of *Exercises* which can include writing code or writing text. At the end of the tutorial, there is a `download-answers` code chunk which provides students with instructions on how to download a copy of their answers in either html or rds format.
+Within the Sections, other than the Introduction and Summary, there are a series of *Exercises* which can include writing code or writing text. At the end of the tutorial, there is a `download-answers` code chunk which provides students with instructions on how to download a copy of their answers.
 
 The Introduction section is two to four sentence about the main topics covered in the tutorial. Why are we here? What will students get out of giving you 90 minutes of their lives? What functions/techniques will they learn?
 
-The Summary section is two to four sentences which bring the lessons of the tutorial together for the student. What do they know now that they did not know before? What are the most important functions/techniques covered? It's completely OK if this is very similar to the Introduction. You made a promise as to what they would learn. You kept that promise.
+The Summary section is two to four sentences which bring the lessons of the tutorial together for the student. What do they know now that they did not know before? What are the most important functions/techniques covered? This should be very similar to the Introduction. You made a promise as to what they would learn. You kept that promise.
 
 If there are one or two other key resources about the topic of the tutorial, then those resources should be mentioned somewhere in the tutorial and also in the Summary.
 
@@ -471,12 +469,12 @@ The simplest way to test the `tutorial.Rmd` with which you are working on is to 
 rmarkdown::render("inst/tutorials/02-terminal/tutorial.Rmd")
 ```
 
-This assumes that you are located in the main directory of **your.package*, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace `02-terminal` with the appropriate directory.
+This assumes that you are located in the main directory of **your.package**, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace `02-terminal` with the appropriate directory.
 
 
 ### Test before submitting a PR
 
-Once you are done writing your tutorial, you need to make sure it works before you submit a pull request.
+Once you are done editing your tutorial, you need to make sure it works before you submit a pull request.
 
 1. Click "Install and Restart" from the Build tab. Then, hit "Start Tutorial" in the Tutorial tab. This mimics the experience that users will have. This will catch some common errors, like having two code chunks with the same name. (I am not sure if this does more or less than the simple test as above.)
 

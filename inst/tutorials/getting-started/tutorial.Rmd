@@ -24,7 +24,7 @@ options(tutorial.exercise.timelimit = 60,
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- DK: Set up a default version of this on RStudio Cloud that anyone can run at anytime? Could add a question about looking at a data set. What about a question about prep_rstudio_settings()? -->
+<!-- DK: Set up a default version of this on RStudio Cloud that anyone can run at anytime? Could add a question about looking at a data set. -->
 
 
 ## Introduction

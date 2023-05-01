@@ -2,12 +2,21 @@
 % Please edit documentation in R/make_exercise.R
 \name{make_yes_answer}
 \alias{make_yes_answer}
-\title{Make Exercise witn an Answer}
+\title{Make Exercise with an Answer}
 \usage{
 make_yes_answer()
+}
+\value{
+exercise skeleton with an answer
 }
 \description{
 It appears that the RStudio addins must have function names only as the
 Binding value. In other words, you can't have make_exercise(type =
 'yes-answer') as the value. So, we need a function which makes this call.
+}
+\examples{
+\dontrun{
+make_yes_answer()
+}
+
 }

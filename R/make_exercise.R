@@ -17,9 +17,17 @@
 #'  of c("code", "no-answer", "yes-answer")
 #'
 #' @importFrom rstudioapi getActiveDocumentContext
+#' 
+#' @return exercise skeleton of referenced type
+#' 
+#' @examples
+#' \dontrun{
+#' make_exercise()
+#' make_exercise(type = "no-answer")
+#' }
 #'
 #' @export
-#' @return exercise skeleton with appropriate labels and numbers
+
 
 make_exercise <- function(type = "code"){
 
@@ -139,7 +147,13 @@ make_exercise <- function(type = "code"){
 #' It appears that the RStudio addins must have function names only as the
 #' Binding value. In other words, you can't have make_exercise(type =
 #' 'no-answer') as the value. So, we need a function which makes this call.
-#'
+#' 
+#' @return exercise skeleton without an answer
+#' 
+#' @examples
+#' \dontrun{
+#' make_no_answer()
+#' }
 #'
 #' @export
 
@@ -147,7 +161,7 @@ make_no_answer <- function(){
   make_exercise(type = 'no-answer')
 }
 
-#' Make Exercise witn an Answer
+#' Make Exercise with an Answer
 #'
 #' @description
 #'
@@ -155,6 +169,12 @@ make_no_answer <- function(){
 #' Binding value. In other words, you can't have make_exercise(type =
 #' 'yes-answer') as the value. So, we need a function which makes this call.
 #'
+#' @return exercise skeleton with an answer
+#' 
+#' @examples
+#' \dontrun{
+#' make_yes_answer()
+#' }
 #'
 #' @export
 

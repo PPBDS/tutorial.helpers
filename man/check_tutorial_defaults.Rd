@@ -12,3 +12,9 @@ check_tutorial_defaults(tutorial_paths)
 \description{
 Check that a tutorial has the standard components
 }
+\examples{
+\dontrun{
+  check_tutorial_defaults('/path/to/tutorial.Rmd')
+}
+
+}

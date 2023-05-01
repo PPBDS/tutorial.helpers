@@ -11,7 +11,7 @@ make_exercise(type = "code")
 of c("code", "no-answer", "yes-answer")}
 }
 \value{
-exercise skeleton with appropriate labels and numbers
+exercise skeleton of referenced type
 }
 \description{
 An add-in for writing tutorials.
@@ -24,4 +24,11 @@ because now a fast click can create most of the exercise for you.
 
 There is also no need to keep track of the exercise numbers
 because it is done for you in the add-in.
+}
+\examples{
+\dontrun{
+make_exercise()
+make_exercise(type = "no-answer")
+}
+
 }

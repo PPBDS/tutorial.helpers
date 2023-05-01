@@ -23,3 +23,9 @@ fast chunk label updating and quick formatting and checking.
 There is also no need to keep track of the exercise numbers because it is
 done for you in the addin.
 }
+\examples{
+\dontrun{
+  format_tutorial('/path/to/tutorial.Rmd')
+}
+
+}

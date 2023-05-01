@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<title>Instructions for Writing Tutorials</title>
+<title>Instructions for Writing R Tutorials</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/github.min.css">
 <script src="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js,npm/@xiee/utils/js/load-highlight.js" async></script>
@@ -92,7 +92,7 @@ hr { border: 1px #ddd dashed; }
 </div>
 
 <div class="frontmatter">
-<div class="title"><h1>Instructions for Writing Tutorials</h1></div>
+<div class="title"><h1>Instructions for Writing R Tutorials</h1></div>
 <div class="author"><h2>David Kane</h2></div>
 <div class="date"><h3></h3></div>
 </div>
@@ -114,17 +114,15 @@ hr { border: 1px #ddd dashed; }
 <p>The most important parts of the “knowledge drops” with which we pepper these tutorials are, first, the packages/functions/arguments which we mention without demonstrating, and second, links to high quality resources.</p>
 <p>We are building a “<a href="https://ricomariani.medium.com/the-pit-of-success-cfefc6cb64c8">pit of success</a>.” Generally, students don’t do the assigned reading, at least in a large class. However, they will complete required work. They will do the assigned tutorials. <em>Our promise: If you complete the tutorials, you will become a data scientist. There is simply no way not to.</em></p>
 <h2>Set Up</h2>
-<!-- Not sure about this paragraph -->
-<p>To make additions to a tutorial package, follow the <a href="https://ppbds.github.io/primer/set-up.html">set up guide</a> to fork/download a copy of of the package. Press “Install and Restart” from the “Build” tab to ensure that you have the latest copy installed. (You should not do <code>remotes::install_github(&quot;the-tutorial-package&quot;)</code> since that gets the version from Github. You want the version from your computer so that you get any changes you make.)</p>
-<p>Tutorials themselves live in a directory within <code>inst/tutorials</code> in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the <code>id</code> of the tutorial. Within each directory is am R Markdown file and, sometimes, other material like an <code>images</code> and <code>data</code> directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. By default, we name the R Markdown file <code>tutorial.Rmd</code> but any name works as long as the file has the appropriate YAML header.</p>
+<p>Tutorials themselves live in a directory within <code>inst/tutorials</code> in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the <code>id</code> of the tutorial. Within each directory is an R Markdown file and, sometimes, other material like an <code>images</code> or <code>data</code> directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. By default, we name the R Markdown file <code>tutorial.Rmd</code>, but any name works as long as the file has the appropriate YAML header.</p>
 <p>To create a new tutorial, use <code>File -&gt; New File -&gt; R Markdown...</code>. Choose the “From Template” option and then select “Helper Tutorial.” Follow the instructions.</p>
 <p>The <code>id</code> value is important. It should be the same as the directory in which the tutorial is located, but with any leading numbers removed. It is used for the name of the answer file which students save at the end of the tutorial.</p>
-<p>Note that tutorials must be <a href="https://rmarkdown.rstudio.com/">R Markdown</a> documents, meaning that their suffix is <code>.Rmd</code>. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the <code>{}</code>. Don’t worry about this detail. Just use the provided addin templates.</p>
+<p>Note that tutorials must be <a href="https://rmarkdown.rstudio.com/">R Markdown</a> documents, meaning that their suffix is <code>.Rmd</code>. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the <code>{}</code>. Don’t worry about this detail. Just use the provided RStudio addin tools.</p>
 <h2>Structure</h2>
 <p>The beginning of every tutorial includes the <code>copy-code-chunk</code> and the <code>info-section</code> code chunks. The tutorial is then divided into different <em>Sections</em> that appear as side panels. The first section is the “Introduction” and the last is the “Summary”.</p>
-<p>Within the Sections after the Introduction and before the Summary, there are a series of <em>Exercises</em> which can include writing code or writing text. At the end of the tutorial, there is a <code>download-answers</code> code chunk which provides students with instructions on how to download a copy of their answers in either html or rds format.</p>
+<p>Within the Sections, other than the Introduction and Summary, there are a series of <em>Exercises</em> which can include writing code or writing text. At the end of the tutorial, there is a <code>download-answers</code> code chunk which provides students with instructions on how to download a copy of their answers.</p>
 <p>The Introduction section is two to four sentence about the main topics covered in the tutorial. Why are we here? What will students get out of giving you 90 minutes of their lives? What functions/techniques will they learn?</p>
-<p>The Summary section is two to four sentences which bring the lessons of the tutorial together for the student. What do they know now that they did not know before? What are the most important functions/techniques covered? It’s completely OK if this is very similar to the Introduction. You made a promise as to what they would learn. You kept that promise.</p>
+<p>The Summary section is two to four sentences which bring the lessons of the tutorial together for the student. What do they know now that they did not know before? What are the most important functions/techniques covered? This should be very similar to the Introduction. You made a promise as to what they would learn. You kept that promise.</p>
 <p>If there are one or two other key resources about the topic of the tutorial, then those resources should be mentioned somewhere in the tutorial and also in the Summary.</p>
 <p>Anything typed at the keyboard belongs in `backticks` (not “quotation marks”), except for package names, which are always <strong>bolded</strong>. Function names always include the parentheses: <code>read_csv()</code>, not <code>read_csv</code>. Example: the <code>+</code> sign is used to connect <code>ggplot()</code> components when using the <strong>ggplot2</strong> library.</p>
 <h2>Sections</h2>
@@ -423,9 +421,9 @@ include_graphics(&quot;images/example.png&quot;)
 <p>The simplest way to test the <code>tutorial.Rmd</code> with which you are working on is to hit the “Run Document” button. This is the same thing as running <code>rmarkdown::render()</code> on that file:</p>
 <pre><code class="language-r">rmarkdown::render(&quot;inst/tutorials/02-terminal/tutorial.Rmd&quot;)
 </code></pre>
-<p>This assumes that you are located in the main directory of *<em>your.package</em>, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace <code>02-terminal</code> with the appropriate directory.</p>
+<p>This assumes that you are located in the main directory of <strong>your.package</strong>, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace <code>02-terminal</code> with the appropriate directory.</p>
 <h3>Test before submitting a PR</h3>
-<p>Once you are done writing your tutorial, you need to make sure it works before you submit a pull request.</p>
+<p>Once you are done editing your tutorial, you need to make sure it works before you submit a pull request.</p>
 <ol>
 <li>
 <p>Click “Install and Restart” from the Build tab. Then, hit “Start Tutorial” in the Tutorial tab. This mimics the experience that users will have. This will catch some common errors, like having two code chunks with the same name. (I am not sure if this does more or less than the simple test as above.)</p>

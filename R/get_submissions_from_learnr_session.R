@@ -1,8 +1,14 @@
 #' Get Submissions from a learnr Session
 #'
 #' @param sess session object from shiny with learnr
-#'
-#' @return exercise submissions of tutorial
+#' 
+#' @examples
+#' \dontrun{
+#'   get_submissions_from_learnr_session(session)
+#' }
+#' 
+#' @return a list which includes the exercise submissions of tutorial
+#' 
 #' @export
 
 get_submissions_from_learnr_session <- function(sess){

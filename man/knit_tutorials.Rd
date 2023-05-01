@@ -13,3 +13,9 @@ knitted}
 \description{
 Knit all the tutorials in a package
 }
+\examples{
+\dontrun{
+knit_tutorials(tutorial_paths = return_tutorial_paths('learnr'))
+}
+
+}

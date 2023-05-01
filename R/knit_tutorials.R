@@ -4,6 +4,12 @@
 #'  knitted
 #'
 #' @return NULL
+#' 
+#' @examples
+#' \dontrun{
+#' knit_tutorials(tutorial_paths = return_tutorial_paths('learnr'))
+#' }
+#' 
 #' @export
 
 knit_tutorials <- function(tutorial_paths){
@@ -27,5 +33,7 @@ knit_tutorials <- function(tutorial_paths){
                     "tutorial.html")
     })
   }
+  
+  NULL
 }
 

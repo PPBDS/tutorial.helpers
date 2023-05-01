@@ -6,12 +6,15 @@
 \usage{
 check_current_tutorial()
 }
-\value{
-current document OVERWRITTEN and formatted with correct chunk labels
-}
 \description{
 An add-in for formatting tutorials.
 
-It uses format_tutorial() to format the tutorial Rmd open
+Uses format_tutorial() to format the tutorial Rmd open
 in the current editor
+}
+\examples{
+\dontrun{
+  check_current_tutorial()
+}
+
 }

@@ -1,3 +1,8 @@
+# Submit to CRAN
+
+Which functions should be exported and which not? Those that are not do not require examples or return values. Explore use of @internal in relation to this.
+
+
 # Thoughts on geting information from a tutorial, and on testing.
 
 learnr::get_tutorial_info() returns an ordinary list, with an `items` entry that is a "data frame with columns order, label, type and data describing the items (questions and exercises) in the tutorial." Right now, we only use this to get the valye of `tutorial_id`. 

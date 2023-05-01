@@ -4,11 +4,15 @@
 #'
 #' An add-in for formatting tutorials.
 #'
-#' It uses format_tutorial() to format the tutorial Rmd open
+#' Uses format_tutorial() to format the tutorial Rmd open
 #' in the current editor
-#'
-#'
-#' @return current document OVERWRITTEN and formatted with correct chunk labels
+#' 
+#' @examples
+#' \dontrun{
+#'   check_current_tutorial()
+#' }
+#' 
+#' @return NULL
 
 check_current_tutorial <- function(){
 
@@ -23,4 +27,5 @@ check_current_tutorial <- function(){
   write(trimws(new_doc), file = out)
   close(out)
 
+  NULL
 }

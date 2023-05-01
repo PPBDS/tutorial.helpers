@@ -1,18 +1,18 @@
 Package: tutorial.helpers
 Title: Helper Functions for Creating Tutorials
-Version: 0.1.2
+Version: 0.2.0
 Authors@R: 
     person(given = "David",
            family = "Kane",
            role = c("aut", "cre", "cph"),
            email = "dave.kane@gmail.com",
            comment = c(ORCID = "0000-0002-6660-3934"))
-Description: Helper functions for creating and processing tutorials which use 
-    the 'learnr' package. Provides a simple method for allowing students to 
-    download their answers to tutorial questions. For examples of its use, 
-    see the 'r4ds.tutorials' and 'all.primer.tutorials' packages.
+Description: Helper functions for creating, editing, and testing tutorials 
+    created with the 'learnr' package. Provides a simple method for allowing 
+    students to download their answers to tutorial questions. For examples 
+    of its use, see the 'r4ds.tutorials' and 'all.primer.tutorials' packages.
 Depends: 
-    R (>= 3.5.0)
+    R (>= 4.1.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

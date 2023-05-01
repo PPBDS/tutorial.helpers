@@ -3,8 +3,12 @@
 # Shiny server and Shiny ui. This is not (?) any other way to produce this
 # effect.
 
-# But where, exactly, do we add this code given that we don't control the Shiny
-# sessions which learnr itself starts and stops?
+# Perhaps we can replace this function with the downloadthis package someday:
+# https://CRAN.R-project.org/package=downloadthis
+
+# When we call this function, we just use submission_server(). But, then, where
+# does the information for the session argument come from?
+
 
 #' @title Tutorial submission functions
 #'
@@ -18,6 +22,13 @@
 #' R chunk where `context="server"`.
 #'
 #' @param session session object from shiny with learnr
+#' 
+#' @examples
+#' \dontrun{
+#'   submission_server()
+#' }
+#' 
+#' @return NULL
 #'
 #' @rdname submission_functions
 #' @export
@@ -79,10 +90,20 @@ submission_server <- function(session) {
     )
 
   }, envir = p)
+  
+  NULL
 }
 
 
 #' @rdname submission_functions
+#'
+#' @examples
+#' \dontrun{
+#'   submission_ui
+#' }
+#' 
+#' @return an html <div></div> element
+#' 
 #' @export
 
 submission_ui <- shiny::div(

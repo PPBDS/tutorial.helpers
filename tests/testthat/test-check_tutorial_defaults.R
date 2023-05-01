@@ -2,10 +2,10 @@
 # tutorials. But maybe we should also have an installed tutorial . . .
 
 test_that("check_tutorial() works on legal tutorials", {
-  expect_invisible(
+  expect_null(
     check_tutorial_defaults("test-data/tutorial_examples/good-tutorial.Rmd")
   )
-  expect_invisible(
+  expect_null(
     check_tutorial_defaults(
       c("test-data/tutorial_examples/good-tutorial.Rmd",
          "test-data/tutorial_examples/good-tutorial-2.Rmd"))

@@ -13,7 +13,12 @@
 #' done for you in the addin.
 #'
 #' @param file_path Character string
-#'
+#' 
+#' @examples
+#' \dontrun{
+#'   format_tutorial('/path/to/tutorial.Rmd')
+#' }
+#' 
 #' @return formatted document with correct code and hint chunk labels
 #'
 #' @export

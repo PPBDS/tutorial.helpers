@@ -18,3 +18,7 @@ Takes a package name and returns a character vector of all the
 paths to tutorials in the installed package. Assumes that every Rmd file in
 inst/tutorials/*/ is a tutorial, which should be true.
 }
+\examples{
+return_tutorial_paths('learnr')
+  
+}

@@ -10,8 +10,14 @@ get_submissions_from_learnr_session(sess)
 \item{sess}{session object from shiny with learnr}
 }
 \value{
-exercise submissions of tutorial
+a list which includes the exercise submissions of tutorial
 }
 \description{
 Get Submissions from a learnr Session
+}
+\examples{
+\dontrun{
+  get_submissions_from_learnr_session(session)
+}
+
 }

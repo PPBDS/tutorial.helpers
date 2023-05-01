@@ -4,6 +4,12 @@
 #'  file suffix. Acceptable values are "html", "rds" and "pdf".
 #' @param session session object from shiny with learnr
 #' @param is_test check if testing function
+#' 
+#' @examples
+#' \dontrun{
+#'   write_answers("answers.pdf", session)
+#' }
+#' 
 #'
 #' @return NULL
 #' @export

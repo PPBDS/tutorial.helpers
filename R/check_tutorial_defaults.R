@@ -2,6 +2,13 @@
 #'
 #' @param tutorial_paths character vector of the paths to the tutorials to be tested
 #'
+#' @examples
+#' \dontrun{
+#'   check_tutorial_defaults('/path/to/tutorial.Rmd')
+#' }
+#' 
+#' @return NULL
+#'
 #' @export
 
 check_tutorial_defaults <- function(tutorial_paths){
@@ -42,6 +49,7 @@ check_tutorial_defaults <- function(tutorial_paths){
     }
   }
 
+  NULL
 }
 
 

@@ -3,10 +3,10 @@
 
 
 test_that("knit_tutorials() works on legal tutorials", {
-  expect_invisible(
+  expect_null(
     knit_tutorials("test-data/tutorial_examples/good-tutorial.Rmd")
   )
-  expect_invisible(
+  expect_null(
     knit_tutorials(
       c("test-data/tutorial_examples/good-tutorial.Rmd",
         "test-data/tutorial_examples/no-info-tutorial.Rmd"))
@@ -15,7 +15,7 @@ test_that("knit_tutorials() works on legal tutorials", {
 
 
 test_that("knit_tutorials() works on Getting Started tutorial", {
-  expect_invisible(
+  expect_null(
     knit_tutorials(
       system.file("tutorials/getting-started/tutorial.Rmd", 
                   package = "tutorial.helpers")

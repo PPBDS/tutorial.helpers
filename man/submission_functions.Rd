@@ -16,6 +16,9 @@ submission_ui
 \arguments{
 \item{session}{session object from shiny with learnr}
 }
+\value{
+an html \if{html}{\out{<div>}}\if{html}{\out{</div>}} element
+}
 \description{
 The following function was modified from Colin Rundel's learnrhash package,
 available at https://github.com/rundel/learnrhash.
@@ -23,5 +26,15 @@ available at https://github.com/rundel/learnrhash.
 Note that when including these functions in a learnr Rmd document it is
 necessary that the server function, \code{submission_server()}, be included in an
 R chunk where \code{context="server"}.
+}
+\examples{
+\dontrun{
+  submission_server()
+}
+
+\dontrun{
+  submission_ui
+}
+
 }
 \keyword{datasets}

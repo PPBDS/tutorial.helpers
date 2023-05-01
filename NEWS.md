@@ -1,5 +1,7 @@
 # tutorial.helpers (development version)
 
+* Add examples and return values for all functions.
+
 # tutorial.helpers 0.1.2
 
 * Move prep_rstudio_settings() to r4ds.tutorials.
