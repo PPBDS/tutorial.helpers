@@ -24,6 +24,13 @@
 #'
 #' @param session session object from shiny with learnr
 #' 
+#' @examples
+#' \dontrun{
+#'   submission_server(sess)
+#' }
+#' 
+#' @export
+#' 
 #' @return NULL
 
 
@@ -90,6 +97,14 @@ submission_server <- function(session) {
 
 
 #' @rdname submission_functions
+#' 
+#' @examples
+#' \dontrun{
+#'   submision_ui
+#' }
+#' 
+#' 
+#' @export
 #' 
 #' @return an html div element
 

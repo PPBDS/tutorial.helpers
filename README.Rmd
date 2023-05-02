@@ -42,23 +42,41 @@ remotes::install_github("PPBDS/tutorial.helpers")
 
 * The most useful tool is the download answers trick. Simply insert this empty code chunk at the end of your tutorial.
 
-````
+````{verbatim}
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
 ````
 
-This will ask the student to provide an estimate of how long the tutorial took to complete. It will then provide the ability to download the student's answers in three different formats: html, pdf and rds. Students submit these files to their instructors, who can then confirm that the work was completed and look for any patterns in student misunderstanding.
+This will ask the student to provide an estimate of how long the tutorial took to complete. It will then provide the ability to download the student's answers in three different formats: html, pdf and rds. Students submit these files to their instructors, who can then confirm that the work was completed and look for any patterns in student (mis)understandings.
 
-* We recommend the same child document trick at the start of each tutorial:
+* There are three exported functions for checking the tutorials in your package.
+  - `return_tutorial_paths("your.package.name")` will return a vector of paths to all the tutorials in **your.package.name**. This vector is used as an input to the next two functions.
+  - `knit_tutorials()` takes a vector of tutorial paths and then knits all the tutorials. This is the most useful function in **tutorial.helpers** because it ensures that all your tutorials are still working.
+  - `check_tutorial_defaults()` takes a vector of tutorial paths and then ensures that all the tutorials include the default child code chunks which we recommend. This is only useful if you want to include the three options which we recommend.
 
-````
+* We recommend this child document at the start of each tutorial:
+
+````{verbatim}
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 ````
 
 This will insert questions asking for the student's name and email address.
 
-* 
+* We also recommend including this at the beginning of your tutorial:
+
+````{verbatim}
+```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
+```
+````
+
+This allows you to place a button in an Exercise which will copy over all the code in the previous exercise. Use:
+
+````
+<button onclick = "transfer_code(this)">Copy previous code</button>
+````
+
+This is handy (for students) when a serious of exercises requires them to build up a long pipe, line-by-line.
 
 ## Accessing Addins
 

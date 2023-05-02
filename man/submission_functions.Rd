@@ -27,4 +27,15 @@ Note that when including these functions in a learnr Rmd document it is
 necessary that the server function, \code{submission_server()}, be included in an
 R chunk where \code{context="server"}.
 }
+\examples{
+\dontrun{
+  submission_server(sess)
+}
+
+\dontrun{
+  submision_ui
+}
+
+
+}
 \keyword{datasets}
