@@ -1,4 +1,4 @@
-#' Return all the paths to tutorials
+#' Return all the paths to the tutorials in a package
 #'
 #' @param package character vector of the package name to be tested
 #' 

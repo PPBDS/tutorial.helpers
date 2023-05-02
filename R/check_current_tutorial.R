@@ -6,13 +6,6 @@
 #'
 #' Uses format_tutorial() to format the tutorial Rmd open
 #' in the current editor
-#' 
-#' @examples
-#' \dontrun{
-#'   check_current_tutorial()
-#' }
-#' 
-#' @return NULL
 
 check_current_tutorial <- function(){
 
@@ -26,6 +19,4 @@ check_current_tutorial <- function(){
   out <- file(file_path, "w")
   write(trimws(new_doc), file = out)
   close(out)
-
-  NULL
 }

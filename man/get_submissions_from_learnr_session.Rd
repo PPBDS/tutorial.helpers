@@ -15,9 +15,3 @@ a list which includes the exercise submissions of tutorial
 \description{
 Get Submissions from a learnr Session
 }
-\examples{
-\dontrun{
-  get_submissions_from_learnr_session(session)
-}
-
-}

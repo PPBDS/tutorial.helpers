@@ -12,9 +12,3 @@ An add-in for formatting tutorials.
 Uses format_tutorial() to format the tutorial Rmd open
 in the current editor
 }
-\examples{
-\dontrun{
-  check_current_tutorial()
-}
-
-}

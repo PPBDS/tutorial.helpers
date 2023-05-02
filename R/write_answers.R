@@ -10,7 +10,6 @@
 #'   write_answers("answers.pdf", session)
 #' }
 #' 
-#'
 #' @return NULL
 #' @export
 

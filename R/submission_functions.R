@@ -11,6 +11,7 @@
 
 
 #' @title Tutorial submission functions
+#' @rdname submission_functions
 #'
 #' @description
 #'
@@ -30,7 +31,6 @@
 #' 
 #' @return NULL
 #'
-#' @rdname submission_functions
 #' @export
 
 submission_server <- function(session) {
@@ -102,7 +102,7 @@ submission_server <- function(session) {
 #'   submission_ui
 #' }
 #' 
-#' @return an html <div></div> element
+#' @return an html div element
 #' 
 #' @export
 

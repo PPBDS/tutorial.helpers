@@ -22,5 +22,4 @@ Write Tutorial Answers
   write_answers("answers.pdf", session)
 }
 
-
 }

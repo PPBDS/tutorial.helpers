@@ -7,7 +7,8 @@
 #' 
 #' @examples
 #' \dontrun{
-#' knit_tutorials(tutorial_paths = return_tutorial_paths('learnr'))
+#' knit_tutorials(tutorial_paths = c("/path/to/this/tutorial.Rmd",
+#'                                   "/path/to/that/tutorial.Rmd"))
 #' }
 #' 
 #' @export

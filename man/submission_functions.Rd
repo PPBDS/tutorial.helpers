@@ -17,7 +17,7 @@ submission_ui
 \item{session}{session object from shiny with learnr}
 }
 \value{
-an html \if{html}{\out{<div>}}\if{html}{\out{</div>}} element
+an html div element
 }
 \description{
 The following function was modified from Colin Rundel's learnrhash package,

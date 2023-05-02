@@ -2,27 +2,14 @@
 #'
 #' @description
 #'
-#' A function for formatting tutorial Rmd files.
-#'
-#' It adjusts code chunk labels correctly.
-#'
-#' This should make things easier for tutorial writers because it will allow
-#' fast chunk label updating and quick formatting and checking.
-#'
-#' There is also no need to keep track of the exercise numbers because it is
-#' done for you in the addin.
+#' A function for formatting tutorial Rmd files. Used by
+#' check_current_tutorial() to re-format the currently open tutorial in RStudio.
+#' It renumbers the exercises so that they are in order. It ensures that chunk
+#' labels use this numbering, along with the section title.
 #'
 #' @param file_path Character string
-#' 
-#' @examples
-#' \dontrun{
-#'   format_tutorial('/path/to/tutorial.Rmd')
-#' }
-#' 
-#' @return formatted document with correct code and hint chunk labels
 #'
-#' @export
-
+#' @return formatted document with correct code and hint chunk labels
 
 format_tutorial <- function(file_path){
 

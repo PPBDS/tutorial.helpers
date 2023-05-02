@@ -2,7 +2,7 @@
 % Please edit documentation in R/return_tutorial_paths.R
 \name{return_tutorial_paths}
 \alias{return_tutorial_paths}
-\title{Return all the paths to tutorials}
+\title{Return all the paths to the tutorials in a package}
 \usage{
 return_tutorial_paths(package)
 }

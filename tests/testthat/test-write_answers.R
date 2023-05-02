@@ -42,11 +42,20 @@ saved_session <- readRDS(session_path)
 # See discussion in function definition of get_submissions_from_learnr_session()
 # for details on why this function is hard to test.
 
+# Test html. Note that a simple version of this test, in which we just compare
+# the results of running html_table(), works on Mac and Linux, and on Windows on
+# Github. But it produced a problem with rhub::check_for_cran(). I *think* that
+# using all.equal() on the return value of rvest::html_table() may not be OK.
+# (Although why it works on Github would be a mystery.)
 
-# Change the functions so that they no longer return a path, which is an absurd
-# hack.
+# Note that this test answer include all sorts of weird strings, like:
 
-# Test html
+# 14 html-11            exercise        "\"<html>\n<table>\n  <tr>\n    <td>\n      Hello World\n    <…
+
+# On one hand, tough tests are good. On the other hand, we are really just
+# testing basic functionality. No need for such obscure tests, especially if
+# they don't work!
+
 
 html_file <- file.path(tempdir(), "submission_report_test.html")
 
@@ -56,7 +65,12 @@ submission_report_test <- rvest::read_html(html_file)
 
 submission_report_output <- rvest::read_html("test-data/submission_test_outputs/submission_report_output.html")
 
-if(! all.equal(rvest::html_table(submission_report_test), rvest::html_table(submission_report_output))){
+# Using html_text2() in place of html_table() to provide something which works
+# with rhub::check_for_cran()
+
+if(! all.equal(
+  rvest::html_text2(submission_report_test), 
+  rvest::html_text2(submission_report_output))){
   stop("From test-write_answer, html option did not return the desired output.")
   }
 

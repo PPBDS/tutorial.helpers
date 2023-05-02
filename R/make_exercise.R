@@ -19,15 +19,6 @@
 #' @importFrom rstudioapi getActiveDocumentContext
 #' 
 #' @return exercise skeleton of referenced type
-#' 
-#' @examples
-#' \dontrun{
-#' make_exercise()
-#' make_exercise(type = "no-answer")
-#' }
-#'
-#' @export
-
 
 make_exercise <- function(type = "code"){
 
@@ -149,13 +140,6 @@ make_exercise <- function(type = "code"){
 #' 'no-answer') as the value. So, we need a function which makes this call.
 #' 
 #' @return exercise skeleton without an answer
-#' 
-#' @examples
-#' \dontrun{
-#' make_no_answer()
-#' }
-#'
-#' @export
 
 make_no_answer <- function(){
   make_exercise(type = 'no-answer')
@@ -170,13 +154,6 @@ make_no_answer <- function(){
 #' 'yes-answer') as the value. So, we need a function which makes this call.
 #'
 #' @return exercise skeleton with an answer
-#' 
-#' @examples
-#' \dontrun{
-#' make_yes_answer()
-#' }
-#'
-#' @export
 
 make_yes_answer <- function(){
   make_exercise(type = 'yes-answer')

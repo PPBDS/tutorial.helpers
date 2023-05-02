@@ -2,14 +2,7 @@
 #'
 #' @param sess session object from shiny with learnr
 #' 
-#' @examples
-#' \dontrun{
-#'   get_submissions_from_learnr_session(session)
-#' }
-#' 
 #' @return a list which includes the exercise submissions of tutorial
-#' 
-#' @export
 
 get_submissions_from_learnr_session <- function(sess){
 
@@ -17,27 +10,12 @@ get_submissions_from_learnr_session <- function(sess){
   # report because it has to communicate with the learnr session ENVIRONMENT,
   # not just the object.
 
-  # Since we are using the session environment, we currently don't have a way to
-  # save the environment and hence can't test this function.
+  # Since we are using the session environment, we currently don't (?) have a
+  # way to save the environment and hence can't test this function. (Not sure
+  # this is true.)
 
-  # So learnr:::get_all_state_objects() finds and returns ALL state objects
-  # relating to the session environment and tutorial. This includes the tutorial
-  # id, version, submissions, everything that defines the current "state".
-
-  # learnr:::submissions_from_state_objects() then filters the results to only
-  # submission-related state objects, which are the student answers.
-
-  # objs <- learnr:::get_all_state_objects(sess)
-  # learnr:::submissions_from_state_objects(objs)
-
-  # In the commits on August 12th and 14th, the need to use any ::: have been
-  # eliminated as we can read all the tutorial info and state from newly
-  # provided functions:
-  # learnr::get_tutorial_state()
-  # learnr::get_tutorial_info()
-
-  # Why not just make this a tibble, rather than a nested list? Certainly makes
-  # later code better.
+  # Why not just make this a tibble, rather than a nested list? Certainly  would
+  # make later code easier.
 
   curr_state <- learnr::get_tutorial_state(session = sess)
 
