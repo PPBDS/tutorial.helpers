@@ -70,7 +70,7 @@ submission_server <- function(session) {
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.html"),
       content = function(file){
-        tutorial.helpers::write_answers(file, session)
+        write_answers(file, session)
       }
     )
 
@@ -78,7 +78,7 @@ submission_server <- function(session) {
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.rds"),
       content = function(file){
-        tutorial.helpers::write_answers(file, session)
+        write_answers(file, session)
       }
     )
     
@@ -86,7 +86,7 @@ submission_server <- function(session) {
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.pdf"),
       content = function(file){
-        tutorial.helpers::write_answers(file, session)
+        write_answers(file, session)
       }
     )
 
