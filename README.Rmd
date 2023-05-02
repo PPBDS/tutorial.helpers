@@ -24,7 +24,6 @@ knitr::opts_chunk$set(
 
 **tutorial.helpers** provides functions and RStudio Addins to help you write R tutorials, especially if you follow [our advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html) about the best way to do so. This approach is currently used in two packages: [**all.primer.tutorials**](https://ppbds.github.io/all.primer.tutorials/) and [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/).
 
-
 ## Installation
 
 To install the package from CRAN:
@@ -39,6 +38,27 @@ You can install the development version from [GitHub](https://github.com/) with:
 remotes::install_github("PPBDS/tutorial.helpers")
 ```
 
+## Useful tools
+
+* The most useful tool is the download answers trick. Simply insert this empty code chunk at the end of your tutorial.
+
+````
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
+````
+
+This will ask the student to provide an estimate of how long the tutorial took to complete. It will then provide the ability to download the student's answers in three different formats: html, pdf and rds. Students submit these files to their instructors, who can then confirm that the work was completed and look for any patterns in student misunderstanding.
+
+* We recommend the same child document trick at the start of each tutorial:
+
+````
+```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```
+````
+
+This will insert questions asking for the student's name and email address.
+
+* 
 
 ## Accessing Addins
 
