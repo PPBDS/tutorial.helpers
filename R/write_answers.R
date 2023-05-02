@@ -5,13 +5,8 @@
 #' @param session session object from shiny with learnr
 #' @param is_test check if testing function
 #' 
-#' @examples
-#' \dontrun{
-#'   write_answers("answers.pdf", session)
-#' }
-#' 
 #' @return NULL
-#' @export
+
 
 write_answers <- function(file, session, is_test = FALSE){
   

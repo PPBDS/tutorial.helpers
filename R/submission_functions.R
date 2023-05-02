@@ -24,14 +24,8 @@
 #'
 #' @param session session object from shiny with learnr
 #' 
-#' @examples
-#' \dontrun{
-#'   submission_server()
-#' }
-#' 
 #' @return NULL
-#'
-#' @export
+
 
 submission_server <- function(session) {
   p = parent.frame()
@@ -69,7 +63,7 @@ submission_server <- function(session) {
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.html"),
       content = function(file){
-        write_answers(file, session)
+        tutorial.helpers::write_answers(file, session)
       }
     )
 
@@ -77,7 +71,7 @@ submission_server <- function(session) {
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.rds"),
       content = function(file){
-        write_answers(file, session)
+        tutorial.helpers::write_answers(file, session)
       }
     )
     
@@ -85,7 +79,7 @@ submission_server <- function(session) {
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.pdf"),
       content = function(file){
-        write_answers(file, session)
+        tutorial.helpers::write_answers(file, session)
       }
     )
 
@@ -96,15 +90,9 @@ submission_server <- function(session) {
 
 
 #' @rdname submission_functions
-#'
-#' @examples
-#' \dontrun{
-#'   submission_ui
-#' }
 #' 
 #' @return an html div element
-#' 
-#' @export
+
 
 submission_ui <- shiny::div(
 

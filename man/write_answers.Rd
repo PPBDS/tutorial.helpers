@@ -17,9 +17,3 @@ file suffix. Acceptable values are "html", "rds" and "pdf".}
 \description{
 Write Tutorial Answers
 }
-\examples{
-\dontrun{
-  write_answers("answers.pdf", session)
-}
-
-}
