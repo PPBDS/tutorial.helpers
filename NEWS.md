@@ -1,6 +1,6 @@
-# tutorial.helpers (development version)
+# tutorial.helpers 0.2.0
 
-* Add examples and return values for all functions.
+* Add examples and return values for all exported functions.
 
 # tutorial.helpers 0.1.2
 
