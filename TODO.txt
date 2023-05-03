@@ -1,5 +1,16 @@
 # Submit to CRAN
 
+Investigate this, from rhub::check_for_cran()
+
+   * checking for non-standard things in the check directory ... NOTE
+   Found the following files/directories:
+     ''NULL''
+   * checking for detritus in the temp directory ... NOTE
+   Found the following files/directories:
+     'lastMiKTeXException'
+
+Investigate all the weird html warnings from devtools::check(remote = TRUE, manual = TRUE)
+
 Explore "You fail a noSuggests check" before submission?
 
 Which functions should be exported and which not? Those that are not do not require examples or return values. Explore use of @internal in relation to this.
