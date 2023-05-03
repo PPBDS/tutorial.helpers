@@ -2,16 +2,21 @@
 % Please edit documentation in R/knit_tutorials.R
 \name{knit_tutorials}
 \alias{knit_tutorials}
-\title{Knit all the tutorials in a package}
+\title{Knit a set of tutorials}
 \usage{
 knit_tutorials(tutorial_paths)
 }
 \arguments{
-\item{tutorial_paths}{character vector of the paths to the tutorials to be
-knitted}
+\item{tutorial_paths}{Character vector of the paths to the tutorials to be
+knitted.}
 }
 \description{
-Knit all the tutorials in a package
+We define "testing" a tutorial as (successfully) running
+\code{render()} on it. This function renders all the tutorials provided in
+\code{tutorial_paths}. There is no check to see if the rendered file looks OK,
+just that something has been produced. If a tutorial fails to render, then
+(we assume!) an error will be generated which will then filter up to our
+testing rig.
 }
 \examples{
 \dontrun{

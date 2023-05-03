@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_submissions_from_learnr_session.R
 \name{get_submissions_from_learnr_session}
 \alias{get_submissions_from_learnr_session}
-\title{Get Submissions from a learnr Session}
+\title{Return a list of tutorial answers}
 \usage{
 get_submissions_from_learnr_session(sess)
 }
@@ -13,5 +13,8 @@ get_submissions_from_learnr_session(sess)
 a list which includes the exercise submissions of tutorial
 }
 \description{
-Get Submissions from a learnr Session
+Grabs information from the \code{learnr} session environment, not
+directly from the session object itself. Since we are using the session
+environment, we currently don't (?) have a way to save the environment and
+hence can't test this function.
 }

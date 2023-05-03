@@ -1,20 +1,17 @@
-#' Format Tutorial
+#' Re-format a tutorial
 #'
-#' @description
+#' @description A function for formatting tutorial Rmd files. Used by
+#'   check_current_tutorial() to re-format the currently open tutorial in
+#'   RStudio. It renumbers the exercises so that they are in order. It ensures
+#'   that chunk labels use this numbering, along with the section title.
 #'
-#' A function for formatting tutorial Rmd files. Used by
-#' check_current_tutorial() to re-format the currently open tutorial in RStudio.
-#' It renumbers the exercises so that they are in order. It ensures that chunk
-#' labels use this numbering, along with the section title.
+#' @param file_path Character string.
 #'
-#' @param file_path Character string
-#'
-#' @return formatted document with correct code and hint chunk labels
+#' @returns Formatted document with correct code and hint chunk labels.
 
 format_tutorial <- function(file_path){
 
-  # Create function that will later be used
-  # to set the chunk label and code in the ast.
+  # Create function that will later be used to set the chunk label and code.
 
   change_chunk_function <- function(x, ...){
     opts <- list(...)
@@ -22,8 +19,8 @@ format_tutorial <- function(file_path){
     x
   }
 
-  # Create function that will later be used
-  # to get the number of lines in an exercise.
+  # Create function that will later be used to get the number of lines in an
+  # exercise.
 
   get_chunk_lines <- function(x, ...){
     length(x$code)
@@ -47,12 +44,11 @@ format_tutorial <- function(file_path){
 
   has_exercise <- FALSE
 
-  # The idea of this loop is to go through
-  # each element of the Rmd and change it to its desired format.
+  # The idea of this loop is to go through each element of the Rmd and change it
+  # to its desired format.
 
-  # Each code chunk will go through a series of conditions to
-  # determine what type of code chunk it is and what the label
-  # should be.
+  # Each code chunk will go through a series of conditions to determine what
+  # type of code chunk it is and what the label should be.
 
   for (i in seq_along(tbl$sec_h2)){
 
@@ -68,9 +64,8 @@ format_tutorial <- function(file_path){
       next
     }
 
-    # Check if current exercise is a new exercise:
-    # If it is, then the hint and exercise tracker is reset
-    # and the exercise number is updated.
+    # Check if current exercise is a new exercise: If it is, then the hint and
+    # exercise tracker is reset and the exercise number is updated.
 
     if (l != curr_section && nchar(trimws(l)) != 0 && tbl$type[i] == "rmd_heading"){
       curr_section <- l
@@ -98,7 +93,9 @@ format_tutorial <- function(file_path){
     # 2. has NULL for its label
     # 3. has an empty string for its label
 
-    if (tbl$type[i] != "rmd_chunk" | is.na(tbl$label[i]) | nchar(trimws(tbl$label[i])) == 0){
+    if (tbl$type[i] != "rmd_chunk" | 
+        is.na(tbl$label[i]) | 
+        nchar(trimws(tbl$label[i])) == 0){
       next
     }
 
@@ -106,7 +103,8 @@ format_tutorial <- function(file_path){
     # but the element doesn't have the eval = FALSE option,
     # add that option to the element.
 
-    if (stringr::str_detect(tbl$label[i], "hint") && length(parsermd::rmd_get_options(tbl$ast[i])[[1]]) == 0){
+    if (stringr::str_detect(tbl$label[i], "hint") && 
+        length(parsermd::rmd_get_options(tbl$ast[i])[[1]]) == 0){
       tbl$ast[i] <- parsermd::rmd_set_options(tbl$ast[i], eval = "FALSE")
     }
 
@@ -160,10 +158,8 @@ format_tutorial <- function(file_path){
       }
     }
 
-    # If chunk label ends with "-setup",
-    # it is recognized as a setup code chunk,
-    # so the name is exercise name and -setup
-    # Ex: ex-1-setup for ex-1
+    # If chunk label ends with "-setup", it is recognized as a setup code chunk,
+    # so the name is exercise name and -setup Ex: ex-1-setup for ex-1
 
     if (grepl("-setup$", tbl$label[i])){
       new_label <- paste0(section_id, "-", exercise_number, "-setup")
@@ -172,17 +168,16 @@ format_tutorial <- function(file_path){
       next
     }
 
-    # If this element is not a hint and the current level 3 heading
-    # already has an exercise, skip to the next loop because
-    # it must be some kind of set up code chunk.
+    # If this element is not a hint and the current level 3 heading already has
+    # an exercise, skip to the next loop because it must be some kind of set up
+    # code chunk.
 
     if (has_exercise){
       next
     }
 
-    # After all the conditions above, the elements left
-    # MUST BE exercises, so the appropriate labels are set
-    # and the exercise tracker is updated.
+    # After all the conditions above, the elements left MUST BE exercises, so
+    # the appropriate labels are set and the exercise tracker is updated.
 
     new_label <- paste0(section_id, "-", exercise_number)
 
@@ -195,23 +190,22 @@ format_tutorial <- function(file_path){
 
   # This is quite interesting.
   #
-  # The parsermd already has a as_document function
-  # that should've taken care of turning the changed Rmd structure
-  # into raw text.
+  # The parsermd already has a as_document function that should've taken care of
+  # turning the changed Rmd structure into raw text.
   #
-  # However, there was a thing with Rmarkdown sections in the structure
-  # where each time it is updated, it adds a newline to the section because
-  # while parsing, newlines counted as part of the Rmarkdown section.
+  # However, there was a thing with Rmarkdown sections in the structure where
+  # each time it is updated, it adds a newline to the section because while
+  # parsing, newlines counted as part of the Rmarkdown section.
   #
-  # This created a cycle where each time an Rmd is checked, it would be
-  # padded with as many newlines as there are Rmarkdown sections.
+  # This created a cycle where each time an Rmd is checked, it would be padded
+  # with as many newlines as there are Rmarkdown sections.
   #
-  # Therefore, I had to make my own way of transforming the Rmd back
-  # to plain text
-
-  # The only unique thing this part does is that it removes
-  # the last character of every Rmarkdown section, which is always
-  # a newline before adding it to the full document.
+  # Therefore, I had to make my own way of transforming the Rmd back to plain
+  # text.
+  #
+  # The only unique thing this part does is that it removes the last character
+  # of every Rmarkdown section, which is always a newline before adding it to
+  # the full document.
 
   new_doc <- ""
   for (i in seq_along(tbl$sec_h2)){

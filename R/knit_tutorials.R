@@ -1,25 +1,28 @@
-#' Knit all the tutorials in a package
+#' Knit a set of tutorials
 #'
-#' @param tutorial_paths character vector of the paths to the tutorials to be 
-#'  knitted
+#' @description We define "testing" a tutorial as (successfully) running
+#'   `render()` on it. This function renders all the tutorials provided in
+#'   `tutorial_paths`. There is no check to see if the rendered file looks OK,
+#'   just that something has been produced. If a tutorial fails to render, then
+#'   (we assume!) an error will be generated which will then filter up to our
+#'   testing rig.
 #'
-#' @return NULL
-#' 
+#' @param tutorial_paths Character vector of the paths to the tutorials to be
+#'   knitted.
+#'
+#' @returns NULL
+#'
 #' @examples
 #' \dontrun{
 #' knit_tutorials(tutorial_paths = c("/path/to/this/tutorial.Rmd",
 #'                                   "/path/to/that/tutorial.Rmd"))
 #' }
-#' 
+#'
 #' @export
 
 knit_tutorials <- function(tutorial_paths){
   
   stopifnot(all(file.exists(tutorial_paths)))
-
-  # Our definition of "test" for a tutorial file is to run render() and hope there
-  # is no error. There is no check to see if "tutorial.html" looks OK, just that
-  # that string is returned.
 
   # Might we do more here? For example, what we really want to confirm is that,
   # when a student presses the "Start Tutorial" button, things will work. I am not

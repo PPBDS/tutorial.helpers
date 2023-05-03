@@ -1,11 +1,26 @@
-#' Write Tutorial Answers
+#' Write tutorial answers to file
 #'
-#' @param file location to render answers to. Output file type determined by
-#'  file suffix. Acceptable values are "html", "rds" and "pdf".
-#' @param session session object from shiny with learnr
-#' @param is_test check if testing function
-#' 
-#' @return NULL
+#' @description Take a tutorial session, extract out all the submitted answers,
+#'   and write out a file --- either as html, rds or pdf --- with all of those
+#'   answers.
+#'
+#' @details We only keep track of the questions/exercises that the student has
+#'   completed. So, if she only answers three questions, the resulting output
+#'   will only have 6 rows (the three answers plus the header row plus the first
+#'   row with tutorial info plus the last row with the time taken). The other
+#'   obvious approach is to keep all the questions/exercises and leave
+#'   unanswered ones as NA. Not sure if that approach is better, or even
+#'   possible.
+#'
+#' @param file Location to render answers to. Output file type determined by
+#'   file suffix. Acceptable values are "html", "rds" and "pdf".
+#'
+#' @param session Session object from `Shiny` with `learnr`.
+#'
+#' @param is_test `TRUE`/`FALSE` depending on whether or not we are just testing
+#'   the function. Default is `TRUE`.
+#'
+#' @returns NULL
 
 
 write_answers <- function(file, session, is_test = FALSE){
@@ -20,12 +35,7 @@ write_answers <- function(file, session, is_test = FALSE){
   # https://github.com/mattblackwell/qsslearnr/blob/main/R/submission.R for an
   # example.
   
-  # Right now, we only keep track of the questions/exercises that the student
-  # has completed. So, if she only answers three questions, the resulting output
-  # will only have 5 rows (the three answers plus the header row plus the first
-  # row with tutorial info). The other obvious approach is to keep all the
-  # questions/exercises and leave unanswered ones as NA. I think that approach
-  # might be better. Not sure if it is possible.
+
 
   # Data Structure of a learnr submission object
 

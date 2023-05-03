@@ -1,24 +1,26 @@
-#' Make Exercise
+#' @title Add a tutorial code exercise or question to the active document
 #'
-#' @description
+#' @rdname exercise_creation
 #'
-#' An add-in for writing tutorials.
+#' @description When writing tutorials, it is handy to be able to insert the
+#'   skeleton for a new code exercise or question. We bind `make_exercise()` and
+#'   friends as an RStudio add-in to provide this functionality. Note that the
+#'   function determines the correct exercise number to use and also adds
+#'   appropriate code chunk names, based on the exercise number and section
+#'   title.
 #'
-#' It reads the latest exercise and section name
-#' and then adds an exercise skeleton.
+#' @details It appears that the RStudio addins must have function names only as
+#'   the Binding value. In other words, you can't have `make_exercise(type =
+#'   'no-answer')` as the value. So, we need two extra functions ---
+#'   `make_no_answer()` and `make_yes_answer()` ---which just call
+#'   `make_exercise()` while passing in the correct argument.
 #'
-#' This should make things easier for tutorial-writers
-#' because now a fast click can create most of the exercise for you.
-#'
-#' There is also no need to keep track of the exercise numbers
-#' because it is done for you in the add-in.
-#'
-#' @param type character of question type. Must be one
-#'  of c("code", "no-answer", "yes-answer")
+#' @param type Character of question type. Must be one of "code", "no-answer",
+#'   or "yes-answer".
 #'
 #' @importFrom rstudioapi getActiveDocumentContext
-#' 
-#' @return exercise skeleton of referenced type
+#'
+#' @returns Exercise skeleton corresponding to the `type` argument.
 
 make_exercise <- function(type = "code"){
 
@@ -131,29 +133,17 @@ make_exercise <- function(type = "code"){
   rstudioapi::insertText(text = new_exercise)
 }
 
-#' Make Exercise without an Answer
+#' Make question skeleton without an answer
 #'
-#' @description
-#'
-#' It appears that the RStudio addins must have function names only as the
-#' Binding value. In other words, you can't have make_exercise(type =
-#' 'no-answer') as the value. So, we need a function which makes this call.
-#' 
-#' @return exercise skeleton without an answer
+#' @rdname exercise_creation
 
 make_no_answer <- function(){
   make_exercise(type = 'no-answer')
 }
 
-#' Make Exercise with an Answer
+#' Make question skeleton with an answer
 #'
-#' @description
-#'
-#' It appears that the RStudio addins must have function names only as the
-#' Binding value. In other words, you can't have make_exercise(type =
-#' 'yes-answer') as the value. So, we need a function which makes this call.
-#'
-#' @return exercise skeleton with an answer
+#' @rdname exercise_creation
 
 make_yes_answer <- function(){
   make_exercise(type = 'yes-answer')

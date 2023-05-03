@@ -2,19 +2,19 @@
 % Please edit documentation in R/format_tutorial.R
 \name{format_tutorial}
 \alias{format_tutorial}
-\title{Format Tutorial}
+\title{Re-format a tutorial}
 \usage{
 format_tutorial(file_path)
 }
 \arguments{
-\item{file_path}{Character string}
+\item{file_path}{Character string.}
 }
 \value{
-formatted document with correct code and hint chunk labels
+Formatted document with correct code and hint chunk labels.
 }
 \description{
 A function for formatting tutorial Rmd files. Used by
-check_current_tutorial() to re-format the currently open tutorial in RStudio.
-It renumbers the exercises so that they are in order. It ensures that chunk
-labels use this numbering, along with the section title.
+check_current_tutorial() to re-format the currently open tutorial in
+RStudio. It renumbers the exercises so that they are in order. It ensures
+that chunk labels use this numbering, along with the section title.
 }

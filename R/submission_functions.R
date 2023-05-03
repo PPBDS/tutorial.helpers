@@ -13,25 +13,22 @@
 #' @title Tutorial submission functions
 #' @rdname submission_functions
 #'
-#' @description
+#' @description The following function was modified from Colin Rundel's
+#'   learnrhash package, available at https://github.com/rundel/learnrhash. Note
+#'   that when including these functions in a learnr Rmd document it is
+#'   necessary that the server function, `submission_server()`, be included in
+#'   an R chunk where `context="server"`.
 #'
-#' The following function was modified from Colin Rundel's learnrhash package,
-#' available at https://github.com/rundel/learnrhash.
+#' @param session Session object from `Shiny` with `learnr`.
 #'
-#' Note that when including these functions in a learnr Rmd document it is
-#' necessary that the server function, `submission_server()`, be included in an
-#' R chunk where `context="server"`.
-#'
-#' @param session session object from shiny with learnr
-#' 
 #' @examples
 #' \dontrun{
 #'   submission_server(sess)
 #' }
-#' 
+#'
 #' @export
-#' 
-#' @return NULL
+#'
+#' @returns NULL
 
 
 submission_server <- function(session) {
@@ -106,7 +103,7 @@ submission_server <- function(session) {
 #' 
 #' @export
 #' 
-#' @return an html div element
+#' @returns An html div element.
 
 
 submission_ui <- shiny::div(

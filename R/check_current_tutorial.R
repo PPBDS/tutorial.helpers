@@ -1,4 +1,4 @@
-#' Check Current Tutorial
+#' Check current tutorial
 #'
 #' @description
 #'

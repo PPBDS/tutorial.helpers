@@ -1,25 +1,29 @@
-#' Check that a tutorial has the standard components
+#' Confirm that a tutorial has the recommended components
 #'
-#' @param tutorial_paths character vector of the paths to the tutorials to be tested
+#' @description There are three code components: the use of a copy-code button,
+#'   an information request, and a download page. It is tricky to know where to
+#'   store the "truth" of what these components should look like. For now, the
+#'   truth is defined as the `skeleton.Rmd` which defines the template for
+#'   creating a new tutorial.
+#'
+#'   All tutorials should also have `library(learnr)` and
+#'   `library(tutorial.helpers)`, both of which exist in the skeleton
+#'
+#' @param tutorial_paths Character vector of the paths to the tutorials to be
+#'   examined.
 #'
 #' @examples
 #' \dontrun{
 #'   check_tutorial_defaults('/path/to/tutorial.Rmd')
 #' }
-#' 
-#' @return NULL
+#'
+#' @returns NULL
 #'
 #' @export
 
 check_tutorial_defaults <- function(tutorial_paths){
   
   stopifnot(all(file.exists(tutorial_paths)))
-
-  # There are three code components: the use of a copy-code button, an
-  # information request, and a download page. It is tricky to know where to
-  # store the "truth" of what these components should look like. For now, the
-  # truth is defined as the skeleton.Rmd which defines the template for creating
-  # a new tutorial.
 
   skeleton_lines <- readLines(
     system.file(

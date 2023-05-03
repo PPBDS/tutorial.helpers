@@ -7,11 +7,11 @@
 return_tutorial_paths(package)
 }
 \arguments{
-\item{package}{character vector of the package name to be tested}
+\item{package}{Character vector of the package name to be tested.}
 }
 \value{
-character vector of the full paths to all installed tutorials in
-\code{package}
+Character vector of the full paths to all installed tutorials in
+\code{package}.
 }
 \description{
 Takes a package name and returns a character vector of all the

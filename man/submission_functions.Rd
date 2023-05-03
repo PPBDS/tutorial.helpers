@@ -14,18 +14,17 @@ submission_server(session)
 submission_ui
 }
 \arguments{
-\item{session}{session object from shiny with learnr}
+\item{session}{Session object from \code{Shiny} with \code{learnr}.}
 }
 \value{
-an html div element
+An html div element.
 }
 \description{
-The following function was modified from Colin Rundel's learnrhash package,
-available at https://github.com/rundel/learnrhash.
-
-Note that when including these functions in a learnr Rmd document it is
-necessary that the server function, \code{submission_server()}, be included in an
-R chunk where \code{context="server"}.
+The following function was modified from Colin Rundel's
+learnrhash package, available at https://github.com/rundel/learnrhash. Note
+that when including these functions in a learnr Rmd document it is
+necessary that the server function, \code{submission_server()}, be included in
+an R chunk where \code{context="server"}.
 }
 \examples{
 \dontrun{

@@ -2,15 +2,23 @@
 % Please edit documentation in R/check_tutorial_defaults.R
 \name{check_tutorial_defaults}
 \alias{check_tutorial_defaults}
-\title{Check that a tutorial has the standard components}
+\title{Confirm that a tutorial has the recommended components}
 \usage{
 check_tutorial_defaults(tutorial_paths)
 }
 \arguments{
-\item{tutorial_paths}{character vector of the paths to the tutorials to be tested}
+\item{tutorial_paths}{Character vector of the paths to the tutorials to be
+examined.}
 }
 \description{
-Check that a tutorial has the standard components
+There are three code components: the use of a copy-code button,
+an information request, and a download page. It is tricky to know where to
+store the "truth" of what these components should look like. For now, the
+truth is defined as the \code{skeleton.Rmd} which defines the template for
+creating a new tutorial.
+
+All tutorials should also have \code{library(learnr)} and
+\code{library(tutorial.helpers)}, both of which exist in the skeleton
 }
 \examples{
 \dontrun{

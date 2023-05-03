@@ -2,18 +2,30 @@
 % Please edit documentation in R/write_answers.R
 \name{write_answers}
 \alias{write_answers}
-\title{Write Tutorial Answers}
+\title{Write tutorial answers to file}
 \usage{
 write_answers(file, session, is_test = FALSE)
 }
 \arguments{
-\item{file}{location to render answers to. Output file type determined by
+\item{file}{Location to render answers to. Output file type determined by
 file suffix. Acceptable values are "html", "rds" and "pdf".}
 
-\item{session}{session object from shiny with learnr}
+\item{session}{Session object from \code{Shiny} with \code{learnr}.}
 
-\item{is_test}{check if testing function}
+\item{is_test}{\code{TRUE}/\code{FALSE} depending on whether or not we are just testing
+the function. Default is \code{TRUE}.}
 }
 \description{
-Write Tutorial Answers
+Take a tutorial session, extract out all the submitted answers,
+and write out a file --- either as html, rds or pdf --- with all of those
+answers.
+}
+\details{
+We only keep track of the questions/exercises that the student has
+completed. So, if she only answers three questions, the resulting output
+will only have 6 rows (the three answers plus the header row plus the first
+row with tutorial info plus the last row with the time taken). The other
+obvious approach is to keep all the questions/exercises and leave
+unanswered ones as NA. Not sure if that approach is better, or even
+possible.
 }

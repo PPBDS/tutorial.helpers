@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_current_tutorial.R
 \name{check_current_tutorial}
 \alias{check_current_tutorial}
-\title{Check Current Tutorial}
+\title{Check current tutorial}
 \usage{
 check_current_tutorial()
 }
