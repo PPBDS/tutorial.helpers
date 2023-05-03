@@ -32,7 +32,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2.9004</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,14 +79,14 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="tutorials-helper-functions">Tutorials Helper Functions<a class="anchor" aria-label="anchor" href="#tutorials-helper-functions"></a>
+<div class="page-header"><h1 id="tutorial-helper-functions">Tutorial Helper Functions<a class="anchor" aria-label="anchor" href="#tutorial-helper-functions"></a>
 </h1></div>
 <!-- badges: start -->
 
 <div class="section level2">
 <h2 id="about-this-package">About this package<a class="anchor" aria-label="anchor" href="#about-this-package"></a>
 </h2>
-<p><strong>tutorial.helpers</strong> provides functions and RStudio Addins to help you write R tutorials, especially if you follow <a href="https://ppbds.github.io/tutorial.helpers/articles/instructions.html">our advice</a> about the best way to do so. This approach is currently used in two packages: <a href="https://ppbds.github.io/all.primer.tutorials/" class="external-link"><strong>all.primer.tutorials</strong></a> and <a href="https://ppbds.github.io/r4ds.tutorials/" class="external-link"><strong>r4ds.tutorials</strong></a>.</p>
+<p><strong>tutorial.helpers</strong> provides functions and RStudio Addins to help you write R tutorials, especially if you follow <a href="https://ppbds.github.io/tutorial.helpers/articles/instructions.html">my advice</a> about the best way to do so. This approach is currently used in two packages: <a href="https://ppbds.github.io/all.primer.tutorials/" class="external-link"><strong>all.primer.tutorials</strong></a> and <a href="https://ppbds.github.io/r4ds.tutorials/" class="external-link"><strong>r4ds.tutorials</strong></a>.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -115,7 +115,7 @@
 <li>
 <code><a href="reference/knit_tutorials.html">knit_tutorials()</a></code> takes a vector of tutorial paths and then knits all the tutorials. This is the most useful function in <strong>tutorial.helpers</strong> because it ensures that all your tutorials are still working.</li>
 <li>
-<code><a href="reference/check_tutorial_defaults.html">check_tutorial_defaults()</a></code> takes a vector of tutorial paths and then ensures that all the tutorials include the default child code chunks which we recommend. This is only useful if you want to include the three options which we recommend.</li>
+<code><a href="reference/check_tutorial_defaults.html">check_tutorial_defaults()</a></code> takes a vector of tutorial paths and then ensures that all the tutorials include the default child code chunks which we recommend. This is only useful if you want to include the options which we recommend.</li>
 </ul>
 </li>
 <li>We recommend this child document at the start of each tutorial:</li>
@@ -128,9 +128,9 @@
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
-<p>This allows you to place a button in an Exercise which will copy over all the code in the previous exercise. Use:</p>
+<p>This allows you to place a button in an exercise which will copy over all the code from the previous exercise. Use:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span>button onclick <span class="ot">=</span> <span class="st">"transfer_code(this)"</span><span class="sc">&gt;</span>Copy previous code<span class="sc">&lt;</span><span class="er">/</span>button<span class="sc">&gt;</span></span></code></pre></div>
-<p>This is handy (for students) when a serious of exercises requires them to build up a long pipe, line-by-line.</p>
+<p>This is handy for students when a serious of exercises requires them to build up a long pipe, line-by-line.</p>
 </div>
 <div class="section level2">
 <h2 id="accessing-addins">Accessing Addins<a class="anchor" aria-label="anchor" href="#accessing-addins"></a>
@@ -138,7 +138,7 @@
 <p>In order to access the Addins, load the package.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ppbds.github.io/tutorial.helpers/">tutorial.helpers</a></span><span class="op">)</span></span></code></pre></div>
-<p>This will load the relevant RStudio Addins. Read <a href="https://ppbds.github.io/tutorial.helpers/articles/instructions.html">our instructions</a> for the best way to write tutorials.</p>
+<p>This will load the relevant RStudio Addins.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

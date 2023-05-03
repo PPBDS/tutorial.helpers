@@ -31,6 +31,9 @@
     <loc>https://ppbds.github.io/tutorial.helpers/reference/check_tutorial_defaults.html</loc>
   </url>
   <url>
+    <loc>https://ppbds.github.io/tutorial.helpers/reference/exercise_creation.html</loc>
+  </url>
+  <url>
     <loc>https://ppbds.github.io/tutorial.helpers/reference/format_tutorial.html</loc>
   </url>
   <url>
@@ -41,15 +44,6 @@
   </url>
   <url>
     <loc>https://ppbds.github.io/tutorial.helpers/reference/knit_tutorials.html</loc>
-  </url>
-  <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/reference/make_exercise.html</loc>
-  </url>
-  <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/reference/make_no_answer.html</loc>
-  </url>
-  <url>
-    <loc>https://ppbds.github.io/tutorial.helpers/reference/make_yes_answer.html</loc>
   </url>
   <url>
     <loc>https://ppbds.github.io/tutorial.helpers/reference/return_tutorial_paths.html</loc>
