@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Tutorials Helper Functions
+# Tutorial Helper Functions
 
 <!-- badges: start -->
 [![R build status](https://github.com/PPBDS/tutorial.helpers/workflows/R-CMD-check/badge.svg)](https://github.com/PPBDS/tutorial.helpers/actions)
@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 ## About this package
 
-**tutorial.helpers** provides functions and RStudio Addins to help you write R tutorials, especially if you follow [our advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html) about the best way to do so. This approach is currently used in two packages: [**all.primer.tutorials**](https://ppbds.github.io/all.primer.tutorials/) and [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/).
+**tutorial.helpers** provides functions and RStudio Addins to help you write R tutorials, especially if you follow [my advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html) about the best way to do so. This approach is currently used in two packages: [**all.primer.tutorials**](https://ppbds.github.io/all.primer.tutorials/) and [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/).
 
 ## Installation
 
@@ -52,7 +52,7 @@ This will ask the student to provide an estimate of how long the tutorial took t
 * There are three exported functions for checking the tutorials in your package.
   - `return_tutorial_paths("your.package.name")` will return a vector of paths to all the tutorials in **your.package.name**. This vector is used as an input to the next two functions.
   - `knit_tutorials()` takes a vector of tutorial paths and then knits all the tutorials. This is the most useful function in **tutorial.helpers** because it ensures that all your tutorials are still working.
-  - `check_tutorial_defaults()` takes a vector of tutorial paths and then ensures that all the tutorials include the default child code chunks which we recommend. This is only useful if you want to include the three options which we recommend.
+  - `check_tutorial_defaults()` takes a vector of tutorial paths and then ensures that all the tutorials include the default child code chunks which we recommend. This is only useful if you want to include the options which we recommend.
 
 * We recommend this child document at the start of each tutorial:
 
@@ -70,13 +70,13 @@ This will insert questions asking for the student's name and email address.
 ```
 ````
 
-This allows you to place a button in an Exercise which will copy over all the code in the previous exercise. Use:
+This allows you to place a button in an exercise which will copy over all the code from the previous exercise. Use:
 
 ````
 <button onclick = "transfer_code(this)">Copy previous code</button>
 ````
 
-This is handy (for students) when a serious of exercises requires them to build up a long pipe, line-by-line.
+This is handy for students when a serious of exercises requires them to build up a long pipe, line-by-line.
 
 ## Accessing Addins
 
@@ -86,6 +86,6 @@ In order to access the Addins, load the package.
 library(tutorial.helpers)
 ```
 
-This will load the relevant RStudio Addins. Read [our instructions](https://ppbds.github.io/tutorial.helpers/articles/instructions.html) for the best way to write tutorials.
+This will load the relevant RStudio Addins. 
 
 

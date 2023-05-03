@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Edit ONLY this file if needed. But, after you edit it, you NEED TO KNIT IT BY HAND in order to create the new README.md, which is the thing which is actually used. -->
 
-# Tutorials Helper Functions
+# Tutorial Helper Functions
 
 <!-- badges: start -->
 
@@ -12,7 +12,7 @@ status](https://github.com/PPBDS/tutorial.helpers/workflows/R-CMD-check/badge.sv
 ## About this package
 
 **tutorial.helpers** provides functions and RStudio Addins to help you
-write R tutorials, especially if you follow [our
+write R tutorials, especially if you follow [my
 advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html)
 about the best way to do so. This approach is currently used in two
 packages:
@@ -63,7 +63,7 @@ that the work was completed and look for any patterns in student
   - `check_tutorial_defaults()` takes a vector of tutorial paths and
     then ensures that all the tutorials include the default child code
     chunks which we recommend. This is only useful if you want to
-    include the three options which we recommend.
+    include the options which we recommend.
 - We recommend this child document at the start of each tutorial:
 
 ```` default
@@ -81,13 +81,13 @@ address.
 ```
 ````
 
-This allows you to place a button in an Exercise which will copy over
-all the code in the previous exercise. Use:
+This allows you to place a button in an exercise which will copy over
+all the code from the previous exercise. Use:
 
     <button onclick = "transfer_code(this)">Copy previous code</button>
 
-This is handy (for students) when a serious of exercises requires them
-to build up a long pipe, line-by-line.
+This is handy for students when a serious of exercises requires them to
+build up a long pipe, line-by-line.
 
 ## Accessing Addins
 
@@ -97,6 +97,4 @@ In order to access the Addins, load the package.
 library(tutorial.helpers)
 ```
 
-This will load the relevant RStudio Addins. Read [our
-instructions](https://ppbds.github.io/tutorial.helpers/articles/instructions.html)
-for the best way to write tutorials.
+This will load the relevant RStudio Addins.
