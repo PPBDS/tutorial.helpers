@@ -21,8 +21,6 @@ All tutorials should also have \code{library(learnr)} and
 \code{library(tutorial.helpers)}, both of which exist in the skeleton
 }
 \examples{
-\dontrun{
-  check_tutorial_defaults('/path/to/tutorial.Rmd')
-}
+  check_tutorial_defaults(tutorial_paths = return_tutorial_paths("tutorial.helpers"))
 
 }

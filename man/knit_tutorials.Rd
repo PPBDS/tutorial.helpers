@@ -19,9 +19,6 @@ just that something has been produced. If a tutorial fails to render, then
 testing rig.
 }
 \examples{
-\dontrun{
-knit_tutorials(tutorial_paths = c("/path/to/this/tutorial.Rmd",
-                                  "/path/to/that/tutorial.Rmd"))
-}
+  knit_tutorials(tutorial_paths = return_tutorial_paths("tutorial.helpers"))
 
 }

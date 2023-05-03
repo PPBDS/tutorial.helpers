@@ -1,10 +1,16 @@
 # Submit to CRAN
 
+Explore "You fail a noSuggests check" before submission?
+
 Which functions should be exported and which not? Those that are not do not require examples or return values. Explore use of @internal in relation to this.
 
 Uncomment GHA calls to build on devel for Mac and Linux once the renv nonsense gets fixed.
 
 Need a vignette about Addins. What they are. How they work. How to use them.
+
+Should I be using NULL as a return value? Consider: This note is also applicable if your function has no return value: “If a function does not return a value, please document that too, e.g. \value{None}.”
+
+
 
 # Thoughts on geting information from a tutorial, and on testing.
 

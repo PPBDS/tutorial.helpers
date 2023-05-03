@@ -13,9 +13,7 @@
 #'   examined.
 #'
 #' @examples
-#' \dontrun{
-#'   check_tutorial_defaults('/path/to/tutorial.Rmd')
-#' }
+#'   check_tutorial_defaults(tutorial_paths = return_tutorial_paths("tutorial.helpers"))
 #'
 #' @returns NULL
 #'
