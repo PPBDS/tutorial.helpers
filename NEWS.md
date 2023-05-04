@@ -1,3 +1,7 @@
+# tutorial.helpers 0.2.1
+
+* Changes for CRAN submission.
+
 # tutorial.helpers 0.2.0
 
 * Add examples and return values for all exported functions.
