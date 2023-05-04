@@ -7,9 +7,9 @@ Authors@R:
            role = c("aut", "cre", "cph"),
            email = "dave.kane@gmail.com",
            comment = c(ORCID = "0000-0002-6660-3934"))
-Description: Helper functions for creating, editing, and testing tutorials 
-    created with the 'learnr' package. Provides a simple method for allowing 
-    students to download their answers to tutorial questions. For examples 
+Description: Helper functions for creating, editing, and testing tutorials
+    created with the 'learnr' package. Provides a simple method for allowing
+    students to download their answers to tutorial questions. For examples
     of its use, see the 'r4ds.tutorials' and 'all.primer.tutorials' packages.
 Depends: 
     R (>= 4.1.0)

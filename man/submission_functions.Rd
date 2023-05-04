@@ -17,7 +17,7 @@ submission_ui
 \item{session}{Session object from \code{Shiny} with \code{learnr}.}
 }
 \value{
-An html div element.
+An object of class shiny.tag.
 }
 \description{
 The following function was modified from Colin Rundel's
@@ -28,13 +28,14 @@ an R chunk where \code{context="server"}.
 }
 \examples{
 \dontrun{
+  # Only works from within a live tutorial.
   submission_server(sess)
 }
 
 \dontrun{
+  # Objects of class shiny.tag can not be run as examples.
   submision_ui
 }
-
 
 }
 \keyword{datasets}

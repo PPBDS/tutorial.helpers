@@ -10,6 +10,9 @@ knit_tutorials(tutorial_paths)
 \item{tutorial_paths}{Character vector of the paths to the tutorials to be
 knitted.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 We define "testing" a tutorial as (successfully) running
 \code{render()} on it. This function renders all the tutorials provided in

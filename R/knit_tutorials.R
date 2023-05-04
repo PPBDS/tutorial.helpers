@@ -10,7 +10,7 @@
 #' @param tutorial_paths Character vector of the paths to the tutorials to be
 #'   knitted.
 #'
-#' @returns NULL
+#' @returns No return value, called for side effects.
 #'
 #' @examples
 #'   knit_tutorials(tutorial_paths = return_tutorial_paths("tutorial.helpers"))

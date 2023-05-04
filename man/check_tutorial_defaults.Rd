@@ -10,6 +10,9 @@ check_tutorial_defaults(tutorial_paths)
 \item{tutorial_paths}{Character vector of the paths to the tutorials to be
 examined.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 There are three code components: the use of a copy-code button,
 an information request, and a download page. It is tricky to know where to

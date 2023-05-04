@@ -15,7 +15,7 @@
 #' @examples
 #'   check_tutorial_defaults(tutorial_paths = return_tutorial_paths("tutorial.helpers"))
 #'
-#' @returns NULL
+#' @returns No return value, called for side effects. 
 #'
 #' @export
 

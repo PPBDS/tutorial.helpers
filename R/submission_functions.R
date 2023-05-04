@@ -23,6 +23,7 @@
 #'
 #' @examples
 #' \dontrun{
+#'   # Only works from within a live tutorial.
 #'   submission_server(sess)
 #' }
 #'
@@ -97,18 +98,16 @@ submission_server <- function(session) {
 #' 
 #' @examples
 #' \dontrun{
+#'   # Objects of class shiny.tag can not be run as examples.
 #'   submision_ui
 #' }
 #' 
-#' 
 #' @export
 #' 
-#' @returns An html div element.
+#' @returns An object of class shiny.tag.
 
 
 submission_ui <- shiny::div(
-
-# shiny::div() creates an html <div></div> element.
 
   "When you have completed this tutorial, follow these steps:",
 

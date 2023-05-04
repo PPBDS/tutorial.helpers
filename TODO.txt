@@ -1,29 +1,18 @@
-# Submit to CRAN
+# After CRAN acceptance
 
-Investigate this, from rhub::check_for_cran()
+* Visit and then remove after-CRAN directory. Transfer material into the main branch here.
 
-   * checking for non-standard things in the check directory ... NOTE
-   Found the following files/directories:
-     ''NULL''
-   * checking for detritus in the temp directory ... NOTE
-   Found the following files/directories:
-     'lastMiKTeXException'
+* Uncomment GHA calls to build on devel for Mac and Linux once the renv nonsense gets fixed.
 
-Investigate all the weird html warnings from devtools::check(remote = TRUE, manual = TRUE)
+* Need a vignette about Addins. What they are. How they work. How to use them.
 
-Explore "You fail a noSuggests check" before submission?
+* Need a vignette which clearly explains how to use the package for testing your package.
 
-Which functions should be exported and which not? Those that are not do not require examples or return values. Explore use of @internal in relation to this.
+* Should I be using NULL as a return value? Consider: This note is also applicable if your function has no return value: “If a function does not return a value, please document that too, e.g. \value{None}.”
 
-Uncomment GHA calls to build on devel for Mac and Linux once the renv nonsense gets fixed.
+* Update Shiny Apps tutorial and document its creation. Update it regularly. Maybe automate this as a Github Action?
 
-Need a vignette about Addins. What they are. How they work. How to use them.
-
-Should I be using NULL as a return value? Consider: This note is also applicable if your function has no return value: “If a function does not return a value, please document that too, e.g. \value{None}.”
-
-
-
-# Thoughts on geting information from a tutorial, and on testing.
+# Other topics
 
 learnr::get_tutorial_info() returns an ordinary list, with an `items` entry that is a "data frame with columns order, label, type and data describing the items (questions and exercises) in the tutorial." Right now, we only use this to get the valye of `tutorial_id`. 
 
@@ -35,11 +24,8 @@ The **downloadthis** package looks very interesting. It seems easy to download a
 
 Arrg. Neither learnr::get_tutorial_state() nor learnr::get_tutorial_info() seem to work in an Exercise code chunk, as perhaps I should have expected.
 
-Would be nice to automate the update of the tutorial so that when we make changes in the tutorial the Shiny Apps installation is updated as well.
 
 Does build_tutorials() really work? First, it seems to fail if you don't provide a url. Second, it does not seem to make use of a source option if one is provided.
-
-write_exercise has a problem with the pdf option because the answers are sometimes long and should be wrapped.
 
 Look at get_submissions_from_learnr_session() function. It is only used in one function. Is it still necessary?
 
@@ -64,14 +50,7 @@ Do we really need gridExtra in order to be able to create a pdf file? Seems like
 
 A different approach to the pdf file creation problem in write_answers() would be to create the Rmd document on the file as a character object rmd and then do render(text = rmd, output_file = filename).
 
-Perhaps create a package called a.getting.started.tutorial which would be very simple and solve the problem of how to get started.
-
-Or just add a getting.started tutorial to this package?
-
-
 Explore tutorial testing: https://pkgs.rstudio.com/learnr/articles/exercises.html#test-code-or-cases
-
-## Using ___ instead of ...
 
 The latest version of learnr seems to allow for ____ as a useful placeholder in code which is left in the actual exercise code blocks without creating an error. Might be useful! Might be much better than always inserting code from previous question.
 
@@ -83,9 +62,6 @@ Testing for make_exercise() is a mess. This might be connected to some poor desi
 format_tutorial is an interesting and complex function. Revisit and clean up.
 
 Is get_submissions_from_learnr_session() still necessary? At the very least, the comments need to be cleaned up.
-
-Fix return_tutorial_paths to work on windows. Or maybe use here::here()?
-
 
 Instead of the code chunk trick to spit out the information and download material, maybe those should be created with new functions from tutorial.helpers. Or maybe the `includes` argument to `tutorial()` could solve this by adding this material at run time. See: https://rstudio.github.io/learnr/reference/tutorial.html The df_print option is also interesting.
 
