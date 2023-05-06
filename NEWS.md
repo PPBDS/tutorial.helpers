@@ -1,3 +1,9 @@
+# tutorial.helpers 0.2.2
+
+* Replace /dontrun{} with if(interactive()){}.
+
+* Fix return value in submission_server().
+
 # tutorial.helpers 0.2.1
 
 * Changes for CRAN submission.
