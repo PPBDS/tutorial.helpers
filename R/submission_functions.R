@@ -22,14 +22,14 @@
 #' @param session Session object from `Shiny` with `learnr`.
 #'
 #' @examples
-#' \dontrun{
+#' if(interactive()){
 #'   # Only works from within a live tutorial.
 #'   submission_server(sess)
 #' }
 #'
 #' @export
 #'
-#' @returns NULL
+#' @returns No return value, called for side effects.
 
 
 submission_server <- function(session) {
@@ -97,7 +97,7 @@ submission_server <- function(session) {
 #' @rdname submission_functions
 #' 
 #' @examples
-#' \dontrun{
+#' if(interactive()){
 #'   # Objects of class shiny.tag can not be run as examples.
 #'   submision_ui
 #' }

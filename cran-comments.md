@@ -1,3 +1,11 @@
+## Second Resubmission
+
+In this version I have:
+
+* Replace /dontrun{} with if(interactive()){}.
+
+* Fix return value in submission_server().
+
 ## Resubmission
 
 This is a resubmission. In this version I have:

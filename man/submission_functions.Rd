@@ -17,6 +17,8 @@ submission_ui
 \item{session}{Session object from \code{Shiny} with \code{learnr}.}
 }
 \value{
+No return value, called for side effects.
+
 An object of class shiny.tag.
 }
 \description{
@@ -27,12 +29,12 @@ necessary that the server function, \code{submission_server()}, be included in
 an R chunk where \code{context="server"}.
 }
 \examples{
-\dontrun{
+if(interactive()){
   # Only works from within a live tutorial.
   submission_server(sess)
 }
 
-\dontrun{
+if(interactive()){
   # Objects of class shiny.tag can not be run as examples.
   submision_ui
 }
