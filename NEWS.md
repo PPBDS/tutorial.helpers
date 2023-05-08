@@ -1,3 +1,5 @@
+# tutorial.helpers (development version)
+
 # tutorial.helpers 0.2.2
 
 * Replace /dontrun{} with if(interactive()){}.
