@@ -1,18 +1,23 @@
-# After CRAN acceptance
+# Deal with session_save.rds
 
-* Visit and then remove after-CRAN directory. Transfer material into the main branch here.
+CRAN requires the package to be less than 5 mb. The session_save.rds is 7 mb. Even zipped, it is bigger than 6 mb. 
+
+We should split write_answers() into two parts. The first part just grabs everything we need from the session and returns a tibble. (We might never be able to test this part because of session size issues.) The second part takes the tibble and outputs the saved object. We can test this a lot.
+
+This saved session isn't that good of a test case. We want a test case with lost more answers (to test pagination) and with at least one paragraph of text (to test formatting in the pdf). So, we should make a better test session. Problem: Not sure how to save a session object!
+
+
+# Other tasks
 
 * Uncomment GHA calls to build on devel for Mac and Linux once the renv nonsense gets fixed.
 
-* Need a vignette about Addins. What they are. How they work. How to use them.
+* Need a short vignette about Addins. What they are. How they work. How to use them.
 
-* Need a vignette which clearly explains how to use the package for testing your package.
-
-* Should I be using NULL as a return value? Consider: This note is also applicable if your function has no return value: “If a function does not return a value, please document that too, e.g. \value{None}.”
+* Need a short vignette which clearly explains how to use the package for testing your package.
 
 * Update Shiny Apps tutorial and document its creation. Update it regularly. Maybe automate this as a Github Action?
 
-# Other topics
+# learnr stuff
 
 learnr::get_tutorial_info() returns an ordinary list, with an `items` entry that is a "data frame with columns order, label, type and data describing the items (questions and exercises) in the tutorial." Right now, we only use this to get the valye of `tutorial_id`. 
 

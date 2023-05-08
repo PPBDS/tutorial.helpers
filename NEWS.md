@@ -1,5 +1,7 @@
 # tutorial.helpers (development version)
 
+* Add test case for write_answers.R
+
 # tutorial.helpers 0.2.2
 
 * Replace /dontrun{} with if(interactive()){}.

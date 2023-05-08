@@ -30,12 +30,10 @@ an R chunk where \code{context="server"}.
 }
 \examples{
 if(interactive()){
-  # Only works from within a live tutorial.
   submission_server(sess)
 }
 
 if(interactive()){
-  # Objects of class shiny.tag can not be run as examples.
   submision_ui
 }
 

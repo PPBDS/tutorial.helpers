@@ -23,7 +23,6 @@
 #'
 #' @examples
 #' if(interactive()){
-#'   # Only works from within a live tutorial.
 #'   submission_server(sess)
 #' }
 #'
@@ -98,7 +97,6 @@ submission_server <- function(session) {
 #' 
 #' @examples
 #' if(interactive()){
-#'   # Objects of class shiny.tag can not be run as examples.
 #'   submision_ui
 #' }
 #' 
