@@ -34,12 +34,12 @@ check_tutorial_defaults <- function(tutorial_paths){
   # writer might format them differently. They would still work even if they
   # included line breaks. But such components would fail this check.
 
-  components <- skeleton_lines[ grepl("child = system.file", skeleton_lines) ]
+  components <- skeleton_lines[grepl("child = system.file", skeleton_lines) ]
 
   # All tutorials should have library(learnr) and library(tutorial.helpers),
   # both of which exist in the skeleton.
   
-  libs <- skeleton_lines[ grepl("library", skeleton_lines) ]
+  libs <- skeleton_lines[grepl("library", skeleton_lines) ]
   
   for(i in tutorial_paths){
     target <- readLines(i)

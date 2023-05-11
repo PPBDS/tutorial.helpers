@@ -6,16 +6,19 @@ We should split write_answers() into two parts. The first part just grabs everyt
 
 This saved session isn't that good of a test case. We want a test case with lost more answers (to test pagination) and with at least one paragraph of text (to test formatting in the pdf). So, we should make a better test session. Problem: Not sure how to save a session object!
 
+Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. Key comment: I suspect that the problem is caused by the session_save.rds not preserving the environment of the session. Maybe we just need a better test case. Maybe save() rather than saveRDS() is the key. Alas, we did not record the code we used to create session_save.rds.
+
+Do we really need gridExtra in order to be able to create a pdf file? Seems like overkill. Must be an easier way.
+
+A different approach to the pdf file creation problem in write_answers() would be to create the Rmd document on the file as a character object rmd and then do render(text = rmd, output_file = filename).
 
 # Other tasks
 
 * Uncomment GHA calls to build on devel for Mac and Linux once the renv nonsense gets fixed.
 
-* Need a short vignette about Addins. What they are. How they work. How to use them.
-
 * Need a short vignette which clearly explains how to use the package for testing your package.
 
-* Update Shiny Apps tutorial and document its creation. Update it regularly. Maybe automate this as a Github Action?
+* Update Shiny Apps tutorial and document its creation. Update it regularly. Maybe automate this as a Github Action? You can currently get to this via the website, under Tutorials menu item.
 
 # learnr stuff
 
@@ -44,22 +47,15 @@ their email or other text. This seem relevant:
 # https://stackoverflow.com/questions/33620133/change-the-color-of-action-button-in-shiny/35871042
 
 
-
-Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. Key comment: I suspect that the problem is caused by the session_save.rds not preserving the environment of the session. Maybe we just need a better test case. Maybe save() rather than saveRDS() is the key. Alas, we did not record the code we used to create session_save.rds.
-
 Maybe testing_package() or skip_if_offline() would be useful. 
 
 test_path() does not work if the file is not in tests/testthat/. Might still be useful since it means we don't need to setwd() to play with testing interactively.
-
-Do we really need gridExtra in order to be able to create a pdf file? Seems like overkill. Must be an easier way.
-
-A different approach to the pdf file creation problem in write_answers() would be to create the Rmd document on the file as a character object rmd and then do render(text = rmd, output_file = filename).
 
 Explore tutorial testing: https://pkgs.rstudio.com/learnr/articles/exercises.html#test-code-or-cases
 
 The latest version of learnr seems to allow for ____ as a useful placeholder in code which is left in the actual exercise code blocks without creating an error. Might be useful! Might be much better than always inserting code from previous question.
 
-So, in addition hints, we could have each code block pre-populated with the code we want them to start with. No need for copy-code from previous exercise!
+So, in addition to hints, we could have each code block pre-populated with the code we want them to start with. No need for copy-code from previous exercise!
 
 
 Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason.
