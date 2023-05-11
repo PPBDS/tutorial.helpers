@@ -1,6 +1,12 @@
 # tutorial.helpers (development version)
 
+* Fix error on Debian systems caused by attempts to write to the user library. Thanks to Kurt Hornik for pointing out the problem.
+
 * Add test case for write_answers.R.
+
+* Create "Rstudio Addins"" vignette.
+
+* Create "Testing Your Package of Tutorials" vignette.
 
 # tutorial.helpers 0.2.2
 
