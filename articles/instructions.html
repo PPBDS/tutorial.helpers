@@ -41,7 +41,9 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/addins.html">Rstudio Addins</a>
     <a class="dropdown-item" href="../articles/instructions.html">Instructions for Writing R Tutorials</a>
+    <a class="dropdown-item" href="../articles/testing.html">Testing Your Package of Tutorials</a>
   </div>
 </li>
 <li class="nav-item dropdown">
@@ -92,7 +94,7 @@
 <!-- I hate the way that all the weird formatting we do messes up the document outline. You can see that effect within R Studio and on the web page. Fixable? -->
 <!-- Tutorial answers should require the smallest incremental number of characters for students to type. That is how you know that your learning curve is shallow. geom_smooth() example. -->
 <!-- Get rid of screenshot examples. Instead use the new file = code chunk option to read in the actual files which are used as part of the macro. Is this even possible? -->
-<p><em>There are no questions here. There are only
+<p><em>There are no questions here. There are only simple
 instructions.</em></p>
 <p><em>Tutorials are not challenging. They are
 confidence-building.</em></p>
@@ -500,93 +502,6 @@ Section rather than copying the code.</p>
 <p>You then build up the graphic, line by line, over a series of
 Exercises, providing hints along the way.</p>
 </div>
-<div class="section level4">
-<h4 id="addins">Addins<a class="anchor" aria-label="anchor" href="#addins"></a>
-</h4>
-<p>We have provided four additions to the Addins menu: “Tutorial Code
-Exercise”, “Tutorial Written Exercise (with Answer)”, “Tutorial Written
-Exercise (no Answer)” and “Format Tutorial Chunk Labels.” Give them a
-try! The first three each insert the skeleton for the next Exercise,
-featuring all the key component parts. It even takes a guess at the
-correct Exercise number. The “Format Tutorial Chunk Labels” Addin is the
-most useful. Always run it before testing your tutorial. It ensures that
-all the Exercises are sequentially numbered and that all the code chunk
-names are correct and unique.</p>
-<p>You can find the addins in the “Addins” tab on the top toolbar of
-RStudio. Please make sure that your cursor is located at the point at
-which you want to insert the new Exercise.</p>
-<p><img src="images/code-exercise-1.png" width="75%" height="75%"></p>
-<div class="section level5">
-<h5 id="tutorial-code-exercise">Tutorial Code Exercise<a class="anchor" aria-label="anchor" href="#tutorial-code-exercise"></a>
-</h5>
-<p>It creates a new code exercise skeleton with auto-generated chunk id
-and exercise title.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>### Exercise 7</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>```{r exercises-7, exercise = TRUE}</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>&lt;button onclick = "transfer_code(this)"&gt;Copy previous code&lt;/button&gt;</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>```{r exercises-7-hint, eval = FALSE}</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>###</span></code></pre></div>
-</div>
-<div class="section level5">
-<h5 id="tutorial-written-exercise-with-and-without-answers">Tutorial Written Exercise (with and without answers)<a class="anchor" aria-label="anchor" href="#tutorial-written-exercise-with-and-without-answers"></a>
-</h5>
-<p>Both create similar exercise structures with auto-generated chunk id
-and exercise title. The difference is that the
-<code>question_text()</code> options are filled in differently.</p>
-<p>Written Exercise with Answer:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>### Exercise 8</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>```{r exercises-8}</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    message = "Place correct answer here.",</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    allow_retry = FALSE,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    rows = 6)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>###</span></code></pre></div>
-<p>Written Exercise without Answer:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>### Exercise 9</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>```{r exercises-9}</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    rows = 3)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>###</span></code></pre></div>
-</div>
-<div class="section level5">
-<h5 id="format-tutorial-chunk-labels">Format Tutorial Chunk Labels<a class="anchor" aria-label="anchor" href="#format-tutorial-chunk-labels"></a>
-</h5>
-<!-- DK: Fix this section. Maybe don't use images? -->
-<p>An addin that formats all the code chunk labels in the current
-Rmd.</p>
-<p>It formats the labels of the code and written exercise code chunks as
-well as the hints.</p>
-<p>Limitations:</p>
-<ul>
-<li><p>It doesn’t work well with the `r` that shows the entire code
-chunk</p></li>
-<li><p>The code chunk labels (derived from your section titles) have a
-hard cutoff at 20 characters. So please make sure that your Section
-Titles are different somewhere in the first 20 characters (including
-spaces).</p></li>
-</ul>
-</div>
-</div>
 </div>
 <div class="section level3">
 <h3 id="knowledge-drops">Knowledge Drops<a class="anchor" aria-label="anchor" href="#knowledge-drops"></a>
@@ -685,9 +600,9 @@ can work with those files in all the usual ways.</p>
 <p>Use <code>include_graphics()</code> to add the image into the
 document. Include this code in its own chunk, in the place where you
 want the image to appear in the tutorial.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>```{r}</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>include_graphics("images/example.png")</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>include_graphics("images/example.png")</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
 <p><code>include_graphics()</code> is part of the <code>knitr</code>
 package, so you need <code><a href="https://yihui.org/knitr/" class="external-link">library(knitr)</a></code> in the setup code
 chunk. Note that you do not need to name these code chunks.</p>
@@ -726,7 +641,7 @@ the top of the tutorial.</p>
 <p>The simplest way to test the <code>tutorial.Rmd</code> with which you
 are working on is to hit the “Run Document” button. This is the same
 thing as running <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> on that file:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span><span class="st">"inst/tutorials/02-terminal/tutorial.Rmd"</span><span class="op">)</span></span></code></pre></div>
 <p>This assumes that you are located in the main directory of
 <strong>your.package</strong>, as you normally would be. I am not sure
@@ -793,7 +708,7 @@ new file name it might still have that file as <code>Rproj.png</code>
 internally, with the capital “R”. This will cause errors when your run
 your checks on Github:</p></li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Error:</span> Cannot find the file<span class="er">(</span><span class="ex">s</span><span class="kw">)</span><span class="bu">:</span> <span class="st">"images/rproj.png"</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Error:</span> Cannot find the file<span class="er">(</span><span class="ex">s</span><span class="kw">)</span><span class="bu">:</span> <span class="st">"images/rproj.png"</span></span></code></pre></div>
 <p>But the file is there! You can see it! The tests work on your local
 machine. The easiest solution is to delete the file (and commit that
 change). And then change the name of the file to something else and use
