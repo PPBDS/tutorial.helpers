@@ -13,7 +13,9 @@
 #' @returns No return value, called for side effects.
 #'
 #' @examples
+#' if(interactive()){
 #'   knit_tutorials(tutorial_paths = return_tutorial_paths("tutorial.helpers"))
+#' }
 #'
 #' @export
 
