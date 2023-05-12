@@ -21,6 +21,13 @@
 #'   the function. Default is `TRUE`.
 #'
 #' @returns NULL
+#' 
+#' @examples
+#' if(interactive()){
+#'   write_answers("outfile.pdf", sess)
+#' }
+#'   
+#' @export
 
 
 write_answers <- function(file, session, is_test = FALSE){

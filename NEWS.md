@@ -8,6 +8,8 @@
 
 * Create "Tutorials for Books" vignette.
 
+* Fix error in downloading files by exporting write_answers(). Thanks to Xavier de Pedro Puente for the report.
+
 # tutorial.helpers 0.2.2
 
 * Replace /dontrun{} with if(interactive()){}.

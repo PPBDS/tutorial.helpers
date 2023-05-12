@@ -29,3 +29,9 @@ obvious approach is to keep all the questions/exercises and leave
 unanswered ones as NA. Not sure if that approach is better, or even
 possible.
 }
+\examples{
+if(interactive()){
+  write_answers("outfile.pdf", sess)
+}
+  
+}

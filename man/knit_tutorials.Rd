@@ -16,10 +16,9 @@ No return value, called for side effects.
 \description{
 We define "testing" a tutorial as (successfully) running
 \code{render()} on it. This function renders all the tutorials provided in
-\code{tutorial_paths}. There is no check to see if the rendered file looks OK,
-just that something has been produced. If a tutorial fails to render, then
-(we assume!) an error will be generated which will then filter up to our
-testing rig.
+\code{tutorial_paths}. There is no check to see if the rendered file looks OK.
+If a tutorial fails to render, then (we assume!) an error will be generated
+which will then filter up to our testing rig.
 }
 \examples{
   knit_tutorials(tutorial_paths = return_tutorial_paths("tutorial.helpers"))
