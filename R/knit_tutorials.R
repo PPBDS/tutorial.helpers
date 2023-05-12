@@ -13,9 +13,7 @@
 #' @returns No return value, called for side effects.
 #'
 #' @examples
-#' if(interactive()){
 #'   knit_tutorials(tutorial_paths = return_tutorial_paths("tutorial.helpers"))
-#' }
 #'
 #' @export
 
@@ -28,11 +26,17 @@ knit_tutorials <- function(tutorial_paths){
   # sure if render() is the same thing. But, the good news is that this test seems
   # much more robust than that. In other words, it catches things that do not
   # cause (immediate) failures with Start Tutorial.
+  
+  # The created files must be written in a temp directory in order to avoid
+  # errors on Debian CRAN systems.
 
   for(i in tutorial_paths){
     cat(paste("Testing tutorial:", i, "\n"))
     testthat::test_that(paste("rendering", i), {
-      testthat::expect_output(rmarkdown::render(i, output_file = "tutorial.html"),
+      testthat::expect_output(
+        rmarkdown::render(i, 
+                          output_file = "tutorial.html",
+                          output_dir = tempdir()),
                     "tutorial.html")
     })
   }
