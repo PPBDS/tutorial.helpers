@@ -42,6 +42,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/addins.html">Rstudio Addins</a>
+    <a class="dropdown-item" href="../articles/books.html">Tutorials for Books</a>
     <a class="dropdown-item" href="../articles/instructions.html">Instructions for Writing R Tutorials</a>
     <a class="dropdown-item" href="../articles/testing.html">Testing Your Package of Tutorials</a>
   </div>
@@ -98,19 +99,19 @@ will run when students press the “Start Tutorial” button, but I am not
 certain. This testing certainly does nothing to ensure that the
 substance of your tutorials is correct.</p>
 <p>If you are using the <a href="https://testthat.r-lib.org/" class="external-link"><strong>testthat</strong></a>
-framework for testing, the
-<code>tests' directory would have a file called</code>testthat.R` which
-just contains:</p>
+framework for testing, the <code>tests</code> directory would have a
+file called <code>testthat.R</code> which just contains:</p>
 <pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://testthat.r-lib.org" class="external-link">testthat</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">your.package</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_package.html" class="external-link">test_check</a></span><span class="op">(</span><span class="st">"your.packge"</span><span class="op">)</span></span></code></pre>
 <p>Note how the name of <strong>your.package</strong> is not quoted with
 <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code> but is quoted with <code>test_check()</code>.</p>
-<p>Within the
-<code>tests/testthat' directory there will be a variety of testing scripts. Create a file called</code>test-tutorials.R`.
-(The file can be named whatever you want, consistent with
-<strong>testthat</strong> requirements.) It might contain:</p>
+<p>Within the <code>tests/testthat</code> directory there will be a
+variety of testing scripts. Create a file called
+<code>test-tutorials.R</code>. (The file can be named whatever you want,
+consistent with <strong>testthat</strong> requirements.) It might
+contain:</p>
 <pre><code><span><span class="va">tut_paths</span> <span class="op">&lt;-</span> <span class="fu">tutorial.helpers</span><span class="fu">::</span><span class="fu"><a href="../reference/return_tutorial_paths.html">return_tutorial_paths</a></span><span class="op">(</span><span class="st">"your.package"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://testthat.r-lib.org/reference/test_that.html" class="external-link">test_that</a></span><span class="op">(</span><span class="st">"All tutorials can be knit without error"</span>, <span class="op">{</span></span>
