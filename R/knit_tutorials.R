@@ -29,15 +29,19 @@ knit_tutorials <- function(tutorial_paths){
   
   # The created files must be written in a temp directory in order to avoid
   # errors on Debian CRAN systems.
+  
+  # Recall that render() returns the path to the output document, so our "test"
+  # just confirms that render() returns the same path as the tempfile() which we
+  # provided as the output_file argument.
 
   for(i in tutorial_paths){
+    out_file <- tempfile()
     cat(paste("Testing tutorial:", i, "\n"))
-    testthat::test_that(paste("rendering", i), {
+    testthat::test_that(paste("Rendering", i), {
       testthat::expect_output(
         rmarkdown::render(i, 
-                          output_file = "tutorial.html",
-                          output_dir = tempdir()),
-                    "tutorial.html")
+                          output_file = out_file),
+        out_file)
     })
   }
   
