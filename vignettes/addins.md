@@ -10,17 +10,17 @@ vignette: >
 
 
 
-#### Addins
+## Overview
 
-We have provided four additions to the RStudio Addins menu: "Tutorial Code Exercise", "Tutorial Written Exercise (with Answer)", "Tutorial Written Exercise (no Answer)" and "Format Tutorial Chunk Labels." Give them a try! The first three each insert the skeleton for the next exercise, featuring all the key component parts. It even takes a guess at the correct exercise number.  The "Format Tutorial Chunk Labels" Addin is the most useful. Always run it before testing your tutorial. It ensures that all the Exercises are sequentially numbered and that all the code chunk names are correct and unique.
+We have provided four additions to the RStudio Addins menu: "Tutorial Code Exercise", "Tutorial Written Exercise (with Answer)", "Tutorial Written Exercise (no Answer)" and "Format Tutorial Chunk Labels." The first three each insert the skeleton for the next exercise, featuring all the key component parts. It even takes a guess at the correct exercise number.  The "Format Tutorial Chunk Labels" addin is the most useful. Always run it before testing your tutorial. It ensures that all the exercises are sequentially numbered and that all the code chunk names are correct and unique.
 
-You can find the addins in the "Addins" tab on the top toolbar of RStudio. Please make sure that your cursor is located at the point at which you want to insert the new Exercise. 
+You can find the addins in the "Addins" tab on the top Rstudio toolbar. Make sure that your cursor is located at the point in your Rmd at which you want to insert the new exercise. 
 
 <img src="images/code-exercise-1.png" alt="plot of chunk unnamed-chunk-1" width="95%" height="95%" />
 
-##### Tutorial Code Exercise
+### Tutorial Code Exercise
 
-It creates a new code exercise skeleton with auto-generated chunk id and exercise title.
+Create a new code exercise skeleton with an exercise title and with auto-generated code chunk ids.
 
 
 
@@ -38,11 +38,15 @@ It creates a new code exercise skeleton with auto-generated chunk id and exercis
 ```
 
 ###
-
 ````
 
+As discussed in [our advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises) about writing good tutorials, a good question:
 
-##### Tutorial Written Exercise (with and without answers)
+
+
+
+
+### Tutorial Written Exercise (with and without answers)
 
 Both create similar exercise structures with auto-generated chunk id and exercise title. The difference is that the `question_text()` options are filled in differently.
 
@@ -84,7 +88,7 @@ question_text(NULL,
 
 ````
 
-##### Format Tutorial Chunk Labels
+### Format Tutorial Chunk Labels
 
 <!-- DK: Fix this section. Maybe don't use images? -->
 

@@ -11,8 +11,6 @@ vignette: >
 
 <!-- Change the approach so that the advice covers all sorts of tutorials, not just tutorial.helpers. -->
 
-<!-- Explain how testing with test_knit_tutorials() works. -->
-
 <!-- I hate the way that all the weird formatting we do messes up the document outline. You can see that effect within R Studio and on the web page. Fixable? -->
 
 <!-- Tutorial answers should require the smallest incremental number of characters for students to type. That is how you know that your learning curve is shallow. geom_smooth() example. -->
@@ -85,7 +83,7 @@ The link will be formatted correctly once the tutorial is knitted. Section intro
 
 After the last Exercise in a Section, you should put a triple hash and then give a two sentence summary about what this Exercise accomplished. A Section is a 20 minute transfer of knowledge from you to the student. At the beginning, you mentioned its purpose. Conclude by tying things back to that original purpose. Often, these "purposes" will be fairly trivial: You promised to go through an example of a scatter plot and, in fact, you did. And that is OK! We are not writing poetry. Not every Section leads to salvation.
 
-One or two high quality links, specifically relevant to this Section, should be mentioned at either the beginning or end of a Section, unless the Section is very short.
+One or two high quality links, specifically relevant to this Section, should be included/explained at either the beginning or end of a Section, unless the Section is very short.
 
 
 ## Exercises
@@ -106,7 +104,7 @@ Each Exercise should have a *flow* which requires that students hit the "Continu
 
 * Then comes the answer code chunk and hint(s), which is sometimes proceeded by a triple hash if the Start was long. See below for more discussion. This code/hint grouping is always followed by the triple hash. We want students to pause after they have submitted their answers so that they are more likely to consider the results of their submission before moving on.
 
-* The last part of an Exercise is the End, our main opportunity to drop some knowledge. Not sure what knowledge to drop? Look up the help page for the function which was used to answer the last question. There is often an argument to that function which was not used in this Exercise but is worth mentioning to students. There are always related functions in the help page that are worth mentioning. 
+* The last part of an Exercise is the End, our main opportunity to drop some knowledge. Not sure what knowledge to drop? Look up the help page for the function which was used to answer the last question. There is often an argument to that function which was not used in this Exercise but which students should know about. There are always related functions in the help page that are worth mentioning. 
 
 * The last part of the Section is another knowledge drop. It is not another Exercise. It is just a knowledge drop after the last Exercise which tries to take a broader overview. Again, this can't be more than a sentence or two. But it should be more substantive than a simple "Good job."  Recall the 10,000 items which we want to mention. For example, if the Section has involved creating a scatter plot, then the last Exercise will be putting the final touches on that scatter plot. The knowledge drop should be something about scatter plots in general, not a minor point about the particular scatter plot which the student has just created.
 
@@ -150,7 +148,7 @@ something else.
 
 First, the Start of the Exercise sets the stage. It sometimes teaches something new, connects to a previous question, provides a useful link, whatever. If it is long enough, it is followed by a triple hash. If not, the text continues to the instruction. Most of the time, as above, there is only the instruction, telling the student, step-by-step, what to do.
 
-Second, the instruction requires that students write some code. Good instructions generate results when the student presses Run Code. 
+Second, the instruction requires that students write some code. Good instructions generate results when the student presses Run Code. Tutorial answers should require the smallest incremental number of characters for students to type. That is one way you know that your learning curve is shallow. If a Code Exercise requires the students to type a lot of characters, you should split up the question into mutiple parts.
 
 Third, any Exercise which requires the copying of code from the prior Exercise should place the *Copy previous code* button below the Exercise code chunk.
 
@@ -189,7 +187,7 @@ Often, hints look like this
 
 The "..." indicates places where the student needs to insert some code, a value or a function name. The code in hints should be formatted correctly.
 
-In the current version (0.11.2) of **learnr**, students can not see the first hint after clicking through to the next hint. So, make sure the last hint is the one you most want them to have access to, i.e., the one which provides the key information. If students can see the last hint, they should have no reason to consult any earlier hints. 
+Students can not see the first hint after clicking through to the next hint. So, make sure the last hint is the one you most want them to have access to, i.e., the one which provides the key information. If students can see the last hint, they should have no reason to consult any earlier hints. We rarely provide more that one hint.
 
 Hints are [only allowed](https://community.rstudio.com/t/hints-in-written-questions/108184) for coding questions, **not for text questions**.
 
@@ -417,46 +415,6 @@ But the file is there! You can see it! The tests work on your local machine. The
 * `R CMD check` will test that all tutorials have the default sections exactly as they are in the Helper Tutorial template. So, use the template. If either the "Information" or "Download answers" sections are missing, `R CMD check` will return something like "Missing a component part from file /path/to/your/Rmd/file.Rmd".
 
 
-
-## Advice for Book-based tutorials
-
-Some tutorial packages are based on books. The idea is to provide a structured tutorial in which students type in (almost) every command which the book demonstrates, along with other commands which, in your judgment, are helpful. An example of this approach is the [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) package which is a companion to [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
-
-This section provides some idiosyncratic advice for book-based tutorials using the example of [*R for Data Science (2e)*](https://r4ds.hadley.nz/) and [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/).
-
-1) Do one or two of the tutorials before you start working on your own. One of them should be the 4-data-transform tutorial. Another might be the 21-spreadsheets tutorial. The below examples are taken from it.
-
-2) Make your Introduction look like this:
-
-````
-This tutorial covers [Chapter 21: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html) from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. You will learn how to get data from Excel spreadsheets using  `[read_excel()](https://readxl.tidyverse.org/reference/read_excel.html)` from the [**readxl**](https://readxl.tidyverse.org/) package and Google sheets using `[read_sheet()](https://googlesheets4.tidyverse.org/reference/range_read.html)` from the [**googlesheets4**](https://googlesheets4.tidyverse.org/) package.
-````
-
-  * The first sentence provides a link to your chapter as well as to R4DS.
-  * We highlight some the most important packages and functions used in the tutorial.
-  * We don't go overboard. You can't mention every package or every function used in the tutorial.
-
-3) Make your Summary look like this:
-
-````
-This tutorial covered [Chapter 21: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html) from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. You have learned how to get data from Excel spreadsheets using  `[read_excel()](https://readxl.tidyverse.org/reference/read_excel.html)` from the [**readxl**](https://readxl.tidyverse.org/) package and Google sheets using `[read_sheet()](https://googlesheets4.tidyverse.org/reference/range_read.html)` from the [**googlesheets4**](https://googlesheets4.tidyverse.org/) package.
-
-Read “[Data Organization in Spreadsheets](https://doi.org/10.1080/00031305.2017.1375989)” by Karl Broman and Kara Woo for great advice about organizing your data using spreadsheets.
-````
-
-  * The first paragraph is identical to the Introduction, expected that "covers" is replaced with "covered" and "will learn" with "have learned." We began the tutorial with a promise about what students would learn. One hopes that we kept that promise.
-  * The second paragraph gives one or two pointers about the best material which a student might look into if she is interested in learning more about the broad topic of the tutorial. These pointers were also mentioned as knowledge drops earlier in the tutorial.
-  * These pointers will often (always?) be items which were mentioned in R4DS itself. Those authors have excellent taste!
-
-4) Always have a separate Exercise for each library you load and each data set you use. An Exercise like "Load the **tidyverse** package with the `library()` command." is, obviously, not difficult for students. But it forces them to practice loading libraries, which many students forget, and it provides us with an opportunity to drop some knowledge.
-
-5) Regularly require them to look up the help page for a function, proving that they have done so by copy/pasting a portion of the help page, which means that these will be Exercises with No Answer instead of Code Exercises. Students need to get in the practice of using help.
-
-6) You want students to have to type in every line of code which is mentioned in the book. One approach is to first, set up a bunch of empty Code Exercises. Then, go through your chapter, copying each snippet of example code into the Hint of an Exercise. (If the book is sourced freely, you can also copy/paste a knowledge drop associated with each code snippet.) Then, go back and write the Exercises such that the answers are the code snippets from the book. The final step is to edit out at least a part of the Hint.
-
-7) In most books, the authors will include more than one new thing in each code example. They will add two or three lines to a pipe or pass in two or three arguments to a function. We never want to go that fast. Spread out such code snippets into two or three separate Exercises, each of which makes the smallest possible change. Recall that we are building the shallowest possible learning curve. 
-
-8) Recall the distinction between books which have a permissive license, meaning that we can copy/paste text at our own discretion, and those which do not. For the latter, you can not copy/paste text. But you can express, in your own words, the key points made in each chapter. In either case, your knowledge drops should cover the most important things for students to know.
 
 
 

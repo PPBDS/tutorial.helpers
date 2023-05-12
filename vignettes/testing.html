@@ -83,14 +83,14 @@ table, .body h2 { border-bottom: 1px solid #666; }
 </div>
 <div class="body">
 <p>This vignette demonstrates how to use the <strong>tutorial.helpers</strong> package to “test” the tutorials in your package. I place “test” in quotes because the testing is not very extensive. We are merely ensuring that your tutorials can be knitted without error. I <em>think</em> that this guarantees that the tutorials will run when students press the “Start Tutorial” button, but I am not certain. This testing certainly does nothing to ensure that the substance of your tutorials is correct.</p>
-<p>If you are using the <a href="https://testthat.r-lib.org/"><strong>testthat</strong></a> framework for testing, the <code>tests' directory would have a file called </code>testthat.R` which just contains:</p>
+<p>If you are using the <a href="https://testthat.r-lib.org/"><strong>testthat</strong></a> framework for testing, the <code>tests</code> directory would have a file called <code>testthat.R</code> which just contains:</p>
 <pre><code>library(testthat)
 library(your.package)
 
 test_check(&quot;your.packge&quot;)
 </code></pre>
 <p>Note how the name of <strong>your.package</strong> is not quoted with <code>library()</code> but is quoted with <code>test_check()</code>.</p>
-<p>Within the <code>tests/testthat' directory there will be a variety of testing scripts. Create a file called </code>test-tutorials.R`. (The file can be named whatever you want, consistent with <strong>testthat</strong> requirements.) It might contain:</p>
+<p>Within the <code>tests/testthat</code> directory there will be a variety of testing scripts. Create a file called <code>test-tutorials.R</code>. (The file can be named whatever you want, consistent with <strong>testthat</strong> requirements.) It might contain:</p>
 <pre><code>tut_paths &lt;- tutorial.helpers::return_tutorial_paths(&quot;your.package&quot;)
 
 test_that(&quot;All tutorials can be knit without error&quot;, {

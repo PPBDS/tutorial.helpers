@@ -4,13 +4,10 @@ author: David Kane
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::knitr}
-  %\VignetteIndexEntry{Instructions for Writing Tutorials}
+  %\VignetteIndexEntry{Tutorials for Books}
   %\VignetteEncoding{UTF-8}
 ---
 
-
-
-## Advice for Book-based tutorials
 
 This vignette assumes that you have already read [our advice](instructions.html) about writing good tutorials.
 

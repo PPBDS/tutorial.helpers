@@ -10,7 +10,7 @@ vignette: >
 
 This vignette demonstrates how to use the **tutorial.helpers** package to "test" the tutorials in your package. I place "test" in quotes because the testing is not very extensive. We are merely ensuring that your tutorials can be knitted without error. I *think* that this guarantees that the tutorials will run when students press the "Start Tutorial" button, but I am not certain. This testing certainly does nothing to ensure that the substance of your tutorials is correct.
 
-If you are using the [**testthat**](https://testthat.r-lib.org/) framework for testing, the `tests' directory would have a file called `testthat.R` which just contains:
+If you are using the [**testthat**](https://testthat.r-lib.org/) framework for testing, the `tests` directory would have a file called `testthat.R` which just contains:
 
 ````
 library(testthat)
@@ -21,7 +21,7 @@ test_check("your.packge")
 
 Note how the name of **your.package** is not quoted with `library()` but is quoted with `test_check()`.
 
-Within the `tests/testthat' directory there will be a variety of testing scripts. Create a file called `test-tutorials.R`. (The file can be named whatever you want, consistent with **testthat** requirements.) It might contain:
+Within the `tests/testthat` directory there will be a variety of testing scripts. Create a file called `test-tutorials.R`. (The file can be named whatever you want, consistent with **testthat** requirements.) It might contain:
 
 ````
 tut_paths <- tutorial.helpers::return_tutorial_paths("your.package")

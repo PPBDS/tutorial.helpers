@@ -4,9 +4,11 @@
 
 * Add test case for write_answers.R.
 
-* Create "Rstudio Addins"" vignette.
+* Create "Rstudio Addins" vignette.
 
 * Create "Testing Your Package of Tutorials" vignette.
+
+* Create "Tutorials for Books" vignette.
 
 # tutorial.helpers 0.2.2
 
