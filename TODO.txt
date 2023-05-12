@@ -4,7 +4,7 @@ CRAN requires the package to be less than 5 mb. The session_save.rds is 7 mb. Ev
 
 We should split write_answers() into two parts. The first part just grabs everything we need from the session and returns a tibble. (We might never be able to test this part because of session size issues.) The second part takes the tibble and outputs the saved object. We can test this a lot.
 
-This saved session isn't that good of a test case. We want a test case with lost more answers (to test pagination) and with at least one paragraph of text (to test formatting in the pdf). So, we should make a better test session. Problem: Not sure how to save a session object!
+This saved session isn't that good of a test case. We want a test case with lost more answers (to test pagination) and with at least one paragraph of text (to test formatting in the pdf). Also, would be nice if we had one paragraph with no return characters and one where the student added one after each line. We should be able to handle/clean both cases. So, we should make a better test session. See email from Nuo Wen for details on how.
 
 Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. Key comment: I suspect that the problem is caused by the session_save.rds not preserving the environment of the session. Maybe we just need a better test case. Maybe save() rather than saveRDS() is the key. Alas, we did not record the code we used to create session_save.rds.
 
@@ -14,11 +14,11 @@ A different approach to the pdf file creation problem in write_answers() would b
 
 # Other tasks
 
+* Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
+
 * Why does devtools::check(remote = TRUE, manual = TRUE) produce so many weird notes about html problems? And why does it launch XQuartz?
 
 * Uncomment GHA calls to build on devel for Mac and Linux once the renv nonsense gets fixed.
-
-* Need a short vignette which clearly explains how to use the package for testing your package.
 
 * Update Shiny Apps tutorial and document its creation. Update it regularly. Maybe automate this as a Github Action? You can currently get to this via the website, under Tutorials menu item.
 
