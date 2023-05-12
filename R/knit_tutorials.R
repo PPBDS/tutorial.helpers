@@ -35,13 +35,11 @@ knit_tutorials <- function(tutorial_paths){
   # provided as the output_file argument.
 
   for(i in tutorial_paths){
-    out_file <- tempfile()
-    cat(paste("Testing tutorial:", i, "\n"))
-    testthat::test_that(paste("Rendering", i), {
-      testthat::expect_output(
+     testthat::test_that(paste("Rendering", i), {
+      testthat::expect_silent(
         rmarkdown::render(i, 
-                          output_file = out_file),
-        out_file)
+                          output_file = tempfile())
+        )
     })
   }
   

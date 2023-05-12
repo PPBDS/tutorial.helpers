@@ -29,9 +29,6 @@ test_that("knit_tutorials() fails on illegal tutorials", {
     knit_tutorials("test-data/tutorial_examples/no-exist.Rmd")
     )
   expect_error(
-    knit_tutorials("test-data/tutorial_examples/no-exist.Rmd")
-    )
-  expect_error(
     knit_tutorials(
       c("test-data/tutorial_examples/good-tutorial.Rmd",
         "test-data/tutorial_examples/no-exist.Rmd")
