@@ -2,10 +2,9 @@
 #'
 #' @description We define "testing" a tutorial as (successfully) running
 #'   `render()` on it. This function renders all the tutorials provided in
-#'   `tutorial_paths`. There is no check to see if the rendered file looks OK,
-#'   just that something has been produced. If a tutorial fails to render, then
-#'   (we assume!) an error will be generated which will then filter up to our
-#'   testing rig.
+#'   `tutorial_paths`. There is no check to see if the rendered file looks OK.
+#'   If a tutorial fails to render, then (we assume!) an error will be generated
+#'   which will then filter up to our testing rig.
 #'
 #' @param tutorial_paths Character vector of the paths to the tutorials to be
 #'   knitted.
@@ -26,20 +25,11 @@ knit_tutorials <- function(tutorial_paths){
   # sure if render() is the same thing. But, the good news is that this test seems
   # much more robust than that. In other words, it catches things that do not
   # cause (immediate) failures with Start Tutorial.
-  
-  # The created files must be written in a temp directory in order to avoid
-  # errors on Debian CRAN systems.
-  
-  # Recall that render() returns the path to the output document, so our "test"
-  # just confirms that render() returns the same path as the tempfile() which we
-  # provided as the output_file argument.
 
   for(i in tutorial_paths){
      testthat::test_that(paste("Rendering", i), {
-      testthat::expect_silent(
         rmarkdown::render(i, 
                           output_file = tempfile())
-        )
     })
   }
   
