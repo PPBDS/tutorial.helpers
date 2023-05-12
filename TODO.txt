@@ -14,6 +14,8 @@ A different approach to the pdf file creation problem in write_answers() would b
 
 # Other tasks
 
+* Why does devtools::check(remote = TRUE, manual = TRUE) produce so many weird notes about html problems? And why does it launch XQuartz?
+
 * Uncomment GHA calls to build on devel for Mac and Linux once the renv nonsense gets fixed.
 
 * Need a short vignette which clearly explains how to use the package for testing your package.
