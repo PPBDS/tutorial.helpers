@@ -3,6 +3,8 @@
 export(check_tutorial_defaults)
 export(knit_tutorials)
 export(return_tutorial_paths)
+export(set_binary_only_in_r_profile)
+export(set_rstudio_settings)
 export(submission_server)
 export(submission_ui)
 export(write_answers)
