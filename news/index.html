@@ -61,7 +61,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="tutorialhelpers-development-version">tutorial.helpers (development version)<a class="anchor" aria-label="anchor" href="#tutorialhelpers-development-version"></a></h2>
-</div>
+<ul><li><p>Add test case for write_answers().</p></li>
+<li><p>Fix (really!) error on CRAN Debian systems (caused by attempts to write to the user library) by setting the intermediates_dir argument to tempdir() in the call to render() within knit_tutorials().</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.3" id="tutorialhelpers-023">tutorial.helpers 0.2.3<a class="anchor" aria-label="anchor" href="#tutorialhelpers-023"></a></h2><p class="text-muted">CRAN release: 2023-05-12</p>
 <ul><li><p>Fix error on Debian systems caused by attempts to write to the user library. Thanks to Kurt Hornik for pointing out the problem.</p></li>
