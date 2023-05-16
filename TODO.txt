@@ -1,6 +1,6 @@
 # Deal with session_save.rds
 
-CRAN requires the package to be less than 5 mb. The session_save.rds is 7 mb. Even zipped, it is bigger than 6 mb. 
+CRAN requires the package to be less than 5 mb. The session_save.rds is 7 mb. Even zipped, it is bigger than 6 mb. But maybe I can get away with it, given that the package was already accepted.
 
 We should split write_answers() into two parts. The first part just grabs everything we need from the session and returns a tibble. (We might never be able to test this part because of session size issues.) The second part takes the tibble and outputs the saved object. We can test this a lot.
 
@@ -13,8 +13,13 @@ Do we really need gridExtra in order to be able to create a pdf file? Seems like
 A different approach to the pdf file creation problem in write_answers() would be to create the Rmd document on the file as a character object rmd and then do render(text = rmd, output_file = filename).
 
 # Other tasks
+* Need a test case for set_rstudio_settings(). Maybe record the settings of each variable, then change them, then check to see if you did change them, then change them back. Maybe use some advanced testthat tricks for frameworks or whatever. 
+
+* A test case for set_binary...() as well. This requires more sophisticated R testing tools than we currently use with the package.
 
 * Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
+
+* Provide a `skip` argument to knit_tutorials which allows it to skip any tutorial path which includes a specific string. This will generally be used like skip = c("06-data-tidying", "08-data-import"). Note that these are not the names of tutorial files (which are mostly "tutorial.Rmd") nor the full path to those tutorials (which we don't know until we run `return_tutorial_paths()`). Instead, they are strings from within the path. (Maybe require that they be full parts of the path? Or maybe any match is fine?)
 
 * Why does devtools::check(remote = TRUE, manual = TRUE) produce so many weird notes about html problems? And why does it launch XQuartz?
 
@@ -22,8 +27,8 @@ A different approach to the pdf file creation problem in write_answers() would b
 
 * Update Shiny Apps tutorial and document its creation. Update it regularly. Maybe automate this as a Github Action? You can currently get to this via the website, under Tutorials menu item.
 
-# learnr stuff
 
+# learnr stuff
 learnr::get_tutorial_info() returns an ordinary list, with an `items` entry that is a "data frame with columns order, label, type and data describing the items (questions and exercises) in the tutorial." Right now, we only use this to get the valye of `tutorial_id`. 
 
 learnr::get_tutorial_state() is a complex function. See the help page for details. "Note that get_tutorial_state() will only work for the tutorial author and must be used in a reactive context, i.e. within shiny::observe(), shiny::observeEvent(), or shiny::reactive(). Any logic observing the user's tutorial state must be written inside a context="server" chunk in the tutorial's R Markdown source."
@@ -47,8 +52,6 @@ Want to change the color to the OK box so that it is green when students enter
 their email or other text. This seem relevant:
 
 # https://stackoverflow.com/questions/33620133/change-the-color-of-action-button-in-shiny/35871042
-
-
 Maybe testing_package() or skip_if_offline() would be useful. 
 
 test_path() does not work if the file is not in tests/testthat/. Might still be useful since it means we don't need to setwd() to play with testing interactively.
@@ -70,13 +73,10 @@ Instead of the code chunk trick to spit out the information and download materia
 
 
 # Think about using ___
-
 Blanks are detected using regular expressions (since blanks may make the code unparsable), and learnr’s default pattern is to detect three or more consecutive underscores. Authors can choose the pattern for detecting blanks with the exercise.blanks chunk option. Setting exercise.blanks = "[.]{2}[a-z]+[.]{2}", for example, would allow the author to use valid R syntax for blanks. The warning message shown to students calls out the blanks they need to fill in.
 
 ## This release of learnr includes a new question type, question_numeric().
-
 # Thoughts on Code Inclusion
-
 https://github.com/rstudio/learnr/discussions/774
 
 Handle the code inclusion for student information, code button and download buttons differently. First, the copy-code button is just a bunch of css. We can include css directly via learnr YAML header.
@@ -107,25 +107,22 @@ Another approach would be to have two templates to choose from. The first is our
 
 
 ## Deal with all this junk left over from the old details.Rmd.
-
-
 ## Get a better understanding of package locations
-
 Keep in mind that there are (at least) two versions of **your.tutorial.package** installed on your machine. In my case (using **all.primer.tutorials**), we have
 
-```{bash, eval = FALSE}
+```{bash eval = FALSE}
 > /Library/Frameworks/R.framework/Versions/4.1/Resources/library
 ```
 
 and
 
-```{bash, eval = FALSE}
+```{bash eval = FALSE}
 > /Users/dkane/Library/Caches/org.R-project.R/R/renv/library/all.primer.tutorials-07f29d85/R-4.2/aarch64-apple-darwin20"
 ```
 
 The first is the default location for packages. This is where things go unless you do something special. The second is installed by `renv`, which was used within the **all.primer.tutorials** project. When you are working in your **all.primer.tutorials** project, as you generally will, the `renv` version of the **all.primer.tutorials** library is what you will be using. You can check this by running `.libPaths()`.
 
-```{r, eval=FALSE}
+```{r eval = FALSE}
 > .libPaths()
 [1] "/Users/dkane/Library/Caches/org.R-project.R/R/renv/library/all.primer.tutorials-07f29d85/R-4.2/aarch64-apple-darwin20"
 [2] "/Library/Frameworks/R.framework/Versions/4.2-arm64/Resources/library"
@@ -133,11 +130,10 @@ The first is the default location for packages. This is where things go unless y
 
 Whenever you `library()` a package, R looks through, in order, the values returned by `.libPaths()`. **renv** sets things up so that the first item is its collection of packages. Note that these are placed in a weird location, including a temp directory named something like `all.primer.tutorials-07f29d85`. I am not sure how **renv** decided to create a new one of these. It does not delete the old ones. In the case of major breakdowns, deleting these directories by hand can fix things.
 
-### Current Process
 
 In order to implement copy-pasting for an exercise, you need to add the line `<button onclick = "transfer_code(this)">Copy previous code</button>` either before or after the exercise that you want to copy-paste to. This will add a button that looks like this:
 
-```{r, echo = FALSE}
+```{r echo = FALSE}
 knitr::include_graphics("images/copy-button.png")
 ```
 
@@ -161,7 +157,6 @@ This excludes everything in any subdirectory of the tutorials directory except a
 
 
 ## Adding more libraries
-
 If you are using a new library, there are several things you need to check. First, most obviously, you should install the package within the `your.package` directory. Second, you must use `library(X)` in the setup chunk within the `tutorial.Rmd` itself. Third, you need to run `renv::status()`. This should report that there is a new package which is not part of `renv.lock`. Then, you will need to run `renv::snapshot()` so that the `renv.lock` file is updated. Fourth, you need to add the package to the `DESCRIPTION` file, in the `Imports:` section. (And don't forget the comma when you do so.) If you don't do this, then R CMD check might work on your computer, where library X is already installed, but won't work in Github actions since it relies on the DESCRIPTION file to know which packages to install.
 
 It makes sense to use high quality tools for these steps. For example, `renv::install()` is a better way of installing needed packages within the **renv** environment. `usethis::use_package()` updates the `DESCRIPTION` file to include the package.
@@ -172,13 +167,10 @@ We have seen weird situations in which even doing all of the above did not work.
 
 ## Tour of the Package Functions
 
-### Submission Functions
-
 **submission_ui** is an HTML structure defined through Shiny, which is inserted to the end of every tutorial. It creates buttons to download submission reports in the forms of RDS and HTML.
 
 **submission_server()** is a function that communicates with the Shiny server during a tutorial. It provides the download functions, **downloadHtml** and **downloadRds**, for the user interface to call when downloading submission reports.
 
-### Submission Helper Functions
 
 **build_html** is a function that creates and downloads a tibble report of tutorial submissions in HTML.
 
@@ -186,8 +178,6 @@ We have seen weird situations in which even doing all of the above did not work.
 
 **get_submissions_from_learnr_session** is a function that gets submissions of the current tutorial session through **learnr** functions, specifically `learnr::get_all_state_objects()` and `learnr::submissions_from_state_objects()`. It returns a list of submission objects, each containing details about the question and answer.
 
-
-### Add-in Functions
 
 **format_tutorial** is a function that takes a tutorial path and formats the code chunk labels into a standardized format.
 
@@ -197,7 +187,6 @@ We have seen weird situations in which even doing all of the above did not work.
 
 
 ## Permanent objects
-
 Permanent objects should be avoided, if possible. The problem is that each Exercise code chunk is its own "world." It knows nothing of any actions taken in previous code chunks, except for three exceptions:
 
 1) Any objects created in the global "setup" code chunk are available in all Exercise code chunks. The annoying thing about this option is that we would, ideally like to have the objects created near --- in the Rmd --- to the Exercises which use them. This also means that we can only use names like "fit_1" or "pp" once in each tutorial.
@@ -209,4 +198,3 @@ Permanent objects should be avoided, if possible. The problem is that each Exerc
 But what about regular code chunks which are neither Exercise code chunks nor setup chunks. Do objects created there persist? Maybe! Sometimes!? My *sense* is that such objects are available when the tutorial is knitted. This is why we can show a plot at the end of a Section after creating it at the start. But such objects are not available at run time, which is why they are not seen in Exercises.
 
 No aspect of the tutorials has given us more trouble than permanent objects. In particular, it sometimes seems like things will work with Run Document but not with Run Tutorial. Since students always do the latter, we need to test that way as well.
-
