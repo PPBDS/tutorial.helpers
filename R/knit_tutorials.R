@@ -25,11 +25,16 @@ knit_tutorials <- function(tutorial_paths){
   # sure if render() is the same thing. But, the good news is that this test seems
   # much more robust than that. In other words, it catches things that do not
   # cause (immediate) failures with Start Tutorial.
+  
+  # Note that the Debian setup on CRAN does not allow for writing files to any
+  # location other than the temporary directory, which is why we must specify
+  # tempdir() in the two dir arguments.
 
   for(i in tutorial_paths){
      testthat::test_that(paste("Rendering", i), {
-        rmarkdown::render(i, 
-                          output_file = tempfile())
+        rmarkdown::render(input = i, 
+                          output_dir = tempdir(),
+                          intermediates_dir = tempdir())
     })
   }
   
