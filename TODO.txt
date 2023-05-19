@@ -1,10 +1,20 @@
+# Priorities
+
+* Review vignettes.
+
+* Are vignette titles good?
+
+* What order should vignette titles appear?
+
+* Expand Addins tutorial.
+
 # Deal with session_save.rds
 
 CRAN requires the package to be less than 5 mb. The session_save.rds is 7 mb. Even zipped, it is bigger than 6 mb. But maybe I can get away with it, given that the package was already accepted.
 
-We should split write_answers() into two parts. The first part just grabs everything we need from the session and returns a tibble. (We might never be able to test this part because of session size issues.) The second part takes the tibble and outputs the saved object. We can test this a lot.
+We should split write_answers() into two parts. The first part just grabs everything we need from the session and returns a tibble. (We might never be able to test this part because of session size issues.) The second part takes the tibble and outputs the answers as html/pdf/rds. We can test this a lot.
 
-This saved session isn't that good of a test case. We want a test case with lost more answers (to test pagination) and with at least one paragraph of text (to test formatting in the pdf). Also, would be nice if we had one paragraph with no return characters and one where the student added one after each line. We should be able to handle/clean both cases. So, we should make a better test session. See email from Nuo Wen for details on how.
+This saved session isn't that good of a test case. We want a test case with lots more answers (to test pagination) and with at least one paragraph of text (to test formatting in the pdf). Also, would be nice if we had one paragraph with no return characters and one where the student added one after each line. We should be able to handle/clean both cases. So, we should make a better test session. See email from Nuo Wen for details on how.
 
 Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. Key comment: I suspect that the problem is caused by the session_save.rds not preserving the environment of the session. Maybe we just need a better test case. Maybe save() rather than saveRDS() is the key. Alas, we did not record the code we used to create session_save.rds.
 
@@ -13,6 +23,7 @@ Do we really need gridExtra in order to be able to create a pdf file? Seems like
 A different approach to the pdf file creation problem in write_answers() would be to create the Rmd document on the file as a character object rmd and then do render(text = rmd, output_file = filename).
 
 # Other tasks
+
 * Need a test case for set_rstudio_settings(). Maybe record the settings of each variable, then change them, then check to see if you did change them, then change them back. Maybe use some advanced testthat tricks for frameworks or whatever. 
 
 * A test case for set_binary...() as well. This requires more sophisticated R testing tools than we currently use with the package.
