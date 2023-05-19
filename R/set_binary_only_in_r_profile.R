@@ -78,7 +78,7 @@ set_binary_only_in_r_profile <- function(){
   # Set pkgType to "binary" for this R session
 
     options(pkgType = "binary")
-    message("You will now only install the binary version of packages.")
+    message("You will only install the binary version of packages.")
   }
   else{
     message("No changes made to your .Rprofile because you are using Linux.")
