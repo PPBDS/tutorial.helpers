@@ -1,4 +1,4 @@
-# tutorial.helpers (development version)
+# tutorial.helpers 0.2.4
 
 * Add test case for write_answers().
 
