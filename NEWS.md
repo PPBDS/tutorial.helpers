@@ -1,4 +1,4 @@
-# tutorial.helpers (development)
+# tutorial.helpers 0.2.5
 
 * Remove test case for write_answers() to meet 5 mb maximum package size.
 
