@@ -1,5 +1,7 @@
 # tutorial.helpers (development version)
 
+* Add test case for write_answers(). Add associated files to .Rbuildignore so as not to violate the CRAN size restriction of 5 mb.
+
 # tutorial.helpers 0.2.5
 
 * Remove test case for write_answers() to meet 5 mb maximum package size.
