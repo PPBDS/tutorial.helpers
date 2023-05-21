@@ -24,6 +24,19 @@ A different approach to the pdf file creation problem in write_answers() would b
 
 # Other tasks
 
+* Deal with these NOTES from devtools::check_win_devel() (or maybe they are from devtools::check(remote = TRUE, manual = TRUE) or rhub::check_for_cran())
+
+* checking examples ... [11s] NOTE
+Examples with CPU (user + system) or elapsed time > 5s
+               user system elapsed
+knit_tutorials 3.09   0.69    5.81
+* checking for non-standard things in the check directory ... NOTE
+Found the following files/directories:
+  ''NULL''
+* checking for detritus in the temp directory ... NOTE
+Found the following files/directories:
+  'lastMiKTeXException'
+
 * Need a test case for set_rstudio_settings(). Maybe record the settings of each variable, then change them, then check to see if you did change them, then change them back. Maybe use some advanced testthat tricks for frameworks or whatever. 
 
 * A test case for set_binary...() as well. This requires more sophisticated R testing tools than we currently use with the package.
