@@ -15,7 +15,7 @@ A common use case for this package is to write a collection of tutorials for a b
 
 Instructors like to assign books with code. Ideally, we want our students to read the book, working through the included code, line-by-line. Sadly, very few students are so disciplined. In fact, in a large class, a majority of the students won't even read the book.
 
-The **tutorial.helpers* package make it easy to create a *structured* tutorial in which students type in (almost) every command which the book demonstrates, along with other commands which, in your judgment, are helpful. 
+The **tutorial.helpers** package make it easy to create a *structured* tutorial in which students type in (almost) every command which the book demonstrates, along with other commands which, in your judgment, are helpful. 
 
 Consider some idiosyncratic advice for book-based tutorials using the example of [*R for Data Science (2e)*](https://r4ds.hadley.nz/) and [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/).
 
