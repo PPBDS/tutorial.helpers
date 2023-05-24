@@ -100,13 +100,13 @@ Una vez que hagas clic en "Ejecutar código", la respuesta `[1] 9` debería apar
 
 ### Ejercicio 3
 
-A menudo necesitaremos copiar código de nuestros ejercicios anteriores para continuar trabajando en un problema que se vaya a resolver por etapas. Para hacerlo más fácil, proporcionamos un botón que dice `Copy previous code` (Copiar el código anterior). Debajo del siguiente cuadro, haz clic en el botón `Copy previous code`.
+A menudo necesitaremos copiar código de nuestros ejercicios anteriores para continuar trabajando en un problema que se vaya a resolver por etapas. Para hacerlo más fácil, proporcionamos un botón que dice `Copiar el código anterior`. Debajo del siguiente cuadro, haz clic en el botón `Copiar el código anterior`.
 
 ```{r tutorial-exercises-3, exercise = TRUE}
 
 ```
 
-<button onclick = "transfer_code(this)">Copy previous code</button>
+<button onclick = "transfer_code(this)">Copiar el código anterior</button>
 
 ### 
 
