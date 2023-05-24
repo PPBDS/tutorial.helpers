@@ -1,0 +1,31 @@
+```{js change-code, echo = FALSE}
+
+function transfer_code(elem){
+  Shiny.setInputValue("js_to_server", elem.previousElementSibling.dataset.label);
+  
+}
+
+Shiny.addCustomMessageHandler('set-exercise-code', function(x) {
+  var el = $(`.tutorial-exercise[data-label="${x.label}"] .tutorial-exercise-code-editor`)
+  var editor = ace.edit($(el).attr('id'));
+  editor.getSession().setValue(x.code);
+  Shiny.setInputValue("js_to_server", null);
+})
+```
+
+```{r observe-transfers, context = "server"}
+
+observeEvent(input$js_to_server, {
+  ex_next = input$js_to_server
+  ex_next_label_data = strsplit(ex_next, "-")[[1]]
+  ex_next_num = tail(ex_next_label_data, n = 1)
+  str_head = ex_next_label_data |>
+    head(n = length(ex_next_label_data) - 1) |>
+    paste0(collapse = "-")
+  str_num = as.integer(gsub("[^0-9]", "", ex_next_num)) - 1
+  ex_prev = paste0(str_head, "-", str_num)
+  code <- learnr::get_tutorial_state(ex_prev, session)$answer |> 
+    trimws()
+  session$sendCustomMessage("set-exercise-code", list(label = ex_next, code = code))
+})
+```
