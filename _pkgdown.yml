@@ -16,3 +16,17 @@ tutorials:
 - name: getting-started
   title: Getting Started
   url: https://davidkane9.shinyapps.io/tutorial/
+  
+articles:
+- title: Vignettes
+  navbar: ~
+  contents:
+  - downloads
+  - instructions
+  - books
+  - addins
+  - testing
+
+
+
+

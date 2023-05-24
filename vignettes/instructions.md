@@ -4,7 +4,7 @@ author: David Kane
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteEngine{knitr::knitr}
-  %\VignetteIndexEntry{Instructions for Writing Tutorials}
+  %\VignetteIndexEntry{Instructions for Writing R Tutorials}
   %\VignetteEncoding{UTF-8}
 ---
 

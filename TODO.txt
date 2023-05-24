@@ -1,10 +1,10 @@
 # Priorities
 
+* Do we really need to import stringr? Other packages like tibble and dplyr?
+
 * Review vignettes.
 
 * Are vignette titles good?
-
-* What order should vignette titles appear?
 
 * Expand Addins tutorial.
 

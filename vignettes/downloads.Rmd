@@ -1,0 +1,26 @@
+---
+title: "Enable Students to Download Their Tutorial Answers"
+author: David Kane
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{Enable Students to Download Their Tutorial Answers}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+The most common use for the **tutorial.helpers** package is to allow students to download their answers after they complete a tutorial. To enable this functionality, you need to, first, include `library(tutorial.helpers)` within the initial setup R code chunk and, second, add this line at the end of the tutorial:
+
+````{verbatim}
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
+````
+
+When students complete the tutorial, they will first be asked how long the tutorial took them to complete, in minutes. They will then be presented with the option to download a copy of their answers, in either pdf, html, or rds format, to their Downloads folder. By default, the name of the downloaded file will be the `id` of the tutorial with `_answers` appended, followed by a file suffix indicating the file type. 
+
+So, for example, a tutorial with an `id` equal to `getting-started` will generate a file called `getting-started_answers.pdf` if the student selects the pdf download option.
+
+
+
+
+
