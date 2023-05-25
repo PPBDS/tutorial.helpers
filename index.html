@@ -108,7 +108,7 @@
 <div class="section level4">
 <h4 id="download-answers">Download answers<a class="anchor" aria-label="anchor" href="#download-answers"></a>
 </h4>
-<p>The most useful tool is the download answers trick. Simply insert this empty code chunk at the end of your tutorial.</p>
+<p>The most useful tool is the <a href="https://ppbds.github.io/tutorial.helpers/articles/downloads.html">download answers trick</a>. In your tutorial, simply include <code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code> in the setup R code chunk and then insert this empty code chunk at the end.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
 <p>This will ask the student to provide an estimate of how long the tutorial took to complete. It will then provide the ability to download the student’s answers in three different formats: html, pdf and rds. Students submit these files to their instructors, who can then confirm that the work was completed and look for any patterns in student (mis)understandings.</p>
@@ -121,16 +121,19 @@
 <div class="section level4">
 <h4 id="recommended-components">Recommended components<a class="anchor" aria-label="anchor" href="#recommended-components"></a>
 </h4>
-<p>We recommend this child document at the start of each tutorial:</p>
+<p>We recommend including this child document at the start of each tutorial:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
 <p>This will insert questions asking for the student’s name and email address.</p>
-<p>=We also recommend including this at the beginning of your tutorial:</p>
+<p>We also recommend including this at the beginning of your tutorial:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
 <p>This allows you to place a button in an exercise which will allow students to copy over all the code from the previous exercise. Use:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span>button onclick <span class="ot">=</span> <span class="st">"transfer_code(this)"</span><span class="sc">&gt;</span>Copy previous code<span class="sc">&lt;</span><span class="er">/</span>button<span class="sc">&gt;</span></span></code></pre></div>
-<p>This is handy for students when a serious of exercises requires them to build up a long pipe, line-by-line.</p>
+<p>This is handy for students when a series of exercises requires them to build up a long pipe, line-by-line.</p>
+<p>We recommend ending the tutorial the download-answers child document, as discussed above.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="addins">Addins<a class="anchor" aria-label="anchor" href="#addins"></a>
