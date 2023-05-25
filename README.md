@@ -38,8 +38,10 @@ remotes::install_github("PPBDS/tutorial.helpers")
 
 #### Download answers
 
-The most useful tool is the download answers trick. Simply insert this
-empty code chunk at the end of your tutorial.
+The most useful tool is the [download answers
+trick](https://ppbds.github.io/tutorial.helpers/articles/downloads.html).
+In your tutorial, simply include `library(tutorial.helpers)` in the
+setup R code chunk and then insert this empty code chunk at the end.
 
 ```` default
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
@@ -62,7 +64,8 @@ for details on their use.
 
 #### Recommended components
 
-We recommend this child document at the start of each tutorial:
+We recommend including this child document at the start of each
+tutorial:
 
 ```` default
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
@@ -72,7 +75,7 @@ We recommend this child document at the start of each tutorial:
 This will insert questions asking for the student’s name and email
 address.
 
-=We also recommend including this at the beginning of your tutorial:
+We also recommend including this at the beginning of your tutorial:
 
 ```` default
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
@@ -84,8 +87,16 @@ students to copy over all the code from the previous exercise. Use:
 
     <button onclick = "transfer_code(this)">Copy previous code</button>
 
-This is handy for students when a serious of exercises requires them to
+This is handy for students when a series of exercises requires them to
 build up a long pipe, line-by-line.
+
+We recommend ending the tutorial the download-answers child document, as
+discussed above.
+
+```` default
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
+````
 
 #### Addins
 

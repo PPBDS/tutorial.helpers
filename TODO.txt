@@ -1,5 +1,7 @@
 # Priorities
 
+* I think that there is a bug in set_binary_only_in_r_profile() which only hits in a renv environment. It appears to check the .Rprofile in the local directory to see if options(pkgType = 'binary') is there, and then, when it is not there, it add the line to the main .Rprofile in the users home directory. If you run it again, it adds it again. A student can quickly get the line repeated many times. This then generates a weird error when the student restarts R, presumably because R does not like such silly repetition.
+
 * Do we really need to import stringr? Other packages like tibble and dplyr?
 
 * Review vignettes.
