@@ -393,6 +393,8 @@ The most common source of errors is something wrong with the hint code chunks, w
 
 ### Difficult bugs
 
+* The most common issue is that an author will use a package like **ggthemes** in their tutorial but then forget to include `library(ggthemes)` in the setup code chunk. This will not cause any error in checking because **ggthemes** is not actually used in the tutorial itself, so the tutorial knits without a problem. But then the student tries to type `library(ggthemes)` as an answer to an exercise and gets an error because the package has not been installed. This issue helps to illustrate why having plots which are built on the fly is so valuable: it guarantees that student answers will work since the same code worked when the tutorial was knitted.
+
 * Note that `R CMD check` does not seem to catch cases in which you `library()` a package in a tutorial but that package is not in DESCRIPTION. But such a discrepancy will cause an error on Github Actions because, there, you only have access to packages that have been installed as part of that test.
 
 * Be careful of the way that Github is sloppy in how it deals with capitalization changes, especially when you change the name of a file. For example, you might first commit a file named `Rproj.png`. Later, you decide to change all file names for images to all lower case. So, you change the name of the file to `rproj.png`. Commit and push. Everything is great, right? No! Even if Github shows you the new file name it might still have that file as `Rproj.png` internally, with the capital "R". This will cause errors when your run your checks on Github: 

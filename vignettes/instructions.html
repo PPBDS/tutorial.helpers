@@ -427,6 +427,9 @@ include_graphics(&quot;images/example.png&quot;)
 <h3 id="difficult-bugs">Difficult bugs</h3>
 <ul>
 <li>
+<p>The most common issue is that an author will use a package like <strong>ggthemes</strong> in their tutorial but then forget to include <code>library(ggthemes)</code> in the setup code chunk. This will not cause any error in checking because <strong>ggthemes</strong> is not actually used in the tutorial itself, so the tutorial knits without a problem. But then the student tries to type <code>library(ggthemes)</code> as an answer to an exercise and gets an error because the package has not been installed. This issue helps to illustrate why having plots which are built on the fly is so valuable: it guarantees that student answers will work since the same code worked when the tutorial was knitted.</p>
+</li>
+<li>
 <p>Note that <code>R CMD check</code> does not seem to catch cases in which you <code>library()</code> a package in a tutorial but that package is not in DESCRIPTION. But such a discrepancy will cause an error on Github Actions because, there, you only have access to packages that have been installed as part of that test.</p>
 </li>
 <li>
