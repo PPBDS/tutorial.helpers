@@ -42,7 +42,7 @@ remotes::install_github("PPBDS/tutorial.helpers")
 
 #### Download answers
 
-The most useful tool is the download answers trick. Simply insert this empty code chunk at the end of your tutorial.
+The most useful tool is the [download answers trick](https://ppbds.github.io/tutorial.helpers/articles/downloads.html). In your tutorial, simply include `library(tutorial.helpers)` in the setup R code chunk and then insert this empty code chunk at the end.
 
 ````{verbatim}
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
@@ -57,7 +57,7 @@ There are three exported functions for checking the tutorials in your package. S
 
 #### Recommended components
 
-We recommend this child document at the start of each tutorial:
+We recommend including this child document at the start of each tutorial:
 
 ````{verbatim}
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
@@ -66,7 +66,7 @@ We recommend this child document at the start of each tutorial:
 
 This will insert questions asking for the student's name and email address.
 
-=We also recommend including this at the beginning of your tutorial:
+We also recommend including this at the beginning of your tutorial:
 
 ````{verbatim}
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
@@ -79,7 +79,14 @@ This allows you to place a button in an exercise which will allow students to co
 <button onclick = "transfer_code(this)">Copy previous code</button>
 ````
 
-This is handy for students when a serious of exercises requires them to build up a long pipe, line-by-line.
+This is handy for students when a series of exercises requires them to build up a long pipe, line-by-line. 
+
+We recommend ending the tutorial the download-answers child document, as discussed above.
+
+````{verbatim}
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
+````
 
 #### Addins
 
