@@ -120,6 +120,13 @@ submission_ui <- shiny::div(
                  shiny::downloadButton(outputId = "downloadHtml", label = "Download HTML"),
                  shiny::downloadButton(outputId = "downloadPdf", label = "Download PDF"))
     )
-  )
+  ),
+  shiny::div(
+    shiny::tags$br(),
+    
+    "(If no file seems to download, try clicking with the alternative button on the desired download option and choose \"Save link as...\")",
+    
+    shiny::tags$br()
+    )
 )
 
