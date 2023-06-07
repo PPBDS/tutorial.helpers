@@ -38,7 +38,7 @@ You may complete a tutorial either on your laptop or on a cloud computing platfo
 
 ### 
 
-Many tutorials begin by asking for your your name and email. Fill yours in and then click the **"Submit Answer"** button. If you make a mistake, you can click **"Edit Answer"** and try again. 
+Many tutorials begin by asking for your your name and email. Fill yours in and then click the **"Submit Answer"** button. If you make a mistake, you can click **"Try Again"** and, uh, try again. 
 
 
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
@@ -119,7 +119,13 @@ Change the values to `x <- 6` and `y <- 10`. Hit "Run Code". You should get the 
 
 Note that the assignment symbol --- `<-` --- is a less-than-sign followed by a dash. We often pronounce the symbol as "gets." So, we might say, when reading this code, that "x gets 6."
 
+###
+
+Did you remember to hit the "Run Code" button above? Lots of people forget! You must hit the button for your answer to be recorded.
+
 ### Exercise 4
+
+<!-- DK: Should tidyverse be the package we use? What if they have not installed it? -->
 
 Let's load our first R package. Type  `library(tidyverse)` and then hit "Run Code". 
 
@@ -153,8 +159,9 @@ You should receive the warning message shown below. (Note that this box might be
 knitr::include_graphics("images/terminate_jobs.png")
 ```
 
-Click "Terminate Jobs". Re-open this tutorial. Tutorial progress will have been saved automatically.
+Click "Terminate Jobs". (You might also have to close the tutorial itself by hand.) Re-open this tutorial. Tutorial progress will have been saved automatically.
 
+Now that you have read all the instructions, go ahead and follow them.
 
 ### Exercise 6
 
@@ -250,7 +257,7 @@ This ensures that, when you install new packages, you will not, by default, try 
 
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are just copies of the R commands and their results. Other times, we will ask you to write one or more sentences of prose. 
 
-Copy and paste everything from `Exercise 9` through the end of this sentence into the answer box below.
+Copy and paste everything from `Exercise 9` through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console.
 
 ```{r tutorial-exercises-9}
 question_text(NULL,
@@ -269,12 +276,11 @@ At the end of every tutorial, you will save your work (and submit it, at the dis
 
 After hitting the "Download" button, you will be prompted to save a file named `getting-started_answers` with a suffix which depends on the button you selected. You may download your answers as `rds`, `html` or `pdf` files. This file will be saved in the default Downloads folder on your computer, even if you completed the tutorial on a cloud computing platform. If you want, you may download multiple formats.
 
-### 
-
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
 
 ## Summary
 ### 
 
-You now understand how tutorials function and how to download copies of your answers.
+You now understand how tutorials function and how to download copies of your answers. Good luck with your data science journey!
+

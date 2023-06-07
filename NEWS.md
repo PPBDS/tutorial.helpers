@@ -4,6 +4,8 @@
 
 * Add vignette about downloading answers. Reorder all five vignettes in Articles menu.
 
+* Add Spanish translation of Getting Started tutorial. Thanks to @xavidp!
+
 # tutorial.helpers 0.2.5
 
 * Remove test case for write_answers() to meet 5 mb maximum package size.
