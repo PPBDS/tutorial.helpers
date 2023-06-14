@@ -85,7 +85,7 @@ table, .body h2 { border-bottom: 1px solid #666; }
 <p>This vignette assumes that you have already read <a href="instructions.html">our advice</a> about writing good tutorials.</p>
 <p>A common use case for this package is to write a collection of tutorials for a book. Consider the <a href="https://ppbds.github.io/r4ds.tutorials/"><strong>r4ds.tutorials</strong></a> package which is a companion to <a href="https://r4ds.hadley.nz/"><em>R for Data Science (2e)</em></a> by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.</p>
 <p>Instructors like to assign books with code. Ideally, we want our students to read the book, working through the included code, line-by-line. Sadly, very few students are so disciplined. In fact, in a large class, a majority of the students won’t even read the book.</p>
-<p>The <strong>tutorial.helpers</strong> package make it easy to create a <em>structured</em> tutorial in which students type in (almost) every command which the book demonstrates, along with other commands which, in your judgment, are helpful.</p>
+<p>The <strong>tutorial.helpers</strong> package makes it easy to create a <em>structured</em> tutorial in which students type in (almost) every command which the book demonstrates, along with other commands which, in your judgment, are helpful.</p>
 <p>Consider some idiosyncratic advice for book-based tutorials using the example of <a href="https://r4ds.hadley.nz/"><em>R for Data Science (2e)</em></a> and <a href="https://ppbds.github.io/r4ds.tutorials/"><strong>r4ds.tutorials</strong></a>.</p>
 <ul>
 <li>
@@ -122,13 +122,28 @@ Read “[Data Organization in Spreadsheets](https://doi.org/10.1080/00031305.201
 <p>Regularly require them to look up the help page for a function, proving that they have done so by copy/pasting a portion of the help page, which means that these will be Exercises with No Answer instead of Code Exercises. Students need to get in the practice of using help.</p>
 </li>
 <li>
-<p>You want students to have to type in every line of code which is mentioned in the book. One approach is to first, set up a bunch of empty Code Exercises. Then, go through the chapter, copying each snippet of example code into the Hint of an Exercise. (If the book is sourced freely, you can also copy/paste a knowledge drop associated with each code snippet.) Then, go back and write the Exercises such that the answers are the code snippets from the book. The final step is to edit out at least a portion of the Hint.</p>
+<p>You want students to have to type in (almost) every line of code which is mentioned in the book. One approach is to first, set up a bunch of empty Code Exercises. Then, go through the chapter, copying each snippet of example code into the Hint of an Exercise. (If the book is sourced freely, you can also copy/paste a knowledge drop associated with each code snippet.) Then, go back and write the Exercises such that the answers are the code snippets from the book. The final step is to edit out at least a portion of the Hint.</p>
 </li>
 <li>
 <p>In most books, the authors will include more than one new thing in each code example. They will add two or three lines to a pipe or pass in two or three arguments to a function. We never want to go that fast. Spread out such code snippets into two or three separate Exercises, each of which makes the smallest possible change. Recall that we are building the shallowest possible learning curve.</p>
 </li>
 <li>
 <p>Recall the distinction between books which have a permissive license, meaning that we can copy/paste text at our own discretion, and those which do not. For the latter, you can not copy/paste text. But you can express, in your own words, the key points made in each chapter. In either case, your knowledge drops should cover the most important things for students to know.</p>
+</li>
+<li>
+<p>A common annoyance is the creation of temporary objects. Consider this code snippet from</p>
+</li>
+</ul>
+<pre><code>x &lt;- c(&quot;$1,234&quot;, &quot;USD 3,513&quot;, &quot;59%&quot;)
+parse_number(x)
+#&gt; [1] 1234 3513   59
+</code></pre>
+<ul>
+<li>
+<p>It is unclear how to create <code>x</code> in your tutorial. You could have an exercise in which the students create <code>x</code> themselves. But that is annoying because it doesn’t really teach students anything. It is too close to busy work. Moreover, <code>x</code> won’t exist for the next question, requiring the use of <code>parse_number()</code>. You will need to create <code>x</code> yourself, either in the global set up chunk or in a set up chunk for this exercise. The global set up approach is preferred, but does not work if there are multiple different <code>x</code> objects used in this chapter.</p>
+</li>
+<li>
+<p>I recommend just including the “busy work” in the Exercise code chunk when writing the tutorial, followed by a blank line, so that students have an obvious place to type in <code>parse_number(x)</code>. This avoids the complication of creating/maintaining a bunch of temporary variables. It also means less busy work for students.</p>
 </li>
 </ul>
 </div>

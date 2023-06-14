@@ -15,7 +15,7 @@ A common use case for this package is to write a collection of tutorials for a b
 
 Instructors like to assign books with code. Ideally, we want our students to read the book, working through the included code, line-by-line. Sadly, very few students are so disciplined. In fact, in a large class, a majority of the students won't even read the book.
 
-The **tutorial.helpers** package make it easy to create a *structured* tutorial in which students type in (almost) every command which the book demonstrates, along with other commands which, in your judgment, are helpful. 
+The **tutorial.helpers** package makes it easy to create a *structured* tutorial in which students type in (almost) every command which the book demonstrates, along with other commands which, in your judgment, are helpful. 
 
 Consider some idiosyncratic advice for book-based tutorials using the example of [*R for Data Science (2e)*](https://r4ds.hadley.nz/) and [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/).
 
@@ -48,11 +48,24 @@ Read “[Data Organization in Spreadsheets](https://doi.org/10.1080/00031305.201
 
 * Regularly require them to look up the help page for a function, proving that they have done so by copy/pasting a portion of the help page, which means that these will be Exercises with No Answer instead of Code Exercises. Students need to get in the practice of using help.
 
-* You want students to have to type in every line of code which is mentioned in the book. One approach is to first, set up a bunch of empty Code Exercises. Then, go through the chapter, copying each snippet of example code into the Hint of an Exercise. (If the book is sourced freely, you can also copy/paste a knowledge drop associated with each code snippet.) Then, go back and write the Exercises such that the answers are the code snippets from the book. The final step is to edit out at least a portion of the Hint.
+* You want students to have to type in (almost) every line of code which is mentioned in the book. One approach is to first, set up a bunch of empty Code Exercises. Then, go through the chapter, copying each snippet of example code into the Hint of an Exercise. (If the book is sourced freely, you can also copy/paste a knowledge drop associated with each code snippet.) Then, go back and write the Exercises such that the answers are the code snippets from the book. The final step is to edit out at least a portion of the Hint.
 
 * In most books, the authors will include more than one new thing in each code example. They will add two or three lines to a pipe or pass in two or three arguments to a function. We never want to go that fast. Spread out such code snippets into two or three separate Exercises, each of which makes the smallest possible change. Recall that we are building the shallowest possible learning curve. 
 
 * Recall the distinction between books which have a permissive license, meaning that we can copy/paste text at our own discretion, and those which do not. For the latter, you can not copy/paste text. But you can express, in your own words, the key points made in each chapter. In either case, your knowledge drops should cover the most important things for students to know.
+
+* A common annoyance is the creation of temporary objects. Consider this code snippet from 
+
+````
+x <- c("$1,234", "USD 3,513", "59%")
+parse_number(x)
+#> [1] 1234 3513   59
+````
+
+* It is unclear how to create `x` in your tutorial. You could have an exercise in which the students create `x` themselves. But that is annoying because it doesn't really teach students anything. It is too close to busy work. Moreover, `x` won't exist for the next question, requiring the use of `parse_number()`. You will need to create `x` yourself, either in the global set up chunk or in a set up chunk for this exercise. The global set up approach is preferred, but does not work if there are multiple different `x` objects used in this chapter.
+
+* I recommend just including the "busy work" in the Exercise code chunk when writing the tutorial, followed by a blank line, so that students have an obvious place to type in `parse_number(x)`. This avoids the complication of creating/maintaining a bunch of temporary variables. It also means less busy work for students.
+
 
 
 
