@@ -176,6 +176,7 @@ table, .body h2 { border-bottom: 1px solid #666; }
 <p>The Summary section is two to four sentences which bring the lessons of the tutorial together for the student. What do they know now that they did not know before? What are the most important functions/techniques covered? This should be very similar to the Introduction. You made a promise as to what they would learn. You kept that promise.</p>
 <p>If there are one or two other key resources about the topic of the tutorial, then those resources should be mentioned somewhere in the tutorial and also in the Summary.</p>
 <p>Anything typed at the keyboard belongs in `backticks` (not “quotation marks”), except for package names, which are always <strong>bolded</strong>. Function names always include the parentheses: <code>read_csv()</code>, not <code>read_csv</code>. Example: the <code>+</code> sign is used to connect <code>ggplot()</code> components when using the <strong>ggplot2</strong> library.</p>
+<p>Ensure that the first few questions always require students to load any libraries which are used in the tutorial. That is, look at all the libraries you load in the set up chunk. (Try not to have too many of them.) All of them, except for <strong>learnr</strong> and <strong>tutorial.helpers</strong> merit an exercise which requires the student to type <code>library(package.name)</code>. This ensures that students get in the practice o loading libraries. And it also provides occasion to drop some knowledge. Don’t forget that all libraries you load should be includes in the DESCRIPTION file — if the tutorial is part of a package — probably under Suggests.</p>
 <h2 id="sections">Sections</h2>
 <p>Tutorials are divided into <em>Sections</em> that appear on the side panel. To create these sections, we include a double hash (##) before the text for it to show up as a side panel. This is also called the <em>Section Title</em>.  Use <a href="https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case">sentence case</a>. On the line after the Section Title, put three hashes. This ensures that students will see the introductory text before they see the first Exercise.</p>
 <p>Each Section begins with a sentence or two about what this group of Exercises is trying to accomplish. Example:</p>
@@ -208,10 +209,10 @@ imitate standard HTTP in R. Read more about HTTP [here](https://www.jmarshall.co
 <!-- DK: This seems false. Rarely proceeded by a triple hash. -->
 <ul>
 <li>
-<p>Then comes the answer code chunk and hint(s), which is sometimes proceeded by a triple hash if the Start was long. See below for more discussion. This code/hint grouping is always followed by the triple hash. We want students to pause after they have submitted their answers so that they are more likely to consider the results of their submission before moving on.</p>
+<p>Then comes the answer code chunk and hint(s), which is sometimes proceeded by a triple hash if the Start was long. See below for more discussion. This code/hint grouping is always followed by the triple hash. We want students to pause after they have submitted their answers so that they are more likely to consider the output from their submission before moving on.</p>
 </li>
 <li>
-<p>The last part of an Exercise is the End, our main opportunity to drop some knowledge. Not sure what knowledge to drop? Look up the help page for the function which was used to answer the last question. There is often an argument to that function which was not used in this Exercise but which students should know about. There are always related functions in the help page that are worth mentioning.</p>
+<p>The last part of an Exercise is the End, our main opportunity to drop some knowledge. See the <a href="#kd">Knowledge Drops</a> section for extensive discussion.</p>
 </li>
 <li>
 <p>The last part of the Section is another knowledge drop. It is not another Exercise. It is just a knowledge drop after the last Exercise which tries to take a broader overview. Again, this can’t be more than a sentence or two. But it should be more substantive than a simple “Good job.”  Recall the 10,000 items which we want to mention. For example, if the Section has involved creating a scatter plot, then the last Exercise will be putting the final touches on that scatter plot. The knowledge drop should be something about scatter plots in general, not a minor point about the particular scatter plot which the student has just created.</p>
@@ -341,7 +342,7 @@ question_text(NULL,
 <p>You want to first show the graphic that you will create by the end of the Section. You show it once at the start of the Section and once before the last Exercise, as a reminder of what the graphic should look like so students do not need to scroll all the way back up.</p>
 <p>You should put the code for the graph in the code chunk at the start of the Section. Save the code to an object. The name of the object should have a “_p” suffix, where the “p” stands for “plot.” This way, you only have to put the object name in the code chunk at the end of the Section rather than copying the code.</p>
 <p>You then build up the graphic, line by line, over a series of Exercises, providing hints along the way.</p>
-<h3 id="knowledge-drops">Knowledge Drops</h3>
+<h3 id="knowledge-drops"><a id="kd"></a>Knowledge Drops</h3>
 <p>The most difficult part of tutorial creation is writing the “knowledge drops,” the snippets of wisdom (and the associated links) which are used at the End of each Exercise. Some advice:</p>
 <ul>
 <li>

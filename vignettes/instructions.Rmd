@@ -69,6 +69,8 @@ If there are one or two other key resources about the topic of the tutorial, the
 
 Anything typed at the keyboard belongs in \`backticks\` (not "quotation marks"), except for package names, which are always **bolded**. Function names always include the parentheses: `read_csv()`, not `read_csv`. Example: the `+` sign is used to connect `ggplot()` components when using the **ggplot2** library.
 
+Ensure that the first few questions always require students to load any libraries which are used in the tutorial. That is, look at all the libraries you load in the set up chunk. (Try not to have too many of them.) All of them, except for **learnr** and **tutorial.helpers** merit an exercise which requires the student to type `library(package.name)`. This ensures that students get in the practice o loading libraries. And it also provides occasion to drop some knowledge. Don't forget that all libraries you load should be includes in the DESCRIPTION file --- if the tutorial is part of a package --- probably under Suggests.
+
 ## Sections
 
 Tutorials are divided into *Sections* that appear on the side panel. To create these sections, we include a double hash (##) before the text for it to show up as a side panel. This is also called the *Section Title*.  Use [sentence case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case). On the line after the Section Title, put three hashes. This ensures that students will see the introductory text before they see the first Exercise.
@@ -108,9 +110,9 @@ Each Exercise should have a *flow* which requires that students hit the "Continu
 
 <!-- DK: This seems false. Rarely proceeded by a triple hash. -->
 
-* Then comes the answer code chunk and hint(s), which is sometimes proceeded by a triple hash if the Start was long. See below for more discussion. This code/hint grouping is always followed by the triple hash. We want students to pause after they have submitted their answers so that they are more likely to consider the results of their submission before moving on.
+* Then comes the answer code chunk and hint(s), which is sometimes proceeded by a triple hash if the Start was long. See below for more discussion. This code/hint grouping is always followed by the triple hash. We want students to pause after they have submitted their answers so that they are more likely to consider the output from their submission before moving on.
 
-* The last part of an Exercise is the End, our main opportunity to drop some knowledge. Not sure what knowledge to drop? Look up the help page for the function which was used to answer the last question. There is often an argument to that function which was not used in this Exercise but which students should know about. There are always related functions in the help page that are worth mentioning. 
+* The last part of an Exercise is the End, our main opportunity to drop some knowledge. See the [Knowledge Drops](#kd) section for extensive discussion.
 
 * The last part of the Section is another knowledge drop. It is not another Exercise. It is just a knowledge drop after the last Exercise which tries to take a broader overview. Again, this can't be more than a sentence or two. But it should be more substantive than a simple "Good job."  Recall the 10,000 items which we want to mention. For example, if the Section has involved creating a scatter plot, then the last Exercise will be putting the final touches on that scatter plot. The knowledge drop should be something about scatter plots in general, not a minor point about the particular scatter plot which the student has just created.
 
@@ -295,7 +297,7 @@ You should put the code for the graph in the code chunk at the start of the Sect
 You then build up the graphic, line by line, over a series of Exercises, providing hints along the way. 
 
 
-### Knowledge Drops
+### <a id="kd"></a>Knowledge Drops
 
 The most difficult part of tutorial creation is writing the "knowledge drops," the snippets of wisdom (and the associated links) which are used at the End of each Exercise. Some advice:
 
