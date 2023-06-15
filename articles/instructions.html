@@ -164,6 +164,20 @@ documents with tutorials. Fortunately, most of what you need which works
 in Quarto also works in R Markdown. The main difference is that code
 chunk options appear within the <code><a href="https://rdrr.io/r/base/Paren.html" class="external-link">{}</a></code>. Don’t worry about this
 detail. Just use the provided RStudio addin tools.</p>
+<p>There is a <code>setup</code> code chunk at the top of a tutorial.
+You must have <code><a href="https://rstudio.github.io/learnr/" class="external-link">library(learnr)</a></code> and, if you use our tools,
+<code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code> in this chunk. Our template also
+provide useful settings for various options.</p>
+<p><strong>Warning</strong>: You must ensure that any library used in
+the tutorial is explicitly loaded in this setup chunk. Almost every
+tutorial makes use of functions from the <strong>tidyverse</strong>
+package, so be sure to load this. Unfortunately, nothing in our test
+suite captures the common error of using library X in the tutorial code
+and forgetting to load it in the setup chunk.</p>
+<p>If your tutorials are part of an R package, then you should ensure
+that <strong>tutorial.helpers</strong> is included under Imports and
+that any library loaded in a tutorial is, at least, included under
+Suggests.</p>
 </div>
 <div class="section level2">
 <h2 id="structure">Structure<a class="anchor" aria-label="anchor" href="#structure"></a>
@@ -562,11 +576,12 @@ categories:</p>
 <li>Links to the help pages for base function are tricky. It is not
 clear to me which location is the best to use for this purpose. My
 suggestion is to use links involving the <code>stat.ethz.ch</code>
-server, which is the home base (I think) for the core R
-developpers.</li>
+server, which is the home base (I think) for the core R developers.
+Consider examples for <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html" class="external-link"><code>cut()</code></a>
+and <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/print.html" class="external-link"><code>print()</code></a>.</li>
 <li>Links to functions from the <em>Tidyverse</em> should use the docs
-maintained by Posit. Consider these examples for <a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a>
-and <a href="https://tidyverse.github.io/ggplot2-docs/reference/aes.html" class="external-link">aes()</a>.</li>
+maintained by Posit. Consider these examples for <a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link"><code>arrange()</code></a>
+and <a href="https://tidyverse.github.io/ggplot2-docs/reference/aes.html" class="external-link"><code>aes()</code></a>.</li>
 </ul>
 </li>
 <li><p>One common approach is like this:</p></li>

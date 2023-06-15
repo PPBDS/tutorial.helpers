@@ -174,7 +174,7 @@ can express, in your own words, the key points made in each chapter. In
 either case, your knowledge drops should cover the most important things
 for students to know.</p></li>
 <li><p>A common annoyance is the creation of temporary objects. Consider
-this code snippet from</p></li>
+this code snippet from <em>R for Data Science</em>.</p></li>
 </ul>
 <pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"$1,234"</span>, <span class="st">"USD 3,513"</span>, <span class="st">"59%"</span><span class="op">)</span></span>
 <span><span class="fu">parse_number</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -192,9 +192,13 @@ work if there are multiple different <code>x</code> objects used in this
 chapter.</p></li>
 <li><p>I recommend just including the “busy work” in the Exercise code
 chunk when writing the tutorial, followed by a blank line, so that
-students have an obvious place to type in <code>parse_number(x)</code>.
-This avoids the complication of creating/maintaining a bunch of
-temporary variables. It also means less busy work for students.</p></li>
+students have an obvious place to type in
+<code>parse_number(x)</code>.</p></li>
+</ul>
+<pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"$1,234"</span>, <span class="st">"USD 3,513"</span>, <span class="st">"59%"</span><span class="op">)</span></span></code></pre>
+<ul>
+<li>This avoids the complication of creating/maintaining a bunch of
+temporary variables. It also means less busy work for students.</li>
 </ul></main>
 </div>
 
