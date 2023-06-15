@@ -49,6 +49,12 @@ The `id` value is important. It should be the same as the directory in which the
 
 Note that tutorials must be [R Markdown](https://rmarkdown.rstudio.com/) documents, meaning that their suffix is `.Rmd`. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the `{}`. Don't worry about this detail. Just use the provided RStudio addin tools.
 
+There is a `setup` code chunk at the top of a tutorial. You must have `library(learnr)` and, if you use our tools, `library(tutorial.helpers)` in this chunk. Our template also provide useful settings for various options.
+
+**Warning**: You must ensure that any library used in the tutorial is explicitly loaded in this setup chunk. Almost every tutorial makes use of functions from the **tidyverse** package, so be sure to load this. Unfortunately, nothing in our test suite captures the common error of using library X in the tutorial code and forgetting to load it in the setup chunk.
+
+If your tutorials are part of an R package, then you should ensure that **tutorial.helpers** is included under Imports and that any library loaded in a tutorial is, at least, included under Suggests.
+
 ## Structure
 
 The beginning of every tutorial includes the `copy-code-chunk` and the `info-section` code chunks. The tutorial is then divided into different *Sections* that appear as side panels. The first section is the "Introduction" and the last is the "Summary". 
@@ -308,8 +314,8 @@ The most difficult part of tutorial creation is writing the "knowledge drops," t
 * Avoid links to low quality sites like `https://rdrr.io/` , `https://www.rdocumentation.org/`, and `https://www.datamentor.io/`. Any site which uses ads should be avoided.
 
 * Links to function documentation is useful. Indeed, we should link at least once to the documentation for every function which we use. Two categories:
-  * Links to the help pages for base function are tricky. It is not clear to me which location is the best to use for this purpose. My suggestion is to use links involving the `stat.ethz.ch` server, which is the home base (I think) for the core R developpers. 
-  * Links to functions from the *Tidyverse* should use the docs maintained by Posit. Consider these examples for [arrange()](https://dplyr.tidyverse.org/reference/arrange.html) and [aes()](https://tidyverse.github.io/ggplot2-docs/reference/aes.html). 
+  * Links to the help pages for base function are tricky. It is not clear to me which location is the best to use for this purpose. My suggestion is to use links involving the `stat.ethz.ch` server, which is the home base (I think) for the core R developers. Consider examples for [`cut()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html) and [`print()`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/print.html).
+  * Links to functions from the *Tidyverse* should use the docs maintained by Posit. Consider these examples for [`arrange()`](https://dplyr.tidyverse.org/reference/arrange.html) and [`aes()`](https://tidyverse.github.io/ggplot2-docs/reference/aes.html). 
   
 * One common approach is like this:
 

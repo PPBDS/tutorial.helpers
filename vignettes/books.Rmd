@@ -54,7 +54,7 @@ Read “[Data Organization in Spreadsheets](https://doi.org/10.1080/00031305.201
 
 * Recall the distinction between books which have a permissive license, meaning that we can copy/paste text at our own discretion, and those which do not. For the latter, you can not copy/paste text. But you can express, in your own words, the key points made in each chapter. In either case, your knowledge drops should cover the most important things for students to know.
 
-* A common annoyance is the creation of temporary objects. Consider this code snippet from 
+* A common annoyance is the creation of temporary objects. Consider this code snippet from *R for Data Science*.
 
 ````
 x <- c("$1,234", "USD 3,513", "59%")
@@ -64,7 +64,14 @@ parse_number(x)
 
 * It is unclear how to create `x` in your tutorial. You could have an exercise in which the students create `x` themselves. But that is annoying because it doesn't really teach students anything. It is too close to busy work. Moreover, `x` won't exist for the next question, requiring the use of `parse_number()`. You will need to create `x` yourself, either in the global set up chunk or in a set up chunk for this exercise. The global set up approach is preferred, but does not work if there are multiple different `x` objects used in this chapter.
 
-* I recommend just including the "busy work" in the Exercise code chunk when writing the tutorial, followed by a blank line, so that students have an obvious place to type in `parse_number(x)`. This avoids the complication of creating/maintaining a bunch of temporary variables. It also means less busy work for students.
+* I recommend just including the "busy work" in the Exercise code chunk when writing the tutorial, followed by a blank line, so that students have an obvious place to type in `parse_number(x)`. 
+
+````
+x <- c("$1,234", "USD 3,513", "59%")
+
+````
+
+* This avoids the complication of creating/maintaining a bunch of temporary variables. It also means less busy work for students.
 
 
 

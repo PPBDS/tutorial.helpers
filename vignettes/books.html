@@ -131,7 +131,7 @@ Read “[Data Organization in Spreadsheets](https://doi.org/10.1080/00031305.201
 <p>Recall the distinction between books which have a permissive license, meaning that we can copy/paste text at our own discretion, and those which do not. For the latter, you can not copy/paste text. But you can express, in your own words, the key points made in each chapter. In either case, your knowledge drops should cover the most important things for students to know.</p>
 </li>
 <li>
-<p>A common annoyance is the creation of temporary objects. Consider this code snippet from</p>
+<p>A common annoyance is the creation of temporary objects. Consider this code snippet from <em>R for Data Science</em>.</p>
 </li>
 </ul>
 <pre><code>x &lt;- c(&quot;$1,234&quot;, &quot;USD 3,513&quot;, &quot;59%&quot;)
@@ -143,8 +143,14 @@ parse_number(x)
 <p>It is unclear how to create <code>x</code> in your tutorial. You could have an exercise in which the students create <code>x</code> themselves. But that is annoying because it doesn’t really teach students anything. It is too close to busy work. Moreover, <code>x</code> won’t exist for the next question, requiring the use of <code>parse_number()</code>. You will need to create <code>x</code> yourself, either in the global set up chunk or in a set up chunk for this exercise. The global set up approach is preferred, but does not work if there are multiple different <code>x</code> objects used in this chapter.</p>
 </li>
 <li>
-<p>I recommend just including the “busy work” in the Exercise code chunk when writing the tutorial, followed by a blank line, so that students have an obvious place to type in <code>parse_number(x)</code>. This avoids the complication of creating/maintaining a bunch of temporary variables. It also means less busy work for students.</p>
+<p>I recommend just including the “busy work” in the Exercise code chunk when writing the tutorial, followed by a blank line, so that students have an obvious place to type in <code>parse_number(x)</code>.</p>
 </li>
+</ul>
+<pre><code>x &lt;- c(&quot;$1,234&quot;, &quot;USD 3,513&quot;, &quot;59%&quot;)
+
+</code></pre>
+<ul>
+<li>This avoids the complication of creating/maintaining a bunch of temporary variables. It also means less busy work for students.</li>
 </ul>
 </div>
 <div class="include-after">

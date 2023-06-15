@@ -166,6 +166,9 @@ table, .body h2 { border-bottom: 1px solid #666; }
 <p>To create a new tutorial, use <code>File -&gt; New File -&gt; R Markdown...</code>. Choose the “From Template” option and then select “Helper Tutorial.” Follow the instructions.</p>
 <p>The <code>id</code> value is important. It should be the same as the directory in which the tutorial is located, but with any leading numbers removed. It is used for the name of the answer file which students save at the end of the tutorial.</p>
 <p>Note that tutorials must be <a href="https://rmarkdown.rstudio.com/">R Markdown</a> documents, meaning that their suffix is <code>.Rmd</code>. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the <code>{}</code>. Don’t worry about this detail. Just use the provided RStudio addin tools.</p>
+<p>There is a <code>setup</code> code chunk at the top of a tutorial. You must have <code>library(learnr)</code> and, if you use our tools, <code>library(tutorial.helpers)</code> in this chunk. Our template also provide useful settings for various options.</p>
+<p><strong>Warning</strong>: You must ensure that any library used in the tutorial is explicitly loaded in this setup chunk. Almost every tutorial makes use of functions from the <strong>tidyverse</strong> package, so be sure to load this. Unfortunately, nothing in our test suite captures the common error of using library X in the tutorial code and forgetting to load it in the setup chunk.</p>
+<p>If your tutorials are part of an R package, then you should ensure that <strong>tutorial.helpers</strong> is included under Imports and that any library loaded in a tutorial is, at least, included under Suggests.</p>
 <h2 id="structure">Structure</h2>
 <p>The beginning of every tutorial includes the <code>copy-code-chunk</code> and the <code>info-section</code> code chunks. The tutorial is then divided into different <em>Sections</em> that appear as side panels. The first section is the “Introduction” and the last is the “Summary”.</p>
 <p>Within the Sections, other than the Introduction and Summary, there are a series of <em>Exercises</em> which can include writing code or writing text. At the end of the tutorial, there is a <code>download-answers</code> code chunk which provides students with instructions on how to download a copy of their answers.</p>
@@ -367,8 +370,8 @@ question_text(NULL,
 <li>
 <p>Links to function documentation is useful. Indeed, we should link at least once to the documentation for every function which we use. Two categories:</p>
 <ul>
-<li>Links to the help pages for base function are tricky. It is not clear to me which location is the best to use for this purpose. My suggestion is to use links involving the <code>stat.ethz.ch</code> server, which is the home base (I think) for the core R developpers.</li>
-<li>Links to functions from the <em>Tidyverse</em> should use the docs maintained by Posit. Consider these examples for <a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a> and <a href="https://tidyverse.github.io/ggplot2-docs/reference/aes.html">aes()</a>.</li>
+<li>Links to the help pages for base function are tricky. It is not clear to me which location is the best to use for this purpose. My suggestion is to use links involving the <code>stat.ethz.ch</code> server, which is the home base (I think) for the core R developers. Consider examples for <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/cut.html"><code>cut()</code></a> and <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/print.html"><code>print()</code></a>.</li>
+<li>Links to functions from the <em>Tidyverse</em> should use the docs maintained by Posit. Consider these examples for <a href="https://dplyr.tidyverse.org/reference/arrange.html"><code>arrange()</code></a> and <a href="https://tidyverse.github.io/ggplot2-docs/reference/aes.html"><code>aes()</code></a>.</li>
 </ul>
 </li>
 <li>
