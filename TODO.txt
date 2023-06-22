@@ -8,6 +8,8 @@
 
 * Do we really need to import stringr? Other packages like tibble and dplyr?
 
+* Change the default editor: visual in Quarto Documents to source in set_r_studio_settings().
+
 * Review vignettes.
 
 * Are vignette titles good?
@@ -226,3 +228,6 @@ Permanent objects should be avoided, if possible. The problem is that each Exerc
 But what about regular code chunks which are neither Exercise code chunks nor setup chunks. Do objects created there persist? Maybe! Sometimes!? My *sense* is that such objects are available when the tutorial is knitted. This is why we can show a plot at the end of a Section after creating it at the start. But such objects are not available at run time, which is why they are not seen in Exercises.
 
 No aspect of the tutorials has given us more trouble than permanent objects. In particular, it sometimes seems like things will work with Run Document but not with Run Tutorial. Since students always do the latter, we need to test that way as well.
+
+I am dissatisfied withe code for formating the chunk names. First, I am not so sure how well it handles non-standard code chunks, the ones outside the standard exercise/hint blocks, as, for example, the ones which display plots. Second, instead of its current behavior, it should first, check all the section names, confirming that they are all unique, and reporting an error if not. Then, it should reduce each section name to the shortest length which is still unique. (And those links might be quite long, for example in the dates/times tutorial.) Then, it would use these as the base for making the labels. The limit on 20 characters fails too often.
+
