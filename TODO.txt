@@ -2,13 +2,13 @@
 
 * I think that there is a bug in set_binary_only_in_r_profile() which only hits in a renv environment. It appears to check the .Rprofile in the local directory to see if options(pkgType = 'binary') is there, and then, when it is not there, it add the line to the main .Rprofile in the users home directory. If you run it again, it adds it again. A student can quickly get the line repeated many times. This then generates a weird error when the student restarts R, presumably because R does not like such silly repetition.
 
-* I am not satisfied with our testing. For example, I am not sure if we catch the case of duplicated code chunk names. That is an important test case! I would have thought that such an Rmd would fail when knitted. But maybe not, at least in some examples I tried. Should fix this!
 
-* Should somehow test to ensure that all correct answers, when typed by the student in an exercise code chunk, actually work. Common example of this issue is forgetting to include `library(ggthemes)` in the setup code chunk and then having an exercise for which the correct answer is `library(ggthemes)`. Current testing does not catch this. If we had invsible code chunks which listed all the correct answers and then were all run during knitting, then we could fix this . . .
+* Think harder about how to test the tutorials. For example, if you forget to include `library(primer.data)` in the set up code chunk, then students won't have access to, for example, the `trains` data set. But, you might still have a question which tells them to type `trains` in the code exercise. That will fail for them! But none of our current testing catches that. We really ought to invisibly print every data set we use in any tutorial to ensure that they are available. A related example of this issue is forgetting to include `library(ggthemes)` in the setup code chunk and then having an exercise for which the correct answer is `library(ggthemes)`. Current testing does not catch this. Is there a way to have a suggested answer code chunk which students can not see but which runs the code we expect students to submit? This is partly the reason why I like building the plots ourselves. This was we are sure that the code works!
+
 
 * Do we really need to import stringr? Other packages like tibble and dplyr?
 
-* Change the default editor: visual in Quarto Documents to source in set_r_studio_settings().
+* Change the default `editor: visual` in Quarto Documents to source in set_r_studio_settings(). Either make it explicity edit: source or delete it so that he default behavior (which is source?) is allowed to act.
 
 * Review vignettes.
 
