@@ -43,7 +43,7 @@ We are building a "[pit of success](https://ricomariani.medium.com/the-pit-of-su
 
 Tutorials themselves live in a directory within `inst/tutorials` in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the `id` of the tutorial. Within each directory is an R Markdown file and, sometimes, other material like an `images` or `data` directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. By default, we name the R Markdown file `tutorial.Rmd`, but any name works as long as the file has the appropriate YAML header.
 
-To create a new tutorial, use `File -> New File -> R Markdown...`. Choose the "From Template" option and then select "Helper Tutorial." Follow the instructions.
+To create a new tutorial, use `File -> New File -> R Markdown...`. Choose the "From Template" option and then select "Helpers Tutorial" from the **tutorial.helpers** package. Follow the instructions.
 
 The `id` value is important. It should be the same as the directory in which the tutorial is located, but with any leading numbers removed. It is used for the name of the answer file which students save at the end of the tutorial. 
 

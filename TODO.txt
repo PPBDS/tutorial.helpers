@@ -12,6 +12,8 @@
 
 * Review vignettes.
 
+* We would like Section titles to be able to use weird characters like "[". Right now, we fail. Not clear whether that is because Format Tutorial Chunk Labels forbids it, or because it (mistakenly!) allows it and then the tutorials don't work. I suspect the latter. So, we need to change Format Tutorial Chunk Labels to simply remove weird characters (like it does with spaces) when constructing the code chunk names.
+
 * Are vignette titles good?
 
 * Expand Addins tutorial.
