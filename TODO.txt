@@ -1,14 +1,21 @@
 # Priorities
 
+* Need a test case for set_rstudio_settings(). Maybe record the settings of each variable, then change them, then check to see if you did change them, then change them back. Maybe use some advanced testthat tricks for frameworks or whatever. 
+
+* A test case for set_binary...() as well. This requires more sophisticated R testing tools than we currently use with the package.
+
+* Change the default `editor: visual` in Quarto Documents to source in set_r_studio_settings(). Either make it explicity edit: source or delete it so that he default behavior (which is source?) is allowed to act.
+
+* Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr???
+
 * I think that there is a bug in set_binary_only_in_r_profile() which only hits in a renv environment. It appears to check the .Rprofile in the local directory to see if options(pkgType = 'binary') is there, and then, when it is not there, it add the line to the main .Rprofile in the users home directory. If you run it again, it adds it again. A student can quickly get the line repeated many times. This then generates a weird error when the student restarts R, presumably because R does not like such silly repetition.
 
 
 * Think harder about how to test the tutorials. For example, if you forget to include `library(primer.data)` in the set up code chunk, then students won't have access to, for example, the `trains` data set. But, you might still have a question which tells them to type `trains` in the code exercise. That will fail for them! But none of our current testing catches that. We really ought to invisibly print every data set we use in any tutorial to ensure that they are available. A related example of this issue is forgetting to include `library(ggthemes)` in the setup code chunk and then having an exercise for which the correct answer is `library(ggthemes)`. Current testing does not catch this. Is there a way to have a suggested answer code chunk which students can not see but which runs the code we expect students to submit? This is partly the reason why I like building the plots ourselves. This was we are sure that the code works!
 
 
-* Do we really need to import stringr? Other packages like tibble and dplyr?
 
-* Change the default `editor: visual` in Quarto Documents to source in set_r_studio_settings(). Either make it explicity edit: source or delete it so that he default behavior (which is source?) is allowed to act.
+
 
 * Review vignettes.
 
@@ -45,9 +52,6 @@ Found the following files/directories:
 Found the following files/directories:
   'lastMiKTeXException'
 
-* Need a test case for set_rstudio_settings(). Maybe record the settings of each variable, then change them, then check to see if you did change them, then change them back. Maybe use some advanced testthat tricks for frameworks or whatever. 
-
-* A test case for set_binary...() as well. This requires more sophisticated R testing tools than we currently use with the package.
 
 * Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
 
