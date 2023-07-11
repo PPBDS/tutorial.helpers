@@ -1,5 +1,9 @@
 # Priorities
 
+* Split up make_exercise() into three functions, each with its own file (and its own test cases). determine_exercise_number() determines the number to assign to the new exercise.  determine_code_chunk_name() figures out the code chunk name. make_exercise() which calls the other two, gets their return values, and then creates the insertion. 
+
+* Use `file` argument. If NULL, then get active document, if given an argument, it reads in that file (all the way) and pretends to be located at the end. 
+
 * Need a test case for set_rstudio_settings(). Maybe record the settings of each variable, then change them, then check to see if you did change them, then change them back. Maybe use some advanced testthat tricks for frameworks or whatever. 
 
 * A test case for set_binary...() as well. This requires more sophisticated R testing tools than we currently use with the package.

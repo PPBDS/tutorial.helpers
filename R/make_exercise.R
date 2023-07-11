@@ -21,6 +21,8 @@
 #' @importFrom rstudioapi getActiveDocumentContext
 #'
 #' @returns Exercise skeleton corresponding to the `type` argument.
+#' 
+#' @export
 
 make_exercise <- function(type = "code"){
 
@@ -137,6 +139,7 @@ make_exercise <- function(type = "code"){
 #'
 #' @rdname exercise_creation
 
+
 make_no_answer <- function(){
   make_exercise(type = 'no-answer')
 }
@@ -144,6 +147,7 @@ make_no_answer <- function(){
 #' Make question skeleton with an answer
 #'
 #' @rdname exercise_creation
+
 
 make_yes_answer <- function(){
   make_exercise(type = 'yes-answer')
