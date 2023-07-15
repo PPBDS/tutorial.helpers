@@ -1,0 +1,86 @@
+---
+title: A legal tutorial
+author: David Kane
+tutorial:
+  id: a-legal-tutorial
+output:
+  learnr::tutorial:
+    progressive: yes
+    allow_skip: yes
+runtime: shiny_prerendered
+description: 'Tutorial for Chapter 4: Data transformation'
+---
+
+```{r setup, include = FALSE}
+library(learnr)
+library(tutorial.helpers)
+knitr::opts_chunk$set(echo = FALSE)
+options(tutorial.exercise.timelimit = 60, 
+        tutorial.storage = "local") 
+```
+
+```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
+```
+
+```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```
+
+## Reading/Writing Excel
+### 
+
+[**readxl**](https://readxl.tidyverse.org/) and [**wrirexl**](https://docs.ropensci.org/writexl/) are the two key packages for working with Excel spreadsheets.
+
+### Exercise 1
+
+Use the `library()` command to load the **readxl** package.
+
+
+```{r readingwriting-excel-1, exercise = TRUE}
+
+```
+
+```{r readingwriting-excel-1-hint-1, eval = FALSE}
+library(readxl)
+```
+
+### 
+
+“[Data Organization in Spreadsheets](https://doi.org/10.1080/00031305.2017.1375989)” by Karl Broman and Kara Woo provides lots of great advice for organizing your data using spreadsheets.
+
+### Exercise 2
+
+Look up the help page for the package by issuing this command: "?`readxl-package`". Copy/paste the Description field from the help page.  
+
+```{r readingwriting-excel-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+### 
+
+Almost all packages have a help page which can be accessed via `packagename-package`. Note that you need to use backticks (\` \`) around this phrase after the `?` because otherwise the Console will try to interpret the dash as a minus sign, thereby sending you to the wrong page.
+
+### Exercise 3
+
+Run `read_excel()` with `"data/students.xlsx"` as the argument to `path`.
+
+
+```{r readingwriting-excel-3, exercise = TRUE}
+
+```
+
+```{r readingwriting-excel-3-hint-1, eval = FALSE}
+read_excel(path = "...")
+```
+
+### 
+
+`read_excel()` functions similarly to `read_csv()` and the other data import functions you have seen before. The **readxl** package also includes `read_xls()` (for files in xls format) and `read_xlsx()` (for files in xlsx format). `read_excel()` can read files with both xls and xlsx format. It guesses the file type based on the input.
+
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
