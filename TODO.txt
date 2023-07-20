@@ -1,13 +1,5 @@
 # Rajarshi
 
-Complete the tutorial in the r.packages.tutorials package. Submit a PR with any typos/fixes/whatevers.
-
-Read the functions chapter in R4DS. Complete the functions tutorial in the r4ds.tutorials package. Submit a PR with any typos/fixes/whatevers.
-
-Create project for tutorial.helpers.
-
-Add a PR which puts your name one line above this.
-
 Start working on a new function, process_submissions(), in a file called process_submissions.R. Starts by taking one argument which is a path to a folder with a bunch of answer html files in it. Reads through those files, pulling out the name of the tutorial, the email of the student, and the time it took. Then returns a tibble with that information in three variables.
 
 # Priorities
