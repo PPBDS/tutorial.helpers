@@ -16,7 +16,9 @@ make_yes_answer()
 \item{type}{Character of question type. Must be one of "code", "no-answer",
 or "yes-answer".}
 
-\item{file_path}{Character path to current file.}
+\item{file_path}{Character path to a file. If NULL, the RStudio active
+document is used, which is the default behavior. An actual file path is
+used for testing.}
 }
 \value{
 Exercise skeleton corresponding to the \code{type} argument.
