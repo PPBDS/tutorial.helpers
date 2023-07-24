@@ -1,76 +1,76 @@
-#' @title Process Submissions
+#' @title Process student submissions
 #'
-#' @description Creates a .csv file containing the tutorial name, student name, student email, and time spent for all .html files in the input folder.
+#' @description Creates a .csv file containing the tutorial name, student name, student email, and time spent for all .html files in the input folder. It is intended to be used by instructors.
 #'
-#' @details Uses tidyverse, stringr, and dplyr libraries.
+#' @details Uses rvest and tidyverse libraries.
 #'
 #' @param folder_path Input string. The path to a folder on your computer that contains all the .html files.
+#'
+#' @importFrom rvest read_html html_element html_table
+#' 
+#' @importFrom tidyverse read_csv str_glue add_row tibble
 #'
 #' @returns A .csv file with as many rows as .html files in the folder path.
 #' 
 #' @examples
 #' process_submissions('C:/Users/Name/Documents/Student Responses')
 
-# Loading libraries
-library(tidyverse)
-library(stringr)
-library(dplyr)
-
 process_submissions <- function(folder_path){
+  
+  # Listing the files in the folder path
+  
   file_list <- list.files(folder_path, recursive = TRUE)
+  
+  # Selecting .html files
+  
   html_file_list <- file_list[str_ends(file_list, ".html")]
-  tbl_colnames <- c("tutorial_name", "student_name", "student_email", "time_spent")
-  data <- read_csv("\n", col_names = tbl_colnames)
+  
+  # Creating empty dataframe with four columns
+  
+  data <- read_csv("\n", col_names = c("tutorial_name", "student_name", "student_email", "time_spent"))
+  
+  # Looping over every file in the list of files
   
   for (file in html_file_list) {
-    file_path <- str_glue(folder_path, file, .sep = '\\')
-    contents <- readLines(file_path)
     
-    file_tutorial_name <- gsub(".*<td style=\"text-align:left;\"> (.+) </td>*", "\\1", contents[13])
-    file_student_name <- gsub(".*<td style=\"text-align:left;\"> (.+) </td>*", "\\1", contents[18])
-    file_student_email <- gsub(".*<td style=\"text-align:left;\"> (.+) </td>*", "\\1", contents[23])
-    file_time_spent <- gsub(".*<td style=\"text-align:left;\"> (.+) </td>*", "\\1", contents[sum(str_count(contents, "\n") + 1) - 3])
+    # Calling the read_submission on the file's path
     
-    data <- data %>% add_row(tutorial_name = file_tutorial_name, 
-                             student_name = file_student_name, 
-                             student_email = file_student_email,
-                             time_spent = file_time_spent)
+    try(contents <- read_submission(str_glue(folder_path, file, .sep = '\\')), silent = TRUE)
+    
+    # Checking if the student typed their name, email and time spent
+    
+    if (!(contents$student_name == 'character(0)' | contents$student_email == 'character(0)' | contents$time_spent == 'character(0)')) {
+      
+      # Adding the extracted information to the tibble
+      
+      data <- data |>
+        add_row(contents)
+    }
   }
   
-  # Removing long values in student_name, student_email, time_spent
-  data <- data[which(nchar(data$student_name) <= 32), ]
-  data <- data[which(nchar(data$student_email) <= 32), ]
-  data <- data[which(nchar(data$time_spent) <= 5), ]
+  # Creating a .csv file containing the extracted data
   
-  # Removing special characters
-  data$tutorial_name <- str_replace_all(data$tutorial_name, "[^a-z-]", "")
-  data$student_name <- str_replace_all(data$student_name, "[^a-zA-Z ]", "")
-  data <- data[grepl("@", data$student_email), ]
-  
-  # Last line of defense for time_spent
-  data$time_spent <- str_replace_all(data$time_spent, "[^0-9]", "")
-  data$time_spent <- as.numeric(data$time_spent)
-  data <- data[!is.na(data$time_spent), ]
-  data <- data |>
-    filter(time_spent <= 600)
-  
-  # Last line of defense for student_name
-  data <- data[!str_detect(data$student_name, "^   td styletext"), ]
-  data <- data[!str_detect(data$student_name, "^httpscommunity"), ]
-  data <- data[!str_detect(data$student_name, "^library"), ]
-  data <- data[!str_detect(data$student_name, "^df"), ]
-  data <- data[!str_detect(data$student_name, "mailcom$"), ]
-  data <- data[!str_detect(data$student_name, "^student_name"), ]
-  data <- data[!str_detect(data$student_name, "^substack"), ]
-  data <- data[!str_detect(data$student_name, "analysisgt$"), ]
-  
-  # Last line of defense for student_email
-  data <- data[!str_detect(data$student_name, "^   td styletext"), ]
-  data <- data[!str_detect(data$student_name, "^httpscommunity"), ]
-  data <- data[!str_detect(data$student_name, "^help"), ]
-  
-  # Writing csv file
   write.csv(data, 'tutorial_info.csv', row.names = FALSE)
 }
 
-process_submissions('C:\\Users\\Rajarshi\\OneDrive\\Documents\\New Laptop March 2021\\Rishi\\Data Science (R)\\Internship\\Student Responses')
+# read_submission takes a file path as input and extracts the tutorial name, student name, student email, and time spent from it
+
+read_submission <- function(file_path){
+  
+  # Reading the html file as a table
+  
+  file <- read_html(file_path) |>
+    html_element("table") |>
+    html_table()
+  
+  # Extracting tutorial name, student name, student email, and time spent
+  
+  tutorial_name <- as.character(file[file$id == 'tutorial-id', "answer"])
+  student_name <- as.character(file[file$id == 'information-name', "answer"])
+  student_email <- as.character(file[file$id == 'information-email', "answer"])
+  time_spent <- as.character(file[file$id == 'download-answers-1', "answer"])
+  
+  # Returning a tibble that contains the required information
+  
+  return(tibble(tutorial_name, student_name, student_email, time_spent))
+}
