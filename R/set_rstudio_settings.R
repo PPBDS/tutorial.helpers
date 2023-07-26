@@ -29,6 +29,7 @@ set_rstudio_settings <- function(){
   # Other settings which might be looked at include: document_author,
   # packages_pane_enabled, always_write_history, rainbow_parantheses,
   # show_invisibles, show_rmd_render_commit, sync_files_pane_working_dir,
-  # syntax_color_console and use_tiny_tex.
+  # syntax_color_console, auto_append_newline, soft_wrap_r_files, source_with_echo and
+  # use_tiny_tex.
 
 }

@@ -16,9 +16,7 @@ Start working on a new function, process_submissions(), in a file called process
   - Update Addins vignette to explain.
   - Update Instructions vignette to explain.
   
-Basic idea is that we should test, by running it, every piece of code which we expect students to entire into an exercise chunk. (Note that exercise which require students to submit code which produces an error/warning will need to be adjusted somehow.)
-
-* Split up make_exercise() into three functions, each with its own file (and its own test cases). determine_exercise_number() determines the number to assign to the new exercise.  determine_code_chunk_name() figures out the code chunk name. make_exercise() which calls the other two, gets their return values, and then creates the insertion. 
+Basic idea is that we should test, by running it, every piece of code which we expect students to enter into an exercise chunk. (Note that exercise which require students to submit code which produces an error/warning will need to be adjusted somehow.)
 
 * Use `file` argument. If NULL, then get active document, if given an argument, it reads in that file (all the way) and pretends to be located at the end. 
 
