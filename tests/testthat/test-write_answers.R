@@ -1,6 +1,6 @@
 # Comments from May 21, 2023, after uploading version 0.2.5 to CRAN.
 
-# First, this test, because of the associated test-data/session_save.rds file,
+# First, this test, because of the associated fixtures/session_save.rds file,
 # is too big for CRAN, where packages should not be bigger than 5 mb. We get
 # around this by adding two lines to the .Rbuildignore which prevent these files
 # from being built for CRAN. (I am a little confused as to whether or not this
@@ -63,7 +63,7 @@ library(rvest)
 
 # Load session saved in rds
 
-session_path <- "test-data/session_save.rds"
+session_path <- "fixtures/session_save.rds"
 
 saved_session <- readRDS(session_path)
 
@@ -94,7 +94,7 @@ write_answers(html_file, saved_session, is_test = TRUE)
 
 submission_report_test <- rvest::read_html(html_file)
 
-submission_report_output <- rvest::read_html("test-data/submission_test_outputs/submission_report_output.html")
+submission_report_output <- rvest::read_html("fixtures/submission_test_outputs/submission_report_output.html")
 
 # The below test does not work for me with rhub::check_for_cran(), despite the
 # fact that it works fine, for three platforms, on Github Actions. So, I cut it
@@ -116,7 +116,7 @@ write_answers(rds_file, saved_session, is_test = TRUE)
 
 submission_rds_test <- readRDS(rds_file)
 
-submission_rds_output <- readRDS("test-data/submission_test_outputs/submission_desired_output.rds")
+submission_rds_output <- readRDS("fixtures/submission_test_outputs/submission_desired_output.rds")
 
 if(! all.equal(submission_rds_test, submission_rds_output)){
   stop("From test-write_answer, rds option did not return the desired output.")
@@ -134,7 +134,7 @@ write_answers(pdf_file, saved_session, is_test = TRUE)
 
 submission_pdf_test <- readLines(pdf_file, warn = FALSE)
 
-submission_pdf_output <- readLines("test-data/submission_test_outputs/submission_desired_output.pdf", warn = FALSE)
+submission_pdf_output <- readLines("fixtures/submission_test_outputs/submission_desired_output.pdf", warn = FALSE)
 
 if(length(submission_pdf_test) != length(submission_pdf_output)){
   stop("From test-write_answer, pdf option did not return the desired output.")

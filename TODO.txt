@@ -10,6 +10,18 @@ Start working on a new function, process_submissions(), in a file called process
 
 # Priorities
 
+* Use testing_package() rather than hard-coding the package name.
+
+* Use test_path for all input files.
+
+* Replace test-data with fixtures.
+
+* Read https://testthat.r-lib.org/articles/test-fixtures.html
+
+* rstudioapi::is_available()
+
+* With rstudioapi, use selectFile and friends as an easier way of saving student answers.
+
 * Add include = FALSE code chunk as third code chunk in the make_exericse() for making a code exercise. 
 
   - This will probably require the modification of the format_tutorial() and related (?) functions. Although perhaps these chunks will have no name, and that will be alright. 

@@ -52,7 +52,7 @@ write_answers <- function(file, session, is_test = FALSE){
   # obj$id[[1]] "id"
 
   if(is_test){
-    objs <- readRDS("test-data/submission_test_outputs/learnr_submissions_output.rds")
+    objs <- readRDS("fixtures/submission_test_outputs/learnr_submissions_output.rds")
     tutorial_id <- "data-webscraping"
   }
   else{

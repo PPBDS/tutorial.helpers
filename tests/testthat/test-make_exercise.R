@@ -10,10 +10,10 @@
 # must be a way around this . . .
 
 # tutorial.helpers::make_exercise(type = "code", 
-#                                 file_path = "test-data/tutorial_examples/code-chunk-name-test-tutorial-1.Rmd")
+#                                 file_path = "fixtures/tutorial_examples/code-chunk-name-test-tutorial-1.Rmd")
 # 
 # tutorial.helpers::make_exercise(type = "no-answer",
-#                                 file_path = "test-data/tutorial_examples/code-chunk-name-test-tutorial-1.Rmd")
+#                                 file_path = "fixtures/tutorial_examples/code-chunk-name-test-tutorial-1.Rmd")
 # tutorial.helpers::make_exercise(type = "yes-answer")
 
 # We can, however, check to ensure that they error when given bad input.
