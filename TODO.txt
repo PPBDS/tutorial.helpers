@@ -10,27 +10,18 @@ Start working on a new function, process_submissions(), in a file called process
 
 # Priorities
 
+* Figure out why check is 0/0/0 but tests 1 FAIL and 4 SKIPs.
+
 * Use testing_package() rather than hard-coding the package name.
 
 * Use test_path for all input files.
-
-* Replace test-data with fixtures.
 
 * Read https://testthat.r-lib.org/articles/test-fixtures.html
 
 * rstudioapi::is_available()
 
 * With rstudioapi, use selectFile and friends as an easier way of saving student answers.
-
-* Add include = FALSE code chunk as third code chunk in the make_exericse() for making a code exercise. 
-
-  - This will probably require the modification of the format_tutorial() and related (?) functions. Although perhaps these chunks will have no name, and that will be alright. 
-  - Update Addins vignette to explain.
-  - Update Instructions vignette to explain.
   
-Basic idea is that we should test, by running it, every piece of code which we expect students to enter into an exercise chunk. (Note that exercise which require students to submit code which produces an error/warning will need to be adjusted somehow.)
-
-* Use `file` argument. If NULL, then get active document, if given an argument, it reads in that file (all the way) and pretends to be located at the end. 
 
 * Need a test case for set_rstudio_settings(). Maybe record the settings of each variable, then change them, then check to see if you did change them, then change them back. Maybe use some advanced testthat tricks for frameworks or whatever. 
 
