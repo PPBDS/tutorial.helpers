@@ -278,15 +278,34 @@ include the answer code chunk in the same part.</p></li>
 code chunk.</p></li>
 <li><p>Do not expect students to read more than two sentences of text at
 a time. After two sentences, you almost always want to use a triple hash
-in order to create a Continue button.</p></li>
+in order to create a Continue button so that students have a break. They
+won’t read more than two sentences without a break.</p></li>
 </ul>
 <!-- DK: This seems false. Rarely proceeded by a triple hash. --><ul>
-<li><p>Then comes the answer code chunk and hint(s), which is sometimes
-proceeded by a triple hash if the Start was long. See below for more
-discussion. This code/hint grouping is always followed by the triple
-hash. We want students to pause after they have submitted their answers
-so that they are more likely to consider the output from their
-submission before moving on.</p></li>
+<li>
+<p>After the Start, come three code chunks:</p>
+<ul>
+<li>The Exercise Code Chunk is the location in which students will place
+their answers. It always includes the <code>exercise = TRUE</code> code
+chunk option.</li>
+<li>The Hint Code Chunk includes any hints for the students. The code
+chunk name is the hint is always exactly the same as the one for the
+Exercise Code Chunk, except with <code>-hint-n</code> attached at the
+end. The <code>n</code> is replaced by the number of the hint. Almost
+always, there is only one hint, so the suffix is <code>-hint-1</code>.
+We always set <code>eval = FALSE</code> in the Hint code chunk since,
+often, the hint will not be legal R code.</li>
+<li>The Test Code Chunk requires no chunk name. It always includes the
+<code>include = FALSE</code> code chunk option because we never want to
+show the code or the results to students. Instead, the purpose of the
+Test Code Chunk is to ensure that the correct answer — that is, the code
+we want students to enter into the Exercise Code Chunk — works.</li>
+</ul>
+</li>
+<li><p>The three code chunks are always followed by a triple hash. We
+want students to pause after they have submitted their answers so that
+they are more likely to consider the output from their submission before
+moving on.</p></li>
 <li><p>The last part of an Exercise is the End, our main opportunity to
 drop some knowledge. See the <a href="#kd">Knowledge Drops</a> section
 for extensive discussion.</p></li>
@@ -339,14 +358,18 @@ the <strong>c</strong>ommand and the <strong>r</strong>esult.</p>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  filter(state == "...")</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>```</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>### </span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>`==` is used because it is **checking** whether the value of the </span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>variable on the left is equal to the value on the left. See </span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>[here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html) </span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>for discussion of other relational operators in R.</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>A single equation symbol, `=`, is used to set something equal to </span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>something else. </span></code></pre></div>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>```{r, include = FALSE}</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>cces |&gt; </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  filter(state == "Massachusetts")</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>### </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>`==` is used because it is **checking** whether the value of the </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>variable on the left is equal to the value on the left. See </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>[here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html) </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>for discussion of other relational operators in R.</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>A single equation symbol, `=`, is used to set something equal to </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>something else. </span></code></pre></div>
 <p>First, the Start of the Exercise sets the stage. It sometimes teaches
 something new, connects to a previous question, provides a useful link,
 whatever. If it is long enough, it is followed by a triple hash. If not,
@@ -356,10 +379,10 @@ do.</p>
 <p>Second, the instruction requires that students write some code. Good
 instructions generate results when the student presses Run Code.
 Tutorial answers should require the smallest incremental number of
-characters for students to type. That is one way you know that your
-learning curve is shallow. If a Code Exercise requires the students to
-type a lot of characters, you should split up the question into mutiple
-parts.</p>
+characters, relative to the last question, for students to type. That is
+one way you know that your learning curve is shallow. If a Exercise Code
+Chunk requires the students to type a lot of characters, you should
+split up the Exercise into mutiple separate Exercises.</p>
 <p>Third, any Exercise which requires the copying of code from the prior
 Exercise should place the <em>Copy previous code</em> button below the
 Exercise code chunk.</p>
@@ -377,11 +400,11 @@ the parentheses in the code chunk. This is because hints will often
 include “…” and other symbols which do not run as correct R code. So, we
 need to tell R not to run it or an error will occur during
 <code>R CMD check</code>. Example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>```{r ex-1-hint-good, eval = FALSE}</span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>```{r ex-1-hint-1, eval = FALSE}</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>This is an example hint. Normally sentences like these </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>would cause an error in R because it is not proper code. </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>However, since we include eval = FALSE in the r-chunk, </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>R ignores all potential errors!</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>R ignores all errors!</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
 <p><strong>You need to wrap the text in a long hint by hand, inserting
 the carriage returns yourself.</strong> R will not wrap the text
