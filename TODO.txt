@@ -8,7 +8,7 @@ Re(?)-read https://ppbds.github.io/tutorial.helpers/articles/instructions.html.
 
 Start working on a new function, process_submissions(), in a file called process_submissions.R. Starts by taking one argument which is a path to a folder with a bunch of answer html files in it. Reads through those files, pulling out the name of the tutorial, the email of the student, and the time it took. Then returns a tibble with that information in three variables.
 
-# Matthew
+# Priorities
 
 * When creating a new Quarto document,  `editor: visual` should not be in the YAML header by default. How can we change set_r_studio_settings() to achieve this? (Full disclosure: I could not find the variable to do this. Maybe ask on Posit Community? Maybe writePreference helps?)
 
@@ -17,10 +17,6 @@ Start working on a new function, process_submissions(), in a file called process
 * Need a test case for set_rstudio_settings(). Maybe record the settings of each variable, then change them, then check to see if you did change them, then change them back. Maybe use some advanced testthat tricks for frameworks or whatever. Maybe snapshots help? 
 
 * A test case for set_binary...() as well. This requires more sophisticated R testing tools than we currently use with the package. Need to ensure that the option is set back, after the test runs, to the value it was before the test started. Or maybe there is some other way of setting this preference (with writePreference()?) without the hackorama of changing the user's Rprofile.
-
-
-
-# Priorities
 
 
 
