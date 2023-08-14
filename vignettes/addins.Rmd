@@ -39,20 +39,20 @@ Create a new code exercise skeleton with an exercise title and with auto-generat
 
 ```
 
+```{r, include = FALSE}
+
+```
 ###
 ````
 
-See [our advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises) about writing good tutorial code exercises. 
-
-<!-- DK: Add some details, a precise of the advice, explaining the structure we provide. -->
-
+See [our advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises) about writing good tutorial Code Exercises. First. start with the correct answer, the code you want students to submit. Please that code in the Test Chunk at the end. Our test process will ensure that this code will work for the students. Second, copy/paste the correct answer into the Hint Chunk in the middle. Then replace one or more of the key words or function arguments or argument values with `...`. Third, add your actual question to the top of the skeleton. What instructions will cause students to enter the correct answer in the Exercise Code Chunk? Fourth, drop some knowledge after the `###` at the end. Each Exercise is an opportunity to teach. Make use of them!
 
 
 ### Tutorial Written Exercise (with and without answers)
 
-Both create similar exercise structures with auto-generated chunk id and exercise title. The difference is that the `question_text()` options are filled in differently.
+Both create similar exercise structures with auto-generated code chunk id and Exercise number. The difference is that the `question_text()` options are filled in differently.
 
-Written Exercise with Answer:
+Tutorial Written Exercise (with Answer):
 
 ````{verbatim}
 ### Exercise 8
@@ -70,7 +70,7 @@ question_text(NULL,
 ###
 ````
 
-Written Exercise without Answer:
+Written Exercise (no Answer):
 
 ````{verbatim}
 ### Exercise 9
@@ -88,22 +88,17 @@ question_text(NULL,
 ###
 ````
 
-<!-- DK: More details on why/how of these questions. -->
+The "with Answer" Exercises require the tutorial author to provide an (excellent!) answer to the question. This is harder than it looks, especially for questions without a single "right" answer. But it is also a rare opportunity since students will usually study the supplied answer quite closely. They want to check that their answer matches. We can't allow students to edit their answers to these questions since they might (misuse) that option to just copy/paste/modify our supplied answer.
 
+The "no Answer" Exercises are usually used for confirmation that a student has completed a specified task. In that case, there is no need for us to supply a correct answer. And we can allow students to edit their submissions.
 
 ### Format Tutorial Chunk Labels
 
-<!-- DK: Fix this section. Maybe don't use images? -->
+We often need to add a new Exercise in the middle of a collection of other Exercises. Or, we want to delete one Exercise from the middle of the collection. In either scenario, our Exercises are now mis-numbered. We either have two Exercise 5's or we go straight from Exercise 4 to Exercise 5. We want to renumber all the remaining Exercises so that there are no duplicates or missing numbers.
 
-An addin that formats all the code chunk labels in the current Rmd.
+The "Format Tutorial Chunk Labels" addin accomplishes this renumbering. But it also does more, changing all the code chunk names --- both in the Exercise chunks and the Hint chunks --- to be consistent with the new Exercise numbers. Finally, it ensures that all code chunk labels follow our standard: begin with (up to 20 characters from) the Section Title, remove special characters, replace spaces with dashes, and make all letters lowercase.
 
-It formats the labels of the code and written exercise code chunks as well as the hints.
-
-Limitations:
-
-- It doesn't work well with the \`r\` that shows the entire code chunk
-
-- The code chunk labels (derived from your section titles) have a hard cutoff at 20 characters. So please make sure that your Section Titles are different somewhere in the first 20 characters (including spaces).
+Since the code chunk labels (derived from your section titles) have a hard cutoff at 20 characters, try to make sure that your Section Titles are different somewhere in the first 20 characters (including spaces). If not, the tutorial will not run since unique code chunk labels are required.
 
 
 

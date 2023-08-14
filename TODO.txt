@@ -10,23 +10,33 @@ Start working on a new function, process_submissions(), in a file called process
 
 # Priorities
 
-* Add include = FALSE code chunk as third code chunk in the make_exericse() for making a code exercise. 
+* When creating a new Quarto document,  `editor: visual` should not be in the YAML header by default. How can we change set_r_studio_settings() to achieve this? (Full disclosure: I could not find the variable to do this. Maybe ask on Posit Community? Maybe writePreference helps?)
 
-  - This will probably require the modification of the format_tutorial() and related (?) functions. Although perhaps these chunks will have no name, and that will be alright. 
-  - Update Addins vignette to explain.
-  - Update Instructions vignette to explain.
+* Understand https://r-pkgs.org/testing-basics.html#sec-snapshot-tests and other advanced testing stuff. I bet that "withr::local_options" will be valuable for doing the next two tasks.
+
+* Need a test case for set_rstudio_settings(). Maybe record the settings of each variable, then change them, then check to see if you did change them, then change them back. Maybe use some advanced testthat tricks for frameworks or whatever. Maybe snapshots help? 
+
+* A test case for set_binary...() as well. This requires more sophisticated R testing tools than we currently use with the package. Need to ensure that the option is set back, after the test runs, to the value it was before the test started. Or maybe there is some other way of setting this preference (with writePreference()?) without the hackorama of changing the user's Rprofile.
+
+
+
+
+* Use testing_package() rather than hard-coding the package name.
+
+* Use test_path for all input files.
+
+* Read https://testthat.r-lib.org/articles/test-fixtures.html
+
+* rstudioapi::is_available()
+
+* With rstudioapi, use selectFile and friends as an easier way of saving student answers.
   
-Basic idea is that we should test, by running it, every piece of code which we expect students to entire into an exercise chunk. (Note that exercise which require students to submit code which produces an error/warning will need to be adjusted somehow.)
 
-* Split up make_exercise() into three functions, each with its own file (and its own test cases). determine_exercise_number() determines the number to assign to the new exercise.  determine_code_chunk_name() figures out the code chunk name. make_exercise() which calls the other two, gets their return values, and then creates the insertion. 
 
-* Use `file` argument. If NULL, then get active document, if given an argument, it reads in that file (all the way) and pretends to be located at the end. 
 
-* Need a test case for set_rstudio_settings(). Maybe record the settings of each variable, then change them, then check to see if you did change them, then change them back. Maybe use some advanced testthat tricks for frameworks or whatever. 
 
-* A test case for set_binary...() as well. This requires more sophisticated R testing tools than we currently use with the package.
 
-* Change the default `editor: visual` in Quarto Documents to source in set_r_studio_settings(). Either make it explicity edit: source or delete it so that he default behavior (which is source?) is allowed to act.
+
 
 * Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr???
 
@@ -85,6 +95,7 @@ Found the following files/directories:
 
 * Update Shiny Apps tutorial and document its creation. Update it regularly. Maybe automate this as a Github Action? You can currently get to this via the website, under Tutorials menu item.
 
+* Figure out why Check is 0/0/0 but Test 1 FAIL and 4 SKIPs.
 
 # learnr stuff
 learnr::get_tutorial_info() returns an ordinary list, with an `items` entry that is a "data frame with columns order, label, type and data describing the items (questions and exercises) in the tutorial." Right now, we only use this to get the valye of `tutorial_id`. 

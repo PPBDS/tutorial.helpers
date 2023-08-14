@@ -13,4 +13,4 @@
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 ^tests/testthat/test-write_answers\.R$
-^tests/testthat/test-data/session_save\.rds$
+^tests/testthat/fixtures/session_save\.rds$

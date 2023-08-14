@@ -1,10 +1,10 @@
 test_that("Reading/Writing Excel section", {
-  expect_equal(tutorial.helpers::determine_code_chunk_name("test-data/tutorial_examples/code-chunk-name-test-tutorial-1.Rmd"),
+  expect_equal(tutorial.helpers::determine_code_chunk_name("fixtures/tutorial_examples/code-chunk-name-test-tutorial-1.Rmd"),
                "readingwriting-excel")
 })
 
 
 test_that("Testing name cut off", {
-  expect_equal(tutorial.helpers::determine_code_chunk_name("test-data/tutorial_examples/code-chunk-name-test-tutorial-2.Rmd"),
+  expect_equal(tutorial.helpers::determine_code_chunk_name("fixtures/tutorial_examples/code-chunk-name-test-tutorial-2.Rmd"),
                "really-long-name-to-")
 })
