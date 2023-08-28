@@ -36,7 +36,7 @@ We can only demonstrate a tiny percentage of all the packages in the world, but 
 
 The most important parts of the "knowledge drops" with which we pepper these tutorials are, first, the packages/functions/arguments which we mention without demonstrating, and second, links to high quality resources.
 
-We are building a "[pit of success](https://ricomariani.medium.com/the-pit-of-success-cfefc6cb64c8)." Generally, students don't do the assigned reading, at least in a large class. However, they will complete required work. They will do the assigned tutorials. *Our promise: If you complete the tutorials, you will become a data scientist. There is simply no way not to.*
+We are building a "[pit of success](https://ricomariani.medium.com/the-pit-of-success-cfefc6cb64c8)." Generally, students don't do the assigned reading, at least in a large class. However, they will complete required work. They will do the assigned tutorials. *Our promise: If you complete the tutorials, you will learn the material. There is simply no way not to.*
 
 
 ## Set Up
