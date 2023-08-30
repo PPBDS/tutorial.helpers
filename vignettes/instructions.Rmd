@@ -26,6 +26,10 @@ vignette: >
 
 ## Introduction
 
+This document describes the best way to write R tutorials using the [**learnr**](https://rstudio.github.io/learnr/) package. The most common use case is a tutorial which covers [the material in an assigned textbook](https://ppbds.github.io/tutorial.helpers/articles/books.html), as with the [**r4ds.tutorials**](https://CRAN.R-project.org/package=r4ds.tutorials) package for the [*R for Data Science*](https://r4ds.hadley.nz/) textbook.
+
+Instructors assign textbook readings to students. We want our students to read and, perhaps more importantly, go through the associated code, typing it in and confirming what it does. Sadly, students almost never do so. Fortunately, the [**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers) package provides tools for ensuring that students type in all the assigned code.
+
 Imagine the *shallowest* possible learning curve. Almost every student should be able to answer almost every Exercise, albeit perhaps with the help of a Hint. There are no hard questions. In fact, there really aren't any *questions* at all. Instead, there are *instructions*: Do one thing, then the next, and then the next.
 
 Assume that you are giving the student a private lesson. You ask them a question. They give you an answer. What would you say to them next? What do you want to teach them, given that context?
@@ -348,7 +352,7 @@ Think back to our initial discussion of the 10,000 pieces of information which w
 
 ### Tibbles
 
-There are two main sources for tibbles for use in the tutorials. First, use built-in data sets. Run `library(all.primer.data)` or `library(tidyverse)` or any other package. Then, run `data()`. This will pull up a list of available data sets. Note that some of these will be data frames rather than tibbles. Second, you can store data --- either as csv or rds files --- in the `data` directory of the tutorial, as discussed below.
+There are two main sources for tibbles for use in the tutorials. First, use built-in data sets. Run `library(tidyverse)` or any other package. Then, run `data()`. This will pull up a list of available data sets, both those in the base R packages and those in any other packages you have loaded. Note that some of these will be data frames rather than tibbles. Second, you can store data --- either as csv or rds files --- in the `data` directory of a tutorial, as discussed below.
 
 ### Using images
 

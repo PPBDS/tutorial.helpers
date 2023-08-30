@@ -16,8 +16,8 @@ write R tutorials, especially if you follow [my
 advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html)
 about the best way to do so. This approach is currently used in two
 packages:
-[**all.primer.tutorials**](https://ppbds.github.io/all.primer.tutorials/)
-and [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/).
+[**primer.tutorials**](https://ppbds.github.io/primer.tutorials/) and
+[**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/).
 
 ## Installation
 

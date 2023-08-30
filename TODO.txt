@@ -1,14 +1,12 @@
-# Rajarshi
-
-Read: https://ppbds.github.io/primer/style-guide.html
-
-Create tutorial for https://r-pkgs.org/testing-basics.html in r.packages.tutorials.
-
-Re(?)-read https://ppbds.github.io/tutorial.helpers/articles/instructions.html.
-
-Start working on a new function, process_submissions(), in a file called process_submissions.R. Starts by taking one argument which is a path to a folder with a bunch of answer html files in it. Reads through those files, pulling out the name of the tutorial, the email of the student, and the time it took. Then returns a tibble with that information in three variables.
-
 # Priorities
+
+
+* Would be nice to have more flexibility with knit_tutorials(). The problem arises when knitting a collection of tutorial paths takes too long, especially on CRAN, where all tests should only take 10 minutes total. Might be nice if tutorial paths:
+
+  + Had an option to report the time (or start/end time) which each knitting used. We want to identify which tutorials take too long to knit. Right now, there is no easy way to do so.
+  + Had an option to take a vector of tutorials to not knit, if they are in the input collection. That is, 
+
+* Start working on a new function, process_submissions(), in a file called process_submissions.R. Starts by taking one argument which is a path to a folder with a bunch of answer html files in it. Reads through those files, pulling out the name of the tutorial, the email of the student, and the time it took. Then returns a tibble with that information in three variables.
 
 * When creating a new Quarto document,  `editor: visual` should not be in the YAML header by default. How can we change set_r_studio_settings() to achieve this? (Full disclosure: I could not find the variable to do this. Maybe ask on Posit Community? Maybe writePreference helps?)
 
