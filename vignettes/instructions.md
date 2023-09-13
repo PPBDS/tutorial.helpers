@@ -26,7 +26,7 @@ vignette: >
 
 ## Introduction
 
-This document describes the best way to write R tutorials using the [**learnr**](https://rstudio.github.io/learnr/) package. The most common use case is a tutorial which covers [the material in an assigned textbook](https://ppbds.github.io/tutorial.helpers/articles/books.html), as with the [**r4ds.tutorials**](https://CRAN.R-project.org/package=r4ds.tutorials) package for the [*R for Data Science*](https://r4ds.hadley.nz/) textbook.
+This document describes the best way to write R tutorials using the [**learnr**](https://rstudio.github.io/learnr/) package. The most common use case is a tutorial which covers [the material in an assigned textbook](https://ppbds.github.io/tutorial.helpers/articles/books.html), as with the [**r4ds.tutorials**](https://CRAN.R-project.org/package=r4ds.tutorials) package for t[*R for Data Science*](https://r4ds.hadley.nz/).
 
 Instructors assign textbook readings to students. We want our students to read and, perhaps more importantly, go through the associated code, typing it in and confirming what it does. Sadly, students almost never do so. Fortunately, the [**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers) package provides tools for ensuring that students type in all the assigned code.
 
