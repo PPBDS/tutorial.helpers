@@ -45,7 +45,9 @@ make_exercise <- function(type = "code", file_path = NULL){
   new_exercise <-
     dplyr::case_match(
       type,
-      "code"       ~ sprintf("### Exercise %s\n\n\n```{r %s-%s, exercise = TRUE}\n\n```\n\n<button onclick = \"transfer_code(this)\">Copy previous code</button>\n\n```{r %s-%s-hint, eval = FALSE}\n\n```\n\n```{r, include = FALSE}\n\n```\n\n###\n\n",
+      "code"       ~ sprintf("### Exercise %s\n\n\n```{r %s-%s, exercise = TRUE}\n\n```\n\n<button onclick = \"transfer_code(this)\">Copy previous code</button>\n\n```{r %s-%s-hint, eval = FALSE}\n\n```\n\n```{r %s-%s-test, include = FALSE}\n\n```\n\n###\n\n",
+                             exercise_number,
+                             section_id,
                              exercise_number,
                              section_id,
                              exercise_number,

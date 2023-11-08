@@ -1,6 +1,8 @@
+---
+[]
+---
+
 # Priorities
-
-
 * Would be nice to have more flexibility with knit_tutorials(). The problem arises when knitting a collection of tutorial paths takes too long, especially on CRAN, where all tests should only take 10 minutes total. Might be nice if tutorial paths:
 
   + Had an option to report the time (or start/end time) which each knitting used. We want to identify which tutorials take too long to knit. Right now, there is no easy way to do so.
@@ -56,7 +58,6 @@
 * Expand Addins tutorial.
 
 # Deal with write_answers() and its associated test case.
-
 See the comments at test-write_answers.R for detailed discussion. 
 
 We should split write_answers() into two parts. The first part just grabs everything we need from the session and returns a tibble. (This part might be too big for CRAN.) The second part takes the tibble and outputs the answers as html/pdf/rds. We can test this a lot. Do this first. The current test case will help ensure that, at least, nothing is worse.
@@ -68,7 +69,6 @@ Do we really need gridExtra in order to be able to create a pdf file? Seems like
 A different approach to the pdf file creation problem in write_answers() would be to create the Rmd document on the file as a character object rmd and then do render(text = rmd, output_file = filename).
 
 # Other tasks
-
 * Deal with these NOTES from devtools::check_win_devel() (or maybe they are from devtools::check(remote = TRUE, manual = TRUE) or rhub::check_for_cran())
 
 * checking examples ... [11s] NOTE
@@ -209,7 +209,6 @@ The user just needs to click the button in order to copy the code from the previ
 The downsides to the current approach are: 1) tutorial makers still have to include something in the Exercises and 2) the button would look much better on the toolbar section of the exercise, perhaps in between  `Start Over` and `Hint`..
 
 ## Comments on .Rbuildignore
-
 For some reason, it is impossible to include comments in the `.Rbuildignore`, at least by using the "#" symbol. I think the key issue is that using `*` (or maybe a parenthesis) in a line which begins with `#` causes trouble. Regardless, here are some thoughts on the version we currently use in **all.primer.tutorials**.
 
 We would like to ensure that all the junk files which end up in the `tutorials/*` directories are not included in the build. Such files are often large. They also run the risk of messing things up in that they might cause certain tests to pass for us but which would fail for anyone who downloads from Github. (The `.gitignore` file does a reasonable job of ensuring that such files do not end up on Github.)
@@ -233,7 +232,6 @@ We have seen weird situations in which even doing all of the above did not work.
 
 
 ## Tour of the Package Functions
-
 **submission_ui** is an HTML structure defined through Shiny, which is inserted to the end of every tutorial. It creates buttons to download submission reports in the forms of RDS and HTML.
 
 **submission_server()** is a function that communicates with the Shiny server during a tutorial. It provides the download functions, **downloadHtml** and **downloadRds**, for the user interface to call when downloading submission reports.

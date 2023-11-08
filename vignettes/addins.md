@@ -16,28 +16,27 @@ We have provided four additions to the RStudio Addins menu: "Tutorial Code Exerc
 
 You can find the addins in the "Addins" tab on the top Rstudio toolbar. Make sure that your cursor is located at the point in your Rmd at which you want to insert the new exercise. 
 
-<img src="images/code-exercise-1.png" alt="plot of chunk unnamed-chunk-1" width="95%" height="95%" />
 
 ### Tutorial Code Exercise
 
-Create a new code exercise skeleton with an exercise title and with auto-generated code chunk ids.
+Create a new code exercise skeleton with an exercise title and with auto-generated code chunk ids. The Section, of which this Exercise is a part, is titled "Plotting".
 
 
 
 ````default
 ### Exercise 7
 
-```{r exercises-7, exercise = TRUE}
+```{r plotting-7, exercise = TRUE}
 
 ```
 
 <button onclick = "transfer_code(this)">Copy previous code</button>
 
-```{r exercises-7-hint, eval = FALSE}
+```{r plotting-7-hint, eval = FALSE}
 
 ```
 
-```{r, include = FALSE}
+```{r plotting-7-test, include = FALSE}
 
 ```
 ###

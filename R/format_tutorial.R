@@ -7,7 +7,7 @@
 #'
 #' @param file_path Character string.
 #'
-#' @returns Formatted document with correct code and hint chunk labels.
+#' @returns Formatted document with correct exercise, hint and test chunk labels.
 
 format_tutorial <- function(file_path){
 
@@ -102,6 +102,8 @@ format_tutorial <- function(file_path){
     # If "hint" is in the current element's label
     # but the element doesn't have the eval = FALSE option,
     # add that option to the element.
+    
+    # DK: Add similar testing/fixing for test chunks.
 
     if (stringr::str_detect(tbl$label[i], "hint") && 
         length(parsermd::rmd_get_options(tbl$ast[i])[[1]]) == 0){
@@ -163,6 +165,16 @@ format_tutorial <- function(file_path){
 
     if (grepl("-setup$", tbl$label[i])){
       new_label <- paste0(section_id, "-", exercise_number, "-setup")
+      new_ast <- purrr::map(tbl$ast[i], change_chunk_function, "name", new_label)
+      tbl$ast[i] <- new_ast
+      next
+    }
+    
+    # If chunk label ends with "-test", it is recognized as a test chunk,
+    # so the name is exercise name and -test Ex: ex-1-test for ex-1
+    
+    if (grepl("-test$", tbl$label[i])){
+      new_label <- paste0(section_id, "-", exercise_number, "-test")
       new_ast <- purrr::map(tbl$ast[i], change_chunk_function, "name", new_label)
       tbl$ast[i] <- new_ast
       next

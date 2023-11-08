@@ -10,7 +10,7 @@ format_tutorial(file_path)
 \item{file_path}{Character string.}
 }
 \value{
-Formatted document with correct code and hint chunk labels.
+Formatted document with correct exercise, hint and test chunk labels.
 }
 \description{
 A function for formatting tutorial Rmd files. Used by
