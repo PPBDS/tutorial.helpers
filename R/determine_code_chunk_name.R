@@ -50,7 +50,7 @@ determine_code_chunk_name <- function(file_path = NULL){
 
       lowercase_id <- tolower(trimws(possible_id_removed))
 
-      section_id <- trimws(substr(gsub(" ", "-", lowercase_id), 0, 20))
+      section_id <- trimws(substr(gsub("[ /]", "-", lowercase_id), 0, 20))
 
       # After finding a section, stop looping immediately
 
