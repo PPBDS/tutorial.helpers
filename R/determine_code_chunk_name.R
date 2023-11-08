@@ -42,15 +42,19 @@ determine_code_chunk_name <- function(file_path = NULL){
 
     if (stringr::str_detect(l, "^## ")){
 
-      # clean up id
-
-      possible_id_removed_prev <- gsub("\\{#(.*)\\}", "", l)
-
-      possible_id_removed <- gsub("[^a-zA-Z0-9 ]", "", possible_id_removed_prev)
-
-      lowercase_id <- tolower(trimws(possible_id_removed))
-
-      section_id <- trimws(substr(gsub("[ /]", "-", lowercase_id), 0, 20))
+      # Remove the pattern "{#...}" and non-alphanumeric characters except
+      # spaces and slashes
+      
+      cleaned_l <- gsub("\\{#(.*)\\}", "", l)
+      cleaned_l <- gsub("[^a-zA-Z0-9 /]", "", cleaned_l)
+      
+      # Convert to lowercase, replace spaces and slashes with hyphens, trim to
+      # 30 characters, and trim whitespace
+      
+      section_id <- trimws(cleaned_l)
+      section_id <- substr(gsub("[ /]", "-", tolower(section_id)), 1, 30)
+      section_id <- gsub("-+$", "", section_id)
+      section_id <- gsub("^-+", "", section_id)
 
       # After finding a section, stop looping immediately
 

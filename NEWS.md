@@ -1,6 +1,6 @@
 # tutorial.helpers (development version)
 
-* Add determine_code_chunk_name() and determine_exercise_number() functions so that make_exercise() is more manageable.
+* Add determine_code_chunk_name() and determine_exercise_number() functions so that make_exercise() is more manageable. Update logic for determine_code_chunk_name() to handle forward slashes and ending dashes better.
 
 * Add test case for write_answers(). Add associated files to .Rbuildignore so as not to violate the CRAN size restriction of 5 mb.
 

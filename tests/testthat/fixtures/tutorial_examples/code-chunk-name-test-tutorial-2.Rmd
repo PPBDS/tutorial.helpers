@@ -25,7 +25,7 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
-## really long name to cut off
+## really long name to cut off and other stuff
 ### 
 
 [**readxl**](https://readxl.tidyverse.org/) and [**wrirexl**](https://docs.ropensci.org/writexl/) are the two key packages for working with Excel spreadsheets.
