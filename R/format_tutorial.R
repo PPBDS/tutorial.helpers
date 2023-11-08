@@ -87,6 +87,10 @@ format_tutorial <- function(file_path){
 
       has_exercise <- FALSE
     }
+    
+    # DK: Would be nice if, instead of skipping labels which are null, it added
+    # labels, at least in any hint or test chunk. Big annoyance right now is
+    # that we have lots of test chunks with no labels.
 
     # Skip this loop if the current element fits any of the following:
     # 1. not a code chunk
@@ -110,15 +114,23 @@ format_tutorial <- function(file_path){
       tbl$ast[i] <- parsermd::rmd_set_options(tbl$ast[i], eval = "FALSE")
     }
 
-    # Create the standardized label of the current element
+    # Create the standardized label of the current element. Hate that we need to
+    # duplicate this code from determine_code_chunk_names.R. Can't we have it in
+    # just one place?
 
-    possible_id_removed_prev <- gsub("\\{#(.*)\\}", "", l)
-
-    possible_id_removed <- gsub("[^a-zA-Z0-9 ]", "", possible_id_removed_prev)
-
-    lowercase_id <- tolower(trimws(possible_id_removed))
-
-    section_id <- trimws(substr(gsub(" ", "-", lowercase_id), 0, 20))
+    # Remove the pattern "{#...}" and non-alphanumeric characters except
+    # spaces and slashes
+    
+    cleaned_l <- gsub("\\{#(.*)\\}", "", l)
+    cleaned_l <- gsub("[^a-zA-Z0-9 /]", "", cleaned_l)
+    
+    # Convert to lowercase, replace spaces and slashes with hyphens, trim to
+    # 30 characters, and trim whitespace
+    
+    section_id <- trimws(cleaned_l)
+    section_id <- substr(gsub("[ /]", "-", tolower(section_id)), 1, 30)
+    section_id <- gsub("-+$", "", section_id)
+    section_id <- gsub("^-+", "", section_id)
 
     # Read the options of the element
 
