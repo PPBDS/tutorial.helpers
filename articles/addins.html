@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.5.9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.5.9008</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,40 +106,47 @@ the code chunk names are correct and unique.</p>
 <p>You can find the addins in the “Addins” tab on the top Rstudio
 toolbar. Make sure that your cursor is located at the point in your Rmd
 at which you want to insert the new exercise.</p>
-<p><img src="images/code-exercise-1.png" width="95%" height="95%"></p>
 <div class="section level3">
 <h3 id="tutorial-code-exercise">Tutorial Code Exercise<a class="anchor" aria-label="anchor" href="#tutorial-code-exercise"></a>
 </h3>
 <p>Create a new code exercise skeleton with an exercise title and with
-auto-generated code chunk ids.</p>
+auto-generated code chunk ids. The Section, of which this Exercise is a
+part, is titled “Plotting”.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>### Exercise 7</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>```{r exercises-7, exercise = TRUE}</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>```{r plotting-7, exercise = TRUE}</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>```</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>&lt;button onclick = "transfer_code(this)"&gt;Copy previous code&lt;/button&gt;</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>```{r exercises-7-hint, eval = FALSE}</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>```{r plotting-7-hint, eval = FALSE}</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>```</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>```{r, include = FALSE}</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>```{r plotting-7-test, include = FALSE}</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>```</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>###</span></code></pre></div>
+<p>There are three code chunks included by default: Exercise, Hint and
+Test. You do not need to include all three, although in most cases you
+should. The Exercise Chunk is the location in which students will type
+their answers. The Hint Chunk will be displayed to students when they
+click on the Hint button. The Test Chunk should include the correct
+answer, so that you can be sure it will work for students when they
+enter it in the Exercise code chunk.</p>
 <p>See <a href="https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises">our
-advice</a> about writing good tutorial Code Exercises. First. start with
-the correct answer, the code you want students to submit. Please that
+advice</a> about writing good tutorial Code Exercises. First, start with
+the correct answer, the code you want students to submit. Place that
 code in the Test Chunk at the end. Our test process will ensure that
 this code will work for the students. Second, copy/paste the correct
 answer into the Hint Chunk in the middle. Then replace one or more of
 the key words or function arguments or argument values with
 <code>...</code>. Third, add your actual question to the top of the
 skeleton. What instructions will cause students to enter the correct
-answer in the Exercise Code Chunk? Fourth, drop some knowledge after the
+answer in the Exercise Chunk? Fourth, drop some knowledge after the
 <code>###</code> at the end. Each Exercise is an opportunity to teach.
-Make use of them!</p>
+Make use of it!</p>
 </div>
 <div class="section level3">
 <h3 id="tutorial-written-exercise-with-and-without-answers">Tutorial Written Exercise (with and without answers)<a class="anchor" aria-label="anchor" href="#tutorial-written-exercise-with-and-without-answers"></a>
@@ -150,7 +157,7 @@ chunk id and Exercise number. The difference is that the
 <p>Tutorial Written Exercise (with Answer):</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>### Exercise 8</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>```{r exercises-8}</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>```{r plotting-8}</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    message = "Place correct answer here.",</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
@@ -163,7 +170,7 @@ chunk id and Exercise number. The difference is that the
 <p>Written Exercise (no Answer):</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>### Exercise 9</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>```{r exercises-9}</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>```{r plotting-9}</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
