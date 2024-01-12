@@ -13,16 +13,11 @@
 
 * Start working on a new function, process_submissions(), in a file called process_submissions.R. Starts by taking one argument which is a path to a folder with a bunch of answer html files in it. Reads through those files, pulling out the name of the tutorial, the email of the student, and the time it took. Then returns a tibble with that information in three variables.
 
-* When creating a new Quarto document,  `editor: visual` should not be in the YAML header by default. How can we change set_r_studio_settings() to achieve this? (Full disclosure: I could not find the variable to do this. Maybe ask on Posit Community? Maybe writePreference helps?)
-
 * Understand https://r-pkgs.org/testing-basics.html#sec-snapshot-tests and other advanced testing stuff. I bet that "withr::local_options" will be valuable for doing the next two tasks.
 
 * Need a test case for set_rstudio_settings(). Maybe record the settings of each variable, then change them, then check to see if you did change them, then change them back. Maybe use some advanced testthat tricks for frameworks or whatever. Maybe snapshots help? 
 
 * A test case for set_binary...() as well. This requires more sophisticated R testing tools than we currently use with the package. Need to ensure that the option is set back, after the test runs, to the value it was before the test started. Or maybe there is some other way of setting this preference (with writePreference()?) without the hackorama of changing the user's Rprofile.
-
-
-
 
 * Use testing_package() rather than hard-coding the package name.
 
@@ -34,13 +29,6 @@
 
 * With rstudioapi, use selectFile and friends as an easier way of saving student answers.
   
-
-
-
-
-
-
-
 * Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr???
 
 * I think that there is a bug in set_binary_only_in_r_profile() which only hits in a renv environment. It appears to check the .Rprofile in the local directory to see if options(pkgType = 'binary') is there, and then, when it is not there, it add the line to the main .Rprofile in the users home directory. If you run it again, it adds it again. A student can quickly get the line repeated many times. This then generates a weird error when the student restarts R, presumably because R does not like such silly repetition.
@@ -72,6 +60,7 @@ Do we really need gridExtra in order to be able to create a pdf file? Seems like
 A different approach to the pdf file creation problem in write_answers() would be to create the Rmd document on the file as a character object rmd and then do render(text = rmd, output_file = filename).
 
 # Other tasks
+
 * Deal with these NOTES from devtools::check_win_devel() (or maybe they are from devtools::check(remote = TRUE, manual = TRUE) or rhub::check_for_cran())
 
 * checking examples ... [11s] NOTE
@@ -99,7 +88,8 @@ Found the following files/directories:
 * Figure out why Check is 0/0/0 but Test 1 FAIL and 4 SKIPs.
 
 # learnr stuff
-learnr::get_tutorial_info() returns an ordinary list, with an `items` entry that is a "data frame with columns order, label, type and data describing the items (questions and exercises) in the tutorial." Right now, we only use this to get the valye of `tutorial_id`. 
+
+learnr::get_tutorial_info() returns an ordinary list, with an `items` entry that is a "data frame with columns order, label, type and data describing the items (questions and exercises) in the tutorial." Right now, we only use this to get the value of `tutorial_id`. 
 
 learnr::get_tutorial_state() is a complex function. See the help page for details. "Note that get_tutorial_state() will only work for the tutorial author and must be used in a reactive context, i.e. within shiny::observe(), shiny::observeEvent(), or shiny::reactive(). Any logic observing the user's tutorial state must be written inside a context="server" chunk in the tutorial's R Markdown source."
 
@@ -226,6 +216,7 @@ This excludes everything in any subdirectory of the tutorials directory except a
 
 
 ## Adding more libraries
+
 If you are using a new library, there are several things you need to check. First, most obviously, you should install the package within the `your.package` directory. Second, you must use `library(X)` in the setup chunk within the `tutorial.Rmd` itself. Third, you need to run `renv::status()`. This should report that there is a new package which is not part of `renv.lock`. Then, you will need to run `renv::snapshot()` so that the `renv.lock` file is updated. Fourth, you need to add the package to the `DESCRIPTION` file, in the `Imports:` section. (And don't forget the comma when you do so.) If you don't do this, then R CMD check might work on your computer, where library X is already installed, but won't work in Github actions since it relies on the DESCRIPTION file to know which packages to install.
 
 It makes sense to use high quality tools for these steps. For example, `renv::install()` is a better way of installing needed packages within the **renv** environment. `usethis::use_package()` updates the `DESCRIPTION` file to include the package.
@@ -235,6 +226,7 @@ We have seen weird situations in which even doing all of the above did not work.
 
 
 ## Tour of the Package Functions
+
 **submission_ui** is an HTML structure defined through Shiny, which is inserted to the end of every tutorial. It creates buttons to download submission reports in the forms of RDS and HTML.
 
 **submission_server()** is a function that communicates with the Shiny server during a tutorial. It provides the download functions, **downloadHtml** and **downloadRds**, for the user interface to call when downloading submission reports.
@@ -255,6 +247,7 @@ We have seen weird situations in which even doing all of the above did not work.
 
 
 ## Permanent objects
+
 Permanent objects should be avoided, if possible. The problem is that each Exercise code chunk is its own "world." It knows nothing of any actions taken in previous code chunks, except for three exceptions:
 
 1) Any objects created in the global "setup" code chunk are available in all Exercise code chunks. The annoying thing about this option is that we would, ideally like to have the objects created near --- in the Rmd --- to the Exercises which use them. This also means that we can only use names like "fit_1" or "pp" once in each tutorial.
