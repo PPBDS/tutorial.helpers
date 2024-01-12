@@ -1,8 +1,11 @@
----
-[]
----
-
 # Priorities
+
+* Maybe running tutorial.helpers::set_rstudio_settings() should generate list of all the options which were changes, the old value and the new value.
+
+* Something in Getting Started which shows how links work. You can click. It takes you away, but then the back button takes you back.
+
+* Ensure that this code handles our test code chunks in non-code questions. See RStudio and Github (gert) for examples. Seems to work, but some test cases would be nice.
+
 * Would be nice to have more flexibility with knit_tutorials(). The problem arises when knitting a collection of tutorial paths takes too long, especially on CRAN, where all tests should only take 10 minutes total. Might be nice if tutorial paths:
 
   + Had an option to report the time (or start/end time) which each knitting used. We want to identify which tutorials take too long to knit. Right now, there is no easy way to do so.
