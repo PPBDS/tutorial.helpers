@@ -46,11 +46,6 @@ set_rstudio_settings <- function(){
   rstudioapi::writeRStudioPreference("rainbow_parentheses", TRUE)
   rstudioapi::writeRStudioPreference("syntax_color_console", TRUE)
   
-  # Thinking of removing this. Does not seem to work, or at least it does not
-  # add blank lines to script files.
-  
-  rstudioapi::writeRStudioPreference("auto_append_newline", TRUE)
-  
   # Other settings which might be looked at include: initial_working_directory,
   # posix_terminal_shell, jobs_tab_visibility, default_project_location,
   # document_author, show_invisibles, sync_files_pane_working_dir, and
