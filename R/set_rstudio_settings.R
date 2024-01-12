@@ -20,7 +20,7 @@ set_rstudio_settings <- function(){
 
   message("Changing RStudio settings to better defaults.")
 
-  # These first four are definitely a good idea. Perhaps the function should, by
+  # These first three are definitely a good idea. Perhaps the function should, by
   # default, report all the changes it is making. If so, then we probably need
   # to write a loop which takes in a list of parameter/value pairs and then goes
   # through them all, reporting "Changing X from A to B."
@@ -28,6 +28,12 @@ set_rstudio_settings <- function(){
   rstudioapi::writeRStudioPreference("save_workspace", "never")
   rstudioapi::writeRStudioPreference("load_workspace", FALSE)
   rstudioapi::writeRStudioPreference("insert_native_pipe_operator", TRUE)
+  
+  # visual_markdown_editing_is_default does not seem to show up in the json
+  # file! Why? And yet it still seems to work . . . Maybe, because it is the
+  # default, it does not get written to the json. But, then, why bother changing
+  # it anyway?
+  
   rstudioapi::writeRStudioPreference("visual_markdown_editing_is_default", FALSE)
   
   # The remaining changes are more debatable.
@@ -37,12 +43,17 @@ set_rstudio_settings <- function(){
   rstudioapi::writeRStudioPreference("show_hidden_files", TRUE)
   rstudioapi::writeRStudioPreference("source_with_echo", TRUE)
   rstudioapi::writeRStudioPreference("packages_pane_enabled", FALSE)
-  rstudioapi::writeRStudioPreference("always_save_history", FALSE)
   rstudioapi::writeRStudioPreference("rainbow_parentheses", TRUE)
   rstudioapi::writeRStudioPreference("syntax_color_console", TRUE)
+  
+  # Thinking of removing this. Does not seem to work, or at least it does not
+  # add blank lines to script files.
+  
   rstudioapi::writeRStudioPreference("auto_append_newline", TRUE)
   
-  # Other settings which might be looked at include: document_author,
-  # show_invisibles, sync_files_pane_working_dir, and use_tiny_tex.
+  # Other settings which might be looked at include: initial_working_directory,
+  # posix_terminal_shell, jobs_tab_visibility, default_project_location,
+  # document_author, show_invisibles, sync_files_pane_working_dir, and
+  # use_tiny_tex.
 
 }
