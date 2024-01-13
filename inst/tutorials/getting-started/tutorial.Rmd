@@ -117,7 +117,7 @@ Change the values to `x <- 6` and `y <- 10`. Hit "Run Code". You should get the 
 
 ### 
 
-Note that the assignment symbol --- `<-` --- is a less-than-sign followed by a dash. We often pronounce the symbol as "gets." So, we might say, when reading this code, that "x gets 6."
+Note that the assignment symbol, `<-`, is a less-than-sign followed by a dash. We often pronounce the symbol as "gets." So, we might say, when reading this code, that "x gets 6."
 
 ###
 
@@ -226,9 +226,9 @@ You should have pasted something like this in the box above:
 > 
 ````
 
-The response should be `FALSE`. If it is not, try re-running `tutorial.helpers::set_rstudio_settings()`. You have now selected sensible settings for using RStudio.
+The response should be `FALSE`. If it is not, try re-running `tutorial.helpers::set_rstudio_settings()`. 
 
-
+You have now selected sensible settings for using RStudio.
 
 ### Exercise 8
 
@@ -250,6 +250,14 @@ question_text(NULL,
 
 ### 
 
+Your answer should look like:
+
+````
+> options("pkgType")
+$pkgType
+[1] "binary"
+````
+
 This ensures that, when you install new packages, you will not, by default, try to compile them from the underlying source code itself. Doing so can only lead to trouble for those new to R programming.
 
 
@@ -257,7 +265,7 @@ This ensures that, when you install new packages, you will not, by default, try 
 
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are just copies of the R commands and their results. Other times, we will ask you to write one or more sentences of prose. 
 
-Copy and paste everything from `Exercise 9` through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console.
+Copy and paste everything from `Exercise 9` through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
 ```{r tutorial-exercises-9}
 question_text(NULL,
@@ -273,6 +281,8 @@ question_text(NULL,
 ### 
 
 At the end of every tutorial, you will save your work (and submit it, at the discretion of your instructor). We will do this in the next panel, labeled "Submit." Follow the instructions there. 
+
+Make sure to answer the question about how many **minutes** you spent on the tutorial.
 
 After hitting the "Download" button, you will be prompted to save a file named `getting-started_answers` with a suffix which depends on the button you selected. You may download your answers as `rds`, `html` or `pdf` files. This file will be saved in the default Downloads folder on your computer, even if you completed the tutorial on a cloud computing platform. If you want, you may download multiple formats.
 

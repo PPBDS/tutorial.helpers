@@ -42,7 +42,9 @@ Create a new code exercise skeleton with an exercise title and with auto-generat
 ###
 ````
 
-See [our advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises) about writing good tutorial Code Exercises. First. start with the correct answer, the code you want students to submit. Please that code in the Test Chunk at the end. Our test process will ensure that this code will work for the students. Second, copy/paste the correct answer into the Hint Chunk in the middle. Then replace one or more of the key words or function arguments or argument values with `...`. Third, add your actual question to the top of the skeleton. What instructions will cause students to enter the correct answer in the Exercise Code Chunk? Fourth, drop some knowledge after the `###` at the end. Each Exercise is an opportunity to teach. Make use of them!
+There are three code chunks included by default: Exercise, Hint and Test. You do not need to include all three, although in most cases you should. The Exercise Chunk is the location in which students will type their answers. The Hint Chunk will be displayed to students when they click on the Hint button. The Test Chunk should include the correct answer, so that you can be sure it will work for students when they enter it in the Exercise code chunk.
+
+See [our advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises) about writing good tutorial Code Exercises. First, start with the correct answer, the code you want students to submit. Place that code in the Test Chunk at the end. Our test process will ensure that this code will work for the students. Second, copy/paste the correct answer into the Hint Chunk in the middle. Then replace one or more of the key words or function arguments or argument values with `...`. Third, add your actual question to the top of the skeleton. What instructions will cause students to enter the correct answer in the Exercise Chunk? Fourth, drop some knowledge after the `###` at the end. Each Exercise is an opportunity to teach. Make use of it!
 
 
 ### Tutorial Written Exercise (with and without answers)
@@ -55,7 +57,7 @@ Tutorial Written Exercise (with Answer):
 ````default
 ### Exercise 8
 
-```{r exercises-8}
+```{r plotting-8}
 question_text(NULL,
 	message = "Place correct answer here.",
 	answer(NULL, correct = TRUE),
@@ -73,7 +75,7 @@ Written Exercise (no Answer):
 ````default
 ### Exercise 9
 
-```{r exercises-9}
+```{r plotting-9}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,

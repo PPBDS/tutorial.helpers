@@ -1,5 +1,13 @@
 # Priorities
 
+* Test visual_markdown_editing_is_default and then delete it if it does nothing, as seems to be the case.
+
+* Confirm Getting Started tutorial. 
+
+* Update on CRAN
+
+* When running a tutorial from the Tutorial tab, links in the tutorial do not work.
+
 * Maybe running tutorial.helpers::set_rstudio_settings() should generate list of all the options which were changes, the old value and the new value.
 
 * Something in Getting Started which shows how links work. You can click. It takes you away, but then the back button takes you back.

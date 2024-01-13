@@ -169,13 +169,14 @@ table, .body h2 { border-bottom: 1px solid #666; }
 ```
 ###
 </code></pre>
-<p>See <a href="https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises">our advice</a> about writing good tutorial Code Exercises. First. start with the correct answer, the code you want students to submit. Please that code in the Test Chunk at the end. Our test process will ensure that this code will work for the students. Second, copy/paste the correct answer into the Hint Chunk in the middle. Then replace one or more of the key words or function arguments or argument values with <code>...</code>. Third, add your actual question to the top of the skeleton. What instructions will cause students to enter the correct answer in the Exercise Code Chunk? Fourth, drop some knowledge after the <code>###</code> at the end. Each Exercise is an opportunity to teach. Make use of them!</p>
+<p>There are three code chunks included by default: Exercise, Hint and Test. You do not need to include all three, although in most cases you should. The Exercise Chunk is the location in which students will type their answers. The Hint Chunk will be displayed to students when they click on the Hint button. The Test Chunk should include the correct answer, so that you can be sure it will work for students when they enter it in the Exercise code chunk.</p>
+<p>See <a href="https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises">our advice</a> about writing good tutorial Code Exercises. First, start with the correct answer, the code you want students to submit. Place that code in the Test Chunk at the end. Our test process will ensure that this code will work for the students. Second, copy/paste the correct answer into the Hint Chunk in the middle. Then replace one or more of the key words or function arguments or argument values with <code>...</code>. Third, add your actual question to the top of the skeleton. What instructions will cause students to enter the correct answer in the Exercise Chunk? Fourth, drop some knowledge after the <code>###</code> at the end. Each Exercise is an opportunity to teach. Make use of it!</p>
 <h3 id="tutorial-written-exercise-with-and-without-answers">Tutorial Written Exercise (with and without answers)</h3>
 <p>Both create similar exercise structures with auto-generated code chunk id and Exercise number. The difference is that the <code>question_text()</code> options are filled in differently.</p>
 <p>Tutorial Written Exercise (with Answer):</p>
 <pre><code class="language-default">### Exercise 8
 
-```{r exercises-8}
+```{r plotting-8}
 question_text(NULL,
 	message = &quot;Place correct answer here.&quot;,
 	answer(NULL, correct = TRUE),
@@ -189,7 +190,7 @@ question_text(NULL,
 <p>Written Exercise (no Answer):</p>
 <pre><code class="language-default">### Exercise 9
 
-```{r exercises-9}
+```{r plotting-9}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,

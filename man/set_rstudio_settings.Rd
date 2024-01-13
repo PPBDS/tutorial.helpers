@@ -13,7 +13,6 @@ No return value, called for side effects.
 This function changes RStudio settings in order to make learning easier for
 new users. These settings are stored in:
 ~/.config/rstudio/rstudio-prefs.json. The most important changes are
-\code{save_workspace} to \code{"never"}, \code{load_workspace} to \code{FALSE},
-\code{"insert_native_pipe_operator"} to \code{TRUE}, and
-\code{"visual_markdown_editing_is_default"} to \code{FALSE}.
+\code{save_workspace} to \code{"never"}, \code{load_workspace} to \code{FALSE}, and
+\code{"insert_native_pipe_operator"} to \code{TRUE}.
 }
