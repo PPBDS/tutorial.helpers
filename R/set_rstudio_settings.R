@@ -5,9 +5,8 @@
 #' This function changes RStudio settings in order to make learning easier for
 #' new users. These settings are stored in:
 #' ~/.config/rstudio/rstudio-prefs.json. The most important changes are
-#' `save_workspace` to `"never"`, `load_workspace` to `FALSE`,
-#' `"insert_native_pipe_operator"` to `TRUE`, and
-#' `"visual_markdown_editing_is_default"` to `FALSE`.
+#' `save_workspace` to `"never"`, `load_workspace` to `FALSE`, and
+#' `"insert_native_pipe_operator"` to `TRUE`.
 #'
 #' @returns No return value, called for side effects.
 #'
@@ -17,6 +16,9 @@ set_rstudio_settings <- function(){
 
   # Change default settings in RStudio. Here all are settings:
   # https://docs.posit.co/ide/server-pro/reference/session_user_settings.html
+  
+  # Could have a better message which first checks to see if any changes need to
+  # be made and then announces what changes it is making, if any.
 
   message("Changing RStudio settings to better defaults.")
 
@@ -29,20 +31,19 @@ set_rstudio_settings <- function(){
   rstudioapi::writeRStudioPreference("load_workspace", FALSE)
   rstudioapi::writeRStudioPreference("insert_native_pipe_operator", TRUE)
   
-  # visual_markdown_editing_is_default does not seem to show up in the json
-  # file! Why? And yet it still seems to work . . . Maybe, because it is the
-  # default, it does not get written to the json. But, then, why bother changing
-  # it anyway?
-  
-  rstudioapi::writeRStudioPreference("visual_markdown_editing_is_default", FALSE)
-  
-  # The remaining changes are more debatable.
+  # The remaining changes are more debatable. I think that the next three
+  # decrease student confusion.
   
   rstudioapi::writeRStudioPreference("show_hidden_files", TRUE)
   rstudioapi::writeRStudioPreference("rmd_chunk_output_inline", FALSE)
-  rstudioapi::writeRStudioPreference("show_hidden_files", TRUE)
   rstudioapi::writeRStudioPreference("source_with_echo", TRUE)
+  
+  # The packages pane is nothing but distracting.
+  
   rstudioapi::writeRStudioPreference("packages_pane_enabled", FALSE)
+  
+  # I think that these make code writing easier. Don't they?
+  
   rstudioapi::writeRStudioPreference("rainbow_parentheses", TRUE)
   rstudioapi::writeRStudioPreference("syntax_color_console", TRUE)
   
