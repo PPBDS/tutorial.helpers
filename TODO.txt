@@ -1,14 +1,14 @@
 # Priorities
 
-* Test visual_markdown_editing_is_default and then delete it if it does nothing, as seems to be the case.
-
-* Confirm Getting Started tutorial. 
-
 * Update on CRAN
 
-* When running a tutorial from the Tutorial tab, links in the tutorial do not work.
+* Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
 
-* Maybe running tutorial.helpers::set_rstudio_settings() should generate list of all the options which were changes, the old value and the new value.
+* Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr??? Get rid of them, if possible!
+
+* Review vignettes. Are titles good? Expand Addins tutorial.
+
+* When running a tutorial from the Tutorial tab, links in the tutorial do not work.
 
 * Something in Getting Started which shows how links work. You can click. It takes you away, but then the back button takes you back.
 
@@ -29,34 +29,16 @@
 
 * Use testing_package() rather than hard-coding the package name.
 
-* Use test_path for all input files.
-
 * Read https://testthat.r-lib.org/articles/test-fixtures.html
 
 * rstudioapi::is_available()
 
 * With rstudioapi, use selectFile and friends as an easier way of saving student answers.
-  
-* Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr???
 
 * I think that there is a bug in set_binary_only_in_r_profile() which only hits in a renv environment. It appears to check the .Rprofile in the local directory to see if options(pkgType = 'binary') is there, and then, when it is not there, it add the line to the main .Rprofile in the users home directory. If you run it again, it adds it again. A student can quickly get the line repeated many times. This then generates a weird error when the student restarts R, presumably because R does not like such silly repetition.
 
-
-* Think harder about how to test the tutorials. For example, if you forget to include `library(primer.data)` in the set up code chunk, then students won't have access to, for example, the `trains` data set. But, you might still have a question which tells them to type `trains` in the code exercise. That will fail for them! But none of our current testing catches that. We really ought to invisibly print every data set we use in any tutorial to ensure that they are available. A related example of this issue is forgetting to include `library(ggthemes)` in the setup code chunk and then having an exercise for which the correct answer is `library(ggthemes)`. Current testing does not catch this. Is there a way to have a suggested answer code chunk which students can not see but which runs the code we expect students to submit? This is partly the reason why I like building the plots ourselves. This was we are sure that the code works!
-
-
-
-
-
-* Review vignettes.
-
-* We would like Section titles to be able to use weird characters like "[". Right now, we fail. Not clear whether that is because Format Tutorial Chunk Labels forbids it, or because it (mistakenly!) allows it and then the tutorials don't work. I suspect the latter. So, we need to change Format Tutorial Chunk Labels to simply remove weird characters (like it does with spaces) when constructing the code chunk names.
-
-* Are vignette titles good?
-
-* Expand Addins tutorial.
-
 # Deal with write_answers() and its associated test case.
+
 See the comments at test-write_answers.R for detailed discussion. 
 
 We should split write_answers() into two parts. The first part just grabs everything we need from the session and returns a tibble. (This part might be too big for CRAN.) The second part takes the tibble and outputs the answers as html/pdf/rds. We can test this a lot. Do this first. The current test case will help ensure that, at least, nothing is worse.
@@ -81,19 +63,14 @@ Found the following files/directories:
 * checking for detritus in the temp directory ... NOTE
 Found the following files/directories:
   'lastMiKTeXException'
-
-
-* Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
+  
+  * Why does devtools::check(remote = TRUE, manual = TRUE) produce so many weird notes about html problems? And why does it launch XQuartz?
 
 * Provide a `skip` argument to knit_tutorials which allows it to skip any tutorial path which includes a specific string. This will generally be used like skip = c("06-data-tidying", "08-data-import"). Note that these are not the names of tutorial files (which are mostly "tutorial.Rmd") nor the full path to those tutorials (which we don't know until we run `return_tutorial_paths()`). Instead, they are strings from within the path. (Maybe require that they be full parts of the path? Or maybe any match is fine?)
 
-* Why does devtools::check(remote = TRUE, manual = TRUE) produce so many weird notes about html problems? And why does it launch XQuartz?
-
-* Uncomment GHA calls to build on devel for Mac and Linux once the renv nonsense gets fixed.
-
 * Update Shiny Apps tutorial and document its creation. Update it regularly. Maybe automate this as a Github Action? You can currently get to this via the website, under Tutorials menu item.
 
-* Figure out why Check is 0/0/0 but Test 1 FAIL and 4 SKIPs.
+* Figure out why Check is 0/0/0 but Test is 1 FAIL and 4 SKIPs.
 
 # learnr stuff
 
