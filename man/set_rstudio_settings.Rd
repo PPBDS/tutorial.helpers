@@ -14,5 +14,14 @@ This function changes RStudio settings in order to make learning easier for
 new users. These settings are stored in:
 ~/.config/rstudio/rstudio-prefs.json. The most important changes are
 \code{save_workspace} to \code{"never"}, \code{load_workspace} to \code{FALSE}, and
-\code{"insert_native_pipe_operator"} to \code{TRUE}.
+\code{"insert_native_pipe_operator"} to \code{TRUE}. All those changes are good for any
+user, new or old.
+
+We also change \code{show_hidden_files} to \code{TRUE}, \code{rmd_chunk_output_inline} to
+\code{FALSE}, \code{source_with_echo} to \code{TRUE}, and \code{packages_pane_enabled} to
+\code{FALSE}. These settings make RStudio less confusing to new users.
+
+The last two changes are setting both \code{rainbow_parentheses} and
+\code{syntax_color_console} to \code{TRUE}. We \emph{think} that these settings make coding
+errors less likely.
 }

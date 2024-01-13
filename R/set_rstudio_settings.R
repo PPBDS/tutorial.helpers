@@ -6,50 +6,56 @@
 #' new users. These settings are stored in:
 #' ~/.config/rstudio/rstudio-prefs.json. The most important changes are
 #' `save_workspace` to `"never"`, `load_workspace` to `FALSE`, and
-#' `"insert_native_pipe_operator"` to `TRUE`.
+#' `"insert_native_pipe_operator"` to `TRUE`. All those changes are good for any
+#' user, new or old.
+#'
+#' We also change `show_hidden_files` to `TRUE`, `rmd_chunk_output_inline` to
+#' `FALSE`, `source_with_echo` to `TRUE`, and `packages_pane_enabled` to
+#' `FALSE`. These settings make RStudio less confusing to new users.
+#'
+#' The last two changes are setting both `rainbow_parentheses` and
+#' `syntax_color_console` to `TRUE`. We *think* that these settings make coding
+#' errors less likely.
 #'
 #' @returns No return value, called for side effects.
 #'
 #' @export
 
 set_rstudio_settings <- function(){
-
-  # Change default settings in RStudio. Here all are settings:
+  
+  # Change default settings in RStudio. Here are all the options:
   # https://docs.posit.co/ide/server-pro/reference/session_user_settings.html
-  
-  # Could have a better message which first checks to see if any changes need to
-  # be made and then announces what changes it is making, if any.
 
-  message("Changing RStudio settings to better defaults.")
-
-  # These first three are definitely a good idea. Perhaps the function should, by
-  # default, report all the changes it is making. If so, then we probably need
-  # to write a loop which takes in a list of parameter/value pairs and then goes
-  # through them all, reporting "Changing X from A to B."
-  
-  rstudioapi::writeRStudioPreference("save_workspace", "never")
-  rstudioapi::writeRStudioPreference("load_workspace", FALSE)
-  rstudioapi::writeRStudioPreference("insert_native_pipe_operator", TRUE)
-  
-  # The remaining changes are more debatable. I think that the next three
-  # decrease student confusion.
-  
-  rstudioapi::writeRStudioPreference("show_hidden_files", TRUE)
-  rstudioapi::writeRStudioPreference("rmd_chunk_output_inline", FALSE)
-  rstudioapi::writeRStudioPreference("source_with_echo", TRUE)
-  
-  # The packages pane is nothing but distracting.
-  
-  rstudioapi::writeRStudioPreference("packages_pane_enabled", FALSE)
-  
-  # I think that these make code writing easier. Don't they?
-  
-  rstudioapi::writeRStudioPreference("rainbow_parentheses", TRUE)
-  rstudioapi::writeRStudioPreference("syntax_color_console", TRUE)
-  
   # Other settings which might be looked at include: initial_working_directory,
   # posix_terminal_shell, jobs_tab_visibility, default_project_location,
   # document_author, show_invisibles, sync_files_pane_working_dir, and
   # use_tiny_tex.
-
+  
+  settings <- list(
+    list("save_workspace", "never"), 
+    list("load_workspace", FALSE),
+    list("insert_native_pipe_operator", TRUE),
+    list("show_hidden_files", TRUE),
+    list("rmd_chunk_output_inline", FALSE),
+    list("source_with_echo", TRUE),
+    list("packages_pane_enabled", FALSE),
+    list("rainbow_parentheses", TRUE),
+    list("syntax_color_console", TRUE)
+  )
+  
+  changes_made <- FALSE
+  
+  for(i in seq(length(settings))){
+    setting <- settings[[i]][[1]]
+    value <- settings[[i]][[2]]
+    if(rstudioapi::readRStudioPreference(setting, NA) != value){
+      changes_made <- TRUE
+      message(paste0("Changing ",  setting, " to ", value, "."))
+      rstudioapi::writeRStudioPreference(setting, value)
+    }
+  }
+  
+  if(isFALSE(changes_made)){
+    message("RStudio settings are already sensible. No changes made.")
+  } 
 }
