@@ -31,6 +31,15 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
 
+      # Need because because the textshaping package failed with installing on 
+      # the Mac.
+      
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libharfbuzz-dev libfribidi-dev
+      
+
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
