@@ -91,10 +91,13 @@
 
     
     
+<!-- There are some tutorials which require either an R restart or (what is more or less the same thing, I think) the creation of a new R project. Clearest examples are: RStudio and Code, Rstudio and Github, and Quarto Websites. The problem arises because restarting R or creating a new R project causes R to terminate the tutorial. That is fine when working on a local machine, since the tutorial answers are saved and you can just restart the tutorial. But it does not (alway? ever?) work in the cloud. Restarting a tutorial which you terminated causes an error in the Cloud. -->
+<!-- So, for these three tutorials and all others, we should explicitly have students create two RStudio instances, one in which they are doing the tutorial and one in which they are following the tutorial's instructions, instructions which will often require restarts and/or new projects. -->
+<!-- Explain test code chunks! -->
 <!-- Change the approach so that the advice covers all sorts of tutorials, not just tutorial.helpers. -->
 <!-- I hate the way that all the weird formatting we do messes up the document outline. You can see that effect within R Studio and on the web page. Fixable? -->
 <!-- Tutorial answers should require the smallest incremental number of characters for students to type. That is how you know that your learning curve is shallow. geom_smooth() example. -->
-<!-- Get rid of screenshot examples. Instead use the new file = code chunk option to read in the actual files which are used as part of the macro. Is this even possible? -->
+<!-- Add testing discussion of even loading libraries. -->
 <p><em>There are no questions here. There are only simple
 instructions.</em></p>
 <p><em>Tutorials are not challenging. They are
@@ -107,8 +110,9 @@ confidence-building.</em></p>
 <a href="https://rstudio.github.io/learnr/" class="external-link"><strong>learnr</strong></a>
 package. The most common use case is a tutorial which covers <a href="https://ppbds.github.io/tutorial.helpers/articles/books.html">the
 material in an assigned textbook</a>, as with the <a href="https://CRAN.R-project.org/package=r4ds.tutorials" class="external-link"><strong>r4ds.tutorials</strong></a>
-package for t<a href="https://r4ds.hadley.nz/" class="external-link"><em>R for Data
-Science</em></a>.</p>
+package for <a href="https://r4ds.hadley.nz/" class="external-link"><em>R for Data Science
+(2e)</em></a> by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett
+Grolemund..</p>
 <p>Instructors assign textbook readings to students. We want our
 students to read and, perhaps more importantly, go through the
 associated code, typing it in and confirming what it does. Sadly,
@@ -129,12 +133,12 @@ or . . .) knowledge which we might provide to students: tips, tricks,
 cool packages, fun websites, et cetera. We don’t have time to mention
 all of them. The art of teaching is to, first, decide which 10,000 bits
 are the most important to mention and second, figure out the best time
-at which to mention them. Tutorials are a key for doing that mentioning.
-Which bits do we mention and where do we mention them?</p>
+at which to mention them. Tutorials provide an occasion for that
+mentioning. Which bits do we mention and where do we mention them?</p>
 <p>We can only demonstrate a tiny percentage of all the packages in the
 world, but we can certainly at least mention the existence of dozens
-more. Within the packages we use, we can only demonstrate some of the
-functions; but we can mention some of the other important ones. Among
+more. Within the packages we use, we can only illustrate some of the
+functions; but we can examine some of the other important ones. Among
 the functions we use, we can only show some of the arguments; but we can
 discuss others.</p>
 <p>The most important parts of the “knowledge drops” with which we
@@ -159,7 +163,7 @@ and/or the order in which to do it) and a name, which corresponds to the
 <code>id</code> of the tutorial. Within each directory is an R Markdown
 file and, sometimes, other material like an <code>images</code> or
 <code>data</code> directory. The prefix number determines the order in
-which tutorials appear in the Tutorial pane. By default, we name the R
+which tutorials appear in the Tutorial tab. By default, we name the R
 Markdown file <code>tutorial.Rmd</code>, but any name works as long as
 the file has the appropriate YAML header.</p>
 <p>To create a new tutorial, use
@@ -229,9 +233,9 @@ libraries you load in the set up chunk. (Try not to have too many of
 them.) All of them, except for <strong>learnr</strong> and
 <strong>tutorial.helpers</strong> merit an exercise which requires the
 student to type <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(package.name)</a></code>. This ensures that
-students get in the practice o loading libraries. And it also provides
+students get in the practice of loading libraries. And it also provides
 occasion to drop some knowledge. Don’t forget that all libraries you
-load should be includes in the DESCRIPTION file — if the tutorial is
+load should be included in the DESCRIPTION file — if the tutorial is
 part of a package — probably under Suggests.</p>
 </div>
 <div class="section level2">
@@ -258,7 +262,7 @@ Section introductions will often have two parts: the introductory text
 as above and a plot which will be replicated in that section of the
 tutorial. Those two parts are generally separated by a triple hash.</p>
 <p>After the last Exercise in a Section, you should put a triple hash
-and then give a two sentence summary about what this Exercise
+and then give a two sentence summary about what this Section
 accomplished. A Section is a 20 minute transfer of knowledge from you to
 the student. At the beginning, you mentioned its purpose. Conclude by
 tying things back to that original purpose. Often, these “purposes” will
@@ -277,7 +281,7 @@ Section, unless the Section is very short.</p>
 <h3 id="flow">Flow<a class="anchor" aria-label="anchor" href="#flow"></a>
 </h3>
 <p>Each Exercise should have a <em>flow</em> which requires that
-students hit the “Continue” button at least twice.</p>
+students hit the “Continue” button at least once.</p>
 <ul>
 <li><p>Begin with a <em>Start</em> which is a sentence or two of
 knowledge and/or the question itself. If the length of the Start text is
@@ -285,7 +289,7 @@ longer than one or two lines, then do not place the question code chunk
 in the same part. Instead, the Start includes a triple hash, thereby
 creating the Continue button. If the length of the text is short enough
 that students are willing to read it (at most two sentences), you can
-include the answer code chunk in the same part.</p></li>
+include the Exercise code chunk in the same part.</p></li>
 <li><p>Most of the time there is no need for a triple hash before the
 code chunk.</p></li>
 <li><p>Do not expect students to read more than two sentences of text at
@@ -297,21 +301,21 @@ won’t read more than two sentences without a break.</p></li>
 <li>
 <p>After the Start, come three code chunks:</p>
 <ul>
-<li>The Exercise Code Chunk is the location in which students will place
+<li>The Exercise code chunk is the location in which students will place
 their answers. It always includes the <code>exercise = TRUE</code> code
 chunk option.</li>
-<li>The Hint Code Chunk includes any hints for the students. The code
+<li>The Hint code chunk includes any hints for the students. The code
 chunk name is the hint is always exactly the same as the one for the
-Exercise Code Chunk, except with <code>-hint-n</code> attached at the
+Exercise code chunk, except with <code>-hint-n</code> attached at the
 end. The <code>n</code> is replaced by the number of the hint. Almost
 always, there is only one hint, so the suffix is <code>-hint-1</code>.
 We always set <code>eval = FALSE</code> in the Hint code chunk since,
 often, the hint will not be legal R code.</li>
-<li>The Test Code Chunk requires no chunk name. It always includes the
+<li>The Test code chunk requires no chunk name. It always includes the
 <code>include = FALSE</code> code chunk option because we never want to
 show the code or the results to students. Instead, the purpose of the
-Test Code Chunk is to ensure that the correct answer — that is, the code
-we want students to enter into the Exercise Code Chunk — works.</li>
+Test code chunk is to ensure that the correct answer — that is, the code
+we want students to enter into the Exercise code chunk — works.</li>
 </ul>
 </li>
 <li><p>The three code chunks are always followed by a triple hash. We
@@ -355,35 +359,35 @@ the <strong>c</strong>ommand and the <strong>r</strong>esult.</p>
 <h4 id="code-questions">Code questions<a class="anchor" aria-label="anchor" href="#code-questions"></a>
 </h4>
 <p>Here is an example code question:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>### Exercise 2</span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Exercise 2</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Start your code with `cces`. Use the pipe operator `|&gt;` to add the </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>function `filter()`, selecting the  rows where `state` is equal to </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>"Massachusetts". To set something equal to a value in `filter()` </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>use two equal signs, `==`.</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Start your code with <span class="st">`</span><span class="at">cces</span><span class="st">`</span>. Use the pipe operator <span class="st">`</span><span class="at">|&gt;</span><span class="st">`</span> to add the </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">function</span> <span class="st">`</span><span class="at">filter()</span><span class="st">`</span>, selecting the  rows where <span class="st">`</span><span class="at">state</span><span class="st">`</span> is equal to </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">"Massachusetts"</span>. To set something equal to a value <span class="cf">in</span> <span class="st">`</span><span class="at">filter()</span><span class="st">`</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>use two equal signs<span class="sc">:</span> <span class="st">`</span><span class="at">==</span><span class="st">`</span>.</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>```{r filter-2, exercise = TRUE}</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r filter-2, exercise = TRUE}</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>```{r filter-2-hint-1, eval = FALSE}</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>cces |&gt; </span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  filter(state == "...")</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r filter-2-hint-1, eval = FALSE}</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">cces |&gt; </span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">  filter(state == "...")</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>```{r, include = FALSE}</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>cces |&gt; </span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  filter(state == "Massachusetts")</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>### </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r filter-2-test, include = FALSE}</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="at">cces |&gt; </span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="at">  filter(state == "Massachusetts")</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="do">### </span></span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>`==` is used because it is **checking** whether the value of the </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">==</span><span class="st">`</span> is used because it is <span class="sc">**</span>checking<span class="sc">**</span> whether the value of the </span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>variable on the left is equal to the value on the left. See </span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>[here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html) </span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>for discussion of other relational operators in R.</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>A single equation symbol, `=`, is used to set something equal to </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>[here](https<span class="sc">:</span><span class="er">//</span>stat.ethz.ch<span class="sc">/</span>R<span class="sc">-</span>manual<span class="sc">/</span>R<span class="sc">-</span>devel<span class="sc">/</span>library<span class="sc">/</span>base<span class="sc">/</span>html<span class="sc">/</span>Comparison.html) </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> discussion of other relational operators <span class="cf">in</span> R.</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>A single equation symbol, <span class="st">`</span><span class="at">=</span><span class="st">`</span>, is used to set something equal to </span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>something else. </span></code></pre></div>
 <p>First, the Start of the Exercise sets the stage. It sometimes teaches
-something new, connects to a previous question, provides a useful link,
+something new, connects to a previous Exercise, provides a useful link,
 whatever. If it is long enough, it is followed by a triple hash. If not,
 the text continues to the instruction. Most of the time, as above, there
 is only the instruction, telling the student, step-by-step, what to
@@ -392,9 +396,9 @@ do.</p>
 instructions generate results when the student presses Run Code.
 Tutorial answers should require the smallest incremental number of
 characters, relative to the last question, for students to type. That is
-one way you know that your learning curve is shallow. If a Exercise Code
-Chunk requires the students to type a lot of characters, you should
-split up the Exercise into mutiple separate Exercises.</p>
+one way you know that your learning curve is shallow. If a Exercise code
+chunk requires the students to type a lot of characters, you should
+split up the Exercise into multiple separate Exercises.</p>
 <p>Third, any Exercise which requires the copying of code from the prior
 Exercise should place the <em>Copy previous code</em> button below the
 Exercise code chunk.</p>
@@ -412,21 +416,21 @@ the parentheses in the code chunk. This is because hints will often
 include “…” and other symbols which do not run as correct R code. So, we
 need to tell R not to run it or an error will occur during
 <code>R CMD check</code>. Example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>```{r ex-1-hint-1, eval = FALSE}</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>This is an example hint. Normally sentences like these </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>would cause an error in R because it is not proper code. </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>However, since we include eval = FALSE in the r-chunk, </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>R ignores all errors!</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r ex-1-hint-1, eval = FALSE}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">This is an example hint. Normally sentences like these </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">would cause an error in R because it is not proper code. </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">However, since we include eval = FALSE in the r-chunk, </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">R ignores all errors!</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p><strong>You need to wrap the text in a long hint by hand, inserting
 the carriage returns yourself.</strong> R will not wrap the text
 automatically.</p>
-<p>Often, hints look like this</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>```{r ex-1-hint, eval = FALSE}</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>... |&gt; </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  filter(year = ...) |&gt; </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  ...(flights)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<p>Often, hints look like this:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r ex-1-hint, eval = FALSE}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">... |&gt; </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">  filter(year = ...) |&gt; </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  ...(flights)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p>The “…” indicates places where the student needs to insert some code,
 a value or a function name. The code in hints should be formatted
 correctly.</p>
@@ -569,8 +573,7 @@ Exercises, providing hints along the way.</p>
 </div>
 </div>
 <div class="section level3">
-<h3 id="knowledge-drops">
-<a id="kd"></a>Knowledge Drops<a class="anchor" aria-label="anchor" href="#knowledge-drops"></a>
+<h3 id="knowledge-drops">Knowledge Drops<a id="kd"></a><a class="anchor" aria-label="anchor" href="#knowledge-drops"></a>
 </h3>
 <p>The most difficult part of tutorial creation is writing the
 “knowledge drops,” the snippets of wisdom (and the associated links)
@@ -601,9 +604,7 @@ knowledge drops.</li>
 <p>Use high quality links.</p>
 <ul>
 <li>The second edition of <a href="https://r4ds.hadley.nz/" class="external-link"><em>R for
-Data Science</em></a> is amazing. Link to it as often as you can.
-Indeed, I think we should link at least once to every subpart of this
-book. We want students to look at it as often as possible.</li>
+Data Science</em></a> is amazing. Link to it as often as you can.</li>
 <li>Anything associated with <a href="https://posit.co/" class="external-link">Posit</a>
 (formerly named RStudio) is high quality. Examples include sites
 associated with <a href="https://www.tidyverse.org/" class="external-link">Tidyverse</a> and
@@ -633,7 +634,7 @@ and <a href="https://tidyverse.github.io/ggplot2-docs/reference/aes.html" class=
 </li>
 <li><p>One common approach is like this:</p></li>
 </ul>
-<p>See <code><a href="https://readr.tidyverse.org/reference/locale.html" class="external-link">?readr::locale</a></code> for <a href="https://readr.tidyverse.org/articles/locales.html" class="external-link">details</a>.</p>
+<pre><code>See `?readr::locale` for [details](https://readr.tidyverse.org/articles/locales.html).</code></pre>
 <p>Note how we concisely provide both the command which brings up the
 help page and a link to the help page itself.</p>
 <p>Think back to our initial discussion of the 10,000 pieces of
@@ -659,7 +660,7 @@ csv or rds files — in the <code>data</code> directory of a tutorial, as
 discussed below.</p>
 </div>
 <div class="section level3">
-<h3 id="using-images">Using images<a class="anchor" aria-label="anchor" href="#using-images"></a>
+<h3 id="images">Images<a class="anchor" aria-label="anchor" href="#images"></a>
 </h3>
 <p>To add images to a tutorial, first make a directory called
 <code>images</code> in the folder that contains the
@@ -668,15 +669,15 @@ can work with those files in all the usual ways.</p>
 <p>Use <code>include_graphics()</code> to add the image into the
 document. Include this code in its own chunk, in the place where you
 want the image to appear in the tutorial.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>```{r}</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>include_graphics("images/example.png")</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="at">include_graphics("images/example.png")</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p><code>include_graphics()</code> is part of the <code>knitr</code>
 package, so you need <code><a href="https://yihui.org/knitr/" class="external-link">library(knitr)</a></code> in the setup code
 chunk. Note that you do not need to name these code chunks.</p>
 </div>
 <div class="section level3">
-<h3 id="using-files">Using files<a class="anchor" aria-label="anchor" href="#using-files"></a>
+<h3 id="files">Files<a class="anchor" aria-label="anchor" href="#files"></a>
 </h3>
 <p>Files — most commonly text files or rds files — are handled in a
 similar fashion to images. Create a directory called <code>data</code>
@@ -697,19 +698,15 @@ during “run time” (when students are doing the tutorial).</p>
 <p>If you need for an R object to be accessible in an Exercise code
 chunk, create it in the initial global <code>setup</code> code chunk at
 the top of the tutorial.</p>
-<!-- ## Tutorials which require restarts -->
-<!-- Revisit this if we start using posit.cloud again. -->
-<!-- There are some tutorials which require either an R restart or (what is more or less the same thing, I think) the creation of a new R project. Clearest examples are: RStudio and Code, Rstudio and Github, and Quarto Websites. The problem arises because restarting R or creating a new R project causes R to terminate the tutorial. That is fine when working on a local machine, since the tutorial answers are saved and you can just restart the tutorial. But it does not (alway? ever?) work in the cloud. Restarting a tutorial which you terminated causes an error in the Cloud. -->
-<!-- So, for these three tutorials and all others, we should explicitly have students create two RStudio instances, one in which they are doing the tutorial and one in which they are following the tutorial's instructions, instructions which will often require restarts and/or new projects. -->
 </div>
 </div>
 <div class="section level2">
-<h2 id="check-tutorial-functionality">Check tutorial functionality<a class="anchor" aria-label="anchor" href="#check-tutorial-functionality"></a>
+<h2 id="checks">Checks<a class="anchor" aria-label="anchor" href="#checks"></a>
 </h2>
 <p>The simplest way to test the <code>tutorial.Rmd</code> with which you
 are working on is to hit the “Run Document” button. This is the same
 thing as running <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> on that file:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span><span class="st">"inst/tutorials/02-terminal/tutorial.Rmd"</span><span class="op">)</span></span></code></pre></div>
 <p>This assumes that you are located in the main directory of
 <strong>your.package</strong>, as you normally would be. I am not sure
@@ -771,7 +768,10 @@ problem. But then the student tries to type
 error because the package has not been installed. This issue helps to
 illustrate why having plots which are built on the fly is so valuable:
 it guarantees that student answers will work since the same code worked
-when the tutorial was knitted.</p></li>
+when the tutorial was knitted. The main lesson: For any package used,
+have a question which explicitly asks the student to load the package.
+In the Test chunk for that question, load the package yourself. This
+guarantees the availability of the package.</p></li>
 <li><p>Note that <code>R CMD check</code> does not seem to catch cases
 in which you <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code> a package in a tutorial but that
 package is not in DESCRIPTION. But such a discrepancy will cause an
@@ -787,7 +787,7 @@ new file name it might still have that file as <code>Rproj.png</code>
 internally, with the capital “R”. This will cause errors when your run
 your checks on Github:</p></li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Error:</span> Cannot find the file<span class="er">(</span><span class="ex">s</span><span class="kw">)</span><span class="bu">:</span> <span class="st">"images/rproj.png"</span></span></code></pre></div>
+<pre><code>Error: Cannot find the file(s): "images/rproj.png"</code></pre>
 <p>But the file is there! You can see it! The tests work on your local
 machine. The easiest solution is to delete the file (and commit that
 change). And then change the name of the file to something else and use
