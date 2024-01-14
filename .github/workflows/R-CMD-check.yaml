@@ -18,7 +18,8 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-latest,   r: 'release'}
+# Commented out Mac because of failure to install textshaping package.        
+#          - {os: macos-latest,   r: 'release'}
           - {os: windows-latest, r: 'release'}
           - {os: ubuntu-latest,  r: 'release'}
 
@@ -30,15 +31,6 @@ jobs:
       - uses: actions/checkout@v3
 
       - uses: r-lib/actions/setup-pandoc@v2
-
-      # Need because because the textshaping package failed with installing on 
-      # the Mac.
-      
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libharfbuzz-dev libfribidi-dev
-      
 
       - uses: r-lib/actions/setup-r@v2
         with:
