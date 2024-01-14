@@ -1,0 +1,6 @@
+```{r ex-1-hint-1, eval = FALSE}
+This is an example hint. Normally sentences like these 
+would cause an error in R because it is not proper code. 
+However, since we include eval = FALSE in the r-chunk, 
+R ignores all errors!
+```

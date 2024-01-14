@@ -8,6 +8,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+<!-- There are some tutorials which require either an R restart or (what is more or less the same thing, I think) the creation of a new R project. Clearest examples are: RStudio and Code, Rstudio and Github, and Quarto Websites. The problem arises because restarting R or creating a new R project causes R to terminate the tutorial. That is fine when working on a local machine, since the tutorial answers are saved and you can just restart the tutorial. But it does not (alway? ever?) work in the cloud. Restarting a tutorial which you terminated causes an error in the Cloud. -->
+
+<!-- So, for these three tutorials and all others, we should explicitly have students create two RStudio instances, one in which they are doing the tutorial and one in which they are following the tutorial's instructions, instructions which will often require restarts and/or new projects. -->
+
+<!-- Explain test code chunks! -->
 
 <!-- Change the approach so that the advice covers all sorts of tutorials, not just tutorial.helpers. -->
 
@@ -15,7 +20,7 @@ vignette: >
 
 <!-- Tutorial answers should require the smallest incremental number of characters for students to type. That is how you know that your learning curve is shallow. geom_smooth() example. -->
 
-<!-- Get rid of screenshot examples. Instead use the new file = code chunk option to read in the actual files which are used as part of the macro. Is this even possible? -->
+<!-- Add testing discussion of even loading libraries. -->
 
 
 *There are no questions here. There are only simple instructions.*
@@ -26,7 +31,7 @@ vignette: >
 
 ## Introduction
 
-This document describes the best way to write R tutorials using the [**learnr**](https://rstudio.github.io/learnr/) package. The most common use case is a tutorial which covers [the material in an assigned textbook](https://ppbds.github.io/tutorial.helpers/articles/books.html), as with the [**r4ds.tutorials**](https://CRAN.R-project.org/package=r4ds.tutorials) package for t[*R for Data Science*](https://r4ds.hadley.nz/).
+This document describes the best way to write R tutorials using the [**learnr**](https://rstudio.github.io/learnr/) package. The most common use case is a tutorial which covers [the material in an assigned textbook](https://ppbds.github.io/tutorial.helpers/articles/books.html), as with the [**r4ds.tutorials**](https://CRAN.R-project.org/package=r4ds.tutorials) package for [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund..
 
 Instructors assign textbook readings to students. We want our students to read and, perhaps more importantly, go through the associated code, typing it in and confirming what it does. Sadly, students almost never do so. Fortunately, the [**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers) package provides tools for ensuring that students type in all the assigned code.
 
@@ -34,9 +39,9 @@ Imagine the *shallowest* possible learning curve. Almost every student should be
 
 Assume that you are giving the student a private lesson. You ask them a question. They give you an answer. What would you say to them next? What do you want to teach them, given that context?
 
-There are a million little bits of R (or statistics or data science or . . .) knowledge which we might provide to students: tips, tricks, cool packages, fun websites, et cetera. We don't have time to mention all of them. The art of teaching is to, first, decide which 10,000 bits are the most important to mention and second, figure out the best time at which to mention them. Tutorials are a key  for doing that mentioning. Which bits do we mention and where do we mention them?
+There are a million little bits of R (or statistics or data science or . . .) knowledge which we might provide to students: tips, tricks, cool packages, fun websites, et cetera. We don't have time to mention all of them. The art of teaching is to, first, decide which 10,000 bits are the most important to mention and second, figure out the best time at which to mention them. Tutorials provide an occasion for that mentioning. Which bits do we mention and where do we mention them?
 
-We can only demonstrate a tiny percentage of all the packages in the world, but we can certainly at least mention the existence of dozens more. Within the packages we use, we can only demonstrate some of the functions; but we can mention some of the other important ones. Among the functions we use, we can only show some of the arguments; but we can discuss others.
+We can only demonstrate a tiny percentage of all the packages in the world, but we can certainly at least mention the existence of dozens more. Within the packages we use, we can only illustrate some of the functions; but we can examine some of the other important ones. Among the functions we use, we can only show some of the arguments; but we can discuss others.
 
 The most important parts of the "knowledge drops" with which we pepper these tutorials are, first, the packages/functions/arguments which we mention without demonstrating, and second, links to high quality resources.
 
@@ -45,7 +50,7 @@ We are building a "[pit of success](https://ricomariani.medium.com/the-pit-of-su
 
 ## Set Up
 
-Tutorials themselves live in a directory within `inst/tutorials` in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the `id` of the tutorial. Within each directory is an R Markdown file and, sometimes, other material like an `images` or `data` directory. The prefix number determines the order in which tutorials appear in the Tutorial pane. By default, we name the R Markdown file `tutorial.Rmd`, but any name works as long as the file has the appropriate YAML header.
+Tutorials themselves live in a directory within `inst/tutorials` in whichever package you are working on. We recommend that this directory name be a combination of a prefix number (which indicate the week/chapter with which a tutorial is associated and/or the order in which to do it) and a name, which corresponds to the `id` of the tutorial. Within each directory is an R Markdown file and, sometimes, other material like an `images` or `data` directory. The prefix number determines the order in which tutorials appear in the Tutorial tab. By default, we name the R Markdown file `tutorial.Rmd`, but any name works as long as the file has the appropriate YAML header.
 
 To create a new tutorial, use `File -> New File -> R Markdown...`. Choose the "From Template" option and then select "Helpers Tutorial" from the **tutorial.helpers** package. Follow the instructions.
 
@@ -73,7 +78,7 @@ If there are one or two other key resources about the topic of the tutorial, the
 
 Anything typed at the keyboard belongs in \`backticks\` (not "quotation marks"), except for package names, which are always **bolded**. Function names always include the parentheses: `read_csv()`, not `read_csv`. Example: the `+` sign is used to connect `ggplot()` components when using the **ggplot2** library.
 
-Ensure that the first few questions always require students to load any libraries which are used in the tutorial. That is, look at all the libraries you load in the set up chunk. (Try not to have too many of them.) All of them, except for **learnr** and **tutorial.helpers** merit an exercise which requires the student to type `library(package.name)`. This ensures that students get in the practice o loading libraries. And it also provides occasion to drop some knowledge. Don't forget that all libraries you load should be includes in the DESCRIPTION file --- if the tutorial is part of a package --- probably under Suggests.
+Ensure that the first few questions always require students to load any libraries which are used in the tutorial. That is, look at all the libraries you load in the set up chunk. (Try not to have too many of them.) All of them, except for **learnr** and **tutorial.helpers** merit an exercise which requires the student to type `library(package.name)`. This ensures that students get in the practice of loading libraries. And it also provides occasion to drop some knowledge. Don't forget that all libraries you load should be included in the DESCRIPTION file --- if the tutorial is part of a package --- probably under Suggests.
 
 ## Sections
 
@@ -93,7 +98,7 @@ imitate standard HTTP in R. Read more about HTTP [here](https://www.jmarshall.co
 
 The link will be formatted correctly once the tutorial is knitted. Section introductions will often have two parts: the introductory text as above and a plot which will be replicated in that section of the tutorial. Those two parts are generally separated by a triple hash.
 
-After the last Exercise in a Section, you should put a triple hash and then give a two sentence summary about what this Exercise accomplished. A Section is a 20 minute transfer of knowledge from you to the student. At the beginning, you mentioned its purpose. Conclude by tying things back to that original purpose. Often, these "purposes" will be fairly trivial: You promised to go through an example of a scatter plot and, in fact, you did. And that is OK! We are not writing poetry. Not every Section leads to salvation.
+After the last Exercise in a Section, you should put a triple hash and then give a two sentence summary about what this Section accomplished. A Section is a 20 minute transfer of knowledge from you to the student. At the beginning, you mentioned its purpose. Conclude by tying things back to that original purpose. Often, these "purposes" will be fairly trivial: You promised to go through an example of a scatter plot and, in fact, you did. And that is OK! We are not writing poetry. Not every Section leads to salvation.
 
 One or two high quality links, specifically relevant to this Section, should be included/explained at either the beginning or end of a Section, unless the Section is very short.
 
@@ -104,9 +109,9 @@ Each Section is composed of a series of numbered Exercises.
 
 ### Flow
 
-Each Exercise should have a *flow* which requires that students hit the "Continue" button at least twice. 
+Each Exercise should have a *flow* which requires that students hit the "Continue" button at least once. 
 
-* Begin with a *Start* which is a sentence or two of knowledge and/or the question itself. If the length of the Start text is longer than one or two lines, then do not place the question code chunk in the same part. Instead, the Start includes a triple hash, thereby creating the Continue button. If the length of the text is short enough that students are willing to read it (at most two sentences), you can include the answer code chunk in the same part.
+* Begin with a *Start* which is a sentence or two of knowledge and/or the question itself. If the length of the Start text is longer than one or two lines, then do not place the question code chunk in the same part. Instead, the Start includes a triple hash, thereby creating the Continue button. If the length of the text is short enough that students are willing to read it (at most two sentences), you can include the Exercise code chunk in the same part.
 
 * Most of the time there is no need for a triple hash before the code chunk. 
 
@@ -116,9 +121,9 @@ Each Exercise should have a *flow* which requires that students hit the "Continu
 
 * After the Start, come three code chunks:
 
-  - The Exercise Code Chunk is the location in which students will place their answers. It always includes the `exercise = TRUE` code chunk option.
-  - The Hint Code Chunk includes any hints for the students. The code chunk name is the hint is always exactly the same as the one for the Exercise Code Chunk, except with `-hint-n` attached at the end. The `n` is replaced by the number of the hint. Almost always, there is only one hint, so the suffix is `-hint-1`. We always set `eval = FALSE` in the Hint code chunk since, often, the hint will not be legal R code.
-  - The Test Code Chunk requires no chunk name. It always includes the `include = FALSE` code chunk option because we never want to show the code or the results to students. Instead, the purpose of the Test Code Chunk is to ensure that the correct answer --- that is, the code we want students to enter into the Exercise Code Chunk --- works. 
+  - The Exercise code chunk is the location in which students will place their answers. It always includes the `exercise = TRUE` code chunk option.
+  - The Hint code chunk includes any hints for the students. The code chunk name is the hint is always exactly the same as the one for the Exercise code chunk, except with `-hint-n` attached at the end. The `n` is replaced by the number of the hint. Almost always, there is only one hint, so the suffix is `-hint-1`. We always set `eval = FALSE` in the Hint code chunk since, often, the hint will not be legal R code.
+  - The Test code chunk requires no chunk name. It always includes the `include = FALSE` code chunk option because we never want to show the code or the results to students. Instead, the purpose of the Test code chunk is to ensure that the correct answer --- that is, the code we want students to enter into the Exercise code chunk --- works. 
   
 * The three code chunks are always followed by a triple hash. We want students to pause after they have submitted their answers so that they are more likely to consider the output from their submission before moving on.
 
@@ -137,13 +142,13 @@ There are two main types of questions. First, we have normal *coding* questions.
 Here is an example code question:
 
 
-````default
+````r
 ### Exercise 2
 
 Start your code with `cces`. Use the pipe operator `|>` to add the 
 function `filter()`, selecting the  rows where `state` is equal to 
 "Massachusetts". To set something equal to a value in `filter()` 
-use two equal signs, `==`.
+use two equal signs: `==`.
 
 ```{r filter-2, exercise = TRUE}
 ```
@@ -153,7 +158,7 @@ cces |>
   filter(state == "...")
 ```
 
-```{r, include = FALSE}
+```{r filter-2-test, include = FALSE}
 cces |> 
   filter(state == "Massachusetts")
 ```
@@ -165,12 +170,12 @@ variable on the left is equal to the value on the left. See
 for discussion of other relational operators in R.
 A single equation symbol, `=`, is used to set something equal to 
 something else. 
-
 ````
 
-First, the Start of the Exercise sets the stage. It sometimes teaches something new, connects to a previous question, provides a useful link, whatever. If it is long enough, it is followed by a triple hash. If not, the text continues to the instruction. Most of the time, as above, there is only the instruction, telling the student, step-by-step, what to do.
 
-Second, the instruction requires that students write some code. Good instructions generate results when the student presses Run Code. Tutorial answers should require the smallest incremental number of characters, relative to the last question, for students to type. That is one way you know that your learning curve is shallow. If a Exercise Code Chunk requires the students to type a lot of characters, you should split up the Exercise into mutiple separate Exercises.
+First, the Start of the Exercise sets the stage. It sometimes teaches something new, connects to a previous Exercise, provides a useful link, whatever. If it is long enough, it is followed by a triple hash. If not, the text continues to the instruction. Most of the time, as above, there is only the instruction, telling the student, step-by-step, what to do.
+
+Second, the instruction requires that students write some code. Good instructions generate results when the student presses Run Code. Tutorial answers should require the smallest incremental number of characters, relative to the last question, for students to type. That is one way you know that your learning curve is shallow. If a Exercise code chunk requires the students to type a lot of characters, you should split up the Exercise into multiple separate Exercises.
 
 Third, any Exercise which requires the copying of code from the prior Exercise should place the *Copy previous code* button below the Exercise code chunk.
 
@@ -185,7 +190,7 @@ Hints must always have the same code chunk name as the exercise chunk for which 
 When you create a hint, always use `eval = FALSE` within the parentheses in the code chunk. This is because hints will often include "..." and other symbols which do not run as correct R code. So, we need to tell R not to run it or an error will occur during `R CMD check`. Example:
 
 
-````default
+````r
 ```{r ex-1-hint-1, eval = FALSE}
 This is an example hint. Normally sentences like these 
 would cause an error in R because it is not proper code. 
@@ -196,16 +201,17 @@ R ignores all errors!
 
 **You need to wrap the text in a long hint by hand, inserting the carriage returns yourself.** R will not wrap the text automatically.
 
-Often, hints look like this
+Often, hints look like this:
 
 
-````default
+````r
 ```{r ex-1-hint, eval = FALSE}
 ... |> 
   filter(year = ...) |> 
   ...(flights)
 ```
 ````
+
 
 The "..." indicates places where the student needs to insert some code, a value or a function name. The code in hints should be formatted correctly.
 
@@ -319,7 +325,7 @@ You should put the code for the graph in the code chunk at the start of the Sect
 You then build up the graphic, line by line, over a series of Exercises, providing hints along the way. 
 
 
-### <a id="kd"></a>Knowledge Drops
+### Knowledge Drops<a id="kd"></a>
 
 The most difficult part of tutorial creation is writing the "knowledge drops," the snippets of wisdom (and the associated links) which are used at the End of each Exercise. Some advice:
 
@@ -332,7 +338,7 @@ The most difficult part of tutorial creation is writing the "knowledge drops," t
   * Related functions. For example, use the "Useful filter functions" section of the `?dplyr::filter` help page. All of these make for good knowledge drops! Another example is the "See also" section of the `?arrange` help page. We can't possibly use every R function in an Exercise, but we can at least describe some of them in knowledge drops.
   
 * Use high quality links. 
-  * The second edition of [*R for Data Science*](https://r4ds.hadley.nz/) is amazing. Link to it as often as you can. Indeed, I think we should link at least once to every subpart of this book. We want students to look at it as often as possible.
+  * The second edition of [*R for Data Science*](https://r4ds.hadley.nz/) is amazing. Link to it as often as you can.
   * Anything associated with [Posit](https://posit.co/) (formerly named RStudio) is high quality. Examples include sites associated with [Tidyverse](https://www.tidyverse.org/) and [Tidymodels](https://www.tidymodels.org/).
 
 * Avoid links to low quality sites like `https://rdrr.io/` , `https://www.rdocumentation.org/`, and `https://www.datamentor.io/`. Any site which uses ads should be avoided.
@@ -343,7 +349,9 @@ The most difficult part of tutorial creation is writing the "knowledge drops," t
   
 * One common approach is like this:
 
+````
 See `?readr::locale` for [details](https://readr.tidyverse.org/articles/locales.html).
+````
 
 Note how we concisely provide both the command which brings up the help page and a link to the help page itself. 
 
@@ -360,22 +368,23 @@ Think back to our initial discussion of the 10,000 pieces of information which w
 
 There are two main sources for tibbles for use in the tutorials. First, use built-in data sets. Run `library(tidyverse)` or any other package. Then, run `data()`. This will pull up a list of available data sets, both those in the base R packages and those in any other packages you have loaded. Note that some of these will be data frames rather than tibbles. Second, you can store data --- either as csv or rds files --- in the `data` directory of a tutorial, as discussed below.
 
-### Using images
+### Images
 
 To add images to a tutorial, first make a directory called `images` in the folder that contains the `tutorial.Rmd`. Store all images for that tutorial there. You can work with those files in all the usual ways.
 
 Use `include_graphics()` to add the image into the document. Include this code in its own chunk, in the place where you want the image to appear in the tutorial. 
 
 
-````default
+````r
 ```{r}
 include_graphics("images/example.png")
 ```
 ````
 
+
 `include_graphics()` is part of the `knitr` package, so you need `library(knitr)` in the setup code chunk. Note that you do not need to name these code chunks.
 
-### Using files
+### Files
 
 Files --- most commonly text files or rds files --- are handled in a similar fashion to images. Create a directory called `data` in the same directory as the `tutorial.Rmd`, just as we do with `images`. Any file in `data` will be available at run time. (Note that the directory must be named `data`. Something like `my_data` will not work.) 
 
@@ -386,16 +395,9 @@ There are two main uses for files in `data`. First, they can be used at "compile
 
 If you need for an R object to be accessible in an Exercise code chunk, create it in the initial global `setup` code chunk at the top of the tutorial.
 
-<!-- ## Tutorials which require restarts -->
 
-<!-- Revisit this if we start using posit.cloud again. -->
 
-<!-- There are some tutorials which require either an R restart or (what is more or less the same thing, I think) the creation of a new R project. Clearest examples are: RStudio and Code, Rstudio and Github, and Quarto Websites. The problem arises because restarting R or creating a new R project causes R to terminate the tutorial. That is fine when working on a local machine, since the tutorial answers are saved and you can just restart the tutorial. But it does not (alway? ever?) work in the cloud. Restarting a tutorial which you terminated causes an error in the Cloud. -->
-
-<!-- So, for these three tutorials and all others, we should explicitly have students create two RStudio instances, one in which they are doing the tutorial and one in which they are following the tutorial's instructions, instructions which will often require restarts and/or new projects. -->
-
-## Check tutorial functionality 
-
+## Checks 
 
 The simplest way to test the `tutorial.Rmd` with which you are working on is to hit the "Run Document" button. This is the same thing as running `rmarkdown::render()` on that file:
 
@@ -425,16 +427,15 @@ The most common source of errors is something wrong with the hint code chunks, w
 
 ### Difficult bugs
 
-* The most common issue is that an author will use a package like **ggthemes** in their tutorial but then forget to include `library(ggthemes)` in the setup code chunk. This will not cause any error in checking because **ggthemes** is not actually used in the tutorial itself, so the tutorial knits without a problem. But then the student tries to type `library(ggthemes)` as an answer to an exercise and gets an error because the package has not been installed. This issue helps to illustrate why having plots which are built on the fly is so valuable: it guarantees that student answers will work since the same code worked when the tutorial was knitted.
+* The most common issue is that an author will use a package like **ggthemes** in their tutorial but then forget to include `library(ggthemes)` in the setup code chunk. This will not cause any error in checking because **ggthemes** is not actually used in the tutorial itself, so the tutorial knits without a problem. But then the student tries to type `library(ggthemes)` as an answer to an exercise and gets an error because the package has not been installed. This issue helps to illustrate why having plots which are built on the fly is so valuable: it guarantees that student answers will work since the same code worked when the tutorial was knitted. The main lesson: For any package used, have a question which explicitly asks the student to load the package. In the Test chunk for that question, load the package yourself. This guarantees the availability of the package.
 
 * Note that `R CMD check` does not seem to catch cases in which you `library()` a package in a tutorial but that package is not in DESCRIPTION. But such a discrepancy will cause an error on Github Actions because, there, you only have access to packages that have been installed as part of that test.
 
 * Be careful of the way that Github is sloppy in how it deals with capitalization changes, especially when you change the name of a file. For example, you might first commit a file named `Rproj.png`. Later, you decide to change all file names for images to all lower case. So, you change the name of the file to `rproj.png`. Commit and push. Everything is great, right? No! Even if Github shows you the new file name it might still have that file as `Rproj.png` internally, with the capital "R". This will cause errors when your run your checks on Github: 
 
-
-```bash
+````
 Error: Cannot find the file(s): "images/rproj.png"
-```
+````
 
 But the file is there! You can see it! The tests work on your local machine. The easiest solution is to delete the file (and commit that change). And then change the name of the file to something else and use it.
 
