@@ -459,21 +459,21 @@ Exercise, or to one of the previous Exercises in this Section.</p>
 <p>There are two types of text questions: 1) those that provide the
 students with the correct answer, after they have submitted their own
 answer, and, 2) those that do not provide an answer. Examples:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>### Exercise 6</span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Exercise 6</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Explain potential outcomes in about two sentences.</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Explain potential outcomes <span class="cf">in</span> about two sentences.</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>```{r definitions-ex-6}</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    message = "This is where we place the correct answer. It will appear only after </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    students have submitted their own answers. Note that we do not need to wrap the </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    answer text by hand.",          </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    answer(NULL, </span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>           correct = TRUE),</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    allow_retry = FALSE,</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    rows = 6)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r definitions-ex-6}</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">question_text(NULL,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">    message = "This is where we place the correct answer. It will appear only after </span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">    students have submitted their own answers. Note that we do not need to wrap the </span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">    answer text by hand.",          </span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">    answer(NULL, </span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">           correct = TRUE),</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="at">    allow_retry = FALSE,</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="at">    incorrect = NULL,</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="at">    rows = 6)</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="st">```</span> </span></code></pre></div>
 <p>For the <code>message</code> argument, you should provide an
 <strong>excellent</strong> answer. We want to allow students to check
 for themselves that they got, more or less, the correct answer. Note how
@@ -490,18 +490,21 @@ answer includes the word “validity,” for example, then tell the students
 to include (and define) validity as part of their answer.</p>
 <p>However, for many written questions, we don’t provide an answer, so
 we don’t mind if students resubmit. In that case, we use</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>```{r definitions-ex-6}</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  question_text(NULL,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    rows = 3)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Exercise 7</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>From the Console, run <span class="st">`</span><span class="at">list.files()</span><span class="st">`</span>. CP<span class="sc">/</span>CR.</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r file-creation-7}</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">  question_text(NULL,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">    answer(NULL, correct = TRUE),</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">    allow_retry = TRUE,</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">    try_again_button = "Edit Answer",</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="at">    incorrect = NULL,</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="at">    rows = 3)</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p>This format is most commonly used for “process” questions in which we
 have told students to do something and then confirm that they have done
-it by copying/pasting the result from a command like
-<code><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files()</a></code>.</p>
+it by copying/pasting the result from a command.</p>
 </div>
 </div>
 <div class="section level3">
@@ -521,10 +524,10 @@ effects. Doing so is annoying and error prone.</p></li>
 part of this same exercise, print out the object. This works
 well.</p></li>
 </ul>
-<p>Follow a coding <a href="https://ppbds.github.io/primer/style-guide.html" class="external-link">Style Guide</a>,
-especially spaces around operators like ” = “. Use only one command per
-line in pipes and graphics, with proper indentation. Indent plotting
-commands after the call to <code>ggplot()</code>.</p>
+<p>Follow a coding <a href="https://style.tidyverse.org/" class="external-link">Style
+Guide</a>, especially spaces around operators like ” = “. Use only one
+command per line in pipes and graphics, with proper indentation. Indent
+plotting commands after the call to <code>ggplot()</code>.</p>
 <!-- DK: Standardize this to refer to Tidyverse Guide, or elsewhere? -->
 <p>Do not create an object in one question and then assume that it will
 be available in subsequent questions. It won’t be! Each question is
@@ -553,9 +556,10 @@ Using <code><a href="https://rdrr.io/r/base/getwd.html" class="external-link">se
 <p>CMD-Return will now work because your R session is “located” in the
 same location as that from which the tutorial will be run when it is
 knitted.</p>
-<div class="section level4">
-<h4 id="pipes">Pipes<a class="anchor" aria-label="anchor" href="#pipes"></a>
-</h4>
+</div>
+<div class="section level3">
+<h3 id="pipes">Pipes<a class="anchor" aria-label="anchor" href="#pipes"></a>
+</h3>
 <p>The most common type of code questions involve the step-by-step
 process of building a pipe, the final output of which is a nice looking
 graphic.</p>
@@ -570,7 +574,6 @@ you only have to put the object name in the code chunk at the end of the
 Section rather than copying the code.</p>
 <p>You then build up the graphic, line by line, over a series of
 Exercises, providing hints along the way.</p>
-</div>
 </div>
 <div class="section level3">
 <h3 id="knowledge-drops">Knowledge Drops<a id="kd"></a><a class="anchor" aria-label="anchor" href="#knowledge-drops"></a>
