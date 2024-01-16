@@ -295,7 +295,7 @@ R ignores all errors!
 <p>But, much more common, is to use the End to drop some knowledge, especially about a function which was used in the answer to this Exercise, or to one of the previous Exercises in this Section.</p>
 <h4 id="text-questions">Text questions</h4>
 <p>There are two types of text questions: 1) those that provide the students with the correct answer, after they have submitted their own answer, and, 2) those that do not provide an answer.  Examples:</p>
-<pre><code class="language-default">### Exercise 6
+<pre><code class="language-r">### Exercise 6
 
 Explain potential outcomes in about two sentences.
 
@@ -309,13 +309,17 @@ question_text(NULL,
     allow_retry = FALSE,
     incorrect = NULL,
     rows = 6)
-```
+``` 
 </code></pre>
 <p>For the <code>message</code> argument, you should provide an <strong>excellent</strong> answer. We want to allow students to check for themselves that they got, more or less, the correct answer. Note how we set <code>allow_retry</code> to FALSE. This means that, after they see our answer, students can’t modify their answer. The <code>rows</code> argument decides how many rows the empty text input will have.</p>
 <p>Always specify (approximately) how much you want students to write. Reasonable units are: one sentence, two sentences and a paragraph. Pick one of these three unless you have a good reason not to.</p>
 <p>For paragraph questions, you should mention specific words or phrases which the students should include in their answers. If your suggested answer includes the word “validity,” for example, then tell the students to include (and define) validity as part of their answer.</p>
 <p>However, for many written questions, we don’t provide an answer, so we don’t mind if students resubmit. In that case, we use</p>
-<pre><code class="language-default">```{r definitions-ex-6}
+<pre><code class="language-r">### Exercise 7
+
+From the Console, run `list.files()`. CP/CR.
+
+```{r file-creation-7}
   question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -324,7 +328,7 @@ question_text(NULL,
     rows = 3)
 ```
 </code></pre>
-<p>This format is most commonly used for “process” questions in which we have told students to do something and then confirm that they have done it by copying/pasting the result from a command like <code>list.files()</code>.</p>
+<p>This format is most commonly used for “process” questions in which we have told students to do something and then confirm that they have done it by copying/pasting the result from a command.</p>
 <h3 id="tips">Tips</h3>
 <p>Each coding exercise should always spit out something. Interactivity is good! Students should always look at what their code is producing. There are some situations in which students need to make assignments and which, because of this, will result in no output when the Run Code button is pressed. But:</p>
 <ul>
@@ -338,7 +342,7 @@ question_text(NULL,
 <p>You can have the student not only do the assignment but also, as part of this same exercise, print out the object. This works well.</p>
 </li>
 </ul>
-<p>Follow a coding <a href="https://ppbds.github.io/primer/style-guide.html">Style Guide</a>, especially spaces around operators like “ = “. Use only one command per line in pipes and graphics, with proper indentation. Indent plotting commands after the call to <code>ggplot()</code>.</p>
+<p>Follow a coding <a href="https://style.tidyverse.org/">Style Guide</a>, especially spaces around operators like “ = “. Use only one command per line in pipes and graphics, with proper indentation. Indent plotting commands after the call to <code>ggplot()</code>.</p>
 <!-- DK: Standardize this to refer to Tidyverse Guide, or elsewhere? -->
 <p>Do not create an object in one question and then assume that it will be available in subsequent questions. It won’t be! Each question is independent of every other question. They live in separate R instances. The only exception (which we make use of) is that objects created in the initial <code>setup</code> chunk for the entire tutorial are available in all later questions, just the way that <code>library()</code> commands executed there do not need to be executed again.</p>
 <p>Code chunks for Exercises must be named.</p>
@@ -354,7 +358,7 @@ question_text(NULL,
 &gt; 
 </code></pre>
 <p>CMD-Return will now work because your R session is “located” in the same location as that from which the tutorial will be run when it is knitted.</p>
-<h4 id="pipes">Pipes</h4>
+<h3 id="pipes">Pipes</h3>
 <p>The most common type of code questions involve the step-by-step process of building a pipe, the final output of which is a nice looking graphic.</p>
 <p>You want to first show the graphic that you will create by the end of the Section. You show it once at the start of the Section and once before the last Exercise, as a reminder of what the graphic should look like so students do not need to scroll all the way back up.</p>
 <p>You should put the code for the graph in the code chunk at the start of the Section. Save the code to an object. The name of the object should have a “_p” suffix, where the “p” stands for “plot.” This way, you only have to put the object name in the code chunk at the end of the Section rather than copying the code.</p>

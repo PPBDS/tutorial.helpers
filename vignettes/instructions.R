@@ -42,6 +42,37 @@
 #    ...(flights)
 #  ```
 
+## ---- file = "example-written-1.txt", echo = TRUE, eval = FALSE---------------
+#  ### Exercise 6
+#  
+#  Explain potential outcomes in about two sentences.
+#  
+#  ```{r definitions-ex-6}
+#  question_text(NULL,
+#      message = "This is where we place the correct answer. It will appear only after
+#      students have submitted their own answers. Note that we do not need to wrap the
+#      answer text by hand.",
+#      answer(NULL,
+#             correct = TRUE),
+#      allow_retry = FALSE,
+#      incorrect = NULL,
+#      rows = 6)
+#  ```
+
+## ---- file = "example-written-2.txt", echo = TRUE, eval = FALSE---------------
+#  ### Exercise 7
+#  
+#  From the Console, run `list.files()`. CP/CR.
+#  
+#  ```{r file-creation-7}
+#    question_text(NULL,
+#      answer(NULL, correct = TRUE),
+#      allow_retry = TRUE,
+#      try_again_button = "Edit Answer",
+#      incorrect = NULL,
+#      rows = 3)
+#  ```
+
 ## ---- eval = FALSE------------------------------------------------------------
 #  x <- read_csv("data/myfile.csv")
 

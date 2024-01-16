@@ -232,7 +232,7 @@ But, much more common, is to use the End to drop some knowledge, especially abou
 There are two types of text questions: 1) those that provide the students with the correct answer, after they have submitted their own answer, and, 2) those that do not provide an answer.  Examples:
 
 
-````default
+````r
 ### Exercise 6
 
 Explain potential outcomes in about two sentences.
@@ -247,7 +247,7 @@ question_text(NULL,
     allow_retry = FALSE,
     incorrect = NULL,
     rows = 6)
-```
+``` 
 ````
 
 For the `message` argument, you should provide an **excellent** answer. We want to allow students to check for themselves that they got, more or less, the correct answer. Note how we set `allow_retry` to FALSE. This means that, after they see our answer, students can't modify their answer. The `rows` argument decides how many rows the empty text input will have.
@@ -259,8 +259,12 @@ For paragraph questions, you should mention specific words or phrases which the 
 However, for many written questions, we don't provide an answer, so we don't mind if students resubmit. In that case, we use 
 
 
-````default
-```{r definitions-ex-6}
+````r
+### Exercise 7
+
+From the Console, run `list.files()`. CP/CR.
+
+```{r file-creation-7}
   question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -270,7 +274,7 @@ However, for many written questions, we don't provide an answer, so we don't min
 ```
 ````
 
-This format is most commonly used for "process" questions in which we have told students to do something and then confirm that they have done it by copying/pasting the result from a command like `list.files()`.
+This format is most commonly used for "process" questions in which we have told students to do something and then confirm that they have done it by copying/pasting the result from a command.
 
 ### Tips
 
@@ -283,7 +287,7 @@ Each coding exercise should always spit out something. Interactivity is good! St
 * You can have the student not only do the assignment but also, as part of this same exercise, print out the object. This works well.
 
 
-Follow a coding [Style Guide](https://ppbds.github.io/primer/style-guide.html), especially spaces around operators like " = ". Use only one command per line in pipes and graphics, with proper indentation. Indent plotting commands after the call to `ggplot()`.
+Follow a coding [Style Guide](https://style.tidyverse.org/), especially spaces around operators like " = ". Use only one command per line in pipes and graphics, with proper indentation. Indent plotting commands after the call to `ggplot()`.
 
 <!-- DK: Standardize this to refer to Tidyverse Guide, or elsewhere? -->
 
@@ -314,7 +318,7 @@ in an R code chunk, presumably in the global `setup` chunk. But, if you try to e
 CMD-Return will now work because your R session is "located" in the same location as that from which the tutorial will be run when it is knitted.
 
 
-#### Pipes
+### Pipes
 
 The most common type of code questions involve the step-by-step process of building a pipe, the final output of which is a nice looking graphic.
 
