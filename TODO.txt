@@ -2,17 +2,31 @@
 
 * Update on CRAN
 
+* Update Shiny Apps tutorial and document its creation. Update it regularly. Maybe automate this as a Github Action? You can currently get to this via the website, under Tutorials menu item.
+
+## write_answers()
+
+See the comments at test-write_answers.R for detailed discussion. 
+
+We should split write_answers() into two parts. The first part just grabs everything we need from the session and returns a tibble. (This part might be too big for CRAN.) The second part takes the tibble and outputs the answers as html/pdf/rds. We can test this a lot. Do this first. The current test case will help ensure that, at least, nothing is worse.
+
+Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
+
+Do we really need gridExtra in order to be able to create a pdf file? Seems like overkill. Must be an easier way.
+
+A different approach to the pdf file creation problem in write_answers() would be to create the Rmd document on the file as a character object rmd and then do render(text = rmd, output_file = filename).
+
+## Other items
+
 * Fix Mac checking error on Github. Problem is "Error: Error: Error installing package 'textshaping':"
 
 * Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
 
 * Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr??? Get rid of them, if possible!
 
-* Review vignettes.
-
 * When running a tutorial from the Tutorial tab, links in the tutorial do not work.
 
-* Something in Getting Started which shows how links work. You can click. It takes you away, but then the back button takes you back.
+* Something in Getting Started which shows how links work. You can click. It takes you away, but then the back button takes you back. Or maybe this doesn't work from the Tutorial tab?
 
 * Ensure that this code handles our test code chunks in non-code questions. See RStudio and Github (gert) for examples. Seems to work, but some test cases would be nice.
 
@@ -39,20 +53,6 @@
 
 * I think that there is a bug in set_binary_only_in_r_profile() which only hits in a renv environment. It appears to check the .Rprofile in the local directory to see if options(pkgType = 'binary') is there, and then, when it is not there, it add the line to the main .Rprofile in the users home directory. If you run it again, it adds it again. A student can quickly get the line repeated many times. This then generates a weird error when the student restarts R, presumably because R does not like such silly repetition.
 
-# Deal with write_answers() and its associated test case.
-
-See the comments at test-write_answers.R for detailed discussion. 
-
-We should split write_answers() into two parts. The first part just grabs everything we need from the session and returns a tibble. (This part might be too big for CRAN.) The second part takes the tibble and outputs the answers as html/pdf/rds. We can test this a lot. Do this first. The current test case will help ensure that, at least, nothing is worse.
-
-Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
-
-Do we really need gridExtra in order to be able to create a pdf file? Seems like overkill. Must be an easier way.
-
-A different approach to the pdf file creation problem in write_answers() would be to create the Rmd document on the file as a character object rmd and then do render(text = rmd, output_file = filename).
-
-# Other tasks
-
 * Deal with these NOTES from devtools::check_win_devel() (or maybe they are from devtools::check(remote = TRUE, manual = TRUE) or rhub::check_for_cran())
 
 * checking examples ... [11s] NOTE
@@ -69,8 +69,6 @@ Found the following files/directories:
   * Why does devtools::check(remote = TRUE, manual = TRUE) produce so many weird notes about html problems? And why does it launch XQuartz?
 
 * Provide a `skip` argument to knit_tutorials which allows it to skip any tutorial path which includes a specific string. This will generally be used like skip = c("06-data-tidying", "08-data-import"). Note that these are not the names of tutorial files (which are mostly "tutorial.Rmd") nor the full path to those tutorials (which we don't know until we run `return_tutorial_paths()`). Instead, they are strings from within the path. (Maybe require that they be full parts of the path? Or maybe any match is fine?)
-
-* Update Shiny Apps tutorial and document its creation. Update it regularly. Maybe automate this as a Github Action? You can currently get to this via the website, under Tutorials menu item.
 
 * Figure out why Check is 0/0/0 but Test is 1 FAIL and 4 SKIPs.
 

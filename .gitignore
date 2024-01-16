@@ -16,3 +16,5 @@ inst/tutorials/*/rsconnect
 # The simple name of a file ignores that file wherever it might appear.
 
 .DS_Store
+
+revdep

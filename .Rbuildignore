@@ -14,3 +14,4 @@
 ^CRAN-SUBMISSION$
 ^tests/testthat/test-write_answers\.R$
 ^tests/testthat/fixtures/session_save\.rds$
+^revdep$
