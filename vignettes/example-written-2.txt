@@ -1,0 +1,12 @@
+### Exercise 7
+
+From the Console, run `list.files()`. CP/CR.
+
+```{r file-creation-7}
+  question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 3)
+```
