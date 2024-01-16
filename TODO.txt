@@ -1,12 +1,8 @@
 # Priorities
 
-* Format Tutorial chunk labels does not ignore material within four backticks. See Quarto 1 section of a previous version of RStudio and Code for an actual example. See how the exercises start again from 1 and use "Running Code" as the new section. Not what we want!
-
-* Fix Mac checking error on Github. Problem is "Error: Error: Error installing package 'textshaping':" 
-
-* Update Writing Tutorials Instructions to ensure it provides useful advice about how to show R code chunks
-
 * Update on CRAN
+
+* Fix Mac checking error on Github. Problem is "Error: Error: Error installing package 'textshaping':"
 
 * Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
 
