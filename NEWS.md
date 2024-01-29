@@ -1,5 +1,7 @@
 # tutorial.helpers (development version)
 
+* Get test cases for format_tutorial() working again.
+
 # tutorial.helpers 0.2.6
 
 * Add determine_code_chunk_name() and determine_exercise_number() functions so that make_exercise() is more manageable. Update logic for determine_code_chunk_name() to handle forward slashes and ending dashes better.

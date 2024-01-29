@@ -1,6 +1,21 @@
 # Priorities
 
-* Update on CRAN
+
+* I think it is dangerous how format_tutorial() turns:
+
+```{r, file = "images/quarto-example.txt", echo = TRUE, eval = FALSE}
+```
+
+into
+
+```{r file = "images/quarto-example.txt", echo = TRUE, eval = FALSE}
+```
+
+Is losing that comma really a good idea?
+
+* the_pipe-2-test as a test code chunk label, in a section entitles "The pipe" does not get fit to the-pipe-2-test when you hit Format Tutorial Chunk Labels.
+
+* How well is the case handled of a code chunk which is not one of exercise, hint and test, but which appears at the start of the question? Not well! Consider a chunk which simply includes a graphic.
 
 * Update Shiny Apps tutorial and document its creation. Update it regularly. Maybe automate this as a Github Action? You can currently get to this via the website, under Tutorials menu item.
 
