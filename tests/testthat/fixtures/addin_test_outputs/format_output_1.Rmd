@@ -47,6 +47,12 @@ Purpose of this initial code chunk is to ensure that format tutorial does not ac
 
 ```
 
+Testing to see if an unlabeled code chunk at the end also is unchanged, as it should be.
+
+```{r}
+
+```
+
 ### 
 
 ### Exercise 3
