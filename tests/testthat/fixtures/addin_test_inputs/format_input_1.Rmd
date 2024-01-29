@@ -30,6 +30,11 @@ Purpose of this initial code chunk is to ensure that format tutorial does not ac
 
 ```
 
+```{r -test, include=FALSE}
+
+```
+
+
 ###
 
 ### Exercise 2

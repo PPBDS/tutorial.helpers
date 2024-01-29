@@ -29,6 +29,10 @@ Purpose of this initial code chunk is to ensure that format tutorial does not ac
 
 ```
 
+```{r section-1-1-test, include = FALSE}
+
+```
+
 ### 
 
 ### Exercise 2
