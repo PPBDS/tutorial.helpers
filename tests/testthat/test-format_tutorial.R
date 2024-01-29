@@ -37,7 +37,7 @@ test_that("Format 2 works", {
 
 f_3_test <- tutorial.helpers::format_tutorial("fixtures/addin_test_inputs/format_input_3.Rmd")
 
-writeLines(f_3_test, "fixtures/addin_test_outputs/format_output_3.Rmd")
+# writeLines(f_3_test, "fixtures/addin_test_outputs/format_output_3.Rmd")
 
 f_3_truth <- paste(readLines("fixtures/addin_test_outputs/format_output_3.Rmd"),
                    collapse = "\n")
