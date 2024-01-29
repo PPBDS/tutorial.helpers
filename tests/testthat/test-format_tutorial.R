@@ -18,6 +18,8 @@ test_that("Format 1 works", {
                f_1_truth)
 })
 
+## Second test cases, dealing with a simple non-Code exercises. among other things.
+
 f_2_test <- tutorial.helpers::format_tutorial("fixtures/addin_test_inputs/format_input_2.Rmd")
 
 # writeLines(f_2_test, "fixtures/addin_test_outputs/format_output_2.Rmd")
@@ -29,3 +31,19 @@ test_that("Format 2 works", {
   expect_equal(f_2_test,
                f_2_truth)
 })
+
+# The RStudio and Code tutorial from r4ds.tutorials was giving me a bunch of
+# trouble, so I added it as a test case.
+
+f_3_test <- tutorial.helpers::format_tutorial("fixtures/addin_test_inputs/format_input_3.Rmd")
+
+writeLines(f_3_test, "fixtures/addin_test_outputs/format_output_3.Rmd")
+
+f_3_truth <- paste(readLines("fixtures/addin_test_outputs/format_output_3.Rmd"),
+                   collapse = "\n")
+
+test_that("Format 3 works", {
+  expect_equal(f_3_test,
+               f_3_truth)
+})
+
