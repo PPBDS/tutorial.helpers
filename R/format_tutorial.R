@@ -8,6 +8,7 @@
 #' @param file_path Character string.
 #'
 #' @returns Formatted document with correct exercise, hint and test chunk labels.
+#' @export
 
 format_tutorial <- function(file_path){
 

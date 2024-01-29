@@ -3,6 +3,7 @@
 export(check_tutorial_defaults)
 export(determine_code_chunk_name)
 export(determine_exercise_number)
+export(format_tutorial)
 export(knit_tutorials)
 export(make_exercise)
 export(return_tutorial_paths)
