@@ -33,6 +33,24 @@ options(tutorial.exercise.timelimit = 60,
 
 ### Exercise 1
 
+```{r checking-your-setup-1, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{r checking-your-setup-1-hint-1, eval = FALSE}
+
+```
+
+```{r checking-your-setup-1-test, include = FALSE}
+
+```
+
+### 
+
+### Exercise 2
+
 Look at the top left of your R Console. Here you should see the version of R you are running. It should look something like the image below.
 
 ```{r}
@@ -41,7 +59,7 @@ include_graphics("images/r_version.png")
 
 Type `R.version$version.string` into the Console and hit return. CP/CR.
 
-```{r checking-your-setup-1}
+```{r checking-your-setup-2}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
