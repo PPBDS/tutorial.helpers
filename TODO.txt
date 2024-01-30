@@ -1,8 +1,5 @@
 # Priorities
 
-* Chunk labels for the exercise code chunk should include "ex" just like the hint code chunk labels include "hint".
-
-
 * I think it is dangerous how format_tutorial() turns:
 
 ```{r, file = "images/quarto-example.txt", echo = TRUE, eval = FALSE}

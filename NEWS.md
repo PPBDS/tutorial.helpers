@@ -1,8 +1,10 @@
 # tutorial.helpers (development version)
 
+* Get test cases for format_tutorial() working again.
+
 * Fix format_tutorial() to deal with changes in parsermd 0.1.3.
 
-* Get test cases for format_tutorial() working again.
+* Change code chunk label for exercises to include "-ex-" before the exercise number.
 
 # tutorial.helpers 0.2.6
 
