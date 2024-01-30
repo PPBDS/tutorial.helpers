@@ -32,7 +32,29 @@ format_tutorial <- function(file_path){
   rmd <- parsermd::parse_rmd(file_path)
 
   tbl <- tibble::as_tibble(rmd)
-
+  
+  # parsermd 0.1.3 created a difficult to diagnose bug for me. It labels any
+  # unlabelled R code chunk as "unnamed-chunk-n" with "n" incrementing. That is
+  # very bad! You should not add labels which do not exist. So, I do a total
+  # hack to just remove those labels from the final document. Of course, this
+  # will hose any user who actually has a code chunk whose label matches
+  # "unnamed-chunk-n" wiuth "n" as any integer, but what are you going to do?
+  # This hack was easier (?) than trying to work directly with objects of class
+  # "rmd_ast" "list"
+  
+  for(i in seq_len(nrow(tbl))){
+    if(grepl("^unnamed-chunk-\\d+$", tbl[i, "label"])){
+      
+      # Once we get the correct row, we do two things. First, we remove the
+      # label from the tibble. Not sure why this is necessary. Is the label
+      # really used later? Second, we need to change the ast itself.
+      
+      tbl$label[i] <- NA
+      new_ast <- purrr::map(tbl$ast[i], change_chunk_function, "name", "")
+      tbl$ast[i] <- new_ast
+    }
+  }
+  
   # Set up tracker variables for the loop
 
   hint_count <- 0
@@ -245,6 +267,8 @@ format_tutorial <- function(file_path){
 
     new_doc <- paste(new_doc, new_txt, sep = "\n")
   }
+  
+
 
   new_doc
 }

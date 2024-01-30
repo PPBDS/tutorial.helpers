@@ -1,5 +1,7 @@
 # Priorities
 
+* Chunk labels for the exercise code chunk should include "ex" just like the hint code chunk labels include "hint".
+
 
 * I think it is dangerous how format_tutorial() turns:
 
@@ -11,7 +13,7 @@ into
 ```{r file = "images/quarto-example.txt", echo = TRUE, eval = FALSE}
 ```
 
-Is losing that comma really a good idea?
+Is losing that comma really a good idea? Turns out that this does nothing wrong.
 
 * the_pipe-2-test as a test code chunk label, in a section entitles "The pipe" does not get fit to the-pipe-2-test when you hit Format Tutorial Chunk Labels.
 

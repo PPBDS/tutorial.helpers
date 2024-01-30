@@ -1132,7 +1132,7 @@ If RStudio continues to insert `editor: visual` in the YAML header of new docume
 
 * Click `Tools -> Global Options...` to bring up the "Options" box. 
 
-```{r unnamed-chunk-16}
+```{r}
 include_graphics("images/visual-editing-options.png")
 ```
 
