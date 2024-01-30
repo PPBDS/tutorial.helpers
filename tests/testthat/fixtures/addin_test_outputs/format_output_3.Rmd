@@ -1,3 +1,7 @@
+---
+[]
+---
+
 
 ---
 title: RStudio and code
@@ -1348,4 +1352,3 @@ You now know how to use R projects, R scripts, Quarto documents, how to publish 
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
-

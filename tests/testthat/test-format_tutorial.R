@@ -47,3 +47,17 @@ test_that("Format 3 works", {
                f_3_truth)
 })
 
+# Isolated test of image load proceeding a non-code exercise.
+
+f_4_test <- tutorial.helpers::format_tutorial("fixtures/addin_test_inputs/format_input_4.Rmd")
+
+# writeLines(f_4_test, "fixtures/addin_test_outputs/format_output_4.Rmd")
+
+f_4_truth <- paste(readLines("fixtures/addin_test_outputs/format_output_4.Rmd"),
+                   collapse = "\n")
+
+test_that("Format 4 works", {
+  expect_equal(f_4_test,
+               f_4_truth)
+})
+
