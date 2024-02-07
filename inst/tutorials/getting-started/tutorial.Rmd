@@ -232,7 +232,20 @@ You have now selected sensible settings for using RStudio.
 
 ### Exercise 8
 
-Run this command at the Console: `tutorial.helpers::set_binary_only_in_r_profile()`. This will ensure that you install the binary version of new packages.
+Run this command at the Console: `tutorial.helpers::set_binary_only_in_r_profile()`. CP/CR.
+
+```{r tutorial-exercises-ex-8}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+### 
+
+This will ensure that you install the binary version of new packages.
 
 ### Exercise 9
 
@@ -257,7 +270,7 @@ $pkgType
 [1] "binary"
 ````
 
-This ensures that, when you install new packages, you will not, by default, try to compile them from the underlying source code itself. Doing so can only lead to trouble for those new to R programming.
+Now, when you install new packages, you will not, by default, try to compile them from the underlying source code itself. Doing so can only lead to trouble for those new to R programming.
 
 
 ### Exercise 10
