@@ -57,7 +57,7 @@ Clicking **"Start Over"** --- look for small letters at the bottom of the left-h
 
 Let's practice some simple math. Type `4 + 5` into the box below. Hit **"Run Code"** to see your results. Clicking **"Hint"** gives you a hint about what to type. 
 
-```{r tutorial-exercises-1, exercise = TRUE}
+```{r tutorial-exercises-ex-1, exercise = TRUE}
 
 ```
 
@@ -81,7 +81,7 @@ If you don't "Run Code" (or "Submit Answer") your response, nothing is recorded.
 
 Let's use variables to perform the same calculation. Below, we have already assigned 5 to `x` and 4 to `y`. On the line below those two provided lines of code, add the two variables by typing `x + y`. Hit "Run Code" to see your results. 
 
-```{r tutorial-exercises-2, exercise = TRUE}
+```{r tutorial-exercises-ex-2, exercise = TRUE}
 x <- 5
 y <- 4
 
@@ -101,7 +101,7 @@ Once you click "Run Code", the answer `[1] 9` should appear below the code you e
 
 We will often need to copy code from our previous exercises to continue working on a multi-stage problem. To make this easier, we provide a `Copy previous code` button. Below the following box, click on the `Copy previous code` button. 
 
-```{r tutorial-exercises-3, exercise = TRUE}
+```{r tutorial-exercises-ex-3, exercise = TRUE}
 
 ```
 
@@ -119,7 +119,7 @@ Change the values to `x <- 6` and `y <- 10`. Hit "Run Code". You should get the 
 
 Note that the assignment symbol, `<-`, is a less-than-sign followed by a dash. We often pronounce the symbol as "gets." So, we might say, when reading this code, that "x gets 6."
 
-###
+### 
 
 Did you remember to hit the "Run Code" button above? Lots of people forget! You must hit the button for your answer to be recorded.
 
@@ -129,7 +129,7 @@ Did you remember to hit the "Run Code" button above? Lots of people forget! You 
 
 Let's load our first R package. Type  `library(tidyverse)` and then hit "Run Code". 
 
-```{r tutorial-exercises-4, exercise = TRUE}
+```{r tutorial-exercises-ex-4, exercise = TRUE}
 
 ```
 
@@ -169,7 +169,7 @@ We often ask you to execute an R command in the R Console, the tab on the left p
 
 Copy/paste the command **and** the return value into this box.
 
-```{r tutorial-exercises-6}
+```{r tutorial-exercises-ex-6}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -207,7 +207,7 @@ You can generally call functions by just giving their name, like `set_rstudio_se
 
 To confirm that you have run this command, run `rstudioapi::readRStudioPreference(name = "load_workspace", default = "Code failed.")` from the R Console. CP/CR.
 
-```{r tutorial-exercises-7}
+```{r tutorial-exercises-ex-7}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -232,14 +232,13 @@ You have now selected sensible settings for using RStudio.
 
 ### Exercise 8
 
-Run this command at the Console: `tutorial.helpers::set_binary_only_in_r_profile()`.
+Run this command at the Console: `tutorial.helpers::set_binary_only_in_r_profile()`. This will ensure that you install the binary version of new packages.
 
-### 
+### Exercise 9
 
 Run this command at the Console: `options("pkgType")`. CP/CR.
 
-
-```{r tutorial-exercises-8}
+```{r tutorial-exercises-ex-9}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -261,13 +260,13 @@ $pkgType
 This ensures that, when you install new packages, you will not, by default, try to compile them from the underlying source code itself. Doing so can only lead to trouble for those new to R programming.
 
 
-### Exercise 9
+### Exercise 10
 
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are just copies of the R commands and their results. Other times, we will ask you to write one or more sentences of prose. 
 
 Copy and paste everything from `Exercise 9` through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
-```{r tutorial-exercises-9}
+```{r tutorial-exercises-ex-10}
 question_text(NULL,
     message = "We will sometimes provide an answer to written questions. Other times, like here, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",          
     answer(NULL, 
@@ -293,4 +292,3 @@ After hitting the "Download" button, you will be prompted to save a file named `
 ### 
 
 You now understand how tutorials function and how to download copies of your answers. Good luck with your data science journey!
-
