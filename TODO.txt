@@ -1,5 +1,8 @@
 # Priorities
 
+* Both make_exercise and format_tutorial encode the information about the correct code chunk labels for exercises. That is bad! We should encode that stuff in just one location.
+
+* maybe change the title of the tutorial? Perhaps "How Tutorials Work".
 
 * Update Shiny Apps tutorial and document its creation. Update it regularly. Maybe automate this as a Github Action? You can currently get to this via the website, under Tutorials menu item.
 
@@ -53,7 +56,7 @@ A different approach to the pdf file creation problem in write_answers() would b
 
 * With rstudioapi, use selectFile and friends as an easier way of saving student answers.
 
-* I think that there is a bug in set_binary_only_in_r_profile() which only hits in a renv environment. It appears to check the .Rprofile in the local directory to see if options(pkgType = 'binary') is there, and then, when it is not there, it add the line to the main .Rprofile in the users home directory. If you run it again, it adds it again. A student can quickly get the line repeated many times. This then generates a weird error when the student restarts R, presumably because R does not like such silly repetition.
+* I think that there is a bug in set_binary_only_in_r_profile() which only hits in a renv environment. It appears to check the .Rprofile in the local directory to see if options(pkgType = 'binary') is there, and then, when it is not there, it add the line to the main .Rprofile in the users home directory. If you run it again, it adds it again. A user can quickly get the line repeated many times. This then generates a weird error when the user restarts R, presumably because R does not like such silly repetition.
 
 * Deal with these NOTES from devtools::check_win_devel() (or maybe they are from devtools::check(remote = TRUE, manual = TRUE) or rhub::check_for_cran())
 
@@ -91,11 +94,11 @@ Does build_tutorials() really work? First, it seems to fail if you don't provide
 
 Look at get_submissions_from_learnr_session() function. It is only used in one function. Is it still necessary?
 
-Add test cases for format_tutorial() (at least) and maybe, if it is possible, for check_current_tutorial().
+Add test cases for check_current_tutorial().
 
 Do something about test-return_tutorial_paths(). 
 
-Want to change the color to the OK box so that it is green when students enter
+Want to change the color of the OK box so that it is green when students enter
 their email or other text. This seem relevant:
 
 # https://stackoverflow.com/questions/33620133/change-the-color-of-action-button-in-shiny/35871042
