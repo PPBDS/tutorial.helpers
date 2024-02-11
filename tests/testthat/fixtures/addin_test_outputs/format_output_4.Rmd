@@ -33,7 +33,7 @@ options(tutorial.exercise.timelimit = 60,
 
 ### Exercise 1
 
-```{r checking-your-setup-ex-1, exercise = TRUE}
+```{r checking-your-setup-1-ex, exercise = TRUE}
 
 ```
 
@@ -59,7 +59,7 @@ include_graphics("images/r_version.png")
 
 Type `R.version$version.string` into the Console and hit return. CP/CR.
 
-```{r checking-your-setup-ex-2}
+```{r checking-your-setup-2-ex}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
