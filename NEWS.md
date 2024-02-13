@@ -4,7 +4,7 @@
 
 * Fix format_tutorial() to deal with changes in parsermd 0.1.3.
 
-* Change code chunk label for exercises to include "-ex-" before the exercise number.
+* Change code chunk label for exercises to end with "-ex", just as the test code chunk labels end with "-test".
 
 # tutorial.helpers 0.2.6
 

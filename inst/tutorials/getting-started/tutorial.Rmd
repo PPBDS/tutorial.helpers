@@ -163,6 +163,11 @@ Click "Terminate Jobs". (You might also have to close the tutorial itself by han
 
 Now that you have read all the instructions, go ahead and follow them.
 
+###
+
+Note how all your answers to previous questions have been saved. It is not a problem to quit a tutorial. In fact, if you ignore a tutorial for awhile, it will quit automatically, appearing "grayed out" on the Tutorial tab. To start working again, click the "Home" button and then restart the tutorial just as you started it the first time.
+
+
 ### Exercise 6
 
 We often ask you to execute an R command in the R Console, the tab on the left portion of your RStudio screen. Type `version[['version.string']]` into the Console and hit the return key.
@@ -184,8 +189,8 @@ Your answer should look something like:
 
 ````
 > version[['version.string']]
-[1] "R version 4.3.0 (2023-04-21)"
->
+[1] "R version 4.3.2 (2023-10-31)"
+> 
 ````
 
 Your version of R may be more recent, but it should not be older. It is OK if your formatting differs from ours. Exactness does not matter. What matters is that you prove that you have executed the command as instructed.
