@@ -6,6 +6,8 @@
 
 * Change code chunk label for exercises to end with "-ex", just as the test code chunk labels end with "-test".
 
+* Setting rmd_viewer_type to "pane" within set_rstudio_settings(), per suggestion from Jade Cao.
+
 # tutorial.helpers 0.2.6
 
 * Add determine_code_chunk_name() and determine_exercise_number() functions so that make_exercise() is more manageable. Update logic for determine_code_chunk_name() to handle forward slashes and ending dashes better.

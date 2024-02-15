@@ -9,9 +9,11 @@
 #' `"insert_native_pipe_operator"` to `TRUE`. All those changes are good for any
 #' user, new or old.
 #'
-#' We also change `show_hidden_files` to `TRUE`, `rmd_chunk_output_inline` to
-#' `FALSE`, `source_with_echo` to `TRUE`, and `packages_pane_enabled` to
-#' `FALSE`. These settings make RStudio less confusing to new users.
+#' We also change `rmd_viewer_type` to `"pane"`, `show_hidden_files` to `TRUE`,
+#' `rmd_chunk_output_inline` to `FALSE`, `source_with_echo` to `TRUE`, and
+#' `packages_pane_enabled` to `FALSE`. These settings make RStudio less
+#' confusing to new users. The `rmd_viewer_type` setting is especially useful to
+#' students copy/pasting from the Console/Terminal to a tutorial.
 #'
 #' The last two changes are setting both `rainbow_parentheses` and
 #' `syntax_color_console` to `TRUE`. We *think* that these settings make coding
@@ -35,6 +37,7 @@ set_rstudio_settings <- function(){
     list("save_workspace", "never"), 
     list("load_workspace", FALSE),
     list("insert_native_pipe_operator", TRUE),
+    list("rmd_viewer_type", "pane"),
     list("show_hidden_files", TRUE),
     list("rmd_chunk_output_inline", FALSE),
     list("source_with_echo", TRUE),

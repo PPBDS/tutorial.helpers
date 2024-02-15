@@ -26,6 +26,8 @@ options(tutorial.exercise.timelimit = 60,
 
 <!-- DK: Set up a default version of this on RStudio Cloud that anyone can run at anytime? Could add a question about looking at a data set. -->
 
+<!-- I set this up so that, for me, it allows publishing to either shinyapps.io or Posit Cloud. Anyone else would need to connect their own accounts. Takes a while to run!  Sadly, both error with something about renv. Why should that matter? -->
+
 
 ## Introduction
 ### 

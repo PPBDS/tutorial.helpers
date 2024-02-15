@@ -17,9 +17,11 @@ new users. These settings are stored in:
 \code{"insert_native_pipe_operator"} to \code{TRUE}. All those changes are good for any
 user, new or old.
 
-We also change \code{show_hidden_files} to \code{TRUE}, \code{rmd_chunk_output_inline} to
-\code{FALSE}, \code{source_with_echo} to \code{TRUE}, and \code{packages_pane_enabled} to
-\code{FALSE}. These settings make RStudio less confusing to new users.
+We also change \code{rmd_viewer_type} to \code{"pane"}, \code{show_hidden_files} to \code{TRUE},
+\code{rmd_chunk_output_inline} to \code{FALSE}, \code{source_with_echo} to \code{TRUE}, and
+\code{packages_pane_enabled} to \code{FALSE}. These settings make RStudio less
+confusing to new users. The \code{rmd_viewer_type} setting is especially useful to
+students copy/pasting from the Console/Terminal to a tutorial.
 
 The last two changes are setting both \code{rainbow_parentheses} and
 \code{syntax_color_console} to \code{TRUE}. We \emph{think} that these settings make coding
