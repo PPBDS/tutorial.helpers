@@ -5,9 +5,11 @@ new users. These settings are stored in:
 save_workspace to "never", load_workspace to FALSE, and
 "insert_native_pipe_operator" to TRUE. All those changes are good for any
 user, new or old.
-We also change show_hidden_files to TRUE, rmd_chunk_output_inline to
-FALSE, source_with_echo to TRUE, and packages_pane_enabled to
-FALSE. These settings make RStudio less confusing to new users.
+We also change rmd_viewer_type to "pane", show_hidden_files to TRUE,
+rmd_chunk_output_inline to FALSE, source_with_echo to TRUE, and
+packages_pane_enabled to FALSE. These settings make RStudio less
+confusing to new users. The rmd_viewer_type setting is especially useful to
+students copy/pasting from the Console/Terminal to a tutorial.
 The last two changes are setting both rainbow_parentheses and
 syntax_color_console to TRUE. We think that these settings make coding
 errors less likely.'><title>Select smart setting for RStudio — set_rstudio_settings • tutorial.helpers</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Select smart setting for RStudio — set_rstudio_settings"><meta property="og:description" content='This function changes RStudio settings in order to make learning easier for
@@ -16,9 +18,11 @@ new users. These settings are stored in:
 save_workspace to "never", load_workspace to FALSE, and
 "insert_native_pipe_operator" to TRUE. All those changes are good for any
 user, new or old.
-We also change show_hidden_files to TRUE, rmd_chunk_output_inline to
-FALSE, source_with_echo to TRUE, and packages_pane_enabled to
-FALSE. These settings make RStudio less confusing to new users.
+We also change rmd_viewer_type to "pane", show_hidden_files to TRUE,
+rmd_chunk_output_inline to FALSE, source_with_echo to TRUE, and
+packages_pane_enabled to FALSE. These settings make RStudio less
+confusing to new users. The rmd_viewer_type setting is especially useful to
+students copy/pasting from the Console/Terminal to a tutorial.
 The last two changes are setting both rainbow_parentheses and
 syntax_color_console to TRUE. We think that these settings make coding
 errors less likely.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -32,7 +36,7 @@ errors less likely.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/a
     
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.6.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.6.9004</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,9 +94,11 @@ new users. These settings are stored in:
 <code>save_workspace</code> to <code>"never"</code>, <code>load_workspace</code> to <code>FALSE</code>, and
 <code>"insert_native_pipe_operator"</code> to <code>TRUE</code>. All those changes are good for any
 user, new or old.</p>
-<p>We also change <code>show_hidden_files</code> to <code>TRUE</code>, <code>rmd_chunk_output_inline</code> to
-<code>FALSE</code>, <code>source_with_echo</code> to <code>TRUE</code>, and <code>packages_pane_enabled</code> to
-<code>FALSE</code>. These settings make RStudio less confusing to new users.</p>
+<p>We also change <code>rmd_viewer_type</code> to <code>"pane"</code>, <code>show_hidden_files</code> to <code>TRUE</code>,
+<code>rmd_chunk_output_inline</code> to <code>FALSE</code>, <code>source_with_echo</code> to <code>TRUE</code>, and
+<code>packages_pane_enabled</code> to <code>FALSE</code>. These settings make RStudio less
+confusing to new users. The <code>rmd_viewer_type</code> setting is especially useful to
+students copy/pasting from the Console/Terminal to a tutorial.</p>
 <p>The last two changes are setting both <code>rainbow_parentheses</code> and
 <code>syntax_color_console</code> to <code>TRUE</code>. We <em>think</em> that these settings make coding
 errors less likely.</p>
