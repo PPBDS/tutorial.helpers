@@ -90,8 +90,8 @@ students to copy over all the code from the previous exercise. Use:
 This is handy for students when a series of exercises requires them to
 build up a long pipe, line-by-line.
 
-We recommend ending the tutorial the download-answers child document, as
-discussed above.
+We recommend ending the tutorial with the download-answers child
+document, as discussed above.
 
 ```` default
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
@@ -103,3 +103,15 @@ discussed above.
 In order to access the addins, load the package. See the [addins
 vignette](https://ppbds.github.io/tutorial.helpers/articles/addins.html)
 for details about their use.
+
+#### Getting Started with Tutorials
+
+The package includes a tutorial, “Getting Started with Tutorials,” which
+provides an introduction to tutorials for beginning students. You should
+require your students to complete this tutorial if you are using
+**tutorial.packages** to create your own tutorials. The tutorial is also
+available on
+[shinyapps.io](https://davidkane9.shinyapps.io/Getting-Started-with-Tutorials/)
+(number of users is limited) and [Posit
+Cloud](https://posit.cloud/content/7608636) (requires (free) Posit Cloud
+account).

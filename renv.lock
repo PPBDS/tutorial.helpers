@@ -994,12 +994,11 @@
     },
     "learnr": {
       "Package": "learnr",
-      "Version": "0.11.3",
+      "Version": "0.11.5",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "checkmate",
-        "curl",
         "digest",
         "ellipsis",
         "evaluate",
@@ -1021,7 +1020,7 @@
         "utils",
         "withr"
       ],
-      "Hash": "eb611c8535c23f4a8c519e1625f45b18"
+      "Hash": "3267d22ec2560045f5ff6e24d536c8d7"
     },
     "lifecycle": {
       "Package": "lifecycle",
@@ -1468,9 +1467,12 @@
     "renv": {
       "Package": "renv",
       "Version": "1.0.3",
-      "OS_type": null,
+      "Source": "Repository",
       "Repository": "CRAN",
-      "Source": "Repository"
+      "Requirements": [
+        "utils"
+      ],
+      "Hash": "41b847654f567341725473431dd0d5ab"
     },
     "reprex": {
       "Package": "reprex",
@@ -1635,7 +1637,7 @@
     },
     "shiny": {
       "Package": "shiny",
-      "Version": "1.7.4",
+      "Version": "1.8.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1665,7 +1667,7 @@
         "withr",
         "xtable"
       ],
-      "Hash": "c2eae3d8c670fa9dfa35a12066f4a1d5"
+      "Hash": "3a1f41807d648a908e3c7f0334bf85e6"
     },
     "sourcetools": {
       "Package": "sourcetools",

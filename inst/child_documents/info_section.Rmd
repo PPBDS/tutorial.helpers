@@ -18,3 +18,12 @@ question_text(
     try_again = "Edit Answer",
     incorrect = NULL)
 ```
+
+```{r information-id}
+question_text(
+    "ID (if requested by your instructor):",
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again = "Edit Answer",
+    incorrect = NULL)
+```

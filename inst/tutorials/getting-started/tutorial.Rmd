@@ -1,5 +1,5 @@
 ---
-title: Getting Started
+title: Getting Started with Tutorials
 author: David Kane
 tutorial:
   id: getting-started
@@ -24,9 +24,8 @@ options(tutorial.exercise.timelimit = 60,
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- DK: Set up a default version of this on RStudio Cloud that anyone can run at anytime? Could add a question about looking at a data set. -->
 
-<!-- I set this up so that, for me, it allows publishing to either shinyapps.io or Posit Cloud. Anyone else would need to connect their own accounts. Takes a while to run!  Sadly, both error with something about renv. Why should that matter? -->
+<!-- Publishing this tutorial to shinyapps and Posit Cloud is non-trivial. If you aren't careful, you get some weird renv error messages. I *think* that you need to be sure that you have installed a "clean" (?) version of tutorial.helpers itself. (Or maybe you just need to ensure that renv/activate.R includes some magic about RENV_STARTUP_DIAGNOSTICS.) Not sure! Anyway, each time you have an important change, you should republish, although it takes some time. We should have a Github Action take care of this. Should also move them to PPBDS accounts instead of my personal accounts. Maybe we only need to maintain one of these going forward. Any changes made should be reflected in the README.Rmd as well. -->
 
 
 ## Introduction
@@ -36,11 +35,11 @@ This tutorial is an introduction to the general use of R tutorials created with 
 
 ### 
 
-You may complete a tutorial either on your laptop or on a cloud computing platform, if one is provided. Either way, you will download a copy of your answers to the Downloads folder on your computer once you are done. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
+You may complete a tutorial either on your laptop or on a cloud computing platform like [Posit Cloud](https://posit.cloud/). Either way, you will download a copy of your answers to the Downloads folder on your computer once you are done. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
 
 ### 
 
-Many tutorials begin by asking for your your name and email. Fill yours in and then click the **"Submit Answer"** button. If you make a mistake, you can click **"Try Again"** and, uh, try again. 
+Most tutorials begin by asking for your your name and email. (Your instructor might also request that you fill in the "ID" field so that your work can be matched to a grading database. If not, leave this field blank.) Click "Continue" and then fill in your name and email. Click the **"Submit Answer"** button. If you make a mistake, you can click **"Try Again"** and, uh, try again. 
 
 
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}

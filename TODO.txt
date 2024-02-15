@@ -1,12 +1,8 @@
 # Priorities
 
-* Set up a default version of this on RStudio Cloud that anyone can run at anytime. Automatically update it somehow.
+* Explore online tutorials. Do they work? Do we need both Shiny Apps Automatically update it somehow.
 
 * Both make_exercise and format_tutorial encode the information about the correct code chunk labels for exercises. That is bad! We should encode that stuff in just one location.
-
-* maybe change the title of the tutorial? Perhaps "How Tutorials Work".
-
-* Update Shiny Apps tutorial and document its creation. Update it regularly. Maybe automate this as a Github Action? You can currently get to this via the website, under Tutorials menu item.
 
 ## write_answers()
 
