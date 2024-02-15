@@ -32,7 +32,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.6.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.6.9005</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,7 +131,7 @@
 <p>This allows you to place a button in an exercise which will allow students to copy over all the code from the previous exercise. Use:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span>button onclick <span class="ot">=</span> <span class="st">"transfer_code(this)"</span><span class="sc">&gt;</span>Copy previous code<span class="sc">&lt;</span><span class="er">/</span>button<span class="sc">&gt;</span></span></code></pre></div>
 <p>This is handy for students when a series of exercises requires them to build up a long pipe, line-by-line.</p>
-<p>We recommend ending the tutorial the download-answers child document, as discussed above.</p>
+<p>We recommend ending the tutorial with the download-answers child document, as discussed above.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
 </div>
@@ -139,6 +139,11 @@
 <h4 id="addins">Addins<a class="anchor" aria-label="anchor" href="#addins"></a>
 </h4>
 <p>In order to access the addins, load the package. See the <a href="https://ppbds.github.io/tutorial.helpers/articles/addins.html">addins vignette</a> for details about their use.</p>
+</div>
+<div class="section level4">
+<h4 id="getting-started-with-tutorials">Getting Started with Tutorials<a class="anchor" aria-label="anchor" href="#getting-started-with-tutorials"></a>
+</h4>
+<p>The package includes a tutorial, “Getting Started with Tutorials,” which provides an introduction to tutorials for beginning students. You should require your students to complete this tutorial if you are using <strong>tutorial.packages</strong> to create your own tutorials. The tutorial is also available on <a href="https://davidkane9.shinyapps.io/Getting-Started-with-Tutorials/" class="external-link">shinyapps.io</a> (number of users is limited) and <a href="https://posit.cloud/content/7608636" class="external-link">Posit Cloud</a> (requires (free) Posit Cloud account).</p>
 </div>
 </div>
 </div>
