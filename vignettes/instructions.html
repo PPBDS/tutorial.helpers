@@ -416,6 +416,7 @@ include_graphics(&quot;images/example.png&quot;)
 ```
 </code></pre>
 <p><code>include_graphics()</code> is part of the <code>knitr</code> package, so you need <code>library(knitr)</code> in the setup code chunk. Note that you do not need to name these code chunks.</p>
+<p>Because students will complete the tutorials using screens of very different widths, it is a good idea to put <code>knitr::opts_chunk$set(out.width = '100%')</code> in your <code>setup</code> code chunk. In this way, images will appear as a sensible size regardless of whether they are using a phone or a big monitor.</p>
 <h3 id="files">Files</h3>
 <p>Files — most commonly text files or rds files — are handled in a similar fashion to images. Create a directory called <code>data</code> in the same directory as the <code>tutorial.Rmd</code>, just as we do with <code>images</code>. Any file in <code>data</code> will be available at run time. (Note that the directory must be named <code>data</code>. Something like <code>my_data</code> will not work.)</p>
 <p>There are two main uses for files in <code>data</code>. First, they can be used at “compile time” (when the <code>tutorial.Rmd</code> is knit to html) for making plots or doing anything else. Second, and more importantly, they are available to students in the exercise code blocks during “run time” (when students are doing the tutorial).</p>

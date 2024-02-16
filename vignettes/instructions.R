@@ -1,4 +1,4 @@
-## ---- file = "example-code-exercise.txt", echo = TRUE, eval = FALSE-----------
+## ----file = "example-code-exercise.txt", echo = TRUE, eval = FALSE------------
 #  ### Exercise 2
 #  
 #  Start your code with `cces`. Use the pipe operator `|>` to add the
@@ -27,7 +27,7 @@
 #  A single equation symbol, `=`, is used to set something equal to
 #  something else.
 
-## ---- file = "example-hint-1.txt", echo = TRUE, eval = FALSE------------------
+## ----file = "example-hint-1.txt", echo = TRUE, eval = FALSE-------------------
 #  ```{r ex-1-hint-1, eval = FALSE}
 #  This is an example hint. Normally sentences like these
 #  would cause an error in R because it is not proper code.
@@ -35,14 +35,14 @@
 #  R ignores all errors!
 #  ```
 
-## ---- file = "example-hint-2.txt", echo = TRUE, eval = FALSE------------------
+## ----file = "example-hint-2.txt", echo = TRUE, eval = FALSE-------------------
 #  ```{r ex-1-hint, eval = FALSE}
 #  ... |>
 #    filter(year = ...) |>
 #    ...(flights)
 #  ```
 
-## ---- file = "example-written-1.txt", echo = TRUE, eval = FALSE---------------
+## ----file = "example-written-1.txt", echo = TRUE, eval = FALSE----------------
 #  ### Exercise 6
 #  
 #  Explain potential outcomes in about two sentences.
@@ -59,7 +59,7 @@
 #      rows = 6)
 #  ```
 
-## ---- file = "example-written-2.txt", echo = TRUE, eval = FALSE---------------
+## ----file = "example-written-2.txt", echo = TRUE, eval = FALSE----------------
 #  ### Exercise 7
 #  
 #  From the Console, run `list.files()`. CP/CR.
@@ -73,14 +73,14 @@
 #      rows = 3)
 #  ```
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  x <- read_csv("data/myfile.csv")
 
-## ---- file = "example-graphic.txt", echo = TRUE, eval = FALSE-----------------
+## ----file = "example-graphic.txt", echo = TRUE, eval = FALSE------------------
 #  ```{r}
 #  include_graphics("images/example.png")
 #  ```
 
-## ---- eval = FALSE------------------------------------------------------------
+## ----eval = FALSE-------------------------------------------------------------
 #  rmarkdown::render("inst/tutorials/02-terminal/tutorial.Rmd")
 

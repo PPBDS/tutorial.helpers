@@ -310,8 +310,9 @@ Use `include_graphics()` to add the image into the document. Include this code i
 ```{r, file = "example-graphic.txt", echo = TRUE, eval = FALSE}
 ```
 
-
 `include_graphics()` is part of the `knitr` package, so you need `library(knitr)` in the setup code chunk. Note that you do not need to name these code chunks.
+
+Because students will complete the tutorials using screens of very different widths, it is a good idea to put `knitr::opts_chunk$set(out.width = '100%')` in your `setup` code chunk. In this way, images will appear as a sensible size regardless of whether they are using a phone or a big monitor.
 
 ### Files
 
