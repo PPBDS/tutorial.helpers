@@ -4,8 +4,6 @@
 
 * Fix format_tutorial() to deal with changes in parsermd 0.1.3.
 
-* Change code chunk label for exercises to end with "-ex", just as the test code chunk labels end with "-test".
-
 * Setting rmd_viewer_type to "pane" within set_rstudio_settings(), per suggestion from Jade Cao.
 
 * Add "ID" field to default information page.
