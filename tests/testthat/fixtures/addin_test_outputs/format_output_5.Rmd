@@ -9,7 +9,7 @@ title: Fifth test
 
 <!-- test that it works with no exercise chunk. What should happen to this chunk label? Presumably nothing? Or should it be removed. -->
 
-```{r what-you-will-learn-ex-1}
+```{r what-you-will-learn-1}
 knitr::include_graphics("images/base.png")
 ```
 
@@ -17,7 +17,7 @@ knitr::include_graphics("images/base.png")
 
 <!-- test that things work with one hint chunk and an unlabeled test chunk. -->
 
-```{r what-you-will-learn-ex-2, exercise = TRUE}
+```{r what-you-will-learn-2, exercise = TRUE}
 
 ```
 
@@ -29,13 +29,12 @@ library(tidyverse)
 library(tidyverse)
 ```
 
-
 ### Exercise 3
 
 <!-- test that things work with two hints; no test chunk -->
 
 
-```{r what-you-will-learn-ex-3, exercise = TRUE}
+```{r what-you-will-learn-3, exercise = TRUE}
 
 ```
 
@@ -43,9 +42,7 @@ library(tidyverse)
 look it up
 ```
 
-```{r what-you-will-learn-3-hint-1, eval = FALSE}
+```{r what-you-will-learn-3-hint-2, eval = FALSE}
 ?sqrt
 ```
-
-
 

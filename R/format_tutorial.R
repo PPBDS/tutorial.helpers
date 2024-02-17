@@ -38,7 +38,7 @@ format_tutorial <- function(file_path){
   # very bad! You should not add labels which do not exist. So, I do a total
   # hack to just remove those labels from the final document. Of course, this
   # will hose any user who actually has a code chunk whose label matches
-  # "unnamed-chunk-n" wiuth "n" as any integer, but what are you going to do?
+  # "unnamed-chunk-n" with "n" as any integer, but what are you going to do?
   # This hack was easier (?) than trying to work directly with objects of class
   # "rmd_ast" "list"
   
@@ -72,6 +72,12 @@ format_tutorial <- function(file_path){
 
   # Each code chunk will go through a series of conditions to determine what
   # type of code chunk it is and what the label should be.
+  
+  # This entire loop should be refactored. Not sure how! Should probably start
+  # by creating the exercise code chunk name correctly. Once you have that, the
+  # name for the hint and the test code chunks is simple enough. Note the
+  # trickiness of keeping count of the hints. Maybe don't allow more than one
+  # hint?
 
   for (i in seq_along(tbl$sec_h2)){
 
@@ -130,7 +136,8 @@ format_tutorial <- function(file_path){
     # but the element doesn't have the eval = FALSE option,
     # add that option to the element.
     
-    # DK: Add similar testing/fixing for test chunks.
+    # DK: Add similar testing/fixing for test chunks. Or, better, make this
+    # hackery go away. If writers forget eval = FALSE, what can we do?
 
     if (stringr::str_detect(tbl$label[i], "hint") && 
         length(parsermd::rmd_get_options(tbl$ast[i])[[1]]) == 0){
@@ -147,8 +154,8 @@ format_tutorial <- function(file_path){
     cleaned_l <- gsub("\\{#(.*)\\}", "", l)
     cleaned_l <- gsub("[^a-zA-Z0-9 /]", "", cleaned_l)
     
-    # Convert to lowercase, replace spaces and slashes with hyphens, trim to
-    # 30 characters, and trim whitespace
+    # Convert to lowercase, replace spaces and slashes with hyphens, trim to 30
+    # characters, and trim whitespace and hyphens at the start and beginning.
     
     section_id <- trimws(cleaned_l)
     section_id <- substr(gsub("[ /]", "-", tolower(section_id)), 1, 30)
@@ -226,7 +233,7 @@ format_tutorial <- function(file_path){
     # After all the conditions above, the elements left MUST BE exercises, so
     # the appropriate labels are set and the exercise tracker is updated.
 
-    new_label <- paste0(section_id, "-", exercise_number, "-ex")
+    new_label <- paste0(section_id, "-", exercise_number)
 
     new_ast <- purrr::map(tbl$ast[i], change_chunk_function, "name", new_label)
 
@@ -237,8 +244,8 @@ format_tutorial <- function(file_path){
 
   # This is quite interesting.
   #
-  # The parsermd already has a as_document function that should've taken care of
-  # turning the changed Rmd structure into raw text.
+  # The parsermd already has an as_document function that should've taken care
+  # of turning the changed Rmd structure into raw text.
   #
   # However, there was a thing with Rmarkdown sections in the structure where
   # each time it is updated, it adds a newline to the section because while
@@ -268,6 +275,15 @@ format_tutorial <- function(file_path){
     new_doc <- paste(new_doc, new_txt, sep = "\n")
   }
   
+  # I don't really understand how the above code works. But I can see that it
+  # always results in an output doc with a newline at the beginning, which I
+  # don't think we want. At least, it looks weird for the test cases. (But might
+  # be a good idea in interactive use. If so, add the newline when it is
+  # interactive.)
+  
+  if(substr(new_doc, 1, 1) == "\n") {
+    new_doc <- substring(new_doc, 2)
+  }
 
 
   new_doc

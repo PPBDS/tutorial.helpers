@@ -61,3 +61,17 @@ test_that("Format 4 works", {
                f_4_truth)
 })
 
+# Deal better with hints
+
+f_5_test <- tutorial.helpers::format_tutorial("fixtures/addin_test_inputs/format_input_5.Rmd")
+
+# writeLines(f_5_test, "fixtures/addin_test_outputs/format_output_5.Rmd")
+
+f_5_truth <- paste(readLines("fixtures/addin_test_outputs/format_output_5.Rmd"),
+                   collapse = "\n")
+
+test_that("Format 5 works", {
+  expect_equal(f_5_test,
+               f_5_truth)
+})
+
