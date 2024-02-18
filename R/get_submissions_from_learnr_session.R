@@ -13,6 +13,16 @@ get_submissions_from_learnr_session <- function(sess){
 
   # Why not just make this a tibble, rather than a nested list? Certainly  would
   # make later code easier.
+  
+  # Note that get_tutorial_state(), with its `label` argument, allows you to
+  # grab the answer to a single question. Also, the returned object has a
+  # `timestamp` entry. Perhaps these would be of use somehow?
+  
+  # As best I can tell, get_tutorial_state() can only return questions which
+  # students have answered. You need to do something else, get_tutorial_info(),
+  # to get a list of all the questions.
+  
+  # get_tutorial_info() returns a list, one element of which is `items`
 
   curr_state <- learnr::get_tutorial_state(session = sess)
 

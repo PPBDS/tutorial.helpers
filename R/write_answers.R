@@ -42,7 +42,8 @@ write_answers <- function(file, session, is_test = FALSE){
   # https://github.com/mattblackwell/qsslearnr/blob/main/R/submission.R for an
   # example.
   
-
+  # For example, get_tutorial_state()$tutorial_version seems useful, as does
+  # $user_id.
 
   # Data Structure of a learnr submission object
 
