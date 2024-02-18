@@ -4,11 +4,13 @@
 
 * Fix format_tutorial() to deal with changes in parsermd 0.1.3.
 
-* Setting rmd_viewer_type to "pane" within set_rstudio_settings(), per suggestion from Jade Cao.
+* Setting rmd_viewer_type to "pane" within set_rstudio_settings(), per suggestion from Jade Cao. 
 
 * Add "ID" field to default information page.
 
 * Change tutorial title to "Getting Started with Tutorials."
+
+* Give set_rstudio_settings() a set.binary argument which is set to FALSE by default. If TRUE, the function will run set_binary_only_in_r_profile() at the end. This is handy for the "Getting Started with Tutorials"" tutorial. 
 
 * Set up "Getting Started with Tutorials" on shinyapps.io and Posit Cloud.
 

@@ -19,11 +19,14 @@
 #' `syntax_color_console` to `TRUE`. We *think* that these settings make coding
 #' errors less likely.
 #'
+#' @param set.binary Logical, set to `FALSE`, which indicates whether or not
+#'   `set_binary_only_in_r_profile()` should be run at the end. 
+#'
 #' @returns No return value, called for side effects.
 #'
 #' @export
 
-set_rstudio_settings <- function(){
+set_rstudio_settings <- function(set.binary = FALSE){
   
   # Change default settings in RStudio. Here are all the options:
   # https://docs.posit.co/ide/server-pro/reference/session_user_settings.html
@@ -61,4 +64,8 @@ set_rstudio_settings <- function(){
   if(isFALSE(changes_made)){
     message("RStudio settings are already sensible. No changes made.")
   } 
+  
+  if(isTRUE(set.binary)){
+    set_binary_only_in_r_profile()
+  }
 }
