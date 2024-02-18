@@ -138,7 +138,7 @@ Let's load our first R package. Type  `library(tidyverse)` and then hit "Run Cod
 library(...)
 ```
 
-Nothing is returned, which is often the case with R code.
+Nothing is returned, which is often the case with R code. But note the checkmark which has appeared next to "Exercise 4" above. This indicates that you have submitted your answer.
 
 ### 
 
@@ -222,7 +222,7 @@ question_text(NULL,
 
 ### 
 
-You can generally call functions by just giving their name, like `set_rstudio_settings()`. However, it can be safer to preface the function names with the name of the package in which the function is found, separated by two colons. Since `set_rstudio_settings()` is in the **tutorial.helpers**, we can also call it using the double colon notation: `tutorial.helpers::set_rstudio_settings()`.
+You can generally call functions by just giving their name along with the ending parantheses, as with `set_rstudio_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_rstudio_settings()` is in the **tutorial.helpers** package, we can also call it using the double colon notation: `tutorial.helpers::set_rstudio_settings()`.
 
 
 
@@ -231,8 +231,7 @@ You can generally call functions by just giving their name, like `set_rstudio_se
 Run this command from the R Console. 
 
 `
-rstudioapi::readRStudioPreference(name = "load_workspace", 
-                                  default = "Code failed.")
+rstudioapi::readRStudioPreference(name = "load_workspace", NA)
 `
 
 CP/CR.
@@ -251,8 +250,7 @@ question_text(NULL,
 You should have pasted something like this in the box above:
 
 ````
-> rstudioapi::readRStudioPreference(name = "load_workspace", 
-+                                   default = "Code failed.")
+> rstudioapi::readRStudioPreference(name = "load_workspace", NA)
 [1] FALSE
 >
 ````
@@ -345,4 +343,5 @@ After hitting the "Download" button, you will be prompted to save a file named `
 ```
 
 ## Summary
+
 You now understand how tutorials function and how to download copies of your answers. Good luck with your data science journey!
