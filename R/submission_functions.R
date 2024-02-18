@@ -75,6 +75,13 @@ submission_server <- function(session) {
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.rds"),
       content = function(file){
+        
+        # This is how we make test cases. Uncomment this line and comment
+        # write_answers(). Then, install the package. This assumes your test
+        # case comes from the "Getting Started with Tutorials" tutorial). Then
+        # run your tutorial as normal, choosing the RDS option at the end.
+        
+        # saveRDS(session, file = "~/Desktop/test_session.rds")
         write_answers(file, session)
       }
     )
