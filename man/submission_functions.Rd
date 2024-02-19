@@ -9,12 +9,9 @@
 An object of class \code{shiny.tag} of length 3.
 }
 \usage{
-submission_server(session)
+submission_server()
 
 submission_ui
-}
-\arguments{
-\item{session}{Session object from \code{Shiny} with \code{learnr}.}
 }
 \value{
 No return value, called for side effects.
@@ -30,7 +27,7 @@ an R chunk where \code{context="server"}.
 }
 \examples{
 if(interactive()){
-  submission_server(sess)
+  submission_server()
 }
 
 if(interactive()){

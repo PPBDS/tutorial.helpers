@@ -1,14 +1,11 @@
-# What we really want is a single function which, when called from the tutorial,
-# does all the stuff we need. But, presumably, that is impossible. We need (?) a
-# Shiny server and Shiny ui. This is not (?) any other way to produce this
-# effect.
+# This code is called from within inst/child_documents/download_answers.Rmd.
+# Note that the call is submission_server(), with no argument. Given that, where
+# does the code get the "session" object which is used below? Perhaps the
+# session object just exists somehow? In parent environment? I don't know how
+# this works! So, I need to declare a global variable in order to fix the NOTE
+# from R CMD check.
 
-# Perhaps we can replace this function with the downloadthis package someday:
-# https://CRAN.R-project.org/package=downloadthis
-
-# When we call this function, we just use submission_server(). But, then, where
-# does the information for the session argument come from?
-
+utils::globalVariables(c("session"))
 
 #' @title Tutorial submission functions
 #' @rdname submission_functions
@@ -19,35 +16,36 @@
 #'   necessary that the server function, `submission_server()`, be included in
 #'   an R chunk where `context="server"`.
 #'
-#' @param session Session object from `Shiny` with `learnr`.
-#'
 #' @examples
 #' if(interactive()){
-#'   submission_server(sess)
+#'   submission_server()
 #' }
 #'
 #' @export
 #'
 #' @returns No return value, called for side effects.
 
-
-submission_server <- function(session) {
+submission_server <- function() {
   p = parent.frame()
   
-  # This code is called from within inst/child_documents/download_answers.Rmd.
-  # Note that the call is submission_server(), with no argument. Perhaps the
-  # session object just exists somehow? In parent environment? I don't know how
-  # this works!
+  # What we really want is a single function which, when called from the
+  # tutorial, does all the stuff we need. But, presumably, that is impossible.
+  # We need (?) a Shiny server and Shiny ui. There is not (?) any other way to
+  # produce this effect.
+  
+  # Perhaps we can replace this function with the downloadthis package someday:
+  # https://CRAN.R-project.org/package=downloadthis. Or perhaps we can use this:
+  # https://mastering-shiny.org/action-transfer.html#downloading-reports
+  
+  # Sure seems like a better approach would be to make use of the same mechanism
+  # by which Shiny stores the student's work in between sessions. Couldn't we
+  # just find that and load it up somehow?
 
   # We need information from the parent frame --- from the learnr code which is
   # running this tutorial. This is the environment which is calling this
   # function, submission_server. Only this parent environment has access to
   # objects (like input, output, and session) which we need to access. So,
   # local() makes everything below evaluated in the parent frame.
-  
-  # Sure seems like a better approach would be to make use of the same mechanism
-  # by which Shiny stores the student's work in between sessions. Couldn't we
-  # just find that and load it up somehow?
 
   local({
 

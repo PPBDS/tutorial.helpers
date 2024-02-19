@@ -11,6 +11,7 @@
 * Change tutorial title to "Getting Started with Tutorials."
 
 * Give set_rstudio_settings() a set.binary argument which is set to FALSE by default. If TRUE, the function will run set_binary_only_in_r_profile() at the end. This is handy for the "Getting Started with Tutorials"" tutorial. 
+* Remove session argument from submission_server() since it had no effect.
 
 * Set up "Getting Started with Tutorials" on shinyapps.io and Posit Cloud.
 
