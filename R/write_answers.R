@@ -32,6 +32,9 @@
 
 write_answers <- function(file, session, is_test = FALSE){
   
+  # Seems like there are much easier ways of handling this problem. See:
+  # https://mastering-shiny.org/action-transfer.html#downloading-reports
+  
   suffix <- tools::file_ext(file)
   
   stopifnot(suffix %in% c("html", "rds", "pdf"))

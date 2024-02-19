@@ -1,18 +1,14 @@
 # Priorities
 
-* Update 
-
-* Upon reflection, it was a mistake to add an "ex" to the exercise since the hints must have the same label, and it is dumb for them to include an "ex"! So, switch things so that main id has not ex, and then hints and tests just add hint-n and test.
-
-* Explore online tutorials. Do they work? Do we need both Shiny Apps Automatically update it somehow.
+* Update online versions. Maybe only need Posit Cloud version?
 
 * Think harder about whether write answer should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
 
 * format_tutorial() needs to handle hints better. In particular, it must ensure that the hint matches the exercise code chunk name, as it must, by definition.
 
-* Both make_exercise and format_tutorial encode the information about the correct code chunk labels for exercises. That is bad! We should encode that stuff in just one location.
+* Both make_exercise() and format_tutorial() encode the information about the correct code chunk labels for exercises. That is bad! We should encode that stuff in just one location.
 
-
+* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
 
 ## write_answers()
 
