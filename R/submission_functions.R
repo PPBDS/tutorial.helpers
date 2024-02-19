@@ -26,7 +26,6 @@ utils::globalVariables(c("session"))
 #' @returns No return value, called for side effects.
 
 submission_server <- function() {
-  p = parent.frame()
   
   # What we really want is a single function which, when called from the
   # tutorial, does all the stuff we need. But, presumably, that is impossible.
@@ -47,53 +46,49 @@ submission_server <- function() {
   # objects (like input, output, and session) which we need to access. So,
   # local() makes everything below evaluated in the parent frame.
 
-  local({
-
-    # downloadHandler is a function, one of the arguments for which is
-    # filename. We want to have the file name be different for each tutorial.
-    # But how do we know the name of the tutorial in the middle of the
-    # session? It is easy to access some information from the session object
-    # if we know the correct learnr function. (Note that the call to session
-    # only seems to work within a reactive function like this.)
-    
-    # Since the filename is just the tutorial_id plus the suffix, and since the
-    # id information also exists in the session object, we don't really need the
-    # call to get_tutorial_info() here.
-    
-    
-    output$downloadHtml <- shiny::downloadHandler(
-      filename = paste0(learnr::get_tutorial_info()$tutorial_id,
-                        "_answers.html"),
-      content = function(file){
-        write_answers(file, session)
-      }
-    )
-
-    output$downloadRds <- shiny::downloadHandler(
-      filename = paste0(learnr::get_tutorial_info()$tutorial_id,
-                        "_answers.rds"),
-      content = function(file){
-        
-        # This is how we make test cases. Uncomment this line and comment
-        # write_answers(). Then, install the package. This assumes your test
-        # case comes from the "Getting Started with Tutorials" tutorial). Then
-        # run your tutorial as normal, choosing the RDS option at the end.
-        
-        # saveRDS(session, file = "~/Desktop/test_session.rds")
-        write_answers(file, session)
-      }
-    )
-    
-    output$downloadPdf <- shiny::downloadHandler(
-      filename = paste0(learnr::get_tutorial_info()$tutorial_id,
-                        "_answers.pdf"),
-      content = function(file){
-        write_answers(file, session)
-      }
-    )
-
-  }, envir = p)
+  # downloadHandler is a function, one of the arguments for which is
+  # filename. We want to have the file name be different for each tutorial.
+  # But how do we know the name of the tutorial in the middle of the
+  # session? It is easy to access some information from the session object
+  # if we know the correct learnr function. (Note that the call to session
+  # only seems to work within a reactive function like this.)
   
+  # Since the filename is just the tutorial_id plus the suffix, and since the
+  # id information also exists in the session object, we don't really need the
+  # call to get_tutorial_info() here.
+  
+  
+  output$downloadHtml <- shiny::downloadHandler(
+    filename = paste0(learnr::get_tutorial_info()$tutorial_id,
+                      "_answers.html"),
+    content = function(file){
+      write_answers(file, session)
+    }
+  )
+  
+  output$downloadRds <- shiny::downloadHandler(
+    filename = paste0(learnr::get_tutorial_info()$tutorial_id,
+                      "_answers.rds"),
+    content = function(file){
+      
+      # This is how we make test cases. Uncomment this line and comment
+      # write_answers(). Then, install the package. This assumes your test
+      # case comes from the "Getting Started with Tutorials" tutorial). Then
+      # run your tutorial as normal, choosing the RDS option at the end.
+      
+      # saveRDS(session, file = "~/Desktop/test_session.rds")
+      write_answers(file, session)
+    }
+  )
+  
+  output$downloadPdf <- shiny::downloadHandler(
+    filename = paste0(learnr::get_tutorial_info()$tutorial_id,
+                      "_answers.pdf"),
+    content = function(file){
+      write_answers(file, session)
+    }
+  )
+
   NULL
 }
 
