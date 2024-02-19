@@ -19,7 +19,7 @@ set_binary_only_in_r_profile <- function(){
   
   # Should we still change the option value to binary at the end of this
   # function? It is bad practice to just change options, I think. Perhaps we
-  # could just require students to restart the R session?
+  # could just require users to restart the R session?
 
   # This function is modeled after the function census_api_key() from the
   # tidycensus package. We only do it on non-Linux systems because Linux is
@@ -32,22 +32,25 @@ set_binary_only_in_r_profile <- function(){
     home <- Sys.getenv("HOME")
     rprof <- file.path(home, ".Rprofile")
 
-    # Create lines to insert. We added the trailing newline because there is a
-    # bug (?) whereby the .Rprofile script does not run when the .Rprofile file
-    # does not end with a trailing newline.
+    # Create lines to insert. Be warned that .Rprofile does not run when the
+    # .Rprofile file does not end with a trailing newline. We assume that the
+    # current .Rprofile, if it exists, is well-formed. We do not check for a
+    # trailing newline. Perhaps we should?
 
-    rprof_line <- "options(pkgType = 'binary')\n"
+    rprof_line <- "options(pkgType = 'binary')"
 
-    # If user already has an .Rprofile, then just append to that file If not,
+    # If user already has an .Rprofile, then just append to that file. If not,
     # create an .Rprofile in home directory and write to that. I *think* that
-    # new installations do not create a .Rprofile by default.
+    # new installations of R/Rstudio do not create a .Rprofile by default.
 
     if(file.exists(rprof)){
 
       curr_prof <- readr::read_file(rprof)
 
-
-      # If option already in user's .Rprofile, then just don't write in it
+      # If the option is already in user's .Rprofile, then just don't write in
+      # it. Note this hacky method of checking by removing all white space
+      # before doing the check, the better to match `pkgType = 'binary'` with
+      # `pkgType='binary'`.
 
       if(stringr::str_detect(gsub(" ", "", curr_prof), 
                              stringr::fixed(gsub(" ", "", rprof_line)))){
@@ -57,7 +60,8 @@ set_binary_only_in_r_profile <- function(){
       }else{
         
         # We claim to be appending, but we are really replacing. Should we just
-        # append?
+        # append? I believe that write() (which wraps cat()) automatically
+        # appends a trailing newline, so we do not have to.
 
         message("Appending options(pkgType = 'binary') to your .Rprofile")
 
