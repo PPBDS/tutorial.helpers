@@ -19,24 +19,19 @@
 #'   necessary that the server function, `submission_server()`, be included in
 #'   an R chunk where `context="server"`.
 #'
-#' @param session Session object from `Shiny` with `learnr`.
-#'
 #' @examples
 #' if(interactive()){
-#'   submission_server(sess)
+#'   submission_server()
 #' }
 #'
 #' @export
 #'
 #' @returns No return value, called for side effects.
 
-submission_server <- function(session) {
-  p = parent.frame()
+submission_server <- function() {
+  p <- parent.frame()
 
   # This code is called from within inst/child_documents/download_answers.Rmd.
-  # Note that the call is submission_server(), with no argument. Perhaps the
-  # session object just exists somehow? In parent environment? I don't know how
-  # this works!
 
   # We need information from the parent frame --- from the learnr code which is
   # running this tutorial. This is the environment which is calling this
