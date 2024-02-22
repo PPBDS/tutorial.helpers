@@ -6,9 +6,14 @@
 # Perhaps we can replace this function with the downloadthis package someday:
 # https://CRAN.R-project.org/package=downloadthis
 
-# When we call this function, we just use submission_server(). But, then, where
-# does the information for the session argument come from?
+# This code is called from within inst/child_documents/download_answers.Rmd.
+# Note that the call is submission_server(), with no argument. Given that, where
+# does the code get the "session" object which is used below? Perhaps the
+# session object just exists somehow? In parent environment? I don't know how
+# this works! Anyway, I need to declare a global variable in order to fix the
+# NOTE from R CMD check.
 
+utils::globalVariables(c("session"))
 
 #' @title Tutorial submission functions
 #' @rdname submission_functions
@@ -31,8 +36,6 @@
 submission_server <- function() {
   p <- parent.frame()
 
-  # This code is called from within inst/child_documents/download_answers.Rmd.
-
   # We need information from the parent frame --- from the learnr code which is
   # running this tutorial. This is the environment which is calling this
   # function, submission_server. Only this parent environment has access to
@@ -45,12 +48,12 @@ submission_server <- function() {
   
   local({
 
-    # downloadHandler is a function, one of the arguments for which is
-    # filename. We want to have the file name be different for each tutorial.
-    # But how do we know the name of the tutorial in the middle of the
-    # session? It is easy to access some information from the session object
-    # if we know the correct learnr function. (Note that the call to session
-    # only seems to work within a reactive function like this.)
+    # downloadHandler is a function, one of the arguments for which is filename.
+    # We want to have the file name be different for each tutorial. But how do
+    # we know the name of the tutorial in the middle of the session? It is easy
+    # to access some information from the session object if we know the correct
+    # learnr function. (Note that the session object only seems to exist within
+    # a reactive function like this.)
     
     # Since the filename is just the tutorial_id plus the suffix, and since the
     # id information also exists in the session object, we don't really need the
