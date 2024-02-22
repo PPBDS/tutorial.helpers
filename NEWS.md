@@ -1,43 +1,44 @@
 # tutorial.helpers (development version)
 
-* Get test cases for format_tutorial() working again.
+* Get test cases for `format_tutorial()` working again.
 
-* Fix format_tutorial() to deal with changes in parsermd 0.1.3.
+* Fix `format_tutorial()` to deal with changes in parsermd 0.1.3.
 
-* Setting rmd_viewer_type to "pane" within set_rstudio_settings(), per suggestion from Jade Cao. 
+* Setting rmd_viewer_type to "pane" within `set_rstudio_settings()`, per suggestion from Jade Cao. 
 
 * Add "ID" field to default information page.
 
 * Change tutorial title to "Getting Started with Tutorials."
 
-* Give set_rstudio_settings() a set.binary argument which is set to FALSE by default. If TRUE, the function will run set_binary_only_in_r_profile() at the end. This is handy for the "Getting Started with Tutorials"" tutorial. 
-* Simplify submission_server().
+* Give `set_rstudio_settings()` a set.binary argument which is set to FALSE by default. If TRUE, the function will run set_binary_only_in_r_profile() at the end. This is handy for the "Getting Started with Tutorials"" tutorial. 
+
+* Simplify `submission_server()`.
 
 * Set up "Getting Started with Tutorials" on shinyapps.io and Posit Cloud.
 
 # tutorial.helpers 0.2.6
 
-* Add determine_code_chunk_name() and determine_exercise_number() functions so that make_exercise() is more manageable. Update logic for determine_code_chunk_name() to handle forward slashes and ending dashes better.
+* Add `determine_code_chunk_name()` and `determine_exercise_number()` functions so that `make_exercise()` is more manageable. Update logic for `determine_code_chunk_name()` to handle forward slashes and ending dashes better.
 
-* Add test case for write_answers(). Add associated files to .Rbuildignore so as not to violate the CRAN size restriction of 5 mb.
+* Add test case for `write_answers()`. Add associated files to .Rbuildignore so as not to violate the CRAN size restriction of 5 mb.
 
 * Add vignette about downloading answers. Reorder all five vignettes in Articles menu.
 
 * Add Spanish translation of Getting Started tutorial. Thanks to @xavidp!
 
-* Add several more settings changes to set_rstudio_settings(). The set of changes is now quite extensive, but this seems the best approach to ensuring that new students have the best possible learning environment.
+* Add several more settings changes to `set_rstudio_settings()`. The set of changes is now quite extensive, but this seems the best approach to ensuring that new students have the best possible learning environment.
 
-* Rewrite set_rstudio_settings() to report any changes made in settings.
+* Rewrite `set_rstudio_settings()` to report any changes made in settings.
 
 # tutorial.helpers 0.2.5
 
-* Remove test case for write_answers() to meet 5 mb maximum package size.
+* Remove test case for `write_answers()` to meet 5 mb maximum package size.
 
 # tutorial.helpers 0.2.4
 
-* Add test case for write_answers().
+* Add test case for `write_answers()`.
 
-* Fix (really!) error on CRAN Debian systems (caused by attempts to write to the user library) by setting the intermediates_dir argument to tempdir() in the call to render() within knit_tutorials().
+* Fix (really!) error on CRAN Debian systems (caused by attempts to write to the user library) by setting the intermediates_dir argument to `tempdir()` in the call to `render()` within `knit_tutorials()`.
 
 # tutorial.helpers 0.2.3
 
@@ -49,13 +50,13 @@
 
 * Create "Tutorials for Books" vignette.
 
-* Fix error in downloading files by exporting write_answers(). Thanks to Xavier de Pedro Puente for the report.
+* Fix error in downloading files by exporting `write_answers()`. Thanks to Xavier de Pedro Puente for the report.
 
 # tutorial.helpers 0.2.2
 
 * Replace /dontrun{} with if(interactive()){}.
 
-* Fix return value in submission_server().
+* Fix return value in `submission_server()`.
 
 # tutorial.helpers 0.2.1
 
@@ -67,13 +68,13 @@
 
 # tutorial.helpers 0.1.2
 
-* Move prep_rstudio_settings() to r4ds.tutorials.
+* Move `prep_rstudio_settings()` to r4ds.tutorials.
 
 * Publish Getting Started tutorial to Shiny Apps and adjust \_pkgdown.yml to make use of it.
 
 # tutorial.helpers 0.1.1
 
-* Add prep_rstudio_settings().
+* Add `prep_rstudio_settings()`.
 
 * Add Getting Started tutorial.
 
