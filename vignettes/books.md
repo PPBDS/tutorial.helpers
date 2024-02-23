@@ -19,12 +19,12 @@ The **tutorial.helpers** package makes it easy to create a *structured* tutorial
 
 Consider some idiosyncratic advice for book-based tutorials using the example of [*R for Data Science (2e)*](https://r4ds.hadley.nz/) and [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/).
 
-* Do one or two of the tutorials before you start working on your own. One of them should be the 4-data-transform tutorial. Another might be the 21-spreadsheets tutorial. The below examples are taken from it.
+* Do one or two of the tutorials before you start working on your own. 
 
 * Make your Introduction look like this:
 
 ````
-This tutorial covers [Chapter 21: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html) 
+This tutorial covers [Chapter 20: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html) 
 from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, 
 Mine Çetinkaya-Rundel, and Garrett Grolemund. You will learn how to get data from Excel 
 spreadsheets using  `[read_excel()](https://readxl.tidyverse.org/reference/read_excel.html)` 
@@ -41,7 +41,7 @@ the [**googlesheets4**](https://googlesheets4.tidyverse.org/) package.
 * Make your Summary look like this:
 
 ````
-This tutorial covered [Chapter 21: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html) 
+This tutorial covered [Chapter 20: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html) 
 from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, 
 Mine Çetinkaya-Rundel, and Garrett Grolemund. You have learned how to get data from Excel
 spreadsheets using  `[read_excel()](https://readxl.tidyverse.org/reference/read_excel.html)` 
@@ -55,7 +55,7 @@ by Karl Broman and Kara Woo for great advice about organizing your data using sp
 
   - The first paragraph is identical to the Introduction, except that "covers" is replaced with "covered" and "will learn" with "have learned." We began the tutorial with a promise about what students would learn. One hopes that we kept that promise.
   - The second paragraph gives one or two pointers about the best material which a student might look into if she is interested in learning more about the broad topic of the tutorial. These pointers were also mentioned as knowledge drops earlier in the tutorial.
-  - These pointers will often (always?) be items which were mentioned in the book itself. Those authors, presumably, have good taste, otherwise you would not have selected the book in the first place.
+  - These pointers will often (always?) be items which were mentioned in the book itself. Those authors, presumably, have good taste, otherwise you would not have selected their book in the first place.
 
 * Always have a separate Exercise for each library you load and each data set you use. An Exercise like "Load the **tidyverse** package with the `library()` command." is, obviously, not difficult for students. But it forces them to practice loading libraries, which many students forget, and it provides us with an opportunity to drop some knowledge.
 
@@ -75,7 +75,7 @@ parse_number(x)
 #> [1] 1234 3513   59
 ````
 
-* It is unclear how to create `x` in your tutorial. You could have an Exercise in which the students create `x` themselves. But that is annoying because it doesn't really teach students anything. It is too close to busy work. Moreover, `x` won't exist for the next question, requiring the use of `parse_number()`. You will need to create `x` yourself, either in the global setup chunk or in a setup chunk for this exercise. The global setup approach is preferred, but does not work if there are multiple different `x` objects used in this chapter.
+* It is unclear how to create `x` in your tutorial. You could have an Exercise in which the students create `x` themselves. But that is annoying because it doesn't really teach students anything. It is too close to busy work. Moreover, `x` won't exist for the next question, requiring the use of `parse_number()`. You will need to create `x` yourself, either in the global setup chunk or in a setup chunk for this Exercise. The global setup approach is preferred, but does not work if there are multiple different `x` objects used in this chapter.
 
 * I recommend just including the "busy work" in the Exercise code chunk when writing the tutorial, followed by a blank line, so that students have an obvious place to type in `parse_number(x)`. 
 
