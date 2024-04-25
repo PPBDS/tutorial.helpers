@@ -18,8 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-# Commented out Mac because of failure to install textshaping package.        
-#          - {os: macos-latest,   r: 'release'}
+          - {os: macos-latest,   r: 'release'}
           - {os: windows-latest, r: 'release'}
           - {os: ubuntu-latest,  r: 'release'}
 
