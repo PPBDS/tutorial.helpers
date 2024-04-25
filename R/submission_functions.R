@@ -1,17 +1,13 @@
 # What we really want is a single function which, when called from the tutorial,
 # does all the stuff we need. But, presumably, that is impossible. We need (?) a
-# Shiny server and Shiny ui. This is not (?) any other way to produce this
+# Shiny server and Shiny ui. There is not (?) any other way to produce this
 # effect.
 
 # Perhaps we can replace this function with the downloadthis package someday:
-# https://CRAN.R-project.org/package=downloadthis
+# https://CRAN.R-project.org/package=downloadthis. My initial testing suggests
+# not.
 
-# This code is called from within inst/child_documents/download_answers.Rmd.
-# Note that the call is submission_server(), with no argument. Given that, where
-# does the code get the "session" object which is used below? Perhaps the
-# session object just exists somehow? In parent environment? I don't know how
-# this works! Anyway, I need to declare a global variable in order to fix the
-# NOTE from R CMD check.
+# I need to declare a global variable in order to fix the NOTE from R CMD check.
 
 utils::globalVariables(c("session"))
 
@@ -36,11 +32,13 @@ utils::globalVariables(c("session"))
 submission_server <- function() {
   p <- parent.frame()
 
-  # We need information from the parent frame --- from the learnr code which is
-  # running this tutorial. This is the environment which is calling this
-  # function, submission_server. Only this parent environment has access to
-  # objects (like input, output, and session) which we need to access. So,
-  # local() makes everything below evaluated in the parent frame.
+  # Note that this code is called from within
+  # inst/child_documents/download_answers.Rmd. We need information from the
+  # parent frame --- from the Rmd code which being run (by Shiny?) for this
+  # tutorial. This is the environment which is calling this function,
+  # submission_server(). Only this parent environment has access to objects
+  # (like session) which we need to access. So, local() makes everything below
+  # evaluated in the parent frame.
   
   # Sure seems like a better approach would be to make use of the same mechanism
   # by which Shiny stores the student's work in between sessions. Couldn't we
@@ -64,6 +62,13 @@ submission_server <- function() {
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.html"),
       content = function(file){
+        
+        # This is how we make test cases. Uncomment this line and comment
+        # write_answers(). Then, install the package. This assumes your test
+        # case comes from the "Getting Started with Tutorials" tutorial). Then
+        # run your tutorial as normal, choosing the RDS option at the end.
+        
+        # saveRDS(session, file = "~/Desktop/test_session_3.rds")
         write_answers(file, session)
       }
     )
@@ -71,14 +76,26 @@ submission_server <- function() {
     output$downloadRds <- shiny::downloadHandler(
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.rds"),
+      
+      # Note that you must wrap the call to write_answers() inside a function. I
+      # am confused about why. No doubt some weird Shiny/reactive thing . . .
+      # But, then, why don't we need to do th same wrapping for the value of
+      # filename just above?
+      
+      # Also, where does the value for "file" come from below? The Shiny book
+      # reports that "`content` should be a function with one argument, `file`,
+      # which is the path to save the file. The job of this function is to save
+      # the file in a place that Shiny knows about, so it can then send it to
+      # the user." Confusing!
+      
+      # The use of session is also weird. First, there is no explicit "session"
+      # object. Presumably, this comes from the magic of Shiny, along with
+      # local() and parent.frame(). Second, Section 9.2.2 of the Shiny Book
+      # gives an example which uses a reactive object. Maybe this is a better
+      # approach? Maybe is a reactive object which is automatically created in
+      # Shiny?
+      
       content = function(file){
-        
-        # This is how we make test cases. Uncomment this line and comment
-        # write_answers(). Then, install the package. This assumes your test
-        # case comes from the "Getting Started with Tutorials" tutorial). Then
-        # run your tutorial as normal, choosing the RDS option at the end.
-        
-        # saveRDS(session, file = "~/Desktop/test_session.rds")
         write_answers(file, session)
       }
     )

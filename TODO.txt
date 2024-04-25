@@ -1,5 +1,29 @@
 # Priorities
 
+* Should Written Exercises with no answers have test code chunks by default? I seem to be using these a lot in 22-arrow.
+
+* There is something here which makes Format Tutorial Chunk Labels work poorly. Tthe quoted tibble below causes the issue. Add this issue as a test case in tutorial.helpers and then fix it here. Perhaps cause is that, within a tripple backtick block you can't have a comment operator? I think this causes the problem but I have not produced a reproducible example yet.
+
+````        
+Tabble from Exercise 25:
+# > # A tibble: 1 × 9
+# >   median_a n_miss_a median_b n_miss_b median_c n_miss_c median_d n_miss_d
+# >      <dbl>    <int>    <dbl>    <int>    <dbl>    <int>    <dbl>    <int>
+# > 1    0.139        1    -1.11        1   -0.387        2     1.15        0
+````
+
+
+* Seems like the new label calculation did something weird in this case, dropping "brackets" to "brackes".
+ 
+```{r subsetting-with-double-brackets-10, exercise = TRUE}
+ 
+732
+```{r subsetting-with-double-brackes-10, exercise = TRUE}
+
+* Perhaps Section 9.2.3 Downloading reports in the Shiny book shows a much better way of handling our answer-saving problem: parameterised RMarkdown. 
+
+* reactiveConsole(TRUE) might make it easier to experiment with reactivity in the Console.
+
 * Update online versions. Maybe only need Posit Cloud version?
 
 * Think harder about whether write answer should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
