@@ -45,7 +45,7 @@ Most tutorials begin by asking for your your name and email. (Your instructor mi
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
-## Tutorial exercises 
+## Exercises 
 ### 
 
 In each tutorial, there will be a set of exercises for you to complete. For non-coding questions, you write your answer and then hit the "Submit Answer" button, as you did above.
@@ -58,11 +58,11 @@ Clicking **"Start Over"** --- look for small letters at the bottom of the left-h
 
 Let's practice some simple math. Type `4 + 5` into the box below. Hit **"Run Code"** to see your results. Clicking **"Hint"** gives you a hint about what to type. 
 
-```{r tutorial-exercises-1, exercise = TRUE}
+```{r exercises-1, exercise = TRUE}
 
 ```
 
-```{r tutorial-exercises-1-hint-1, eval = FALSE}
+```{r exercises-1-hint-1, eval = FALSE}
 4 + 5
 ```
 
@@ -82,13 +82,13 @@ If you don't "Run Code" (or "Submit Answer") your response, nothing is recorded.
 
 Let's use variables to perform the same calculation. Below, we have already assigned 5 to `x` and 4 to `y`. On the line below those two provided lines of code, add the two variables by typing `x + y`. Hit "Run Code" to see your results. 
 
-```{r tutorial-exercises-2, exercise = TRUE}
+```{r exercises-2, exercise = TRUE}
 x <- 5
 y <- 4
 
 ```
 
-```{r tutorial-exercises-2-hint-1, eval = FALSE}
+```{r exercises-2-hint-1, eval = FALSE}
 x <- 5
 y <- 4
 x + y
@@ -102,13 +102,13 @@ Once you click "Run Code", the answer `[1] 9` should appear below the code you e
 
 We will often need to copy code from our previous exercises to continue working on a multi-stage problem. To make this easier, we provide a `Copy previous code` button. Below the following box, click on the `Copy previous code` button. 
 
-```{r tutorial-exercises-3, exercise = TRUE}
+```{r exercises-3, exercise = TRUE}
 
 ```
 
 <button onclick = "transfer_code(this)">Copy previous code</button>
 
-```{r tutorial-exercises-3-hint-1, eval = FALSE}
+```{r exercises-3-hint-1, eval = FALSE}
 x <- ...
 y <- 10
 x + ...
@@ -137,7 +137,7 @@ If you used the hint, note how we did not provide the entire answer. This is our
 
 ### Exercise 4
 
-Read all of the following instructions before continuing, as this tutorial will close once you take the first step. (These instructions only apply if you are running this tutorial on your local computer. If you are working online, just restart the browser, rather than restart R.)
+Read all of the following instructions before continuing, as this tutorial will close once you take the first step.
 
 Restart your **R session** by clicking `Session -> Restart R` from the main RStudio Menu. (Note that restarting R within this **RStudio instance** is a different thing than restarting the overall RStudio instance itself.)
 
@@ -149,7 +149,7 @@ knitr::include_graphics("images/terminate_jobs.png")
 
 Click "Terminate Jobs". This will "grey out" the tutorial. (You might also have to close the tutorial window by hand.) 
 
-Re-open this tutorial by clicking "Start Tutorial" in the Tutorial pane, just as you did at the start. Tutorial progress will have been saved automatically.
+Re-open this tutorial by clicking "Start Tutorial" in the Tutorial pane, just as you did at the start of the tutorial. Progress will have been saved automatically.
 
 Now that you have read all the instructions, go ahead and follow them.
 
@@ -166,7 +166,7 @@ We often ask you to execute an R command in the R Console, the tab on the left p
 
 Copy/paste the command **and** the return value into this box.
 
-```{r tutorial-exercises-5}
+```{r exercises-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -202,7 +202,7 @@ tutorial.helpers::set_rstudio_settings(set.binary = TRUE)
 
 CP/CR.
 
-```{r tutorial-exercises-6}
+```{r exercises-6}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -217,7 +217,7 @@ The output from this function will report the changes, if any, which were made. 
 
 ### 
 
-You can generally call functions by just giving their name along with the ending parantheses, as with `set_rstudio_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_rstudio_settings()` is in the **tutorial.helpers** package, we can also call it using the double colon notation: `tutorial.helpers::set_rstudio_settings()`.
+You can generally call functions by just giving their name along with the ending parentheses, as with `set_rstudio_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_rstudio_settings()` is in the **tutorial.helpers** package, we can also call it using the double colon notation: `tutorial.helpers::set_rstudio_settings()`.
 
 ### Exercise 7
 
@@ -229,7 +229,7 @@ rstudioapi::readRStudioPreference(name = "load_workspace", NA)
 
 CP/CR.
 
-```{r tutorial-exercises-7}
+```{r exercises-7}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -254,35 +254,11 @@ You have now selected sensible settings for using RStudio.
 
 ### Exercise 8
 
-Run this command from the R Console. 
-
-`
-tutorial.helpers::set_binary_only_in_r_profile()
-`
-
-CP/CR.
-
-```{r tutorial-exercises-8}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
-```
-
-### 
-
-The output from this function will report the changes, if any, which were made. To learn more, look up the help page by running `?set_binary_only_in_r_profile` at the Console.
-
-
-### Exercise 9
-
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are just copies of the R commands and their results. Other times, we will ask you to write one or more sentences of prose. 
 
 Copy and paste everything from `Exercise 9` through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
-```{r tutorial-exercises-9}
+```{r exercises-8}
 question_text(NULL,
     message = "We will sometimes provide an answer to written questions. Other times, like here, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",          
     answer(NULL, 
@@ -305,6 +281,6 @@ After hitting the "Download" button, you will be prompted to save a file named `
 ```
 
 ## Summary
-###
+### 
 
 You now understand how tutorials function and how to download copies of your answers. Good luck with your data science journey!
