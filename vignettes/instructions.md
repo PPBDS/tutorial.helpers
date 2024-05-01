@@ -185,7 +185,7 @@ Third, any Exercise which requires the copying of code from the prior Exercise s
 
 Fourth, tutorials should be so simple that 95% of the students can answer 95% of the questions easily. One way to ensure that is to add a *Hint* to almost every coding question.
 
-Hints must always have the same code chunk name as the exercise chunk for which they are the hint, with a "-hint-n" added at the end. So, if an exercise code chunk is named "ex-1", then the hint associated with that exercise is named "ex-1-hint-1". A second hint for that same question would be named "ex-1-hint-2", and so on. 
+Hints must always have the same code chunk name as the exercise chunk for which they are the hint, with a "-hint-n" added at the end. So, if an Exercise code chunk is named "ex-1", then the hint associated with that exercise is named "ex-1-hint-1". A second hint for that same question would be named "ex-1-hint-2", and so on. 
 
 When you create a hint, always use `eval = FALSE` within the parentheses in the code chunk. This is because hints will often include "..." and other symbols which do not run as correct R code. So, we need to tell R not to run it or an error will occur during `R CMD check`. Example:
 
@@ -205,7 +205,7 @@ Often, hints look like this:
 
 
 ````r
-```{r ex-1-hint, eval = FALSE}
+```{r ex-1-hint-2, eval = FALSE}
 ... |> 
   filter(year = ...) |> 
   ...(flights)
@@ -237,7 +237,7 @@ There are two types of text questions: 1) those that provide the students with t
 
 Explain potential outcomes in about two sentences.
 
-```{r definitions-ex-6}
+```{r definitions-6}
 question_text(NULL,
     message = "This is where we place the correct answer. It will appear only after 
     students have submitted their own answers. Note that we do not need to wrap the 
@@ -368,13 +368,35 @@ Think back to our initial discussion of the 10,000 pieces of information which w
 
 ## Inputs
 
-### Tibbles
+In addition to `tutorial.Rmd`, a tutorial will often use other inputs. The two most common locations for storing these inputs are `data` and `images` directories at the same level as the `tutorial.Rmd` file. Any file in `data` or `images` will be available at run time. (Note that the directories must have these names. Something like `my_data` will not work.) 
 
-There are two main sources for tibbles for use in the tutorials. First, use built-in data sets. Run `library(tidyverse)` or any other package. Then, run `data()`. This will pull up a list of available data sets, both those in the base R packages and those in any other packages you have loaded. Note that some of these will be data frames rather than tibbles. Second, you can store data --- either as csv or rds files --- in the `data` directory of a tutorial, as discussed below.
+### Data
+
+If you need for an R object to be accessible in an Exercise code chunk, create it in the initial global `setup` code chunk at the top of the tutorial.
+
+Be wary code which downloads data from the web. This won't work if the student does not have an internet connection when she creates the tutorial. Instead, save the code which downloaded the data and then place that object in an RDS file in the `data` directory. Here is an example from the "Wrangling Census data with tidyverse tools" tutorial from the [**tidycensus.tutorials**](https://ppbds.github.io/tidycensus.tutorials/) package.
+
+```
+median_age <- get_acs(geography = "county",
+                      variables = "B01002_001",
+                      year = 2020)
+write_rds(median_age, "data/median_age.rds")
+
+median_age <- read_rds("data/median_age.rds")
+````
+
+The first two commands download data and save it to an RDS file in the `data` directory. 
+
+This code assumes that you are located in the same directory as the `tutorial.Rmd` file. You only run those commands once, and then you comment them out because you don't want them re-run each time the tutorial is created. The `read_rds()` call is never commented out because we always need the `median_age` object.
+
+When designing tutorials which use objects like `median_age`, we generally write two Exercise code chunks. The first has the student run the same code as that which we used to create the object ourselves. This won't work if the student is not connected to the web but, with luck, in that case they will get a sensible error message. The second question informs the students that we have, behind the scenes, assigned the result of the function to an R object. We then ask the student to just print out that object. We don't have them do the assignment themselves, not least because we don't like questions which don't generate any output. 
+
+What happens if the data is too large? See the "Arrow" tutorial in the [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) for an example. First, we generally switch away from Code Exercises and use Written Exercises. Students run the required commands and then copy/paste the command/response. Big downloads don't work well in Exercise code chunks. Second, we create small versions of this big data in the global `setup` chunk. This allows us to create test code chunks for most of the exercises which follow. These tests will run much more quickly with this smaller data. Also, for any package on CRAN, we need to keep the overall size of the package as small as possible.
+
 
 ### Images
 
-To add images to a tutorial, first make a directory called `images` in the folder that contains the `tutorial.Rmd`. Store all images for that tutorial there. You can work with those files in all the usual ways.
+To add images to a tutorial, first make a directory called `images` in the folder that contains `tutorial.Rmd`. Store all images for that tutorial there. You can work with those files in all the usual ways.
 
 Use `include_graphics()` to add the image into the document. Include this code in its own chunk, in the place where you want the image to appear in the tutorial. 
 
@@ -387,19 +409,13 @@ include_graphics("images/example.png")
 
 `include_graphics()` is part of the `knitr` package, so you need `library(knitr)` in the setup code chunk. Note that you do not need to name these code chunks.
 
-Because students will complete the tutorials using screens of very different widths, it is a good idea to put `knitr::opts_chunk$set(out.width = '100%')` in your `setup` code chunk. In this way, images will appear as a sensible size regardless of whether they are using a phone or a big monitor.
+Because students will complete the tutorials using screens of very different widths, it is a good idea to put `knitr::opts_chunk$set(out.width = '90%')` in your `setup` code chunk. In this way, images will appear as a sensible size regardless of whether they are using a phone screen or a big monitor.
 
 ### Files
 
-Files --- most commonly text files or rds files --- are handled in a similar fashion to images. Create a directory called `data` in the same directory as the `tutorial.Rmd`, just as we do with `images`. Any file in `data` will be available at run time. (Note that the directory must be named `data`. Something like `my_data` will not work.) 
+Other files --- most commonly text files or RDS files --- are handled in a similar fashion to images. Create a directory called `data` in the same directory as the `tutorial.Rmd`, just as we do with `images`. 
 
 There are two main uses for files in `data`. First, they can be used at "compile time" (when the `tutorial.Rmd` is knit to html) for making plots or doing anything else. Second, and more importantly, they are available to students in the exercise code blocks during "run time" (when students are doing the tutorial).
-
-
-### Permanent objects
-
-If you need for an R object to be accessible in an Exercise code chunk, create it in the initial global `setup` code chunk at the top of the tutorial.
-
 
 
 ## Checks 

@@ -120,7 +120,7 @@ table, .body h2 { border-bottom: 1px solid #666; }
 .body .appendix, .appendix ~ h2 { border-bottom-style: dashed; }
 .footnote-ref a::before { content: "["; }
 .footnote-ref a::after { content: "]"; }
-.footnotes::before {
+section.footnotes::before {
   content: "";
   display: block;
   max-width: 20em;
@@ -139,8 +139,6 @@ table, .body h2 { border-bottom: 1px solid #666; }
 </style>
 </head>
 <body>
-<div class="include-before">
-</div>
 <div class="frontmatter">
 <div class="title"><h1>Instructions for Writing R Tutorials</h1></div>
 <div class="author"><h2>David Kane</h2></div>
@@ -270,7 +268,7 @@ something else.
 <pre><code class="language-markdown">&lt;button onclick = &quot;transfer_code(this)&quot;&gt;Copy previous code&lt;/button&gt;
 </code></pre>
 <p>Fourth, tutorials should be so simple that 95% of the students can answer 95% of the questions easily. One way to ensure that is to add a <em>Hint</em> to almost every coding question.</p>
-<p>Hints must always have the same code chunk name as the exercise chunk for which they are the hint, with a “-hint-n” added at the end. So, if an exercise code chunk is named “ex-1”, then the hint associated with that exercise is named “ex-1-hint-1”. A second hint for that same question would be named “ex-1-hint-2”, and so on.</p>
+<p>Hints must always have the same code chunk name as the exercise chunk for which they are the hint, with a “-hint-n” added at the end. So, if an Exercise code chunk is named “ex-1”, then the hint associated with that exercise is named “ex-1-hint-1”. A second hint for that same question would be named “ex-1-hint-2”, and so on.</p>
 <p>When you create a hint, always use <code>eval = FALSE</code> within the parentheses in the code chunk. This is because hints will often include “…” and other symbols which do not run as correct R code. So, we need to tell R not to run it or an error will occur during <code>R CMD check</code>. Example:</p>
 <pre><code class="language-r">```{r ex-1-hint-1, eval = FALSE}
 This is an example hint. Normally sentences like these 
@@ -281,7 +279,7 @@ R ignores all errors!
 </code></pre>
 <p><strong>You need to wrap the text in a long hint by hand, inserting the carriage returns yourself.</strong> R will not wrap the text automatically.</p>
 <p>Often, hints look like this:</p>
-<pre><code class="language-r">```{r ex-1-hint, eval = FALSE}
+<pre><code class="language-r">```{r ex-1-hint-2, eval = FALSE}
 ... |&gt; 
   filter(year = ...) |&gt; 
   ...(flights)
@@ -299,7 +297,7 @@ R ignores all errors!
 
 Explain potential outcomes in about two sentences.
 
-```{r definitions-ex-6}
+```{r definitions-6}
 question_text(NULL,
     message = &quot;This is where we place the correct answer. It will appear only after 
     students have submitted their own answers. Note that we do not need to wrap the 
@@ -406,22 +404,33 @@ From the Console, run `list.files()`. CP/CR.
 <p>Think back to our initial discussion of the 10,000 pieces of information which we want to mention at some point. Among these are many pages linked to from the help pages for the core <em>Tidyverse</em> functions, like <code>arrange()</code> and <code>aes()</code>.</p>
 <!-- DK: Everything below is worth re-writing. -->
 <h2 id="inputs">Inputs</h2>
-<h3 id="tibbles">Tibbles</h3>
-<p>There are two main sources for tibbles for use in the tutorials. First, use built-in data sets. Run <code>library(tidyverse)</code> or any other package. Then, run <code>data()</code>. This will pull up a list of available data sets, both those in the base R packages and those in any other packages you have loaded. Note that some of these will be data frames rather than tibbles. Second, you can store data — either as csv or rds files — in the <code>data</code> directory of a tutorial, as discussed below.</p>
+<p>In addition to <code>tutorial.Rmd</code>, a tutorial will often use other inputs. The two most common locations for storing these inputs are <code>data</code> and <code>images</code> directories at the same level as the <code>tutorial.Rmd</code> file. Any file in <code>data</code> or <code>images</code> will be available at run time. (Note that the directories must have these names. Something like <code>my_data</code> will not work.)</p>
+<h3 id="data">Data</h3>
+<p>If you need for an R object to be accessible in an Exercise code chunk, create it in the initial global <code>setup</code> code chunk at the top of the tutorial.</p>
+<p>Be wary code which downloads data from the web. This won’t work if the student does not have an internet connection when she creates the tutorial. Instead, save the code which downloaded the data and then place that object in an RDS file in the <code>data</code> directory. Here is an example from the “Wrangling Census data with tidyverse tools” tutorial from the <a href="https://ppbds.github.io/tidycensus.tutorials/"><strong>tidycensus.tutorials</strong></a> package.</p>
+<pre><code>median_age &lt;- get_acs(geography = &quot;county&quot;,
+                      variables = &quot;B01002_001&quot;,
+                      year = 2020)
+write_rds(median_age, &quot;data/median_age.rds&quot;)
+
+median_age &lt;- read_rds(&quot;data/median_age.rds&quot;)
+</code></pre>
+<p>The first two commands download data and save it to an RDS file in the <code>data</code> directory.</p>
+<p>This code assumes that you are located in the same directory as the <code>tutorial.Rmd</code> file. You only run those commands once, and then you comment them out because you don’t want them re-run each time the tutorial is created. The <code>read_rds()</code> call is never commented out because we always need the <code>median_age</code> object.</p>
+<p>When designing tutorials which use objects like <code>median_age</code>, we generally write two Exercise code chunks. The first has the student run the same code as that which we used to create the object ourselves. This won’t work if the student is not connected to the web but, with luck, in that case they will get a sensible error message. The second question informs the students that we have, behind the scenes, assigned the result of the function to an R object. We then ask the student to just print out that object. We don’t have them do the assignment themselves, not least because we don’t like questions which don’t generate any output.</p>
+<p>What happens if the data is too large? See the “Arrow” tutorial in the <a href="https://ppbds.github.io/r4ds.tutorials/"><strong>r4ds.tutorials</strong></a> for an example. First, we generally switch away from Code Exercises and use Written Exercises. Students run the required commands and then copy/paste the command/response. Big downloads don’t work well in Exercise code chunks. Second, we create small versions of this big data in the global <code>setup</code> chunk. This allows us to create test code chunks for most of the exercises which follow. These tests will run much more quickly with this smaller data. Also, for any package on CRAN, we need to keep the overall size of the package as small as possible.</p>
 <h3 id="images">Images</h3>
-<p>To add images to a tutorial, first make a directory called <code>images</code> in the folder that contains the <code>tutorial.Rmd</code>. Store all images for that tutorial there. You can work with those files in all the usual ways.</p>
+<p>To add images to a tutorial, first make a directory called <code>images</code> in the folder that contains <code>tutorial.Rmd</code>. Store all images for that tutorial there. You can work with those files in all the usual ways.</p>
 <p>Use <code>include_graphics()</code> to add the image into the document. Include this code in its own chunk, in the place where you want the image to appear in the tutorial.</p>
 <pre><code class="language-r">```{r}
 include_graphics(&quot;images/example.png&quot;)
 ```
 </code></pre>
 <p><code>include_graphics()</code> is part of the <code>knitr</code> package, so you need <code>library(knitr)</code> in the setup code chunk. Note that you do not need to name these code chunks.</p>
-<p>Because students will complete the tutorials using screens of very different widths, it is a good idea to put <code>knitr::opts_chunk$set(out.width = '100%')</code> in your <code>setup</code> code chunk. In this way, images will appear as a sensible size regardless of whether they are using a phone or a big monitor.</p>
+<p>Because students will complete the tutorials using screens of very different widths, it is a good idea to put <code>knitr::opts_chunk$set(out.width = '90%')</code> in your <code>setup</code> code chunk. In this way, images will appear as a sensible size regardless of whether they are using a phone screen or a big monitor.</p>
 <h3 id="files">Files</h3>
-<p>Files — most commonly text files or rds files — are handled in a similar fashion to images. Create a directory called <code>data</code> in the same directory as the <code>tutorial.Rmd</code>, just as we do with <code>images</code>. Any file in <code>data</code> will be available at run time. (Note that the directory must be named <code>data</code>. Something like <code>my_data</code> will not work.)</p>
+<p>Other files — most commonly text files or RDS files — are handled in a similar fashion to images. Create a directory called <code>data</code> in the same directory as the <code>tutorial.Rmd</code>, just as we do with <code>images</code>.</p>
 <p>There are two main uses for files in <code>data</code>. First, they can be used at “compile time” (when the <code>tutorial.Rmd</code> is knit to html) for making plots or doing anything else. Second, and more importantly, they are available to students in the exercise code blocks during “run time” (when students are doing the tutorial).</p>
-<h3 id="permanent-objects">Permanent objects</h3>
-<p>If you need for an R object to be accessible in an Exercise code chunk, create it in the initial global <code>setup</code> code chunk at the top of the tutorial.</p>
 <h2 id="checks">Checks</h2>
 <p>The simplest way to test the <code>tutorial.Rmd</code> with which you are working on is to hit the “Run Document” button. This is the same thing as running <code>rmarkdown::render()</code> on that file:</p>
 <pre><code class="language-r">rmarkdown::render(&quot;inst/tutorials/02-terminal/tutorial.Rmd&quot;)
@@ -465,8 +474,6 @@ include_graphics(&quot;images/example.png&quot;)
 <ul>
 <li><code>R CMD check</code> will test that all tutorials have the default sections exactly as they are in the Helper Tutorial template. So, use the template. If either the “Information” or “Download answers” sections are missing, <code>R CMD check</code> will return something like “Missing a component part from file /path/to/your/Rmd/file.Rmd”.</li>
 </ul>
-</div>
-<div class="include-after">
 </div>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>

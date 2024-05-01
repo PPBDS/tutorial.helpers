@@ -36,7 +36,7 @@
 #  ```
 
 ## ----file = "example-hint-2.txt", echo = TRUE, eval = FALSE-------------------
-#  ```{r ex-1-hint, eval = FALSE}
+#  ```{r ex-1-hint-2, eval = FALSE}
 #  ... |>
 #    filter(year = ...) |>
 #    ...(flights)
@@ -47,7 +47,7 @@
 #  
 #  Explain potential outcomes in about two sentences.
 #  
-#  ```{r definitions-ex-6}
+#  ```{r definitions-6}
 #  question_text(NULL,
 #      message = "This is where we place the correct answer. It will appear only after
 #      students have submitted their own answers. Note that we do not need to wrap the
