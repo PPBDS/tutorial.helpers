@@ -4,10 +4,10 @@
 \alias{set_rstudio_settings}
 \title{Select smart setting for RStudio}
 \usage{
-set_rstudio_settings(set.binary = FALSE)
+set_rstudio_settings(set.binary = TRUE)
 }
 \arguments{
-\item{set.binary}{Logical, set to \code{FALSE}, which indicates whether or not
+\item{set.binary}{Logical, set to \code{TRUE}, which indicates whether or not
 \code{set_binary_only_in_r_profile()} should be run at the end.}
 }
 \value{
