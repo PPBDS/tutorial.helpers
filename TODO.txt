@@ -1,8 +1,16 @@
 # Priorities
 
-* Should Written Exercises with no answers have test code chunks by default? I seem to be using these a lot in 22-arrow.
+* Fix GHA warnings/failures.
 
-* There is something here which makes Format Tutorial Chunk Labels work poorly. Tthe quoted tibble below causes the issue. Add this issue as a test case in tutorial.helpers and then fix it here. Perhaps cause is that, within a tripple backtick block you can't have a comment operator? I think this causes the problem but I have not produced a reproducible example yet.
+* Start working on a new function, process_submissions(), in a file called process_submissions.R. Starts by taking one argument which is a path to a folder with a bunch of answer html files in it. Reads through those files, pulling out the name of the tutorial, the email of the student, and the time it took. Then returns a tibble with that information in three variables.
+
+* Both make_exercise() and format_tutorial() encode the information about the correct code chunk labels for exercises. That is bad! We should encode that stuff in just one location.
+
+* Ensure that this code handles our test code chunks in non-code questions. See RStudio and Github (gert) for examples. Seems to work, but some test cases would be nice.
+
+* Should Written Exercises with no answers have test code chunks by default? I seem to be using these a lot in 22-arrow. Most useful for the case in which the answer requires CP/CR and you still want to confirm that your code works, presumably on a simpler/quicker version of required code.
+
+* There is something here which makes Format Tutorial Chunk Labels work poorly. The quoted tibble below causes the issue. Add this issue as a test case in tutorial.helpers and then fix it here. Perhaps cause is that, within a tripple backtick block you can't have a comment operator? I think this causes the problem but I have not produced a reproducible example yet.
 
 ````        
 Tabble from Exercise 25:
@@ -26,11 +34,10 @@ Tabble from Exercise 25:
 
 * Update online versions. Maybe only need Posit Cloud version?
 
-* Think harder about whether write answer should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
+* Think harder about whether write_answer should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
 
 * format_tutorial() needs to handle hints better. In particular, it must ensure that the hint matches the exercise code chunk name, as it must, by definition.
 
-* Both make_exercise() and format_tutorial() encode the information about the correct code chunk labels for exercises. That is bad! We should encode that stuff in just one location.
 
 * Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
 
@@ -48,10 +55,6 @@ A different approach to the pdf file creation problem in write_answers() would b
 
 ## Other items
 
-* Replace parsermd with lightparser? Alas, this is not necessarily a path forward. The current version lightparser can't parse our tutorials: https://github.com/ThinkR-open/lightparser/issues/4
-
-
-* Fix Mac checking error on Github. Problem is "Error: Error: Error installing package 'textshaping':"
 
 * Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
 
@@ -61,14 +64,12 @@ A different approach to the pdf file creation problem in write_answers() would b
 
 * Something in Getting Started which shows how links work. You can click. It takes you away, but then the back button takes you back. Or maybe this doesn't work from the Tutorial tab?
 
-* Ensure that this code handles our test code chunks in non-code questions. See RStudio and Github (gert) for examples. Seems to work, but some test cases would be nice.
-
 * Would be nice to have more flexibility with knit_tutorials(). The problem arises when knitting a collection of tutorial paths takes too long, especially on CRAN, where all tests should only take 10 minutes total. Might be nice if tutorial paths:
 
   + Had an option to report the time (or start/end time) which each knitting used. We want to identify which tutorials take too long to knit. Right now, there is no easy way to do so.
-  + Had an option to take a vector of tutorials to not knit, if they are in the input collection. That is, 
+  + Provide a `skip` argument to knit_tutorials which allows it to skip any tutorial path which includes a specific string. This will generally be used like skip = c("06-data-tidying", "08-data-import"). Note that these are not the names of tutorial files (which are mostly "tutorial.Rmd") nor the full path to those tutorials (which we don't know until we run `return_tutorial_paths()`). Instead, they are strings from within the path. (Maybe require that they be full parts of the path? Or maybe any match is fine?)
 
-* Start working on a new function, process_submissions(), in a file called process_submissions.R. Starts by taking one argument which is a path to a folder with a bunch of answer html files in it. Reads through those files, pulling out the name of the tutorial, the email of the student, and the time it took. Then returns a tibble with that information in three variables.
+
 
 * Understand https://r-pkgs.org/testing-basics.html#sec-snapshot-tests and other advanced testing stuff. I bet that "withr::local_options" will be valuable for doing the next two tasks.
 
@@ -100,8 +101,6 @@ Found the following files/directories:
   'lastMiKTeXException'
   
   * Why does devtools::check(remote = TRUE, manual = TRUE) produce so many weird notes about html problems? And why does it launch XQuartz?
-
-* Provide a `skip` argument to knit_tutorials which allows it to skip any tutorial path which includes a specific string. This will generally be used like skip = c("06-data-tidying", "08-data-import"). Note that these are not the names of tutorial files (which are mostly "tutorial.Rmd") nor the full path to those tutorials (which we don't know until we run `return_tutorial_paths()`). Instead, they are strings from within the path. (Maybe require that they be full parts of the path? Or maybe any match is fine?)
 
 * Figure out why Check is 0/0/0 but Test is 1 FAIL and 4 SKIPs.
 
