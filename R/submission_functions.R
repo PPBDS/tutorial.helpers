@@ -132,7 +132,7 @@ submission_ui <- shiny::div(
 
   shiny::tags$br(),
   shiny::tags$ol(
-    shiny::tags$li("Click a button to download a file containing your answers. A window will pop up."),
+    shiny::tags$li("Click a button to download a file containing your answers."),
     shiny::tags$li("Save the file onto your computer in a convenient location.")),
   shiny::fluidPage(
     shiny::mainPanel(

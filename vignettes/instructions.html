@@ -145,13 +145,9 @@ section.footnotes::before {
 <div class="date"><h3></h3></div>
 </div>
 <div class="body">
-<!-- There are some tutorials which require either an R restart or (what is more or less the same thing, I think) the creation of a new R project. Clearest examples are: RStudio and Code, Rstudio and Github, and Quarto Websites. The problem arises because restarting R or creating a new R project causes R to terminate the tutorial. That is fine when working on a local machine, since the tutorial answers are saved and you can just restart the tutorial. But it does not (alway? ever?) work in the cloud. Restarting a tutorial which you terminated causes an error in the Cloud. -->
+<!-- There are some tutorials which require either an R restart or (what is more or less the same thing, I think) the creation of a new R project. Clearest examples are: RStudio and Code, Rstudio and Github, and Quarto. The problem arises because restarting R or creating a new R project causes R to terminate the tutorial. That is fine when working on a local machine, since the tutorial answers are saved and you can just restart the tutorial. But it does not (always? ever?) work in the cloud. Restarting a tutorial which you terminated causes an error in the Cloud. -->
 <!-- So, for these three tutorials and all others, we should explicitly have students create two RStudio instances, one in which they are doing the tutorial and one in which they are following the tutorial's instructions, instructions which will often require restarts and/or new projects. -->
-<!-- Explain test code chunks! -->
-<!-- Change the approach so that the advice covers all sorts of tutorials, not just tutorial.helpers. -->
 <!-- I hate the way that all the weird formatting we do messes up the document outline. You can see that effect within R Studio and on the web page. Fixable? -->
-<!-- Tutorial answers should require the smallest incremental number of characters for students to type. That is how you know that your learning curve is shallow. geom_smooth() example. -->
-<!-- Add testing discussion of even loading libraries. -->
 <p><em>There are no questions here. There are only simple instructions.</em></p>
 <p><em>Tutorials are not challenging. They are confidence-building.</em></p>
 <p><em>Every word matters. Never waste a student’s time.</em></p>
@@ -186,8 +182,7 @@ section.footnotes::before {
 <pre><code class="language-markdown">## Interacting with sites with `GET()`
 ###
 
-In order to get data from an API, we use the **httr** package. The package is designed to 
-imitate standard HTTP in R. Read more about HTTP [here](https://www.jmarshall.com/easy/http/).
+In order to get data from an API, we use the **httr** package. The package is designed to imitate standard HTTP in R. Read more about HTTP [here](https://www.jmarshall.com/easy/http/).
 
 ### Exercise 1
 </code></pre>
@@ -203,20 +198,17 @@ imitate standard HTTP in R. Read more about HTTP [here](https://www.jmarshall.co
 <p>Begin with a <em>Start</em> which is a sentence or two of knowledge and/or the question itself. If the length of the Start text is longer than one or two lines, then do not place the question code chunk in the same part. Instead, the Start includes a triple hash, thereby creating the Continue button. If the length of the text is short enough that students are willing to read it (at most two sentences), you can include the Exercise code chunk in the same part.</p>
 </li>
 <li>
-<p>Most of the time there is no need for a triple hash before the code chunk.</p>
+<p>Most of the time there is no need for a triple hash before the Exercise code chunk.</p>
 </li>
 <li>
 <p>Do not expect students to read more than two sentences of text at a time. After two sentences, you almost always want to use a triple hash in order to create a Continue button so that students have a break. They won’t read more than two sentences without a break.</p>
 </li>
-</ul>
-<!-- DK: This seems false. Rarely proceeded by a triple hash. -->
-<ul>
 <li>
 <p>After the Start, come three code chunks:</p>
 <ul>
 <li>The Exercise code chunk is the location in which students will place their answers. It always includes the <code>exercise = TRUE</code> code chunk option.</li>
 <li>The Hint code chunk includes any hints for the students. The code chunk name is the hint is always exactly the same as the one for the Exercise code chunk, except with <code>-hint-n</code> attached at the end. The <code>n</code> is replaced by the number of the hint. Almost always, there is only one hint, so the suffix is <code>-hint-1</code>. We always set <code>eval = FALSE</code> in the Hint code chunk since, often, the hint will not be legal R code.</li>
-<li>The Test code chunk requires no chunk name. It always includes the <code>include = FALSE</code> code chunk option because we never want to show the code or the results to students. Instead, the purpose of the Test code chunk is to ensure that the correct answer — that is, the code we want students to enter into the Exercise code chunk — works.</li>
+<li>The Test code chunk has exactly the label as the one for the Exercise code chunk, except with <code>-test</code> attached at the end. It always includes the <code>include = FALSE</code> code chunk option because we never want to show the code or the results to students. Instead, the purpose of the Test code chunk is to ensure that the correct answer — that is, the code we want students to enter into the Exercise code chunk — works.</li>
 </ul>
 </li>
 <li>
@@ -226,7 +218,7 @@ imitate standard HTTP in R. Read more about HTTP [here](https://www.jmarshall.co
 <p>The last part of an Exercise is the End, our main opportunity to drop some knowledge. See the <a href="#kd">Knowledge Drops</a> section for extensive discussion.</p>
 </li>
 <li>
-<p>The last part of the Section is another knowledge drop. It is not another Exercise. It is just a knowledge drop after the last Exercise which tries to take a broader overview. Again, this can’t be more than a sentence or two. But it should be more substantive than a simple “Good job.”  Recall the 10,000 items which we want to mention. For example, if the Section has involved creating a scatter plot, then the last Exercise will be putting the final touches on that scatter plot. The knowledge drop should be something about scatter plots in general, not a minor point about the particular scatter plot which the student has just created.</p>
+<p>The last part of the Section is another knowledge drop. It is not another Exercise. It is just a knowledge drop after the last Exercise which tries to take a broader overview. It is often separated from that last Exercise by a simple <code>###</code>. Again, this can’t be more than a sentence or two. But it should be more substantive than a simple “Good job.”  Recall the 10,000 items which we want to mention. For example, if the Section has involved creating a scatter plot, then the last Exercise will be putting the final touches on that scatter plot. The knowledge drop should be something about scatter plots in general, not a minor point about the particular scatter plot which the student has just created.</p>
 </li>
 </ul>
 <h3 id="question-types">Question types</h3>
@@ -288,9 +280,14 @@ R ignores all errors!
 <p>The “…” indicates places where the student needs to insert some code, a value or a function name. The code in hints should be formatted correctly.</p>
 <p>Students can not see the first hint after clicking through to the next hint. So, make sure the last hint is the one you most want them to have access to, i.e., the one which provides the key information. If students can see the last hint, they should have no reason to consult any earlier hints. We rarely provide more that one hint.</p>
 <p>Hints are <a href="https://community.rstudio.com/t/hints-in-written-questions/108184">only allowed</a> for coding questions, <strong>not for text questions</strong>.</p>
-<p>Fifth, we separate the code chunks from the End of the Exercise by using <code>###</code> again.</p>
+<p>Fifth, the third code chunk, after the Exercise and Hint code chunks, is the Test code chunk. Place the answer — the code which you want students to enter into the Exercise code chunk — into the Test code chunk. Since the Test code chunk will be evaluated with the tutorial is knitted (which also happens during testing), this guarantees that correct answer will work for students.</p>
+<p>Indeed, the workflow for writing an Exercise often begins by, first, entering the code which we want students to provide into the Test code chunk. We then copy/paste that same code into the Hint code chunk, replacing some of the functions and/or arguments with <code>...</code> as appropriate. We then ask the question which, we hope, will cause students to answer with the same code as we have in the Test code chunk.</p>
+<p>There are some instances in which we can’t test code which we want students to use. The most common case is code which requires the web, generally for downloading data. In that case, we delete the Test code chunk.</p>
+<p>Sixth, we separate the code chunks from the End of the Exercise by using <code>###</code> again.</p>
 <p>For simple questions which result in a display of some data, one approach is to write “You should see that the value of height in row 1 is 23.” This allows the students to know that they are on the right track. Never hard-code a number. Use R to inline calculate it, even though this can be a bother.</p>
 <p>But, much more common, is to use the End to drop some knowledge, especially about a function which was used in the answer to this Exercise, or to one of the previous Exercises in this Section.</p>
+<p>Note that we provide as many Exercises as possible. For example, every tutorial features a question for each package which must be loaded. We require students to type in items like <code>library(tidyverse)</code> even though they have done so many times in the past. Every Exercise is another opportunity to make the learning curve as shallow as possible and to drop some knowledge. More questions are better than fewer.</p>
+<p>One way to measure the shallowness of the learning curve is to examine how many new characters each Exercise requires for its answer. Better three Exercises, each of which loads a different package, then one Exercise which loads three packages at once.</p>
 <h4 id="text-questions">Text questions</h4>
 <p>There are two types of text questions: 1) those that provide the students with the correct answer, after they have submitted their own answer, and, 2) those that do not provide an answer.  Examples:</p>
 <pre><code class="language-r">### Exercise 6
@@ -341,13 +338,11 @@ From the Console, run `list.files()`. CP/CR.
 </li>
 </ul>
 <p>Follow a coding <a href="https://style.tidyverse.org/">Style Guide</a>, especially spaces around operators like “ = “. Use only one command per line in pipes and graphics, with proper indentation. Indent plotting commands after the call to <code>ggplot()</code>.</p>
-<!-- DK: Standardize this to refer to Tidyverse Guide, or elsewhere? -->
 <p>Do not create an object in one question and then assume that it will be available in subsequent questions. It won’t be! Each question is independent of every other question. They live in separate R instances. The only exception (which we make use of) is that objects created in the initial <code>setup</code> chunk for the entire tutorial are available in all later questions, just the way that <code>library()</code> commands executed there do not need to be executed again.</p>
-<p>Code chunks for Exercises must be named.</p>
 <p>Tutorials are knitted/run from the directory in which they are located. So, if you want to read in a file from a <code>data/</code> directory, you write:</p>
 <pre><code class="language-r">x &lt;- read_csv(&quot;data/myfile.csv&quot;)
 </code></pre>
-<p>in an R code chunk, presumably in the global <code>setup</code> chunk. But, if you try to execute that line of code with CMD-Return, it will fail because, by default, you are located in the main directory of <strong>your.package</strong> when you start working on your tutorials. Using <code>setwd()</code> will solve this problem.</p>
+<p>in an R code chunk, presumably in the global <code>setup</code> chunk. But, if you try to execute that line of code with <code>Command + Return</code>, it will fail because, by default, you are located in the main directory of <strong>your.package</strong> when you start working on your tutorials. Using <code>setwd()</code> will solve this problem.</p>
 <pre><code class="language-markdown">&gt; getwd()
 [1] &quot;/Users/davidkane/Desktop/projects/r4ds.tutorials&quot;
 &gt; setwd(&quot;inst/tutorials/031-data-files/&quot;)
@@ -355,7 +350,7 @@ From the Console, run `list.files()`. CP/CR.
 [1] &quot;/Users/davidkane/Desktop/projects/r4ds.tutorials/inst/tutorials/031-data-files&quot;
 &gt; 
 </code></pre>
-<p>CMD-Return will now work because your R session is “located” in the same location as that from which the tutorial will be run when it is knitted.</p>
+<p><code>Command + Return</code> will now work because your R session is “located” in the same location as that from which the tutorial will be run when it is knitted.</p>
 <h3 id="pipes">Pipes</h3>
 <p>The most common type of code questions involve the step-by-step process of building a pipe, the final output of which is a nice looking graphic.</p>
 <p>You want to first show the graphic that you will create by the end of the Section. You show it once at the start of the Section and once before the last Exercise, as a reminder of what the graphic should look like so students do not need to scroll all the way back up.</p>
@@ -418,7 +413,7 @@ median_age &lt;- read_rds(&quot;data/median_age.rds&quot;)
 <p>The first two commands download data and save it to an RDS file in the <code>data</code> directory.</p>
 <p>This code assumes that you are located in the same directory as the <code>tutorial.Rmd</code> file. You only run those commands once, and then you comment them out because you don’t want them re-run each time the tutorial is created. The <code>read_rds()</code> call is never commented out because we always need the <code>median_age</code> object.</p>
 <p>When designing tutorials which use objects like <code>median_age</code>, we generally write two Exercise code chunks. The first has the student run the same code as that which we used to create the object ourselves. This won’t work if the student is not connected to the web but, with luck, in that case they will get a sensible error message. The second question informs the students that we have, behind the scenes, assigned the result of the function to an R object. We then ask the student to just print out that object. We don’t have them do the assignment themselves, not least because we don’t like questions which don’t generate any output.</p>
-<p>What happens if the data is too large? See the “Arrow” tutorial in the <a href="https://ppbds.github.io/r4ds.tutorials/"><strong>r4ds.tutorials</strong></a> for an example. First, we generally switch away from Code Exercises and use Written Exercises. Students run the required commands and then copy/paste the command/response. Big downloads don’t work well in Exercise code chunks. Second, we create small versions of this big data in the global <code>setup</code> chunk. This allows us to create test code chunks for most of the exercises which follow. These tests will run much more quickly with this smaller data. Also, for any package on CRAN, we need to keep the overall size of the package as small as possible.</p>
+<p>What happens if the data is too large? See the “Arrow” tutorial in the <a href="https://ppbds.github.io/r4ds.tutorials/"><strong>r4ds.tutorials</strong></a> for an example. First, we generally switch away from Code Exercises and use Written Exercises. Students run the required commands and then copy/paste the command/response. Big downloads don’t work well in Exercise code chunks. Second, we create small versions of this big data in the global <code>setup</code> chunk. This allows us to create Test code chunks for most of the exercises which follow. These tests will run much more quickly with this smaller data. Also, for any package on CRAN, we need to keep the overall size of the package as small as possible.</p>
 <h3 id="images">Images</h3>
 <p>To add images to a tutorial, first make a directory called <code>images</code> in the folder that contains <code>tutorial.Rmd</code>. Store all images for that tutorial there. You can work with those files in all the usual ways.</p>
 <p>Use <code>include_graphics()</code> to add the image into the document. Include this code in its own chunk, in the place where you want the image to appear in the tutorial.</p>
