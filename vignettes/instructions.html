@@ -145,9 +145,6 @@ section.footnotes::before {
 <div class="date"><h3></h3></div>
 </div>
 <div class="body">
-<!-- There are some tutorials which require either an R restart or (what is more or less the same thing, I think) the creation of a new R project. Clearest examples are: RStudio and Code, Rstudio and Github, and Quarto. The problem arises because restarting R or creating a new R project causes R to terminate the tutorial. That is fine when working on a local machine, since the tutorial answers are saved and you can just restart the tutorial. But it does not (always? ever?) work in the cloud. Restarting a tutorial which you terminated causes an error in the Cloud. -->
-<!-- So, for these three tutorials and all others, we should explicitly have students create two RStudio instances, one in which they are doing the tutorial and one in which they are following the tutorial's instructions, instructions which will often require restarts and/or new projects. -->
-<!-- I hate the way that all the weird formatting we do messes up the document outline. You can see that effect within R Studio and on the web page. Fixable? -->
 <p><em>There are no questions here. There are only simple instructions.</em></p>
 <p><em>Tutorials are not challenging. They are confidence-building.</em></p>
 <p><em>Every word matters. Never waste a student’s time.</em></p>
@@ -454,7 +451,7 @@ include_graphics(&quot;images/example.png&quot;)
 <h3 id="difficult-bugs">Difficult bugs</h3>
 <ul>
 <li>
-<p>The most common issue is that an author will use a package like <strong>ggthemes</strong> in their tutorial but then forget to include <code>library(ggthemes)</code> in the setup code chunk. This will not cause any error in checking because <strong>ggthemes</strong> is not actually used in the tutorial itself, so the tutorial knits without a problem. But then the student tries to type <code>library(ggthemes)</code> as an answer to an exercise and gets an error because the package has not been installed. This issue helps to illustrate why having plots which are built on the fly is so valuable: it guarantees that student answers will work since the same code worked when the tutorial was knitted. The main lesson: For any package used, have a question which explicitly asks the student to load the package. In the Test chunk for that question, load the package yourself. This guarantees the availability of the package.</p>
+<p>The most common issue is that an author will use a package like <strong>ggthemes</strong> in their tutorial but then forget to include <code>library(ggthemes)</code> in the <code>setup</code> code chunk. This will not cause any error in checking because <strong>ggthemes</strong> is not actually used in the tutorial itself, so the tutorial knits without a problem. But then the student tries to type <code>library(ggthemes)</code> as an answer to an exercise and gets an error because the package has not been installed. This issue helps to illustrate why having plots which are built on the fly is so valuable: it guarantees that student answers will work since the same code worked when the tutorial was knitted. The main lesson: For any package used, have a question which explicitly asks the student to load the package. In the Test chunk for that question, load the package yourself. This guarantees the availability of the package.</p>
 </li>
 <li>
 <p>Note that <code>R CMD check</code> does not seem to catch cases in which you <code>library()</code> a package in a tutorial but that package is not in DESCRIPTION. But such a discrepancy will cause an error on Github Actions because, there, you only have access to packages that have been installed as part of that test.</p>
@@ -469,6 +466,9 @@ include_graphics(&quot;images/example.png&quot;)
 <ul>
 <li><code>R CMD check</code> will test that all tutorials have the default sections exactly as they are in the Helper Tutorial template. So, use the template. If either the “Information” or “Download answers” sections are missing, <code>R CMD check</code> will return something like “Missing a component part from file /path/to/your/Rmd/file.Rmd”.</li>
 </ul>
+<h2 id="open-issues">Open Issues</h2>
+<p>There are some tutorials which require either an R restart or (what is more or less the same thing) the creation of a new R project. Some examples from the <strong>r4ds.tutorials</strong> package are “RStudio and code,” “Rstudio and Github,” and “Quarto.” The problem arises because restarting R or creating a new R project causes R to terminate the tutorial. That is fine when working on a local machine, since the tutorial answers are saved and you can just restart the tutorial. But it does not (always? ever?) work in the cloud. Restarting a tutorial which you terminated causes an error in Posit Cloud, for example.</p>
+<p>So, for these three tutorials and all others, we should explicitly have students create two RStudio instances, one in which they are doing the tutorial and one in which they are following the tutorial’s instructions, instructions which will often require restarts and/or new projects.</p>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>
