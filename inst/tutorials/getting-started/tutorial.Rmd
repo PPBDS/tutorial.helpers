@@ -197,7 +197,7 @@ The tutorial workflow will often look like this. We tell you to run a command **
 RStudio and your R installation have some default settings which are not good for new users. Run this command at the Console to change them:
 
 `
-tutorial.helpers::set_rstudio_settings(set.binary = TRUE)
+tutorial.helpers::set_rstudio_settings()
 `
 
 CP/CR.
