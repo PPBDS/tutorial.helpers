@@ -130,12 +130,44 @@ Tutorial pane more room.</p>
 Note that, in Posit Cloud, just pressing a download button, for any
 format, will probably not work. Instead, you will need to follow the
 instructions you see and use an alternative or secondary click. This is
-either a two finger or <code>Ctrl + click</code> on the Mac or a right
-click on Windows. This action will bring up a menu, one choice of which
-is “Save link as …” Choose this option and dowload the file, probably to
-your Downloads file. Except the default name for the file. An
-appropriate suffix will be added automatically.</p>
-  </main>
+either a two finger click (or <code>Ctrl + click</code>) on the Mac or a
+right click on Windows. This action will bring up a menu, one choice of
+which is “Save link as …” Choose this option and download the file,
+probably to your Downloads folder. Accept the default name for the file.
+An appropriate suffix will be added automatically.</p>
+<div class="section level3">
+<h3 id="tutorials-and-rstudio-projects">Tutorials and RStudio Projects<a class="anchor" aria-label="anchor" href="#tutorials-and-rstudio-projects"></a>
+</h3>
+<p>In most tutorials, you never leave the RStudio Project in which you
+started the tutorial.</p>
+<p>Some tutorials require you to create a new RStudio Project. Examples
+from the <strong>r4ds.tutorials</strong> package include “RStudio and
+code,” RStudio and Github,” and “Quarto.” This works fine on your local
+computer. On Posit Cloud, things are trickier. You must manually keep
+track of the different RStudio Projects in which you are working.</p>
+<p>In order to start a new RStudio Project on Posit Cloud, you must go
+back to your Workspace, click on “New Project” in the upper right,
+select “New Project from a Git Repository,” and then provide the URL for
+your Git repo. Once you click “OK,” you will now have two RStudio
+Projects in your Workspace.</p>
+<p>These two projects are completely separate. They run on separate
+“containers,” i.e., on separate computers with no connection to one
+another. One might think that this is not a problem. We should be able
+to just move back-and-forth between the two RStudio Projects, just as we
+would on a local computer. But that does not work on Posit Cloud because
+each time you switch away from the tutorial RStudio Project, Posit Cloud
+closes the tutorial, thereby requiring you to restart it each time you
+come back. That is very annoying!</p>
+<p>The solution is for you to login to Posit Cloud twice, keeping each
+login in its own tab on your browser. In one login, you are looking at
+the tutorial RStudio Project, answering questions as you go along. In
+the other login, you are looking at the second RStudio Project, which is
+usually connected to a Github repo. This is where you are doing most of
+your work. But, because these two logins are just two tabs on your
+browser, it is easy to switch back and forth.</p>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
