@@ -45,6 +45,7 @@
     <a class="dropdown-item" href="../articles/instructions.html">Instructions for Writing R Tutorials</a>
     <a class="dropdown-item" href="../articles/books.html">Tutorials for Books</a>
     <a class="dropdown-item" href="../articles/addins.html">Rstudio Addins</a>
+    <a class="dropdown-item" href="../articles/cloud.html">Using Tutorials with Posit Cloud</a>
     <a class="dropdown-item" href="../articles/testing.html">Testing Your Package of Tutorials</a>
   </div>
 </li>
@@ -762,6 +763,30 @@ knit to html) for making plots or doing anything else. Second, and more
 importantly, they are available to students in the exercise code blocks
 during “run time” (when students are doing the tutorial).</p>
 </div>
+<div class="section level3">
+<h3 id="complex-text">Complex text<a class="anchor" aria-label="anchor" href="#complex-text"></a>
+</h3>
+<p>You sometimes want to include “complex” text in a tutorial. This is
+most common when trying to teach students how to use R code chunks and
+other strings which Rmarkdown wants to process in certain ways. You can
+sometimes get away by placing such text in environments surrounded by
+three, or even four, backticks. This works often, but not always.
+Comments characters like <code>#</code> are especially problematic. We
+also use the <a href="https://rundel.github.io/parsermd/" class="external-link"><strong>parsermd</strong></a>
+package behind the scenes. It does not work as well as one might
+like.</p>
+<p>The “file” trick solves this problem. Create a txt file,
+<code>example.txt</code>, with the text which you want to appear in the
+tutorial. You can either leave it in the same directory as the
+<code>tutorial.Rmd</code> file or, probably better, place it in either
+the <code>data</code> or <code>images</code> directory. You then add
+this code chunk to your tutorial.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="st">```</span><span class="at">{r file = "example.txt", echo = TRUE, eval = FALSE}</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+<p>The <code>file</code> code chunk object loads the specified file. The
+other code chunk options ensure that the text is echoed but not
+evaluated.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="checks">Checks<a class="anchor" aria-label="anchor" href="#checks"></a>
@@ -769,7 +794,7 @@ during “run time” (when students are doing the tutorial).</p>
 <p>The simplest way to test the <code>tutorial.Rmd</code> with which you
 are working on is to hit the “Run Document” button. This is the same
 thing as running <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> on that file:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span><span class="st">"inst/tutorials/02-terminal/tutorial.Rmd"</span><span class="op">)</span></span></code></pre></div>
 <p>This assumes that you are located in the main directory of
 <strong>your.package</strong>, as you normally would be. I am not sure
@@ -865,24 +890,6 @@ like “Missing a component part from file
 /path/to/your/Rmd/file.Rmd”.</li>
 </ul>
 </div>
-</div>
-<div class="section level2">
-<h2 id="open-issues">Open Issues<a class="anchor" aria-label="anchor" href="#open-issues"></a>
-</h2>
-<p>There are some tutorials which require either an R restart or (what
-is more or less the same thing) the creation of a new R project. Some
-examples from the <strong>r4ds.tutorials</strong> package are “RStudio
-and code,” “Rstudio and Github,” and “Quarto.” The problem arises
-because restarting R or creating a new R project causes R to terminate
-the tutorial. That is fine when working on a local machine, since the
-tutorial answers are saved and you can just restart the tutorial. But it
-does not (always? ever?) work in the cloud. Restarting a tutorial which
-you terminated causes an error in Posit Cloud, for example.</p>
-<p>So, for these three tutorials and all others, we should explicitly
-have students create two RStudio instances, one in which they are doing
-the tutorial and one in which they are following the tutorial’s
-instructions, instructions which will often require restarts and/or new
-projects.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
