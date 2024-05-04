@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Using Tutorials with Posit Cloud</title>
+<style type="text/css">
+body {
+  font-family: sans-serif;
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+body, .footnotes, code { font-size: .9em; }
+li li { font-size: .95em; }
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+pre, img { max-width: 100%; }
+pre, pre:hover {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+pre code {
+  display: block;
+  overflow-x: auto;
+}
+code { font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace; }
+:not(pre) > code, code[class] { background-color: #F8F8F8; }
+code.language-undefined, pre > code:not([class]) {
+  background-color: inherit;
+  border: 1px solid #eee;
+}
+table {
+  margin: auto;
+  border-top: 1px solid #666;
+}
+table thead th { border-bottom: 1px solid #ddd; }
+th, td { padding: 5px; }
+thead, tfoot, tr:nth-child(even) { background: #eee; }
+blockquote {
+  color: #666;
+  margin: 0;
+  padding-left: 1em;
+  border-left: 0.5em solid #eee;
+}
+hr, .footnotes::before { border: 1px dashed #ddd; }
+.frontmatter { text-align: center; }
+#TOC .numbered li { list-style: none; }
+#TOC .numbered { padding-left: 0; }
+#TOC .numbered ul { padding-left: 1em; }
+table, .body h2 { border-bottom: 1px solid #666; }
+.body .appendix, .appendix ~ h2 { border-bottom-style: dashed; }
+.footnote-ref a::before { content: "["; }
+.footnote-ref a::after { content: "]"; }
+section.footnotes::before {
+  content: "";
+  display: block;
+  max-width: 20em;
+}
+
+@media print {
+  body {
+    font-size: 12pt;
+    max-width: 100%;
+  }
+  tr, img { page-break-inside: avoid; }
+}
+@media only screen and (min-width: 992px) {
+  pre { white-space: pre; }
+}
+</style>
+</head>
+<body>
+<div class="frontmatter">
+<div class="title"><h1>Using Tutorials with Posit Cloud</h1></div>
+<div class="author"><h2>David Kane</h2></div>
+<div class="date"><h3></h3></div>
+</div>
+<div class="body">
+<p><a href="https://posit.cloud/">Posit Cloud</a> is the most common cloud service to use when working with <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>, not least because <a href="https://posit.co/">Posit</a> is also the company behind RStudio. Using Posit Cloud with tutorials created with the <a href="https://ppbds.github.io/tutorial.helpers/"><strong>tutorial.helpers</strong></a> package is tricky. The purpose of this vignette is to explain the process.</p>
+<p>First, when signing up, choose the “<a href="https://posit.cloud/plans">Cloud Free</a>” plan. At least for the first 20 hours or so of use, do not give Posit your credit card number. If Posit Cloud is working well for you, and you use more than the 25 hours per month allowed (currently) by the Cloud Free plan, then you might pay and upgrade. There are also sometimes discounts for students/teachers. I</p>
+<p>Second, follow the Posit Cloud <a href="https://posit.cloud/learn/guide">instructions</a> to login, an action which should automatically place you in your Workspace. Once there, set up a new RStudio Project. This is all fairly simple and just involves clicking some buttons. Once you have a new Project, you should be able to follow the <a href="https://ppbds.github.io/tutorial.helpers/">standard instructions</a> for working with the <strong>tutorial.helpers</strong> package. That is, running <code>install.packages(&quot;tutorial.helpers&quot;)</code> should work as the first R command you issue in the Console.</p>
+<p>Third, go to the Tutorial pane in the upper right and scroll to the bottom. Tutorials are listed in the alphabetical order of the packages in which they reside, so the “Getting Started” tutorial is usually the bottom tutorial. Press the “Start Tutorial” button. You may be asked to install the <strong>tidyverse</strong> package. If so, please agree.</p>
+<p>Fourth, the “Getting Started” tutorial will be created, with messages shown in the “Background Jobs” tab. After a few moment, the tutorial will be complete, also appearing in the Tutorial pane. You may work on it either in the Tutorial pane or, by clicking the “Show in new window” button (located between the “Return to home” and “Stop tutorial” buttons), in its own window. I recommend leaving it in the Tutorial pane. Note that you can adjust the different window sizes to give the Tutorial pane more room.</p>
+<p>Fifth, once you complete the tutorial, you can download your answers. Note that, in Posit Cloud, just pressing a download button, for any format, will probably not work. Instead, you will need to follow the instructions you see and use an alternative or secondary click. This is either a two finger or <code>Ctrl + click</code> on the Mac or a right click on Windows. This action will bring up a menu, one choice of which is “Save link as …” Choose this option and dowload the file, probably to your Downloads file. Except the default name for the file. An appropriate suffix will be added automatically.</p>
+</div>
+</body>
+</html>
