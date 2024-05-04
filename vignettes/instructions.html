@@ -423,6 +423,13 @@ include_graphics(&quot;images/example.png&quot;)
 <h3 id="files">Files</h3>
 <p>Other files — most commonly text files or RDS files — are handled in a similar fashion to images. Create a directory called <code>data</code> in the same directory as the <code>tutorial.Rmd</code>, just as we do with <code>images</code>.</p>
 <p>There are two main uses for files in <code>data</code>. First, they can be used at “compile time” (when the <code>tutorial.Rmd</code> is knit to html) for making plots or doing anything else. Second, and more importantly, they are available to students in the exercise code blocks during “run time” (when students are doing the tutorial).</p>
+<h3 id="complex-text">Complex text</h3>
+<p>You sometimes want to include “complex” text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which Rmarkdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. This works often, but not always. Comments characters like <code>#</code> are especially problematic. We also use the <a href="https://rundel.github.io/parsermd/"><strong>parsermd</strong></a> package behind the scenes. It does not work as well as one might like.</p>
+<p>The “file” trick solves this problem. Create a txt file, <code>example.txt</code>, with the text which you want to appear in the tutorial. You can either leave it in the same directory as the <code>tutorial.Rmd</code> file or, probably better, place it in either the <code>data</code> or <code>images</code> directory. You then add this code chunk to your tutorial.</p>
+<pre><code class="language-r">```{r file = &quot;example.txt&quot;, echo = TRUE, eval = FALSE}
+```
+</code></pre>
+<p>The <code>file</code> code chunk object loads the specified file. The other code chunk options ensure that the text is echoed but not evaluated.</p>
 <h2 id="checks">Checks</h2>
 <p>The simplest way to test the <code>tutorial.Rmd</code> with which you are working on is to hit the “Run Document” button. This is the same thing as running <code>rmarkdown::render()</code> on that file:</p>
 <pre><code class="language-r">rmarkdown::render(&quot;inst/tutorials/02-terminal/tutorial.Rmd&quot;)
@@ -466,9 +473,6 @@ include_graphics(&quot;images/example.png&quot;)
 <ul>
 <li><code>R CMD check</code> will test that all tutorials have the default sections exactly as they are in the Helper Tutorial template. So, use the template. If either the “Information” or “Download answers” sections are missing, <code>R CMD check</code> will return something like “Missing a component part from file /path/to/your/Rmd/file.Rmd”.</li>
 </ul>
-<h2 id="open-issues">Open Issues</h2>
-<p>There are some tutorials which require either an R restart or (what is more or less the same thing) the creation of a new R project. Some examples from the <strong>r4ds.tutorials</strong> package are “RStudio and code,” “Rstudio and Github,” and “Quarto.” The problem arises because restarting R or creating a new R project causes R to terminate the tutorial. That is fine when working on a local machine, since the tutorial answers are saved and you can just restart the tutorial. But it does not (always? ever?) work in the cloud. Restarting a tutorial which you terminated causes an error in Posit Cloud, for example.</p>
-<p>So, for these three tutorials and all others, we should explicitly have students create two RStudio instances, one in which they are doing the tutorial and one in which they are following the tutorial’s instructions, instructions which will often require restarts and/or new projects.</p>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>

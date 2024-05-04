@@ -403,6 +403,20 @@ Other files --- most commonly text files or RDS files --- are handled in a simil
 
 There are two main uses for files in `data`. First, they can be used at "compile time" (when the `tutorial.Rmd` is knit to html) for making plots or doing anything else. Second, and more importantly, they are available to students in the exercise code blocks during "run time" (when students are doing the tutorial).
 
+### Complex text
+
+You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which Rmarkdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. This works often, but not always. Comments characters like `#` are especially problematic. We also use the [**parsermd**](https://rundel.github.io/parsermd/) package behind the scenes. It does not work as well as one might like.
+
+The "file" trick solves this problem. Create a txt file, `example.txt`, with the text which you want to appear in the tutorial. You can either leave it in the same directory as the `tutorial.Rmd` file or, probably better, place it in either the `data` or `images` directory. You then add this code chunk to your tutorial.
+
+
+````r
+```{r file = "example.txt", echo = TRUE, eval = FALSE}
+```
+````
+
+The `file` code chunk object loads the specified file. The other code chunk options ensure that the text is echoed but not evaluated.
+
 
 ## Checks 
 
@@ -448,11 +462,9 @@ But the file is there! You can see it! The tests work on your local machine. The
 
 * `R CMD check` will test that all tutorials have the default sections exactly as they are in the Helper Tutorial template. So, use the template. If either the "Information" or "Download answers" sections are missing, `R CMD check` will return something like "Missing a component part from file /path/to/your/Rmd/file.Rmd".
 
-## Open Issues
 
-There are some tutorials which require either an R restart or (what is more or less the same thing) the creation of a new R project. Some examples from the **r4ds.tutorials** package are "RStudio and code," "Rstudio and Github," and "Quarto." The problem arises because restarting R or creating a new R project causes R to terminate the tutorial. That is fine when working on a local machine, since the tutorial answers are saved and you can just restart the tutorial. But it does not (always? ever?) work in the cloud. Restarting a tutorial which you terminated causes an error in Posit Cloud, for example.
 
-So, for these three tutorials and all others, we should explicitly have students create two RStudio instances, one in which they are doing the tutorial and one in which they are following the tutorial's instructions, instructions which will often require restarts and/or new projects.
+
 
 
 

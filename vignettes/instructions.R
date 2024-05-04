@@ -81,6 +81,10 @@
 #  include_graphics("images/example.png")
 #  ```
 
+## ----file = "example-file.txt", echo = TRUE, eval = FALSE---------------------
+#  ```{r file = "example.txt", echo = TRUE, eval = FALSE}
+#  ```
+
 ## ----eval = FALSE-------------------------------------------------------------
 #  rmarkdown::render("inst/tutorials/02-terminal/tutorial.Rmd")
 
