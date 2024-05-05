@@ -145,7 +145,7 @@ You should receive the warning message shown below. (Note that this box might be
 knitr::include_graphics("images/terminate_jobs.png")
 ```
 
-Click "Terminate Jobs". This will "grey out" the tutorial. (You might also have to close the tutorial window by hand.) 
+Click "Terminate Jobs". This will "grey out" the tutorial. (You might also have to close the tutorial window by hand and/or hit the "Return to home" button, the little house icon with the red roof located just below the word "Environment.") 
 
 Re-open this tutorial by clicking "Start Tutorial" in the Tutorial tab, just as you did at the start of the tutorial. Progress will have been saved automatically.
 
@@ -153,7 +153,7 @@ Now that you have read all the instructions, go ahead and follow them.
 
 ### 
 
-Note how all your answers to previous questions have been saved. It is not a problem to quit a tutorial. In fact, if you ignore a tutorial for awhile, it will quit automatically, appearing "grayed out" on the Tutorial tab. To start working again, click the "Home" button (located just below the word "Environment") and then restart the tutorial just as you started it the first time.
+Note how all your answers to previous questions have been saved. It is not a problem to quit a tutorial. In fact, if you ignore a tutorial for awhile, it will quit automatically.
 
 
 ### Exercise 5
@@ -254,7 +254,7 @@ You have now selected sensible settings for using RStudio.
 
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are just copies of the R commands and their results. Other times, we will ask you to write one or more sentences of prose. 
 
-Copy and paste everything from `Exercise 9` through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
+Copy and paste everything from `Exercise 8` above through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
 ```{r exercises-8}
 question_text(NULL,
