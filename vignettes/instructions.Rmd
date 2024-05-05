@@ -289,6 +289,8 @@ In addition to `tutorial.Rmd`, a tutorial will often use other inputs. The two m
 
 If you need for an R object to be accessible in an Exercise code chunk, create it in the initial global `setup` code chunk at the top of the tutorial.
 
+<!-- Objects created in a code chunk which is then referenced by using the exercise.setup code chunk option in any Exercise which needs access to these objects. -->
+
 Be wary code which downloads data from the web. This won't work if the student does not have an internet connection when she creates the tutorial. Instead, save the code which downloaded the data and then place that object in an RDS file in the `data` directory. Here is an example from the "Wrangling Census data with tidyverse tools" tutorial from the [**tidycensus.tutorials**](https://ppbds.github.io/tidycensus.tutorials/) package.
 
 ```

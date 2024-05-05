@@ -20,6 +20,8 @@ Fourth, the "Getting Started" tutorial will be created, with messages shown in t
 
 Fifth, once you complete the tutorial, you can download your answers. Note that, in Posit Cloud, just pressing a download button, for any format, will probably not work. Instead, you will need to follow the instructions you see and use an alternative or secondary click. This is either a two finger click (or `Ctrl + click`) on the Mac or a right click on Windows. This action will bring up a menu, one choice of which is "Save link as ..." Choose this option and download the file, probably to your Downloads folder. Accept the default name for the file. An appropriate suffix will be added automatically.
 
+**Warning**: Posit Cloud shuts down unused sessions aggressively. If you stop working on your tutorial, it will be closed and "greyed out." To restart it, you need to press the "Return to home" button --- the little house symbol with the red roof --- and then restart your tutorial. All your previous answers will be saved so you can just pick up where you left off. 
+
 ### Tutorials and RStudio Projects
 
 In most tutorials, you never leave the RStudio Project in which you started the tutorial. 

@@ -399,6 +399,7 @@ From the Console, run `list.files()`. CP/CR.
 <p>In addition to <code>tutorial.Rmd</code>, a tutorial will often use other inputs. The two most common locations for storing these inputs are <code>data</code> and <code>images</code> directories at the same level as the <code>tutorial.Rmd</code> file. Any file in <code>data</code> or <code>images</code> will be available at run time. (Note that the directories must have these names. Something like <code>my_data</code> will not work.)</p>
 <h3 id="data">Data</h3>
 <p>If you need for an R object to be accessible in an Exercise code chunk, create it in the initial global <code>setup</code> code chunk at the top of the tutorial.</p>
+<!-- Objects created in a code chunk which is then referenced by using the exercise.setup code chunk option in any Exercise which needs access to these objects. -->
 <p>Be wary code which downloads data from the web. This won’t work if the student does not have an internet connection when she creates the tutorial. Instead, save the code which downloaded the data and then place that object in an RDS file in the <code>data</code> directory. Here is an example from the “Wrangling Census data with tidyverse tools” tutorial from the <a href="https://ppbds.github.io/tidycensus.tutorials/"><strong>tidycensus.tutorials</strong></a> package.</p>
 <pre><code>median_age &lt;- get_acs(geography = &quot;county&quot;,
                       variables = &quot;B01002_001&quot;,
