@@ -199,7 +199,7 @@ The "..." indicates places where the student needs to insert some code, a value 
 
 Students can not see the first hint after clicking through to the next hint. So, make sure the last hint is the one you most want them to have access to, i.e., the one which provides the key information. If students can see the last hint, they should have no reason to consult any earlier hints. We rarely provide more that one hint.
 
-Hints are [only allowed](https://community.rstudio.com/t/hints-in-written-questions/108184) for coding questions, **not for text questions**.
+Hints are [only allowed](https://forum.posit.co/t/hints-in-written-questions/108184) for coding questions, **not for text questions**.
 
 Fifth, the third code chunk, after the Exercise and Hint code chunks, is the Test code chunk. Place the answer --- the code which you want students to enter into the Exercise code chunk --- into the Test code chunk. Since the Test code chunk will be evaluated with the tutorial is knitted (which also happens during testing), this guarantees that correct answer will work for students. 
 
