@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.6.9010</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.6.9011</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,7 +52,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
-    <a class="dropdown-item" href="../tutorials/getting-started.html">Getting Started</a>
+    <a class="dropdown-item" href="../tutorials/getting-started.html">Getting Started with Tutorials</a>
   </div>
 </li>
 <li class="nav-item">
@@ -684,6 +684,7 @@ will not work.)</p>
 <p>If you need for an R object to be accessible in an Exercise code
 chunk, create it in the initial global <code>setup</code> code chunk at
 the top of the tutorial.</p>
+<!-- Objects created in a code chunk which is then referenced by using the exercise.setup code chunk option in any Exercise which needs access to these objects. -->
 <p>Be wary code which downloads data from the web. This won’t work if
 the student does not have an internet connection when she creates the
 tutorial. Instead, save the code which downloaded the data and then
@@ -850,16 +851,11 @@ all hints.</p>
 <strong>ggthemes</strong> in their tutorial but then forget to include
 <code><a href="https://jrnold.github.io/ggthemes/" class="external-link">library(ggthemes)</a></code> in the <code>setup</code> code chunk.
 This will not cause any error in checking because
-<strong>ggthemes</strong> is not actually used in the tutorial itself,
-so the tutorial knits without a problem. But then the student tries to
-type <code><a href="https://jrnold.github.io/ggthemes/" class="external-link">library(ggthemes)</a></code> as an answer to an exercise and gets
-an error because the package has not been installed. This issue helps to
-illustrate why having plots which are built on the fly is so valuable:
-it guarantees that student answers will work since the same code worked
-when the tutorial was knitted. The main lesson: For any package used,
-have a question which explicitly asks the student to load the package.
-In the Test chunk for that question, load the package yourself. This
-guarantees the availability of the package.</p></li>
+<strong>ggthemes</strong> is not actually used in the tutorial itself —
+unless it is included in a Test code chunk, as it should be — so the
+tutorial knits without a problem. But then the student tries to type
+<code><a href="https://jrnold.github.io/ggthemes/" class="external-link">library(ggthemes)</a></code> as an answer to an exercise and gets an
+error because the package has not been installed.</p></li>
 <li><p>Note that <code>R CMD check</code> does not seem to catch cases
 in which you <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code> a package in a tutorial but that
 package is not in DESCRIPTION. But such a discrepancy will cause an
