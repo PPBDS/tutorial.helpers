@@ -29,6 +29,24 @@ knit_tutorials <- function(tutorial_paths){
   # Note that the Debian setup on CRAN does not allow for writing files to any
   # location other than the temporary directory, which is why we must specify
   # tempdir() in the two dir arguments.
+  
+  # Would be nice to have more flexibility with knit_tutorials(). The problem
+  # arises when knitting a collection of tutorial paths takes too long,
+  # especially on CRAN, where all tests should only take 10 minutes total. Might
+  # be nice if tutorial paths:
+    
+  # 1) Had an option to report the time (or start/end time) which each knitting
+  # used. We want to identify which tutorials take too long to knit. Right now,
+  # there is no easy way to do so.
+  
+  # 2) Provide a `skip` argument to knit_tutorials which allows it to skip any
+  # tutorial path which includes a specific string. This will generally be used
+  # like skip = c("06-data-tidying", "08-data-import"). Note that these are not
+  # the names of tutorial files (which are mostly "tutorial.Rmd") nor the full
+  # path to those tutorials (which we don't know until we run
+  # `return_tutorial_paths()`). Instead, they are strings from within the path.
+  # (Maybe require that they be full parts of the path? Or maybe any match is
+  # fine?)
 
   for(i in tutorial_paths){
      testthat::test_that(paste("Rendering", i), {

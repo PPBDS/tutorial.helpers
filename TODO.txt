@@ -1,6 +1,6 @@
 # Priorities
 
-* Does the existence of new RStudio tools (typist?) mean we can make PDF files more easily? No longer need gridExtra?
+* Does the existence of new RStudio tools (typist?) mean we can make PDF files more easily? No longer need gridExtra? Related: Do we really need gridExtra in order to be able to create a pdf file? Seems like overkill. Must be an easier way.
 
 * If you "Show in a new window" a tutorial, then clicking on links in that tutorial does not work on my local computer. If you keep the tutorial in the Tutorial pane, links do work. It works either way on Posit Cloud.
 
@@ -10,13 +10,11 @@
 
 * Start working on a new function, process_submissions(), in a file called process_submissions.R. Starts by taking one argument which is a path to a folder with a bunch of answer html files in it. Reads through those files, pulling out the name of the tutorial, the email of the student, and the time it took. Then returns a tibble with that information in three variables.
 
-* Both make_exercise() and format_tutorial() encode the information about the correct code chunk labels for exercises. That is bad! We should encode that stuff in just one location.
-
 * Ensure that this code handles our test code chunks in non-code questions. See RStudio and Github (gert) for examples. Seems to work, but some test cases would be nice.
 
 * Should Written Exercises with no answers have test code chunks by default? I seem to be using these a lot in 22-arrow. Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code.
 
-* There is something here which makes Format Tutorial Chunk Labels work poorly. The quoted tibble below causes the issue. Add this issue as a test case in tutorial.helpers and then fix it there. Perhaps cause is that, within a tripple backtick block you can't have a comment operator? I think this causes the problem but I have not produced a reproducible example yet.
+* There is something here which makes Format Tutorial Chunk Labels work poorly. The quoted tibble below causes the issue. Add this issue as a test case in tutorial.helpers and then fix it there. Perhaps cause is that, within a tripple backtick block you can't have a comment operator? I think this causes the problem but I have not produced a reproducible example yet. This issue might go back to parsermd().
 
 ````        
 Tabble from Exercise 25:
@@ -27,47 +25,33 @@ Tabble from Exercise 25:
 ````
 
 
-* Perhaps Section 9.2.3 Downloading reports in the Shiny book shows a much better way of handling our answer-saving problem: parameterised RMarkdown. 
-
 * reactiveConsole(TRUE) might make it easier to experiment with reactivity in the Console.
 
 * Think harder about whether write_answer should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
 
 * format_tutorial() needs to handle hints better. In particular, it must ensure that the hint matches the exercise code chunk name, as it must, by definition.
 
+## Downloading answers
 
-* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
+* Perhaps Section 9.2.3 Downloading reports in the Shiny book shows a much better way of handling our answer-saving problem: parameterised RMarkdown. 
+
+* With rstudioapi, use selectFile and friends as an easier way of saving student answers.
+
+* The **downloadthis** package looks very interesting. It seems easy to download a file without all the rigamarole of the Shiny server. But it requires that the file exists. Can we automatically run the code to create the files? Yes! We can write the code in the final exercise and then tell students to hit Run Code. They can then hit the download button. But would that really work? Isn't an Exercise code chunk its own separate world, with no notion of the tutorial of which it is a part? Maybe the same local{()} nonsense that we use submission_server() would do the trick. But that would make for some ugly code. Maybe we can hide the code, but they still press the Run Code button.
+
 
 ## write_answers()
 
-See the comments at test-write_answers.R for detailed discussion. 
+* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
 
-We should split write_answers() into two parts. The first part just grabs everything we need from the session and returns a tibble. (This part might be too big for CRAN.) The second part takes the tibble and outputs the answers as html/pdf/rds. We can test this a lot. Do this first. The current test case will help ensure that, at least, nothing is worse.
+* See the comments at test-write_answers.R for detailed discussion. 
 
-Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
+* We should split write_answers() into two parts. The first part just grabs everything we need from the session and returns a tibble. (This part might be too big for CRAN.) The second part takes the tibble and outputs the answers as html/pdf/rds. We can test this a lot. Do this first. The current test case will help ensure that, at least, nothing is worse.
 
-Do we really need gridExtra in order to be able to create a pdf file? Seems like overkill. Must be an easier way.
+* Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
 
-A different approach to the pdf file creation problem in write_answers() would be to create the Rmd document on the file as a character object rmd and then do render(text = rmd, output_file = filename).
+* A different approach to the pdf file creation problem in write_answers() would be to create the Rmd document on the file as a character object rmd and then do render(text = rmd, output_file = filename).
 
-## CRAN Issues
-
-* Deal with these NOTES from devtools::check_win_devel() (or maybe they are from devtools::check(remote = TRUE, manual = TRUE) or rhub::check_for_cran())
-
-* checking examples ... [11s] NOTE
-Examples with CPU (user + system) or elapsed time > 5s
-               user system elapsed
-knit_tutorials 3.09   0.69    5.81
-* checking for non-standard things in the check directory ... NOTE
-Found the following files/directories:
-  ''NULL''
-* checking for detritus in the temp directory ... NOTE
-Found the following files/directories:
-  'lastMiKTeXException'
-  
-  * Why does devtools::check(remote = TRUE, manual = TRUE) produce so many weird notes about html problems? And why does it launch XQuartz?
-
-* Figure out why Check is 0/0/0 but Test is 1 FAIL and 4 SKIPs.
 
 ## Points about testing
 
@@ -108,16 +92,10 @@ Blanks are detected using regular expressions (since blanks may make the code un
 
 * Version 0.2.6.9012 got rid of the discussion about hosting a version of the Getting Started tutorials on shinyapps.io. The whole process was annoying and working poorly. To my knowledge, it was never used. So, we simplify.
 
-* Would be nice to have more flexibility with knit_tutorials(). The problem arises when knitting a collection of tutorial paths takes too long, especially on CRAN, where all tests should only take 10 minutes total. Might be nice if tutorial paths:
-
-  + Had an option to report the time (or start/end time) which each knitting used. We want to identify which tutorials take too long to knit. Right now, there is no easy way to do so.
-  + Provide a `skip` argument to knit_tutorials which allows it to skip any tutorial path which includes a specific string. This will generally be used like skip = c("06-data-tidying", "08-data-import"). Note that these are not the names of tutorial files (which are mostly "tutorial.Rmd") nor the full path to those tutorials (which we don't know until we run `return_tutorial_paths()`). Instead, they are strings from within the path. (Maybe require that they be full parts of the path? Or maybe any match is fine?)
-
 * rstudioapi::is_available()
 
-* With rstudioapi, use selectFile and friends as an easier way of saving student answers.
+* Figure out why Check is 0/0/0 but Test is 1 FAIL and 4 SKIPs.
 
-* The **downloadthis** package looks very interesting. It seems easy to download a file without all the rigamarole of the Shiny server. But it requires that the file exists. Can we automatically run the code to create the files? Yes! We can write the code in the final exercise and then tell students to hit Run Code. They can then hit the download button. But would that really work? Isn't an Exercise code chunk its own separate world, with no notion of the tutorial of which it is a part? Maybe the same local{()} nonsense that we use submission_server() would do the trick. But that would make for some ugly code. Maybe we can hide the code, but they still press the Run Code button.
 
 * Does build_tutorials() really work? First, it seems to fail if you don't provide a url. Second, it does not seem to make use of a source option if one is provided.
 

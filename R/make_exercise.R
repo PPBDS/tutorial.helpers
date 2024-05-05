@@ -45,6 +45,10 @@ make_exercise <- function(type = "code", file_path = NULL){
   # Make new exercise skeleton by inserting the appropriate label and exercise
   # number at the right places.
   
+  # Both this function and format_tutorial() encode the information about the
+  # correct code chunk labels for exercises. That is bad! We should encode that
+  # stuff in just one location.
+  
   new_exercise <-
     dplyr::case_match(
       type,
