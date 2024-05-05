@@ -170,18 +170,8 @@ tutorials/[^/]*/(?!(data|images|.*Rmd))
 This excludes everything in any subdirectory of the tutorials directory except an `images` directory (a file named images would also be included) or a `data` directory or a file suffixed with `.Rmd`.
 
 
-## Adding more libraries
-
-If you are using a new library, there are several things you need to check. First, most obviously, you should install the package within the `your.package` directory. Second, you must use `library(X)` in the setup chunk within the `tutorial.Rmd` itself. Third, you need to run `renv::status()`. This should report that there is a new package which is not part of `renv.lock`. Then, you will need to run `renv::snapshot()` so that the `renv.lock` file is updated. Fourth, you need to add the package to the `DESCRIPTION` file, in the `Imports:` section. (And don't forget the comma when you do so.) If you don't do this, then R CMD check might work on your computer, where library X is already installed, but won't work in Github actions since it relies on the DESCRIPTION file to know which packages to install.
-
-It makes sense to use high quality tools for these steps. For example, `renv::install()` is a better way of installing needed packages within the **renv** environment. `usethis::use_package()` updates the `DESCRIPTION` file to include the package.
-
-We have seen weird situations in which even doing all of the above did not work. The required hack was to install the new package in your main (default) library. Now, it seems weird that this would help since, with **renv**, we should never be using that location. I suspect that there is a bug involved in the interaction between `R CMD check` and **renv**.
 
 
 
-
-
-* instead of its current behavior, it should first, check all the section names, confirming that they are all unique, and reporting an error if not.
 
 
