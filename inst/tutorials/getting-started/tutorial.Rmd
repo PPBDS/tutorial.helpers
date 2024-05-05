@@ -25,7 +25,7 @@ options(tutorial.exercise.timelimit = 60,
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- Publishing this tutorial to shinyapps and Posit Cloud is non-trivial. If you aren't careful, you get some weird renv error messages. I *think* that you need to be sure that you have installed a "clean" (?) version of tutorial.helpers itself. (Or maybe you just need to ensure that renv/activate.R includes some magic about RENV_STARTUP_DIAGNOSTICS.) Not sure! Anyway, each time you have an important change, you should republish, although it takes some time. We should have a Github Action take care of this. Should also move them to PPBDS accounts instead of my personal accounts. Maybe we only need to maintain one of these going forward. Any changes made should be reflected in the README.Rmd as well. -->
+<!-- Publishing this tutorial to shinyapps and Posit Cloud is non-trivial. If you aren't careful, you get some weird renv error messages. I *think* that you need to be sure that you have installed a "clean" (?) version of tutorial.helpers itself. (Or maybe you just need to ensure that renv/activate.R includes some magic about RENV_STARTUP_DIAGNOSTICS.) Not sure! Anyway, each time you have an important change, you should republish, although it takes some time. We should have a Github Action take care of this. Should also move them to PPBDS accounts instead of my personal accounts. For now, we only maintain a shinyapps version at:  -->
 
 
 ## Introduction
@@ -52,7 +52,7 @@ In each tutorial, there will be a set of exercises for you to complete. For non-
 
 ### 
 
-Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work for a tutorial and allows you to begin the entire tutorial again.
+Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work for a tutorial and allows you to begin the entire tutorial again. (If you are working on your tutorial in the Tutorial tab, the screen might not be wide enough to show the left-hand side menu. If so, just expand the Tutorial tab until it appears.)
 
 ### Exercise 1
 
@@ -149,7 +149,7 @@ knitr::include_graphics("images/terminate_jobs.png")
 
 Click "Terminate Jobs". This will "grey out" the tutorial. (You might also have to close the tutorial window by hand.) 
 
-Re-open this tutorial by clicking "Start Tutorial" in the Tutorial pane, just as you did at the start of the tutorial. Progress will have been saved automatically.
+Re-open this tutorial by clicking "Start Tutorial" in the Tutorial tab, just as you did at the start of the tutorial. Progress will have been saved automatically.
 
 Now that you have read all the instructions, go ahead and follow them.
 
