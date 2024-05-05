@@ -10,9 +10,9 @@
 
 * Change tutorial title to "Getting Started with Tutorials."
 
-* Give `set_rstudio_settings()` a set.binary argument which is set to FALSE by default. If TRUE, the function will run `set_binary_only_in_r_profile()` at the end. This is handy for the "Getting Started with Tutorials"" tutorial. 
+* Give `set_rstudio_settings()` a set.binary argument which is set to TRUE by default, causing the function to run `set_binary_only_in_r_profile()` at the end. This is handy for the "Getting Started with Tutorials"" tutorial. 
 
-* Set up "Getting Started with Tutorials" on shinyapps.io and Posit Cloud.
+* Remove "Getting Started with Tutorials" from shinyapps.io.
 
 # tutorial.helpers 0.2.6
 

@@ -109,9 +109,4 @@ for details about their use.
 The package includes a tutorial, “Getting Started with Tutorials,” which
 provides an introduction to tutorials for beginning students. You should
 require your students to complete this tutorial if you are using
-**tutorial.packages** to create your own tutorials. The tutorial is also
-available on
-[shinyapps.io](https://davidkane9.shinyapps.io/Getting-Started-with-Tutorials/)
-(number of users is limited) and [Posit
-Cloud](https://posit.cloud/content/7608636) (requires (free) Posit Cloud
-account).
+**tutorial.packages** to create your own tutorials.

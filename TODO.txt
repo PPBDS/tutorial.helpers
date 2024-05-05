@@ -1,14 +1,10 @@
 # Priorities
 
-* Update online versions. Maybe only need Posit Cloud version? Maybe just delete the example?
-
-* Move the new testing files outside the package before release, then move them back in.
-
 * Does the existence of new RStudio tools (typist?) mean we can make PDF files more easily? No longer need gridExtra?
 
-* When running a tutorial from the Tutorial tab, links in the tutorial do not work.
+* If you "Show in a new window" a tutorial, then clicking on links in that tutorial does not work on my local computer. If you keep the tutorial in the Tutorial pane, links do work. It works either way on Posit Cloud.
 
-* Something in Getting Started which shows how links work. You can click. It takes you away, but then the back button takes you back. Or maybe this doesn't work from the Tutorial tab?
+* It is annoying that, after installing tutorial.helpers on Posit Cloud, and hitting "Start Tutorial," it asks you to install tidyverse. Less friction would be better. Even removing tidyverse from Suggests does not fix the problem! Perhaps connected:  Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr??? Get rid of them, if possible! Indeed, try to get rid of as many of the packages in Suggests/Depends as possible. Many were left over from when this was a part of primer.tutorials.
 
 * Send to CRAN on Sunday.
 
@@ -104,13 +100,13 @@ Found the following files/directories:
 
 The latest version of learnr seems to allow for ____ as a useful placeholder in code which is left in the actual exercise code blocks without creating an error. Might be useful! Might be much better than always inserting code from previous question.
 
-So, in addition to hints, we could have each code block pre-populated with the code we want them to start with. No need for copy-code from previous exercise! But some diligent students probably don't use the hint. We don't want to force them to see too much before they try out the question.
+So, in addition to hints, we could have each code block pre-populated with the code we want them to start with. No need for copy-code from previous exercise! But some diligent students probably don't use the hint. (But they do use Copy from Previous question.) We don't want to force them to see too much before they try out the question.
 
 Blanks are detected using regular expressions (since blanks may make the code unparsable), and learnr’s default pattern is to detect three or more consecutive underscores. Authors can choose the pattern for detecting blanks with the exercise.blanks chunk option. Setting exercise.blanks = "[.]{2}[a-z]+[.]{2}", for example, would allow the author to use valid R syntax for blanks. The warning message shown to students calls out the blanks they need to fill in.
 
 ## Other items
 
-* Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr??? Get rid of them, if possible!
+* Version 0.2.6.9012 got rid of the discussion about hosting a version of the Getting Started tutorials on shinyapps.io. The whole process was annoying and working poorly. To my knowledge, it was never used. So, we simplify.
 
 * Would be nice to have more flexibility with knit_tutorials(). The problem arises when knitting a collection of tutorial paths takes too long, especially on CRAN, where all tests should only take 10 minutes total. Might be nice if tutorial paths:
 

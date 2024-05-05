@@ -25,8 +25,6 @@ options(tutorial.exercise.timelimit = 60,
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- Publishing this tutorial to shinyapps and Posit Cloud is non-trivial. If you aren't careful, you get some weird renv error messages. I *think* that you need to be sure that you have installed a "clean" (?) version of tutorial.helpers itself. (Or maybe you just need to ensure that renv/activate.R includes some magic about RENV_STARTUP_DIAGNOSTICS.) Not sure! Anyway, each time you have an important change, you should republish, although it takes some time. We should have a Github Action take care of this. Should also move them to PPBDS accounts instead of my personal accounts. For now, we only maintain a shinyapps version at:  -->
-
 
 ## Introduction
 ### 
