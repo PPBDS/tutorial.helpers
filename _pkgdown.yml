@@ -14,8 +14,8 @@ template:
   
 tutorials:
 - name: getting-started
-  title: Getting Started
-  url: https://davidkane9.shinyapps.io/tutorial/
+  title: Getting Started with Tutorials
+  url: https://davidkane9.shinyapps.io/Getting-Started-with-Tutorials/
   
 articles:
 - title: Vignettes
