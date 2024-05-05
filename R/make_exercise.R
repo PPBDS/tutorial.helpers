@@ -30,8 +30,11 @@
 
 make_exercise <- function(type = "code", file_path = NULL){
 
-  # DK: Need to fix behavior when it is called outside an Rmd with Section
+  # Need to fix behavior when it is called outside an Rmd with Section
   # headings.
+  
+  # Function should first, check all the section names, confirming that they are
+  # all unique, and reporting an error if not. Add this!
   
   # To create the code chunks, we need to know the next exercise number and the
   # section title.
