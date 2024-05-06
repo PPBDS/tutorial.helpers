@@ -2,7 +2,7 @@
 
 * Does the existence of new RStudio tools (typist?) mean we can make PDF files more easily? No longer need gridExtra? Related: Do we really need gridExtra in order to be able to create a pdf file? Seems like overkill. Must be an easier way.
 
-* If you "Show in a new window" a tutorial, then clicking on links in that tutorial does not work on my local computer. If you keep the tutorial in the Tutorial pane, links do work. It works either way on Posit Cloud.
+* If you "Show in a new window" a tutorial, then clicking on links in that tutorial does not work on my local computer. If you keep the tutorial in the Tutorial pane, links do work. On Posit Cloud, the latter also works. In the former case, clicking the link switches the pulled out window to the new location, but does not provide a way back, so you need to restart the tutorial.
 
 * It is annoying that, after installing tutorial.helpers on Posit Cloud, and hitting "Start Tutorial," it asks you to install tidyverse. Less friction would be better. Even removing tidyverse from Suggests does not fix the problem! Perhaps connected:  Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr??? Get rid of them, if possible! Indeed, try to get rid of as many of the packages in Suggests/Depends as possible. Many were left over from when this was a part of primer.tutorials.
 
@@ -102,6 +102,8 @@ Blanks are detected using regular expressions (since blanks may make the code un
 
 * Want to change the color of the OK box so that it is green when students enter
 their email or other text. This seem relevant:  https://stackoverflow.com/questions/33620133/change-the-color-of-action-button-in-shiny/35871042.
+
+* Running devtools::check(remote = TRUE, manual = TRUE) produces some spurious documentation warnings. Produce a reprex for the devtools folks.
 
 
 ## Get a better understanding of package locations
