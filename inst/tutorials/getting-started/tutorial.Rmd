@@ -33,7 +33,7 @@ This tutorial is an introduction to the general use of R tutorials created with 
 
 ### 
 
-You may complete a tutorial either on your laptop or on a cloud computing platform like [Posit Cloud](https://posit.cloud/). Either way, you will download a copy of your answers to the Downloads folder on your computer once you are done. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
+You may complete a tutorial either on your laptop or on a cloud computing platform like [Posit Cloud](https://posit.cloud/). (See our discussion about [setting up your own computer](https://ppbds.github.io/primer/getting-started.html) or about [using Posit Cloud](https://ppbds.github.io/tutorial.helpers/articles/cloud.html).) Either way, you will download a copy of your answers to the Downloads folder on your computer once you are done. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
 
 ### 
 
@@ -118,7 +118,7 @@ This should paste all work from the previous exercise into the above exercise co
 
 ### 
 
-Change the values to `x <- 6` and `y <- 10`. Hit "Run Code". You should get the answer 16.
+Change the values to `x <- 6` and `y <- 10`. Hit "Run Code". You should get the answer `[1] 16`.
 
 ### 
 
@@ -269,7 +269,7 @@ question_text(NULL,
 ## Your answers
 ### 
 
-At the end of every tutorial, you will save your work (and submit it, at the discretion of your instructor). We will do this in the next panel, labeled "Submit." Follow the instructions there. 
+At the end of every tutorial, you will save your work (and submit it, at the discretion of your instructor). We will do this in the next panel, labeled "Download answers." Follow the instructions there. 
 
 Make sure to answer the question about how many **minutes** you spent on the tutorial and to click "Submit Answer."
 
