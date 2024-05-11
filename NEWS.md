@@ -1,5 +1,7 @@
 # tutorial.helpers (development version)
 
+* Add show_file().
+
 # tutorial.helpers 0.2.7
 
 * Get test cases for `format_tutorial()` working again.
