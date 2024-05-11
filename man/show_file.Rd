@@ -16,18 +16,18 @@ If negative, it represents the number of lines to print from the end of the file
 
 \item{pattern}{A regular expression pattern to match against each row. Default is NULL (no pattern matching).}
 
-\item{chunk}{A logical value indicating whether to return code lines within R code chunks. Default is FALSE.}
+\item{chunk}{A logical value indicating whether to print code lines within R code chunks. Default is FALSE.}
 }
 \value{
-If chunk is FALSE (default) and start is non-negative, the function prints the contents of the specified
-range of rows that match the pattern (if provided) to the console. If chunk is TRUE,
-the function returns a character vector containing the code lines within R code chunks.
-If start is negative, the function prints the last abs(start) lines and removes blank lines at the end.
+The function prints the contents of the specified range of rows that match the pattern (if provided)
+or the code lines within R code chunks (if chunk is TRUE) to the console. If no rows match the pattern,
+nothing is printed. If start is negative, the function prints the last abs(start) lines, ignoring
+missing lines at the end of the file.
 }
 \description{
 This function reads the contents of a text file and either prints the specified range of rows
-that match a given regular expression pattern or returns the code lines within R code chunks.
-If start is a negative number, it prints the last abs(start) lines and removes blank lines at the end.
+that match a given regular expression pattern or prints the code lines within R code chunks.
+If start is a negative number, it prints the last abs(start) lines, ignoring missing lines at the end of the file.
 }
 \examples{
 \dontrun{
@@ -40,10 +40,10 @@ show_file("path/to/your/file.txt", start = 5, end = 10)
 # Display all rows of a text file that contain the word "example"
 show_file("path/to/your/file.txt", pattern = "example")
 
-# Return code lines within R code chunks
+# Print code lines within R code chunks
 show_file("path/to/your/file.txt", chunk = TRUE)
 
-# Display the last 5 lines of a text file and remove blank lines at the end
+# Display the last 5 lines of a text file, ignoring missing lines at the end
 show_file("path/to/your/file.txt", start = -5)
 }
 

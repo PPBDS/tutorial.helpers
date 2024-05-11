@@ -1,6 +1,6 @@
 # Priorities
 
-* Move show_file() from r4ds.tutorials to this package. Document its use in instructions.qmd. Perhaps also in the Getting Start with Tutorials tutorial. Critical question: What is the easiest way to make this function available? You can't just include it in the tutorial.Rmd. After all, students need to call it from the Console! Either always call it with tutorial.helpers::show_file() or always (and after each restart of the R Session!) have the student library(tutorial.helpers) at the Console by hand. The double colon might not be so bad, especially if always done in the same way:
+* Document the use of show_file() in instructions.qmd. Perhaps also in the Getting Start with Tutorials tutorial. Critical question: What is the easiest way to make this function available? You can't just include it in the tutorial.Rmd. After all, students need to call it from the Console! Either always call it with tutorial.helpers::show_file() or always (and after each restart of the R Session!) have the student library(tutorial.helpers) at the Console by hand. The double colon might not be so bad, especially if always done in the same way:
 
 In the Console, run:
 
@@ -9,6 +9,18 @@ tutorial.helpers::show_file()
 ````
 
 CP/CR.
+
+Fix these bugs:
+
+show_file("quarto-1.qmd", pattern = "6") should not produce a blank line if there are no matching lines.
+
+show_file("quarto-1.qmd", start = -5) should not delete all empty lines, just empty lines at the end of the section.
+
+tutorial.helpers::show_file("quarto-2.qmd", chunk = TRUE) not printed out nicely.
+
+
+
+* Once new version is on CRAN, update r4ds.tutorials to use it.
 
 * Key fix to format tutorials, as discussed below, is ensuring that comment characters, `#`, in backtick environments do not mess things up. I suspect that this might involve a fix in parsermd or in whatever it uses.
 
