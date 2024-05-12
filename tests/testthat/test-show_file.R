@@ -11,6 +11,7 @@ test_that("show_file function works correctly", {
                  "This is line 3 with the word example.",
                  "```{r}",
                  "# This is a code chunk",
+                 "",
                  "x <- 1:10",
                  "print(x)",
                  "```",
@@ -36,8 +37,8 @@ test_that("show_file function works correctly", {
                  "This is line 3 with the word example.",
                  "```{r}",
                  "# This is a code chunk",
-                 "x <- 1:10",
-                 "print(x)"
+                 "",
+                 "x <- 1:10"
                ), collapse = "\n"))
   
   # Test case 3: Display rows matching the pattern "example"
@@ -52,6 +53,7 @@ test_that("show_file function works correctly", {
                paste(c(
                  "```{r}",
                  "# This is a code chunk",
+                 "",
                  "x <- 1:10",
                  "print(x)",
                  "```",
@@ -85,3 +87,4 @@ test_that("show_file function works correctly", {
   # Test case 10: No rows matching the pattern
   expect_equal(paste(capture.output(show_file(test_file, pattern = "nomatch")), collapse = "\n"), "")
 })
+

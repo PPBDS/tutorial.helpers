@@ -1,5 +1,7 @@
 # Priorities
 
+* What should show_file(test_file, start = 0) return? Not sure it should be an error . . .
+
 * Document the use of show_file() in instructions.qmd. Perhaps also in the Getting Start with Tutorials tutorial. Critical question: What is the easiest way to make this function available? You can't just include it in the tutorial.Rmd. After all, students need to call it from the Console! Either always call it with tutorial.helpers::show_file() or always (and after each restart of the R Session!) have the student library(tutorial.helpers) at the Console by hand. The double colon might not be so bad, especially if always done in the same way:
 
 In the Console, run:
@@ -10,17 +12,13 @@ tutorial.helpers::show_file()
 
 CP/CR.
 
-Fix these bugs:
+Maybe the text should always use the double colon, but remind students the first time in each tutorial that they could just library(tutorial.helpers). Or, don't use the double colon and then, the first time it is used, remind students that, when they see the "No function found" error, they need to library(tutorial.helpers)
 
-show_file("quarto-1.qmd", pattern = "6") should not produce a blank line if there are no matching lines.
-
-show_file("quarto-1.qmd", start = -5) should not delete all empty lines, just empty lines at the end of the section.
-
-tutorial.helpers::show_file("quarto-2.qmd", chunk = TRUE) not printed out nicely.
-
-
+* Should show_file(path, chunk = TRUE) print out the code chunk borders, or just the material inside?
 
 * Once new version is on CRAN, update r4ds.tutorials to use it.
+
+* Start working on a new function, process_submissions(), in a file called process_submissions.R. Starts by taking one argument which is a path to a folder with a bunch of answer html files in it. Reads through those files, pulling out the name of the tutorial, the email of the student, and the time it took. Then returns a tibble with that information in three variables.
 
 * Key fix to format tutorials, as discussed below, is ensuring that comment characters, `#`, in backtick environments do not mess things up. I suspect that this might involve a fix in parsermd or in whatever it uses.
 
@@ -32,9 +30,7 @@ tutorial.helpers::show_file("quarto-2.qmd", chunk = TRUE) not printed out nicely
 
 * If you "Show in a new window" a tutorial, then clicking on links in that tutorial does not work on my local computer. If you keep the tutorial in the Tutorial pane, links do work. On Posit Cloud, the latter also works. In the former case, clicking the link switches the pulled out window to the new location, but does not provide a way back, so you need to restart the tutorial.
 
-* It is annoying that, after installing tutorial.helpers on Posit Cloud, and hitting "Start Tutorial," it asks you to install tidyverse. Less friction would be better. Even removing tidyverse from Suggests does not fix the problem! Perhaps connected:  Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr??? Get rid of them, if possible! Indeed, try to get rid of as many of the packages in Suggests/Depends as possible. Many were left over from when this was a part of primer.tutorials.
-
-* Start working on a new function, process_submissions(), in a file called process_submissions.R. Starts by taking one argument which is a path to a folder with a bunch of answer html files in it. Reads through those files, pulling out the name of the tutorial, the email of the student, and the time it took. Then returns a tibble with that information in three variables.
+* Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr??? Get rid of them, if possible! Indeed, try to get rid of as many of the packages in Suggests/Depends as possible. Many were left over from when this was a part of primer.tutorials.
 
 * Ensure that this code handles our test code chunks in non-code questions. See RStudio and Github (gert) for examples. Seems to work, but some test cases would be nice.
 
