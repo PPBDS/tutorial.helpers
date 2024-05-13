@@ -10,7 +10,8 @@
 #' @param return_value A character string specifying the desired return value. "All" returns the full submission data,
 #'                     and "Summary" (default) returns a summary with one row per processed file.
 #'
-#' @return A tibble containing either the full submission data or a summary based on the specified return value.
+#' @return A tibble containing either the full submission data or a summary based 
+#'.        on the specified return value.
 #'   - If return_value is "All", the tibble has the following columns:
 #'     - id: The unique identifier for each submission.
 #'     - submission_type: The type of submission.
@@ -18,6 +19,7 @@
 #'   - If return_value is "Summary", the tibble has the following columns:
 #'     - name: The value in the "information-name" column.
 #'     - email: The value in the "information-email" column.
+#'     - id: The value in the "information-id" column. This column is present only if at least one of the matching files in the directory has id information. If all files are missing id information, this column is omitted.
 #'     - time: The value in the "download-answers" column.
 #'     - answers: The number of rows in the submitted file.
 #'
@@ -29,7 +31,7 @@
 #' @importFrom rvest read_html html_table
 #' @importFrom tibble tibble as_tibble
 #' @importFrom dplyr bind_rows filter pull
-#' @importFrom purrr map_int map_chr
+#' @importFrom purrr map_chr map_dbl
 #' @export
 process_submissions <- function(path, pattern, return_value = "Summary") {
   # Check if the directory exists
@@ -70,11 +72,27 @@ process_submissions <- function(path, pattern, return_value = "Summary") {
   # If return_value is "Summary", process the submission data to create a summary
   if (return_value == "Summary") {
     submission_summary <- tibble(
-      name = map_chr(submission_data_list, ~ pull(filter(., id == "information-name"), answer)),
-      email = map_chr(submission_data_list, ~ pull(filter(., id == "information-email"), answer)),
-      time = map_chr(submission_data_list, ~ pull(filter(., id == "download-answers"), answer)),
-      answers = map_int(submission_data_list, ~ nrow(filter(., submission_type == "question")))
+      name = unname(map_chr(submission_data_list, ~ pull(filter(., id == "information-name"), answer))),
+      email = unname(map_chr(submission_data_list, ~ pull(filter(., id == "information-email"), answer))),
+      id = unname(map_chr(submission_data_list, ~ {
+        id_value <- pull(filter(., id == "information-id"), answer)
+        if (length(id_value) == 0) {
+          return(NA_character_)
+        } else {
+          return(id_value)
+        }
+      })),
+      time = unname(map_chr(submission_data_list, ~ pull(filter(., id == "download-answers"), answer))),
+      answers = unname(map_dbl(submission_data_list, ~ nrow((.))))
     )
+    
+    # Check if all values in the "id" column are NA
+    if (all(is.na(submission_summary$id))) {
+      # Remove the "id" column if all values are NA
+      submission_summary$id <- NULL
+    }
+    
+    
     return(submission_summary)
   }
   

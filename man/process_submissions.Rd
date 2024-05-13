@@ -15,7 +15,8 @@ process_submissions(path, pattern, return_value = "Summary")
 and "Summary" (default) returns a summary with one row per processed file.}
 }
 \value{
-A tibble containing either the full submission data or a summary based on the specified return value.
+A tibble containing either the full submission data or a summary based
+.        on the specified return value.
 \itemize{
 \item If return_value is "All", the tibble has the following columns:
 \itemize{
@@ -27,6 +28,7 @@ A tibble containing either the full submission data or a summary based on the sp
 \itemize{
 \item name: The value in the "information-name" column.
 \item email: The value in the "information-email" column.
+\item id: The value in the "information-id" column. This column is present only if at least one of the matching files in the directory has id information. If all files are missing id information, this column is omitted.
 \item time: The value in the "download-answers" column.
 \item answers: The number of rows in the submitted file.
 }
