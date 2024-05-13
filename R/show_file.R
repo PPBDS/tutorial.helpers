@@ -9,8 +9,9 @@
 #'              If negative, it represents the number of lines to print from the end of the file.
 #' @param end An integer specifying the ending row number (inclusive) to consider. Default is the last row.
 #' @param pattern A regular expression pattern to match against each row. Default is NULL (no pattern matching).
-#' @param chunk A logical value indicating whether to print code lines within R code chunks. Default is FALSE.
-#'
+#' @param chunk A character string indicating whether to print code lines within R code chunks. 
+#'              Possible values are "None" (default), "All" (print all code chunks),
+#'              or "Last" (print only the last code chunk).
 #' @return The function prints the contents of the specified range of rows that match the pattern (if provided)
 #'         or the code lines within R code chunks (if chunk is TRUE) to the console. If no rows match the pattern,
 #'         nothing is printed. If start is negative, the function prints the last abs(start) lines, ignoring
@@ -37,7 +38,7 @@
 #' @importFrom utils tail
 #'
 #' @export
-show_file <- function(path, start = 1, end = NULL, pattern = NULL, chunk = FALSE) {
+show_file <- function(path, start = 1, end = NULL, pattern = NULL, chunk = "None") {
   # Check if the file exists
   if (!file.exists(path)) {
     stop("File does not exist.")
@@ -58,25 +59,41 @@ show_file <- function(path, start = 1, end = NULL, pattern = NULL, chunk = FALSE
     return(invisible(NULL))
   }
   
-  # If chunk is TRUE, print code lines within R code chunks
-  if (chunk) {
+  # If chunk is "All" or "Last", print code lines within R code chunks
+  if (chunk %in% c("All", "Last")) {
     in_chunk <- FALSE
-    code_lines <- character()
+    code_chunks <- list()
+    current_chunk <- character()
     
     for (line in contents) {
       if (grepl("^```\\{r", line)) {
         in_chunk <- TRUE
-        code_lines <- c(code_lines, line)
+        if (length(current_chunk) > 0) {
+          code_chunks <- c(code_chunks, list(current_chunk))
+          current_chunk <- character()
+        }
       } else if (grepl("^```$", line)) {
         in_chunk <- FALSE
-        code_lines <- c(code_lines, line)
+        if (length(current_chunk) > 0) {
+          code_chunks <- c(code_chunks, list(current_chunk))
+          current_chunk <- character()
+        }
       } else if (in_chunk) {
-        code_lines <- c(code_lines, line)
+        current_chunk <- c(current_chunk, line)
       }
     }
     
-    if (length(code_lines) > 0) {
-      cat(code_lines, sep = "\n")
+    if (chunk == "All") {
+      for (i in seq_along(code_chunks)) {
+        cat(code_chunks[[i]], sep = "\n")
+        if (i < length(code_chunks)) {
+          cat("\n")
+        }
+      }
+    } else if (chunk == "Last") {
+      if (length(code_chunks) > 0) {
+        cat(code_chunks[[length(code_chunks)]], sep = "\n")
+      }
     }
     return(invisible(NULL))
   }

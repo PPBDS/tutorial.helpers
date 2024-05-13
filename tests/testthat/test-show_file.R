@@ -48,20 +48,17 @@ test_that("show_file function works correctly", {
                  "This is line 5 with another example."
                ), collapse = "\n"))
   
-  # Test case 4: Print code lines within R code chunks
-  expect_equal(paste(capture.output(show_file(test_file, chunk = TRUE)), collapse = "\n"),
+  # Test case 4: Print all code chunks
+  expect_equal(paste(capture.output(show_file(test_file, chunk = "All")), collapse = "\n"),
                paste(c(
-                 "```{r}",
                  "# This is a code chunk",
                  "",
                  "x <- 1:10",
                  "print(x)",
-                 "```",
-                 "```{r}",
+                 "",
                  "# Another code chunk",
                  "y <- 20:30",
-                 "mean(y)",
-                 "```"
+                 "mean(y)"
                ), collapse = "\n"))
   
   # Test case 5: File does not exist
@@ -86,5 +83,13 @@ test_that("show_file function works correctly", {
   
   # Test case 10: No rows matching the pattern
   expect_equal(paste(capture.output(show_file(test_file, pattern = "nomatch")), collapse = "\n"), "")
+  
+  # Test case 11: Print the last code chunk
+  expect_equal(paste(capture.output(show_file(test_file, chunk = "Last")), collapse = "\n"),
+               paste(c(
+                 "# Another code chunk",
+                 "y <- 20:30",
+                 "mean(y)"
+               ), collapse = "\n"))
 })
 

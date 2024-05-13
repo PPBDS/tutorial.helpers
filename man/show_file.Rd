@@ -4,7 +4,7 @@
 \alias{show_file}
 \title{Display the contents of a text file that match a pattern}
 \usage{
-show_file(path, start = 1, end = NULL, pattern = NULL, chunk = FALSE)
+show_file(path, start = 1, end = NULL, pattern = NULL, chunk = "None")
 }
 \arguments{
 \item{path}{A character vector representing the path to the text file.}
@@ -16,7 +16,9 @@ If negative, it represents the number of lines to print from the end of the file
 
 \item{pattern}{A regular expression pattern to match against each row. Default is NULL (no pattern matching).}
 
-\item{chunk}{A logical value indicating whether to print code lines within R code chunks. Default is FALSE.}
+\item{chunk}{A character string indicating whether to print code lines within R code chunks.
+Possible values are "None" (default), "All" (print all code chunks),
+or "Last" (print only the last code chunk).}
 }
 \value{
 The function prints the contents of the specified range of rows that match the pattern (if provided)
