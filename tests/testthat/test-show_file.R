@@ -1,5 +1,5 @@
 # Test file path
-test_file <- "show_file_test.txt"
+test_file <- "fixtures/show_file_test.txt"
 
 # Test cases
 test_that("show_file function works correctly", {
