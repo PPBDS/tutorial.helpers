@@ -40,13 +40,7 @@ and returns either the full submission data or a summary based on the specified 
 }
 \examples{
 \dontrun{
-# Process submissions in the "submissions" directory with filenames ending in ".html" and matching "project"
-submission_data <- process_submissions("path/to/submissions", "project", return_value = "All")
-print(submission_data)
-
-# Process submissions and return a summary
-submission_summary <- process_submissions("path/to/submissions", "project")
-print(submission_summary)
+process_submissions("path/to/submissions", "project", return_value = "All")
 }
 
 }

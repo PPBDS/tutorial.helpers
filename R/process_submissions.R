@@ -23,19 +23,13 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Process submissions in the "submissions" directory with filenames ending in ".html" and matching "project"
-#' submission_data <- process_submissions("path/to/submissions", "project", return_value = "All")
-#' print(submission_data)
-#'
-#' # Process submissions and return a summary
-#' submission_summary <- process_submissions("path/to/submissions", "project")
-#' print(submission_summary)
+#' process_submissions("path/to/submissions", "project", return_value = "All")
 #' }
 #'
 #' @importFrom rvest read_html html_table
 #' @importFrom tibble tibble as_tibble
 #' @importFrom dplyr bind_rows filter pull
-#' @importFrom purrr map_int
+#' @importFrom purrr map_int map_chr
 #' @export
 process_submissions <- function(path, pattern, return_value = "Summary") {
   # Check if the directory exists
