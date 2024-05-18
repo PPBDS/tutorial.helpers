@@ -14,11 +14,11 @@ CP/CR.
 
 Maybe the text should always use the double colon, but remind students the first time in each tutorial that they could just library(tutorial.helpers). Or, don't use the double colon and then, the first time it is used, remind students that, when they see the "No function found" error, they need to library(tutorial.helpers)
 
+* Document use of process_submissions().
+
 * Standardize an instruction which says to paste from the HTML result. This is different from CP/CR, obviously.
 
 * Once new version is on CRAN, update r4ds.tutorials to use it.
-
-* Start working on a new function, process_submissions(), in a file called process_submissions.R. Starts by taking one argument which is a path to a folder with a bunch of answer html files in it. Reads through those files, pulling out the name of the tutorial, the email of the student, and the time it took. Then returns a tibble with that information in three variables.
 
 * Key fix to format tutorials, as discussed below, is ensuring that comment characters, `#`, in backtick environments do not mess things up. I suspect that this might involve a fix in parsermd or in whatever it uses. I am also unclear if R code chunk headers, with their triple backticks, causes problems on their own. See quarto-1-example.txt in RStudio and Github, for example.
 

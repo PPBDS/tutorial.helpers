@@ -41,7 +41,52 @@ test_that("process_submissions returns correct summary when no entries have an i
   expect_equal(actual_output, expected_output)
 })
 
+test_that("process_submissions handles bad html files and returns correct summary", {
+  # Set up the test fixture
+  test_dir <- "fixtures/process_submissions_dir/"
+  test_pattern <- "gett|err1"
+  
+  # Define the expected output
+  expected_output <- tibble::tibble(
+    name = c("Areeb Atif", "Gitanjali Sheth"),
+    email = c("areebatif2007@gmail.com", "gbhatia1@yahoo.com"),
+    time = c("14", "15"),
+    answers = c(11, 11)
+  )
+  
+  # Call the function with the test fixture and capture the output
+  expect_message(
+    actual_output <- process_submissions(test_dir, pattern = test_pattern),
+    "Could not process file: err1.html"
+  )
+  
+  # Compare the actual output with the expected output
+  expect_equal(actual_output, expected_output)
+})
 
+
+test_that("process_submissions handles missing inputs in html and returns correct summary", {
+  # Set up the test fixture
+  test_dir <- "fixtures/process_submissions_dir/"
+  test_pattern <- "gett|err2"
+  
+  # Define the expected output
+  expected_output <- tibble::tibble(
+    name = c("Areeb Atif", "Gitanjali Sheth"),
+    email = c("areebatif2007@gmail.com", "gbhatia1@yahoo.com"),
+    time = c("14", "15"),
+    answers = c(11, 11)
+  )
+  
+  # Call the function with the test fixture and capture the output
+  expect_message(
+    actual_output <- process_submissions(test_dir, pattern = test_pattern),
+    "Could not process file: err2.html"
+  )
+  
+  # Compare the actual output with the expected output
+  expect_equal(actual_output, expected_output)
+})
 
 test_that("process_submissions returns full submission data", {
   # Set up the test fixture

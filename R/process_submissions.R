@@ -31,7 +31,7 @@
 #' @importFrom rvest read_html html_table
 #' @importFrom tibble tibble as_tibble
 #' @importFrom dplyr bind_rows filter pull
-#' @importFrom purrr map_chr map_dbl
+#' @importFrom purrr map_chr map_dbl imap_dfr
 #' @export
 process_submissions <- function(path, pattern, return_value = "Summary") {
   # Check if the directory exists
@@ -56,42 +56,79 @@ process_submissions <- function(path, pattern, return_value = "Summary") {
     # Create the full file path by combining the directory path and file name
     file_path <- file.path(path, file)
     
-    # Read the HTML file
-    html_content <- read_html(file_path)
+    # Use tryCatch to handle errors
+    submission_data <- tryCatch({
+      # Read the HTML file
+      html_content <- read_html(file_path)
+      
+      # Extract the table data from the HTML
+      table_data <- html_table(html_content)[[1]]
+      
+      # Convert the extracted data to a tibble
+      as_tibble(table_data)
+    }, error = function(e) {
+      # If an error occurs, print a message indicating the file could not be processed
+      message("Could not process file: ", file)
+      # Return NULL to indicate an error occurred
+      return(NULL)
+    })
     
-    # Extract the table data from the HTML
-    table_data <- html_table(html_content)[[1]]
-    
-    # Convert the extracted data to a tibble
-    table_data <- as_tibble(table_data)
-    
-    # Append the extracted data to the submission_data_list
-    submission_data_list[[file]] <- table_data
+    # Append the extracted data to the submission_data_list if no error occurred
+    if (!is.null(submission_data)) {
+      submission_data_list[[file]] <- submission_data
+    }
   }
   
   # If return_value is "Summary", process the submission data to create a summary
   if (return_value == "Summary") {
-    submission_summary <- tibble(
-      name = unname(map_chr(submission_data_list, ~ pull(filter(., id == "information-name"), answer))),
-      email = unname(map_chr(submission_data_list, ~ pull(filter(., id == "information-email"), answer))),
-      id = unname(map_chr(submission_data_list, ~ {
-        id_value <- pull(filter(., id == "information-id"), answer)
-        if (length(id_value) == 0) {
-          return(NA_character_)
-        } else {
-          return(id_value)
+    submission_summary <- imap_dfr(submission_data_list, ~ {
+      file <- .y
+      tryCatch({
+        if (!(any(.x$id == "information-name") && any(.x$id == "information-email") && any(.x$id == "download-answers"))) {
+          message("Could not process file: ", file)
+          return(tibble(
+            name = NA_character_,
+            email = NA_character_,
+            id = NA_character_,
+            time = NA_character_,
+            answers = NA_integer_
+          ))
         }
-      })),
-      time = unname(map_chr(submission_data_list, ~ pull(filter(., id == "download-answers"), answer))),
-      answers = unname(map_dbl(submission_data_list, ~ nrow((.))))
-    )
+        
+        tibble(
+          name = pull(filter(.x, id == "information-name"), answer),
+          email = pull(filter(.x, id == "information-email"), answer),
+          id = {
+            id_value <- pull(filter(.x, id == "information-id"), answer)
+            if (length(id_value) == 0) {
+              NA_character_
+            } else {
+              id_value
+            }
+          },
+          time = pull(filter(.x, id == "download-answers"), answer),
+          answers = nrow(.x)
+        )
+      }, error = function(e) {
+        message("Could not process file: ", file)
+        return(tibble(
+          name = NA_character_,
+          email = NA_character_,
+          id = NA_character_,
+          time = NA_character_,
+          answers = NA_integer_
+        ))
+      })
+    })
+    
+    # Remove rows with NA values in all columns
+    submission_summary <- submission_summary[rowSums(is.na(submission_summary)) != ncol(submission_summary), ]
     
     # Check if all values in the "id" column are NA
     if (all(is.na(submission_summary$id))) {
       # Remove the "id" column if all values are NA
       submission_summary$id <- NULL
     }
-    
     
     return(submission_summary)
   }
