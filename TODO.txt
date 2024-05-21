@@ -1,7 +1,5 @@
 # Priorities
 
-* What should show_file(test_file, start = 0) return? Not sure it should be an error . . .
-
 * Document the use of show_file() in instructions.qmd. Perhaps also in the Getting Start with Tutorials tutorial. Critical question: What is the easiest way to make this function available? You can't just include it in the tutorial.Rmd. After all, students need to call it from the Console! Either always call it with tutorial.helpers::show_file() or always (and after each restart of the R Session!) have the student library(tutorial.helpers) at the Console by hand. The double colon might not be so bad, especially if always done in the same way:
 
 In the Console, run:
@@ -15,6 +13,15 @@ CP/CR.
 Maybe the text should always use the double colon, but remind students the first time in each tutorial that they could just library(tutorial.helpers). Or, don't use the double colon and then, the first time it is used, remind students that, when they see the "No function found" error, they need to library(tutorial.helpers)
 
 * Document use of process_submissions().
+
+* I don't like the way the test cases for process_submissions spit out the pdf files names that they are ignoring, even if it does not effect the tests passing.
+
+* Think harder about the complexity, especially in the way that something like "information-name" is now hard coded in several places, most importantly process_submissions.R and info_section.Rmd. (Of course, it is also in instructions.Rmd, but that will cause fewer issues.)  There are problems with this! 
+  + First, our current test cases won't catch the problem if we were to change that string to something else in the templates. process_submissions() would still pass its tests because all the test cases use answers submitted with the old template. So, we need a test case which begins by creating a new answer html using whatever template is currently installed.
+  + Second, what happens when a teacher creates a template which uses "information-name", or one of our other hard-coded names, as a code chunk name in her tutorial? I don't know! But it probably isn't good. This doesn't happen to me because I use format_tutorial to create the code chunk names, and that function always uses Exercise number as part of the new name.
+
+* What should show_file(test_file, start = 0) return? Not sure it should be an error . . .
+
 
 * Standardize an instruction which says to paste from the HTML result. This is different from CP/CR, obviously.
 

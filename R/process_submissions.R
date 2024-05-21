@@ -42,6 +42,13 @@ process_submissions <- function(path, pattern, return_value = "Summary") {
   # Get the list of all files in the directory
   all_files <- list.files(path, full.names = FALSE)
   
+  # Check each file and issue a message for files without an ".html" suffix
+  for (file in all_files) {
+    if (!grepl("\\.html$", file)) {
+      message("Could not process file: ", file)
+    }
+  }
+  
   # Filter the files based on the ".html" suffix
   html_files <- grep("\\.html$", all_files, value = TRUE)
   
