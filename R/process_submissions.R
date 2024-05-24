@@ -70,9 +70,7 @@ process_submissions <- function(path, pattern, return_value = "Summary") {
       
       # Extract the table data from the HTML
       table_data <- html_table(html_content)[[1]]
-      
-      # Convert the extracted data to a tibble
-      as_tibble(table_data)
+    
     }, error = function(e) {
       # If an error occurs, print a message indicating the file could not be processed
       message("Could not process file: ", file)
