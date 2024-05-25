@@ -1,144 +1,219 @@
-#' Process submissions from HTML files
+#' Process Submissions
 #'
-#' This function takes a directory path and a regular expression pattern as input and processes
-#' the submission files in the specified directory whose filenames have the suffix ".html"
-#' and match the given pattern. It extracts the relevant information from the HTML tables
-#' and returns either the full submission data or a summary based on the specified return value.
+#' This function processes submissions from a directory containing HTML/XML files.
+#' It extracts tables from the files, filters them based on a pattern and key variables,
+#' and returns either a summary tibble or a combined tibble with all the data.
 #'
-#' @param path A character string specifying the path to the directory containing the submission files.
-#' @param pattern A character string representing the regular expression pattern to match against the filenames.
-#' @param return_value A character string specifying the desired return value. "All" returns the full submission data,
-#'                     and "Summary" (default) returns a summary with one row per processed file.
+#' @param path The path to the directory containing the HTML/XML files.
+#' @param pattern The pattern to match against the file names (default: ".").
+#' @param return_value The type of value to return. Allowed values are "Summary" (default) or "All".
+#' @param key_vars A character vector of key variables to extract from the "id" column (default: NULL).
+#' @param verbose An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: detailed messages (default: 0).
 #'
-#' @return A tibble containing either the full submission data or a summary based 
-#'.        on the specified return value.
-#'   - If return_value is "All", the tibble has the following columns:
-#'     - id: The unique identifier for each submission.
-#'     - submission_type: The type of submission.
-#'     - answer: The answer or response corresponding to each submission.
-#'   - If return_value is "Summary", the tibble has the following columns:
-#'     - name: The value in the "information-name" column.
-#'     - email: The value in the "information-email" column.
-#'     - id: The value in the "information-id" column. This column is present only if at least one of the matching files in the directory has id information. If all files are missing id information, this column is omitted.
-#'     - time: The value in the "download-answers" column.
-#'     - answers: The number of rows in the submitted file.
+#' @return If `return_value` is "Summary", returns a tibble with one row for each file, columns corresponding to the `key_vars`,
+#'         and an additional "answers" column indicating the number of rows in each tibble.
+#'         If `return_value` is "All", returns a tibble with all the data combined from all the files.
+#'
+#' @importFrom dplyr select slice mutate bind_rows all_of
+#' @importFrom purrr map_dfr
+#' @importFrom rvest read_html html_table
+#' @importFrom tibble as_tibble tibble
+#' @importFrom mime guess_type
 #'
 #' @examples
 #' \dontrun{
-#' process_submissions("path/to/submissions", "project", return_value = "All")
-#' }
+#' # Process submissions with default settings
+#' process_submissions("path/to/directory")
 #'
-#' @importFrom rvest read_html html_table
-#' @importFrom tibble tibble as_tibble
-#' @importFrom dplyr bind_rows filter pull
-#' @importFrom purrr map_chr map_dbl imap_dfr
-#' @export
-process_submissions <- function(path, pattern, return_value = "Summary") {
+#' # Process submissions with a specific pattern and key variables
+#' process_submissions("path/to/directory", pattern = "^submission", key_vars = c("name", "email"))
+#'
+#' # Process submissions and return all data
+#' process_submissions("path/to/directory", return_value = "All")
+#'
+#' # Process submissions with verbose output
+#' process_submissions("path/to/directory", verbose = 2)
+#' }
+
+process_submissions <- function(path, pattern = ".", return_value = "Summary", key_vars = NULL, verbose = 0) {
+  
   # Check if the directory exists
   if (!dir.exists(path)) {
     stop("The specified directory does not exist.")
   }
   
+  # Check if return_value is valid
+  if (!(return_value %in% c("Summary", "All"))) {
+    stop("Invalid return_value. Allowed values are 'Summary' or 'All'.")
+  }
+  
+  # Check if key_vars is provided when return_value is "Summary"
+  if (return_value == "Summary" && is.null(key_vars)) {
+    stop("key_vars must be provided when return_value is 'Summary'.")
+  }
+  
   # Get the list of all files in the directory
   all_files <- list.files(path, full.names = FALSE)
   
-  # Check each file and issue a message for files without an ".html" suffix
-  for (file in all_files) {
-    if (!grepl("\\.html$", file)) {
-      message("Could not process file: ", file)
-    }
+  # Count the number of files in the directory
+  num_files <- length(all_files)
+  
+  # Print a message reporting the number of files if verbose is 1 or 2
+  if (verbose >= 1) {
+    message("There are ", num_files, " files in the directory.")
   }
   
-  # Filter the files based on the ".html" suffix
-  html_files <- grep("\\.html$", all_files, value = TRUE)
+  # Construct the full file paths
+  full_file_paths <- file.path(path, all_files)
   
-  # Filter the HTML files based on the provided pattern
-  matching_files <- grep(pattern, html_files, value = TRUE)
+  # Check which files are HTML/XML files
+  html_xml_files <- sapply(full_file_paths, function(file) {
+    mime_type <- mime::guess_type(file)
+    grepl("html|xml", mime_type, ignore.case = TRUE)
+  })
   
-  # Initialize an empty list to store the submission data for each file
-  submission_data_list <- list()
+  # Get the names of HTML/XML files
+  html_xml_file_names <- all_files[html_xml_files]
   
-  # Process each matching HTML file
-  for (file in matching_files) {
-    # Create the full file path by combining the directory path and file name
-    file_path <- file.path(path, file)
-    
-    # Use tryCatch to handle errors
-    submission_data <- tryCatch({
-      # Read the HTML file
-      html_content <- read_html(file_path)
-      
-      # Extract the table data from the HTML
-      table_data <- html_table(html_content)[[1]]
-    
-    }, error = function(e) {
-      # If an error occurs, print a message indicating the file could not be processed
-      message("Could not process file: ", file)
-      # Return NULL to indicate an error occurred
-      return(NULL)
-    })
-    
-    # Append the extracted data to the submission_data_list if no error occurred
-    if (!is.null(submission_data)) {
-      submission_data_list[[file]] <- submission_data
-    }
+  # Get the names of non-HTML/XML files
+  non_html_xml_file_names <- all_files[!html_xml_files]
+  
+  # Print the names of non-HTML/XML files if verbose is 2
+  if (verbose == 2 && length(non_html_xml_file_names) > 0) {
+    message("Removing file(s) '", paste(non_html_xml_file_names, collapse = "', '"), "' for not being HTML.")
   }
   
-  # If return_value is "Summary", process the submission data to create a summary
-  if (return_value == "Summary") {
-    submission_summary <- imap_dfr(submission_data_list, ~ {
-      file <- .y
-      tryCatch({
-        if (!(any(.x$id == "information-name") && any(.x$id == "information-email") && any(.x$id == "download-answers"))) {
-          message("Could not process file: ", file)
-          return(tibble(
-            name = NA_character_,
-            email = NA_character_,
-            id = NA_character_,
-            time = NA_character_,
-            answers = NA_integer_
-          ))
+  # Print a message reporting the number of HTML/XML files if verbose is 1 or 2
+  if (verbose >= 1) {
+    message("There are ", length(html_xml_file_names), " HTML/XML files in the directory.")
+  }
+  
+  # Check which HTML/XML files match the provided pattern
+  matching_files <- grep(pattern, html_xml_file_names, value = TRUE)
+  non_matching_files <- setdiff(html_xml_file_names, matching_files)
+  
+  # Print the names of non-matching files if verbose is 2
+  if (verbose == 2 && length(non_matching_files) > 0) {
+    message("Removing file(s) '", paste(non_matching_files, collapse = "', '"), "' for not matching the pattern '", pattern, "'.")
+  }
+  
+  # Print a message reporting the number of matching files if verbose is 1 or 2
+  if (verbose >= 1) {
+    message("There are ", length(matching_files), " HTML/XML files matching the pattern '", pattern, "'.")
+  }
+  
+  # Construct the full file paths for the matching files
+  matching_file_paths <- file.path(path, matching_files)
+  
+  # Initialize an empty list to store the tibbles
+  tibble_list <- list()
+  
+  # Initialize a counter for well-formed HTML files
+  well_formed_files <- 0
+  
+  # Loop through each matching HTML file
+  for (file in matching_file_paths) {
+    # Read the HTML content
+    html_content <- rvest::read_html(file)
+    
+    # Extract the table from the HTML content
+    table_data <- tryCatch(
+      {
+        rvest::html_table(html_content)[[1]]
+      },
+      error = function(e) {
+        if (verbose == 2) {
+          message("File '", basename(file), "' has malformed HTML or does not contain a valid table.")
         }
-        
-        tibble(
-          name = pull(filter(.x, id == "information-name"), answer),
-          email = pull(filter(.x, id == "information-email"), answer),
-          id = {
-            id_value <- pull(filter(.x, id == "information-id"), answer)
-            if (length(id_value) == 0) {
-              NA_character_
-            } else {
-              id_value
-            }
-          },
-          time = pull(filter(.x, id == "download-answers"), answer),
-          answers = nrow(.x)
-        )
-      }, error = function(e) {
-        message("Could not process file: ", file)
-        return(tibble(
-          name = NA_character_,
-          email = NA_character_,
-          id = NA_character_,
-          time = NA_character_,
-          answers = NA_integer_
-        ))
-      })
-    })
+        return(NULL)
+      }
+    )
     
-    # Remove rows with NA values in all columns
-    submission_summary <- submission_summary[rowSums(is.na(submission_summary)) != ncol(submission_summary), ]
-    
-    # Check if all values in the "id" column are NA
-    if (all(is.na(submission_summary$id))) {
-      # Remove the "id" column if all values are NA
-      submission_summary$id <- NULL
+    # If table_data is NULL, skip to the next iteration
+    if (is.null(table_data)) {
+      next
     }
     
-    return(submission_summary)
+    # Convert the table data into a tibble
+    tibble_data <- tibble::as_tibble(table_data)
+    
+    # Get the file name without the path
+    file_name <- basename(file)
+    
+    # Store the tibble in the list with the file name as the element name
+    tibble_list[[file_name]] <- tibble_data
+    
+    # Increment the counter for well-formed HTML files
+    well_formed_files <- well_formed_files + 1
   }
   
-  # If return_value is "All", combine the submission data from all files into a single tibble
-  submission_data <- bind_rows(submission_data_list)
-  return(submission_data)
+  # Print a message indicating the number of well-formed HTML files if verbose is 1 or 2
+  if (verbose >= 1) {
+    message("There were ", well_formed_files, " files with valid HTML tables.")
+  }
+  
+  # Process each tibble in the list
+  filtered_tibble_list <- tibble_list  # Create a copy of the original list
+  removed_files <- character()  # Initialize an empty vector to store removed file names
+  missing_key_vars_files <- character()  # Initialize an empty vector to store files with missing key variables
+  
+  for (file_name in names(tibble_list)) {
+    tibble_data <- tibble_list[[file_name]]
+    
+    # Check if the tibble has an "id" column
+    if (!"id" %in% colnames(tibble_data)) {
+      if (verbose == 2) {
+        message("File '", file_name, "' does not have an 'id' column.")
+        message("Removing file '", file_name, "' from the list.")
+      }
+      filtered_tibble_list[[file_name]] <- NULL  # Remove the element from the filtered list
+      removed_files <- c(removed_files, file_name)  # Add the file name to the removed files vector
+    } else if (!is.null(key_vars) && !all(key_vars %in% tibble_data$id)) {
+      missing_key_vars_files <- c(missing_key_vars_files, file_name)  # Add the file name to the missing key variables files vector
+      filtered_tibble_list[[file_name]] <- NULL  # Remove the element from the filtered list
+      removed_files <- c(removed_files, file_name)  # Add the file name to the removed files vector
+    } else {
+      # Add new columns based on key_vars
+      for (key_var in key_vars) {
+        key_var_value <- tibble_data$answer[tibble_data$id == key_var]
+        tibble_data[[key_var]] <- key_var_value
+      }
+      
+      # Update the tibble in the filtered list
+      filtered_tibble_list[[file_name]] <- tibble_data
+    }
+  }
+  
+  # Print the names of files with missing key variables if verbose is 2
+  if (verbose == 2 && length(missing_key_vars_files) > 0) {
+    message("Removing file(s) '", paste(missing_key_vars_files, collapse = "', '"), "' from the list due to missing key variables.")
+  }
+  
+  # Print a message indicating the number of files with no problems if verbose is 1 or 2
+  if (verbose >= 1) {
+    message("There were ", length(filtered_tibble_list), " files with no problems.")
+  }
+  
+  # Return the result based on the return_value parameter
+  if (return_value == "Summary") {
+    if (length(filtered_tibble_list) > 0) {
+      # Calculate the number of rows in each tibble and create a summary tibble
+      summary_tibble <- purrr::map_dfr(filtered_tibble_list, function(tibble_data) {
+        answers <- nrow(tibble_data)
+        dplyr::slice(tibble_data, 1) |>
+          dplyr::select(all_of(key_vars)) |>
+          dplyr::mutate(answers = answers)
+      })
+      return(summary_tibble)
+    } else {
+      return(tibble())
+    }
+  } else if (return_value == "All") {
+    if (length(filtered_tibble_list) > 0) {
+      all_tibble <- dplyr::bind_rows(filtered_tibble_list)
+      return(all_tibble)
+    } else {
+      return(tibble())
+    }
+  }
 }

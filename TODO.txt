@@ -1,6 +1,15 @@
 # Priorities
 
-* Document the use of show_file() in instructions.qmd. Perhaps also in the Getting Start with Tutorials tutorial. Critical question: What is the easiest way to make this function available? You can't just include it in the tutorial.Rmd. After all, students need to call it from the Console! Either always call it with tutorial.helpers::show_file() or always (and after each restart of the R Session!) have the student library(tutorial.helpers) at the Console by hand. The double colon might not be so bad, especially if always done in the same way:
+* Change the default code chunks so that the new chunk names are "name", "email", "student-id" and "time". We can't (?) use id because that is the default name of one of the columns in the saved html file of answers. Or maybe we can just use id and then change the id column to question-id. That would be nice.
+
+* Change process_submissions() to accomodate those new chunk names.
+
+* Change format_tutorial so it looks to see if you have any chunk names in your file with those names, and then does something about that fact.
+
+* Document process_files() in instructions.Rmd, or perhaps elsewhere.
+
+
+* Document the use of show_file() in instructions.Rmd. Perhaps also in the Getting Start with Tutorials tutorial. Critical question: What is the easiest way to make this function available? You can't just include it in the tutorial.Rmd. After all, students need to call it from the Console! Either always call it with tutorial.helpers::show_file() or always (and after each restart of the R Session!) have the student library(tutorial.helpers) at the Console by hand. The double colon might not be so bad, especially if always done in the same way:
 
 In the Console, run:
 
@@ -12,9 +21,17 @@ CP/CR.
 
 Maybe the text should always use the double colon, but remind students the first time in each tutorial that they could just library(tutorial.helpers). Or, don't use the double colon and then, the first time it is used, remind students that, when they see the "No function found" error, they need to library(tutorial.helpers)
 
+* process_submissions() should handle the distinction between html and other files better. That is, there are many reasons why we might not process a file which matches the pattern. One is that it is pdf. One is that it has no information-email. One is that it has no information-name. One is that it has no download-answers. We should check all of these and, if there is no problem, we process. If there is a problem, we report one (or more) of the issues with the file. In this format:
+
+"Could not process file: ", file, "because . . ."
+
+with the ... filled in with the problem. If the problem is not html, we just report, "because the file is not HTML." If the file is HTML, but is missing any of the fields, we report, "because the filing is missing ... " with any of "your name", "your email address" or "your time to completion". If the file is missing more than one of these fields, then we issue a new message for each problem.
+
+* process_submissions() test cases should not just spit out "Could not process file: getting-started_answers.pdf". Handle it better.
+
 * Document use of process_submissions().
 
-* I don't like the way the test cases for process_submissions spit out the pdf files names that they are ignoring, even if it does not effect the tests passing.
+* I don't like the way the test cases for process_submissions spit out the pdf files names that they are ignoring, even if it does not effect the tests passing. At least, we should add a new test case for this behavior. Perhaps reorganize the test files into a couple of different directories. Or make the pattern ignore the pdf files in the test cases. But I couldn't get that to work.
 
 * Think harder about the complexity, especially in the way that something like "information-name" is now hard coded in several places, most importantly process_submissions.R and info_section.Rmd. (Of course, it is also in instructions.Rmd, but that will cause fewer issues.)  There are problems with this! 
   + First, our current test cases won't catch the problem if we were to change that string to something else in the templates. process_submissions() would still pass its tests because all the test cases use answers submitted with the old template. So, we need a test case which begins by creating a new answer html using whatever template is currently installed.

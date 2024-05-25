@@ -2,47 +2,49 @@
 % Please edit documentation in R/process_submissions.R
 \name{process_submissions}
 \alias{process_submissions}
-\title{Process submissions from HTML files}
+\title{Process Submissions}
 \usage{
-process_submissions(path, pattern, return_value = "Summary")
+process_submissions(
+  path,
+  pattern = ".",
+  return_value = "Summary",
+  key_vars = NULL,
+  verbose = 0
+)
 }
 \arguments{
-\item{path}{A character string specifying the path to the directory containing the submission files.}
+\item{path}{The path to the directory containing the HTML/XML files.}
 
-\item{pattern}{A character string representing the regular expression pattern to match against the filenames.}
+\item{pattern}{The pattern to match against the file names (default: ".").}
 
-\item{return_value}{A character string specifying the desired return value. "All" returns the full submission data,
-and "Summary" (default) returns a summary with one row per processed file.}
+\item{return_value}{The type of value to return. Allowed values are "Summary" (default) or "All".}
+
+\item{key_vars}{A character vector of key variables to extract from the "id" column (default: NULL).}
+
+\item{verbose}{An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: detailed messages (default: 0).}
 }
 \value{
-A tibble containing either the full submission data or a summary based
-.        on the specified return value.
-\itemize{
-\item If return_value is "All", the tibble has the following columns:
-\itemize{
-\item id: The unique identifier for each submission.
-\item submission_type: The type of submission.
-\item answer: The answer or response corresponding to each submission.
-}
-\item If return_value is "Summary", the tibble has the following columns:
-\itemize{
-\item name: The value in the "information-name" column.
-\item email: The value in the "information-email" column.
-\item id: The value in the "information-id" column. This column is present only if at least one of the matching files in the directory has id information. If all files are missing id information, this column is omitted.
-\item time: The value in the "download-answers" column.
-\item answers: The number of rows in the submitted file.
-}
-}
+If \code{return_value} is "Summary", returns a tibble with one row for each file, columns corresponding to the \code{key_vars},
+and an additional "answers" column indicating the number of rows in each tibble.
+If \code{return_value} is "All", returns a tibble with all the data combined from all the files.
 }
 \description{
-This function takes a directory path and a regular expression pattern as input and processes
-the submission files in the specified directory whose filenames have the suffix ".html"
-and match the given pattern. It extracts the relevant information from the HTML tables
-and returns either the full submission data or a summary based on the specified return value.
+This function processes submissions from a directory containing HTML/XML files.
+It extracts tables from the files, filters them based on a pattern and key variables,
+and returns either a summary tibble or a combined tibble with all the data.
 }
 \examples{
 \dontrun{
-process_submissions("path/to/submissions", "project", return_value = "All")
-}
+# Process submissions with default settings
+process_submissions("path/to/directory")
 
+# Process submissions with a specific pattern and key variables
+process_submissions("path/to/directory", pattern = "^submission", key_vars = c("name", "email"))
+
+# Process submissions and return all data
+process_submissions("path/to/directory", return_value = "All")
+
+# Process submissions with verbose output
+process_submissions("path/to/directory", verbose = 2)
+}
 }

@@ -1,6 +1,6 @@
 Package: tutorial.helpers
 Title: Helper Functions for Creating Tutorials
-Version: 0.2.7.9006
+Version: 0.2.7.9007
 Authors@R: 
     person(given = "David",
            family = "Kane",
@@ -31,6 +31,7 @@ Imports:
     grDevices,
     gridExtra,
     learnr,
+    mime,
     parsermd,
     purrr,
     readr,
