@@ -21,7 +21,7 @@ process_submissions(
 
 \item{key_vars}{A character vector of key variables to extract from the "id" column (default: NULL).}
 
-\item{verbose}{An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: detailed messages (default: 0).}
+\item{verbose}{An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).}
 }
 \value{
 If \code{return_value} is "Summary", returns a tibble with one row for each file, columns corresponding to the \code{key_vars},
@@ -44,7 +44,7 @@ process_submissions("path/to/directory", pattern = "^submission", key_vars = c("
 # Process submissions and return all data
 process_submissions("path/to/directory", return_value = "All")
 
-# Process submissions with verbose output
-process_submissions("path/to/directory", verbose = 2)
+# Process submissions with verbose output (level 3)
+process_submissions("path/to/directory", verbose = 3)
 }
 }

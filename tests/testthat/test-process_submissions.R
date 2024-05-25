@@ -1,7 +1,6 @@
 test_dir <- "fixtures/process_submissions_dir/"
 
-# Currently, I do not have tests which explore the verbose = 1 case.
-
+# Currently, I do not have tests which explore the verbose argument in detail.
 
 # Tests which confirm that the returned tibble is correct.
 
