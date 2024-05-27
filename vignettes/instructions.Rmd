@@ -308,6 +308,21 @@ This code assumes that you are located in the same directory as the `tutorial.Rm
 
 When designing tutorials which use objects like `median_age`, we generally write two Exercise code chunks. The first has the student run the same code as that which we used to create the object ourselves. This won't work if the student is not connected to the web but, with luck, in that case they will get a sensible error message. The second question informs the students that we have, behind the scenes, assigned the result of the function to an R object. We then ask the student to just print out that object. We don't have them do the assignment themselves, not least because we don't like questions which don't generate any output. 
 
+We use a similar approach with models which can take awhile to fit. Example:
+
+````
+fit_gauss <- brm(formula = biden ~ 1,
+                data = poll_data,
+                refresh = 0,
+                silent = 2,
+                seed = 9)
+write_rds(fit_gauss, "data/fit_gauss.rds")
+
+fit_gauss <- read_rds("data/fit_gauss.rds")
+````
+
+Again, this code only works if you are in the tutorial directory, not in the higher directory of the R project itself. Also, the first two commands are commented out, unless you are running them by hand to create the object.
+
 What happens if the data is too large? See the "Arrow" tutorial in the [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) for an example. First, we generally switch away from Code Exercises and use Written Exercises. Students run the required commands and then copy/paste the command/response. Big downloads don't work well in Exercise code chunks. Second, we create small versions of this big data in the global `setup` chunk. This allows us to create Test code chunks for most of the exercises which follow. These tests will run much more quickly with this smaller data. Also, for any package on CRAN, we need to keep the overall size of the package as small as possible.
 
 
