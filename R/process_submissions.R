@@ -34,6 +34,7 @@
 #' # Process submissions with verbose output (level 3)
 #' process_submissions("path/to/directory", verbose = 3)
 #' }
+#' @export
 
 process_submissions <- function(path, pattern = ".", return_value = "Summary", key_vars = NULL, verbose = 0) {
   
