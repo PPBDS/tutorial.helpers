@@ -710,6 +710,20 @@ have, behind the scenes, assigned the result of the function to an R
 object. We then ask the student to just print out that object. We don’t
 have them do the assignment themselves, not least because we don’t like
 questions which don’t generate any output.</p>
+<p>We use a similar approach with models which can take awhile to fit.
+Example:</p>
+<pre><code><span><span class="va">fit_gauss</span> <span class="op">&lt;-</span> <span class="fu">brm</span><span class="op">(</span>formula <span class="op">=</span> <span class="va">biden</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>                data <span class="op">=</span> <span class="va">poll_data</span>,</span>
+<span>                refresh <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>                silent <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>                seed <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></span>
+<span><span class="fu">write_rds</span><span class="op">(</span><span class="va">fit_gauss</span>, <span class="st">"data/fit_gauss.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit_gauss</span> <span class="op">&lt;-</span> <span class="fu">read_rds</span><span class="op">(</span><span class="st">"data/fit_gauss.rds"</span><span class="op">)</span></span></code></pre>
+<p>Again, this code only works if you are in the tutorial directory, not
+in the higher directory of the R project itself. Also, the first two
+commands are commented out, unless you are running them by hand to
+create the object.</p>
 <p>What happens if the data is too large? See the “Arrow” tutorial in
 the <a href="https://ppbds.github.io/r4ds.tutorials/" class="external-link"><strong>r4ds.tutorials</strong></a>
 for an example. First, we generally switch away from Code Exercises and
@@ -732,9 +746,9 @@ can work with those files in all the usual ways.</p>
 <p>Use <code>include_graphics()</code> to add the image into the
 document. Include this code in its own chunk, in the place where you
 want the image to appear in the tutorial.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="at">include_graphics("images/example.png")</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="at">include_graphics("images/example.png")</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p><code>include_graphics()</code> is part of the <code>knitr</code>
 package, so you need <code><a href="https://yihui.org/knitr/" class="external-link">library(knitr)</a></code> in the setup code
 chunk. Note that you do not need to name these code chunks.</p>
@@ -776,8 +790,8 @@ tutorial. You can either leave it in the same directory as the
 <code>tutorial.Rmd</code> file or, probably better, place it in either
 the <code>data</code> or <code>images</code> directory. You then add
 this code chunk to your tutorial.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="st">```</span><span class="at">{r file = "example.txt", echo = TRUE, eval = FALSE}</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="st">```</span><span class="at">{r file = "example.txt", echo = TRUE, eval = FALSE}</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p>The <code>file</code> code chunk object loads the specified file. The
 other code chunk options ensure that the text is echoed but not
 evaluated.</p>
@@ -789,7 +803,7 @@ evaluated.</p>
 <p>The simplest way to test the <code>tutorial.Rmd</code> with which you
 are working on is to hit the “Run Document” button. This is the same
 thing as running <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> on that file:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span><span class="st">"inst/tutorials/02-terminal/tutorial.Rmd"</span><span class="op">)</span></span></code></pre></div>
 <p>This assumes that you are located in the main directory of
 <strong>your.package</strong>, as you normally would be. I am not sure
