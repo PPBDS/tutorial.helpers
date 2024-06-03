@@ -14,7 +14,7 @@ and returns either a summary tibble or a combined tibble with all the data."><!-
     
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.7.9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.7.9008</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,8 @@ and returns either a summary tibble or a combined tibble with all the data.</p>
 <span>  pattern <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>  return_value <span class="op">=</span> <span class="st">"Summary"</span>,</span>
 <span>  key_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="fl">0</span></span>
+<span>  verbose <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  keep_file_name <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -97,6 +98,10 @@ and returns either a summary tibble or a combined tibble with all the data.</p>
 
 <dt>verbose</dt>
 <dd><p>An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).</p></dd>
+
+
+<dt>keep_file_name</dt>
+<dd><p>Specifies whether to keep the file name in the summary tibble. Allowed values are NULL (default), "All" (keep entire file name), or "Space" (keep up to first space). Only used when <code>return_value</code> is "Summary".</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -122,6 +127,9 @@ If <code>return_value</code> is "All", returns a tibble with all the data combin
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Process submissions with verbose output (level 3)</span></span></span>
 <span class="r-in"><span><span class="fu">process_submissions</span><span class="op">(</span><span class="st">"path/to/directory"</span>, verbose <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Process submissions and keep the entire file name in the summary tibble</span></span></span>
+<span class="r-in"><span><span class="fu">process_submissions</span><span class="op">(</span><span class="st">"path/to/directory"</span>, return_value <span class="op">=</span> <span class="st">"Summary"</span>, keep_file_name <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
