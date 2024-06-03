@@ -9,7 +9,8 @@ process_submissions(
   pattern = ".",
   return_value = "Summary",
   key_vars = NULL,
-  verbose = 0
+  verbose = 0,
+  keep_file_name = NULL
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ process_submissions(
 \item{key_vars}{A character vector of key variables to extract from the "id" column (default: NULL).}
 
 \item{verbose}{An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).}
+
+\item{keep_file_name}{Specifies whether to keep the file name in the summary tibble. Allowed values are NULL (default), "All" (keep entire file name), or "Space" (keep up to first space). Only used when \code{return_value} is "Summary".}
 }
 \value{
 If \code{return_value} is "Summary", returns a tibble with one row for each file, columns corresponding to the \code{key_vars},
@@ -46,5 +49,8 @@ process_submissions("path/to/directory", return_value = "All")
 
 # Process submissions with verbose output (level 3)
 process_submissions("path/to/directory", verbose = 3)
+
+# Process submissions and keep the entire file name in the summary tibble
+process_submissions("path/to/directory", return_value = "Summary", keep_file_name = "All")
 }
 }

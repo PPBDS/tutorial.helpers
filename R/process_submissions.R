@@ -9,6 +9,7 @@
 #' @param return_value The type of value to return. Allowed values are "Summary" (default) or "All".
 #' @param key_vars A character vector of key variables to extract from the "id" column (default: NULL).
 #' @param verbose An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).
+#' @param keep_file_name Specifies whether to keep the file name in the summary tibble. Allowed values are NULL (default), "All" (keep entire file name), or "Space" (keep up to first space). Only used when `return_value` is "Summary".
 #'
 #' @return If `return_value` is "Summary", returns a tibble with one row for each file, columns corresponding to the `key_vars`,
 #'         and an additional "answers" column indicating the number of rows in each tibble.
@@ -33,10 +34,18 @@
 #'
 #' # Process submissions with verbose output (level 3)
 #' process_submissions("path/to/directory", verbose = 3)
+#'
+#' # Process submissions and keep the entire file name in the summary tibble
+#' process_submissions("path/to/directory", return_value = "Summary", keep_file_name = "All")
 #' }
 #' @export
 
-process_submissions <- function(path, pattern = ".", return_value = "Summary", key_vars = NULL, verbose = 0) {
+process_submissions <- function(path, 
+                                pattern = ".", 
+                                return_value = "Summary", 
+                                key_vars = NULL, 
+                                verbose = 0, 
+                                keep_file_name = NULL) {
   
   # Check if the directory exists
   if (!dir.exists(path)) {
@@ -51,6 +60,14 @@ process_submissions <- function(path, pattern = ".", return_value = "Summary", k
   # Check if key_vars is provided when return_value is "Summary"
   if (return_value == "Summary" && is.null(key_vars)) {
     stop("key_vars must be provided when return_value is 'Summary'.")
+  }
+  
+  if (!is.null(keep_file_name) && return_value != "Summary") {
+    stop("keep_file_name can only be used when return_value is 'Summary'.")
+  }
+  
+  if (!is.null(keep_file_name) && !(keep_file_name %in% c("All", "Space"))) {
+    stop("Invalid keep_file_name. Allowed values are NULL, 'All', or 'Space'.")
   }
   
   # Get the list of all files in the directory
@@ -172,17 +189,36 @@ process_submissions <- function(path, pattern = ".", return_value = "Summary", k
   
   if (return_value == "Summary") {
     if (length(filtered_tibble_list) > 0) {
-      summary_tibble <- purrr::map_dfr(filtered_tibble_list, function(tibble_data) {
+      summary_tibble <- purrr::map_dfr(names(filtered_tibble_list), function(file_name) {
+        tibble_data <- filtered_tibble_list[[file_name]]
         answers <- nrow(tibble_data)
-        dplyr::slice(tibble_data, 1) |>
+        
+        if (!is.null(keep_file_name)) {
+          if (keep_file_name == "All") {
+            source_name <- file_name
+          } else if (keep_file_name == "Space") {
+            source_name <- sub("\\s.*", "", file_name)
+          }
+        } else {
+          source_name <- NULL
+        }
+        
+        summary_row <- dplyr::slice(tibble_data, 1) |>
           dplyr::select(all_of(key_vars)) |>
           dplyr::mutate(answers = answers)
+        
+        if (!is.null(source_name)) {
+          summary_row <- tibble::add_column(summary_row, source = source_name, .before = 1)
+        }
+        
+        summary_row
       })
       return(summary_tibble)
     } else {
       return(tibble::tibble())
     }
-  } else if (return_value == "All") {
+  }
+  else if (return_value == "All") {
     if (length(filtered_tibble_list) > 0) {
       all_tibble <- dplyr::bind_rows(filtered_tibble_list)
       return(all_tibble)
