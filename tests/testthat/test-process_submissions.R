@@ -192,50 +192,53 @@ test_that("process_submissions stops with an error when an invalid keep_file_nam
   )
 })
 
-# test_that("process_submissions returns the expected summary tibble with keep_file_name 'All'", {
-#   expected_output <- tibble::tibble(
-#     source = c(
-#       "introduction_answers - Aadi.html",
-#       "introduction_answers - astrxr.html",
-#       "ivy-introduction - Ivy S.html"
-#     ),
-#     `information-name` = c("Aaditya Gupta", "Mithru Narayan Naidu", "Ivy Spratt"),
-#     answers = c(29L, 29L, 29L)
-#   ) %>%
-#     dplyr::arrange(source)
-#   
-#   actual_output <- process_submissions(
-#     path = test_dir,
-#     pattern = "introduction",
-#     key_vars = c("information-name"),
-#     keep_file_name = "All"
-#   ) %>%
-#     dplyr::arrange(source)
-#   
-#   expect_equal(actual_output, expected_output)
-# })
-# 
-# 
-# test_that("process_submissions returns the expected summary tibble with keep_file_name 'Space' and mixed file names", {
-#   expected_output <- tibble::tibble(
-#     source = c(
-#       "introduction_answers",
-#       "introduction_answers",
-#       "ivy-introduction"
-#     ),
-#     `information-name` = c("Aaditya Gupta", "Mithru Narayan Naidu", "Ivy Spratt"),
-#     answers = c(29L, 29L, 29L)
-#   ) %>%
-#     dplyr::arrange(`information-name`)
-#   
-#   actual_output <- process_submissions(
-#     path = test_dir,
-#     pattern = "introduction",
-#     key_vars = c("information-name"),
-#     keep_file_name = "Space"
-#   ) %>%
-#     dplyr::arrange(`information-name`)
-#   
-#   expect_equal(actual_output, expected_output)
-# })
+# Testing files with spaces required the use of setup/teardown scaffolding. Note
+# the use Sys.getenv("TEST_DIR") as the value of the path argument.
+
+test_that("process_submissions returns the expected summary tibble with keep_file_name 'All'", {
+  expected_output <- tibble::tibble(
+    source = c(
+      "introduction_answers -- Aadi.html",
+      "introduction_answers -- astrxr.html",
+      "ivy-introduction -- Ivy S.html"
+    ),
+    `information-name` = c("Aaditya Gupta", "Mithru Narayan Naidu", "Ivy Spratt"),
+    answers = c(29L, 29L, 29L)
+  ) %>%
+    dplyr::arrange(source)
+
+  actual_output <- process_submissions(
+    path = Sys.getenv("TEST_DIR"),
+    pattern = "introduction",
+    key_vars = c("information-name"),
+    keep_file_name = "All"
+  ) %>%
+    dplyr::arrange(source)
+
+  expect_equal(actual_output, expected_output)
+})
+
+
+test_that("process_submissions returns the expected summary tibble with keep_file_name 'Space' and mixed file names", {
+  expected_output <- tibble::tibble(
+    source = c(
+      "introduction_answers",
+      "introduction_answers",
+      "ivy-introduction"
+    ),
+    `information-name` = c("Aaditya Gupta", "Mithru Narayan Naidu", "Ivy Spratt"),
+    answers = c(29L, 29L, 29L)
+  ) %>%
+    dplyr::arrange(`information-name`)
+
+  actual_output <- process_submissions(
+    path = Sys.getenv("TEST_DIR"),
+    pattern = "introduction",
+    key_vars = c("information-name"),
+    keep_file_name = "Space"
+  ) %>%
+    dplyr::arrange(`information-name`)
+
+  expect_equal(actual_output, expected_output)
+})
 
