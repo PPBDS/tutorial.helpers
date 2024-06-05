@@ -188,7 +188,7 @@ test_that("process_submissions stops with an error when an invalid keep_file_nam
       key_vars = c("information-name"),
       keep_file_name = "Hey"
     ),
-    "Invalid keep_file_name. Allowed values are NULL, 'All', or 'Space'."
+    "Invalid keep_file_name. Allowed values are NULL, 'All', 'Space', or 'Underscore'."
   )
 })
 
@@ -239,6 +239,29 @@ test_that("process_submissions returns the expected summary tibble with keep_fil
   ) %>%
     dplyr::arrange(`information-name`)
 
+  expect_equal(actual_output, expected_output)
+})
+
+test_that("process_submissions returns the expected summary tibble with keep_file_name 'Underscore' and mixed file names", {
+  expected_output <- tibble::tibble(
+    source = c(
+      "introduction",
+      "introduction",
+      "ivy-introduction -- Ivy S.html"
+    ),
+    `information-name` = c("Aaditya Gupta", "Mithru Narayan Naidu", "Ivy Spratt"),
+    answers = c(29L, 29L, 29L)
+  ) %>%
+    dplyr::arrange(`information-name`)
+  
+  actual_output <- process_submissions(
+    path = Sys.getenv("TEST_DIR"),
+    pattern = "introduction",
+    key_vars = c("information-name"),
+    keep_file_name = "Underscore"
+  ) %>%
+    dplyr::arrange(`information-name`)
+  
   expect_equal(actual_output, expected_output)
 })
 

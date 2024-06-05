@@ -1,7 +1,5 @@
 # Priorities
 
-* Add argument to process_submissions() for keeping around the source file name, up to the first space (or .). Only used for result = "Summary". Adds it as the first column. Maybe "keep_file_name" with 4 arguments: NULL (do nothing), "All" (keep entire file name), "Space" (keep up to first space), "Base" (keep up to first space or first dot.)
-
 * Change the default code chunks so that the new chunk names are "name", "email", "student-id" and "time". We can't (?) use id because that is the default name of one of the columns in the saved html file of answers. Or maybe we can just use id and then change the id column to question-id. That would be nice.
 
 * Change process_submissions() to accomodate those new chunk names.

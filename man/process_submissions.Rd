@@ -24,7 +24,7 @@ process_submissions(
 
 \item{verbose}{An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).}
 
-\item{keep_file_name}{Specifies whether to keep the file name in the summary tibble. Allowed values are NULL (default), "All" (keep entire file name), or "Space" (keep up to first space). Only used when \code{return_value} is "Summary".}
+\item{keep_file_name}{Specifies whether to keep the file name in the summary tibble. Allowed values are NULL (default), "All" (keep entire file name), "Space" (keep up to first space), or "Underscore" (keep up to first underscore). Only used when \code{return_value} is "Summary".}
 }
 \value{
 If \code{return_value} is "Summary", returns a tibble with one row for each file, columns corresponding to the \code{key_vars},

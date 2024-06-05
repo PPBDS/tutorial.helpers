@@ -9,7 +9,7 @@
 #' @param return_value The type of value to return. Allowed values are "Summary" (default) or "All".
 #' @param key_vars A character vector of key variables to extract from the "id" column (default: NULL).
 #' @param verbose An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).
-#' @param keep_file_name Specifies whether to keep the file name in the summary tibble. Allowed values are NULL (default), "All" (keep entire file name), or "Space" (keep up to first space). Only used when `return_value` is "Summary".
+#' @param keep_file_name Specifies whether to keep the file name in the summary tibble. Allowed values are NULL (default), "All" (keep entire file name), "Space" (keep up to first space), or "Underscore" (keep up to first underscore). Only used when `return_value` is "Summary".
 #'
 #' @return If `return_value` is "Summary", returns a tibble with one row for each file, columns corresponding to the `key_vars`,
 #'         and an additional "answers" column indicating the number of rows in each tibble.
@@ -66,8 +66,8 @@ process_submissions <- function(path,
     stop("keep_file_name can only be used when return_value is 'Summary'.")
   }
   
-  if (!is.null(keep_file_name) && !(keep_file_name %in% c("All", "Space"))) {
-    stop("Invalid keep_file_name. Allowed values are NULL, 'All', or 'Space'.")
+  if (!is.null(keep_file_name) && !(keep_file_name %in% c("All", "Space", "Underscore"))) {
+    stop("Invalid keep_file_name. Allowed values are NULL, 'All', 'Space', or 'Underscore'.")
   }
   
   # Get the list of all files in the directory
@@ -198,6 +198,8 @@ process_submissions <- function(path,
             source_name <- file_name
           } else if (keep_file_name == "Space") {
             source_name <- sub("\\s.*", "", file_name)
+          } else if (keep_file_name == "Underscore") {
+            source_name <- sub("_.*", "", file_name)
           }
         } else {
           source_name <- NULL
