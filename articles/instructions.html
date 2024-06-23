@@ -86,6 +86,7 @@
 
     
     
+<!-- Expand processing_submissions section. -->
 <p><em>There are no questions here. There are only simple
 instructions.</em></p>
 <p><em>Tutorials are not challenging. They are
@@ -236,6 +237,9 @@ the text for it to show up as a side panel. This is also called the
 case</a>. On the line after the Section Title, put three hashes. This
 ensures that students will see the introductory text before they see the
 first Exercise.</p>
+<p>The only section which only has the double hash (##) and not a triple
+hash (###) on the next line is the Summary section, since there are no
+Exercises which follow the summary text.</p>
 <p>Each Section begins with a sentence or two about what this group of
 Exercises is trying to accomplish. Example:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">## Interacting with sites with `GET()`</span></span>
@@ -309,7 +313,7 @@ Exercise code chunk — works.</li>
 want students to pause after they have submitted their answers so that
 they are more likely to consider the output from their submission before
 moving on.</p></li>
-<li><p>The last part of an Exercise is the End, our main opportunity to
+<li><p>The last part of an Exercise is the end, our main opportunity to
 drop some knowledge. See the <a href="#kd">Knowledge Drops</a> section
 for extensive discussion.</p></li>
 <li><p>The last part of the Section is another knowledge drop. It is not
@@ -447,14 +451,14 @@ chunk.</p>
 students to use. The most common case is code which requires the web,
 generally for downloading data. In that case, we delete the Test code
 chunk.</p>
-<p>Sixth, we separate the code chunks from the End of the Exercise by
+<p>Sixth, we separate the code chunks from the end of the Exercise by
 using <code>###</code> again.</p>
 <p>For simple questions which result in a display of some data, one
 approach is to write “You should see that the value of height in row 1
 is 23.” This allows the students to know that they are on the right
 track. Never hard-code a number. Use R to inline calculate it, even
 though this can be a bother.</p>
-<p>But, much more common, is to use the End to drop some knowledge,
+<p>But, much more common, is to use the end to drop some knowledge,
 especially about a function which was used in the answer to this
 Exercise, or to one of the previous Exercises in this Section.</p>
 <p>Note that we provide as many Exercises as possible. For example,
@@ -521,6 +525,30 @@ we don’t mind if students resubmit. In that case, we use</p>
 <p>This format is most commonly used for “process” questions in which we
 have told students to do something and then confirm that they have done
 it by copying/pasting the result from a command.</p>
+<p><code><a href="../reference/show_file.html">tutorial.helpers::show_file()</a></code> is a handy function for
+confirming that students have modified text files as instructed. For
+example, after telling students to edit the <code>_quarto.yml</code>
+file, we can check that they did so with:</p>
+<pre><code>In the Console, run:
+
+```
+tutorial.helpers::show_file("_quarto.yml")
+```
+
+CP/CR.</code></pre>
+<p><code><a href="../reference/show_file.html">show_file()</a></code> provides a variety of arguments which cause
+it to return only selected lines rather than the entire file.</p>
+<p>Keep in mind that <code><a href="../reference/show_file.html">show_file()</a></code> will not be available to
+students in their Console by default. We can either always call it with
+<code><a href="../reference/show_file.html">tutorial.helpers::show_file()</a></code>, as above, or always (and
+after each restart of the R Session!) have the student type
+<code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code> at the Console by hand.</p>
+<p>Maybe the instructions should always use the double colon, but remind
+students the first time in each tutorial that they could just
+<code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code>. Or, don’t use the double colon
+and then, the first time it is used, remind students that, when they see
+the “No function found” error, they need to
+<code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code> at the Console.</p>
 </div>
 </div>
 <div class="section level3">
@@ -554,7 +582,7 @@ commands executed there do not need to be executed again.</p>
 <p>Tutorials are knitted/run from the directory in which they are
 located. So, if you want to read in a file from a <code>data/</code>
 directory, you write:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/myfile.csv"</span><span class="op">)</span></span></code></pre></div>
 <p>in an R code chunk, presumably in the global <code>setup</code>
 chunk. But, if you try to execute that line of code with
@@ -562,12 +590,12 @@ chunk. But, if you try to execute that line of code with
 located in the main directory of <strong>your.package</strong> when you
 start working on your tutorials. Using <code><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd()</a></code> will solve
 this problem.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="at">&gt; getwd()</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="co">[</span><span class="ot">1</span><span class="co">]</span><span class="at"> "/Users/davidkane/Desktop/projects/r4ds.tutorials"</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="at">&gt; setwd("inst/tutorials/031-data-files/")</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="at">&gt; getwd()</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co">[</span><span class="ot">1</span><span class="co">]</span><span class="at"> "/Users/davidkane/Desktop/projects/r4ds.tutorials/inst/tutorials/031-data-files"</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="at">&gt; </span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="at">&gt; getwd()</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">[</span><span class="ot">1</span><span class="co">]</span><span class="at"> "/Users/davidkane/Desktop/projects/r4ds.tutorials"</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="at">&gt; setwd("inst/tutorials/031-data-files/")</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="at">&gt; getwd()</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">[</span><span class="ot">1</span><span class="co">]</span><span class="at"> "/Users/davidkane/Desktop/projects/r4ds.tutorials/inst/tutorials/031-data-files"</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="at">&gt; </span></span></code></pre></div>
 <p><code>Command + Return</code> will now work because your R session is
 “located” in the same location as that from which the tutorial will be
 run when it is knitted.</p>
@@ -595,7 +623,7 @@ Exercises, providing hints along the way.</p>
 </h3>
 <p>The most difficult part of tutorial creation is writing the
 “knowledge drops,” the snippets of wisdom (and the associated links)
-which are used at the End of each Exercise. Some advice:</p>
+which are used at the end of each Exercise. Some advice:</p>
 <ul>
 <li><p>Do not expect this to be easy! Good knowledge drops are
 hard.</p></li>
@@ -746,9 +774,9 @@ can work with those files in all the usual ways.</p>
 <p>Use <code>include_graphics()</code> to add the image into the
 document. Include this code in its own chunk, in the place where you
 want the image to appear in the tutorial.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="at">include_graphics("images/example.png")</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="st">```</span><span class="at">{r}</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="at">include_graphics("images/example.png")</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p><code>include_graphics()</code> is part of the <code>knitr</code>
 package, so you need <code><a href="https://yihui.org/knitr/" class="external-link">library(knitr)</a></code> in the setup code
 chunk. Note that you do not need to name these code chunks.</p>
@@ -790,12 +818,21 @@ tutorial. You can either leave it in the same directory as the
 <code>tutorial.Rmd</code> file or, probably better, place it in either
 the <code>data</code> or <code>images</code> directory. You then add
 this code chunk to your tutorial.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="st">```</span><span class="at">{r file = "example.txt", echo = TRUE, eval = FALSE}</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="st">```</span><span class="at">{r file = "example.txt", echo = TRUE, eval = FALSE}</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="st">```</span></span></code></pre></div>
 <p>The <code>file</code> code chunk object loads the specified file. The
 other code chunk options ensure that the text is echoed but not
 evaluated.</p>
 </div>
+</div>
+<div class="section level2">
+<h2 id="processing-submissions">Processing submissions<a class="anchor" aria-label="anchor" href="#processing-submissions"></a>
+</h2>
+<p>Instructors have different needs and priorities when it comes to
+processing student answers. For now, we provide one function,
+<code><a href="../reference/process_submissions.html">tutorial.helpers::process_submissions()</a></code> to help them. Read
+the help page: <code><a href="../reference/process_submissions.html">?process_submissions</a></code>. There are many
+arguments and options.</p>
 </div>
 <div class="section level2">
 <h2 id="checks">Checks<a class="anchor" aria-label="anchor" href="#checks"></a>
@@ -803,7 +840,7 @@ evaluated.</p>
 <p>The simplest way to test the <code>tutorial.Rmd</code> with which you
 are working on is to hit the “Run Document” button. This is the same
 thing as running <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> on that file:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span><span class="st">"inst/tutorials/02-terminal/tutorial.Rmd"</span><span class="op">)</span></span></code></pre></div>
 <p>This assumes that you are located in the main directory of
 <strong>your.package</strong>, as you normally would be. I am not sure
