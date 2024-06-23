@@ -8,6 +8,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+<!-- Expand processing_submissions section. -->
+
 *There are no questions here. There are only simple instructions.*
 
 *Tutorials are not challenging. They are confidence-building.*
@@ -69,6 +71,8 @@ Ensure that the first few questions always require students to load any librarie
 
 Tutorials are divided into *Sections* that appear on the side panel. To create these sections, we include a double hash (##) before the text for it to show up as a side panel. This is also called the *Section Title*.  Use [sentence case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case). On the line after the Section Title, put three hashes. This ensures that students will see the introductory text before they see the first Exercise.
 
+The only section which only has the double hash (##) and not a triple hash (###) on the next line is the Summary section, since there are no Exercises which follow the summary text.
+
 Each Section begins with a sentence or two about what this group of Exercises is trying to accomplish. Example:
 
 ````markdown
@@ -109,7 +113,7 @@ Each Exercise should have a *flow* which requires that students hit the "Continu
   
 * The three code chunks are always followed by a triple hash. We want students to pause after they have submitted their answers so that they are more likely to consider the output from their submission before moving on.
 
-* The last part of an Exercise is the End, our main opportunity to drop some knowledge. See the [Knowledge Drops](#kd) section for extensive discussion.
+* The last part of an Exercise is the end, our main opportunity to drop some knowledge. See the [Knowledge Drops](#kd) section for extensive discussion.
 
 * The last part of the Section is another knowledge drop. It is not another Exercise. It is just a knowledge drop after the last Exercise which tries to take a broader overview. It is often separated from that last Exercise by a simple `###`. Again, this can't be more than a sentence or two. But it should be more substantive than a simple "Good job."  Recall the 10,000 items which we want to mention. For example, if the Section has involved creating a scatter plot, then the last Exercise will be putting the final touches on that scatter plot. The knowledge drop should be something about scatter plots in general, not a minor point about the particular scatter plot which the student has just created.
 
@@ -207,11 +211,11 @@ Indeed, the workflow for writing an Exercise often begins by, first, entering th
 
 There are some instances in which we can't test code which we want students to use. The most common case is code which requires the web, generally for downloading data. In that case, we delete the Test code chunk.
 
-Sixth, we separate the code chunks from the End of the Exercise by using `###` again.
+Sixth, we separate the code chunks from the end of the Exercise by using `###` again.
 
 For simple questions which result in a display of some data, one approach is to write "You should see that the value of height in row 1 is 23." This allows the students to know that they are on the right track. Never hard-code a number. Use R to inline calculate it, even though this can be a bother.
 
-But, much more common, is to use the End to drop some knowledge, especially about a function which was used in the answer to this Exercise, or to one of the previous Exercises in this Section.
+But, much more common, is to use the end to drop some knowledge, especially about a function which was used in the answer to this Exercise, or to one of the previous Exercises in this Section.
 
 Note that we provide as many Exercises as possible. For example, every tutorial features a question for each package which must be loaded. We require students to type in items like `library(tidyverse)` even though they have done so many times in the past. Every Exercise is another opportunity to make the learning curve as shallow as possible and to drop some knowledge. More questions are better than fewer. 
 
@@ -266,6 +270,24 @@ From the Console, run `list.files()`. CP/CR.
 
 This format is most commonly used for "process" questions in which we have told students to do something and then confirm that they have done it by copying/pasting the result from a command.
 
+`tutorial.helpers::show_file()` is a handy function for confirming that students have modified text files as instructed. For example, after telling students to edit the `_quarto.yml` file, we can check that they did so with:
+
+````
+In the Console, run:
+
+```
+tutorial.helpers::show_file("_quarto.yml")
+```
+
+CP/CR.
+````
+
+`show_file()` provides a variety of arguments which cause it to return only selected lines rather than the entire file.
+
+Keep in mind that `show_file()` will not be available to students in their Console by default. We can either always call it with `tutorial.helpers::show_file()`, as above, or always (and after each restart of the R Session!) have the student type `library(tutorial.helpers)` at the Console by hand.
+
+Maybe the instructions should always use the double colon, but remind students the first time in each tutorial that they could just `library(tutorial.helpers)`. Or, don't use the double colon and then, the first time it is used, remind students that, when they see the "No function found" error, they need to `library(tutorial.helpers)` at the Console.
+
 ### Tips
 
 Each coding exercise should always spit out something. Interactivity is good! Students should always look at what their code is producing. There are some situations in which students need to make assignments and which, because of this, will result in no output when the Run Code button is pressed. But:
@@ -317,7 +339,7 @@ You then build up the graphic, line by line, over a series of Exercises, providi
 
 ### Knowledge Drops<a id="kd"></a>
 
-The most difficult part of tutorial creation is writing the "knowledge drops," the snippets of wisdom (and the associated links) which are used at the End of each Exercise. Some advice:
+The most difficult part of tutorial creation is writing the "knowledge drops," the snippets of wisdom (and the associated links) which are used at the end of each Exercise. Some advice:
 
 * Do not expect this to be easy! Good knowledge drops are hard.
 
@@ -433,6 +455,10 @@ The "file" trick solves this problem. Create a txt file, `example.txt`, with the
 ````
 
 The `file` code chunk object loads the specified file. The other code chunk options ensure that the text is echoed but not evaluated.
+
+## Processing submissions
+
+Instructors have different needs and priorities when it comes to processing student answers. For now, we provide one function, `tutorial.helpers::process_submissions()` to help them. Read the help page: `?process_submissions`. There are many arguments and options.
 
 
 ## Checks 
