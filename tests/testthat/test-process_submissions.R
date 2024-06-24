@@ -265,3 +265,38 @@ test_that("process_submissions returns the expected summary tibble with keep_fil
   expect_equal(actual_output, expected_output)
 })
 
+# Tests using new variable names.
+
+test_that("process_submissions returns the expected summary tibble", {
+  expected_output <- tibble::tibble(
+    name = c("David Kane"),
+    answers = c(10)
+  )
+  
+  actual_output <- process_submissions(
+    path = "fixtures/process_submissions_dir2/",
+    pattern = "new-labels",
+    key_vars = c("name")
+  )
+  
+  expect_equal(actual_output, expected_output)
+})
+
+test_that("process_submissions returns the expected summary tibble", {
+  expected_output <- tibble::tibble(
+    name = "David Kane",
+    email = "dave.kane@gmail.com",
+    minutes = "9",
+    answers = c(10)
+  )
+  
+  actual_output <- process_submissions(
+    path = "fixtures/process_submissions_dir2/",
+    pattern = "new-labels",
+    key_vars = c("name", "email", "minutes")
+  )
+  
+  expect_equal(actual_output, expected_output)
+})
+
+

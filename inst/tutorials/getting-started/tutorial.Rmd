@@ -273,12 +273,13 @@ At the end of every tutorial, you will save your work (and submit it, at the dis
 
 Make sure to answer the question about how many **minutes** you spent on the tutorial and to click "Submit Answer."
 
-After hitting the "Download" button, you will be prompted to save a file named `getting-started_answers` with a suffix which depends on the button you selected. You may download your answers as `rds`, `html` or `pdf` files. This file will be saved in the default Downloads folder on your computer, even if you completed the tutorial on a cloud computing platform. If you want, you may download multiple formats.
+After hitting the "Download" button, you will be prompted to save a file named `getting-started_answers.html`. This file will be saved in the default Downloads folder on your computer, even if you completed the tutorial on a cloud computing platform. 
+
+Unless told otherwise by your instructor, you should use the default file name, which will usually be of the form `name-of-tutorial` + `_answers` + `.html`. 
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
 
 ## Summary
-### 
 
-You now understand how tutorials function and how to download copies of your answers. Good luck with your data science journey!
+You now understand how tutorials function and how to download a copy of your answers. Good luck with your data science journey!

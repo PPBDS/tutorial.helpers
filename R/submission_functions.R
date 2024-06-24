@@ -63,47 +63,30 @@ submission_server <- function() {
                         "_answers.html"),
       content = function(file){
         
+        # Note that you must wrap the call to write_answers() inside a function. I
+        # am confused about why. No doubt some weird Shiny/reactive thing . . .
+        # But, then, why don't we need to do th same wrapping for the value of
+        # filename just above?
+        
+        # Also, where does the value for "file" come from below? The Shiny book
+        # reports that "`content` should be a function with one argument, `file`,
+        # which is the path to save the file. The job of this function is to save
+        # the file in a place that Shiny knows about, so it can then send it to
+        # the user." Confusing!
+        
+        # The use of session is also weird. First, there is no explicit "session"
+        # object. Presumably, this comes from the magic of Shiny, along with
+        # local() and parent.frame(). Second, Section 9.2.2 of the Shiny Book
+        # gives an example which uses a reactive object. Maybe this is a better
+        # approach? Maybe is a reactive object which is automatically created in
+        # Shiny?
+        
         # This is how we make test cases. Uncomment this line and comment
         # write_answers(). Then, install the package. This assumes your test
         # case comes from the "Getting Started with Tutorials" tutorial). Then
         # run your tutorial as normal, choosing the RDS option at the end.
         
         # saveRDS(session, file = "~/Desktop/test_session_3.rds")
-        write_answers(file, session)
-      }
-    )
-    
-    output$downloadRds <- shiny::downloadHandler(
-      filename = paste0(learnr::get_tutorial_info()$tutorial_id,
-                        "_answers.rds"),
-      
-      # Note that you must wrap the call to write_answers() inside a function. I
-      # am confused about why. No doubt some weird Shiny/reactive thing . . .
-      # But, then, why don't we need to do th same wrapping for the value of
-      # filename just above?
-      
-      # Also, where does the value for "file" come from below? The Shiny book
-      # reports that "`content` should be a function with one argument, `file`,
-      # which is the path to save the file. The job of this function is to save
-      # the file in a place that Shiny knows about, so it can then send it to
-      # the user." Confusing!
-      
-      # The use of session is also weird. First, there is no explicit "session"
-      # object. Presumably, this comes from the magic of Shiny, along with
-      # local() and parent.frame(). Second, Section 9.2.2 of the Shiny Book
-      # gives an example which uses a reactive object. Maybe this is a better
-      # approach? Maybe is a reactive object which is automatically created in
-      # Shiny?
-      
-      content = function(file){
-        write_answers(file, session)
-      }
-    )
-    
-    output$downloadPdf <- shiny::downloadHandler(
-      filename = paste0(learnr::get_tutorial_info()$tutorial_id,
-                        "_answers.pdf"),
-      content = function(file){
         write_answers(file, session)
       }
     )
@@ -132,20 +115,18 @@ submission_ui <- shiny::div(
 
   shiny::tags$br(),
   shiny::tags$ol(
-    shiny::tags$li("Click a button to download a file containing your answers."),
+    shiny::tags$li("Click the button to download a file containing your answers."),
     shiny::tags$li("Save the file onto your computer in a convenient location.")),
   shiny::fluidPage(
     shiny::mainPanel(
       shiny::div(id = "form",
-                 shiny::downloadButton(outputId = "downloadRds", label = "Download RDS"),
-                 shiny::downloadButton(outputId = "downloadHtml", label = "Download HTML"),
-                 shiny::downloadButton(outputId = "downloadPdf", label = "Download PDF"))
+                 shiny::downloadButton(outputId = "downloadHtml", label = "Download HTML"))
     )
   ),
   shiny::div(
     shiny::tags$br(),
     
-    "(If no file seems to download, try clicking with the alternative button on the desired download option and choose \"Save link as...\")",
+    "(If no file seems to download, try clicking with the alternative button on the download button and choose \"Save link as...\")",
     
     shiny::tags$br()
     )

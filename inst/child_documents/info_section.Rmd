@@ -1,7 +1,7 @@
 ## Information
 ###
 
-```{r information-name}
+```{r name}
 question_text(
     "Name:",
     answer(NULL, correct = TRUE),
@@ -10,7 +10,7 @@ question_text(
     incorrect = NULL)
 ```
 
-```{r information-email}
+```{r email}
 question_text(
     "Email:",
     answer(NULL, correct = TRUE),
@@ -19,7 +19,7 @@ question_text(
     incorrect = NULL)
 ```
 
-```{r information-id}
+```{r ID}
 question_text(
     "ID (if requested by your instructor):",
     answer(NULL, correct = TRUE),

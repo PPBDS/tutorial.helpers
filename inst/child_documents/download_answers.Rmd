@@ -1,6 +1,6 @@
 ## Download answers
 
-```{r download-answers}
+```{r minutes}
 question_numeric(
 	"How many minutes, approximately, did it take you to complete this tutorial? For example, an hour and a half would be 90 minutes.",
 	answer(NULL, correct = TRUE),

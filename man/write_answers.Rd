@@ -8,7 +8,7 @@ write_answers(file, session, is_test = FALSE)
 }
 \arguments{
 \item{file}{Location to render answers to. Output file type determined by
-file suffix. Acceptable values are "html", "rds" and "pdf".}
+file suffix. Only "html" is acceptable.}
 
 \item{session}{Session object from \code{Shiny} with \code{learnr}.}
 
@@ -17,21 +17,17 @@ the function. Default is \code{TRUE}.}
 }
 \description{
 Take a tutorial session, extract out all the submitted answers,
-and write out a file --- either as html, rds or pdf --- with all of those
-answers.
+and write out an html file with all of those answers.
 }
 \details{
 We only keep track of the questions/exercises that the student has
-completed. So, if she only answers three questions, the resulting output
-will only have 6 rows (the three answers plus the header row plus the first
-row with tutorial info plus the last row with the time taken). The other
-obvious approach is to keep all the questions/exercises and leave
-unanswered ones as NA. Not sure if that approach is better, or even
-possible.
+completed. The other obvious approach is to keep all the
+questions/exercises and leave unanswered ones as NA. Not sure if that
+approach is better, or even possible.
 }
 \examples{
 if(interactive()){
-  write_answers("outfile.pdf", sess)
+  write_answers("getting-started_answers.html", sess)
 }
-  
+
 }
