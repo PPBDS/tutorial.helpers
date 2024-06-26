@@ -1,6 +1,16 @@
 # Priorities
 
-* Once new version is on CRAN, update r4ds.tutorials to use it.
+* Once new version is on CRAN, update r4ds.tutorials to use it. Once this gets to CRAN, you can remove the REMOTES from all the tutorials packages since we no longer will need to get the development version to get access to show_file().
+
+* The correct term for the different parts of a tutorial is Topic, not Section. Fix this in instructions.Rmd at least.
+
+* Can we turn the vignettes into qmd instead of Rmd?
+
+* Key fix to format tutorials, as discussed below, is ensuring that comment characters, `#`, in backtick environments do not mess things up. I suspect that this might involve a fix in parsermd or in whatever it uses. I am also unclear if R code chunk headers, with their triple backticks, causes problems on their own. See quarto-1-example.txt in RStudio and Github, for example. Since the parsermd author seems unresponsive, maybe we just take a copy of the key code and then fix it ourselves?
+
+* Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr??? Get rid of them, if possible! Indeed, try to get rid of as many of the packages in Suggests/Depends as possible. Many were left over from when this was a part of primer.tutorials.
+
+* Figure out why Check is 0/0/0 but Test is 2 FAILs and 4 SKIPs.
 
 * Why are hints not showing up in some r4ds.tutorials, like data-import?
 
@@ -14,9 +24,6 @@
 
 * Might be nice if the email entry field at least attempted to note/warn if the submitted information was not a legitimate email. Perhaps at least check if there is an `@`.
 
-* Once this gets to CRAN, you can remove the REMOTES from all the tutorials packages since we no longer will need to get the development version to get access to show_file().
-
-
 * process_submissions() test cases should not just spit out "Could not process file: getting-started_answers.pdf". Handle it better.
 
 * I don't like the way the test cases for process_submissions spit out the pdf files names that they are ignoring, even if it does not effect the tests passing. At least, we should add a new test case for this behavior. Perhaps reorganize the test files into a couple of different directories. Or make the pattern ignore the pdf files in the test cases. But I couldn't get that to work.
@@ -27,17 +34,12 @@
 * Standardize an instruction which says to paste from the HTML result. This is different from CP/CR, obviously.
 
 
-* Key fix to format tutorials, as discussed below, is ensuring that comment characters, `#`, in backtick environments do not mess things up. I suspect that this might involve a fix in parsermd or in whatever it uses. I am also unclear if R code chunk headers, with their triple backticks, causes problems on their own. See quarto-1-example.txt in RStudio and Github, for example.
-
 * Consider getting rid of Copy code button. Now that we can pre-place code from previous questions into the Exericise code chunk, we don't need to allow students to Copy from previous exercise. Since that is the only use case for the Copy code button, we can delete it, and all its associated junk. The counter-argument is that if you populate the starting code for Exercise N + 1, then a student working on Exercise N can cheat and just look at by skipping ahead. Counter-counter-argument is that students can already do this by looking at the Hint for Exercise N + 1. Since they don't (?), we don't really have to worry about them cheating in this way. Moreover, the vast majority of questions are so easy that cheating is actually more work. Just look at the provided hint!
 
 * Consider providing a simple hash to guarantee that students haven't cheated, even if they submit html. The function would run some R code which produced a string including things like date, time, pwd, whois, computer name, and whatever else. It then takes that string and turns it into a hash. That hash is output into the html. If there are concerns about cheating, an instructor can check the hash. This might also us to get rid of the rds options, since its only purpose is probably cheat-detection. Might also provide an execuse to get rid of the PDF option.
 
-* Does the existence of new RStudio tools (typist?) mean we can make PDF files more easily? No longer need gridExtra? Related: Do we really need gridExtra in order to be able to create a pdf file? Seems like overkill. Must be an easier way.
-
 * If you "Show in a new window" a tutorial, then clicking on links in that tutorial does not work on my local computer. If you keep the tutorial in the Tutorial pane, links do work. On Posit Cloud, the latter also works. In the former case, clicking the link switches the pulled out window to the new location, but does not provide a way back, so you need to restart the tutorial.
 
-* Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr??? Get rid of them, if possible! Indeed, try to get rid of as many of the packages in Suggests/Depends as possible. Many were left over from when this was a part of primer.tutorials.
 
 * Ensure that this code handles our test code chunks in non-code questions. See RStudio and Github (gert) for examples. Seems to work, but some test cases would be nice.
 
@@ -128,8 +130,6 @@ Blanks are detected using regular expressions (since blanks may make the code un
 * Version 0.2.6.9012 got rid of the discussion about hosting a version of the Getting Started tutorials on shinyapps.io. The whole process was annoying and working poorly. To my knowledge, it was never used. So, we simplify.
 
 * rstudioapi::is_available()
-
-* Figure out why Check is 0/0/0 but Test is 1 FAIL and 4 SKIPs.
 
 
 * Does build_tutorials() really work? First, it seems to fail if you don't provide a url. Second, it does not seem to make use of a source option if one is provided.
