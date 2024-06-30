@@ -299,9 +299,10 @@ Note how we concisely provide both the command which brings up the help page and
 Think back to our initial discussion of the 10,000 pieces of information which we want to mention at some point. Among these are many pages linked to from the help pages for the core *Tidyverse* functions, like `arrange()` and `aes()`.
 
 
+### Addins
 
+The **tutorial.helpers** package provides a collection of RStudio Addins which facilitate the creation and testing of tutorial packages. Read about them in the "[Rstudio Addins](articles/addins.html)" vignette. Three of the vignettes create new exercises. A fourth, "Format Tutorial Chunk Labels," renumbers all the exercises in a tutorial if you add or remove an exercise. It also ensures consistency in code chunk labels. Highly recommended!
 
-<!-- DK: Everything below is worth re-writing. -->
 
 ## Inputs
 
