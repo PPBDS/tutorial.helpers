@@ -18,7 +18,7 @@ vignette: >
 
 ## Introduction
 
-This document describes the best way to write R tutorials using the [**learnr**](https://rstudio.github.io/learnr/) package. The most common use case is a tutorial which covers [the material in an assigned textbook](https://ppbds.github.io/tutorial.helpers/articles/books.html), as with the [**r4ds.tutorials**](https://CRAN.R-project.org/package=r4ds.tutorials) package for [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund..
+This document describes the best way to write R tutorials using the [**learnr**](https://rstudio.github.io/learnr/) package. The most common use case is a tutorial which covers [the material in an assigned textbook](books.html), as with the [**r4ds.tutorials**](https://CRAN.R-project.org/package=r4ds.tutorials) package for [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund..
 
 Instructors assign textbook readings to students. We want our students to read and, perhaps more importantly, go through the associated code, typing it in and confirming what it does. Sadly, students almost never do so. Fortunately, the [**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers) package provides tools for ensuring that students type in all the assigned code.
 
@@ -43,11 +43,13 @@ To create a new tutorial, use `File -> New File -> R Markdown...`. Choose the "F
 
 The `id` value is important. It should be the same as the directory in which the tutorial is located, but with any leading numbers removed. It is used for the name of the answer file which students save at the end of the tutorial. 
 
-Note that tutorials must be [R Markdown](https://rmarkdown.rstudio.com/) documents, meaning that their suffix is `.Rmd`. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the `{}`. Don't worry about this detail. Just use the provided RStudio addin tools.
+Note that tutorials must be [R Markdown](https://rmarkdown.rstudio.com/) documents, meaning that their suffix is `.Rmd`. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the `{}`. Don't worry about this detail. Just use the provided [RStudio Addin functions](addins.html).
 
-There is a `setup` code chunk at the top of a tutorial. You must have `library(learnr)` and, if you use our tools, `library(tutorial.helpers)` in this chunk. Our template also provide useful settings for various options.
+There is a `setup` code chunk at the top of a tutorial. You must have `library(learnr)` and, if you use our tools, `library(tutorial.helpers)` in this chunk. Our template also provides useful settings for various options.
 
-**Warning**: You must ensure that any library used in the tutorial is explicitly loaded in this setup chunk. Almost every tutorial makes use of functions from the **tidyverse** package, so be sure to load this. Unfortunately, nothing in our test suite captures the common error of using library X in the tutorial code and forgetting to load it in the setup chunk.
+**Warning**: You must ensure that any library used in the tutorial is explicitly loaded in this setup chunk. Almost every tutorial makes use of functions from the **tidyverse** package, so be sure to load this. Unfortunately, nothing in our test suite captures the common error of using library X in the tutorial code and forgetting to load it in the setup chunk. 
+
+We recommend always including a question which requires students to load any library used in the tutorial, other than **learnr** and **tutorial.helpers**. This is good for seveal reasons. First, students are always forgetting to load libraries. More practice helps. Second, a load-library question provides a good occasion for a knowledge drop. Third, a load-library question should include a test case code chunk which load the library. This test will only pass if the library is loaded by us in the `setup` chunk.
 
 If your tutorials are part of an R package, then you should ensure that **tutorial.helpers** is included under Imports and that any library loaded in a tutorial is, at least, included under Suggests.
 
@@ -301,7 +303,7 @@ Think back to our initial discussion of the 10,000 pieces of information which w
 
 ### Addins
 
-The **tutorial.helpers** package provides a collection of RStudio Addins which facilitate the creation and testing of tutorial packages. Read about them in the "[Rstudio Addins](articles/addins.html)" vignette. Three of the vignettes create new exercises. A fourth, "Format Tutorial Chunk Labels," renumbers all the exercises in a tutorial if you add or remove an exercise. It also ensures consistency in code chunk labels. Highly recommended!
+The **tutorial.helpers** package provides a collection of RStudio Addins which facilitate the creation and testing of tutorial packages. Read about them in the "[Rstudio Addins](addins.html)" vignette. Three of the vignettes create new exercises. A fourth, "Format Tutorial Chunk Labels," renumbers all the exercises in a tutorial if you add or remove an exercise. It also ensures consistency in code chunk labels. Highly recommended!
 
 
 ## Inputs
