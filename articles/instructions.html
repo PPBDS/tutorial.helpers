@@ -91,7 +91,9 @@
 instructions.</em></p>
 <p><em>Tutorials are not challenging. They are
 confidence-building.</em></p>
+<p><em>Create the shallowest possible learning curve.</em></p>
 <p><em>Every word matters. Never waste a student’s time.</em></p>
+<p><em>Drop some knowledge with each exercise.</em></p>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
@@ -109,31 +111,17 @@ students almost never do so. Fortunately, the <a href="https://CRAN.R-project.or
 package provides tools for ensuring that students type in all the
 assigned code.</p>
 <p>Imagine the <em>shallowest</em> possible learning curve. Almost every
-student should be able to answer almost every Exercise, albeit perhaps
-with the help of a Hint. There are no hard questions. In fact, there
+student should be able to answer almost every exercise, albeit perhaps
+with the help of a hint. There are no hard questions. In fact, there
 really aren’t any <em>questions</em> at all. Instead, there are
 <em>instructions</em>: Do one thing, then the next, and then the
 next.</p>
+<p>Almost all exercises feature a <a href="#kd"><em>knowledge
+drop</em></a>, a bit of information, rarely more than two sentences,
+provided after the student has answered the question.</p>
 <p>Assume that you are giving the student a private lesson. You ask them
 a question. They give you an answer. What would you say to them next?
 What do you want to teach them, given that context?</p>
-<p>There are a million little bits of R (or statistics or data science
-or . . .) knowledge which we might provide to students: tips, tricks,
-cool packages, fun websites, et cetera. We don’t have time to mention
-all of them. The art of teaching is to, first, decide which 10,000 bits
-are the most important to mention and second, figure out the best time
-at which to mention them. Tutorials provide an occasion for that
-mentioning. Which bits do we mention and where do we mention them?</p>
-<p>We can only demonstrate a tiny percentage of all the packages in the
-world, but we can certainly at least mention the existence of dozens
-more. Within the packages we use, we can only illustrate some of the
-functions; but we can examine some of the other important ones. Among
-the functions we use, we can only show some of the arguments; but we can
-discuss others.</p>
-<p>The most important parts of the “knowledge drops” with which we
-pepper these tutorials are, first, the packages/functions/arguments
-which we mention without demonstrating, and second, links to high
-quality resources.</p>
 <p>We are building a “<a href="https://ricomariani.medium.com/the-pit-of-success-cfefc6cb64c8" class="external-link">pit
 of success</a>.” Generally, students don’t do the assigned reading, at
 least in a large class. However, they will complete required work. They
@@ -186,7 +174,7 @@ load any library used in the tutorial, other than
 good for seveal reasons. First, students are always forgetting to load
 libraries. More practice helps. Second, a load-library question provides
 a good occasion for a knowledge drop. Third, a load-library question
-should include a test case code chunk which load the library. This test
+should include a test case code chunk which loads the library. This test
 will only pass if the library is loaded by us in the <code>setup</code>
 chunk.</p>
 <p>If your tutorials are part of an R package, then you should ensure
@@ -199,19 +187,19 @@ Suggests.</p>
 </h2>
 <p>The beginning of every tutorial includes the
 <code>copy-code-chunk</code> and the <code>info-section</code> code
-chunks. The tutorial is then divided into different <em>Sections</em>
-that appear as side panels. The first section is the “Introduction” and
-the last is the “Summary”.</p>
-<p>Within the Sections, other than the Introduction and Summary, there
-are a series of <em>Exercises</em> which can include writing code or
-writing text. At the end of the tutorial, there is a
+chunks. The tutorial is then divided into different <em>topics</em> that
+appear as side panels. The first topic is the “Introduction” and the
+last is the “Summary”.</p>
+<p>Within the topics, other than the Introduction and Summary, there are
+a series of <em>exercises</em> which can include writing code or writing
+text. At the end of the tutorial, there is a
 <code>download-answers</code> code chunk which provides students with
 instructions on how to download a copy of their answers.</p>
-<p>The Introduction section is two to four sentence about the main
+<p>The Introduction portion is two to four sentence about the main
 topics covered in the tutorial. Why are we here? What will students get
 out of giving you 90 minutes of their lives? What functions/techniques
 will they learn?</p>
-<p>The Summary section is two to four sentences which bring the lessons
+<p>The Summary portion is two to four sentences which bring the lessons
 of the tutorial together for the student. What do they know now that
 they did not know before? What are the most important
 functions/techniques covered? This should be very similar to the
@@ -238,20 +226,20 @@ load should be included in the DESCRIPTION file — if the tutorial is
 part of a package — probably under Suggests.</p>
 </div>
 <div class="section level2">
-<h2 id="sections">Sections<a class="anchor" aria-label="anchor" href="#sections"></a>
+<h2 id="topics">Topics<a class="anchor" aria-label="anchor" href="#topics"></a>
 </h2>
-<p>Tutorials are divided into <em>Sections</em> that appear on the side
-panel. To create these sections, we include a double hash (##) before
-the text for it to show up as a side panel. This is also called the
-<em>Section Title</em>. Use <a href="https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case" class="external-link">sentence
-case</a>. On the line after the Section Title, put three hashes. This
+<p>Tutorials are divided into <em>topics</em> that appear on the side
+panel. To create these topics, we include a double hash (##) before the
+text for it to show up as a side panel. This is also called the
+<em>topic title</em>. Use <a href="https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case" class="external-link">sentence
+case</a>. On the line after the topic title, put three hashes. This
 ensures that students will see the introductory text before they see the
-first Exercise.</p>
-<p>The only section which only has the double hash (##) and not a triple
-hash (###) on the next line is the Summary section, since there are no
-Exercises which follow the summary text.</p>
-<p>Each Section begins with a sentence or two about what this group of
-Exercises is trying to accomplish. Example:</p>
+first exercise.</p>
+<p>The one topic which only has the double hash (##) and not a triple
+hash (###) on the next line is the Summary topic, since there are no
+exercises which follow the summary text.</p>
+<p>Each topic begins with a sentence or two about what this group of
+exercises is trying to accomplish. Example:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">## Interacting with sites with `GET()`</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>###</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
@@ -259,29 +247,29 @@ Exercises is trying to accomplish. Example:</p>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">### Exercise 1</span></span></code></pre></div>
 <p>The link will be formatted correctly once the tutorial is knitted.
-Section introductions will often have two parts: the introductory text
-as above and a plot which will be replicated in that section of the
+Topic introductions will sometimes have two parts: the introductory text
+as above and a plot which will be replicated in this portion of the
 tutorial. Those two parts are generally separated by a triple hash.</p>
-<p>After the last Exercise in a Section, you should put a triple hash
-and then give a two sentence summary about what this Section
-accomplished. A Section is a 20 minute transfer of knowledge from you to
-the student. At the beginning, you mentioned its purpose. Conclude by
-tying things back to that original purpose. Often, these “purposes” will
-be fairly trivial: You promised to go through an example of a scatter
-plot and, in fact, you did. And that is OK! We are not writing poetry.
-Not every Section leads to salvation.</p>
-<p>One or two high quality links, specifically relevant to this Section,
-should be included/explained at either the beginning or end of a
-Section, unless the Section is very short.</p>
+<p>After the last exercise in a topic, you should put a triple hash and
+then give a two sentence summary about what this topic accomplished. A
+topic is a 20 minute transfer of knowledge from you to the student. At
+the beginning, you mentioned its purpose. Conclude by tying things back
+to that original purpose. Often, these “purposes” will be fairly
+trivial: You promised to go through an example of a scatter plot and, in
+fact, you did. And that is OK! We are not writing poetry. Not every
+topic leads to salvation.</p>
+<p>One or two high quality links, specifically relevant to this topic,
+should be included/explained at either the beginning or end of a topic,
+unless the topic is very short.</p>
 </div>
 <div class="section level2">
 <h2 id="exercises">Exercises<a class="anchor" aria-label="anchor" href="#exercises"></a>
 </h2>
-<p>Each Section is composed of a series of numbered Exercises.</p>
+<p>Each topic is composed of a series of numbered exercises.</p>
 <div class="section level3">
 <h3 id="flow">Flow<a class="anchor" aria-label="anchor" href="#flow"></a>
 </h3>
-<p>Each Exercise should have a <em>flow</em> which requires that
+<p>Each exercise should have a <em>flow</em> which requires that
 students hit the “Continue” button at least once.</p>
 <ul>
 <li><p>Begin with a <em>Start</em> which is a sentence or two of
@@ -290,9 +278,9 @@ longer than one or two lines, then do not place the question code chunk
 in the same part. Instead, the Start includes a triple hash, thereby
 creating the Continue button. If the length of the text is short enough
 that students are willing to read it (at most two sentences), you can
-include the Exercise code chunk in the same part.</p></li>
+include the exercise code chunk in the same part.</p></li>
 <li><p>Most of the time there is no need for a triple hash before the
-Exercise code chunk.</p></li>
+exercise code chunk.</p></li>
 <li><p>Do not expect students to read more than two sentences of text at
 a time. After two sentences, you almost always want to use a triple hash
 in order to create a Continue button so that students have a break. They
@@ -300,40 +288,40 @@ won’t read more than two sentences without a break.</p></li>
 <li>
 <p>After the Start, come three code chunks:</p>
 <ul>
-<li>The Exercise code chunk is the location in which students will place
+<li>The exercise code chunk is the location in which students will place
 their answers. It always includes the <code>exercise = TRUE</code> code
 chunk option.</li>
-<li>The Hint code chunk includes any hints for the students. The code
+<li>The hint code chunk includes any hints for the students. The code
 chunk name is the hint is always exactly the same as the one for the
-Exercise code chunk, except with <code>-hint-n</code> attached at the
+exercise code chunk, except with <code>-hint-n</code> attached at the
 end. The <code>n</code> is replaced by the number of the hint. Almost
 always, there is only one hint, so the suffix is <code>-hint-1</code>.
-We always set <code>eval = FALSE</code> in the Hint code chunk since,
+We always set <code>eval = FALSE</code> in the hint code chunk since,
 often, the hint will not be legal R code.</li>
-<li>The Test code chunk has exactly the label as the one for the
-Exercise code chunk, except with <code>-test</code> attached at the end.
+<li>The test code chunk has exactly the label as the one for the
+exercise code chunk, except with <code>-test</code> attached at the end.
 It always includes the <code>include = FALSE</code> code chunk option
 because we never want to show the code or the results to students.
-Instead, the purpose of the Test code chunk is to ensure that the
+Instead, the purpose of the test code chunk is to ensure that the
 correct answer — that is, the code we want students to enter into the
-Exercise code chunk — works.</li>
+exercise code chunk — works.</li>
 </ul>
 </li>
 <li><p>The three code chunks are always followed by a triple hash. We
 want students to pause after they have submitted their answers so that
 they are more likely to consider the output from their submission before
 moving on.</p></li>
-<li><p>The last part of an Exercise is the end, our main opportunity to
-drop some knowledge. See the <a href="#kd">Knowledge Drops</a> section
-for extensive discussion.</p></li>
-<li><p>The last part of the Section is another knowledge drop. It is not
-another Exercise. It is just a knowledge drop after the last Exercise
+<li><p>The last part of an exercise is the end, our main opportunity to
+drop some knowledge. See <a href="#kd">Knowledge Drops</a> for extensive
+discussion.</p></li>
+<li><p>The last part of the topic is another knowledge drop. It is not
+another exercise. It is just a knowledge drop after the last exercise
 which tries to take a broader overview. It is often separated from that
-last Exercise by a simple <code>###</code>. Again, this can’t be more
+last exercise by a simple <code>###</code>. Again, this can’t be more
 than a sentence or two. But it should be more substantive than a simple
 “Good job.” Recall the 10,000 items which we want to mention. For
-example, if the Section has involved creating a scatter plot, then the
-last Exercise will be putting the final touches on that scatter plot.
+example, if the topic has involved creating a scatter plot, then the
+last exercise will be putting the final touches on that scatter plot.
 The knowledge drop should be something about scatter plots in general,
 not a minor point about the particular scatter plot which the student
 has just created.</p></li>
@@ -342,7 +330,7 @@ has just created.</p></li>
 <div class="section level3">
 <h3 id="question-types">Question types<a class="anchor" aria-label="anchor" href="#question-types"></a>
 </h3>
-<p>To create the Exercise headers, you use three hashes. Make sure you
+<p>To create the exercise headers, you use three hashes. Make sure you
 number your exercises – <code>### Exercise 1</code>,
 <code>### Exercise 2</code> and so on.</p>
 <p>There are two main types of questions. First, we have normal
@@ -388,8 +376,8 @@ the <strong>c</strong>ommand and the <strong>r</strong>esult.</p>
 <span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="cf">for</span> discussion of other relational operators <span class="cf">in</span> R.</span>
 <span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>A single equation symbol, <span class="st">`</span><span class="at">=</span><span class="st">`</span>, is used to set something equal to </span>
 <span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>something else. </span></code></pre></div>
-<p>First, the Start of the Exercise sets the stage. It sometimes teaches
-something new, connects to a previous Exercise, provides a useful link,
+<p>First, the Start of the exercise sets the stage. It sometimes teaches
+something new, connects to a previous exercise, provides a useful link,
 whatever. If it is long enough, it is followed by a triple hash. If not,
 the text continues to the instruction. Most of the time, as above, there
 is only the instruction, telling the student, step-by-step, what to
@@ -398,19 +386,19 @@ do.</p>
 instructions generate results when the student presses Run Code.
 Tutorial answers should require the smallest incremental number of
 characters, relative to the last question, for students to type. That is
-one way you know that your learning curve is shallow. If a Exercise code
+one way you know that your learning curve is shallow. If a exercise code
 chunk requires the students to type a lot of characters, you should
-split up the Exercise into multiple separate Exercises.</p>
-<p>Third, any Exercise which requires the copying of code from the prior
-Exercise should place the <em>Copy previous code</em> button below the
-Exercise code chunk.</p>
+split up the exercise into multiple separate exercises.</p>
+<p>Third, any exercise which requires the copying of code from the prior
+exercise should place the <em>Copy previous code</em> button below the
+exercise code chunk.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> onclick </span><span class="op">=</span> <span class="st">"transfer_code(this)"</span><span class="dt">&gt;</span>Copy previous code<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>Fourth, tutorials should be so simple that 95% of the students can
 answer 95% of the questions easily. One way to ensure that is to add a
-<em>Hint</em> to almost every coding question.</p>
+<em>hint</em> to almost every coding question.</p>
 <p>Hints must always have the same code chunk name as the exercise chunk
 for which they are the hint, with a “-hint-n” added at the end. So, if
-an Exercise code chunk is named “ex-1”, then the hint associated with
+an exercise code chunk is named “ex-1”, then the hint associated with
 that exercise is named “ex-1-hint-1”. A second hint for that same
 question would be named “ex-1-hint-2”, and so on.</p>
 <p>When you create a hint, always use <code>eval = FALSE</code> within
@@ -444,24 +432,24 @@ any earlier hints. We rarely provide more that one hint.</p>
 <p>Hints are <a href="https://forum.posit.co/t/hints-in-written-questions/108184" class="external-link">only
 allowed</a> for coding questions, <strong>not for text
 questions</strong>.</p>
-<p>Fifth, the third code chunk, after the Exercise and Hint code chunks,
-is the Test code chunk. Place the answer — the code which you want
-students to enter into the Exercise code chunk — into the Test code
-chunk. Since the Test code chunk will be evaluated with the tutorial is
+<p>Fifth, the third code chunk, after the exercise and hint code chunks,
+is the test code chunk. Place the answer — the code which you want
+students to enter into the exercise code chunk — into the test code
+chunk. Since the test code chunk will be evaluated with the tutorial is
 knitted (which also happens during testing), this guarantees that
 correct answer will work for students.</p>
-<p>Indeed, the workflow for writing an Exercise often begins by, first,
-entering the code which we want students to provide into the Test code
-chunk. We then copy/paste that same code into the Hint code chunk,
+<p>Indeed, the workflow for writing an exercise often begins by, first,
+entering the code which we want students to provide into the test code
+chunk. We then copy/paste that same code into the hint code chunk,
 replacing some of the functions and/or arguments with <code>...</code>
 as appropriate. We then ask the question which, we hope, will cause
-students to answer with the same code as we have in the Test code
+students to answer with the same code as we have in the test code
 chunk.</p>
 <p>There are some instances in which we can’t test code which we want
 students to use. The most common case is code which requires the web,
-generally for downloading data. In that case, we delete the Test code
+generally for downloading data. In that case, we delete the test code
 chunk.</p>
-<p>Sixth, we separate the code chunks from the end of the Exercise by
+<p>Sixth, we separate the code chunks from the end of the exercise by
 using <code>###</code> again.</p>
 <p>For simple questions which result in a display of some data, one
 approach is to write “You should see that the value of height in row 1
@@ -470,18 +458,18 @@ track. Never hard-code a number. Use R to inline calculate it, even
 though this can be a bother.</p>
 <p>But, much more common, is to use the end to drop some knowledge,
 especially about a function which was used in the answer to this
-Exercise, or to one of the previous Exercises in this Section.</p>
-<p>Note that we provide as many Exercises as possible. For example,
+exercise, or to one of the previous exercises in this topic.</p>
+<p>Note that we provide as many exercises as possible. For example,
 every tutorial features a question for each package which must be
 loaded. We require students to type in items like
 <code><a href="https://tidyverse.tidyverse.org" class="external-link">library(tidyverse)</a></code> even though they have done so many times
-in the past. Every Exercise is another opportunity to make the learning
+in the past. Every exercise is another opportunity to make the learning
 curve as shallow as possible and to drop some knowledge. More questions
 are better than fewer.</p>
 <p>One way to measure the shallowness of the learning curve is to
-examine how many new characters each Exercise requires for its answer.
-Better three Exercises, each of which loads a different package, then
-one Exercise which loads three packages at once.</p>
+examine how many new characters each exercise requires for its answer.
+Better three exercises, each of which loads a different package, then
+one exercise which loads three packages at once.</p>
 </div>
 <div class="section level4">
 <h4 id="text-questions">Text questions<a class="anchor" aria-label="anchor" href="#text-questions"></a>
@@ -572,7 +560,7 @@ button is pressed. But:</p>
 <ul>
 <li><p>Do this as little as possible. Why not just make a pipe?</p></li>
 <li><p>When you do this, you will need to create the permanent object
-yourself because student work in an Exercise code chunk has no lasting
+yourself because student work in an exercise code chunk has no lasting
 effects. Doing so is annoying and error prone.</p></li>
 <li><p>You can have the student not only do the assignment but also, as
 part of this same exercise, print out the object. This works
@@ -617,42 +605,45 @@ run when it is knitted.</p>
 process of building a pipe, the final output of which is a nice looking
 graphic.</p>
 <p>You want to first show the graphic that you will create by the end of
-the Section. You show it once at the start of the Section and once
-before the last Exercise, as a reminder of what the graphic should look
-like so students do not need to scroll all the way back up.</p>
+the topic. You show it once at the start of the topic and once before
+the last exercise, as a reminder of what the graphic should look like so
+students do not need to scroll all the way back up.</p>
 <p>You should put the code for the graph in the code chunk at the start
-of the Section. Save the code to an object. The name of the object
-should have a “_p” suffix, where the “p” stands for “plot.” This way,
-you only have to put the object name in the code chunk at the end of the
-Section rather than copying the code.</p>
+of the topic. Save the code to an object. The name of the object should
+have a “_p” suffix, where the “p” stands for “plot.” This way, you only
+have to put the object name in the code chunk at the end of the topic
+rather than copying the code.</p>
 <p>You then build up the graphic, line by line, over a series of
-Exercises, providing hints along the way.</p>
+exercises, providing hints along the way.</p>
 </div>
 <div class="section level3">
 <h3 id="knowledge-drops">Knowledge Drops<a id="kd"></a><a class="anchor" aria-label="anchor" href="#knowledge-drops"></a>
 </h3>
 <p>The most difficult part of tutorial creation is writing the
 “knowledge drops,” the snippets of wisdom (and the associated links)
-which are used at the end of each Exercise. Some advice:</p>
+which are used at the end of each exercise. These generally come in two
+categories: details about R functions/packages/websites and background
+information about the substative data science problem at hand.</p>
+<p>Do not expect this to be easy! Good knowledge drops are hard. Make
+them short. Students will not read more than a sentence or two.</p>
+<div class="section level4">
+<h4 id="advice-for-r-details-knowledge-drops">Advice for R Details Knowledge Drops<a class="anchor" aria-label="anchor" href="#advice-for-r-details-knowledge-drops"></a>
+</h4>
 <ul>
-<li><p>Do not expect this to be easy! Good knowledge drops are
-hard.</p></li>
-<li><p>Make them short. Students will not read more than a sentence or
-two.</p></li>
 <li>
 <p>Not sure what knowledge to drop? Look up the help page for one of
-the functions used in the Section. Ideally, this will be the function
-which was used in this Exercise, but it can be one used a few lines
+the functions used in the topic. Ideally, this will be the function
+which was used in this exercise, but it can be one used a few lines
 above. The help page will have two areas of interest:</p>
 <ul>
 <li>Arguments for the function, some of which will not have been used in
-the Section but which are still worth mentioning. A good knowledge drop
+the topic but which are still worth mentioning. A good knowledge drop
 will mention this argument and describe when it might be useful.</li>
 <li>Related functions. For example, use the “Useful filter functions”
 section of the <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">?dplyr::filter</a></code> help page. All of these make
 for good knowledge drops! Another example is the “See also” section of
 the <code>?arrange</code> help page. We can’t possibly use every R
-function in an Exercise, but we can at least describe some of them in
+function in an exercise, but we can at least describe some of them in
 knowledge drops.</li>
 </ul>
 </li>
@@ -698,6 +689,27 @@ information which we want to mention at some point. Among these are many
 pages linked to from the help pages for the core <em>Tidyverse</em>
 functions, like <code>arrange()</code> and <code>aes()</code>.</p>
 </div>
+<div class="section level4">
+<h4 id="advice-for-background-information-knowledge-drops">Advice for Background Information Knowledge Drops<a class="anchor" aria-label="anchor" href="#advice-for-background-information-knowledge-drops"></a>
+</h4>
+<p>The second category of knowledge drop involves background information
+about the current problem. See the <a href="https://ppbds.github.io/primer.tutorials/" class="external-link"><strong>primer.tutorials</strong></a>
+package for some good examples. In this situation, there is a large
+amount of information, generally from a textbook, which we want students
+to read. But we can’t just copy/paste entire paragraphs from the book as
+knowledge drops because students won’t read paragraphs. At best, they
+will read two sentences. So, we need to decide on the 10 or so more
+important sentences from the source material, copy/pasting them if that
+is allowed, rewording them if necessary. Then, we need to find a portion
+of the tutorial with 5 or so exercises in a row with no knowledge drops.
+Then we add two sentences from the material to each of the knowledge
+drops for those 5 exercises.</p>
+<p>A knowledge drop does not need to be relevant to the question which
+was asked in that exercise as long as it is relevant to the knowledge
+drops which are contained in the exercises which come before and/or
+after.</p>
+</div>
+</div>
 <div class="section level3">
 <h3 id="addins">Addins<a class="anchor" aria-label="anchor" href="#addins"></a>
 </h3>
@@ -723,10 +735,10 @@ will not work.)</p>
 <div class="section level3">
 <h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
 </h3>
-<p>If you need for an R object to be accessible in an Exercise code
+<p>If you need for an R object to be accessible in an exercise code
 chunk, create it in the initial global <code>setup</code> code chunk at
 the top of the tutorial.</p>
-<!-- Objects created in a code chunk which is then referenced by using the exercise.setup code chunk option in any Exercise which needs access to these objects. -->
+<!-- Objects created in a code chunk which is then referenced by using the exercise.setup code chunk option in any exercise which needs access to these objects. -->
 <p>Be wary code which downloads data from the web. This won’t work if
 the student does not have an internet connection when she creates the
 tutorial. Instead, save the code which downloaded the data and then
@@ -749,7 +761,7 @@ the tutorial is created. The <code>read_rds()</code> call is never
 commented out because we always need the <code>median_age</code>
 object.</p>
 <p>When designing tutorials which use objects like
-<code>median_age</code>, we generally write two Exercise code chunks.
+<code>median_age</code>, we generally write two exercise code chunks.
 The first has the student run the same code as that which we used to
 create the object ourselves. This won’t work if the student is not
 connected to the web but, with luck, in that case they will get a
@@ -774,11 +786,11 @@ commands are commented out, unless you are running them by hand to
 create the object.</p>
 <p>What happens if the data is too large? See the “Arrow” tutorial in
 the <a href="https://ppbds.github.io/r4ds.tutorials/" class="external-link"><strong>r4ds.tutorials</strong></a>
-for an example. First, we generally switch away from Code Exercises and
-use Written Exercises. Students run the required commands and then
+for an example. First, we generally switch away from code exercises and
+use written exercises. Students run the required commands and then
 copy/paste the command/response. Big downloads don’t work well in
-Exercise code chunks. Second, we create small versions of this big data
-in the global <code>setup</code> chunk. This allows us to create Test
+exercise code chunks. Second, we create small versions of this big data
+in the global <code>setup</code> chunk. This allows us to create test
 code chunks for most of the exercises which follow. These tests will run
 much more quickly with this smaller data. Also, for any package on CRAN,
 we need to keep the overall size of the package as small as
@@ -917,7 +929,7 @@ all hints.</p>
 <code><a href="https://jrnold.github.io/ggthemes/" class="external-link">library(ggthemes)</a></code> in the <code>setup</code> code chunk.
 This will not cause any error in checking because
 <strong>ggthemes</strong> is not actually used in the tutorial itself —
-unless it is included in a Test code chunk, as it should be — so the
+unless it is included in a test code chunk, as it should be — so the
 tutorial knits without a problem. But then the student tries to type
 <code><a href="https://jrnold.github.io/ggthemes/" class="external-link">library(ggthemes)</a></code> as an answer to an exercise and gets an
 error because the package has not been installed.</p></li>
@@ -944,11 +956,10 @@ it.</p>
 <ul>
 <li>
 <code>R CMD check</code> will test that all tutorials have the
-default sections exactly as they are in the Helper Tutorial template.
+default code chunks exactly as they are in the Helper Tutorial template.
 So, use the template. If either the “Information” or “Download answers”
-sections are missing, <code>R CMD check</code> will return something
-like “Missing a component part from file
-/path/to/your/Rmd/file.Rmd”.</li>
+chunks are missing, <code>R CMD check</code> will return something like
+“Missing a component part from file /path/to/your/Rmd/file.Rmd”.</li>
 </ul>
 </div>
 </div>
