@@ -14,7 +14,11 @@ vignette: >
 
 *Tutorials are not challenging. They are confidence-building.*
 
+*Create the shallowest possible learning curve.*
+
 *Every word matters. Never waste a student's time.*
+
+*Drop some knowledge with each exercise.*
 
 ## Introduction
 
@@ -22,15 +26,12 @@ This document describes the best way to write R tutorials using the [**learnr**]
 
 Instructors assign textbook readings to students. We want our students to read and, perhaps more importantly, go through the associated code, typing it in and confirming what it does. Sadly, students almost never do so. Fortunately, the [**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers) package provides tools for ensuring that students type in all the assigned code.
 
-Imagine the *shallowest* possible learning curve. Almost every student should be able to answer almost every Exercise, albeit perhaps with the help of a Hint. There are no hard questions. In fact, there really aren't any *questions* at all. Instead, there are *instructions*: Do one thing, then the next, and then the next.
+Imagine the *shallowest* possible learning curve. Almost every student should be able to answer almost every exercise, albeit perhaps with the help of a hint. There are no hard questions. In fact, there really aren't any *questions* at all. Instead, there are *instructions*: Do one thing, then the next, and then the next.
+
+Almost all exercises feature a [*knowledge drop*](#kd), a bit of information, rarely more than two sentences, provided after the student has answered the question. 
 
 Assume that you are giving the student a private lesson. You ask them a question. They give you an answer. What would you say to them next? What do you want to teach them, given that context?
 
-There are a million little bits of R (or statistics or data science or . . .) knowledge which we might provide to students: tips, tricks, cool packages, fun websites, et cetera. We don't have time to mention all of them. The art of teaching is to, first, decide which 10,000 bits are the most important to mention and second, figure out the best time at which to mention them. Tutorials provide an occasion for that mentioning. Which bits do we mention and where do we mention them?
-
-We can only demonstrate a tiny percentage of all the packages in the world, but we can certainly at least mention the existence of dozens more. Within the packages we use, we can only illustrate some of the functions; but we can examine some of the other important ones. Among the functions we use, we can only show some of the arguments; but we can discuss others.
-
-The most important parts of the "knowledge drops" with which we pepper these tutorials are, first, the packages/functions/arguments which we mention without demonstrating, and second, links to high quality resources.
 
 We are building a "[pit of success](https://ricomariani.medium.com/the-pit-of-success-cfefc6cb64c8)." Generally, students don't do the assigned reading, at least in a large class. However, they will complete required work. They will do the assigned tutorials. *Our promise: If you complete the tutorials, you will learn the material. There is simply no way not to.*
 
@@ -49,19 +50,19 @@ There is a `setup` code chunk at the top of a tutorial. You must have `library(l
 
 **Warning**: You must ensure that any library used in the tutorial is explicitly loaded in this setup chunk. Almost every tutorial makes use of functions from the **tidyverse** package, so be sure to load this. Unfortunately, nothing in our test suite captures the common error of using library X in the tutorial code and forgetting to load it in the setup chunk. 
 
-We recommend always including a question which requires students to load any library used in the tutorial, other than **learnr** and **tutorial.helpers**. This is good for seveal reasons. First, students are always forgetting to load libraries. More practice helps. Second, a load-library question provides a good occasion for a knowledge drop. Third, a load-library question should include a test case code chunk which load the library. This test will only pass if the library is loaded by us in the `setup` chunk.
+We recommend always including a question which requires students to load any library used in the tutorial, other than **learnr** and **tutorial.helpers**. This is good for seveal reasons. First, students are always forgetting to load libraries. More practice helps. Second, a load-library question provides a good occasion for a knowledge drop. Third, a load-library question should include a test case code chunk which loads the library. This test will only pass if the library is loaded by us in the `setup` chunk.
 
 If your tutorials are part of an R package, then you should ensure that **tutorial.helpers** is included under Imports and that any library loaded in a tutorial is, at least, included under Suggests.
 
 ## Structure
 
-The beginning of every tutorial includes the `copy-code-chunk` and the `info-section` code chunks. The tutorial is then divided into different *Sections* that appear as side panels. The first section is the "Introduction" and the last is the "Summary". 
+The beginning of every tutorial includes the `copy-code-chunk` and the `info-section` code chunks. The tutorial is then divided into different *topics* that appear as side panels. The first topic is the "Introduction" and the last is the "Summary". 
 
-Within the Sections, other than the Introduction and Summary, there are a series of *Exercises* which can include writing code or writing text. At the end of the tutorial, there is a `download-answers` code chunk which provides students with instructions on how to download a copy of their answers.
+Within the topics, other than the Introduction and Summary, there are a series of *exercises* which can include writing code or writing text. At the end of the tutorial, there is a `download-answers` code chunk which provides students with instructions on how to download a copy of their answers.
 
-The Introduction section is two to four sentence about the main topics covered in the tutorial. Why are we here? What will students get out of giving you 90 minutes of their lives? What functions/techniques will they learn?
+The Introduction portion is two to four sentence about the main topics covered in the tutorial. Why are we here? What will students get out of giving you 90 minutes of their lives? What functions/techniques will they learn?
 
-The Summary section is two to four sentences which bring the lessons of the tutorial together for the student. What do they know now that they did not know before? What are the most important functions/techniques covered? This should be very similar to the Introduction. You made a promise as to what they would learn. You kept that promise.
+The Summary portion is two to four sentences which bring the lessons of the tutorial together for the student. What do they know now that they did not know before? What are the most important functions/techniques covered? This should be very similar to the Introduction. You made a promise as to what they would learn. You kept that promise.
 
 If there are one or two other key resources about the topic of the tutorial, then those resources should be mentioned somewhere in the tutorial and also in the Summary.
 
@@ -69,13 +70,13 @@ Anything typed at the keyboard belongs in \`backticks\` (not "quotation marks"),
 
 Ensure that the first few questions always require students to load any libraries which are used in the tutorial. That is, look at all the libraries you load in the set up chunk. (Try not to have too many of them.) All of them, except for **learnr** and **tutorial.helpers** merit an exercise which requires the student to type `library(package.name)`. This ensures that students get in the practice of loading libraries. And it also provides occasion to drop some knowledge. Don't forget that all libraries you load should be included in the DESCRIPTION file --- if the tutorial is part of a package --- probably under Suggests.
 
-## Sections
+## Topics
 
-Tutorials are divided into *Sections* that appear on the side panel. To create these sections, we include a double hash (##) before the text for it to show up as a side panel. This is also called the *Section Title*.  Use [sentence case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case). On the line after the Section Title, put three hashes. This ensures that students will see the introductory text before they see the first Exercise.
+Tutorials are divided into *topics* that appear on the side panel. To create these topics, we include a double hash (##) before the text for it to show up as a side panel. This is also called the *topic title*.  Use [sentence case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case). On the line after the topic title, put three hashes. This ensures that students will see the introductory text before they see the first exercise.
 
-The only section which only has the double hash (##) and not a triple hash (###) on the next line is the Summary section, since there are no Exercises which follow the summary text.
+The one topic which only has the double hash (##) and not a triple hash (###) on the next line is the Summary topic, since there are no exercises which follow the summary text.
 
-Each Section begins with a sentence or two about what this group of Exercises is trying to accomplish. Example:
+Each topic begins with a sentence or two about what this group of exercises is trying to accomplish. Example:
 
 ````markdown
 ## Interacting with sites with `GET()`
@@ -86,42 +87,42 @@ In order to get data from an API, we use the **httr** package. The package is de
 ### Exercise 1
 ````
 
-The link will be formatted correctly once the tutorial is knitted. Section introductions will often have two parts: the introductory text as above and a plot which will be replicated in that section of the tutorial. Those two parts are generally separated by a triple hash.
+The link will be formatted correctly once the tutorial is knitted. Topic introductions will sometimes have two parts: the introductory text as above and a plot which will be replicated in this portion of the tutorial. Those two parts are generally separated by a triple hash.
 
-After the last Exercise in a Section, you should put a triple hash and then give a two sentence summary about what this Section accomplished. A Section is a 20 minute transfer of knowledge from you to the student. At the beginning, you mentioned its purpose. Conclude by tying things back to that original purpose. Often, these "purposes" will be fairly trivial: You promised to go through an example of a scatter plot and, in fact, you did. And that is OK! We are not writing poetry. Not every Section leads to salvation.
+After the last exercise in a topic, you should put a triple hash and then give a two sentence summary about what this topic accomplished. A topic is a 20 minute transfer of knowledge from you to the student. At the beginning, you mentioned its purpose. Conclude by tying things back to that original purpose. Often, these "purposes" will be fairly trivial: You promised to go through an example of a scatter plot and, in fact, you did. And that is OK! We are not writing poetry. Not every topic leads to salvation.
 
-One or two high quality links, specifically relevant to this Section, should be included/explained at either the beginning or end of a Section, unless the Section is very short.
+One or two high quality links, specifically relevant to this topic, should be included/explained at either the beginning or end of a topic, unless the topic is very short.
 
 
 ## Exercises
 
-Each Section is composed of a series of numbered Exercises. 
+Each topic is composed of a series of numbered exercises. 
 
 ### Flow
 
-Each Exercise should have a *flow* which requires that students hit the "Continue" button at least once. 
+Each exercise should have a *flow* which requires that students hit the "Continue" button at least once. 
 
-* Begin with a *Start* which is a sentence or two of knowledge and/or the question itself. If the length of the Start text is longer than one or two lines, then do not place the question code chunk in the same part. Instead, the Start includes a triple hash, thereby creating the Continue button. If the length of the text is short enough that students are willing to read it (at most two sentences), you can include the Exercise code chunk in the same part.
+* Begin with a *Start* which is a sentence or two of knowledge and/or the question itself. If the length of the Start text is longer than one or two lines, then do not place the question code chunk in the same part. Instead, the Start includes a triple hash, thereby creating the Continue button. If the length of the text is short enough that students are willing to read it (at most two sentences), you can include the exercise code chunk in the same part.
 
-* Most of the time there is no need for a triple hash before the Exercise code chunk. 
+* Most of the time there is no need for a triple hash before the exercise code chunk. 
 
 * Do not expect students to read more than two sentences of text at a time. After two sentences, you almost always want to use a triple hash in order to create a Continue button so that students have a break. They won't read more than two sentences without a break.
 
 * After the Start, come three code chunks:
 
-  - The Exercise code chunk is the location in which students will place their answers. It always includes the `exercise = TRUE` code chunk option.
-  - The Hint code chunk includes any hints for the students. The code chunk name is the hint is always exactly the same as the one for the Exercise code chunk, except with `-hint-n` attached at the end. The `n` is replaced by the number of the hint. Almost always, there is only one hint, so the suffix is `-hint-1`. We always set `eval = FALSE` in the Hint code chunk since, often, the hint will not be legal R code.
-  - The Test code chunk has exactly the label as the one for the Exercise code chunk, except with `-test` attached at the end. It always includes the `include = FALSE` code chunk option because we never want to show the code or the results to students. Instead, the purpose of the Test code chunk is to ensure that the correct answer --- that is, the code we want students to enter into the Exercise code chunk --- works. 
+  - The exercise code chunk is the location in which students will place their answers. It always includes the `exercise = TRUE` code chunk option.
+  - The hint code chunk includes any hints for the students. The code chunk name is the hint is always exactly the same as the one for the exercise code chunk, except with `-hint-n` attached at the end. The `n` is replaced by the number of the hint. Almost always, there is only one hint, so the suffix is `-hint-1`. We always set `eval = FALSE` in the hint code chunk since, often, the hint will not be legal R code.
+  - The test code chunk has exactly the label as the one for the exercise code chunk, except with `-test` attached at the end. It always includes the `include = FALSE` code chunk option because we never want to show the code or the results to students. Instead, the purpose of the test code chunk is to ensure that the correct answer --- that is, the code we want students to enter into the exercise code chunk --- works. 
   
 * The three code chunks are always followed by a triple hash. We want students to pause after they have submitted their answers so that they are more likely to consider the output from their submission before moving on.
 
-* The last part of an Exercise is the end, our main opportunity to drop some knowledge. See the [Knowledge Drops](#kd) section for extensive discussion.
+* The last part of an exercise is the end, our main opportunity to drop some knowledge. See [Knowledge Drops](#kd) for extensive discussion.
 
-* The last part of the Section is another knowledge drop. It is not another Exercise. It is just a knowledge drop after the last Exercise which tries to take a broader overview. It is often separated from that last Exercise by a simple `###`. Again, this can't be more than a sentence or two. But it should be more substantive than a simple "Good job."  Recall the 10,000 items which we want to mention. For example, if the Section has involved creating a scatter plot, then the last Exercise will be putting the final touches on that scatter plot. The knowledge drop should be something about scatter plots in general, not a minor point about the particular scatter plot which the student has just created.
+* The last part of the topic is another knowledge drop. It is not another exercise. It is just a knowledge drop after the last exercise which tries to take a broader overview. It is often separated from that last exercise by a simple `###`. Again, this can't be more than a sentence or two. But it should be more substantive than a simple "Good job."  Recall the 10,000 items which we want to mention. For example, if the topic has involved creating a scatter plot, then the last exercise will be putting the final touches on that scatter plot. The knowledge drop should be something about scatter plots in general, not a minor point about the particular scatter plot which the student has just created.
 
 ### Question types
 
-To create the Exercise headers, you use three hashes. Make sure you number your exercises -- `### Exercise 1`, `### Exercise 2` and so on. 
+To create the exercise headers, you use three hashes. Make sure you number your exercises -- `### Exercise 1`, `### Exercise 2` and so on. 
 
 There are two main types of questions. First, we have normal *coding* questions. Students write code and press the Run Code button. Second, we have *text* questions which require students to either write prose or to copy/paste the results of running specific commands. Prose is needed for questions like "Explain the meaning of potential outcomes." Copy/paste situations arise when students are instructed to do something like connect to Github or edit a qmd. We confirm that the students have completed these questions by having them issue a command like `list.files()` and then copy/pasting the command and the output. We often abbreviate those instruction using CP/CR, which stands for **c**opy and **p**aste the **c**ommand and the **r**esult.
 
@@ -161,19 +162,19 @@ something else.
 ````
 
 
-First, the Start of the Exercise sets the stage. It sometimes teaches something new, connects to a previous Exercise, provides a useful link, whatever. If it is long enough, it is followed by a triple hash. If not, the text continues to the instruction. Most of the time, as above, there is only the instruction, telling the student, step-by-step, what to do.
+First, the Start of the exercise sets the stage. It sometimes teaches something new, connects to a previous exercise, provides a useful link, whatever. If it is long enough, it is followed by a triple hash. If not, the text continues to the instruction. Most of the time, as above, there is only the instruction, telling the student, step-by-step, what to do.
 
-Second, the instruction requires that students write some code. Good instructions generate results when the student presses Run Code. Tutorial answers should require the smallest incremental number of characters, relative to the last question, for students to type. That is one way you know that your learning curve is shallow. If a Exercise code chunk requires the students to type a lot of characters, you should split up the Exercise into multiple separate Exercises.
+Second, the instruction requires that students write some code. Good instructions generate results when the student presses Run Code. Tutorial answers should require the smallest incremental number of characters, relative to the last question, for students to type. That is one way you know that your learning curve is shallow. If a exercise code chunk requires the students to type a lot of characters, you should split up the exercise into multiple separate exercises.
 
-Third, any Exercise which requires the copying of code from the prior Exercise should place the *Copy previous code* button below the Exercise code chunk.
+Third, any exercise which requires the copying of code from the prior exercise should place the *Copy previous code* button below the exercise code chunk.
 
 ````markdown
 <button onclick = "transfer_code(this)">Copy previous code</button>
 ````
 
-Fourth, tutorials should be so simple that 95% of the students can answer 95% of the questions easily. One way to ensure that is to add a *Hint* to almost every coding question.
+Fourth, tutorials should be so simple that 95% of the students can answer 95% of the questions easily. One way to ensure that is to add a *hint* to almost every coding question.
 
-Hints must always have the same code chunk name as the exercise chunk for which they are the hint, with a "-hint-n" added at the end. So, if an Exercise code chunk is named "ex-1", then the hint associated with that exercise is named "ex-1-hint-1". A second hint for that same question would be named "ex-1-hint-2", and so on. 
+Hints must always have the same code chunk name as the exercise chunk for which they are the hint, with a "-hint-n" added at the end. So, if an exercise code chunk is named "ex-1", then the hint associated with that exercise is named "ex-1-hint-1". A second hint for that same question would be named "ex-1-hint-2", and so on. 
 
 When you create a hint, always use `eval = FALSE` within the parentheses in the code chunk. This is because hints will often include "..." and other symbols which do not run as correct R code. So, we need to tell R not to run it or an error will occur during `R CMD check`. Example:
 
@@ -207,21 +208,21 @@ Students can not see the first hint after clicking through to the next hint. So,
 
 Hints are [only allowed](https://forum.posit.co/t/hints-in-written-questions/108184) for coding questions, **not for text questions**.
 
-Fifth, the third code chunk, after the Exercise and Hint code chunks, is the Test code chunk. Place the answer --- the code which you want students to enter into the Exercise code chunk --- into the Test code chunk. Since the Test code chunk will be evaluated with the tutorial is knitted (which also happens during testing), this guarantees that correct answer will work for students. 
+Fifth, the third code chunk, after the exercise and hint code chunks, is the test code chunk. Place the answer --- the code which you want students to enter into the exercise code chunk --- into the test code chunk. Since the test code chunk will be evaluated with the tutorial is knitted (which also happens during testing), this guarantees that correct answer will work for students. 
 
-Indeed, the workflow for writing an Exercise often begins by, first, entering the code which we want students to provide into the Test code chunk. We then copy/paste that same code into the Hint code chunk, replacing some of the functions and/or arguments with `...` as appropriate. We then ask the question which, we hope, will cause students to answer with the same code as we have in the Test code chunk.
+Indeed, the workflow for writing an exercise often begins by, first, entering the code which we want students to provide into the test code chunk. We then copy/paste that same code into the hint code chunk, replacing some of the functions and/or arguments with `...` as appropriate. We then ask the question which, we hope, will cause students to answer with the same code as we have in the test code chunk.
 
-There are some instances in which we can't test code which we want students to use. The most common case is code which requires the web, generally for downloading data. In that case, we delete the Test code chunk.
+There are some instances in which we can't test code which we want students to use. The most common case is code which requires the web, generally for downloading data. In that case, we delete the test code chunk.
 
-Sixth, we separate the code chunks from the end of the Exercise by using `###` again.
+Sixth, we separate the code chunks from the end of the exercise by using `###` again.
 
 For simple questions which result in a display of some data, one approach is to write "You should see that the value of height in row 1 is 23." This allows the students to know that they are on the right track. Never hard-code a number. Use R to inline calculate it, even though this can be a bother.
 
-But, much more common, is to use the end to drop some knowledge, especially about a function which was used in the answer to this Exercise, or to one of the previous Exercises in this Section.
+But, much more common, is to use the end to drop some knowledge, especially about a function which was used in the answer to this exercise, or to one of the previous exercises in this topic.
 
-Note that we provide as many Exercises as possible. For example, every tutorial features a question for each package which must be loaded. We require students to type in items like `library(tidyverse)` even though they have done so many times in the past. Every Exercise is another opportunity to make the learning curve as shallow as possible and to drop some knowledge. More questions are better than fewer. 
+Note that we provide as many exercises as possible. For example, every tutorial features a question for each package which must be loaded. We require students to type in items like `library(tidyverse)` even though they have done so many times in the past. Every exercise is another opportunity to make the learning curve as shallow as possible and to drop some knowledge. More questions are better than fewer. 
 
-One way to measure the shallowness of the learning curve is to examine how many new characters each Exercise requires for its answer. Better three Exercises, each of which loads a different package, then one Exercise which loads three packages at once.
+One way to measure the shallowness of the learning curve is to examine how many new characters each exercise requires for its answer. Better three exercises, each of which loads a different package, then one exercise which loads three packages at once.
 
 #### Text questions
 
@@ -296,7 +297,7 @@ Each coding exercise should always spit out something. Interactivity is good! St
 
 * Do this as little as possible. Why not just make a pipe?
 
-* When you do this, you will need to create the permanent object yourself because student work in an Exercise code chunk has no lasting effects. Doing so is annoying and error prone.
+* When you do this, you will need to create the permanent object yourself because student work in an exercise code chunk has no lasting effects. Doing so is annoying and error prone.
 
 * You can have the student not only do the assignment but also, as part of this same exercise, print out the object. This works well.
 
@@ -332,24 +333,24 @@ in an R code chunk, presumably in the global `setup` chunk. But, if you try to e
 
 The most common type of code questions involve the step-by-step process of building a pipe, the final output of which is a nice looking graphic.
 
-You want to first show the graphic that you will create by the end of the Section. You show it once at the start of the Section and once before the last Exercise, as a reminder of what the graphic should look like so students do not need to scroll all the way back up. 
+You want to first show the graphic that you will create by the end of the topic. You show it once at the start of the topic and once before the last exercise, as a reminder of what the graphic should look like so students do not need to scroll all the way back up. 
 
-You should put the code for the graph in the code chunk at the start of the Section. Save the code to an object. The name of the object should have a "_p" suffix, where the "p" stands for "plot." This way, you only have to put the object name in the code chunk at the end of the Section rather than copying the code.
+You should put the code for the graph in the code chunk at the start of the topic. Save the code to an object. The name of the object should have a "_p" suffix, where the "p" stands for "plot." This way, you only have to put the object name in the code chunk at the end of the topic rather than copying the code.
 
-You then build up the graphic, line by line, over a series of Exercises, providing hints along the way. 
+You then build up the graphic, line by line, over a series of exercises, providing hints along the way. 
 
 
 ### Knowledge Drops<a id="kd"></a>
 
-The most difficult part of tutorial creation is writing the "knowledge drops," the snippets of wisdom (and the associated links) which are used at the end of each Exercise. Some advice:
+The most difficult part of tutorial creation is writing the "knowledge drops," the snippets of wisdom (and the associated links) which are used at the end of each exercise. These generally come in two categories: details about R functions/packages/websites and background information about the substative data science problem at hand. 
 
-* Do not expect this to be easy! Good knowledge drops are hard.
+Do not expect this to be easy! Good knowledge drops are hard. Make them short. Students will not read more than a sentence or two.
 
-* Make them short. Students will not read more than a sentence or two.
+#### Advice for R Details Knowledge Drops
 
-* Not sure what knowledge to drop? Look up the help page for one of the functions used in the Section. Ideally, this will be the function which was used in this Exercise, but it can be one used a few lines above. The help page will have two areas of interest:
-  * Arguments for the function, some of which will not have been used in the Section but which are still worth mentioning. A good knowledge drop will mention this argument and describe when it might be useful.
-  * Related functions. For example, use the "Useful filter functions" section of the `?dplyr::filter` help page. All of these make for good knowledge drops! Another example is the "See also" section of the `?arrange` help page. We can't possibly use every R function in an Exercise, but we can at least describe some of them in knowledge drops.
+* Not sure what knowledge to drop? Look up the help page for one of the functions used in the topic. Ideally, this will be the function which was used in this exercise, but it can be one used a few lines above. The help page will have two areas of interest:
+  * Arguments for the function, some of which will not have been used in the topic but which are still worth mentioning. A good knowledge drop will mention this argument and describe when it might be useful.
+  * Related functions. For example, use the "Useful filter functions" section of the `?dplyr::filter` help page. All of these make for good knowledge drops! Another example is the "See also" section of the `?arrange` help page. We can't possibly use every R function in an exercise, but we can at least describe some of them in knowledge drops.
   
 * Use high quality links. 
   * The second edition of [*R for Data Science*](https://r4ds.hadley.nz/) is amazing. Link to it as often as you can.
@@ -371,6 +372,11 @@ Note how we concisely provide both the command which brings up the help page and
 
 Think back to our initial discussion of the 10,000 pieces of information which we want to mention at some point. Among these are many pages linked to from the help pages for the core *Tidyverse* functions, like `arrange()` and `aes()`.
 
+#### Advice for Background Information Knowledge Drops
+
+The second category of knowledge drop involves background information about the current problem. See the [**primer.tutorials**](https://ppbds.github.io/primer.tutorials/) package for some good examples. In this situation, there is a large amount of information, generally from a textbook, which we want students to read. But we can't just copy/paste entire paragraphs from the book as knowledge drops because students won't read paragraphs. At best, they will read two sentences. So, we need to decide on the 10 or so more important sentences from the source material, copy/pasting them if that is allowed, rewording them if necessary. Then, we need to find a portion of the tutorial with 5 or so exercises in a row with no knowledge drops. Then we add two sentences from the material to each of the knowledge drops for those 5 exercises.
+
+A knowledge drop does not need to be relevant to the question which was asked in that exercise as long as it is relevant to the knowledge drops which are contained in the exercises which come before and/or after.
 
 ### Addins
 
@@ -383,9 +389,9 @@ In addition to `tutorial.Rmd`, a tutorial will often use other inputs. The two m
 
 ### Data
 
-If you need for an R object to be accessible in an Exercise code chunk, create it in the initial global `setup` code chunk at the top of the tutorial.
+If you need for an R object to be accessible in an exercise code chunk, create it in the initial global `setup` code chunk at the top of the tutorial.
 
-<!-- Objects created in a code chunk which is then referenced by using the exercise.setup code chunk option in any Exercise which needs access to these objects. -->
+<!-- Objects created in a code chunk which is then referenced by using the exercise.setup code chunk option in any exercise which needs access to these objects. -->
 
 Be wary code which downloads data from the web. This won't work if the student does not have an internet connection when she creates the tutorial. Instead, save the code which downloaded the data and then place that object in an RDS file in the `data` directory. Here is an example from the "Wrangling Census data with tidyverse tools" tutorial from the [**tidycensus.tutorials**](https://ppbds.github.io/tidycensus.tutorials/) package.
 
@@ -402,7 +408,7 @@ The first two commands download data and save it to an RDS file in the `data` di
 
 This code assumes that you are located in the same directory as the `tutorial.Rmd` file. You only run those commands once, and then you comment them out because you don't want them re-run each time the tutorial is created. The `read_rds()` call is never commented out because we always need the `median_age` object.
 
-When designing tutorials which use objects like `median_age`, we generally write two Exercise code chunks. The first has the student run the same code as that which we used to create the object ourselves. This won't work if the student is not connected to the web but, with luck, in that case they will get a sensible error message. The second question informs the students that we have, behind the scenes, assigned the result of the function to an R object. We then ask the student to just print out that object. We don't have them do the assignment themselves, not least because we don't like questions which don't generate any output. 
+When designing tutorials which use objects like `median_age`, we generally write two exercise code chunks. The first has the student run the same code as that which we used to create the object ourselves. This won't work if the student is not connected to the web but, with luck, in that case they will get a sensible error message. The second question informs the students that we have, behind the scenes, assigned the result of the function to an R object. We then ask the student to just print out that object. We don't have them do the assignment themselves, not least because we don't like questions which don't generate any output. 
 
 We use a similar approach with models which can take awhile to fit. Example:
 
@@ -419,7 +425,7 @@ fit_gauss <- read_rds("data/fit_gauss.rds")
 
 Again, this code only works if you are in the tutorial directory, not in the higher directory of the R project itself. Also, the first two commands are commented out, unless you are running them by hand to create the object.
 
-What happens if the data is too large? See the "Arrow" tutorial in the [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) for an example. First, we generally switch away from Code Exercises and use Written Exercises. Students run the required commands and then copy/paste the command/response. Big downloads don't work well in Exercise code chunks. Second, we create small versions of this big data in the global `setup` chunk. This allows us to create Test code chunks for most of the exercises which follow. These tests will run much more quickly with this smaller data. Also, for any package on CRAN, we need to keep the overall size of the package as small as possible.
+What happens if the data is too large? See the "Arrow" tutorial in the [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) for an example. First, we generally switch away from code exercises and use written exercises. Students run the required commands and then copy/paste the command/response. Big downloads don't work well in exercise code chunks. Second, we create small versions of this big data in the global `setup` chunk. This allows us to create test code chunks for most of the exercises which follow. These tests will run much more quickly with this smaller data. Also, for any package on CRAN, we need to keep the overall size of the package as small as possible.
 
 
 ### Images
@@ -494,7 +500,7 @@ The most common source of errors is something wrong with the hint code chunks, w
 
 ### Difficult bugs
 
-* The most common issue is that an author will use a package like **ggthemes** in their tutorial but then forget to include `library(ggthemes)` in the `setup` code chunk. This will not cause any error in checking because **ggthemes** is not actually used in the tutorial itself --- unless it is included in a Test code chunk, as it should be --- so the tutorial knits without a problem. But then the student tries to type `library(ggthemes)` as an answer to an exercise and gets an error because the package has not been installed. 
+* The most common issue is that an author will use a package like **ggthemes** in their tutorial but then forget to include `library(ggthemes)` in the `setup` code chunk. This will not cause any error in checking because **ggthemes** is not actually used in the tutorial itself --- unless it is included in a test code chunk, as it should be --- so the tutorial knits without a problem. But then the student tries to type `library(ggthemes)` as an answer to an exercise and gets an error because the package has not been installed. 
 
 * Note that `R CMD check` does not seem to catch cases in which you `library()` a package in a tutorial but that package is not in DESCRIPTION. But such a discrepancy will cause an error on Github Actions because, there, you only have access to packages that have been installed as part of that test.
 
@@ -506,7 +512,7 @@ Error: Cannot find the file(s): "images/rproj.png"
 
 But the file is there! You can see it! The tests work on your local machine. The easiest solution is to delete the file (and commit that change). And then change the name of the file to something else and use it.
 
-* `R CMD check` will test that all tutorials have the default sections exactly as they are in the Helper Tutorial template. So, use the template. If either the "Information" or "Download answers" sections are missing, `R CMD check` will return something like "Missing a component part from file /path/to/your/Rmd/file.Rmd".
+* `R CMD check` will test that all tutorials have the default code chunks exactly as they are in the Helper Tutorial template. So, use the template. If either the "Information" or "Download answers" chunks are missing, `R CMD check` will return something like "Missing a component part from file /path/to/your/Rmd/file.Rmd".
 
 
 
