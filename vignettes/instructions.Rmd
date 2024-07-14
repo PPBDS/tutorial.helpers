@@ -275,6 +275,10 @@ The most difficult part of tutorial creation is writing the "knowledge drops," t
 
 Do not expect this to be easy! Good knowledge drops are hard. Make them short. Students will not read more than a sentence or two.
 
+Rhetorical questions (almost) always work poorly for knowledge drops.
+
+A knowledge drop should not be a road sign. Example: "In the next section we will explore the data further." Don't waste time telling students what you expect to do next, or what you have just completed doing. Teach them something real!
+
 #### Advice for R Details Knowledge Drops
 
 * Not sure what knowledge to drop? Look up the help page for one of the functions used in the topic. Ideally, this will be the function which was used in this exercise, but it can be one used a few lines above. The help page will have two areas of interest:
@@ -306,6 +310,9 @@ Think back to our initial discussion of the 10,000 pieces of information which w
 The second category of knowledge drop involves background information about the current problem. See the [**primer.tutorials**](https://ppbds.github.io/primer.tutorials/) package for some good examples. In this situation, there is a large amount of information, generally from a textbook, which we want students to read. But we can't just copy/paste entire paragraphs from the book as knowledge drops because students won't read paragraphs. At best, they will read two sentences. So, we need to decide on the 10 or so more important sentences from the source material, copy/pasting them if that is allowed, rewording them if necessary. Then, we need to find a portion of the tutorial with 5 or so exercises in a row with no knowledge drops. Then we add two sentences from the material to each of the knowledge drops for those 5 exercises.
 
 A knowledge drop does not need to be relevant to the question which was asked in that exercise as long as it is relevant to the knowledge drops which are contained in the exercises which come before and/or after.
+
+
+
 
 ### Addins
 
