@@ -108,11 +108,13 @@ Each exercise should have a *flow* which requires that students hit the "Continu
 
 * Do not expect students to read more than two sentences of text at a time. After two sentences, you almost always want to use a triple hash in order to create a Continue button so that students have a break. They won't read more than two sentences without a break.
 
+* There is a danger that students will just click the Continue button until they see a question and, only then, start reading. There is little we can do about that. However, we can take advantage of students' tendency to read the sentence or two which proceeds the question fairly closely. This is a great place for teaching since students can't skip it since they don't know if it provides necessary context for answering the question.
+
 * After the Start, come three code chunks:
 
-  - The exercise code chunk is the location in which students will place their answers. It always includes the `exercise = TRUE` code chunk option.
-  - The hint code chunk includes any hints for the students. The code chunk name is the hint is always exactly the same as the one for the exercise code chunk, except with `-hint-n` attached at the end. The `n` is replaced by the number of the hint. Almost always, there is only one hint, so the suffix is `-hint-1`. We always set `eval = FALSE` in the hint code chunk since, often, the hint will not be legal R code.
-  - The test code chunk has exactly the label as the one for the exercise code chunk, except with `-test` attached at the end. It always includes the `include = FALSE` code chunk option because we never want to show the code or the results to students. Instead, the purpose of the test code chunk is to ensure that the correct answer --- that is, the code we want students to enter into the exercise code chunk --- works. 
+  - The question code chunk is the location in which students will place their answers. 
+  - The hint code chunk includes any hints for the students. Hint code chunks are only available for code exercises. The code chunk name is the hint is always exactly the same as the one for the exercise code chunk, except with `-hint-n` attached at the end. The `n` is replaced by the number of the hint. Almost always, there is only one hint, so the suffix is `-hint-1`. We always set `eval = FALSE` in the hint code chunk since, often, the hint will not be legal R code.
+  - The test code chunk has exactly the label as the one for the question code chunk, except with `-test` attached at the end. Test code chunks, like hint code chunks, are only used for code exercises. It always includes the `include = FALSE` code chunk option because we never want to show the code or the results to students. Instead, the purpose of the test code chunk is to ensure that the correct answer --- that is, the code we want students to enter into the exercise code chunk --- works. 
   
 * The three code chunks are always followed by a triple hash. We want students to pause after they have submitted their answers so that they are more likely to consider the output from their submission before moving on.
 
