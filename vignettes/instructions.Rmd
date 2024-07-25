@@ -277,6 +277,8 @@ The most difficult part of tutorial creation is writing the "knowledge drops," t
 
 Do not expect this to be easy! Good knowledge drops are hard. Make them short. Students will not read more than a sentence or two.
 
+Perhaps the best place for a knowledge drop, especially for written questions, is at the start of the exercise. That is, instead of just asking the question immediately, provide a sentence or two of knowledge drops, even if this information is not really needed to answer the question. Students tend to read those sentences closely since they might be relevant to the question they need to answer.
+
 Rhetorical questions (almost) always work poorly for knowledge drops.
 
 A knowledge drop should not be a road sign. Example: "In the next section we will explore the data further." Don't waste time telling students what you expect to do next, or what you have just completed doing. Teach them something real!
