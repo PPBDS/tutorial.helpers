@@ -1,5 +1,6 @@
 # Priorities
 
+return_type = "All" in process_submissions() should not include submission_type column
 
 Fix code and then test case for this example: 
 "~/Downloads/submissions/four-parameters-categorical_answers - Kushagra Singh.html"
