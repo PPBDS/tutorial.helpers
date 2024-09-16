@@ -1,5 +1,12 @@
 # Priorities
 
+
+Fix code and then test case for this example: 
+"~/Downloads/submissions/four-parameters-categorical_answers - Kushagra Singh.html"
+
+
+* Better error message of the pattern does not match any of the files in the directory.
+
 * Explore Positron, which is obviously the future for IDE's. No wonder they put so little effort into improving RStudio.
 
 * Once new version is on CRAN, update r4ds.tutorials to use it. Once this gets to CRAN, you can remove the REMOTES from all the tutorials packages since we no longer will need to get the development version to get access to show_file().
