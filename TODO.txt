@@ -1,6 +1,10 @@
 # Priorities
 
+Consider a very common use case for process_submissions(). I want, for all submitted answers, name, email and any answer which included http. I don't to have to remember the weird id for all the answers that had an http. I want the function to figure that out. Really, what I want is for the function to figure out any id which has (at least 2?) answers which start with http. Then, I want that many lines for each answer. So, we have column name, email, id and answer, with missing values for any student which did not submit for that id. 
+
 return_type = "All" in process_submissions() should not include submission_type column
+
+description: "Tutorial: #121 for Preceptor's Primer" gets turn into description: 'Tutorial: #121 for Preceptor''s Primer' by, I think, Format Tutorial Chunk Labels, which is obviously not what we want.
 
 Fix code and then test case for this example: 
 "~/Downloads/submissions/four-parameters-categorical_answers - Kushagra Singh.html"
