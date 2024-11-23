@@ -133,30 +133,30 @@ also mentioned as knowledge drops earlier in the tutorial.</p></li>
 in the book itself. Those authors, presumably, have good taste,
 otherwise you would not have selected their book in the first
 place.</p></li>
-<li><p>Always have a separate Exercise for each library you load and
-each data set you use. An Exercise like “Load the
+<li><p>Always have a separate code exercise for each library you load
+and each data set you use. A code exercise like “Load the
 <strong>tidyverse</strong> package with the <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code>
 command.” is, obviously, not difficult for students. But it forces them
 to practice loading libraries, which many students forget, and it
 provides us with an opportunity to drop some knowledge.</p></li>
 <li><p>Regularly require them to look up the help page for a function,
 proving that they have done so by copy/pasting a portion of the help
-page, which means that these will be Exercises with No Answer instead of
-Code Exercises. Students need to get in the practice of using
+page, which means that these will be written exercises with no answer
+instead of code exercises. Students need to get in the practice of using
 help.</p></li>
 <li><p>You want students to have to type in at least 90% of the code
 which is used in the book. One approach is to first, set up a bunch of
-empty Code Exercises. Then, go through the chapter, copying each snippet
-of example code into the Test chunk of an Exercise. (If the book is
+empty code exercises. Then, go through the chapter, copying each snippet
+of example code into the test code chunk of an exercise. (If the book is
 sourced freely, you can also copy/paste a knowledge drop associated with
-each code snippet.) Then, go back and write the Exercises such that the
+each code snippet.) Then, go back and write the exercises such that the
 answers are the code snippets from the book. The final step is to copy
-the code to the Hint chunk, and then edit out at least a portion of that
-code.</p></li>
+the code to the hint code chunk, and then edit out at least a portion of
+that code.</p></li>
 <li><p>In most books, the authors will include more than one new thing
 in each code example. They will add two or three lines to a pipe or pass
 in two or three arguments to a function. We never want to go that fast.
-Spread out such code snippets into two or three separate Exercises, each
+Spread out such code snippets into two or three separate exercises, each
 of which makes the smallest possible change. We are building the
 shallowest possible learning curve.</p></li>
 <li><p>Recall the distinction between books which have a permissive
@@ -174,18 +174,18 @@ this code snippet from <em>R for Data Science</em>.</p></li>
 <span><span class="co">#&gt; [1] 1234 3513   59</span></span></code></pre>
 <ul>
 <li><p>It is unclear how to create <code>x</code> in your tutorial. You
-could have an Exercise in which the students create <code>x</code>
+could have a code exercise in which the students create <code>x</code>
 themselves. But that is annoying because it doesn’t really teach
 students anything. It is too close to busy work. Moreover,
-<code>x</code> won’t exist for the next question, requiring the use of
-<code>parse_number()</code>. You will need to create <code>x</code>
+<code>x</code> won’t exist for the next question, which requires the use
+of <code>parse_number()</code>. You will need to create <code>x</code>
 yourself, either in the global setup chunk or in a setup chunk for this
-Exercise. The global setup approach is preferred, but does not work if
+exercise. The global setup approach is preferred, but does not work if
 there are multiple different <code>x</code> objects used in this
 chapter.</p></li>
-<li><p>I recommend just including the “busy work” in the Exercise code
-chunk when writing the tutorial, followed by a blank line, so that
-students have an obvious place to type in
+<li><p>I recommend that tutorial authors include the “busy work” in the
+exercise code chunk when writing the tutorial, followed by a blank line,
+so that students have an obvious place to type in
 <code>parse_number(x)</code>.</p></li>
 </ul>
 <pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"$1,234"</span>, <span class="st">"USD 3,513"</span>, <span class="st">"59%"</span><span class="op">)</span></span></code></pre>
