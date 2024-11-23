@@ -8,8 +8,8 @@
 <title>Helper Functions for Creating Tutorials • tutorial.helpers</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Helper Functions for Creating Tutorials">
 <meta name="description" content="Helper functions for creating, editing, and testing tutorials created with the learnr package. Provides a simple method for allowing students to download their answers to tutorial questions. For examples of its use, see the r4ds.tutorials and primer.tutorials packages.">
 <meta property="og:description" content="Helper functions for creating, editing, and testing tutorials created with the learnr package. Provides a simple method for allowing students to download their answers to tutorial questions. For examples of its use, see the r4ds.tutorials and primer.tutorials packages.">
@@ -86,7 +86,7 @@
 <p>The most useful tool is the <a href="https://ppbds.github.io/tutorial.helpers/articles/downloads.html">download answers trick</a>. In your tutorial, simply include <code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code> in the setup R code chunk and then insert this empty code chunk at the end.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>```</span></code></pre></div>
-<p>This will ask the student to provide an estimate of how long the tutorial took to complete. It will then provide the ability to download the student’s answers in three different formats: html, pdf and rds. Students submit these files to their instructors, who can then confirm that the work was completed and look for any patterns in student (mis)understandings.</p>
+<p>This will ask the student to provide an estimate of how long the tutorial took to complete. It will then provide the ability to download the student’s answers in html format. Students submit these files to their instructors, who can then confirm that the work was completed and look for any patterns in student (mis)understandings.</p>
 </div>
 <div class="section level4">
 <h4 id="testing">Testing<a class="anchor" aria-label="anchor" href="#testing"></a>
@@ -99,7 +99,7 @@
 <p>We recommend including this child document at the start of each tutorial:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>```</span></code></pre></div>
-<p>This will insert questions asking for the student’s name and email address.</p>
+<p>This will insert (optinal) questions asking for the student’s name, email and id.</p>
 <p>We also recommend including this at the beginning of your tutorial:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>```</span></code></pre></div>

@@ -8,8 +8,8 @@
 <title>Instructions for Writing R Tutorials • tutorial.helpers</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Instructions for Writing R Tutorials">
 </head>
 <body>
@@ -174,7 +174,7 @@ Suggests.</p>
 <code>copy-code-chunk</code> and the <code>info-section</code> code
 chunks. The tutorial is then divided into different <em>topics</em> that
 appear as side panels. The first topic is the “Introduction” and the
-last is the “Summary”.</p>
+last is the “Summary.”</p>
 <p>Within the topics, other than the Introduction and Summary, there are
 a series of <em>exercises</em> which can include writing code or writing
 text. At the end of the tutorial, there is a
@@ -182,7 +182,7 @@ text. At the end of the tutorial, there is a
 instructions on how to download a copy of their answers.</p>
 <p>The Introduction portion is two to four sentence about the main
 topics covered in the tutorial. Why are we here? What will students get
-out of giving you 90 minutes of their lives? What functions/techniques
+out of giving you 60 minutes of their lives? What functions/techniques
 will they learn?</p>
 <p>The Summary portion is two to four sentences which bring the lessons
 of the tutorial together for the student. What do they know now that
@@ -203,10 +203,10 @@ when using the <strong>ggplot2</strong> library.</p>
 any libraries which are used in the tutorial. That is, look at all the
 libraries you load in the set up chunk. (Try not to have too many of
 them.) All of them, except for <strong>learnr</strong> and
-<strong>tutorial.helpers</strong> merit an exercise which requires the
+<strong>tutorial.helpers</strong>, merit an exercise which requires the
 student to type <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(package.name)</a></code>. This ensures that
 students get in the practice of loading libraries. And it also provides
-occasion to drop some knowledge. Don’t forget that all libraries you
+an occasion to drop some knowledge. Don’t forget that all libraries you
 load should be included in the DESCRIPTION file — if the tutorial is
 part of a package — probably under Suggests.</p>
 </div>
@@ -222,22 +222,24 @@ ensures that students will see the introductory text before they see the
 first exercise.</p>
 <p>The one topic which only has the double hash (##) and not a triple
 hash (###) on the next line is the Summary topic, since there are no
-exercises which follow the summary text.</p>
+exercises which follow the Summary text.</p>
 <p>Each topic begins with a sentence or two about what this group of
 exercises is trying to accomplish. Example:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">## Interacting with sites with `GET()`</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>###</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>In order to get data from an API, we use the **httr** package. The package is designed to imitate standard HTTP in R. Read more about HTTP <span class="co">[</span><span class="ot">here</span><span class="co">](https://www.jmarshall.com/easy/http/)</span>.</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">### Exercise 1</span></span></code></pre></div>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>In order to get data from an API, we use the **httr** package. </span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>The package is designed to imitate standard HTTP in R. Read </span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>more about HTTP <span class="co">[</span><span class="ot">here</span><span class="co">](https://www.jmarshall.com/easy/http/)</span>.</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="fu">### Exercise 1</span></span></code></pre></div>
 <p>The link will be formatted correctly once the tutorial is knitted.
 Topic introductions will sometimes have two parts: the introductory text
 as above and a plot which will be replicated in this portion of the
 tutorial. Those two parts are generally separated by a triple hash.</p>
 <p>After the last exercise in a topic, you should put a triple hash and
 then give a two sentence summary about what this topic accomplished. A
-topic is a 20 minute transfer of knowledge from you to the student. At
+topic is a 10 minute transfer of knowledge from you to the student. At
 the beginning, you mentioned its purpose. Conclude by tying things back
 to that original purpose. Often, these “purposes” will be fairly
 trivial: You promised to go through an example of a scatter plot and, in
@@ -259,7 +261,7 @@ students hit the “Continue” button at least once.</p>
 <ul>
 <li><p>Begin with a <em>Start</em> which is a sentence or two of
 knowledge and/or the question itself. If the length of the Start text is
-longer than one or two lines, then do not place the question code chunk
+longer than one or two lines, then do not place the exercise code chunk
 in the same part. Instead, the Start includes a triple hash, thereby
 creating the Continue button. If the length of the text is short enough
 that students are willing to read it (at most two sentences), you can
@@ -280,18 +282,18 @@ question.</p></li>
 <li>
 <p>After the Start, come three code chunks:</p>
 <ul>
-<li>The question code chunk is the location in which students will place
+<li>The exercise code chunk is the location in which students will place
 their answers.</li>
 <li>The hint code chunk includes any hints for the students. Hint code
-chunks are only available for code exercises. The code chunk name is the
-hint is always exactly the same as the one for the exercise code chunk,
-except with <code>-hint-n</code> attached at the end. The <code>n</code>
-is replaced by the number of the hint. Almost always, there is only one
-hint, so the suffix is <code>-hint-1</code>. We always set
-<code>eval = FALSE</code> in the hint code chunk since, often, the hint
-will not be legal R code.</li>
+chunks are only available for code exercises. The code chunk name in the
+hint code chunk is always exactly the same as the one for the exercise
+code chunk, except with <code>-hint-n</code> attached at the end. The
+<code>n</code> is replaced by the number of the hint. Almost always,
+there is only one hint, so the suffix is <code>-hint-1</code>. We always
+set <code>eval = FALSE</code> in the hint code chunk since, often, the
+hint will not be legal R code.</li>
 <li>The test code chunk has exactly the label as the one for the
-question code chunk, except with <code>-test</code> attached at the end.
+exercise code chunk, except with <code>-test</code> attached at the end.
 Test code chunks, like hint code chunks, are only used for code
 exercises. It always includes the <code>include = FALSE</code> code
 chunk option because we never want to show the code or the results to
@@ -301,9 +303,9 @@ the exercise code chunk — works.</li>
 </ul>
 </li>
 <li><p>The three code chunks are always followed by a triple hash. We
-want students to pause after they have submitted their answers so that
-they are more likely to consider the output from their submission before
-moving on.</p></li>
+want a student to pause after she has submitted her answer so that she
+is more likely to consider the output from her submission before moving
+on.</p></li>
 <li><p>The last part of an exercise is the end, our main opportunity to
 drop some knowledge. See <a href="#kd">Knowledge Drops</a> for extensive
 discussion.</p></li>
@@ -312,12 +314,11 @@ another exercise. It is just a knowledge drop after the last exercise
 which tries to take a broader overview. It is often separated from that
 last exercise by a simple <code>###</code>. Again, this can’t be more
 than a sentence or two. But it should be more substantive than a simple
-“Good job.” Recall the 10,000 items which we want to mention. For
-example, if the topic has involved creating a scatter plot, then the
-last exercise will be putting the final touches on that scatter plot.
-The knowledge drop should be something about scatter plots in general,
-not a minor point about the particular scatter plot which the student
-has just created.</p></li>
+“Good job.” For example, if the topic has involved creating a scatter
+plot, then the last exercise will be putting the final touches on that
+scatter plot. The last knowledge drop should be something about scatter
+plots in general, not a minor point about the particular scatter plot
+which the student has just created.</p></li>
 </ul>
 </div>
 <div class="section level3">
@@ -332,7 +333,7 @@ button. Second, we have <em>text</em> questions which require students
 to either write prose or to copy/paste the results of running specific
 commands. Prose is needed for questions like “Explain the meaning of
 potential outcomes.” Copy/paste situations arise when students are
-instructed to do something like connect to Github or edit a qmd. We
+instructed to do something like connect to Github or edit a QMD file. We
 confirm that the students have completed these questions by having them
 issue a command like <code><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files()</a></code> and then copy/pasting the
 command and the output. We often abbreviate those instruction using
@@ -369,12 +370,12 @@ the <strong>c</strong>ommand and the <strong>r</strong>esult.</p>
 <span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="cf">for</span> discussion of other relational operators <span class="cf">in</span> R.</span>
 <span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>A single equation symbol, <span class="st">`</span><span class="at">=</span><span class="st">`</span>, is used to set something equal to </span>
 <span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>something else. </span></code></pre></div>
-<p>First, the Start of the exercise sets the stage. It sometimes teaches
+<p>First, the start of the exercise sets the stage. It sometimes teaches
 something new, connects to a previous exercise, provides a useful link,
 whatever. If it is long enough, it is followed by a triple hash. If not,
-the text continues to the instruction. Most of the time, as above, there
-is only the instruction, telling the student, step-by-step, what to
-do.</p>
+the text continues to the instructions. Most of the time, as above,
+there is only the instruction, telling the student, step-by-step, what
+to do.</p>
 <p>Second, the instruction requires that students write some code. Good
 instructions generate results when the student presses Run Code.
 Tutorial answers should require the smallest incremental number of
@@ -394,6 +395,7 @@ for which they are the hint, with a “-hint-n” added at the end. So, if
 an exercise code chunk is named “ex-1”, then the hint associated with
 that exercise is named “ex-1-hint-1”. A second hint for that same
 question would be named “ex-1-hint-2”, and so on.</p>
+<!-- More recent versions of learnr allow for you to use a special character --- by default I think it is underscores --- which will not generate an error, meaning that you don't nee eval = FALSE. Not sure if we care. -->
 <p>When you create a hint, always use <code>eval = FALSE</code> within
 the parentheses in the code chunk. This is because hints will often
 include “…” and other symbols which do not run as correct R code. So, we
@@ -428,8 +430,8 @@ questions</strong>.</p>
 <p>Fifth, the third code chunk, after the exercise and hint code chunks,
 is the test code chunk. Place the answer — the code which you want
 students to enter into the exercise code chunk — into the test code
-chunk. Since the test code chunk will be evaluated with the tutorial is
-knitted (which also happens during testing), this guarantees that
+chunk. Since the test code chunk will be evaluated when the tutorial is
+knitted (which also happens during testing), this guarantees that the
 correct answer will work for students.</p>
 <p>Indeed, the workflow for writing an exercise often begins by, first,
 entering the code which we want students to provide into the test code
@@ -443,7 +445,7 @@ students to use. The most common case is code which requires the web,
 generally for downloading data. In that case, we delete the test code
 chunk.</p>
 <p>Sixth, we separate the code chunks from the end of the exercise by
-using <code>###</code> again.</p>
+using <code>###</code>.</p>
 <p>For simple questions which result in a display of some data, one
 approach is to write “You should see that the value of height in row 1
 is 23.” This allows the students to know that they are on the right
@@ -461,8 +463,9 @@ curve as shallow as possible and to drop some knowledge. More questions
 are better than fewer.</p>
 <p>One way to measure the shallowness of the learning curve is to
 examine how many new characters each exercise requires for its answer.
-Better three exercises, each of which loads a different package, then
-one exercise which loads three packages at once.</p>
+More new characters is worse. Better three exercises, each of which
+loads a different package, then one exercise which loads three packages
+at once.</p>
 </div>
 <div class="section level4">
 <h4 id="text-questions">Text questions<a class="anchor" aria-label="anchor" href="#text-questions"></a>
@@ -535,11 +538,11 @@ students in their Console by default. We can either always call it with
 after each restart of the R Session!) have the student type
 <code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code> at the Console by hand.</p>
 <p>Maybe the instructions should always use the double colon, but remind
-students the first time in each tutorial that they could just
+students the first time in each tutorial that they could just use
 <code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code>. Or, don’t use the double colon
-and then, the first time it is used, remind students that, when they see
-the “No function found” error, they need to
-<code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code> at the Console.</p>
+and then, the first time <code><a href="../reference/show_file.html">show_file()</a></code> is used, remind
+students that, when they see the “No function found” error, they need to
+run <code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code> at the Console.</p>
 </div>
 </div>
 <div class="section level3">
@@ -601,8 +604,8 @@ graphic.</p>
 the topic. You show it once at the start of the topic and once before
 the last exercise, as a reminder of what the graphic should look like so
 students do not need to scroll all the way back up.</p>
-<p>You should put the code for the graph in the code chunk at the start
-of the topic. Save the code to an object. The name of the object should
+<p>You should put the code for the graphic in the <code>setup</code>
+code chunk. Save the code to an object. The name of the object should
 have a “_p” suffix, where the “p” stands for “plot.” This way, you only
 have to put the object name in the code chunk at the end of the topic
 rather than copying the code.</p>
@@ -632,7 +635,7 @@ section we will explore the data further.” Don’t waste time telling
 students what you expect to do next, or what you have just completed
 doing. Teach them something real!</p>
 <div class="section level4">
-<h4 id="advice-for-r-details-knowledge-drops">Advice for R Details Knowledge Drops<a class="anchor" aria-label="anchor" href="#advice-for-r-details-knowledge-drops"></a>
+<h4 id="advice-for-knowledge-drops">Advice for Knowledge Drops<a class="anchor" aria-label="anchor" href="#advice-for-knowledge-drops"></a>
 </h4>
 <ul>
 <li>
@@ -669,9 +672,9 @@ associated with <a href="https://www.tidyverse.org/" class="external-link">Tidyv
 <code>https://www.datamentor.io/</code>. Any site which uses ads should
 be avoided.</p></li>
 <li>
-<p>Links to function documentation is useful. Indeed, we should link
-at least once to the documentation for every function which we use. Two
-categories:</p>
+<p>Links to function documentation are useful. Indeed, we should
+link at least once to the documentation for every function which we use.
+Two categories:</p>
 <ul>
 <li>Links to the help pages for base function are tricky. It is not
 clear to me which location is the best to use for this purpose. My
@@ -689,30 +692,6 @@ and <a href="https://tidyverse.github.io/ggplot2-docs/reference/aes.html" class=
 <pre><code>See `?readr::locale` for [details](https://readr.tidyverse.org/articles/locales.html).</code></pre>
 <p>Note how we concisely provide both the command which brings up the
 help page and a link to the help page itself.</p>
-<p>Think back to our initial discussion of the 10,000 pieces of
-information which we want to mention at some point. Among these are many
-pages linked to from the help pages for the core <em>Tidyverse</em>
-functions, like <code>arrange()</code> and <code>aes()</code>.</p>
-</div>
-<div class="section level4">
-<h4 id="advice-for-background-information-knowledge-drops">Advice for Background Information Knowledge Drops<a class="anchor" aria-label="anchor" href="#advice-for-background-information-knowledge-drops"></a>
-</h4>
-<p>The second category of knowledge drop involves background information
-about the current problem. See the <a href="https://ppbds.github.io/primer.tutorials/" class="external-link"><strong>primer.tutorials</strong></a>
-package for some good examples. In this situation, there is a large
-amount of information, generally from a textbook, which we want students
-to read. But we can’t just copy/paste entire paragraphs from the book as
-knowledge drops because students won’t read paragraphs. At best, they
-will read two sentences. So, we need to decide on the 10 or so more
-important sentences from the source material, copy/pasting them if that
-is allowed, rewording them if necessary. Then, we need to find a portion
-of the tutorial with 5 or so exercises in a row with no knowledge drops.
-Then we add two sentences from the material to each of the knowledge
-drops for those 5 exercises.</p>
-<p>A knowledge drop does not need to be relevant to the question which
-was asked in that exercise as long as it is relevant to the knowledge
-drops which are contained in the exercises which come before and/or
-after.</p>
 </div>
 </div>
 <div class="section level3">
@@ -744,11 +723,11 @@ will not work.)</p>
 chunk, create it in the initial global <code>setup</code> code chunk at
 the top of the tutorial.</p>
 <!-- Objects created in a code chunk which is then referenced by using the exercise.setup code chunk option in any exercise which needs access to these objects. -->
-<p>Be wary code which downloads data from the web. This won’t work if
+<p>Be wary of code which downloads data from the web. This won’t work if
 the student does not have an internet connection when she creates the
 tutorial. Instead, save the code which downloaded the data and then
 place that object in an RDS file in the <code>data</code> directory.
-Here is an example from the “Wrangling Census data with tidyverse tools”
+Here is an example from the “Wrangling Census data with Tidyverse tools”
 tutorial from the <a href="https://ppbds.github.io/tidycensus.tutorials/" class="external-link"><strong>tidycensus.tutorials</strong></a>
 package.</p>
 <pre><code><span><span class="va">median_age</span> <span class="op">&lt;-</span> <span class="fu">get_acs</span><span class="op">(</span>geography <span class="op">=</span> <span class="st">"county"</span>,</span>
@@ -800,6 +779,11 @@ code chunks for most of the exercises which follow. These tests will run
 much more quickly with this smaller data. Also, for any package on CRAN,
 we need to keep the overall size of the package as small as
 possible.</p>
+<p>There are two main uses for files in <code>data</code>. First, they
+can be used at “compile time” (when the <code>tutorial.Rmd</code> is
+knit to HTML) for making plots or doing anything else. Second, and more
+importantly, they are available to students in the exercise code blocks
+during “run time” (when students are doing the tutorial).</p>
 </div>
 <div class="section level3">
 <h3 id="images">Images<a class="anchor" aria-label="anchor" href="#images"></a>
@@ -820,22 +804,9 @@ chunk. Note that you do not need to name these code chunks.</p>
 <p>Because students will complete the tutorials using screens of very
 different widths, it is a good idea to put
 <code>knitr::opts_chunk$set(out.width = '90%')</code> in your
-<code>setup</code> code chunk. In this way, images will appear as a
-sensible size regardless of whether they are using a phone screen or a
-big monitor.</p>
-</div>
-<div class="section level3">
-<h3 id="files">Files<a class="anchor" aria-label="anchor" href="#files"></a>
-</h3>
-<p>Other files — most commonly text files or RDS files — are handled in
-a similar fashion to images. Create a directory called <code>data</code>
-in the same directory as the <code>tutorial.Rmd</code>, just as we do
-with <code>images</code>.</p>
-<p>There are two main uses for files in <code>data</code>. First, they
-can be used at “compile time” (when the <code>tutorial.Rmd</code> is
-knit to html) for making plots or doing anything else. Second, and more
-importantly, they are available to students in the exercise code blocks
-during “run time” (when students are doing the tutorial).</p>
+<code>setup</code> code chunk. In this way, images will appear at a
+sensible size regardless of whether students are using a phone screen or
+a big monitor.</p>
 </div>
 <div class="section level3">
 <h3 id="complex-text">Complex text<a class="anchor" aria-label="anchor" href="#complex-text"></a>
@@ -885,10 +856,10 @@ if this will catch all potential errors, but it will catch many issues,
 and it is very quick. Replace <code>02-terminal</code> with the
 appropriate directory.</p>
 <div class="section level3">
-<h3 id="test-before-submitting-a-pr">Test before submitting a PR<a class="anchor" aria-label="anchor" href="#test-before-submitting-a-pr"></a>
+<h3 id="test-before-submitting-a-pull-request">Test before submitting a pull request<a class="anchor" aria-label="anchor" href="#test-before-submitting-a-pull-request"></a>
 </h3>
-<p>Once you are done editing your tutorial, you need to make sure it
-works before you submit a pull request.</p>
+<p>Once you are done editing a tutorial, you need to make sure it works
+before you submit a pull request to the package maintainer.</p>
 <ol style="list-style-type: decimal">
 <li><p>Click “Install and Restart” from the Build tab. Then, hit “Start
 Tutorial” in the Tutorial tab. This mimics the experience that users
@@ -949,8 +920,8 @@ For example, you might first commit a file named <code>Rproj.png</code>.
 Later, you decide to change all file names for images to all lower case.
 So, you change the name of the file to <code>rproj.png</code>. Commit
 and push. Everything is great, right? No! Even if Github shows you the
-new file name it might still have that file as <code>Rproj.png</code>
-internally, with the capital “R”. This will cause errors when your run
+new file name, it might still have that file as <code>Rproj.png</code>
+internally, with the capital “R.” This will cause errors when your run
 your checks on Github:</p></li>
 </ul>
 <pre><code>Error: Cannot find the file(s): "images/rproj.png"</code></pre>
