@@ -39,23 +39,23 @@ Create a new code exercise skeleton with an exercise title and with auto-generat
 ```{r plotting-7-test, include = FALSE}
 
 ```
+
 ###
 ````
 
-There are three code chunks included by default: Exercise, Hint and Test. You do not need to include all three, although in most cases you should. The Exercise chunk is the location in which students will type their answers. The Hint chunk will be displayed to students when they click on the Hint button. The Test chunk should include the correct answer, so that you can be sure it will work for students when they enter it in the Exercise code chunk.
+There are three code chunks included by default: exercise, hint and test. You do not need to include all three, although in most cases you should. The exercise code chunk is the location in which students will type their answers. The hint code chunk will be displayed to students when they click on the Hint button. The test code chunk should include the correct answer, so that you can be sure it will work for students when they enter it in the exercise code chunk.
 
-See [our advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises) about writing good tutorial Code Exercises. First, start with the correct answer, the code you want students to submit. Place that code in the Test chunk at the end. Our test process will ensure that this code will work for the students. Second, copy/paste the correct answer into the Hint chunk in the middle. Then replace one or more of the key words or function arguments or argument values with `...`. Third, add your actual question to the top of the skeleton. What instructions will cause students to enter the correct answer in the Exercise chunk? Fourth, drop some knowledge after the `###` at the end. Each Exercise is an opportunity to teach. Make use of it!
+See [our advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises) about writing good tutorial code exercises. First, start with the correct answer, the code you want students to submit. Place that code in the test chunk at the end. Our test process will ensure that this code will work for the students. Second, copy/paste the correct answer into the hint chunk in the middle. Then replace one or more of the key words or function arguments or argument values with `...`. Third, add your actual question to the top of the skeleton. What instructions will cause students to enter the correct answer in the exercise chunk? Fourth, drop some knowledge after the `###` at the end. Each exercise is an opportunity to teach. Make use of it!
 
 
 ### Tutorial Written Exercise (without and with answers)
 
-Both create similar exercise structures with auto-generated code chunk id and Exercise number. The difference is that the `question_text()` options are filled in differently.
+Both create similar exercise structures with an auto-generated code chunk id and an exercise number. The difference is that the `question_text()` options are filled in differently.
 
 #### Written Exercise (no Answer):
 
 ````{verbatim}
 ### Exercise 9
-
 
 ```{r plotting-9}
 question_text(NULL,
@@ -76,7 +76,6 @@ The "no Answer" Exercises are usually used for confirmation that a student has c
 ````{verbatim}
 ### Exercise 8
 
-
 ```{r plotting-8}
 question_text(NULL,
 	message = "Place correct answer here.",
@@ -91,16 +90,16 @@ question_text(NULL,
 
 The "with Answer" Exercises require the tutorial author to provide an (excellent!) answer to the question. This is harder than it looks, especially for questions without a single "right" answer. But it is also a rare opportunity since students will usually study the supplied answer quite closely. They want to check that their answer matches. We can't allow students to edit their answers to these questions since they might (misuse) that option to just copy/paste/modify our supplied answer.
 
-The **learnr** package does not allow for Hints to written exercises. We could add a Test chunk, but that rarely makes sense for a written exercise. The main counter-example is a question which asks students to run an R command from the Console and then copy the command and the result of the command as their answer. Even though they are not submitting simple code as their answer, it can make sense to have a test chunk which executes the same R code which you are asking them to run, just to ensure that it will work for them.
+The **learnr** package does not allow for hints to written exercises. We could add a test chunk, but that rarely makes sense for a written exercise. The main counter-example is a question which asks students to run an R command from the Console and then copy the command and the result of the command as their answer. Even though they are not submitting simple code as their answer, it can make sense to have a test chunk which executes the same R code which you are asking them to run, just to ensure that it will work for them.
 
 
 ### Format Tutorial Chunk Labels
 
-We often need to add a new Exercise in the middle of a collection of other Exercises. Or, we want to delete one Exercise from the middle of the collection. In either scenario, our Exercises are now mis-numbered. We either have two Exercise 5's or we go straight from Exercise 4 to Exercise 6. We want to renumber all the remaining Exercises so that there are no duplicates or missing numbers.
+We often need to add a new exercise in the middle of a collection of other exercises. Or, we want to delete one exercise from the middle of the collection. In either scenario, our exercises are now mis-numbered. We either have two Exercise 5's or we go straight from Exercise 4 to Exercise 6. We want to renumber all the remaining exercises so that there are no duplicates or missing numbers.
 
-The "Format Tutorial Chunk Labels" addin accomplishes this renumbering. But it also does more, changing all the code chunk names to be consistent with the new Exercise numbers. Finally, it ensures that all code chunk labels follow our standard: begin with (up to 30 characters from) the Section Title, remove special characters, replace spaces with dashes, and make all letters lowercase.
+The "Format Tutorial Chunk Labels" addin accomplishes this renumbering. But it also does more, changing all the code chunk names to be consistent with the new exercise numbers. Finally, it ensures that all code chunk labels follow our standard: begin with (up to 30 characters from) the topic title, remove special characters, replace spaces with dashes, and make all letters lowercase.
 
-Since the code chunk labels (derived from the title of the Section in which the Exercise resides) have a hard cutoff at 30 characters, try to make sure that your Section titles are different somewhere in the first 30 characters (including spaces). If not, the tutorial will not run since unique code chunk labels are required.
+Since the code chunk labels (derived from the title of the topic in which the exercise resides) have a hard cutoff at 30 characters, try to make sure that your topic titles are different somewhere in the first 30 characters (including spaces) within a given tutorial. If not, the tutorial will not run since unique code chunk labels are required.
 
 
 

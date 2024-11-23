@@ -120,7 +120,7 @@ table, .body h2 { border-bottom: 1px solid #666; }
 .body .appendix, .appendix ~ h2 { border-bottom-style: dashed; }
 .footnote-ref a::before { content: "["; }
 .footnote-ref a::after { content: "]"; }
-.footnotes::before {
+section.footnotes::before {
   content: "";
   display: block;
   max-width: 20em;
@@ -139,8 +139,6 @@ table, .body h2 { border-bottom: 1px solid #666; }
 </style>
 </head>
 <body>
-<div class="include-before">
-</div>
 <div class="frontmatter">
 <div class="title"><h1>Rstudio Addins</h1></div>
 <div class="author"><h2>David Kane</h2></div>
@@ -167,12 +165,13 @@ table, .body h2 { border-bottom: 1px solid #666; }
 ```{r plotting-7-test, include = FALSE}
 
 ```
+
 ###
 </code></pre>
-<p>There are three code chunks included by default: Exercise, Hint and Test. You do not need to include all three, although in most cases you should. The Exercise chunk is the location in which students will type their answers. The Hint chunk will be displayed to students when they click on the Hint button. The Test chunk should include the correct answer, so that you can be sure it will work for students when they enter it in the Exercise code chunk.</p>
-<p>See <a href="https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises">our advice</a> about writing good tutorial Code Exercises. First, start with the correct answer, the code you want students to submit. Place that code in the Test chunk at the end. Our test process will ensure that this code will work for the students. Second, copy/paste the correct answer into the Hint chunk in the middle. Then replace one or more of the key words or function arguments or argument values with <code>...</code>. Third, add your actual question to the top of the skeleton. What instructions will cause students to enter the correct answer in the Exercise chunk? Fourth, drop some knowledge after the <code>###</code> at the end. Each Exercise is an opportunity to teach. Make use of it!</p>
+<p>There are three code chunks included by default: exercise, hint and test. You do not need to include all three, although in most cases you should. The exercise code chunk is the location in which students will type their answers. The hint code chunk will be displayed to students when they click on the Hint button. The test code chunk should include the correct answer, so that you can be sure it will work for students when they enter it in the exercise code chunk.</p>
+<p>See <a href="https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises">our advice</a> about writing good tutorial code exercises. First, start with the correct answer, the code you want students to submit. Place that code in the test chunk at the end. Our test process will ensure that this code will work for the students. Second, copy/paste the correct answer into the hint chunk in the middle. Then replace one or more of the key words or function arguments or argument values with <code>...</code>. Third, add your actual question to the top of the skeleton. What instructions will cause students to enter the correct answer in the exercise chunk? Fourth, drop some knowledge after the <code>###</code> at the end. Each exercise is an opportunity to teach. Make use of it!</p>
 <h3 id="tutorial-written-exercise-without-and-with-answers">Tutorial Written Exercise (without and with answers)</h3>
-<p>Both create similar exercise structures with auto-generated code chunk id and Exercise number. The difference is that the <code>question_text()</code> options are filled in differently.</p>
+<p>Both create similar exercise structures with an auto-generated code chunk id and an exercise number. The difference is that the <code>question_text()</code> options are filled in differently.</p>
 <h4 id="written-exercise-no-answer">Written Exercise (no Answer):</h4>
 <pre><code class="language-default">### Exercise 9
 
@@ -203,13 +202,11 @@ question_text(NULL,
 ###
 </code></pre>
 <p>The “with Answer” Exercises require the tutorial author to provide an (excellent!) answer to the question. This is harder than it looks, especially for questions without a single “right” answer. But it is also a rare opportunity since students will usually study the supplied answer quite closely. They want to check that their answer matches. We can’t allow students to edit their answers to these questions since they might (misuse) that option to just copy/paste/modify our supplied answer.</p>
-<p>The <strong>learnr</strong> package does not allow for Hints to written exercises. We could add a Test chunk, but that rarely makes sense for a written exercise. The main counter-example is a question which asks students to run an R command from the Console and then copy the command and the result of the command as their answer. Even though they are not submitting simple code as their answer, it can make sense to have a test chunk which executes the same R code which you are asking them to run, just to ensure that it will work for them.</p>
+<p>The <strong>learnr</strong> package does not allow for hints to written exercises. We could add a test chunk, but that rarely makes sense for a written exercise. The main counter-example is a question which asks students to run an R command from the Console and then copy the command and the result of the command as their answer. Even though they are not submitting simple code as their answer, it can make sense to have a test chunk which executes the same R code which you are asking them to run, just to ensure that it will work for them.</p>
 <h3 id="format-tutorial-chunk-labels">Format Tutorial Chunk Labels</h3>
-<p>We often need to add a new Exercise in the middle of a collection of other Exercises. Or, we want to delete one Exercise from the middle of the collection. In either scenario, our Exercises are now mis-numbered. We either have two Exercise 5’s or we go straight from Exercise 4 to Exercise 6. We want to renumber all the remaining Exercises so that there are no duplicates or missing numbers.</p>
-<p>The “Format Tutorial Chunk Labels” addin accomplishes this renumbering. But it also does more, changing all the code chunk names to be consistent with the new Exercise numbers. Finally, it ensures that all code chunk labels follow our standard: begin with (up to 20 characters from) the Section Title, remove special characters, replace spaces with dashes, and make all letters lowercase.</p>
-<p>Since the code chunk labels (derived from the title of the Section in which the Exercise resides) have a hard cutoff at 20 characters, try to make sure that your Section titles are different somewhere in the first 20 characters (including spaces). If not, the tutorial will not run since unique code chunk labels are required.</p>
-</div>
-<div class="include-after">
+<p>We often need to add a new exercise in the middle of a collection of other exercises. Or, we want to delete one exercise from the middle of the collection. In either scenario, our exercises are now mis-numbered. We either have two Exercise 5’s or we go straight from Exercise 4 to Exercise 6. We want to renumber all the remaining exercises so that there are no duplicates or missing numbers.</p>
+<p>The “Format Tutorial Chunk Labels” addin accomplishes this renumbering. But it also does more, changing all the code chunk names to be consistent with the new exercise numbers. Finally, it ensures that all code chunk labels follow our standard: begin with (up to 30 characters from) the topic title, remove special characters, replace spaces with dashes, and make all letters lowercase.</p>
+<p>Since the code chunk labels (derived from the title of the topic in which the exercise resides) have a hard cutoff at 30 characters, try to make sure that your topic titles are different somewhere in the first 30 characters (including spaces) within a given tutorial. If not, the tutorial will not run since unique code chunk labels are required.</p>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" defer></script>

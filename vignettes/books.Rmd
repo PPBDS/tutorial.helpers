@@ -57,13 +57,13 @@ by Karl Broman and Kara Woo for great advice about organizing your data using sp
   - The second paragraph gives one or two pointers about the best material which a student might look into if she is interested in learning more about the broad topic of the tutorial. These pointers were also mentioned as knowledge drops earlier in the tutorial.
   - These pointers will often (always?) be items which were mentioned in the book itself. Those authors, presumably, have good taste, otherwise you would not have selected their book in the first place.
 
-* Always have a separate Exercise for each library you load and each data set you use. An Exercise like "Load the **tidyverse** package with the `library()` command." is, obviously, not difficult for students. But it forces them to practice loading libraries, which many students forget, and it provides us with an opportunity to drop some knowledge.
+* Always have a separate code exercise for each library you load and each data set you use. A code exercise like "Load the **tidyverse** package with the `library()` command." is, obviously, not difficult for students. But it forces them to practice loading libraries, which many students forget, and it provides us with an opportunity to drop some knowledge.
 
-* Regularly require them to look up the help page for a function, proving that they have done so by copy/pasting a portion of the help page, which means that these will be Exercises with No Answer instead of Code Exercises. Students need to get in the practice of using help.
+* Regularly require them to look up the help page for a function, proving that they have done so by copy/pasting a portion of the help page, which means that these will be written exercises with no answer instead of code exercises. Students need to get in the practice of using help.
 
-* You want students to have to type in at least 90% of the code which is used in the book. One approach is to first, set up a bunch of empty Code Exercises. Then, go through the chapter, copying each snippet of example code into the Test chunk of an Exercise. (If the book is sourced freely, you can also copy/paste a knowledge drop associated with each code snippet.) Then, go back and write the Exercises such that the answers are the code snippets from the book. The final step is to copy the code to the Hint chunk, and then edit out at least a portion of that code.
+* You want students to have to type in at least 90% of the code which is used in the book. One approach is to first, set up a bunch of empty code exercises. Then, go through the chapter, copying each snippet of example code into the test code chunk of an exercise. (If the book is sourced freely, you can also copy/paste a knowledge drop associated with each code snippet.) Then, go back and write the exercises such that the answers are the code snippets from the book. The final step is to copy the code to the hint code chunk, and then edit out at least a portion of that code.
 
-* In most books, the authors will include more than one new thing in each code example. They will add two or three lines to a pipe or pass in two or three arguments to a function. We never want to go that fast. Spread out such code snippets into two or three separate Exercises, each of which makes the smallest possible change. We are building the shallowest possible learning curve. 
+* In most books, the authors will include more than one new thing in each code example. They will add two or three lines to a pipe or pass in two or three arguments to a function. We never want to go that fast. Spread out such code snippets into two or three separate exercises, each of which makes the smallest possible change. We are building the shallowest possible learning curve. 
 
 * Recall the distinction between books which have a permissive license, meaning that we can copy/paste text at our own discretion, and those which do not. For the latter, you can not copy/paste text. But you can express, in your own words, the key points made in each chapter. In either case, your knowledge drops should cover the most important things for students to know, in your opinion, among those topics covered in the chapter.
 
@@ -75,9 +75,9 @@ parse_number(x)
 #> [1] 1234 3513   59
 ````
 
-* It is unclear how to create `x` in your tutorial. You could have an Exercise in which the students create `x` themselves. But that is annoying because it doesn't really teach students anything. It is too close to busy work. Moreover, `x` won't exist for the next question, requiring the use of `parse_number()`. You will need to create `x` yourself, either in the global setup chunk or in a setup chunk for this Exercise. The global setup approach is preferred, but does not work if there are multiple different `x` objects used in this chapter.
+* It is unclear how to create `x` in your tutorial. You could have a code exercise in which the students create `x` themselves. But that is annoying because it doesn't really teach students anything. It is too close to busy work. Moreover, `x` won't exist for the next question, which requires the use of `parse_number()`. You will need to create `x` yourself, either in the global setup chunk or in a setup chunk for this exercise. The global setup approach is preferred, but does not work if there are multiple different `x` objects used in this chapter.
 
-* I recommend just including the "busy work" in the Exercise code chunk when writing the tutorial, followed by a blank line, so that students have an obvious place to type in `parse_number(x)`. 
+* I recommend that tutorial authors include the "busy work" in the exercise code chunk when writing the tutorial, followed by a blank line, so that students have an obvious place to type in `parse_number(x)`. 
 
 ````
 x <- c("$1,234", "USD 3,513", "59%")
