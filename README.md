@@ -50,10 +50,9 @@ setup R code chunk and then insert this empty code chunk at the end.
 
 This will ask the student to provide an estimate of how long the
 tutorial took to complete. It will then provide the ability to download
-the student’s answers in three different formats: html, pdf and rds.
-Students submit these files to their instructors, who can then confirm
-that the work was completed and look for any patterns in student
-(mis)understandings.
+the student’s answers in html format. Students submit these files to
+their instructors, who can then confirm that the work was completed and
+look for any patterns in student (mis)understandings.
 
 #### Testing
 
@@ -72,8 +71,8 @@ tutorial:
 ```
 ````
 
-This will insert questions asking for the student’s name and email
-address.
+This will insert (optinal) questions asking for the student’s name,
+email and id.
 
 We also recommend including this at the beginning of your tutorial:
 
