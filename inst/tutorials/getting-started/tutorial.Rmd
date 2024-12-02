@@ -25,7 +25,6 @@ options(tutorial.exercise.timelimit = 60,
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
 
-
 ## Introduction
 ### 
 
@@ -66,7 +65,7 @@ Let's practice some simple math. Type `4 + 5` into the box below. Hit **"Run Cod
 
 ### 
 
-Once you click "Run Code", the answer `[1] 9` should appear below the code you entered. This is the same behavior you would see if you ran this code in the RStudio Console tab.
+Once you click "Run Code," the answer `[1] 9` should appear below the code you entered. This is the same behavior you would see if you ran this code in the RStudio Console tab.
 
 ### 
 
@@ -98,7 +97,7 @@ Once you click "Run Code", the answer `[1] 9` should appear below the code you e
 
 ### Exercise 3
 
-We will often need to copy code from our previous exercises to continue working on a multi-stage problem. To make this easier, we provide a `Copy previous code` button. Below the following box, click on the `Copy previous code` button. 
+We will often need to copy code from our previous exercises to continue working on a multi-stage problem. To make this easier, we provide a "Copy previous code" button. Below the following box, click on the "Copy previous code" button. 
 
 ```{r exercises-3, exercise = TRUE}
 
@@ -118,7 +117,7 @@ This should paste all work from the previous exercise into the above exercise co
 
 ### 
 
-Change the values to `x <- 6` and `y <- 10`. Hit "Run Code". You should get the answer `[1] 16`.
+Change the values to `x <- 6` and `y <- 10`. Hit "Run Code." You should get the answer `[1] 16`.
 
 ### 
 
@@ -135,6 +134,8 @@ If you used the hint, note how we did not provide the entire answer. This is our
 
 ### Exercise 4
 
+<!-- Might be nice to create a screen recording of these steps. -->
+
 Read all of the following instructions before continuing, as this tutorial will close once you take the first step.
 
 Restart your **R session** by clicking `Session -> Restart R` from the main RStudio Menu. (Note that restarting R within this **RStudio instance** is a different thing than restarting the overall RStudio instance itself.)
@@ -145,7 +146,7 @@ You should receive the warning message shown below. (Note that this box might be
 knitr::include_graphics("images/terminate_jobs.png")
 ```
 
-Click "Terminate Jobs". This will "grey out" the tutorial. (You might also have to close the tutorial window by hand and/or hit the "Return to home" button, the little house icon with the red roof located just below the word "Environment.") 
+Click "Terminate Jobs." This will "grey out" the tutorial. (You might also have to close the tutorial window by hand and/or hit the "Return to home" button, the little house icon with the red roof located just below the word "Environment.") 
 
 Re-open this tutorial by clicking "Start Tutorial" in the Tutorial tab, just as you did at the start of the tutorial. Progress will have been saved automatically.
 
@@ -179,7 +180,7 @@ Your answer should look something like:
 
 ````
 > version[['version.string']]
-[1] "R version 4.4.0 (2024-04-24)"
+[1] "R version 4.4.2 (2024-10-31)"
 > 
 ````
 

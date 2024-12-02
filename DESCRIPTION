@@ -10,7 +10,7 @@ Authors@R:
 Description: Helper functions for creating, editing, and testing tutorials
     created with the 'learnr' package. Provides a simple method for allowing
     students to download their answers to tutorial questions. For examples
-    of its use, see the 'r4ds.tutorials' and 'primer.tutorials' packages.
+    of its use, see the 'r4ds.tutorials' package.
 Depends: 
     R (>= 4.1.0)
 License: MIT + file LICENSE
