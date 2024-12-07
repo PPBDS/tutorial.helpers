@@ -1,3 +1,5 @@
+# tutorial.helpers (development version)
+
 # tutorial.helpers 0.3.1
 
 * Clean up "Instructions for Writing R Tutorials" vignette.
