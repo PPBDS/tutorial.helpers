@@ -9,7 +9,7 @@ output:
     allow_skip: yes
 runtime: shiny_prerendered
 description: Tutorial for introducing students to tutorials in general and to some
-  of the defaults from the tutorial.helpers package in particular.
+  of the defaults from the **tutorial.helpers** package in particular.
 ---
 
 ```{r setup, include = FALSE}
@@ -32,11 +32,11 @@ This tutorial is an introduction to the general use of R tutorials created with 
 
 ### 
 
-You may complete a tutorial either on your laptop or on a cloud computing platform like [Posit Cloud](https://posit.cloud/). (See our discussion about [setting up your own computer](https://ppbds.github.io/primer/getting-started.html) or about [using Posit Cloud](https://ppbds.github.io/tutorial.helpers/articles/cloud.html).) Either way, you will download a copy of your answers to the Downloads folder on your computer once you are done. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
+You may complete a tutorial either on your laptop or on a cloud computing platform like [Posit Cloud](https://posit.cloud/). (See our discussion about [setting up your own computer](https://ppbds.github.io/primer/getting-started.html) or about [using Posit Cloud](https://ppbds.github.io/tutorial.helpers/articles/cloud.html).) Either way, you will download a copy of your answers to the Downloads folder on your computer once you are done with a tutorial. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
 
 ### 
 
-Most tutorials begin by asking for your your name and email. (Your instructor might also request that you fill in the "ID" field so that your work can be matched to a grading database. If not, leave this field blank.) Click "Continue" and then fill in your name and email. Click the **"Submit Answer"** button. If you make a mistake, you can click **"Try Again"** and, uh, try again. 
+Most tutorials begin by asking for your your name and email. (Your instructor might also request that you fill in the "ID" field so that your work can be matched to a grading database. If not, leave the "ID" field blank.) Click "Continue" and then fill in your name and email. Click the **"Submit Answer"** button each time. If you make a mistake, you can click **"Try Again"** and, uh, try again. 
 
 
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
@@ -159,9 +159,9 @@ Note how all your answers to previous questions have been saved. It is not a pro
 
 ### Exercise 5
 
-We often ask you to execute an R command in the R Console, the tab on the left portion of your RStudio screen. Type `version[['version.string']]` into the Console and hit the return key.
+We often ask you to execute an R command in the R Console, the tab on the left portion of your RStudio screen. Type `version[['version.string']]` into the Console and hit the return/enter key.
 
-**Do not just paste the command into the answer box!** You must paste the command into the R Console and then execute the command.
+**Do not just type the command into the answer box!** You must paste the command into the R Console and then execute the command.
 
 Copy/paste the command **and** the return value into this box.
 
@@ -267,6 +267,54 @@ question_text(NULL,
     rows = 6)
 ```
 
+### Exercise 9
+
+`show_file()` is another commonly-used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file which you have edited. 
+
+From the R Console, run this command:
+
+```
+tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
+```
+
+CP/CR.
+
+```{r exercises-9}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+<!-- I really want a test case to ensure that this works on all OSs. -->
+
+```{r include = FALSE}
+tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
+```
+
+### 
+
+Your answer should look something like this:
+
+````
+> tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
+		    GNU GENERAL PUBLIC LICENSE
+		       Version 2, June 1991
+
+ Copyright (C) 1989, 1991 Free Software Foundation, Inc.
+                       51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+> 
+````
+
+### 
+
+For now, don't worry about what `R.home()` and `file.path()` are doing, although you can read about them by running `?R.home` and `?file.path` at the Console. Those details are less important than seeing the intended usage of `show_file()`. 
+
+
 ## Your answers
 ### 
 
@@ -282,5 +330,4 @@ Unless told otherwise by your instructor, you should use the default file name, 
 ```
 
 ## Summary
-
 You now understand how tutorials function and how to download a copy of your answers. Good luck with your data science journey!

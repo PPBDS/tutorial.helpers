@@ -2,6 +2,8 @@
 
 * Clean up "Instructions for Writing R Tutorials" vignette.
 
+* Revise "Getting Started with Tutorials* tutorial.
+
 # tutorial.helpers 0.3.0
 
 * Add show_file().
