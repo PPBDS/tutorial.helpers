@@ -1,14 +1,14 @@
 ---
-title: Getting Started with Tutorials
+title: Getting Started with Tutorials in RStudio
 author: David Kane
 tutorial:
-  id: getting-started
+  id: getting-started-with-tutorials-in-rstudio
 output:
   learnr::tutorial:
     progressive: yes
     allow_skip: yes
 runtime: shiny_prerendered
-description: Tutorial for introducing students to tutorials in general and to some
+description: Tutorial for introducing students using RStudio to tutorials in general and to some
   of the defaults from the **tutorial.helpers** package in particular.
 ---
 
