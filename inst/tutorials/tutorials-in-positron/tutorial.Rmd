@@ -1,15 +1,14 @@
 ---
-title: Getting Started with Tutorials in RStudio
+title: Tutorials in Positron
 author: David Kane
 tutorial:
-  id: getting-started-with-tutorials-in-rstudio
+  id: tutorials-in-positron
 output:
   learnr::tutorial:
     progressive: yes
     allow_skip: yes
 runtime: shiny_prerendered
-description: Tutorial for introducing students using RStudio to tutorials in general and to some
-  of the defaults from the **tutorial.helpers** package in particular.
+description: Tutorial for introducing students to tutorials when using Positron.
 ---
 
 ```{r setup, include = FALSE}
@@ -28,11 +27,14 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ### 
 
-This tutorial is an introduction to the general use of R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. It is meant for beginning students who have never completed a tutorial.
+This tutorial is an introduction, for students using [Positron](https://positron.posit.co/), to the general use of R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. It is meant for beginning students who have never completed a tutorial.
 
 ### 
 
-You may complete a tutorial either on your laptop or on a cloud computing platform like [Posit Cloud](https://posit.cloud/). (See our discussion about [setting up your own computer](https://ppbds.github.io/primer/getting-started.html) or about [using Posit Cloud](https://ppbds.github.io/tutorial.helpers/articles/cloud.html).) Either way, you will download a copy of your answers to the Downloads folder on your computer once you are done with a tutorial. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
+<!-- DK: Update computer set up link. -->
+<!-- DK: Add new document discussing Workbench. -->
+
+You may complete a tutorial either on your laptop or on a cloud computing platform like [Posit Workbench](https://posit.co/products/enterprise/workbench/). (See our discussion about [setting up your own computer](https://ppbds.github.io/primer/getting-started.html).) Either way, you will download a copy of your answers to the Downloads folder on your computer once you are done with a tutorial. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
 
 ### 
 
@@ -49,7 +51,11 @@ In each tutorial, there will be a set of exercises for you to complete. For non-
 
 ### 
 
-Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work for a tutorial and allows you to begin the entire tutorial again. (If you are working on your tutorial in the Tutorial tab, the screen might not be wide enough to show the left-hand side menu. If so, just expand the Tutorial tab until it appears.)
+Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work for a tutorial and allows you to begin the entire tutorial again. (If you are working on your tutorial in the Viewer Pane, the screen might not be wide enough to show the left-hand side menu. If so, just expand the Viewer Pane until it appears.)
+
+<!-- DK: Also, or better, we can just click on the tutorial name in the top left and Start Over appears at the bottom of the resulting menu. -->
+
+<!-- DK: Test to see if you can just pull out the whole pane into a separate window. -->
 
 ### Exercise 1
 
@@ -65,7 +71,7 @@ Let's practice some simple math. Type `4 + 5` into the box below. Hit **"Run Cod
 
 ### 
 
-Once you click "Run Code," the answer `[1] 9` should appear below the code you entered. This is the same behavior you would see if you ran this code in the RStudio Console tab.
+Once you click "Run Code," the answer `[1] 9` should appear below the code you entered. This is the same behavior you would see if you ran this code in the Console Pane.
 
 ### 
 
@@ -134,21 +140,17 @@ If you used the hint, note how we did not provide the entire answer. This is our
 
 ### Exercise 4
 
-<!-- Might be nice to create a screen recording of these steps. -->
+<!-- DK: Seems like it should be possible to restart the R session. But the various buttons don't seem to work very well, at least when you are in a tutorial. Try this again in a month. In the meantime, this radical close-Positron approach is OK. -->
 
-Read all of the following instructions before continuing, as this tutorial will close once you take the first step.
+Read all of the following instructions before continuing.
 
-Restart your **R session** by clicking `Session -> Restart R` from the main RStudio Menu. (Note that restarting R within this **RStudio instance** is a different thing than restarting the overall RStudio instance itself.)
+* Close and then restart Positron. (The purpose of this exercise is to demonstrate that your work is saved automatically.)
 
-You should receive the warning message shown below. (Note that this box might be "hidden" behind your tutorial.) Whenever you see this warning message, keep in mind that clicking "Terminate Jobs" will close any running tutorials. 
+* Restart the tutorial. The most common approach is to run this command at the Console:
 
-```{r}
-knitr::include_graphics("images/terminate_jobs.png")
 ```
-
-Click "Terminate Jobs." This will "grey out" the tutorial. (You might also have to close the tutorial window by hand and/or hit the "Return to home" button, the little house icon with the red roof located just below the word "Environment.") 
-
-Re-open this tutorial by clicking "Start Tutorial" in the Tutorial tab, just as you did at the start of the tutorial. Progress will have been saved automatically.
+learnr::run_tutorial("getting-started", package = "tutorial.helpers")
+```
 
 Now that you have read all the instructions, go ahead and follow them.
 
@@ -159,7 +161,7 @@ Note how all your answers to previous questions have been saved. It is not a pro
 
 ### Exercise 5
 
-We often ask you to execute an R command in the R Console, the tab on the left portion of your RStudio screen. Type `version[['version.string']]` into the Console and hit the return/enter key.
+We often ask you to execute an R command in the R Console, the pane on the left portion of your Positron screen. Type `version[['version.string']]` into the Console and hit the return/enter key.
 
 **Do not just type the command into the answer box!** You must paste the command into the R Console and then execute the command.
 
@@ -193,71 +195,11 @@ The tutorial workflow will often look like this. We tell you to run a command **
 
 ### Exercise 6
 
-RStudio and your R installation have some default settings which are not good for new users. Run this command at the Console to change them:
-
-`
-tutorial.helpers::set_rstudio_settings()
-`
-
-CP/CR.
-
-```{r exercises-6}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 8)
-```
-
-### 
-
-The output from this function will report the changes, if any, which were made. To learn more, look up the help page by running `?set_rstudio_settings` at the Console.
-
-### 
-
-You can generally call functions by just giving their name along with the ending parentheses, as with `set_rstudio_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_rstudio_settings()` is in the **tutorial.helpers** package, we can also call it using the double colon notation: `tutorial.helpers::set_rstudio_settings()`.
-
-### Exercise 7
-
-Run this command from the R Console. 
-
-`
-rstudioapi::readRStudioPreference(name = "load_workspace", NA)
-`
-
-CP/CR.
-
-```{r exercises-7}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
-```
-
-### 
-
-You should have pasted something like this in the box above:
-
-````
-> rstudioapi::readRStudioPreference(name = "load_workspace", NA)
-[1] FALSE
->
-````
-
-The response should be `FALSE`. If it is not, try re-running `tutorial.helpers::set_rstudio_settings()`.
-
-You have now selected sensible settings for using RStudio.
-
-### Exercise 8
-
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are just copies of the R commands and their results. Other times, we will ask you to write one or more sentences of prose. 
 
-Copy and paste everything from `Exercise 8` above through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
+Copy and paste everything from `Exercise 6` above through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
-```{r exercises-8}
+```{r exercises-6}
 question_text(NULL,
     message = "We will sometimes provide an answer to written questions. Other times, like here, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",          
     answer(NULL, 
@@ -267,7 +209,7 @@ question_text(NULL,
     rows = 6)
 ```
 
-### Exercise 9
+### Exercise 7
 
 `show_file()` is another commonly-used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file which you have edited. 
 
@@ -279,7 +221,7 @@ tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 
 CP/CR.
 
-```{r exercises-9}
+```{r exercises-7}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -330,4 +272,5 @@ Unless told otherwise by your instructor, you should use the default file name, 
 ```
 
 ## Summary
+
 You now understand how tutorials function and how to download a copy of your answers. Good luck with your data science journey!

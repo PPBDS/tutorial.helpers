@@ -14,13 +14,20 @@ test_that("knit_tutorials() works on legal tutorials", {
 })
 
 
-test_that("knit_tutorials() works on Getting Started tutorial", {
+test_that("knit_tutorials() works on installed tutorials", {
   
   expect_null(
     knit_tutorials(
-      system.file("tutorials/getting-started/tutorial.Rmd", 
+      system.file("tutorials/tutorials-in-rstudio/tutorial.Rmd", 
                   package = "tutorial.helpers")
       )
+  )
+  
+  expect_null(
+    knit_tutorials(
+      system.file("tutorials/tutorials-in-positron/tutorial.Rmd", 
+                  package = "tutorial.helpers")
+    )
   )
 })
 

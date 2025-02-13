@@ -1,6 +1,8 @@
 # tutorial.helpers (development version)
 
-* Change tutorial name.
+* Change original tutorial title to "Tutorials in RStudio."
+
+* Add new tutorial: "Tutorials in Positron."
 
 # tutorial.helpers 0.3.1
 
