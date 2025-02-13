@@ -65,7 +65,7 @@
 <div class="section level2">
 <h2 id="about-this-package">About this package<a class="anchor" aria-label="anchor" href="#about-this-package"></a>
 </h2>
-<p><strong>tutorial.helpers</strong> provides functions and RStudio Addins to help you write R tutorials, especially if you follow <a href="https://ppbds.github.io/tutorial.helpers/articles/instructions.html">my advice</a> about the best way to do so. This approach is currently used in two packages: <a href="https://ppbds.github.io/primer.tutorials/" class="external-link"><strong>primer.tutorials</strong></a> and <a href="https://ppbds.github.io/r4ds.tutorials/" class="external-link"><strong>r4ds.tutorials</strong></a>.</p>
+<p><strong>tutorial.helpers</strong> provides functions and RStudio Addins to help you write R tutorials, especially if you follow <a href="https://ppbds.github.io/tutorial.helpers/articles/instructions.html">my advice</a> about the best way to do so. This approach is currently used in several packages, including <a href="https://ppbds.github.io/r4ds.tutorials/" class="external-link"><strong>r4ds.tutorials</strong></a> and <a href="https://ppbds.github.io/primer.tutorials/" class="external-link"><strong>primer.tutorials</strong></a>.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -99,7 +99,7 @@
 <p>We recommend including this child document at the start of each tutorial:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>```</span></code></pre></div>
-<p>This will insert (optinal) questions asking for the student’s name, email and id.</p>
+<p>This will insert (optional) questions asking for the student’s name, email and id.</p>
 <p>We also recommend including this at the beginning of your tutorial:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>```</span></code></pre></div>
@@ -111,14 +111,14 @@
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>```</span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="addins">Addins<a class="anchor" aria-label="anchor" href="#addins"></a>
+<h4 id="rstudio-addins">RStudio Addins<a class="anchor" aria-label="anchor" href="#rstudio-addins"></a>
 </h4>
-<p>In order to access the addins, load the package. See the <a href="https://ppbds.github.io/tutorial.helpers/articles/addins.html">addins vignette</a> for details about their use.</p>
+<p>In order to access the RStudio addins, load the package. See the <a href="https://ppbds.github.io/tutorial.helpers/articles/addins.html">addins vignette</a> for details about their use. Positron does not support addins, but the vignette explains how to use the same tools from the Console.</p>
 </div>
 <div class="section level4">
-<h4 id="getting-started-with-tutorials">Getting Started with Tutorials<a class="anchor" aria-label="anchor" href="#getting-started-with-tutorials"></a>
+<h4 id="tutorials">Tutorials<a class="anchor" aria-label="anchor" href="#tutorials"></a>
 </h4>
-<p>The package includes a tutorial, “Getting Started with Tutorials,” which provides an introduction to tutorials for beginning students. You should require your students to complete this tutorial if you are using <strong>tutorial.packages</strong> to create your own tutorials.</p>
+<p>The package includes two tutorials: “Tutorials in Positron” and “Tutorials in RStudio.” These provide an introduction to tutorials for beginning students. You should require your students to complete the tutorial associated with the IDE you are using if you are creating your own tutorials with <strong>tutorial.helpers</strong> package.</p>
 </div>
 </div>
 </div>
