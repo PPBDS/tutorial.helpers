@@ -16,6 +16,16 @@ We have provided four additions to the RStudio Addins menu: "Tutorial Code Exerc
 
 You can find the addins in the "Addins" tab on the top Rstudio toolbar. Make sure that your cursor is located at the point in your Rmd at which you want to insert the new exercise. 
 
+RStudio Addins are not available in Positron. To use these tools, run these commands from the Console.
+
+```
+make_exercise()
+make_no_answer()
+make_yes_answer()
+check_current_tutorial()
+```
+
+Make sure that your cursor is located in the correct location.
 
 ### Tutorial Code Exercise
 

@@ -18,3 +18,5 @@ inst/tutorials/*/rsconnect
 .DS_Store
 
 revdep
+/doc/
+/Meta/
