@@ -14,9 +14,9 @@ First, when signing up, choose the "[Cloud Free](https://posit.cloud/plans)" pla
 
 Second, follow the Posit Cloud [instructions](https://posit.cloud/learn/guide) to login, an action which should automatically place you in your Workspace. Once there, set up a new RStudio Project. This is all fairly simple and just involves clicking some buttons. Once you have a new Project, you should be able to follow the [standard instructions](https://ppbds.github.io/tutorial.helpers/) for working with the **tutorial.helpers** package. That is, running `install.packages("tutorial.helpers")` should work as the first R command you issue in the Console.
 
-Third, go to the Tutorial tab in the upper right corner and scroll to the bottom. Tutorials are listed in the alphabetical order of the packages in which they reside, so the "Getting Started with Tutorials" tutorial is usually the bottom tutorial. Press the "Start Tutorial" button. 
+Third, go to the Tutorial tab in the upper right corner and scroll to the bottom. Tutorials are listed in the alphabetical order of the packages in which they reside, so the "Tutorials with RStudio" tutorial is usually the bottom tutorial. Press the "Start Tutorial" button. 
 
-Fourth, the "Getting Started with Tutorials" tutorial will be created, with messages shown in the "Background Jobs" tab. After a few moments, the tutorial will be complete, also appearing in the Tutorial pane. You may work on it either in the Tutorial pane or, by clicking the "Show in new window" button --- located between the "Return to home" and "Stop tutorial" buttons --- in its own window. I recommend leaving it in the Tutorial tab. Note that you can adjust the different window sizes to give the Tutorial tab more room.
+Fourth, the "Tutorials with RStudio" tutorial will be created, with messages shown in the "Background Jobs" tab. After a few moments, the tutorial will be complete, also appearing in the Tutorial pane. You may work on it either in the Tutorial pane or, by clicking the "Show in new window" button --- located between the "Return to home" and "Stop tutorial" buttons --- in its own window. I recommend leaving it in the Tutorial tab. Note that you can adjust the different window sizes to give the Tutorial tab more room.
 
 <!-- DK: Not sure that this is right. Isn't `Cmd + option` on Mac? -->
 

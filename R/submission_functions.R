@@ -81,10 +81,11 @@ submission_server <- function() {
         # approach? Maybe is a reactive object which is automatically created in
         # Shiny?
         
-        # This is how we make test cases. Uncomment this line and comment
+        # This is how we make test cases. Uncomment this line and commit
         # write_answers(). Then, install the package. This assumes your test
-        # case comes from the "Getting Started with Tutorials" tutorial). Then
-        # run your tutorial as normal, choosing the RDS option at the end.
+        # case comes from one of the installed tutorials in tutorial.helpers.
+        # Then run your tutorial as normal. The rds object will get saved when
+        # you save your answers at the end.
         
         # saveRDS(session, file = "~/Desktop/test_session_3.rds")
         write_answers(file, session)

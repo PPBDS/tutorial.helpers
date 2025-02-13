@@ -1,10 +1,6 @@
 # Priorities
 
-Ensure that all reference to Getting Started tutorial are generalized to our new base case.
-
 Update Add-Ins vignette to explain how to get the same behavior interactively in Positron.
-
-Update botton of Index page via README.Rmd.
 
 The Posit Cloud vignette could use some work.
 
