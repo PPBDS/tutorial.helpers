@@ -14,10 +14,10 @@ status](https://github.com/PPBDS/tutorial.helpers/workflows/R-CMD-check/badge.sv
 **tutorial.helpers** provides functions and RStudio Addins to help you
 write R tutorials, especially if you follow [my
 advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html)
-about the best way to do so. This approach is currently used in two
-packages:
-[**primer.tutorials**](https://ppbds.github.io/primer.tutorials/) and
-[**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/).
+about the best way to do so. This approach is currently used in several
+packages, including
+[**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) and
+[**primer.tutorials**](https://ppbds.github.io/primer.tutorials/).
 
 ## Installation
 
@@ -71,7 +71,7 @@ tutorial:
 ```
 ````
 
-This will insert (optinal) questions asking for the student’s name,
+This will insert (optional) questions asking for the student’s name,
 email and id.
 
 We also recommend including this at the beginning of your tutorial:
@@ -97,15 +97,17 @@ document, as discussed above.
 ```
 ````
 
-#### Addins
+#### RStudio Addins
 
-In order to access the addins, load the package. See the [addins
+In order to access the RStudio addins, load the package. See the [addins
 vignette](https://ppbds.github.io/tutorial.helpers/articles/addins.html)
-for details about their use.
+for details about their use. Positron does not support addins, but the
+vignette explains how to use the same tools from the Console.
 
-#### Getting Started with Tutorials
+#### Tutorials
 
-The package includes a tutorial, “Getting Started with Tutorials,” which
-provides an introduction to tutorials for beginning students. You should
-require your students to complete this tutorial if you are using
-**tutorial.packages** to create your own tutorials.
+The package includes two tutorials: “Tutorials in Positron” and
+“Tutorials in RStudio.” These provide an introduction to tutorials for
+beginning students. You should require your students to complete the
+tutorial associated with the IDE you are using if you are creating your
+own tutorials with **tutorial.helpers** package.
