@@ -86,29 +86,36 @@ chunk names are correct and unique.</p>
 <p>You can find the addins in the “Addins” tab on the top Rstudio
 toolbar. Make sure that your cursor is located at the point in your Rmd
 at which you want to insert the new exercise.</p>
+<p>RStudio Addins are not available in Positron. To use these tools, run
+these commands from the Console.</p>
+<pre><code><span><span class="fu"><a href="../reference/exercise_creation.html">make_exercise</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/exercise_creation.html">make_no_answer</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/exercise_creation.html">make_yes_answer</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/check_current_tutorial.html">check_current_tutorial</a></span><span class="op">(</span><span class="op">)</span></span></code></pre>
+<p>Make sure that your cursor is located in the correct location.</p>
 <div class="section level3">
 <h3 id="tutorial-code-exercise">Tutorial Code Exercise<a class="anchor" aria-label="anchor" href="#tutorial-code-exercise"></a>
 </h3>
 <p>Create a new code exercise skeleton with an exercise title and with
 auto-generated code chunk ids. The Section, of which this Exercise is a
 part, is titled “Plotting”.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>### Exercise 7</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>```{r plotting-7, exercise = TRUE}</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>```</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>&lt;button onclick = "transfer_code(this)"&gt;Copy previous code&lt;/button&gt;</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>```{r plotting-7-hint, eval = FALSE}</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>```</span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>```{r plotting-7-test, include = FALSE}</span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>```</span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>###</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>### Exercise 7</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>```{r plotting-7, exercise = TRUE}</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>```</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>&lt;button onclick = "transfer_code(this)"&gt;Copy previous code&lt;/button&gt;</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>```{r plotting-7-hint, eval = FALSE}</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>```</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>```{r plotting-7-test, include = FALSE}</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>```</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>###</span></code></pre></div>
 <p>There are three code chunks included by default: exercise, hint and
 test. You do not need to include all three, although in most cases you
 should. The exercise code chunk is the location in which students will
@@ -138,18 +145,18 @@ chunk id and an exercise number. The difference is that the
 <div class="section level4">
 <h4 id="written-exercise-no-answer">Written Exercise (no Answer):<a class="anchor" aria-label="anchor" href="#written-exercise-no-answer"></a>
 </h4>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>### Exercise 9</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>```{r plotting-9}</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>    allow_retry = TRUE,</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    rows = 3)</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>```</span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>###</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>### Exercise 9</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>```{r plotting-9}</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>question_text(NULL,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>    allow_retry = TRUE,</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    incorrect = NULL,</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    rows = 3)</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>```</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>###</span></code></pre></div>
 <p>The “no Answer” Exercises are usually used for confirmation that a
 student has completed a specified task. In that case, there is no need
 for us to supply a correct answer. And we can allow students to edit
@@ -158,18 +165,18 @@ their submissions.</p>
 <div class="section level4">
 <h4 id="written-exercise-with-answer">Written Exercise (with Answer):<a class="anchor" aria-label="anchor" href="#written-exercise-with-answer"></a>
 </h4>
-<div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>### Exercise 8</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>```{r plotting-8}</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    message = "Place correct answer here.",</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>    allow_retry = FALSE,</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    rows = 6)</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>```</span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>###</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>### Exercise 8</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>```{r plotting-8}</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>question_text(NULL,</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    message = "Place correct answer here.",</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>    allow_retry = FALSE,</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    incorrect = NULL,</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>    rows = 6)</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>```</span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>###</span></code></pre></div>
 <p>The “with Answer” Exercises require the tutorial author to provide an
 (excellent!) answer to the question. This is harder than it looks,
 especially for questions without a single “right” answer. But it is also
