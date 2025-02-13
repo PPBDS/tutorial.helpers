@@ -71,7 +71,8 @@ make_exercise <- function(type = "code", file_path = NULL){
 
   # Insert the skeleton into the current active document. Still need to figure out how to test this.
 
-  rstudioapi::insertText(text = new_exercise)
+  rstudioapi::insertText(location = rstudioapi::getActiveDocumentContext()$selection[[1]]$range,
+                         text = new_exercise)
 }
 
 #' Make question skeleton without an answer

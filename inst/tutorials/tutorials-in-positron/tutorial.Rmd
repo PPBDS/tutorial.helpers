@@ -138,6 +138,8 @@ Did you remember to hit the "Run Code" button above? Lots of people forget! You 
 If you used the hint, note how we did not provide the entire answer. This is our standard approach with hints.
 
 
+
+
 ### Exercise 4
 
 <!-- DK: Seems like it should be possible to restart the R session. But the various buttons don't seem to work very well, at least when you are in a tutorial. Try this again in a month. In the meantime, this radical close-Positron approach is OK. -->
@@ -272,5 +274,6 @@ Unless told otherwise by your instructor, you should use the default file name, 
 ```
 
 ## Summary
+### 
 
 You now understand how tutorials function and how to download a copy of your answers. Good luck with your data science journey!
