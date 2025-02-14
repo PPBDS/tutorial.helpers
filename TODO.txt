@@ -8,7 +8,12 @@ Does quarto belong in imports? I am getting a note about it not being used, whic
 But I thought I needed it so that renv would consider it as being used (because it just
 checks imports but does not confirm that it is used) and I need that so that I can keep it
 in the renv lock file. I guess a different appoach would be to have a fake zzz file which
-has library(quarto). That should be enough to fool renv.
+has library(quarto). That should be enough to fool renv. 
+
+Related to the above is that the Github Actions files differ in that R CMD check uses renv and pkgdown.yml
+uses dependencies. The former ensures that the quarto package is available because it is in the renv.lock
+file. But with dependencies, I suspect that quarto must appear in the imports part of the DESCRIPTION file,
+but maybe Suggests would be enough?
 
 Do a complete clean up of the Github Action files.
 
