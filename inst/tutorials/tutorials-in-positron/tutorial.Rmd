@@ -194,14 +194,40 @@ Your version of R may be more recent, but it should not be older. It is OK if yo
 
 The tutorial workflow will often look like this. We tell you to run a command **in the Console**. You run it. We then ask you to copy/paste, from the Console, both the command itself and the response returned. Because we ask you to **c**opy/**p**aste the **c**ommand/**r**esponse so often, we usually shorten this instruction to CP/CR.
 
-
 ### Exercise 6
+
+RStudio and your R installation have some default settings which are not good for new users. Run this command at the Console to change them:
+
+`
+tutorial.helpers::set_binary_only_in_r_profile()
+`
+
+CP/CR.
+
+```{r exercises-6}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+### 
+
+The output from this function will report the changes, if any, which were made. To learn more, look up the help page by running `?set_binary_only_in_r_profile` at the Console.
+
+### 
+
+You can generally call functions by just giving their name along with the ending parentheses, as with `set_binary_only_in_r_profile()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_binary_only_in_r_profile()` is in the **tutorial.helpers** package, we can also call it using the double colon notation: `tutorial.helpers::set_binary_only_in_r_profile()`, as we do above.
+
+### Exercise 7
 
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are just copies of the R commands and their results. Other times, we will ask you to write one or more sentences of prose. 
 
 Copy and paste everything from `Exercise 6` above through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
-```{r exercises-6}
+```{r exercises-7}
 question_text(NULL,
     message = "We will sometimes provide an answer to written questions. Other times, like here, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",          
     answer(NULL, 
@@ -211,7 +237,7 @@ question_text(NULL,
     rows = 6)
 ```
 
-### Exercise 7
+### Exercise 8
 
 `show_file()` is another commonly-used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file which you have edited. 
 
@@ -223,7 +249,7 @@ tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 
 CP/CR.
 
-```{r exercises-7}
+```{r exercises-8}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,

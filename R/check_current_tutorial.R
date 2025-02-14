@@ -6,6 +6,8 @@
 #'
 #' Uses format_tutorial() to format the tutorial Rmd open
 #' in the current editor
+#'
+#' @export
 
 check_current_tutorial <- function(){
 

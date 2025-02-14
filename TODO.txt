@@ -1,7 +1,5 @@
 # Priorities
 
-Update Add-Ins vignette to explain how to get the same behavior interactively in Positron.
-
 The Posit Cloud vignette could use some work.
 
 Consider a very common use case for process_submissions(). I want, for all submitted answers, name, email and any answer which included http. I don't to have to remember the weird id for all the answers that had an http. I want the function to figure that out. Really, what I want is for the function to figure out any id which has (at least 2?) answers which start with http. Then, I want that many lines for each answer. So, we have column name, email, id and answer, with missing values for any student which did not submit for that id. 
@@ -15,10 +13,6 @@ Fix code and then test case for this example:
 
 
 * Better error message of the pattern does not match any of the files in the directory.
-
-* Explore Positron, which is obviously the future for IDE's. No wonder they put so little effort into improving RStudio.
-
-* Once new version is on CRAN, update r4ds.tutorials to use it. Once this gets to CRAN, you can remove the REMOTES from all the tutorials packages since we no longer will need to get the development version to get access to show_file().
 
 * The correct term for the different parts of a tutorial is Topic, not Section. Fix this in instructions.Rmd at least.
 
