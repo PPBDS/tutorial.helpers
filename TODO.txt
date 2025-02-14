@@ -1,5 +1,17 @@
 # Priorities
 
+How does line-wrapping work in Positron? And, whatever the answer, is this something that we should
+set for students in the Positron tutorial?
+
+
+Does quarto belong in imports? I am getting a note about it not being used, which is true. 
+But I thought I needed it so that renv would consider it as being used (because it just
+checks imports but does not confirm that it is used) and I need that so that I can keep it
+in the renv lock file. I guess a different appoach would be to have a fake zzz file which
+has library(quarto). That should be enough to fool renv.
+
+Do a complete clean up of the Github Action files.
+
 Vignette about Posit Workbench.
 
 The Posit Cloud vignette could use some work.
