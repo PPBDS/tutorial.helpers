@@ -1,9 +1,9 @@
 ---
 title: "Using Tutorials with Posit Cloud"
 author: David Kane
-output: rmarkdown::html_vignette
+format: html
 vignette: >
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{quarto::html}
   %\VignetteIndexEntry{Using Tutorials with Posit Cloud}
   %\VignetteEncoding{UTF-8}
 ---

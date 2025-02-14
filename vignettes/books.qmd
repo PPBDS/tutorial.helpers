@@ -1,9 +1,9 @@
 ---
 title: "Tutorials for Books"
 author: David Kane
-output: rmarkdown::html_vignette
+format: html
 vignette: >
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{quarto::html}
   %\VignetteIndexEntry{Tutorials for Books}
   %\VignetteEncoding{UTF-8}
 ---

@@ -1,1 +1,3 @@
 *.html
+
+vignettes/*_files

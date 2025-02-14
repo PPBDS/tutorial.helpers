@@ -1,9 +1,9 @@
 ---
 title: "Rstudio Addins"
 author: David Kane
-output: rmarkdown::html_vignette
+format: html
 vignette: >
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{quarto::html}
   %\VignetteIndexEntry{Rstudio Addins}
   %\VignetteEncoding{UTF-8}
 ---

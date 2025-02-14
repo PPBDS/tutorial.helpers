@@ -1,5 +1,7 @@
 # Priorities
 
+Vignette about Posit Workbench.
+
 The Posit Cloud vignette could use some work.
 
 Consider a very common use case for process_submissions(). I want, for all submitted answers, name, email and any answer which included http. I don't to have to remember the weird id for all the answers that had an http. I want the function to figure that out. Really, what I want is for the function to figure out any id which has (at least 2?) answers which start with http. Then, I want that many lines for each answer. So, we have column name, email, id and answer, with missing values for any student which did not submit for that id. 
@@ -16,23 +18,17 @@ Fix code and then test case for this example:
 
 * The correct term for the different parts of a tutorial is Topic, not Section. Fix this in instructions.Rmd at least.
 
-* Can we turn the vignettes into qmd instead of Rmd?
-
 * Key fix to format tutorials, as discussed below, is ensuring that comment characters, `#`, in backtick environments do not mess things up. I suspect that this might involve a fix in parsermd or in whatever it uses. I am also unclear if R code chunk headers, with their triple backticks, causes problems on their own. See quarto-1-example.txt in RStudio and Github, for example. Since the parsermd author seems unresponsive, maybe we just take a copy of the key code and then fix it ourselves?
 
 * Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr??? Get rid of them, if possible! Indeed, try to get rid of as many of the packages in Suggests/Depends as possible. Many were left over from when this was a part of primer.tutorials.
 
-* Figure out why Check is 0/0/0 but Test is 2 FAILs and 4 SKIPs.
+* Figure out why Check is 0/0/0 but Test is 2 FAILs and 5 SKIPs.
 
 * Why are hints not showing up in some r4ds.tutorials, like data-import?
-
-* Add something about show_file() to the tutorial?
 
 * Change format_tutorial() so it looks to see if you have any chunk names in your file with reserved names (name, email, ID, minutes, answers), and then warns you about that fact.
 
 * Document process_submissions() in instructions.Rmd, or perhaps elsewhere.
-
-* Do we need to split up instructions.Rmd?
 
 * Might be nice if the email entry field at least attempted to note/warn if the submitted information was not a legitimate email. Perhaps at least check if there is an `@`.
 

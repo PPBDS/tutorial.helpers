@@ -1,9 +1,9 @@
 ---
 title: "Testing Your Package of Tutorials"
 author: David Kane
-output: rmarkdown::html_vignette
+format: html
 vignette: >
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{quarto::html}
   %\VignetteIndexEntry{Testing Your Package of Tutorials}
   %\VignetteEncoding{UTF-8}
 ---

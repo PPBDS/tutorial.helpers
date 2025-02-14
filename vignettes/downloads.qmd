@@ -1,9 +1,9 @@
 ---
 title: "Enable Students to Download Their Tutorial Answers"
 author: David Kane
-output: rmarkdown::html_vignette
+format: html
 vignette: >
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{quarto::html}
   %\VignetteIndexEntry{Enable Students to Download Their Tutorial Answers}
   %\VignetteEncoding{UTF-8}
 ---

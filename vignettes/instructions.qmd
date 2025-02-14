@@ -1,9 +1,9 @@
 ---
 title: "Instructions for Writing R Tutorials"
 author: David Kane
-output: rmarkdown::html_vignette
+format: html
 vignette: >
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{quarto::html}
   %\VignetteIndexEntry{Instructions for Writing R Tutorials}
   %\VignetteEncoding{UTF-8}
 ---

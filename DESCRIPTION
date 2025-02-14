@@ -1,6 +1,6 @@
 Package: tutorial.helpers
 Title: Helper Functions for Creating Tutorials
-Version: 0.3.1.9002
+Version: 0.3.1.9003
 Authors@R: 
     person(given = "David",
            family = "Kane",
@@ -17,9 +17,10 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
-VignetteBuilder: knitr
+VignetteBuilder: quarto
 Suggests:
     knitr,
+    quarto,
     roxygen2,
     rsconnect,
     shinytest,
