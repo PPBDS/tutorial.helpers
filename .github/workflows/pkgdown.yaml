@@ -36,6 +36,7 @@ jobs:
         with:
           extra-packages: any::pkgdown, local::.
           needs: website
+          install-quarto: true
       
       - uses: r-lib/actions/setup-tinytex@v2
 

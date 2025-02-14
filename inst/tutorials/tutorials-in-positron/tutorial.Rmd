@@ -51,7 +51,7 @@ In each tutorial, there will be a set of exercises for you to complete. For non-
 
 ### 
 
-Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work for a tutorial and allows you to begin the entire tutorial again. (If you are working on your tutorial in the Viewer Pane, the screen might not be wide enough to show the left-hand side menu. If so, just expand the Viewer Pane until it appears.)
+Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work for a tutorial and allows you to begin the entire tutorial again. (If you are working on your tutorial in the Viewer, the screen might not be wide enough to show the left-hand side menu. If so, just expand the Viewer until it appears.)
 
 <!-- DK: Also, or better, we can just click on the tutorial name in the top left and Start Over appears at the bottom of the resulting menu. -->
 
@@ -71,7 +71,7 @@ Let's practice some simple math. Type `4 + 5` into the box below. Hit **"Run Cod
 
 ### 
 
-Once you click "Run Code," the answer `[1] 9` should appear below the code you entered. This is the same behavior you would see if you ran this code in the Console Pane.
+Once you click "Run Code," the answer `[1] 9` should appear below the code you entered. This is the same behavior you would see if you ran this code in the Console, which is where R is run, in a tab beneath the Welcome page.
 
 ### 
 
@@ -163,9 +163,9 @@ Note how all your answers to previous questions have been saved. It is not a pro
 
 ### Exercise 5
 
-We often ask you to execute an R command in the R Console, the pane on the left portion of your Positron screen. Type `version[['version.string']]` into the Console and hit the return/enter key.
+We often ask you to execute an R command in the Console, a pane on the lower left portion of your Positron screen. Type `version[['version.string']]` into the Console and hit the return/enter key.
 
-**Do not just type the command into the answer box!** You must paste the command into the R Console and then execute the command.
+**Do not just type the command into the answer box!** You must paste the command into the Console and then execute the command.
 
 Copy/paste the command **and** the return value into this box.
 
@@ -196,7 +196,7 @@ The tutorial workflow will often look like this. We tell you to run a command **
 
 ### Exercise 6
 
-RStudio and your R installation have some default settings which are not good for new users. Run this command at the Console to change them:
+Positron and your R installation have some default settings which are not good for new users. Run this command at the Console to change them:
 
 `
 tutorial.helpers::set_binary_only_in_r_profile()
@@ -225,7 +225,7 @@ You can generally call functions by just giving their name along with the ending
 
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are just copies of the R commands and their results. Other times, we will ask you to write one or more sentences of prose. 
 
-Copy and paste everything from `Exercise 6` above through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
+Copy and paste everything from `Exercise 7` above through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
 ```{r exercises-7}
 question_text(NULL,
@@ -241,7 +241,7 @@ question_text(NULL,
 
 `show_file()` is another commonly-used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file which you have edited. 
 
-From the R Console, run this command:
+From the Console, run this command:
 
 ```
 tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
@@ -288,7 +288,7 @@ For now, don't worry about what `R.home()` and `file.path()` are doing, although
 ## Your answers
 ### 
 
-At the end of every tutorial, you will save your work (and submit it, at the discretion of your instructor). We will do this in the next panel, labeled "Download answers." Follow the instructions there. 
+At the end of every tutorial, you will save your work (and submit it, at the discretion of your instructor). We will do this in the next topic, labeled "Download answers." Follow the instructions there. 
 
 Make sure to answer the question about how many **minutes** you spent on the tutorial and to click "Submit Answer."
 
