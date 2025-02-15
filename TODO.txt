@@ -3,6 +3,12 @@
 How does line-wrapping work in Positron? And, whatever the answer, is this something that we should
 set for students in the Positron tutorial?
 
+The pkgdown.yml was causing errors on GitHub. I suspect that this is the cause:
+
+https://github.com/r-lib/pkgdown/issues/2830
+
+So, for now, I just commented out the yaml. 
+
 
 Does quarto belong in imports? I am getting a note about it not being used, which is true. 
 But I thought I needed it so that renv would consider it as being used (because it just
