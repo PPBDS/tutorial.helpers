@@ -1,0 +1,14 @@
+pandoc: '3.4'
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles:
+  addins: addins.html
+  books: books.html
+  cloud: cloud.html
+  downloads: downloads.html
+  instructions: instructions.html
+  testing: testing.html
+last_built: 2025-02-15T23:57Z
+urls:
+  reference: https://ppbds.github.io/tutorial.helpers/reference
+  article: https://ppbds.github.io/tutorial.helpers/articles

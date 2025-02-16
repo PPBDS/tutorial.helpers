@@ -9,7 +9,7 @@ vignette: >
 ---
 
 
-The most common use for the **tutorial.helpers** package is to allow students to download their answers after they complete a tutorial. To enable this functionality, you need to, first, include `library(tutorial.helpers)` within the initial setup R code chunk and, second, add this line at the end of the tutorial:
+The most common use of the **tutorial.helpers** package is to allow students to download their answers after they complete a tutorial. To enable this functionality, you need to, first, include `library(tutorial.helpers)` within the initial setup R code chunk and, second, add this line at the end of the tutorial:
 
 ````{verbatim}
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}

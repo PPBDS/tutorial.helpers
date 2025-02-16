@@ -4,7 +4,7 @@
 .Ruserdata
 
 *Rproj
-docs
+# docs Comment out until YAML working
 
 # Deal with this in a more sensible way.
 
@@ -20,3 +20,5 @@ inst/tutorials/*/rsconnect
 revdep
 /doc/
 /Meta/
+
+/.quarto/

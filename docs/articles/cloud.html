@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="David Kane">
+
+<title>Using Tutorials with Posit Cloud</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+width: 0.8em;
+margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+<style type="text/css">body {background-color: #fff;margin: 1em auto;max-width: 700px;overflow: visible;padding-left: 2em;padding-right: 2em;font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.35;}table {margin: 1em auto;border-width: 1px;border-color: #DDDDDD;border-style: outset;border-collapse: collapse;}table th {border-width: 2px;padding: 5px;border-style: inset;}table td {border-width: 1px;border-style: inset;line-height: 18px;padding: 5px 5px;}table, table th, table td {border-left-style: none;border-right-style: none;}table thead, table tr.even {background-color: #f7f7f7;}p {margin: 0.5em 0;}blockquote {background-color: #f6f6f6;padding: 0.25em 0.75em;}hr {border-style: solid;border: none;border-top: 1px solid #777;margin: 28px 0;}dl {margin-left: 0;}dl dd {margin-bottom: 13px;margin-left: 13px;}dl dt {font-weight: bold;}ul {margin-top: 0;}ul li {list-style: circle outside;}ul ul {margin-bottom: 0;}pre, code {background-color: #f7f7f7;border-radius: 3px;color: #333;white-space: pre-wrap; }pre {border-radius: 3px;margin: 5px 0px 10px 0px;padding: 10px;}pre:not([class]) {background-color: #f7f7f7;}code {font-family: Consolas, Monaco, 'Courier New', monospace;font-size: 85%;}p > code, li > code {padding: 2px 0px;}div.figure {text-align: center;}img {background-color: #FFFFFF;padding: 2px;border: 1px solid #DDDDDD;border-radius: 3px;border: 1px solid #CCCCCC;margin: 0 5px;}h1 {margin-top: 0;font-size: 35px;line-height: 40px;}h2 {border-bottom: 4px solid #f7f7f7;padding-top: 10px;padding-bottom: 2px;font-size: 145%;}h3 {border-bottom: 2px solid #f7f7f7;padding-top: 10px;font-size: 120%;}h4 {border-bottom: 1px solid #f7f7f7;margin-left: 8px;font-size: 105%;}h5, h6 {border-bottom: 1px solid #ccc;font-size: 105%;}a {color: #0033dd;text-decoration: none;}a:hover {color: #6666ff; }a:visited {color: #800080; }a:visited:hover {color: #BB00BB; }a[href^="http:"] {text-decoration: underline; }a[href^="https:"] {text-decoration: underline; }</style>
+</head>
+
+<body>
+
+
+<header id="title-block-header">
+<h1 class="title">Using Tutorials with Posit Cloud</h1>
+<p class="author">David Kane</p>
+
+</header>
+
+
+<p><a href="https://posit.cloud/">Posit Cloud</a> is the most common cloud service to use when working with <a href="https://posit.co/download/rstudio-desktop/">RStudio</a>, not least because <a href="https://posit.co/">Posit</a> is also the company behind RStudio. Using Posit Cloud with tutorials created with the <a href="https://ppbds.github.io/tutorial.helpers/"><strong>tutorial.helpers</strong></a> package is sometimes tricky. The purpose of this vignette is to explain the process.</p>
+<p>First, when signing up, choose the “<a href="https://posit.cloud/plans">Cloud Free</a>” plan. At least for the first 20 hours or so of use, do not give Posit your credit card number. If Posit Cloud is working well for you, and you use more than the 25 hours per month allowed (currently) by the Cloud Free plan, then you might pay and upgrade. There are also sometimes discounts for students/teachers.</p>
+<p>Second, follow the Posit Cloud <a href="https://posit.cloud/learn/guide">instructions</a> to login, an action which should automatically place you in your Workspace. Once there, set up a new RStudio Project. This is all fairly simple and just involves clicking some buttons. Once you have a new Project, you should be able to follow the <a href="https://ppbds.github.io/tutorial.helpers/">standard instructions</a> for working with the <strong>tutorial.helpers</strong> package. That is, running <code>install.packages(&quot;tutorial.helpers&quot;)</code> should work as the first R command you issue in the Console.</p>
+<p>Third, go to the Tutorial tab in the upper right corner and scroll to the bottom. Tutorials are listed in the alphabetical order of the packages in which they reside, so the “Tutorials with RStudio” tutorial is usually the bottom tutorial. Press the “Start Tutorial” button.</p>
+<p>Fourth, the “Tutorials with RStudio” tutorial will be created, with messages shown in the “Background Jobs” tab. After a few moments, the tutorial will be complete, also appearing in the Tutorial pane. You may work on it either in the Tutorial pane or, by clicking the “Show in new window” button — located between the “Return to home” and “Stop tutorial” buttons — in its own window. I recommend leaving it in the Tutorial tab. Note that you can adjust the different window sizes to give the Tutorial tab more room.</p>
+<!-- DK: Not sure that this is right. Isn't `Cmd + option` on Mac? -->
+<p>Fifth, once you complete the tutorial, you can download your answers. Note that, in Posit Cloud, just pressing a download button, for any format, will probably not work. Instead, you will need to follow the instructions you see and use an alternative or secondary click. This is either a two finger click (or <code>Ctrl + click</code>) on the Mac or a right click on Windows. This action will bring up a menu, one choice of which is “Save link as …” Choose this option and download the file, probably to your Downloads folder. Accept the default name for the file. An appropriate suffix will be added automatically.</p>
+<p><strong>Warning</strong>: Posit Cloud shuts down unused sessions aggressively. If you stop working on your tutorial, it will be closed and “greyed out.” To restart it, you need to press the “Return to home” button — the little house symbol with the red roof — and then restart your tutorial. All your previous answers will be saved so you can just pick up where you left off.</p>
+<h3 id="tutorials-and-rstudio-projects">Tutorials and RStudio Projects</h3>
+<p>In most tutorials, you never leave the RStudio Project in which you started the tutorial.</p>
+<!-- DK: This is unclear. There are two separate issues. First, what happens in things like RStudio and code when you need to restart RStudio because you have made a new project. Second, what happens when you need to connect to Github. -->
+<p>Some tutorials require you to create a new RStudio Project. Examples from the <strong>r4ds.tutorials</strong> package include “RStudio and code” and “RStudio and Quarto.” This works fine on your local computer. On Posit Cloud, things are trickier. You must manually keep track of the different RStudio Projects in which you are working.</p>
+<p>In order to start a new RStudio Project on Posit Cloud, you must go back to your Workspace, click on “New Project” in the upper right, select “New Project from a Git Repository,” and then provide the URL for your Git repo. Once you click “OK,” you will now have two RStudio Projects in your Workspace.</p>
+<p>These two projects are completely separate. They run on separate “containers,” i.e., on separate computers with no connection to one another. One might think that this is not a problem. We should be able to just move back-and-forth between the two RStudio Projects, just as we would on a local computer. But that does not work on Posit Cloud because each time you switch away from the tutorial RStudio Project, Posit Cloud closes the tutorial, thereby requiring you to restart it each time you come back. That is very annoying!</p>
+<p>The solution is for you to login to Posit Cloud twice, keeping each login in its own tab on your browser. In one login, you are looking at the tutorial RStudio Project, answering questions as you go along. In the other login, you are looking at the second RStudio Project, which is usually connected to a Github repo. This is where you are doing most of your work. But, because these two logins are just two tabs on your browser, it is easy to switch back and forth.</p>
+<p><strong>Warning</strong>: On Posit Cloud (unlike on your local computer) progress on a tutorial is not saved across RStudio Projects. That is, if you close the RStudio Project in which you have been working on a tutorial, you will lose all the work you have done on that tutorial.</p>
+<h3 id="rstudio-project-templates">RStudio Project Templates</h3>
+<p>One problem with working with RStudio on Posit Cloud is that each new RStudio Project is “clean,” meaning that no packages have been installed and any RStudio settings you may have selected in previous RStudio Projects have disappeared. The best way to solve this is to create a <a href="https://posit.cloud/learn/guide#project-templates">Project Template</a>. The idea behind templates is that you want to start new RStudio Projects with all your favorite packages already installed, all your preferred RStudio preferences already selected, and so on. If you do all these things in your template, then each new RStudio Project you create will start up with all these tasks already accomplished. Consider setting up a template by completing all <a href="https://ppbds.github.io/primer/getting-started.html#summary">these steps</a> and then saving the resulting workspace as a template.</p>
+
+
+
+
+
+</body></html>

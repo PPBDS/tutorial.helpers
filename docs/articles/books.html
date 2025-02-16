@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="David Kane">
+
+<title>Tutorials for Books</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+width: 0.8em;
+margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+
+
+
+
+<style type="text/css">body {background-color: #fff;margin: 1em auto;max-width: 700px;overflow: visible;padding-left: 2em;padding-right: 2em;font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.35;}table {margin: 1em auto;border-width: 1px;border-color: #DDDDDD;border-style: outset;border-collapse: collapse;}table th {border-width: 2px;padding: 5px;border-style: inset;}table td {border-width: 1px;border-style: inset;line-height: 18px;padding: 5px 5px;}table, table th, table td {border-left-style: none;border-right-style: none;}table thead, table tr.even {background-color: #f7f7f7;}p {margin: 0.5em 0;}blockquote {background-color: #f6f6f6;padding: 0.25em 0.75em;}hr {border-style: solid;border: none;border-top: 1px solid #777;margin: 28px 0;}dl {margin-left: 0;}dl dd {margin-bottom: 13px;margin-left: 13px;}dl dt {font-weight: bold;}ul {margin-top: 0;}ul li {list-style: circle outside;}ul ul {margin-bottom: 0;}pre, code {background-color: #f7f7f7;border-radius: 3px;color: #333;white-space: pre-wrap; }pre {border-radius: 3px;margin: 5px 0px 10px 0px;padding: 10px;}pre:not([class]) {background-color: #f7f7f7;}code {font-family: Consolas, Monaco, 'Courier New', monospace;font-size: 85%;}p > code, li > code {padding: 2px 0px;}div.figure {text-align: center;}img {background-color: #FFFFFF;padding: 2px;border: 1px solid #DDDDDD;border-radius: 3px;border: 1px solid #CCCCCC;margin: 0 5px;}h1 {margin-top: 0;font-size: 35px;line-height: 40px;}h2 {border-bottom: 4px solid #f7f7f7;padding-top: 10px;padding-bottom: 2px;font-size: 145%;}h3 {border-bottom: 2px solid #f7f7f7;padding-top: 10px;font-size: 120%;}h4 {border-bottom: 1px solid #f7f7f7;margin-left: 8px;font-size: 105%;}h5, h6 {border-bottom: 1px solid #ccc;font-size: 105%;}a {color: #0033dd;text-decoration: none;}a:hover {color: #6666ff; }a:visited {color: #800080; }a:visited:hover {color: #BB00BB; }a[href^="http:"] {text-decoration: underline; }a[href^="https:"] {text-decoration: underline; }</style>
+</head>
+
+<body>
+
+
+<header id="title-block-header">
+<h1 class="title">Tutorials for Books</h1>
+<p class="author">David Kane</p>
+
+</header>
+
+
+<p>This vignette assumes that you have already read <a href="instructions.html">our advice</a> about writing good tutorials.</p>
+<p>A common use case for this package is to write a collection of tutorials for a book. Consider the <a href="https://ppbds.github.io/r4ds.tutorials/"><strong>r4ds.tutorials</strong></a> package which is a companion to <a href="https://r4ds.hadley.nz/"><em>R for Data Science (2e)</em></a> by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.</p>
+<p>Instructors like to assign books with code. Ideally, we want our students to read the book, working through the included code, line-by-line. Sadly, very few students are so disciplined. In fact, in a large class, a majority of the students won’t even read the book.</p>
+<p>The <strong>tutorial.helpers</strong> package makes it easy to create a <em>structured</em> tutorial in which students type in (almost) every command which the book demonstrates, along with other commands which, in your judgment, are helpful.</p>
+<p>Consider some idiosyncratic advice for book-based tutorials using the example of <a href="https://r4ds.hadley.nz/"><em>R for Data Science (2e)</em></a> and <a href="https://ppbds.github.io/r4ds.tutorials/"><strong>r4ds.tutorials</strong></a>.</p>
+<ul>
+<li><p>Do one or two of the tutorials before you start working on your own.</p></li>
+<li><p>Make your Introduction look like this:</p></li>
+</ul>
+<pre><code>This tutorial covers [Chapter 20: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html) 
+from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, 
+Mine Çetinkaya-Rundel, and Garrett Grolemund. You will learn how to get data from Excel 
+spreadsheets using  `[read_excel()](https://readxl.tidyverse.org/reference/read_excel.html)` 
+from the [**readxl**](https://readxl.tidyverse.org/) package and Google sheets using
+`[read_sheet()](https://googlesheets4.tidyverse.org/reference/range_read.html)` from 
+the [**googlesheets4**](https://googlesheets4.tidyverse.org/) package.</code></pre>
+<ul>
+<li><p>The first sentence provides a link to your chapter as well as to R4DS.</p></li>
+<li><p>We highlight some of the most important packages and functions used in the tutorial.</p></li>
+<li><p>We don’t go overboard. You can’t mention every package or every function used in the tutorial.</p></li>
+<li><p>Make your Summary look like this:</p></li>
+</ul>
+<pre><code>This tutorial covered [Chapter 20: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html) 
+from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, 
+Mine Çetinkaya-Rundel, and Garrett Grolemund. You have learned how to get data from Excel
+spreadsheets using  `[read_excel()](https://readxl.tidyverse.org/reference/read_excel.html)` 
+from the [**readxl**](https://readxl.tidyverse.org/) package and Google sheets using
+`[read_sheet()](https://googlesheets4.tidyverse.org/reference/range_read.html)` from 
+the [**googlesheets4**](https://googlesheets4.tidyverse.org/) package.
+
+Read “[Data Organization in Spreadsheets](https://doi.org/10.1080/00031305.2017.1375989)” 
+by Karl Broman and Kara Woo for great advice about organizing your data using spreadsheets.</code></pre>
+<ul>
+<li><p>The first paragraph is identical to the Introduction, except that “covers” is replaced with “covered” and “will learn” with “have learned.” We began the tutorial with a promise about what students would learn. One hopes that we kept that promise.</p></li>
+<li><p>The second paragraph gives one or two pointers about the best material which a student might look into if she is interested in learning more about the broad topic of the tutorial. These pointers were also mentioned as knowledge drops earlier in the tutorial.</p></li>
+<li><p>These pointers will often (always?) be items which were mentioned in the book itself. Those authors, presumably, have good taste, otherwise you would not have selected their book in the first place.</p></li>
+<li><p>Always have a separate code exercise for each library you load and each data set you use. A code exercise like “Load the <strong>tidyverse</strong> package with the <code>library()</code> command.” is, obviously, not difficult for students. But it forces them to practice loading libraries, which many students forget, and it provides us with an opportunity to drop some knowledge.</p></li>
+<li><p>Regularly require them to look up the help page for a function, proving that they have done so by copy/pasting a portion of the help page, which means that these will be written exercises with no answer instead of code exercises. Students need to get in the practice of using help.</p></li>
+<li><p>You want students to have to type in at least 90% of the code which is used in the book. One approach is to first, set up a bunch of empty code exercises. Then, go through the chapter, copying each snippet of example code into the test code chunk of an exercise. (If the book is sourced freely, you can also copy/paste a knowledge drop associated with each code snippet.) Then, go back and write the exercises such that the answers are the code snippets from the book. The final step is to copy the code to the hint code chunk, and then edit out at least a portion of that code.</p></li>
+<li><p>In most books, the authors will include more than one new thing in each code example. They will add two or three lines to a pipe or pass in two or three arguments to a function. We never want to go that fast. Spread out such code snippets into two or three separate exercises, each of which makes the smallest possible change. We are building the shallowest possible learning curve.</p></li>
+<li><p>Recall the distinction between books which have a permissive license, meaning that we can copy/paste text at our own discretion, and those which do not. For the latter, you can not copy/paste text. But you can express, in your own words, the key points made in each chapter. In either case, your knowledge drops should cover the most important things for students to know, in your opinion, among those topics covered in the chapter.</p></li>
+<li><p>A common annoyance is the creation of temporary objects. Consider this code snippet from <em>R for Data Science</em>.</p></li>
+</ul>
+<pre><code>x &lt;- c(&quot;$1,234&quot;, &quot;USD 3,513&quot;, &quot;59%&quot;)
+parse_number(x)
+#&gt; [1] 1234 3513   59</code></pre>
+<ul>
+<li><p>It is unclear how to create <code>x</code> in your tutorial. You could have a code exercise in which the students create <code>x</code> themselves. But that is annoying because it doesn’t really teach students anything. It is too close to busy work. Moreover, <code>x</code> won’t exist for the next question, which requires the use of <code>parse_number()</code>. You will need to create <code>x</code> yourself, either in the global setup chunk or in a setup chunk for this exercise. The global setup approach is preferred, but does not work if there are multiple different <code>x</code> objects used in this chapter.</p></li>
+<li><p>I recommend that tutorial authors include the “busy work” in the exercise code chunk when writing the tutorial, followed by a blank line, so that students have an obvious place to type in <code>parse_number(x)</code>.</p></li>
+</ul>
+<pre><code>x &lt;- c(&quot;$1,234&quot;, &quot;USD 3,513&quot;, &quot;59%&quot;)
+</code></pre>
+<ul>
+<li>This avoids the complication of creating/maintaining a bunch of temporary variables. It also means less busy work for students.</li>
+</ul>
+
+
+
+
+
+</body></html>
