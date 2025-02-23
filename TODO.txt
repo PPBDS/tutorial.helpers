@@ -9,6 +9,10 @@ https://github.com/r-lib/pkgdown/issues/2830
 
 So, for now, I just commented out the yaml. 
 
+Move over some of the core r4ds.tutorials. 
+
+Where should we ensure that students have a good default location for 
+projects --- in Tutorials in Positron or on Positron and Code?
 
 Does quarto belong in imports? I am getting a note about it not being used, which is true. 
 But I thought I needed it so that renv would consider it as being used (because it just

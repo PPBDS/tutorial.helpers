@@ -17,3 +17,4 @@
 ^revdep$
 ^doc$
 ^Meta$
+^vignettes/.quarto$
