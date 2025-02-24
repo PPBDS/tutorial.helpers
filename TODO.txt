@@ -27,6 +27,10 @@ but maybe Suggests would be enough?
 
 Do a complete clean up of the Github Action files.
 
+Does tidyverse belong in Suggests? Without this, we get a fail on GitHub since library(tidyverse) is used in Positron
+and Code tutorial. But the conventional wisdom is that we should include as few packages as possible in DESCRIPTION.
+Maybe if we only add these extra packages in Suggest, it is OK to do so?
+
 Vignette about Posit Workbench.
 
 The Posit Cloud vignette could use some work.

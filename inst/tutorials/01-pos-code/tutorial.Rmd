@@ -28,9 +28,9 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- DK: Work with Mark to make the experience good for Windows users. Key issue is adding Windows hints/clarifications to questions which are written implicitly assuming students are on a Mac. -->
+<!-- Make the experience good for Windows users. Key issue is adding Windows hints/clarifications to questions which are written implicitly assuming students are on a Mac. -->
 
-<!-- What about Chromebooks??!! -->
+<!-- What about Chromebooks??!! Too much to worry about. -->
 
 <!-- Teach about show_file() and how it won't work without doing library(tutorial.helpers) in the Console. First, show it fails. Second, do library() command in Console. Third, show it works now. Fourth, restart R and show it now fails. Lesson: Whenever you get "function not found," it probably means a failure to load a library. -->
 
@@ -38,9 +38,6 @@ options(tutorial.exercise.timelimit = 60,
 <!-- To Format the chunk labels you need to comment out the example comment line in Script 1. And there is at least one more example later. -->
 
 <!-- We do not use the Terminal in this tutorial. Maybe mention it, though? -->
-
-<!-- Hardest part is creating an R project the first time. We can break it into separate steps? Can we show them the two different Project drop down methods? Actually, this should be taught from the File menu. Fix the gif to do that!  -->
-
 
 ## Introduction
 ### 
@@ -51,13 +48,13 @@ This tutorial teaches you how to use [**Positron**](https://positron.posit.co) w
 ## Checking your setup
 ### 
 
-<!-- DK: Do the below. Make it as easy to use for Windows students. For example, the use of forward versus backward slashes. -->
+<!-- Make it as easy to use for Windows students. For example, the use of forward versus backward slashes. -->
 
 <!-- Should provide better guidance for Windows students. I think that their ~ directories are actually their Documents/ folders, which are often backed up on One Drive. So, have them put, by hand, a projects directory on their Desktop and then use that. Or maybe dir.create("~/../Desktop/projects) would work. -->
 
 <!-- MP: I remember that when I first set up R/RStudio/RTools, my ~ directory was C:\\Users\\mark.p\\. It seems like RS typically defaults ~ to %USERPROFILE% -- see https://tinyurl.com/gpt-default-tilde.  -->
 
-This tutorial assumes that you have read and completed all the steps in the "Tutorials in Positron" tutorial from the [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package, i.e., this package. We will ask you to **c**opy/**p**aste the **c**ommand/**r**esponse so often, we will be shortening this instruction to CP/CR.
+This tutorial assumes that you have read and completed all the steps in the "Tutorials in Positron" tutorial from the [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package, i.e., this package. We will ask you to **c**opy/**p**aste the **c**ommand/**r**esponse so often, we shorten this instruction to CP/CR.
 
 ### Exercise 1
 
@@ -76,13 +73,29 @@ question_text(NULL,
 
 ### 
 
+Your answer should look something like this:
+
+```
+> library(tutorial.helpers)
+> search()
+ [1] ".GlobalEnv"               "package:tutorial.helpers" "tools:rstudio"           
+ [4] "tools:positron"           "package:stats"            "package:graphics"        
+ [7] "package:grDevices"        "package:utils"            "package:datasets"        
+[10] "package:methods"          "Autoloads"                "package:base"            
+>
+```
+
+Don't worry if your answer does not match our answer exactly, either in this question or in any other question.
+
+### 
+
 The string "package:tutorial.helpers" should be in the output. If you skip this step, commands like `show_file()` will not work without a `tutorial.helpers::` prefix.
 
 ### Exercise 2
 
-You should have installed the **tidyverse** package, among others. If you haven't yet, run `install.package('tidyverse')` in the Console. 
-
 Load the **tidyverse** package into your R Console using the `library()` function.
+
+If this fails, the most likely cause is that you failed to installed the **tidyverse** package, among others. Run `install.package('tidyverse')` in the Console to fix this and then try `library(tidyverse)` again.
 
 ### 
 
@@ -105,7 +118,7 @@ There should be strings such as "package:tidyverse" in the output. These are the
 
 Look at the top left of your Console. Here you should see the version of R you are running. It should look something like the image below.
 
-```{r r-version-img}
+```{r}
 include_graphics("images/r-version.png")
 ```
 
@@ -147,9 +160,9 @@ More info on paths can be found [here](https://people.ischool.berkeley.edu/~kevi
 
 ### Exercise 5
 
-Whenever you start a new RStudio project, you will want to store it in a location which you can easily find. Right now, you are likely in an arbitrary location on your computer. It would be much more useful to have a location dedicated to your RStudio projects.
+Whenever you start a new project, you will want to store it in a location which you can easily find. Right now, you are likely in an arbitrary location on your computer. It would be much more useful to have a location dedicated to your projects.
 
-From the Console, run `dir.exists("~/Desktop/")`. CP/CR.
+From the Console, run `path.expand("~")`. CP/CR.
 
 ```{r checking-your-setup-5}
 question_text(NULL,
@@ -162,11 +175,25 @@ question_text(NULL,
 
 ### 
 
-If this returns `TRUE`, then you have a "typical" computer set up, with a Desktop in your home directory. (The tilde symbol, `~`, refers to a user's home directory.) We recommend that you store your RStudio projects there. If the return value is `FALSE`, you will need to create a location by hand. However, more experienced computer users should feel free to ignore this advice and set up their project directories as they see fit, at their own risk. 
+My answer:
+
+```
+> path.expand("~")
+[1] "/Users/dkane"
+```
+
+The tilde symbol, `~`, refers to a user's home directory. Your answer should look similar. If you are on Windows, the directory separators will be backward slashes rather than forward slashes, as on my Mac. So, on Windows, the answer might be:
+
+```
+> path.expand("~")
+[1] "C:/Users/dkane/"
+```
+
+The important point is that, in almost all non-pathological set ups, you will have a home directory. It is important to know where that is.
 
 ### Exercise 6
 
-Let's make a folder, and call it `projects`, and store it on our desktop. From the Console, run `dir.create("~/Desktop/projects/")`. CP/CR. (This command will only work if `dir.exists("~/Desktop/")` returned `TRUE`.)
+Let's take a look at the directories in your home directory. From the Console, run `list.files(path.expand("~"))`. CP/CR.
 
 ```{r checking-your-setup-6}
 question_text(NULL,
@@ -179,71 +206,105 @@ question_text(NULL,
 
 ### 
 
+My answer:
+
+```
+> list.files(path.expand("~"))
+ [1] "Applications" "counties.R"   "Desktop"      "Documents"    "Downloads"    "Library"     
+ [7] "miniconda3"   "Movies"       "Music"        "Pictures"     "Public"       "temp"        
+>
+```
+
+If you are on a Mac, then the `Desktop` directory is a handy location in which to store all your coding projects. On Windows, however, the `Desktop` is less convenient because OneDrive often backs it up automatically, which can cause all sorts of problems later on.
+
+**Avoid doing data science in any directory which is backed up by OneDrive, or any other backup service.**
+
+### Exercise 7
+
+Let's make a folder, and call it `projects`, and store it someplace sensible. **If you on a Mac**, then, from the Console, run: 
+
+```
+dir.create(file.path(path.expand("~/Desktop"), "projects"))
+```
+
+**If you on Windows**, then, from the Console, run: 
+
+```
+dir.create(file.path(path.expand("~"), "projects"))
+```
+
+
+CP/CR. 
+
+```{r checking-your-setup-7}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+### 
+
 If that command works, you are all set. (If you get a message about the directory already exists, then you are also all set.) If not, you will need to create a `projects` directory by hand. Helpful resources can be found [here](https://support.microsoft.com/en-us/office/create-a-new-folder-cbbfb6f5-59dd-4e5d-95f6-a12577952e17) for Windows, and [here](https://support.apple.com/guide/mac-help/organize-files-using-folders-mh26885/mac) for macOS.
 
-**NOTE: Do not store this folder inside of a cloud storage directory such as OneDrive.** This can cause heaps of unforeseen problems for you in the future.
 
-The path to your R projects should not include any folders with spaces (or other weird characters) in their names. For example, this is a reasonable location for R projects if you are using a Mac:
+**The path to your data science projects should not include any folders with spaces (or other weird characters) in their names.** For example, this is a reasonable location for R projects if you are using a Mac:
 
-````
+```
 /Users/dkane/Desktop/projects/
-````
+```
 
-<!-- And if you are using Windows . . . -->
-
-The next example is bad. Do not use spaces or weird characters!
+And if you are using Windows . . .
 
 ````
-/Users/dkane/Desktop/my projects/
+C:/Users/dkane/projects/
 ````
 
 ## R Projects
 ### 
 
-Good data scientists keep their work organized. You should place your work in different [RStudio projects](https://docs.posit.co/ide/user/ide/guide/code/projects.html), which are simply folders (that is, directories) on your computer with some helper files. Each separate RStudio project is a folder within your main folder for your R work, i.e.,  `/Users/dkane/Desktop/projects/`. We use the terms "RStudio project" and "R project" interchangeably. 
+Good data scientists keep their work organized. You should place your work in different projects, which are simply folders (that is, directories) on your computer with some helper files. Each separate project is a folder within your main folder for your data science work, i.e.,  `/Users/dkane/Desktop/projects/`.  
 
 
 ### Exercise 1
 
+<!-- DK: Consider adding images and/or a gif. -->
+
 **Read all of the instructions before starting this exercise.**
 
-You will be forced to close the tutorial during project creation. You'll be able to re-open the tutorial and get back to where you left off once the project is created. 
+From the `File` menu, select `New Project ...`. (You can also click on the "New Project" icon on the *Welcome* screen.)
 
-The first step is to click `File -> New Project` from the main menu:
-
-```{r}
-include_graphics("images/new_project.png")
-```
-
-Select `New Directory`:
+From the "Project Type" screen, select "R Project." Click "Next." Doing so brings up the "Create New Project" screen:
 
 ```{r}
-include_graphics("images/new_project_2.png")
+include_graphics("images/set-project.png")
 ```
 
-Select `New Project`:
+Enter `analysis-1` as the name of your Project Name. Set the Parent Directory to your `projects` directory. (You may have to "Browse" your computer to find it.) Do **not* initialize the project as a Git repository.
 
 ```{r}
-include_graphics("images/new_project_3.png")
+include_graphics("images/set-project-2.png")
 ```
 
-Yes, it is confusing that this is the second time you have selected `New Project`! But that's only due to the fact that RStudio offers many options for projects. 
+Click "Next."
+
+The "Set up project configuration" screen should appear. Accept the default option, which should be the version of R which you installed. Click "Create." Then:
+
+```{r}
+include_graphics("images/set-project-3.png")
+```
+
+You can have multiple "Windows" open when you use Positron. Each is separate. Some people like to complete tutorials within just one Window, so they can keep everything together. Others prefer multiple windows, across which they then switch back and forth.
 
 ### 
 
-Use `analysis-1` for the "Directory name". In the "Create project as subdirectory of" box, use your new `projects` folder.
-
-```{r}
-include_graphics("images/new_project_4.png")
-```
-
-Ensure that all the check boxes are unchecked. Click "Create Project." 
+For new students, we recommend the former, doing everything within one Window. So, we recommend choosing "Current Window." But choosing "New Window" is also reasonable. But, with that choice, you will need to move back-and-forth between the two windows, one of which is this tutorial and the other of which is the actual `analysis-1` project which we will be working on.
 
 ### 
 
-Now that you have read all the directions, we can go through the steps. But note that, when you first click `File -> New Project`, you will get the "Terminate Jobs" warning. (Recall the discussion from the "Getting Started with Tutorials" tutorial in the **tutorial.helpers** package.)
-
-And that is OK! Go ahead and click "Terminate Jobs" and follow the above steps. **You will need to restart the tutorial**. Your R session will be located in this new project. For the rest of this tutorial, we will be working in `analysis-1`.
+Now that you have read all the directions, we can go through the steps. 
 
 ### 
 
@@ -600,7 +661,7 @@ question_text(NULL,
 
 Save your scripts (with informative names) in the project, edit them, run them line-by-line or in their entirety. Restart R frequently to make sure you’ve captured everything in your scripts.
 
-Scripts and projects give you a solid workflow that will serve you well in the future. Always remember to create one RStudio project for each data analysis project. That project may contain multiple scripts files, along with other material.
+Scripts and projects give you a solid workflow that will serve you well in the future. Always remember to create one project for each data analysis project. That project may contain multiple scripts files, along with other material.
 
 ### Exercise 2
 
@@ -971,7 +1032,7 @@ If the title text flows out of the image, you might want to modify the `scale` a
 ## Script 3
 ### 
 
-Let's make another plot, this time in a script inside of a *different* RStudio project. We'll be making this plot:
+Let's make another plot, this time in a script inside of a *different* project. We'll be making this plot:
 
 ```{r script-3-0}
 car_plot <- ggplot(mpg, aes(displ, hwy, colour = class)) + 
@@ -1001,7 +1062,7 @@ Your answer should look like this:
 "/Users/dkane/Desktop/projects/project-1"
 ```
 
-Somewhere in the path should be `project-1`, the name of the RStudio project you're in right now. 
+Somewhere in the path should be `project-1`, the name of the project you're in right now. 
 
 ### Exercise 2
 
@@ -1020,13 +1081,13 @@ question_text(NULL,
 
 This command shows the files in the directory.
 
-Note that "project" has multiple meanings. First, "project" is a generic term for an RStudio project, generally with a sensible name. Second, `project-1`, note the use of typewriter font, is the name of a specific RStudio project. Third, `project-1` --- the same string in the same font --- can refer to the directory in which the RStudio project is located.
+Note that "project" has multiple meanings. First, "project" is a generic term for an a project which contains our code/data, generally with a sensible name. Second, `project-1`, note the use of typewriter font, is the name of a specific project. Third, `project-1` --- the same string in the same font --- can refer to the directory in which the project is located.
 
 ### Exercise 3
 
 ***Do not start this exercise until you have read all the instructions. This exercise will force you to close the tutorial, so you won't be able to access the instructions while completing the exercise. Once you're done with all the steps in this exercise, re-open the tutorial to continue.***
 
-We want to make the plot in a script that's inside of a different RStudio project. To do that, we need to actually *create* the new project! The way to do that is quite simple, as RStudio has a handy menu for managing projects:
+We want to make the plot in a script that's inside of a different project. To do that, we need to actually *create* the new project! The way to do that is quite simple, as RStudio has a handy menu for managing projects:
 
 ```{r}
 include_graphics("images/rs-proj-menu-locator.png")
@@ -1069,7 +1130,7 @@ Your answer should look like this:
 "/Users/dkane/Desktop/projects/project-2"
 ```
 
-Somewhere in the path should be `project-2`, the name of the RStudio project you just made and are now in. 
+Somewhere in the path should be `project-2`, the name of the project you just made and are now in. 
 
 ### Exercise 5
 
@@ -1126,7 +1187,7 @@ The output should have the same chunk of code as the one you were given to copy-
 ## Summary
 ### 
 
-This tutorial covered [Chapter 2 Workflow: basics](https://r4ds.hadley.nz/workflow-basics.html),  [Chapter 4 Workflow: code style](https://r4ds.hadley.nz/workflow-style.html), [Chapter 6 Workflow: scripts and projects](https://r4ds.hadley.nz/workflow-scripts.html), and some material in [Chapter 28 Quarto](https://r4ds.hadley.nz/quarto.html) from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. You learned how to use [R scripts](https://r4ds.hadley.nz/workflow-scripts.html#scripts) and how to create [RStudio projects](https://docs.posit.co/ide/user/ide/guide/code/projects.html).
+This tutorial covered [Chapter 2 Workflow: basics](https://r4ds.hadley.nz/workflow-basics.html),  [Chapter 4 Workflow: code style](https://r4ds.hadley.nz/workflow-style.html), [Chapter 6 Workflow: scripts and projects](https://r4ds.hadley.nz/workflow-scripts.html), and some material in [Chapter 28 Quarto](https://r4ds.hadley.nz/quarto.html) from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. You learned how to use [R scripts](https://r4ds.hadley.nz/workflow-scripts.html#scripts) and how to create [projects](https://docs.posit.co/ide/user/ide/guide/code/projects.html).
 
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
