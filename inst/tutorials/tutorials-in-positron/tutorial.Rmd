@@ -151,7 +151,7 @@ Read all of the following instructions before continuing.
 * Restart the tutorial. The most common approach is to run this command at the Console:
 
 ```
-learnr::run_tutorial("getting-started", package = "tutorial.helpers")
+learnr::run_tutorial("tutorials-in-positron", package = "tutorial.helpers")
 ```
 
 Now that you have read all the instructions, go ahead and follow them.
@@ -192,7 +192,7 @@ Your version of R may be more recent, but it should not be older. It is OK if yo
 
 ### 
 
-The tutorial workflow will often look like this. We tell you to run a command **in the Console**. You run it. We then ask you to copy/paste, from the Console, both the command itself and the response returned. Because we ask you to **c**opy/**p**aste the **c**ommand/**r**esponse so often, we usually shorten this instruction to CP/CR.
+Tutorial workflow will often look like this. We tell you to run a command **in the Console**. You run it. We then ask you to copy/paste, from the Console, both the command itself and the response returned. Because we ask you to **c**opy/**p**aste the **c**ommand/**r**esponse so often, we usually shorten this instruction to CP/CR.
 
 ### Exercise 6
 

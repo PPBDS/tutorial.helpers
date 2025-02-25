@@ -3,6 +3,10 @@
 How does line-wrapping work in Positron? And, whatever the answer, is this something that we should
 set for students in the Positron tutorial?
 
+Change name of set_rstudio_settings function.
+
+Add settings function to Primer.
+
 The pkgdown.yml was causing errors on GitHub. I suspect that this is the cause:
 
 https://github.com/r-lib/pkgdown/issues/2830
