@@ -28,6 +28,8 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
+<!-- Need to deal with the issue of keyboard short cuts. For now, I have mostly deleted them. Need to figure out which set to use and how to add them back. -->
+
 <!-- Make the experience good for Windows users. Key issue is adding Windows hints/clarifications to questions which are written implicitly assuming students are on a Mac. -->
 
 <!-- What about Chromebooks??!! Too much to worry about. -->
@@ -160,6 +162,8 @@ More info on paths can be found [here](https://people.ischool.berkeley.edu/~kevi
 
 ### Exercise 5
 
+<!-- DK: Test to ensure that ~ works on Windows. I am not sure if it does. The environment variable %USERPROFILE% might be what we need, perhaps only if RTools has been installed. -->
+
 Whenever you start a new project, you will want to store it in a location which you can easily find. Right now, you are likely in an arbitrary location on your computer. It would be much more useful to have a location dedicated to your projects.
 
 From the Console, run `path.expand("~")`. CP/CR.
@@ -182,7 +186,7 @@ My answer:
 [1] "/Users/dkane"
 ```
 
-The tilde symbol, `~`, refers to a user's home directory. Your answer should look similar. If you are on Windows, the directory separators will be backward slashes rather than forward slashes, as on my Mac. So, on Windows, the answer might be:
+The tilde symbol, `~`, refers to a user's home directory. Your answer should look similar. If you are on Windows, the directory separators will be backward slashes rather than forward slashes, as on my Mac. And there will also be a disk, generally `C:`, on which these directories are placed. So, on Windows, the answer might be:
 
 ```
 > path.expand("~")
@@ -249,6 +253,7 @@ question_text(NULL,
 
 If that command works, you are all set. (If you get a message about the directory already exists, then you are also all set.) If not, you will need to create a `projects` directory by hand. Helpful resources can be found [here](https://support.microsoft.com/en-us/office/create-a-new-folder-cbbfb6f5-59dd-4e5d-95f6-a12577952e17) for Windows, and [here](https://support.apple.com/guide/mac-help/organize-files-using-folders-mh26885/mac) for macOS.
 
+### 
 
 **The path to your data science projects should not include any folders with spaces (or other weird characters) in their names.** For example, this is a reasonable location for R projects if you are using a Mac:
 
@@ -262,15 +267,17 @@ And if you are using Windows . . .
 C:/Users/dkane/projects/
 ````
 
-## R Projects
+Again, you can place your `projects` directory where you want, as long as you keep track of where it is.
+
+## Projects
 ### 
 
-Good data scientists keep their work organized. You should place your work in different projects, which are simply folders (that is, directories) on your computer with some helper files. Each separate project is a folder within your main folder for your data science work, i.e.,  `/Users/dkane/Desktop/projects/`.  
+Good data scientists keep their work organized. You should place your work in different projects, which are simply folders (that is, directories) on your computer. Each separate project is a folder within your main folder for your data science work, i.e.,  `/Users/dkane/Desktop/projects/`.  
 
 
 ### Exercise 1
 
-<!-- DK: Consider adding images and/or a gif. -->
+<!-- DK: Consider adding more images and/or a gif. -->
 
 **Read all of the instructions before starting this exercise.**
 
@@ -282,7 +289,7 @@ From the "Project Type" screen, select "R Project." Click "Next." Doing so bring
 include_graphics("images/set-project.png")
 ```
 
-Enter `analysis-1` as the name of your Project Name. Set the Parent Directory to your `projects` directory. (You may have to "Browse" your computer to find it.) Do **not* initialize the project as a Git repository.
+Enter `analysis-1` as your "Project Name."" Set the "Parent Directory" to your `projects` directory. (You may have to "Browse" your computer to find it.) Do **not* initialize the project as a Git repository.
 
 ```{r}
 include_graphics("images/set-project-2.png")
@@ -296,11 +303,9 @@ The "Set up project configuration" screen should appear. Accept the default opti
 include_graphics("images/set-project-3.png")
 ```
 
-You can have multiple "Windows" open when you use Positron. Each is separate. Some people like to complete tutorials within just one Window, so they can keep everything together. Others prefer multiple windows, across which they then switch back and forth.
+You can have multiple "Windows" open when you use Positron. Getting used to moving between Windows is important; the short-cut-key `Command/Ctrl + \`` may be useful.
 
-### 
-
-For new students, we recommend the former, doing everything within one Window. So, we recommend choosing "Current Window." But choosing "New Window" is also reasonable. But, with that choice, you will need to move back-and-forth between the two windows, one of which is this tutorial and the other of which is the actual `analysis-1` project which we will be working on.
+Select "New Window." You will need to move back-and-forth between the two windows, one of which is this tutorial and the other of which is the actual `analysis-1` project in which we will be working.
 
 ### 
 
@@ -308,9 +313,12 @@ Now that you have read all the directions, we can go through the steps.
 
 ### 
 
-Once you restart the tutorial, run `getwd()` in the Console. CP/CR.
+In the new window, run `getwd()` in the Console. (In other words, you are **not** doing this in the Console in the window in which you are completely this tutorial, if only because the Console in this window is *busy* running the tutorial itself.)
 
-```{r r-projects-1}
+
+CP/CR.
+
+```{r projects-1}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -321,7 +329,7 @@ question_text(NULL,
 
 ### 
 
-This path should now be different than our previous path, similar to the path below. Creating/opening an R project moves the R session to that directory.
+This path should now be different than our previous path, similar to the path below. Creating/opening a project moves the R session to that directory.
 
 
 ````
@@ -331,14 +339,26 @@ This path should now be different than our previous path, similar to the path be
 
 ### 
 
-If your path does not include your `projects` folder, you probably did not fill in the "Create project as subdirectory of:" box correctly. It should be the path to your `projects` folder, including `projects` itself.
+If your path does not include your `projects` folder, you probably did not fill in the "Parent Directory" box correctly. It should be the path to your `projects` folder, including `projects` itself.
 
 
 ### Exercise 2
 
-Run `list.files()`. CP/CR.
+The new window should look like this:
 
-```{r r-projects-2}
+```{r}
+include_graphics("images/set-project-4.png")
+```
+
+The *Welcome* screen has disappeared. There is a blank, unsaved file named `Untitled-1` in the Editor pane. You can tell it is unsaved because its name is *italicized*. By deafult, the Explorer button in the Activity Bar on the far left has been activated, showing us that the `analysis-1` directory has no files in it yet.
+
+###
+
+Run `list.files()`. Again, we are issuing all these commands in the other window, not the window in which this tutorial is running. 
+
+CP/CR.
+
+```{r projects-2}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -349,56 +369,25 @@ question_text(NULL,
 
 ### 
 
-`list.files()` returns files contained in your current R project. This should return only the file `analysis-1.Rproj`.
+`list.files()` returns files contained in your current project. There are none so far.
 
-Keeping all the files associated with a given project --- input data, R scripts, analytic results, and figures --- together in one directory is such a wise and common practice that RStudio has built-in support for this via projects.
+Keeping all the files associated with a given project --- input data, R scripts, analytic results, and figures --- together in one directory is very wise.
 
 Everything you need is in one place and cleanly separated from all the other projects that you are working on.
 
 
-### Exercise 3
 
-In the Console, run:
-
-````
-tutorial.helpers::show_file("analysis-1.Rproj")
-````
-
-CP/CR.
-
-`show_file()` is a function which we have written which makes it easy for you to demonstrate, and for us to check, that you have done what we wanted you to do.
-
-```{r r-projects-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
-```
-
-### 
-
-This should return lines containing some basic settings for your R project. For example, `RestoreWorkspace` is set to `Default`. Each R project has its own `Rproj` file in which its settings are recorded. 
-
-### 
-
-Indeed, the *definition* of an R project --- from the point of view of RStudio --- is a directory with an associated `Rproj` file. ("Folder" and "directory" are used interchangeably.)
 
 ## Script 1
 ### 
 
-So far, we have only worked in the R Console, but it's quite difficult to type more than a few lines of code into the Console at once. One solution is to use [R scripts](https://r4ds.hadley.nz/workflow-scripts.html#scripts), files which contain a permanent copy of our code.
+So far, we have only worked in the Console, but it's quite difficult to type more than a few lines of code into the Console at once. One solution is to use [R scripts](https://r4ds.hadley.nz/workflow-scripts.html#scripts), files which contain a permanent copy of our code.
 
 ### Exercise 1
 
-Create an R script by clicking the `File -> New File` drop down menu at the top left of your RStudio Session, and then selecting `R Script`.
+The file `Untitled-1` should already be in your Editor window. If it is not, you can create a new file by clicking the `File -> New File ...` drop down menu, and then selecting `R File`.
 
 ### 
-
-An untitled, empty file should pop up above the R Console in the Source pane. By opening a script, you have caused the Source pane to open, the fourth [common pane within RStudio](https://docs.posit.co/ide/user/ide/guide/ui/ui-panes.html). (The three other panes are Console, Environment and Output. Within each pane, there are usually multiple tabs.)
-
-You can also create a new R script using the keyboard shortcut `Cmd/Ctrl + Shift + N`. 
 
 Type `5 * 5` into your R script file. Save the file. Name it `script-1.R`. (Note that R will provide the `.R` suffix, so you only need to type `script-1`.) 
 
@@ -428,17 +417,19 @@ Warning message:
 In readLines("script-1.R") : incomplete final line found on 'script-1.R'
 ````
 
-This means that your file need a blank line at the end. As a rule of thumb, it is always a good idea to have the last line of any text file be blank.
+This means that your file needs a blank line at the end. As a rule of thumb, it is always a good idea to have the last line of any text file be blank.
 
 R scripts are permanent copies of your code. You can save them and also work with them interactively.
 
 ### Exercise 2
 
-Note the "Source" button, which is in the top right corner of the Source pane. If you hover your cursor over it, you will see "Source the contents of the active document." Press the Source button. (We will sometimes shorten the instruction "press the source button" to just "source" the script.)
+Note the "Source" button, which is in the top right corner of the Editor. 
 
 ```{r}
-include_graphics("images/source-button.jpg")
+include_graphics("images/source-button.png")
 ```
+
+If you hover your cursor over it, you will see "Source R File." Press the Source button. (We will sometimes shorten the instruction "press the source button" to just "source" the script.)
 
 Note what happens in the Console. CP/CR.
 
@@ -457,11 +448,7 @@ question_text(NULL,
 You answer should look like this:
 
 ````
-> source("~/Desktop/projects/analysis-1/script-1.R", echo=TRUE)
-
-> 5 * 5
-[1] 25
-> 
+> source("/Users/dkane/Desktop/projects/analysis-1/script-1.R")
 ````
 
 ### 

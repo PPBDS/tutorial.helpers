@@ -4,6 +4,8 @@
 
 * Add new tutorial: "Tutorials in Positron."
 
+* Add set_positron_rstudio_keymap() function.
+
 # tutorial.helpers 0.3.1
 
 * Clean up "Instructions for Writing R Tutorials" vignette.
