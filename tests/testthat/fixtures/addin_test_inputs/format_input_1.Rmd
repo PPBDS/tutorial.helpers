@@ -174,3 +174,14 @@ Should work even if there are no labels, even if the comma is not included. The 
 ```
 
 ###
+
+## Exercises 
+### 
+
+Weird case which used to produce exercises--1 instead of exercise-1.
+
+### Exercise 1
+
+```{r exercises-1, exercise = TRUE}
+
+```

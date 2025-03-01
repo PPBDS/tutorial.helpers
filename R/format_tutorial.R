@@ -67,6 +67,12 @@ format_tutorial <- function(file_path) {
       section_name <- tolower(section_title)
       section_name <- gsub(" ", "-", section_name)
       section_name <- gsub("[^a-z0-9-]", "", section_name)
+      
+      # Check if section_name already ends with a hyphen and remove it
+      if (grepl("-$", section_name)) {
+        section_name <- sub("-$", "", section_name)
+      }
+      
       exercise_counter <- 0
       in_section <- TRUE
       i <- i + 1
@@ -115,6 +121,12 @@ format_tutorial <- function(file_path) {
       section_name <- tolower(section_title)
       section_name <- gsub(" ", "-", section_name)
       section_name <- gsub("[^a-z0-9-]", "", section_name)
+      
+      # Check if section_name already ends with a hyphen and remove it
+      if (grepl("-$", section_name)) {
+        section_name <- sub("-$", "", section_name)
+      }
+      
       exercise_counter <- 0
       next
     }
@@ -144,6 +156,15 @@ format_tutorial <- function(file_path) {
       
       # Skip "setup" chunks - they should not be changed
       if (grepl("^```\\{r\\s+setup", current_line)) {
+        next
+      }
+      
+      # First check if the chunk already has the correct label
+      current_label_pattern <- paste0("^```\\{r\\s+", section_name, "-", exercise_counter, "(,|\\})")
+      is_already_correct <- grepl(current_label_pattern, current_line)
+      
+      # Skip if the label is already correctly formatted
+      if (is_already_correct) {
         next
       }
       
