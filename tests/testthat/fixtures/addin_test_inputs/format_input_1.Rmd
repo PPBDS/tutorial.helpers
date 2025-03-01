@@ -5,14 +5,15 @@ date: "7/27/2021"
 output: html_document
 ---
 
-This is test 1 for the addin that formats code chunk labels. This covers the basic usage of the addin, which is changing the chunk labels based on section name and exercise number. It also covers the mix of different kinds of questions.
+This is test 1 for the addin that formats code chunk labels. 
 
 ## Section 1
 ###
 
 ### Exercise 1
 
-Purpose of this initial code chunk is to ensure that format tutorial does not act on it. No code chunk without a label should be changed.
+
+Purpose of this initial code chunk is to ensure format_tutorial() does not act on it. A code chunk without either "exercise," "eval," or "include" should not be changed.
 
 ```{r}
 
@@ -37,7 +38,7 @@ Purpose of this initial code chunk is to ensure that format tutorial does not ac
 
 ###
 
-### Exercise 2
+### Exercise 4
 
 
 ```{r incorrect-label, exercise = TRUE}
@@ -90,11 +91,26 @@ question_text(NULL,
 
 ###
 
-## Section 2
+A code chunk with the label setup should not be changed:
 
+```{r setup, include = FALSE}
+library(learnr)
+``
+
+None of the default tutorial helpers should be changed:
+
+```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
+```
+
+```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+
+## Section 2
 ###
 
-### Exercise 1
+### Exercise 8
 
 
 ```{r incorrect-label, exercise = TRUE}
@@ -141,14 +157,19 @@ aslkdjasld
 
 ### Exercise 4
 
+Should work even if there are no labels, even if the comma is not included. The option tells us what kind of chunk it is, and therefor, how to label it.
 
-```{r incorrect-label, exercise = TRUE}
+```{r, exercise = TRUE}
 
 ```
 
 <button onclick = "transfer_code(this)">Copy previous code</button>
 
-```{r incorrect-label, eval = FALSE}
+```{r include = FALSE}
+
+```
+
+```{r eval = FALSE}
 
 ```
 
