@@ -1,290 +1,281 @@
-#' Re-format a tutorial
+#' Format RMarkdown tutorial code chunks
 #'
-#' @description A function for formatting tutorial Rmd files. Used by
-#'   check_current_tutorial() to re-format the currently open tutorial in
-#'   RStudio. It renumbers the exercises so that they are in order. It ensures
-#'   that chunk labels use this numbering, along with the section title.
+#' This function processes an R Markdown tutorial file to standardize code chunk labels
+#' based on section names and exercise numbers. It also renumbers exercises sequentially
+#' within each section.
 #'
-#' @param file_path Character string.
+#' @param file_path Character string. Path to the R Markdown file to process.
 #'
-#' @returns Formatted document with correct exercise, hint and test chunk labels.
+#' @details
+#' The function applies the following formatting rules:
+#' \itemize{
+#'   \item Exercises are renumbered sequentially within each section
+#'   \item Code chunks are relabeled according to the pattern: section-name-exercise-number
+#'   \item Chunks with `eval = FALSE` receive a `-hint-N` suffix
+#'   \item Chunks with `include = FALSE` receive a `-test` suffix
+#'   \item Chunks with label "setup" are not modified
+#'   \item Unlabeled chunks without key options are not modified
+#'   \item All formatted chunks preserve their original options
+#' }
+#'
+#' @return Character string containing the formatted R Markdown content.
+#'
+#' @examples
+#' \dontrun{
+#' # Format a tutorial file
+#' new_content <- format_tutorial("path/to/tutorial.Rmd")
+#' 
+#' # Write the formatted content to a file
+#' writeLines(new_content, "path/to/formatted_tutorial.Rmd")
+#' }
+#'
 #' @export
-
-format_tutorial <- function(file_path){
-
-  # Create function that will later be used to set the chunk label and code.
-
-  change_chunk_function <- function(x, ...){
-    opts <- list(...)
-    x[[opts[[1]]]] <- opts[[2]]
-    x
-  }
-
-  # Create function that will later be used to get the number of lines in an
-  # exercise.
-
-  get_chunk_lines <- function(x, ...){
-    length(x$code)
-  }
-
-  # Parse Rmd of file path
-
-  rmd <- parsermd::parse_rmd(file_path)
-
-  tbl <- tibble::as_tibble(rmd)
+format_tutorial <- function(file_path) {
+  # Read the Rmd file
+  lines <- readLines(file_path)
   
-  # parsermd 0.1.3 created a difficult to diagnose bug for me. It labels any
-  # unlabelled R code chunk as "unnamed-chunk-n" with "n" incrementing. That is
-  # very bad! You should not add labels which do not exist. So, I do a total
-  # hack to just remove those labels from the final document. Of course, this
-  # will hose any user who actually has a code chunk whose label matches
-  # "unnamed-chunk-n" with "n" as any integer, but what are you going to do?
-  # This hack was easier (?) than trying to work directly with objects of class
-  # "rmd_ast" "list"
+  # Initialize variables to track state
+  section_name <- ""
+  exercise_counter <- 0
+  in_yaml <- FALSE
+  in_section <- FALSE
   
-  for(i in seq_len(nrow(tbl))){
-    if(grepl("^unnamed-chunk-\\d+$", tbl[i, "label"])){
-      
-      # Once we get the correct row, we do two things. First, we remove the
-      # label from the tibble. Not sure why this is necessary. Is the label
-      # really used later? Second, we need to change the ast itself.
-      
-      tbl$label[i] <- NA
-      new_ast <- purrr::map(tbl$ast[i], change_chunk_function, "name", "")
-      tbl$ast[i] <- new_ast
-    }
-  }
+  # Add a variable to track hint counters per exercise
+  hint_counters <- list()
   
-  # Set up tracker variables for the loop
-
-  hint_count <- 0
-
-  exercise_number <- 1
-
-  curr_exercise <- ""
-
-  curr_section <- ""
-
-  has_exercise <- FALSE
-
-  # The idea of this loop is to go through each element of the Rmd and change it
-  # to its desired format.
-
-  # Each code chunk will go through a series of conditions to determine what
-  # type of code chunk it is and what the label should be.
-  
-  # This entire loop should be refactored. Not sure how! Should probably start
-  # by creating the exercise code chunk name correctly. Once you have that, the
-  # name for the hint and the test code chunks is simple enough. Note the
-  # trickiness of keeping count of the hints. Maybe don't allow more than one
-  # hint?
-
-  for (i in seq_along(tbl$sec_h2)){
-
-    # Check if the code chunk is in a level 3 heading.
-
-    l <- tbl$sec_h2[i]
-
-    e <- tbl$sec_h3[i]
-
-    # Ignore all code chunks outside a level 3 heading.
-
-    if (is.na(l) | is.na(e)){
+  # First pass: Identify and renumber exercises
+  i <- 1
+  while (i <= length(lines)) {
+    current_line <- lines[i]
+    
+    # Track YAML section
+    if (grepl("^---$", current_line)) {
+      in_yaml <- !in_yaml
+      i <- i + 1
       next
     }
-
-    # Check if current exercise is a new exercise: If it is, then the hint and
-    # exercise tracker is reset and the exercise number is updated.
-
-    if (l != curr_section && nchar(trimws(l)) != 0 && tbl$type[i] == "rmd_heading"){
-      curr_section <- l
-
-      exercise_number <- 0
-    }
-
-
-    if (nchar(trimws(e)) != 0 && tbl$type[i] == "rmd_heading"){
-      exercise_number <- exercise_number + 1
-
-      curr_exercise <- paste0("Exercise ", exercise_number)
-
-      new_heading_ast <- purrr::map(tbl$ast[i], change_chunk_function, "name", curr_exercise)
-
-      tbl$ast[i] <- new_heading_ast
-
-      hint_count <- 0
-
-      has_exercise <- FALSE
-    }
     
-    # DK: Would be nice if, instead of skipping labels which are null, it added
-    # labels, at least in any hint or test chunk. Big annoyance right now is
-    # that we have lots of test chunks with no labels.
-
-    # Skip this loop if the current element fits any of the following:
-    # 1. not a code chunk
-    # 2. has NULL for its label
-    # 3. has an empty string for its label
-
-    if (tbl$type[i] != "rmd_chunk" | 
-        is.na(tbl$label[i]) | 
-        nchar(trimws(tbl$label[i])) == 0){
+    # Skip processing within YAML
+    if (in_yaml) {
+      i <- i + 1
       next
     }
-
-    # If "hint" is in the current element's label
-    # but the element doesn't have the eval = FALSE option,
-    # add that option to the element.
     
-    # DK: Add similar testing/fixing for test chunks. Or, better, make this
-    # hackery go away. If writers forget eval = FALSE, what can we do?
-
-    if (stringr::str_detect(tbl$label[i], "hint") && 
-        length(parsermd::rmd_get_options(tbl$ast[i])[[1]]) == 0){
-      tbl$ast[i] <- parsermd::rmd_set_options(tbl$ast[i], eval = "FALSE")
+    # Detect sections (## headers)
+    if (grepl("^## ", current_line)) {
+      section_title <- sub("^## ", "", current_line)
+      section_name <- tolower(section_title)
+      section_name <- gsub(" ", "-", section_name)
+      section_name <- gsub("[^a-z0-9-]", "", section_name)
+      exercise_counter <- 0
+      in_section <- TRUE
+      i <- i + 1
+      next
     }
-
-    # Create the standardized label of the current element. Hate that we need to
-    # duplicate this code from determine_code_chunk_names.R. Can't we have it in
-    # just one place?
-
-    # Remove the pattern "{#...}" and non-alphanumeric characters except
-    # spaces and slashes
     
-    cleaned_l <- gsub("\\{#(.*)\\}", "", l)
-    cleaned_l <- gsub("[^a-zA-Z0-9 /]", "", cleaned_l)
+    # Detect and renumber exercise sections
+    if (in_section && grepl("^### Exercise", current_line)) {
+      exercise_counter <- exercise_counter + 1
+      # Update the exercise number in the header
+      lines[i] <- paste0("### Exercise ", exercise_counter)
+      # Initialize hint counter for this exercise
+      hint_key <- paste0(section_name, "-", exercise_counter)
+      hint_counters[[hint_key]] <- 0
+      i <- i + 1
+      next
+    }
     
-    # Convert to lowercase, replace spaces and slashes with hyphens, trim to 30
-    # characters, and trim whitespace and hyphens at the start and beginning.
+    i <- i + 1
+  }
+  
+  # Reset tracking variables for second pass
+  section_name <- ""
+  exercise_counter <- 0
+  in_yaml <- FALSE
+  hint_counters <- list()
+  
+  # Second pass: Update code chunk labels based on corrected exercise numbers
+  for (i in seq_along(lines)) {
+    current_line <- lines[i]
     
-    section_id <- trimws(cleaned_l)
-    section_id <- substr(gsub("[ /]", "-", tolower(section_id)), 1, 30)
-    section_id <- gsub("-+$", "", section_id)
-    section_id <- gsub("^-+", "", section_id)
-
-    # Read the options of the element
-
-    filt_options <- parsermd::rmd_get_options(tbl$ast[i])[[1]]
-
-    # If the element has options, then check for the following:
-    #
-    # 1) If the element is a hint, set its label
-    #   to the hint format and increment the hint tracker
-    #   then skip to next loop
-    #
-    # 2) If the element is a child document, skip to next loop.
-    #
-    # 3) If the element is an exercise and does not have an empty line,
-    #   add an empty line.
-
-    if (length(filt_options) > 0){
-      if (names(filt_options)[[1]] == "eval" && filt_options[[1]] == "FALSE"){
-        hint_count <- hint_count + 1
-
-        new_label <- paste0(section_id, "-", exercise_number, "-hint-", hint_count)
-
-        new_ast <- purrr::map(tbl$ast[i], change_chunk_function, "name", new_label)
-
-        tbl$ast[i] <- new_ast
-
+    # Track YAML section
+    if (grepl("^---$", current_line)) {
+      in_yaml <- !in_yaml
+      next
+    }
+    
+    # Skip processing within YAML
+    if (in_yaml) {
+      next
+    }
+    
+    # Detect sections (## headers)
+    if (grepl("^## ", current_line)) {
+      section_title <- sub("^## ", "", current_line)
+      section_name <- tolower(section_title)
+      section_name <- gsub(" ", "-", section_name)
+      section_name <- gsub("[^a-z0-9-]", "", section_name)
+      exercise_counter <- 0
+      next
+    }
+    
+    # Detect exercise sections and increment counter
+    if (grepl("^### Exercise", current_line)) {
+      exercise_counter <- exercise_counter + 1
+      # Initialize hint counter for this exercise
+      hint_key <- paste0(section_name, "-", exercise_counter)
+      hint_counters[[hint_key]] <- 0
+      next
+    }
+    
+    # Process code chunks - match the start of an R code chunk 
+    if (grepl("^```\\{r", current_line)) {
+      # Skip if we're not in a section or exercise
+      if (section_name == "" || exercise_counter == 0) {
         next
       }
-
-      if (names(filt_options)[[1]] == "child"){
+      
+      # LOGIC FOR UPDATING CODE CHUNKS:
+      # 1. Label "setup" = no change
+      # 2. No label without key options = no change
+      # 3. Label with other options but without key options = no change
+      # 4. Label without any options = change
+      # 5. Any chunk with "exercise", "eval", or "include" = change (even if no label)
+      
+      # Skip "setup" chunks - they should not be changed
+      if (grepl("^```\\{r\\s+setup", current_line)) {
         next
       }
-
-      if (names(filt_options)[[1]] == "exercise" && filt_options[[1]] == "TRUE"){
-        if (purrr::map(tbl$ast[i], get_chunk_lines)[[1]] == 0){
-          new_ast <- purrr::map(tbl$ast[i], change_chunk_function, "code", "")
-          tbl$ast[i] <- new_ast
+      
+      # Create the new base label
+      new_base_label <- paste0(section_name, "-", exercise_counter)
+      
+      # Handle the special case of unlabeled chunks with include=FALSE, eval=FALSE, or exercise=TRUE
+      if (grepl("^```\\{r\\s+include\\s*=\\s*FALSE", current_line) || grepl("^```\\{r,\\s*include\\s*=\\s*FALSE", current_line)) {
+        # Direct match for unlabeled chunk with include=FALSE
+        lines[i] <- gsub("^```\\{r\\s*(.*)$", paste0("```{r ", new_base_label, "-test, \\1"), current_line)
+        next
+      }
+      
+      if (grepl("^```\\{r\\s+eval\\s*=\\s*FALSE", current_line) || grepl("^```\\{r,\\s*eval\\s*=\\s*FALSE", current_line)) {
+        # Direct match for unlabeled chunk with eval=FALSE
+        hint_key <- paste0(section_name, "-", exercise_counter)
+        hint_counters[[hint_key]] <- hint_counters[[hint_key]] + 1
+        hint_number <- hint_counters[[hint_key]]
+        
+        lines[i] <- gsub("^```\\{r\\s*(.*)$", paste0("```{r ", new_base_label, "-hint-", hint_number, ", \\1"), current_line)
+        next
+      }
+      
+      if (grepl("^```\\{r\\s+exercise\\s*=\\s*TRUE", current_line) || grepl("^```\\{r,\\s*exercise\\s*=\\s*TRUE", current_line)) {
+        # Direct match for unlabeled chunk with exercise=TRUE
+        lines[i] <- gsub("^```\\{r\\s*(.*)$", paste0("```{r ", new_base_label, ", \\1"), current_line)
+        next
+      }
+      
+      # Check if chunk has a label
+      has_label <- grepl("^```\\{r\\s+[^,\\}]", current_line)
+      
+      # Check if chunk has one of the key options
+      has_key_option <- grepl("exercise\\s*=", current_line) || 
+                        grepl("eval\\s*=", current_line) || 
+                        grepl("include\\s*=", current_line)
+      
+      # Check if the chunk has any options (indicated by a comma)
+      has_options <- grepl(",", current_line)
+      
+      # Determine if we should update this chunk
+      should_update <- FALSE
+      
+      # Logic for determining if a chunk should be updated
+      if (!has_label) {
+        # No label - only update if it has key options
+        should_update <- has_key_option
+      } else {
+        if (has_options) {
+          # Label with options - only update if it has a key option
+          should_update <- has_key_option
+        } else {
+          # Label without options - always update
+          should_update <- TRUE
+        }
+      }
+      
+      # Update the chunk if needed
+      if (should_update) {
+        # Handle specific cases based on options
+        if (grepl("eval\\s*=\\s*FALSE", current_line)) {
+          # Hint chunks with eval=FALSE
+          hint_key <- paste0(section_name, "-", exercise_counter)
+          hint_counters[[hint_key]] <- hint_counters[[hint_key]] + 1
+          hint_number <- hint_counters[[hint_key]]
+          
+          if (has_label && has_options) {
+            # Labeled chunk with options
+            options <- sub("^```\\{r\\s+[^,]+,\\s*(.+)\\}$", "\\1", current_line)
+            lines[i] <- paste0("```{r ", new_base_label, "-hint-", hint_number, ", ", options, "}")
+          } else if (has_label && !has_options) {
+            # Labeled chunk without other options
+            lines[i] <- paste0("```{r ", new_base_label, "-hint-", hint_number, "}")
+          } else {
+            # Unlabeled chunk with eval=FALSE
+            options <- sub("^```\\{r\\s*,?\\s*(.+)\\}$", "\\1", current_line)
+            lines[i] <- paste0("```{r ", new_base_label, "-hint-", hint_number, ", ", options, "}")
+          }
+        }
+        else if (grepl("include\\s*=\\s*FALSE", current_line)) {
+          # Chunks with include=FALSE get -test suffix
+          if (has_label && has_options) {
+            options <- sub("^```\\{r\\s+[^,]+,\\s*(.+)\\}$", "\\1", current_line)
+            lines[i] <- paste0("```{r ", new_base_label, "-test, ", options, "}")
+          } else if (has_label && !has_options) {
+            lines[i] <- paste0("```{r ", new_base_label, "-test}")
+          } else {
+            # Unlabeled chunk with include=FALSE
+            options <- sub("^```\\{r\\s*,?\\s*(.+)\\}$", "\\1", current_line)
+            lines[i] <- paste0("```{r ", new_base_label, "-test, ", options, "}")
+          }
+        }
+        else if (grepl("-test", current_line)) {
+          # Chunks with -test in their label
+          if (has_options) {
+            options <- sub("^```\\{r\\s+[^,]+,\\s*(.+)\\}$", "\\1", current_line)
+            lines[i] <- paste0("```{r ", new_base_label, "-test, ", options, "}")
+          } else {
+            lines[i] <- paste0("```{r ", new_base_label, "-test}")
+          }
+        }
+        else if (grepl("exercise\\s*=\\s*TRUE", current_line)) {
+          # Exercise chunks
+          if (has_label && has_options) {
+            options <- sub("^```\\{r\\s+[^,]+,\\s*(.+)\\}$", "\\1", current_line)
+            lines[i] <- paste0("```{r ", new_base_label, ", ", options, "}")
+          } else if (has_label && !has_options) {
+            lines[i] <- paste0("```{r ", new_base_label, "}")
+          } else {
+            # Unlabeled chunk with exercise=TRUE
+            options <- sub("^```\\{r\\s*,?\\s*(.+)\\}$", "\\1", current_line)
+            lines[i] <- paste0("```{r ", new_base_label, ", ", options, "}")
+          }
+        }
+        else if (has_options && has_key_option) {
+          # Other chunks with key options
+          if (has_label) {
+            options <- sub("^```\\{r\\s+[^,]+,\\s*(.+)\\}$", "\\1", current_line)
+            lines[i] <- paste0("```{r ", new_base_label, ", ", options, "}")
+          } else {
+            options <- sub("^```\\{r\\s*,?\\s*(.+)\\}$", "\\1", current_line)
+            lines[i] <- paste0("```{r ", new_base_label, ", ", options, "}")
+          }
+        }
+        else {
+          # Label without options
+          lines[i] <- paste0("```{r ", new_base_label, "}")
         }
       }
     }
-
-    # If chunk label ends with "-setup", it is recognized as a setup code chunk,
-    # so the name is exercise name and -setup Ex: ex-1-setup for ex-1
-
-    if (grepl("-setup$", tbl$label[i])){
-      new_label <- paste0(section_id, "-", exercise_number, "-setup")
-      new_ast <- purrr::map(tbl$ast[i], change_chunk_function, "name", new_label)
-      tbl$ast[i] <- new_ast
-      next
-    }
-    
-    # If chunk label ends with "-test", it is recognized as a test chunk,
-    # so the name is exercise name and -test Ex: ex-1-test for ex-1
-    
-    if (grepl("-test$", tbl$label[i])){
-      new_label <- paste0(section_id, "-", exercise_number, "-test")
-      new_ast <- purrr::map(tbl$ast[i], change_chunk_function, "name", new_label)
-      tbl$ast[i] <- new_ast
-      next
-    }
-
-    # If this element is not a hint and the current level 3 heading already has
-    # an exercise, skip to the next loop because it must be some kind of set up
-    # code chunk.
-
-    if (has_exercise){
-      next
-    }
-
-    # After all the conditions above, the elements left MUST BE exercises, so
-    # the appropriate labels are set and the exercise tracker is updated.
-
-    new_label <- paste0(section_id, "-", exercise_number)
-
-    new_ast <- purrr::map(tbl$ast[i], change_chunk_function, "name", new_label)
-
-    tbl$ast[i] <- new_ast
-
-    has_exercise <- TRUE
-  }
-
-  # This is quite interesting.
-  #
-  # The parsermd already has an as_document function that should've taken care
-  # of turning the changed Rmd structure into raw text.
-  #
-  # However, there was a thing with Rmarkdown sections in the structure where
-  # each time it is updated, it adds a newline to the section because while
-  # parsing, newlines counted as part of the Rmarkdown section.
-  #
-  # This created a cycle where each time an Rmd is checked, it would be padded
-  # with as many newlines as there are Rmarkdown sections.
-  #
-  # Therefore, I had to make my own way of transforming the Rmd back to plain
-  # text.
-  #
-  # The only unique thing this part does is that it removes the last character
-  # of every Rmarkdown section, which is always a newline before adding it to
-  # the full document.
-
-  new_doc <- ""
-  for (i in seq_along(tbl$sec_h2)){
-    new_txt <- parsermd::as_document(tbl$ast[i], collapse = "\n")
-    if (tbl$type[i] == "rmd_markdown"){
-      new_txt <- substr(new_txt, 0, nchar(new_txt)-1)
-    }
-
-    if (tbl$type[i] == "rmd_heading" & is.na(tbl$sec_h3[i])){
-      new_txt <- substr(new_txt, 0, nchar(new_txt)-1)
-    }
-
-    new_doc <- paste(new_doc, new_txt, sep = "\n")
   }
   
-  # I don't really understand how the above code works. But I can see that it
-  # always results in an output doc with a newline at the beginning, which I
-  # don't think we want. At least, it looks weird for the test cases. (But might
-  # be a good idea in interactive use. If so, add the newline when it is
-  # interactive.)
-  
-  if(substr(new_doc, 1, 1) == "\n") {
-    new_doc <- substring(new_doc, 2)
-  }
-
-
-  new_doc
+  # Return formatted content with exactly the same line endings
+  return(paste(lines, collapse = "\n"))
 }

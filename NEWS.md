@@ -6,6 +6,8 @@
 
 * Add set_positron_rstudio_keymap() function.
 
+* Rewrite format_tutorial() to not use **parsermd** package.
+
 # tutorial.helpers 0.3.1
 
 * Clean up "Instructions for Writing R Tutorials" vignette.

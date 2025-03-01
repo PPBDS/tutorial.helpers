@@ -1,5 +1,3 @@
-library(parsermd)
-
 tutorial_paths <- tutorial.helpers::return_tutorial_paths("learnr")
 
 # One problem is that the tutorials in the learnr package have various problems.

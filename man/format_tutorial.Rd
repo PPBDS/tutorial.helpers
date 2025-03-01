@@ -2,19 +2,40 @@
 % Please edit documentation in R/format_tutorial.R
 \name{format_tutorial}
 \alias{format_tutorial}
-\title{Re-format a tutorial}
+\title{Format RMarkdown tutorial code chunks}
 \usage{
 format_tutorial(file_path)
 }
 \arguments{
-\item{file_path}{Character string.}
+\item{file_path}{Character string. Path to the R Markdown file to process.}
 }
 \value{
-Formatted document with correct exercise, hint and test chunk labels.
+Character string containing the formatted R Markdown content.
 }
 \description{
-A function for formatting tutorial Rmd files. Used by
-check_current_tutorial() to re-format the currently open tutorial in
-RStudio. It renumbers the exercises so that they are in order. It ensures
-that chunk labels use this numbering, along with the section title.
+This function processes an R Markdown tutorial file to standardize code chunk labels
+based on section names and exercise numbers. It also renumbers exercises sequentially
+within each section.
+}
+\details{
+The function applies the following formatting rules:
+\itemize{
+\item Exercises are renumbered sequentially within each section
+\item Code chunks are relabeled according to the pattern: section-name-exercise-number
+\item Chunks with \code{eval = FALSE} receive a \code{-hint-N} suffix
+\item Chunks with \code{include = FALSE} receive a \code{-test} suffix
+\item Chunks with label "setup" are not modified
+\item Unlabeled chunks without key options are not modified
+\item All formatted chunks preserve their original options
+}
+}
+\examples{
+\dontrun{
+# Format a tutorial file
+new_content <- format_tutorial("path/to/tutorial.Rmd")
+
+# Write the formatted content to a file
+writeLines(new_content, "path/to/formatted_tutorial.Rmd")
+}
+
 }

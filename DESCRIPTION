@@ -1,6 +1,6 @@
 Package: tutorial.helpers
 Title: Helper Functions for Creating Tutorials
-Version: 0.3.1.9007
+Version: 0.3.1.9008
 Authors@R: 
     person(given = "David",
            family = "Kane",
@@ -32,7 +32,6 @@ Imports:
     jsonlite,
     learnr,
     mime,
-    parsermd,
     purrr,
     readr,
     rmarkdown,
