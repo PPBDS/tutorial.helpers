@@ -1,5 +1,15 @@
 # Priorities
 
+Do we need to deal with the case in which the only option is echo = FALSE. 
+Right now, it just gets deleted. Which does not matter since echo = FALSE
+is a global option set by all tutorials. But, this might be a sign of bad 
+behavior in general. Like why delete a code chunk option under any 
+circumstances? No good reason to do so! Need to fix because current code
+leaves a duplicate code chunk there.
+
+It is annoying that R attempts to run `r scales::comma(x)` even when it is placed 
+in a verbatim environment. That is annoying! But how can format_tutorial() prevent? 
+
 How does line-wrapping work in Positron? And, whatever the answer, is this something that we should
 set for students in the Positron tutorial?
 
