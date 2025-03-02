@@ -1,5 +1,13 @@
 # Priorities
 
+Change set_positron settings to be more like rstudio version.
+
+Deal with all the .txt files in vignettes.
+
+Add back in pkgdown.
+
+See if they have fixed the pkgdown issue.
+
 Do we need to deal with the case in which the only option is echo = FALSE. 
 Right now, it just gets deleted. Which does not matter since echo = FALSE
 is a global option set by all tutorials. But, this might be a sign of bad 
@@ -9,9 +17,10 @@ leaves a duplicate code chunk there.
 
 It is annoying that R attempts to run `r scales::comma(x)` even when it is placed 
 in a verbatim environment. That is annoying! But how can format_tutorial() prevent? 
+It can't! This is a problem with run_tutorial().
 
-How does line-wrapping work in Positron? And, whatever the answer, is this something that we should
-set for students in the Positron tutorial?
+How does line-wrapping work in Positron? And, whatever the answer, is this something 
+that we should set for students in the Positron tutorial?
 
 Change name of set_rstudio_settings function.
 
