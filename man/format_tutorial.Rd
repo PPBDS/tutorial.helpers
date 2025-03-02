@@ -25,6 +25,7 @@ The function applies the following formatting rules:
 \item Chunks with \code{eval = FALSE} receive a \code{-hint-N} suffix
 \item Chunks with \code{include = FALSE} receive a \code{-test} suffix
 \item Chunks with label "setup" are not modified
+\item Chunks with the "file" option are not modified
 \item Unlabeled chunks without key options are not modified
 \item All formatted chunks preserve their original options
 \item Content between quadruple backticks (\verb{ }) is preserved untouched

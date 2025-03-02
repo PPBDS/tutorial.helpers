@@ -14,6 +14,7 @@
 #'   \item Chunks with `eval = FALSE` receive a `-hint-N` suffix
 #'   \item Chunks with `include = FALSE` receive a `-test` suffix
 #'   \item Chunks with label "setup" are not modified
+#'   \item Chunks with the "file" option are not modified
 #'   \item Unlabeled chunks without key options are not modified
 #'   \item All formatted chunks preserve their original options
 #'   \item Content between quadruple backticks (```` ````) is preserved untouched
@@ -176,13 +177,19 @@ format_tutorial <- function(file_path) {
       
       # LOGIC FOR UPDATING CODE CHUNKS:
       # 1. Label "setup" = no change
-      # 2. No label without key options = no change
-      # 3. Label with other options but without key options = no change
-      # 4. Label without any options = change
-      # 5. Any chunk with "exercise", "eval", or "include" = change (even if no label)
+      # 2. Chunks with "file" option = no change
+      # 3. No label without key options = no change
+      # 4. Label with other options but without key options = no change
+      # 5. Label without any options = change
+      # 6. Any chunk with "exercise", "eval", or "include" = change (even if no label)
       
       # Skip "setup" chunks - they should not be changed
       if (grepl("^```\\{r\\s+setup", current_line)) {
+        next
+      }
+      
+      # Skip chunks with "file" option - they should not be changed
+      if (grepl("file\\s*=", current_line)) {
         next
       }
       

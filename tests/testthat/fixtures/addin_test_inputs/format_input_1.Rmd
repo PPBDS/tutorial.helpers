@@ -183,6 +183,11 @@ Also ignore data printouts:
 
 ### Exercise 4
 
+Don't change a chunk with the "file" option.
+
+```{r file = "images/chunk-example.txt", echo = TRUE, eval = FALSE}
+```
+
 Should work even if there are no labels, even if the comma is not included. The option tells us what kind of chunk it is, and therefor, how to label it.
 
 ```{r, exercise = TRUE}
