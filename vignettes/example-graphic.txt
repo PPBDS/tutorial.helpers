@@ -1,3 +1,0 @@
-```{r}
-include_graphics("images/example.png")
-```

@@ -134,9 +134,35 @@ There are two main types of questions. First, we have normal *coding* questions.
 
 Here is an example code question:
 
-```{r, file = "example-code-exercise.txt", echo = TRUE, eval = FALSE}
+````{verbatim}
+### Exercise 2
+
+Start your code with `cces`. Use the pipe operator `|>` to add the 
+function `filter()`, selecting the  rows where `state` is equal to 
+"Massachusetts". To set something equal to a value in `filter()` 
+use two equal signs: `==`.
+
+```{r filter-2, exercise = TRUE}
 ```
 
+```{r filter-2-hint-1, eval = FALSE}
+cces |> 
+  filter(state == "...")
+```
+
+```{r filter-2-test, include = FALSE}
+cces |> 
+  filter(state == "Massachusetts")
+```
+### 
+
+`==` is used because it is **checking** whether the value of the 
+variable on the left is equal to the value on the left. See 
+[here](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html) 
+for discussion of other relational operators in R.
+A single equation symbol, `=`, is used to set something equal to 
+something else. 
+````
 
 First, the start of the exercise sets the stage. It sometimes teaches something new, connects to a previous exercise, provides a useful link, whatever. If it is long enough, it is followed by a triple hash. If not, the text continues to the instructions. Most of the time, as above, there is only the instruction, telling the student, step-by-step, what to do.
 
@@ -156,15 +182,26 @@ Hints must always have the same code chunk name as the exercise chunk for which 
 
 When you create a hint, always use `eval = FALSE` within the parentheses in the code chunk. This is because hints will often include "..." and other symbols which do not run as correct R code. So, we need to tell R not to run it or an error will occur during `R CMD check`. Example:
 
-```{r, file = "example-hint-1.txt", echo = TRUE, eval = FALSE}
+````{verbatim}
+```{r ex-1-hint-1, eval = FALSE}
+This is an example hint. Normally sentences like these 
+would cause an error in R because it is not proper code. 
+However, since we include eval = FALSE in the r-chunk, 
+R ignores all errors!
 ```
+````
 
 **You need to wrap the text in a long hint by hand, inserting the carriage returns yourself.** R will not wrap the text automatically.
 
 Often, hints look like this:
 
-```{r, file = "example-hint-2.txt", echo = TRUE, eval = FALSE}
+````{verbatim}
+```{r ex-1-hint-2, eval = FALSE}
+... |> 
+  filter(year = ...) |> 
+  ...(flights)
 ```
+````
 
 
 The "..." indicates places where the student needs to insert some code, a value or a function name. The code in hints should be formatted correctly.
@@ -193,8 +230,23 @@ One way to measure the shallowness of the learning curve is to examine how many 
 
 There are two types of text questions: 1) those that provide the students with the correct answer, after they have submitted their own answer, and, 2) those that do not provide an answer.  Examples:
 
-```{r, file = "example-written-1.txt", echo = TRUE, eval = FALSE}
-```
+````{verbatim}
+### Exercise 6
+
+Explain potential outcomes in about two sentences.
+
+```{r definitions-6}
+question_text(NULL,
+    message = "This is where we place the correct answer. It will appear only after 
+    students have submitted their own answers. Note that we do not need to wrap the 
+    answer text by hand.",          
+    answer(NULL, 
+           correct = TRUE),
+    allow_retry = FALSE,
+    incorrect = NULL,
+    rows = 6)
+``` 
+````
 
 For the `message` argument, you should provide an **excellent** answer. We want to allow students to check for themselves that they got, more or less, the correct answer. Note how we set `allow_retry` to FALSE. This means that, after they see our answer, students can't modify their answer. The `rows` argument decides how many rows the empty text input will have.
 
@@ -204,14 +256,27 @@ For paragraph questions, you should mention specific words or phrases which the 
 
 However, for many written questions, we don't provide an answer, so we don't mind if students resubmit. In that case, we use 
 
-```{r, file = "example-written-2.txt", echo = TRUE, eval = FALSE}
+````{verbatim}
+### Exercise 7
+
+From the Console, run `list.files()`. CP/CR.
+
+```{r file-creation-7}
+  question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 3)
 ```
+````
+
 
 This format is most commonly used for "process" questions in which we have told students to do something and then confirm that they have done it by copying/pasting the result from a command.
 
 `tutorial.helpers::show_file()` is a handy function for confirming that students have modified text files as instructed. For example, after telling students to edit the `_quarto.yml` file, we can check that they did so with:
 
-````
+````{verbatim}
 In the Console, run:
 
 ```
@@ -369,8 +434,11 @@ To add images to a tutorial, first make a directory called `images` in the folde
 
 Use `include_graphics()` to add the image into the document. Include this code in its own chunk, in the place where you want the image to appear in the tutorial. 
 
-```{r, file = "example-graphic.txt", echo = TRUE, eval = FALSE}
+````{verbatim}
+```{r}
+include_graphics("images/example.png")
 ```
+````
 
 `include_graphics()` is part of the `knitr` package, so you need `library(knitr)` in the setup code chunk. Note that you do not need to name these code chunks.
 
@@ -378,14 +446,7 @@ Because students will complete the tutorials using screens of very different wid
 
 ### Complex text
 
-You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which Rmarkdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. This works often, but not always. Comments characters like `#` are especially problematic. We also use the [**parsermd**](https://rundel.github.io/parsermd/) package behind the scenes. It does not work as well as one might like.
-
-The "file" trick solves this problem. Create a txt file, `example.txt`, with the text which you want to appear in the tutorial. You can either leave it in the same directory as the `tutorial.Rmd` file or, probably better, place it in either the `data` or `images` directory. You then add this code chunk to your tutorial.
-
-```{r file = "example-file.txt", echo = TRUE, eval = FALSE}
-```
-
-The `file` code chunk object loads the specified file. The other code chunk options ensure that the text is echoed but not evaluated.
+You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which Rmarkdown wants to process in certain ways. You can usually place such code in an environment surrounded by four backticks. 
 
 ## Processing submissions
 

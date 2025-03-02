@@ -1,7 +1,6 @@
 url: https://ppbds.github.io/tutorial.helpers/
 template:
-  bootstrap: 5
-  
+  bootstrap: 5  
 articles:
 - title: Vignettes
   navbar: ~

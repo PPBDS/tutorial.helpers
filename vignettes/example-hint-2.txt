@@ -1,5 +1,0 @@
-```{r ex-1-hint-2, eval = FALSE}
-... |> 
-  filter(year = ...) |> 
-  ...(flights)
-```

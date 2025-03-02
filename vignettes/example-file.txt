@@ -1,2 +1,0 @@
-```{r file = "example.txt", echo = TRUE, eval = FALSE}
-```
