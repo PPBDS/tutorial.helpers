@@ -27,6 +27,7 @@ The function applies the following formatting rules:
 \item Chunks with label "setup" are not modified
 \item Unlabeled chunks without key options are not modified
 \item All formatted chunks preserve their original options
+\item Content between quadruple backticks (\verb{ }) is preserved untouched
 }
 }
 \examples{

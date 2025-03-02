@@ -16,6 +16,7 @@
 #'   \item Chunks with label "setup" are not modified
 #'   \item Unlabeled chunks without key options are not modified
 #'   \item All formatted chunks preserve their original options
+#'   \item Content between quadruple backticks (```` ````) is preserved untouched
 #' }
 #'
 #' @return Character string containing the formatted R Markdown content.
@@ -38,6 +39,7 @@ format_tutorial <- function(file_path) {
   section_name <- ""
   exercise_counter <- 0
   in_yaml <- FALSE
+  in_verbatim <- FALSE  # New flag to track if we're inside quadruple backticks
   in_section <- FALSE
   
   # Add a variable to track hint counters per exercise
@@ -47,6 +49,19 @@ format_tutorial <- function(file_path) {
   i <- 1
   while (i <= length(lines)) {
     current_line <- lines[i]
+    
+    # Check for quadruple backticks - toggles verbatim mode
+    if (grepl("^````$", current_line)) {
+      in_verbatim <- !in_verbatim
+      i <- i + 1
+      next
+    }
+    
+    # Skip processing while in verbatim mode
+    if (in_verbatim) {
+      i <- i + 1
+      next
+    }
     
     # Track YAML section
     if (grepl("^---$", current_line)) {
@@ -98,11 +113,23 @@ format_tutorial <- function(file_path) {
   section_name <- ""
   exercise_counter <- 0
   in_yaml <- FALSE
+  in_verbatim <- FALSE
   hint_counters <- list()
   
   # Second pass: Update code chunk labels based on corrected exercise numbers
   for (i in seq_along(lines)) {
     current_line <- lines[i]
+    
+    # Check for quadruple backticks - toggles verbatim mode
+    if (grepl("^````$", current_line)) {
+      in_verbatim <- !in_verbatim
+      next
+    }
+    
+    # Skip processing while in verbatim mode
+    if (in_verbatim) {
+      next
+    }
     
     # Track YAML section
     if (grepl("^---$", current_line)) {
