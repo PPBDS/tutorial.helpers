@@ -10,7 +10,9 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Tutorials for Books">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="books_files/libs/quarto-html/popper.min.js"></script><script src="books_files/libs/quarto-html/tippy.umd.min.js"></script><link href="books_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="books_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Tutorials for Books">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -20,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9008</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,148 +55,181 @@
 
 
   </div>
-</nav><div class="container template-article">
-
-
-
-
+</nav><div class="container template-quarto">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Tutorials for Books</h1>
-                        <h4 data-toc-skip class="author">David Kane</h4>
-            
-      
-      <small class="dont-index">Source: <a href="https://github.com/PPBDS/tutorial.helpers/blob/main/vignettes/books.Rmd" class="external-link"><code>vignettes/books.Rmd</code></a></small>
-      <div class="d-none name"><code>books.Rmd</code></div>
+
+      <p class="author">David Kane</p>
+
+
+      <small class="dont-index">Source: <a href="https://github.com/PPBDS/tutorial.helpers/blob/main/vignettes/books.qmd" class="external-link"><code>vignettes/books.qmd</code></a></small>
+      <div class="d-none name"><code></code></div>
     </div>
 
-    
-    
-<p>This vignette assumes that you have already read <a href="instructions.html">our advice</a> about writing good
-tutorials.</p>
-<p>A common use case for this package is to write a collection of
-tutorials for a book. Consider the <a href="https://ppbds.github.io/r4ds.tutorials/" class="external-link"><strong>r4ds.tutorials</strong></a>
-package which is a companion to <a href="https://r4ds.hadley.nz/" class="external-link"><em>R
-for Data Science (2e)</em></a> by Hadley Wickham, Mine Çetinkaya-Rundel,
-and Garrett Grolemund.</p>
-<p>Instructors like to assign books with code. Ideally, we want our
-students to read the book, working through the included code,
-line-by-line. Sadly, very few students are so disciplined. In fact, in a
-large class, a majority of the students won’t even read the book.</p>
-<p>The <strong>tutorial.helpers</strong> package makes it easy to create
-a <em>structured</em> tutorial in which students type in (almost) every
-command which the book demonstrates, along with other commands which, in
-your judgment, are helpful.</p>
-<p>Consider some idiosyncratic advice for book-based tutorials using the
-example of <a href="https://r4ds.hadley.nz/" class="external-link"><em>R for Data Science
-(2e)</em></a> and <a href="https://ppbds.github.io/r4ds.tutorials/" class="external-link"><strong>r4ds.tutorials</strong></a>.</p>
+
+
+
+
+
+    <p>This vignette assumes that you have already read <a href="instructions.html">our advice</a> about writing good tutorials.</p>
+<p>A common use case for this package is to write a collection of tutorials for a book. Consider the <a href="https://ppbds.github.io/r4ds.tutorials/" class="external-link"><strong>r4ds.tutorials</strong></a> package which is a companion to <a href="https://r4ds.hadley.nz/" class="external-link"><em>R for Data Science (2e)</em></a> by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.</p>
+<p>Instructors like to assign books with code. Ideally, we want our students to read the book, working through the included code, line-by-line. Sadly, very few students are so disciplined. In fact, in a large class, a majority of the students won’t even read the book.</p>
+<p>The <strong>tutorial.helpers</strong> package makes it easy to create a <em>structured</em> tutorial in which students type in (almost) every command which the book demonstrates, along with other commands which, in your judgment, are helpful.</p>
+<p>Consider some idiosyncratic advice for book-based tutorials using the example of <a href="https://r4ds.hadley.nz/" class="external-link"><em>R for Data Science (2e)</em></a> and <a href="https://ppbds.github.io/r4ds.tutorials/" class="external-link"><strong>r4ds.tutorials</strong></a>.</p>
 <ul>
-<li><p>Do one or two of the tutorials before you start working on your
-own.</p></li>
+<li><p>Do one or two of the tutorials before you start working on your own.</p></li>
 <li><p>Make your Introduction look like this:</p></li>
 </ul>
-<pre><code>This tutorial covers [Chapter 20: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html) 
-from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, 
-Mine Çetinkaya-Rundel, and Garrett Grolemund. You will learn how to get data from Excel 
-spreadsheets using  `[read_excel()](https://readxl.tidyverse.org/reference/read_excel.html)` 
+<pre><code>This tutorial covers [Chapter 20: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html)
+from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham,
+Mine Çetinkaya-Rundel, and Garrett Grolemund. You will learn how to get data from Excel
+spreadsheets using  `[read_excel()](https://readxl.tidyverse.org/reference/read_excel.html)`
 from the [**readxl**](https://readxl.tidyverse.org/) package and Google sheets using
-`[read_sheet()](https://googlesheets4.tidyverse.org/reference/range_read.html)` from 
+`[read_sheet()](https://googlesheets4.tidyverse.org/reference/range_read.html)` from
 the [**googlesheets4**](https://googlesheets4.tidyverse.org/) package.</code></pre>
 <ul>
-<li><p>The first sentence provides a link to your chapter as well as to
-R4DS.</p></li>
-<li><p>We highlight some of the most important packages and functions
-used in the tutorial.</p></li>
-<li><p>We don’t go overboard. You can’t mention every package or every
-function used in the tutorial.</p></li>
+<li><p>The first sentence provides a link to your chapter as well as to R4DS.</p></li>
+<li><p>We highlight some of the most important packages and functions used in the tutorial.</p></li>
+<li><p>We don’t go overboard. You can’t mention every package or every function used in the tutorial.</p></li>
 <li><p>Make your Summary look like this:</p></li>
 </ul>
-<pre><code>This tutorial covered [Chapter 20: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html) 
-from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, 
+<pre><code>This tutorial covered [Chapter 20: Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html)
+from [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham,
 Mine Çetinkaya-Rundel, and Garrett Grolemund. You have learned how to get data from Excel
-spreadsheets using  `[read_excel()](https://readxl.tidyverse.org/reference/read_excel.html)` 
+spreadsheets using  `[read_excel()](https://readxl.tidyverse.org/reference/read_excel.html)`
 from the [**readxl**](https://readxl.tidyverse.org/) package and Google sheets using
-`[read_sheet()](https://googlesheets4.tidyverse.org/reference/range_read.html)` from 
+`[read_sheet()](https://googlesheets4.tidyverse.org/reference/range_read.html)` from
 the [**googlesheets4**](https://googlesheets4.tidyverse.org/) package.
 
-Read “[Data Organization in Spreadsheets](https://doi.org/10.1080/00031305.2017.1375989)” 
+Read “[Data Organization in Spreadsheets](https://doi.org/10.1080/00031305.2017.1375989)”
 by Karl Broman and Kara Woo for great advice about organizing your data using spreadsheets.</code></pre>
 <ul>
-<li><p>The first paragraph is identical to the Introduction, except that
-“covers” is replaced with “covered” and “will learn” with “have
-learned.” We began the tutorial with a promise about what students would
-learn. One hopes that we kept that promise.</p></li>
-<li><p>The second paragraph gives one or two pointers about the best
-material which a student might look into if she is interested in
-learning more about the broad topic of the tutorial. These pointers were
-also mentioned as knowledge drops earlier in the tutorial.</p></li>
-<li><p>These pointers will often (always?) be items which were mentioned
-in the book itself. Those authors, presumably, have good taste,
-otherwise you would not have selected their book in the first
-place.</p></li>
-<li><p>Always have a separate code exercise for each library you load
-and each data set you use. A code exercise like “Load the
-<strong>tidyverse</strong> package with the <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code>
-command.” is, obviously, not difficult for students. But it forces them
-to practice loading libraries, which many students forget, and it
-provides us with an opportunity to drop some knowledge.</p></li>
-<li><p>Regularly require them to look up the help page for a function,
-proving that they have done so by copy/pasting a portion of the help
-page, which means that these will be written exercises with no answer
-instead of code exercises. Students need to get in the practice of using
-help.</p></li>
-<li><p>You want students to have to type in at least 90% of the code
-which is used in the book. One approach is to first, set up a bunch of
-empty code exercises. Then, go through the chapter, copying each snippet
-of example code into the test code chunk of an exercise. (If the book is
-sourced freely, you can also copy/paste a knowledge drop associated with
-each code snippet.) Then, go back and write the exercises such that the
-answers are the code snippets from the book. The final step is to copy
-the code to the hint code chunk, and then edit out at least a portion of
-that code.</p></li>
-<li><p>In most books, the authors will include more than one new thing
-in each code example. They will add two or three lines to a pipe or pass
-in two or three arguments to a function. We never want to go that fast.
-Spread out such code snippets into two or three separate exercises, each
-of which makes the smallest possible change. We are building the
-shallowest possible learning curve.</p></li>
-<li><p>Recall the distinction between books which have a permissive
-license, meaning that we can copy/paste text at our own discretion, and
-those which do not. For the latter, you can not copy/paste text. But you
-can express, in your own words, the key points made in each chapter. In
-either case, your knowledge drops should cover the most important things
-for students to know, in your opinion, among those topics covered in the
-chapter.</p></li>
-<li><p>A common annoyance is the creation of temporary objects. Consider
-this code snippet from <em>R for Data Science</em>.</p></li>
+<li><p>The first paragraph is identical to the Introduction, except that “covers” is replaced with “covered” and “will learn” with “have learned.” We began the tutorial with a promise about what students would learn. One hopes that we kept that promise.</p></li>
+<li><p>The second paragraph gives one or two pointers about the best material which a student might look into if she is interested in learning more about the broad topic of the tutorial. These pointers were also mentioned as knowledge drops earlier in the tutorial.</p></li>
+<li><p>These pointers will often (always?) be items which were mentioned in the book itself. Those authors, presumably, have good taste, otherwise you would not have selected their book in the first place.</p></li>
+<li><p>Always have a separate code exercise for each library you load and each data set you use. A code exercise like “Load the <strong>tidyverse</strong> package with the <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code> command.” is, obviously, not difficult for students. But it forces them to practice loading libraries, which many students forget, and it provides us with an opportunity to drop some knowledge.</p></li>
+<li><p>Regularly require them to look up the help page for a function, proving that they have done so by copy/pasting a portion of the help page, which means that these will be written exercises with no answer instead of code exercises. Students need to get in the practice of using help.</p></li>
+<li><p>You want students to have to type in at least 90% of the code which is used in the book. One approach is to first, set up a bunch of empty code exercises. Then, go through the chapter, copying each snippet of example code into the test code chunk of an exercise. (If the book is sourced freely, you can also copy/paste a knowledge drop associated with each code snippet.) Then, go back and write the exercises such that the answers are the code snippets from the book. The final step is to copy the code to the hint code chunk, and then edit out at least a portion of that code.</p></li>
+<li><p>In most books, the authors will include more than one new thing in each code example. They will add two or three lines to a pipe or pass in two or three arguments to a function. We never want to go that fast. Spread out such code snippets into two or three separate exercises, each of which makes the smallest possible change. We are building the shallowest possible learning curve.</p></li>
+<li><p>Recall the distinction between books which have a permissive license, meaning that we can copy/paste text at our own discretion, and those which do not. For the latter, you can not copy/paste text. But you can express, in your own words, the key points made in each chapter. In either case, your knowledge drops should cover the most important things for students to know, in your opinion, among those topics covered in the chapter.</p></li>
+<li><p>A common annoyance is the creation of temporary objects. Consider this code snippet from <em>R for Data Science</em>.</p></li>
 </ul>
 <pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"$1,234"</span>, <span class="st">"USD 3,513"</span>, <span class="st">"59%"</span><span class="op">)</span></span>
 <span><span class="fu">parse_number</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 1234 3513   59</span></span></code></pre>
 <ul>
-<li><p>It is unclear how to create <code>x</code> in your tutorial. You
-could have a code exercise in which the students create <code>x</code>
-themselves. But that is annoying because it doesn’t really teach
-students anything. It is too close to busy work. Moreover,
-<code>x</code> won’t exist for the next question, which requires the use
-of <code>parse_number()</code>. You will need to create <code>x</code>
-yourself, either in the global setup chunk or in a setup chunk for this
-exercise. The global setup approach is preferred, but does not work if
-there are multiple different <code>x</code> objects used in this
-chapter.</p></li>
-<li><p>I recommend that tutorial authors include the “busy work” in the
-exercise code chunk when writing the tutorial, followed by a blank line,
-so that students have an obvious place to type in
-<code>parse_number(x)</code>.</p></li>
+<li><p>It is unclear how to create <code>x</code> in your tutorial. You could have a code exercise in which the students create <code>x</code> themselves. But that is annoying because it doesn’t really teach students anything. It is too close to busy work. Moreover, <code>x</code> won’t exist for the next question, which requires the use of <code>parse_number()</code>. You will need to create <code>x</code> yourself, either in the global setup chunk or in a setup chunk for this exercise. The global setup approach is preferred, but does not work if there are multiple different <code>x</code> objects used in this chapter.</p></li>
+<li><p>I recommend that tutorial authors include the “busy work” in the exercise code chunk when writing the tutorial, followed by a blank line, so that students have an obvious place to type in <code>parse_number(x)</code>.</p></li>
 </ul>
 <pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"$1,234"</span>, <span class="st">"USD 3,513"</span>, <span class="st">"59%"</span><span class="op">)</span></span></code></pre>
 <ul>
-<li>This avoids the complication of creating/maintaining a bunch of
-temporary variables. It also means less busy work for students.</li>
-</ul></main>
+<li>This avoids the complication of creating/maintaining a bunch of temporary variables. It also means less busy work for students.</li>
+</ul>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'light-border',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config);
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script></main>
 </div>
-
 
 
     <footer><div class="pkgdown-footer-left">
