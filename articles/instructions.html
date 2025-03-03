@@ -364,7 +364,7 @@
 <p>Because students will complete the tutorials using screens of very different widths, it is a good idea to put <code>knitr::opts_chunk$set(out.width = '90%')</code> in your <code>setup</code> code chunk. In this way, images will appear at a sensible size regardless of whether students are using a phone screen or a big monitor.</p>
 </section><section class="level3"><h3 id="complex-text">Complex text<a class="anchor" aria-label="anchor" href="#complex-text"></a>
 </h3>
-<p>You sometimes want to include “complex” text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which Rmarkdown wants to process in certain ways. You can usually place such code in an environment surrounded by four backticks.</p>
+<p>You sometimes want to include “complex” text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which Rmarkdown wants to process in certain ways. You can usually place such code in an environment started by four backticks along with the <code>{verbatim}</code> and then ended with four more backticks.</p>
 </section></section><section class="level2"><h2 id="processing-submissions">Processing submissions<a class="anchor" aria-label="anchor" href="#processing-submissions"></a>
 </h2>
 <p>Instructors have different needs and priorities when it comes to processing student answers. For now, we provide one function, <code><a href="../reference/process_submissions.html">tutorial.helpers::process_submissions()</a></code> to help them. Read the help page: <code><a href="../reference/process_submissions.html">?process_submissions</a></code>. There are many arguments and options.</p>
