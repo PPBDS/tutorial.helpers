@@ -446,7 +446,9 @@ Because students will complete the tutorials using screens of very different wid
 
 ### Complex text
 
-You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which Rmarkdown wants to process in certain ways. You can usually place such code in an environment surrounded by four backticks. 
+You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which Rmarkdown wants to process in certain ways. You can usually place such code in an environment started by four backticks along with the `{verbatim}` and then ended with four more backticks. 
+
+
 
 ## Processing submissions
 

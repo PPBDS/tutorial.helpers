@@ -56,46 +56,5 @@ for(i in tutorial_paths){
          toString(no_end_labels), " Found in file ", i, "\n")
   }
 
-  # DK: There is a problem with this file:
-  # https://github.com/rstudio/learnr/blob/main/inst/tutorials/ex-data-filter/ex-data-filter.Rmd
-
-  # parsermd::parse_rmd() on that file produces an error:
-
-  # Error: Failed to parse line 242
-  # ```{r filterex1, exercise = TRUE}
-  # ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  # Not sure why. But that error causes me to comment out the rest of the checks
-  # in this script. Might revisit this later.
-
-  # Uses parse_rmd to get the structure of the document
-
-  # doc_structure <- parsermd::parse_rmd(i)
-
-  # Filters out the document so that we only pull the chunks and their labels
-
-  # doc_labels <- doc_structure |> rmd_node_label()
-  # doc_labels <- doc_labels[!is.na(doc_labels)]
-  # doc_labels <- doc_labels[doc_labels != ""]
-
-  # Checks for duplicates then stops it if there's multiple
-
-  # dups <- doc_labels[duplicated(doc_labels)]
-  # dups <- dups[!is.na(dups)]
-  # if(length(dups) != 0){
-  #   stop("From test-code-chunks.R. Duplicated code chunk labels ",
-  #        toString(dups), " found in file ", i, "\n")
-  # }
-
-  # Check for eval = false in hints
-
-  # hint_labels <- labels[grepl("hint", labels)]
-  # for(label in hint_labels){
-  #   if(! str_detect(label, "eval = FALSE")){
-  #     stop("From test-code-chunks.R. `eval = false` missing from code chunk ",
-  #          label, " in file ", i, "\n")
-  #   }
-  # }
-
 }
 

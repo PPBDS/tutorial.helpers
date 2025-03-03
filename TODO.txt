@@ -2,11 +2,11 @@
 
 Change set_positron settings to be more like rstudio version.
 
-Deal with all the .txt files in vignettes.
+Check out all unit tests.
 
-Add back in pkgdown.
 
-See if they have fixed the pkgdown issue.
+
+
 
 Do we need to deal with the case in which the only option is echo = FALSE. 
 Right now, it just gets deleted. Which does not matter since echo = FALSE
@@ -72,8 +72,6 @@ Fix code and then test case for this example:
 
 * The correct term for the different parts of a tutorial is Topic, not Section. Fix this in instructions.Rmd at least.
 
-* Key fix to format tutorials, as discussed below, is ensuring that comment characters, `#`, in backtick environments do not mess things up. I suspect that this might involve a fix in parsermd or in whatever it uses. I am also unclear if R code chunk headers, with their triple backticks, causes problems on their own. See quarto-1-example.txt in RStudio and Github, for example. Since the parsermd author seems unresponsive, maybe we just take a copy of the key code and then fix it ourselves?
-
 * Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr??? Get rid of them, if possible! Indeed, try to get rid of as many of the packages in Suggests/Depends as possible. Many were left over from when this was a part of primer.tutorials.
 
 * Figure out why Check is 0/0/0 but Test is 2 FAILs and 5 SKIPs.
@@ -107,28 +105,12 @@ Fix code and then test case for this example:
 
 * Should Written Exercises with no answers have test code chunks by default? I seem to be using these a lot in 22-arrow. Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code.
 
-* There is something here which makes Format Tutorial Chunk Labels work poorly. The quoted tibble below causes the issue. Add this issue as a test case in tutorial.helpers and then fix it there. Perhaps cause is that, within a tripple backtick block you can't have a comment operator? I think this causes the problem but I have not produced a reproducible example yet. This issue might go back to parsermd().
-
-````        
-Tabble from Exercise 25:
-# > # A tibble: 1 × 9
-# >   median_a n_miss_a median_b n_miss_b median_c n_miss_c median_d n_miss_d
-# >      <dbl>    <int>    <dbl>    <int>    <dbl>    <int>    <dbl>    <int>
-# > 1    0.139        1    -1.11        1   -0.387        2     1.15        0
-````
-
 
 * reactiveConsole(TRUE) might make it easier to experiment with reactivity in the Console.
 
 * Think harder about whether write_answer should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
 
 * format_tutorial() needs to handle hints better. In particular, it must ensure that the hint matches the exercise code chunk name, as it must, by definition.
-
-### format_tutorial hackery
-
-Biggest hackery is our use of the "file =" trick to bring in code examples which would mess up the formatting of this document (and, even worse, mess up the use of format_tutorial()) if we just included them raw, like with ```` or ````markdown or ````{verbatim}. The trick works in that nothing breaks. But it is annoying! We would much rather see the code which we are including **right there** instead of having to look it up in a separate file.
-
-More details: parsermd(), used by format_tutorial(), is finicky. We don't want it to consider the headers in this example QMD as "real" headers. We want them to be ignored. Seems like the only way to do that is to include the entire document in an R code chunk with three backticks. Then, format_tutorial() does what we want. But! Then knitting the tutorial fails totally. You need to switch to four backticks, at the start and end. Knitting is now fine, but, if you run format_tutorial(), you will mess up the exercise numbering and chunk labels. Could not solve this! So, just use "file =" trick. Using other code examples, like empty chunks, does not mess up format_tutoria() but does mess up the displayed outline of this document, which is annoying.
 
 ## Downloading answers
 
