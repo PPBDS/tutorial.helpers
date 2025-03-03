@@ -4,7 +4,7 @@
 
 * Add new tutorial: "Tutorials in Positron."
 
-* Add set_positron_rstudio_keymap() function.
+* Add set_positron_settings() function.
 
 * Rewrite format_tutorial() to not use **parsermd** package.
 
