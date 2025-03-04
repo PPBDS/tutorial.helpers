@@ -1,12 +1,16 @@
 # Priorities
 
-Change set_positron settings to be more like rstudio version.
+Consider a very common use case for process_submissions(). I want, for all submitted answers, name, email and any answer which included http. I don't want to have to remember the weird id for all the answers that had an http. I want the function to figure that out. Really, what I want is for the function to figure out any id which has (at least 2?) answers which start with http. Then, I want that many lines for each answer. So, we have column name, email, id and answer, with missing values for any student which did not submit for that id. 
+
+Figure out why Check is 0/0/0 but Test is 2 FAILs and 5 SKIPs.
+
+Change format_tutorial() so it looks to see if you have any chunk names in your file with reserved names (name, email, ID, minutes, answers), and then warns you about that fact.
+
+What other Positron settings should we set by default?
+
+Which packages do we really need, either in Imports or in Suggests?
 
 Check out all unit tests.
-
-
-
-
 
 Do we need to deal with the case in which the only option is echo = FALSE. 
 Right now, it just gets deleted. Which does not matter since echo = FALSE
@@ -17,100 +21,48 @@ leaves a duplicate code chunk there.
 
 It is annoying that R attempts to run `r scales::comma(x)` even when it is placed 
 in a verbatim environment. That is annoying! But how can format_tutorial() prevent? 
-It can't! This is a problem with run_tutorial().
+It can't! This is a problem with learnr::run_tutorial().
 
 How does line-wrapping work in Positron? And, whatever the answer, is this something 
 that we should set for students in the Positron tutorial?
 
-Change name of set_rstudio_settings function.
-
-Add settings function to Primer.
-
-The pkgdown.yml was causing errors on GitHub. I suspect that this is the cause:
-
-https://github.com/r-lib/pkgdown/issues/2830
-
-So, for now, I just commented out the yaml. 
-
-Move over some of the core r4ds.tutorials. 
-
-Where should we ensure that students have a good default location for 
-projects --- in Tutorials in Positron or on Positron and Code?
-
-Does quarto belong in imports? I am getting a note about it not being used, which is true. 
-But I thought I needed it so that renv would consider it as being used (because it just
-checks imports but does not confirm that it is used) and I need that so that I can keep it
-in the renv lock file. I guess a different appoach would be to have a fake zzz file which
-has library(quarto). That should be enough to fool renv. 
-
-Related to the above is that the Github Actions files differ in that R CMD check uses renv and pkgdown.yml
-uses dependencies. The former ensures that the quarto package is available because it is in the renv.lock
-file. But with dependencies, I suspect that quarto must appear in the imports part of the DESCRIPTION file,
-but maybe Suggests would be enough?
+Related to the above is that the Github Actions files differ in that R CMD check uses renv and pkgdown.yml uses dependencies. The former ensures that the quarto package is available because it is in the renv.lock file. But with dependencies, I suspect that quarto must appear in the imports part of the DESCRIPTION file, but maybe Suggests would be enough?
 
 Do a complete clean up of the Github Action files.
 
-Does tidyverse belong in Suggests? Without this, we get a fail on GitHub since library(tidyverse) is used in Positron
-and Code tutorial. But the conventional wisdom is that we should include as few packages as possible in DESCRIPTION.
-Maybe if we only add these extra packages in Suggest, it is OK to do so?
-
 Vignette about Posit Workbench.
 
-The Posit Cloud vignette could use some work.
-
-Consider a very common use case for process_submissions(). I want, for all submitted answers, name, email and any answer which included http. I don't to have to remember the weird id for all the answers that had an http. I want the function to figure that out. Really, what I want is for the function to figure out any id which has (at least 2?) answers which start with http. Then, I want that many lines for each answer. So, we have column name, email, id and answer, with missing values for any student which did not submit for that id. 
-
 return_type = "All" in process_submissions() should not include submission_type column
-
-description: "Tutorial: #121 for Preceptor's Primer" gets turn into description: 'Tutorial: #121 for Preceptor''s Primer' by, I think, Format Tutorial Chunk Labels, which is obviously not what we want.
 
 Fix code and then test case for this example: 
 "~/Downloads/submissions/four-parameters-categorical_answers - Kushagra Singh.html"
 
 
-* Better error message of the pattern does not match any of the files in the directory.
+Better error message if the pattern does not match any of the files in the directory.
 
-* The correct term for the different parts of a tutorial is Topic, not Section. Fix this in instructions.Rmd at least.
+Might be nice if the email entry field at least attempted to note/warn if the submitted information was not a legitimate email. Perhaps at least check if there is an `@`.
 
-* Do we really need to import stringr? Other packages like tibble and dplyr? purrrr? readr??? Get rid of them, if possible! Indeed, try to get rid of as many of the packages in Suggests/Depends as possible. Many were left over from when this was a part of primer.tutorials.
+process_submissions() test cases should not just spit out "Could not process file: getting-started_answers.pdf". Handle it better.
 
-* Figure out why Check is 0/0/0 but Test is 2 FAILs and 5 SKIPs.
-
-* Why are hints not showing up in some r4ds.tutorials, like data-import?
-
-* Change format_tutorial() so it looks to see if you have any chunk names in your file with reserved names (name, email, ID, minutes, answers), and then warns you about that fact.
-
-* Document process_submissions() in instructions.Rmd, or perhaps elsewhere.
-
-* Might be nice if the email entry field at least attempted to note/warn if the submitted information was not a legitimate email. Perhaps at least check if there is an `@`.
-
-* process_submissions() test cases should not just spit out "Could not process file: getting-started_answers.pdf". Handle it better.
-
-* I don't like the way the test cases for process_submissions spit out the pdf files names that they are ignoring, even if it does not effect the tests passing. At least, we should add a new test case for this behavior. Perhaps reorganize the test files into a couple of different directories. Or make the pattern ignore the pdf files in the test cases. But I couldn't get that to work.
+I don't like the way the test cases for process_submissions spit out the pdf files names that they are ignoring, even if it does not effect the tests passing. At least, we should add a new test case for this behavior. Perhaps reorganize the test files into a couple of different directories. Or make the pattern ignore the pdf files in the test cases. But I couldn't get that to work.
 
 
-* What should show_file(test_file, start = 0) return? Not sure it should be an error . . .
+What should show_file(test_file, start = 0) return? Not sure it should be an error . . .
 
-* Standardize an instruction which says to paste from the HTML result. This is different from CP/CR, obviously.
+Standardize an instruction which says to paste from the HTML result. This is different from CP/CR, obviously.
 
+Consider getting rid of Copy code button. Now that we can pre-place code from previous questions into the Exericise code chunk, we don't need to allow students to Copy from previous exercise. Since that is the only use case for the Copy code button, we can delete it, and all its associated junk. The counter-argument is that if you populate the starting code for Exercise N + 1, then a student working on Exercise N can cheat and just look at by skipping ahead. Counter-counter-argument is that students can already do this by looking at the Hint for Exercise N + 1. Since they don't (?), we don't really have to worry about them cheating in this way. Moreover, the vast majority of questions are so easy that cheating is actually more work. Just look at the provided hint!
 
-* Consider getting rid of Copy code button. Now that we can pre-place code from previous questions into the Exericise code chunk, we don't need to allow students to Copy from previous exercise. Since that is the only use case for the Copy code button, we can delete it, and all its associated junk. The counter-argument is that if you populate the starting code for Exercise N + 1, then a student working on Exercise N can cheat and just look at by skipping ahead. Counter-counter-argument is that students can already do this by looking at the Hint for Exercise N + 1. Since they don't (?), we don't really have to worry about them cheating in this way. Moreover, the vast majority of questions are so easy that cheating is actually more work. Just look at the provided hint!
-
-* Consider providing a simple hash to guarantee that students haven't cheated, even if they submit html. The function would run some R code which produced a string including things like date, time, pwd, whois, computer name, and whatever else. It then takes that string and turns it into a hash. That hash is output into the html. If there are concerns about cheating, an instructor can check the hash. This might also us to get rid of the rds options, since its only purpose is probably cheat-detection. Might also provide an execuse to get rid of the PDF option.
-
-* If you "Show in a new window" a tutorial, then clicking on links in that tutorial does not work on my local computer. If you keep the tutorial in the Tutorial pane, links do work. On Posit Cloud, the latter also works. In the former case, clicking the link switches the pulled out window to the new location, but does not provide a way back, so you need to restart the tutorial.
+Consider providing a simple hash to guarantee that students haven't cheated, even if they submit html. The function would run some R code which produced a string including things like date, time, pwd, whois, computer name, and whatever else. It then takes that string and turns it into a hash. That hash is output into the html. If there are concerns about cheating, an instructor can check the hash. This might also us to get rid of the rds options, since its only purpose is probably cheat-detection. Might also provide an execuse to get rid of the PDF option.
 
 
-* Ensure that this code handles our test code chunks in non-code questions. See RStudio and Github (gert) for examples. Seems to work, but some test cases would be nice.
+Ensure that this code handles our test code chunks in non-code questions. See Positron and Github (gert) for examples. Seems to work, but some test cases would be nice.
 
-* Should Written Exercises with no answers have test code chunks by default? I seem to be using these a lot in 22-arrow. Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code.
+Should Written Exercises with no answers have test code chunks by default? I seem to be using these a lot in 22-arrow. Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code.
 
+reactiveConsole(TRUE) might make it easier to experiment with reactivity in the Console.
 
-* reactiveConsole(TRUE) might make it easier to experiment with reactivity in the Console.
-
-* Think harder about whether write_answer should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
-
-* format_tutorial() needs to handle hints better. In particular, it must ensure that the hint matches the exercise code chunk name, as it must, by definition.
+Think harder about whether write_answer should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
 
 ## Downloading answers
 
@@ -140,10 +92,6 @@ Fix code and then test case for this example:
 
 * Understand https://r-pkgs.org/testing-basics.html#sec-snapshot-tests and other advanced testing stuff. I bet that "withr::local_options" will be valuable for doing the next two tasks.
 
-* Need a test case for set_rstudio_settings(). Maybe record the settings of each variable, then change them, then check to see if you did change them, then change them back. Maybe use some advanced testthat tricks for frameworks or whatever. Maybe snapshots help? 
-
-* A test case for set_binary...() as well. This requires more sophisticated R testing tools than we currently use with the package. Need to ensure that the option is set back, after the test runs, to the value it was before the test started. Or maybe there is some other way of setting this preference (with writePreference()?) without the hackorama of changing the user's Rprofile.
-
 * Use testing_package() rather than hard-coding the package name.
 
 * Read https://testthat.r-lib.org/articles/test-fixtures.html
@@ -153,8 +101,6 @@ Fix code and then test case for this example:
 * Explore tutorial testing: https://pkgs.rstudio.com/learnr/articles/exercises.html#test-code-or-cases
 
 * Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason.
-
-* Add test cases for check_current_tutorial().
 
 * Do something about test-return_tutorial_paths(). 
 
@@ -170,14 +116,6 @@ So, in addition to hints, we could have each code block pre-populated with the c
 Blanks are detected using regular expressions (since blanks may make the code unparsable), and learnr’s default pattern is to detect three or more consecutive underscores. Authors can choose the pattern for detecting blanks with the exercise.blanks chunk option. Setting exercise.blanks = "[.]{2}[a-z]+[.]{2}", for example, would allow the author to use valid R syntax for blanks. The warning message shown to students calls out the blanks they need to fill in.
 
 ## Other items
-
-* Version 0.2.6.9012 got rid of the discussion about hosting a version of the Getting Started tutorials on shinyapps.io. The whole process was annoying and working poorly. To my knowledge, it was never used. So, we simplify.
-
-* rstudioapi::is_available()
-
-
-* Does build_tutorials() really work? First, it seems to fail if you don't provide a url. Second, it does not seem to make use of a source option if one is provided.
-
 
 * Want to change the color of the OK box so that it is green when students enter
 their email or other text. This seem relevant:  https://stackoverflow.com/questions/33620133/change-the-color-of-action-button-in-shiny/35871042.
@@ -223,10 +161,3 @@ tutorials/[^/]*/(?!(data|images|.*Rmd))
 ````
 
 This excludes everything in any subdirectory of the tutorials directory except an `images` directory (a file named images would also be included) or a `data` directory or a file suffixed with `.Rmd`.
-
-
-
-
-
-
-

@@ -199,7 +199,7 @@ Tutorial workflow will often look like this. We tell you to run a command **in t
 Positron and your R installation have some default settings which are not good for new users. Run this command at the Console to change them:
 
 `
-tutorial.helpers::set_binary_only_in_r_profile()
+tutorial.helpers::set_positron_settings()
 `
 
 CP/CR.
@@ -215,11 +215,11 @@ question_text(NULL,
 
 ### 
 
-The output from this function will report the changes, if any, which were made. To learn more, look up the help page by running `?set_binary_only_in_r_profile` at the Console.
+The output from this function will report the changes, if any, which were made. To learn more, look up the help page by running `?tutorial.helpers::set_positron_settings` at the Console.
 
 ### 
 
-You can generally call functions by just giving their name along with the ending parentheses, as with `set_binary_only_in_r_profile()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_binary_only_in_r_profile()` is in the **tutorial.helpers** package, we can also call it using the double colon notation: `tutorial.helpers::set_binary_only_in_r_profile()`, as we do above.
+You can generally call functions by just giving their name along with the ending parentheses, as with `set_positron_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_positron_settings()` is in the **tutorial.helpers** package, we can also call it using the double colon notation: `tutorial.helpers::set_positron_settings()`, as we do above.
 
 ### Exercise 7
 
@@ -260,7 +260,7 @@ question_text(NULL,
 
 <!-- I really want a test case to ensure that this works on all OSs. -->
 
-```{r include = FALSE}
+```{r exercises-8-test, include = FALSE}
 tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 ```
 
