@@ -14,6 +14,7 @@ description: Tutorial for introducing students to tutorials when using Positron.
 ```{r setup, include = FALSE}
 library(learnr)
 library(tutorial.helpers)
+library(remotes)
 
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(out.width = '90%')

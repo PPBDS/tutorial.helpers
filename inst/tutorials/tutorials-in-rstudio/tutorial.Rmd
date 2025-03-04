@@ -15,6 +15,7 @@ description: Tutorial for introducing students who are using RStudio to tutorial
 ```{r setup, include = FALSE}
 library(learnr)
 library(tutorial.helpers)
+library(remotes)
 
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(out.width = '90%')
