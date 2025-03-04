@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Rstudio Addins • tutorial.helpers</title>
+<title>Functions for Working with Tutorials • tutorial.helpers</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="addins_files/libs/quarto-html/popper.min.js"></script><script src="addins_files/libs/quarto-html/tippy.umd.min.js"></script><link href="addins_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="addins_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Rstudio Addins">
+<!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Functions for Working with Tutorials">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9009</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9010</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
 <li><a class="dropdown-item" href="../articles/downloads.html">Enable Students to Download Their Tutorial Answers</a></li>
     <li><a class="dropdown-item" href="../articles/instructions.html">Instructions for Writing R Tutorials</a></li>
     <li><a class="dropdown-item" href="../articles/books.html">Tutorials for Books</a></li>
-    <li><a class="dropdown-item" href="../articles/addins.html">Rstudio Addins</a></li>
+    <li><a class="dropdown-item" href="../articles/addins.html">Functions for Working with Tutorials</a></li>
     <li><a class="dropdown-item" href="../articles/cloud.html">Using Tutorials with Posit Cloud</a></li>
     <li><a class="dropdown-item" href="../articles/testing.html">Testing Your Package of Tutorials</a></li>
   </ul>
@@ -59,7 +59,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Rstudio Addins</h1>
+      <h1>Functions for Working with Tutorials</h1>
 
       <p class="author">David Kane</p>
 
@@ -75,13 +75,13 @@
 
     <section class="level2"><h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>We have provided four additions to the RStudio Addins menu: “Tutorial Code Exercise”, “Tutorial Written Exercise (no Answer)”, “Tutorial Written Exercise (with Answer)” and “Format Tutorial Chunk Labels.” The first three each insert the skeleton for the next exercise in a tutorial, featuring all the key component parts. We even take a guess at the correct exercise number. The “Format Tutorial Chunk Labels” addin is the most useful. Always run it before testing your tutorial. It ensures that all the exercises are sequentially numbered and that all the code chunk names are correct and unique.</p>
+<p>We have provided two functions which help in the writing of tutorials: <code><a href="../reference/exercise_creation.html">make_exercise()</a></code> and <code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code>. The first creates a new exercise in the open RMD at the current location of your cursor. The key argument of <code><a href="../reference/exercise_creation.html">make_exercise()</a></code> is <code>type</code>, which is <code>"code"</code> by default and produces a coding exercise. The other allowed values of <code>type</code> are <code>"yes-answer"</code> and <code>"no-answer"</code>. <code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code> reformats the entire open tutorial, mainly ordering exercises correctly and ensuring that chunk labels are correct.</p>
+<p>When using RStudio, we have mapped variations of these functions to four RStudio addins: “Tutorial Code Exercise”, “Tutorial Written Exercise (no Answer)”, “Tutorial Written Exercise (with Answer)” and “Format Tutorial Chunk Labels.” The first three each insert the skeleton for the next exercise in a tutorial, featuring all the key component parts. We even take a guess at the correct exercise number. The “Format Tutorial Chunk Labels” addin is the most useful. Always run it before testing your tutorial. It ensures that all the exercises are sequentially numbered and that all the code chunk names are correct and unique.</p>
 <p>You can find the addins in the “Addins” tab on the top Rstudio toolbar. Make sure that your cursor is located at the point in your Rmd at which you want to insert the new exercise.</p>
-<p>RStudio Addins are not available in Positron. To use these tools, there are two key functions: <code><a href="../reference/exercise_creation.html">make_exercise()</a></code> and <code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code>.</p>
 <p>Make sure that your cursor is located in the correct location.</p>
 <section class="level3"><h3 id="tutorial-code-exercise">Tutorial Code Exercise<a class="anchor" aria-label="anchor" href="#tutorial-code-exercise"></a>
 </h3>
-<p>Create a new code exercise skeleton with an exercise title and with auto-generated code chunk ids. The Section, of which this Exercise is a part, is titled “Plotting”.</p>
+<p><code><a href="../reference/exercise_creation.html">make_exercise()</a></code>, by default, it produces a new code exercise skeleton with an exercise title and with auto-generated code chunk labels. The Topic, of which this Exercise is a part, is titled “Plotting”.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>### Exercise 7</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>```{r plotting-7, exercise = TRUE}</span>
@@ -101,12 +101,12 @@
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>###</span></code></pre></div>
 <p>There are three code chunks included by default: exercise, hint and test. You do not need to include all three, although in most cases you should. The exercise code chunk is the location in which students will type their answers. The hint code chunk will be displayed to students when they click on the Hint button. The test code chunk should include the correct answer, so that you can be sure it will work for students when they enter it in the exercise code chunk.</p>
 <p>See <a href="https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises">our advice</a> about writing good tutorial code exercises. First, start with the correct answer, the code you want students to submit. Place that code in the test chunk at the end. Our test process will ensure that this code will work for the students. Second, copy/paste the correct answer into the hint chunk in the middle. Then replace one or more of the key words or function arguments or argument values with <code>...</code>. Third, add your actual question to the top of the skeleton. What instructions will cause students to enter the correct answer in the exercise chunk? Fourth, drop some knowledge after the <code>###</code> at the end. Each exercise is an opportunity to teach. Make use of it!</p>
-<p><code><a href="../reference/exercise_creation.html">make_exercise()</a></code> is the R function to run, if you are using Positron. By default, it produces a code exercise.</p>
 </section><section class="level3"><h3 id="tutorial-written-exercise-without-and-with-answers">Tutorial Written Exercise (without and with answers)<a class="anchor" aria-label="anchor" href="#tutorial-written-exercise-without-and-with-answers"></a>
 </h3>
 <p>Both create similar exercise structures with an auto-generated code chunk id and an exercise number. The difference is that the <code>question_text()</code> options are filled in differently.</p>
 <section class="level4"><h4 id="written-exercise-no-answer">Written Exercise (no Answer):<a class="anchor" aria-label="anchor" href="#written-exercise-no-answer"></a>
 </h4>
+<p><code>make_exercise(type = 'no-answer')</code> is the R function to run, if you are using Positron.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>### Exercise 9</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>```{r plotting-9}</span>
@@ -120,9 +120,9 @@
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>###</span></code></pre></div>
 <p>The “no Answer” Exercises are usually used for confirmation that a student has completed a specified task. In that case, there is no need for us to supply a correct answer. And we can allow students to edit their submissions.</p>
-<p><code>make_exercise(type = 'no-answer')</code> is the R function to run, if you are using Positron.</p>
 </section><section class="level4"><h4 id="written-exercise-with-answer">Written Exercise (with Answer):<a class="anchor" aria-label="anchor" href="#written-exercise-with-answer"></a>
 </h4>
+<p><code>make_exercise(type = 'yes-answer')</code> is the R function to run, if you are using Positron.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>### Exercise 8</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>```{r plotting-8}</span>
@@ -137,13 +137,12 @@
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>###</span></code></pre></div>
 <p>The “with Answer” Exercises require the tutorial author to provide an (excellent!) answer to the question. This is harder than it looks, especially for questions without a single “right” answer. But it is also a rare opportunity since students will usually study the supplied answer quite closely. They want to check that their answer matches. We can’t allow students to edit their answers to these questions since they might (misuse) that option to just copy/paste/modify our supplied answer.</p>
 <p>The <strong>learnr</strong> package does not allow for hints to written exercises. We could add a test chunk, but that rarely makes sense for a written exercise. The main counter-example is a question which asks students to run an R command from the Console and then copy the command and the result of the command as their answer. Even though they are not submitting simple code as their answer, it can make sense to have a test chunk which executes the same R code which you are asking them to run, just to ensure that it will work for them.</p>
-<p><code>make_exercise(type = 'yes-answer')</code> is the R function to run, if you are using Positron.</p>
 </section></section><section class="level3"><h3 id="format-tutorial-chunk-labels">Format Tutorial Chunk Labels<a class="anchor" aria-label="anchor" href="#format-tutorial-chunk-labels"></a>
 </h3>
+<p><code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code> is the R function to run, if you are using Positron.</p>
 <p>We often need to add a new exercise in the middle of a collection of other exercises. Or, we want to delete one exercise from the middle of the collection. In either scenario, our exercises are now mis-numbered. We either have two Exercise 5’s or we go straight from Exercise 4 to Exercise 6. We want to renumber all the remaining exercises so that there are no duplicates or missing numbers.</p>
 <p>The “Format Tutorial Chunk Labels” addin accomplishes this renumbering. But it also does more, changing all the code chunk names to be consistent with the new exercise numbers. Finally, it ensures that all code chunk labels follow our standard: begin with (up to 30 characters from) the topic title, remove special characters, replace spaces with dashes, and make all letters lowercase.</p>
 <p>Since the code chunk labels (derived from the title of the topic in which the exercise resides) have a hard cutoff at 30 characters, try to make sure that your topic titles are different somewhere in the first 30 characters (including spaces) within a given tutorial. If not, the tutorial will not run since unique code chunk labels are required.</p>
-<p><code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code> is the R function to run, if you are using Positron.</p>
 </section></section><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
