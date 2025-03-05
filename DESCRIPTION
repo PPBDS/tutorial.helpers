@@ -21,6 +21,7 @@ VignetteBuilder: quarto
 Suggests:
     knitr,
     quarto,
+    remotes,
     roxygen2,
     rsconnect,
     shinytest,
@@ -34,7 +35,6 @@ Imports:
     mime,
     purrr,
     readr,
-    remotes,
     rmarkdown,
     rstudioapi,
     rvest,
