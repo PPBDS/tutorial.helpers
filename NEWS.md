@@ -1,4 +1,4 @@
-# tutorial.helpers 0.4.0
+# tutorial.helpers 0.4.1
 
 * Change original tutorial title to "Tutorials in RStudio."
 

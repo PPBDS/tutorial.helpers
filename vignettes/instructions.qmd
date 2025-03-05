@@ -28,7 +28,7 @@ Instructors assign textbook readings to students. We want our students to read a
 
 Imagine the *shallowest* possible learning curve. Almost every student should be able to answer almost every exercise, albeit perhaps with the help of a hint. There are no hard questions. In fact, there really aren't any *questions* at all. Instead, there are *instructions*: Do one thing, then the next, and then the next.
 
-Almost all exercises feature a [*knowledge drop*](#kd), a bit of information, rarely more than two sentences, provided after the student has answered the question. 
+Almost all exercises feature a knowledge drop, a bit of information, rarely more than two sentences, provided after the student has answered the question. 
 
 Assume that you are giving the student a private lesson. You ask them a question. They give you an answer. What would you say to them next? What do you want to teach them, given that context?
 
@@ -120,7 +120,7 @@ Each exercise should have a *flow* which requires that students hit the "Continu
   
 * The three code chunks are always followed by a triple hash. We want a student to pause after she has submitted her answer so that she is more likely to consider the output from her submission before moving on.
 
-* The last part of an exercise is the end, our main opportunity to drop some knowledge. See [Knowledge Drops](#kd) for extensive discussion.
+* The last part of an exercise is the end, our main opportunity to drop some knowledge. 
 
 * The last part of the topic is another knowledge drop. It is not another exercise. It is just a knowledge drop after the last exercise which tries to take a broader overview. It is often separated from that last exercise by a simple `###`. Again, this can't be more than a sentence or two. But it should be more substantive than a simple "Good job." For example, if the topic has involved creating a scatter plot, then the last exercise will be putting the final touches on that scatter plot. The last knowledge drop should be something about scatter plots in general, not a minor point about the particular scatter plot which the student has just created.
 
@@ -340,7 +340,7 @@ You should put the code for the graphic in the `setup` code chunk. Save the code
 You then build up the graphic, line by line, over a series of exercises, providing hints along the way. 
 
 
-### Knowledge Drops<a id="kd"></a>
+### Knowledge Drops
 
 The most difficult part of tutorial creation is writing the "knowledge drops," the snippets of wisdom (and the associated links) which are used at the end of each exercise. These generally come in two categories: details about R functions/packages/websites and background information about the substative data science problem at hand. 
 

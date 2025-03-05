@@ -2,6 +2,8 @@
 
 Consider a very common use case for process_submissions(). I want, for all submitted answers, name, email and any answer which included http. I don't want to have to remember the weird id for all the answers that had an http. I want the function to figure that out. Really, what I want is for the function to figure out any id which has (at least 2?) answers which start with http. Then, I want that many lines for each answer. So, we have column name, email, id and answer, with missing values for any student which did not submit for that id. 
 
+I think that there is a bug (or at least a change) in how to handle links within a vignette. That is, within instructions.qmd, I want to link discussion of knowledge drops to the Knowledge Drops section. The old way of doing that in Rmd files still *seemed* to work, in the sense that the links worked in the result html, but R CMD check seemed to identify those links as have an Empty URL, generating a NOTE in R CMD check which led to CRAN rejection. 
+
 Figure out why Check is 0/0/0 but Test is 2 FAILs and 5 SKIPs.
 
 Change format_tutorial() so it looks to see if you have any chunk names in your file with reserved names (name, email, ID, minutes, answers), and then warns you about that fact.
