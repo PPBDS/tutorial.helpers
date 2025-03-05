@@ -34,6 +34,7 @@ Imports:
     mime,
     purrr,
     readr,
+    remotes,
     rmarkdown,
     rstudioapi,
     rvest,
