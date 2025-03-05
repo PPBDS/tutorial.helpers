@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9011</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,7 +83,7 @@
 <p>This document describes the best way to write R tutorials using the <a href="https://rstudio.github.io/learnr/" class="external-link"><strong>learnr</strong></a> package. The most common use case is a tutorial which covers <a href="books.html">the material in an assigned textbook</a>, as with the <a href="https://CRAN.R-project.org/package=r4ds.tutorials" class="external-link"><strong>r4ds.tutorials</strong></a> package for <a href="https://r4ds.hadley.nz/" class="external-link"><em>R for Data Science (2e)</em></a> by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund..</p>
 <p>Instructors assign textbook readings to students. We want our students to read and, perhaps more importantly, go through the associated code, typing it in and confirming what it does. Sadly, students almost never do so. Fortunately, the <a href="https://CRAN.R-project.org/package=tutorial.helpers" class="external-link"><strong>tutorial.helpers</strong></a> package provides tools for ensuring that students type in all the assigned code.</p>
 <p>Imagine the <em>shallowest</em> possible learning curve. Almost every student should be able to answer almost every exercise, albeit perhaps with the help of a hint. There are no hard questions. In fact, there really aren’t any <em>questions</em> at all. Instead, there are <em>instructions</em>: Do one thing, then the next, and then the next.</p>
-<p>Almost all exercises feature a <a href="#kd"><em>knowledge drop</em></a>, a bit of information, rarely more than two sentences, provided after the student has answered the question.</p>
+<p>Almost all exercises feature a knowledge drop, a bit of information, rarely more than two sentences, provided after the student has answered the question.</p>
 <p>Assume that you are giving the student a private lesson. You ask them a question. They give you an answer. What would you say to them next? What do you want to teach them, given that context?</p>
 <p>We are building a “<a href="https://ricomariani.medium.com/the-pit-of-success-cfefc6cb64c8" class="external-link">pit of success</a>.” Generally, students don’t do the assigned reading, at least in a large class. However, they will complete required work. They will do the assigned tutorials. <em>Our promise: If you complete the tutorials, you will learn the material. There is simply no way not to.</em></p>
 </section><section class="level2"><h2 id="set-up">Set Up<a class="anchor" aria-label="anchor" href="#set-up"></a>
@@ -141,7 +141,7 @@
 </ul>
 </li>
 <li><p>The three code chunks are always followed by a triple hash. We want a student to pause after she has submitted her answer so that she is more likely to consider the output from her submission before moving on.</p></li>
-<li><p>The last part of an exercise is the end, our main opportunity to drop some knowledge. See <a href="#kd">Knowledge Drops</a> for extensive discussion.</p></li>
+<li><p>The last part of an exercise is the end, our main opportunity to drop some knowledge.</p></li>
 <li><p>The last part of the topic is another knowledge drop. It is not another exercise. It is just a knowledge drop after the last exercise which tries to take a broader overview. It is often separated from that last exercise by a simple <code>###</code>. Again, this can’t be more than a sentence or two. But it should be more substantive than a simple “Good job.” For example, if the topic has involved creating a scatter plot, then the last exercise will be putting the final touches on that scatter plot. The last knowledge drop should be something about scatter plots in general, not a minor point about the particular scatter plot which the student has just created.</p></li>
 </ul></section><section class="level3"><h3 id="question-types">Question types<a class="anchor" aria-label="anchor" href="#question-types"></a>
 </h3>
@@ -284,8 +284,7 @@
 <p>You want to first show the graphic that you will create by the end of the topic. You show it once at the start of the topic and once before the last exercise, as a reminder of what the graphic should look like so students do not need to scroll all the way back up.</p>
 <p>You should put the code for the graphic in the <code>setup</code> code chunk. Save the code to an object. The name of the object should have a “_p” suffix, where the “p” stands for “plot.” This way, you only have to put the object name in the code chunk at the end of the topic rather than copying the code.</p>
 <p>You then build up the graphic, line by line, over a series of exercises, providing hints along the way.</p>
-</section><section class="level3"><h3 id="knowledge-drops">Knowledge Drops<a id="kd" href=""></a>
-<a class="anchor" aria-label="anchor" href="#knowledge-drops"></a>
+</section><section class="level3"><h3 id="knowledge-drops">Knowledge Drops<a class="anchor" aria-label="anchor" href="#knowledge-drops"></a>
 </h3>
 <p>The most difficult part of tutorial creation is writing the “knowledge drops,” the snippets of wisdom (and the associated links) which are used at the end of each exercise. These generally come in two categories: details about R functions/packages/websites and background information about the substative data science problem at hand.</p>
 <p>Do not expect this to be easy! Good knowledge drops are hard. Make them short. Students will not read more than a sentence or two.</p>
