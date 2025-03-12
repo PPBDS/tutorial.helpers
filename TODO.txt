@@ -1,5 +1,31 @@
 # Priorities
 
+Here is my current json file. How did I end up with the two things besides the keymap? Should students have the same?
+
+{
+  "diffEditor.ignoreTrimWhitespace": true,
+  "rstudio.keymap.enable": true,
+  "workbench.editor.enablePreview": false
+}
+
+Consider changing the JSON file so that Windows users will use bash. Ask Grok for details. Example:
+
+{
+  "terminal.integrated.profiles.windows": {
+    "RTools Bash": {
+      "path": "C:\\rtools44\\usr\\bin\\bash.exe",
+      "args": ["--login"]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "RTools Bash"
+}
+
+No idea if this would work. And, if we start using it, we might need to update the Terminal tutorial.
+
+Nice for show_all() to take "YAML" as an option and just return the YALM header.
+
+Sometimes, if there is a include graphics chunk, the main chunk label gets added to it, even if that label already exists for that question a few lines down. Not sure what to do. Best would be if check_current_tutorial, at the end, checked that there are no duplicate labels and then reported any that it found.
+
 Consider a very common use case for process_submissions(). I want, for all submitted answers, name, email and any answer which included http. I don't want to have to remember the weird id for all the answers that had an http. I want the function to figure that out. Really, what I want is for the function to figure out any id which has (at least 2?) answers which start with http. Then, I want that many lines for each answer. So, we have column name, email, id and answer, with missing values for any student which did not submit for that id. 
 
 I think that there is a bug (or at least a change) in how to handle links within a vignette. That is, within instructions.qmd, I want to link discussion of knowledge drops to the Knowledge Drops section. The old way of doing that in Rmd files still *seemed* to work, in the sense that the links worked in the result html, but R CMD check seemed to identify those links as have an Empty URL, generating a NOTE in R CMD check which led to CRAN rejection. 
