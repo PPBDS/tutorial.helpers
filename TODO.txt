@@ -1,5 +1,7 @@
 # Priorities
 
+show_file should fail if chunk is anything other than the allowed character strings, i.e., chunk = 1 should fail.
+
 Here is my current json file. How did I end up with the two things besides the keymap? Should students have the same?
 
 {
