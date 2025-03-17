@@ -40,8 +40,9 @@ format_tutorial <- function(file_path) {
   section_name <- ""
   exercise_counter <- 0
   in_yaml <- FALSE
-  in_verbatim <- FALSE  # New flag to track if we're inside quadruple backticks
+  in_verbatim <- FALSE  # Flag to track if we're inside quadruple backticks
   in_section <- FALSE
+  verbatim_count <- 0   # Track the number of backtick toggles to ensure proper pairing
   
   # Add a variable to track hint counters per exercise
   hint_counters <- list()
@@ -52,8 +53,9 @@ format_tutorial <- function(file_path) {
     current_line <- lines[i]
     
     # Check for quadruple backticks - toggles verbatim mode
-    if (grepl("^````$", current_line)) {
-      in_verbatim <- !in_verbatim
+    if (grepl("^````\\s*$", trimws(current_line))) {
+      verbatim_count <- verbatim_count + 1
+      in_verbatim <- verbatim_count %% 2 != 0  # Toggle state based on count parity
       i <- i + 1
       next
     }
@@ -115,31 +117,38 @@ format_tutorial <- function(file_path) {
   exercise_counter <- 0
   in_yaml <- FALSE
   in_verbatim <- FALSE
+  verbatim_count <- 0
   hint_counters <- list()
   
   # Second pass: Update code chunk labels based on corrected exercise numbers
-  for (i in seq_along(lines)) {
+  i <- 1
+  while (i <= length(lines)) {
     current_line <- lines[i]
     
-    # Check for quadruple backticks - toggles verbatim mode
-    if (grepl("^````$", current_line)) {
-      in_verbatim <- !in_verbatim
+    # Check for quadruple backticks - toggles verbatim mode with more robust detection
+    if (grepl("^````\\s*$", trimws(current_line))) {
+      verbatim_count <- verbatim_count + 1
+      in_verbatim <- verbatim_count %% 2 != 0  # Toggle based on count parity
+      i <- i + 1
       next
     }
     
     # Skip processing while in verbatim mode
     if (in_verbatim) {
+      i <- i + 1
       next
     }
     
     # Track YAML section
     if (grepl("^---$", current_line)) {
       in_yaml <- !in_yaml
+      i <- i + 1
       next
     }
     
     # Skip processing within YAML
     if (in_yaml) {
+      i <- i + 1
       next
     }
     
@@ -156,6 +165,7 @@ format_tutorial <- function(file_path) {
       }
       
       exercise_counter <- 0
+      i <- i + 1
       next
     }
     
@@ -165,13 +175,15 @@ format_tutorial <- function(file_path) {
       # Initialize hint counter for this exercise
       hint_key <- paste0(section_name, "-", exercise_counter)
       hint_counters[[hint_key]] <- 0
+      i <- i + 1
       next
     }
     
-    # Process code chunks - match the start of an R code chunk 
+    # Process code chunks - match the start of an R code chunk with more robust detection
     if (grepl("^```\\{r", current_line)) {
       # Skip if we're not in a section or exercise
       if (section_name == "" || exercise_counter == 0) {
+        i <- i + 1
         next
       }
       
@@ -185,11 +197,13 @@ format_tutorial <- function(file_path) {
       
       # Skip "setup" chunks - they should not be changed
       if (grepl("^```\\{r\\s+setup", current_line)) {
+        i <- i + 1
         next
       }
       
       # Skip chunks with "file" option - they should not be changed
       if (grepl("file\\s*=", current_line)) {
+        i <- i + 1
         next
       }
       
@@ -199,6 +213,7 @@ format_tutorial <- function(file_path) {
       
       # Skip if the label is already correctly formatted
       if (is_already_correct) {
+        i <- i + 1
         next
       }
       
@@ -209,6 +224,7 @@ format_tutorial <- function(file_path) {
       if (grepl("^```\\{r\\s+include\\s*=\\s*FALSE", current_line) || grepl("^```\\{r,\\s*include\\s*=\\s*FALSE", current_line)) {
         # Direct match for unlabeled chunk with include=FALSE
         lines[i] <- gsub("^```\\{r\\s*(.*)$", paste0("```{r ", new_base_label, "-test, \\1"), current_line)
+        i <- i + 1
         next
       }
       
@@ -219,12 +235,15 @@ format_tutorial <- function(file_path) {
         hint_number <- hint_counters[[hint_key]]
         
         lines[i] <- gsub("^```\\{r\\s*(.*)$", paste0("```{r ", new_base_label, "-hint-", hint_number, ", \\1"), current_line)
+        i <- i + 1
         next
       }
       
-      if (grepl("^```\\{r\\s+exercise\\s*=\\s*TRUE", current_line) || grepl("^```\\{r,\\s*exercise\\s*=\\s*TRUE", current_line)) {
-        # Direct match for unlabeled chunk with exercise=TRUE
-        lines[i] <- gsub("^```\\{r\\s*(.*)$", paste0("```{r ", new_base_label, ", \\1"), current_line)
+      if (grepl("^```\\{r\\s+exercise\\s*=\\s*TRUE", current_line) || grepl("^```\\{r,\\s*exercise\\s*=\\s*TRUE", current_line) || 
+          grepl("^```\\{r\\s+[^,]+,\\s*exercise\\s*=\\s*TRUE", current_line)) {
+        # Match for both unlabeled and labeled chunk with exercise=TRUE
+        lines[i] <- gsub("^```\\{r(?:\\s+[^,]+)?\\s*,?\\s*(.*)$", paste0("```{r ", new_base_label, ", \\1"), current_line)
+        i <- i + 1
         next
       }
       
@@ -328,7 +347,12 @@ format_tutorial <- function(file_path) {
           lines[i] <- paste0("```{r ", new_base_label, "}")
         }
       }
+      
+      i <- i + 1
+      next
     }
+    
+    i <- i + 1
   }
   
   # Return formatted content with exactly the same line endings

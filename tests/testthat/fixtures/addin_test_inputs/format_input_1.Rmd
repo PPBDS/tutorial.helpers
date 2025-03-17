@@ -242,8 +242,23 @@ penguins
 # ℹ 2 more variables: sex <fct>, year <int>
 ````
 
+### Exercise 4
+
+```{r zz, exercise = TRUE}
+
+```
+
+## Four ticks problem
+### 
+
 ### Exercise 2
 
-```{r exercise-1, exercise = TRUE}
+Test to make sure that this four backtick environment does not cause trouble. Not sure what made this trouble in previous versions!
+
+````
+
+````  
+
+```{r zz, exercise = TRUE}
 
 ```

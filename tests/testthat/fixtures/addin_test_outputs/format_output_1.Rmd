@@ -247,3 +247,18 @@ penguins
 ```{r hask-marks-1, exercise = TRUE}
 
 ```
+
+## Four ticks problem
+### 
+
+### Exercise 1
+
+Test to make sure that this four backtick environment does not cause trouble. Not sure what made this trouble in previous versions!
+
+````
+
+````  
+
+```{r four-ticks-problem-1, exercise = TRUE}
+
+```
