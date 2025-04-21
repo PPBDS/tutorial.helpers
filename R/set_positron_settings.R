@@ -2,10 +2,9 @@
 #' 
 #' @description
 #' Locates or creates the Positron `settings.json` file on Windows or macOS,
-#' then updates multiple settings to enhance the Positron experience for R users.
-#' Key settings include enabling RStudio keyboard shortcuts, multiple console
-#' sessions and several other optimizations. The function can also optionally
-#' configure binary package preferences in the `.Rprofile`.
+#' then updates those settings to enhance the Positron experience for R users.
+#' Key setting is including enabling RStudio keyboard shortcuts. The function can 
+#' also optionally configure binary package preferences in the `.Rprofile`.
 #'
 #' @details
 #' This function uses the `jsonlite` package to handle JSON operations and
@@ -66,8 +65,7 @@ set_positron_settings <- function(home_dir = path.expand("~"), set.binary = TRUE
   
   # Define the settings we want to apply
   positron_settings <- list(
-    list("rstudio.keymap.enable", TRUE),
-    list("console.multipleConsoleSessions", TRUE)
+    list("rstudio.keymap.enable", TRUE)
   )
   
   # Apply all settings in the list

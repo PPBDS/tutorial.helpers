@@ -30,8 +30,7 @@ test_that("set_positron_settings creates/updates settings.json", {
   expect_match(output[1], "Created directory:", info = "Directory creation message missing")
   expect_match(output[2], "Created new settings.json at:", info = "File creation message missing")
   expect_match(output[3], "Setting rstudio.keymap.enable to TRUE", info = "Setting update message missing")
-  expect_match(output[4], "Setting console.multipleConsoleSessions to TRUE", info = "Setting update message missing")
-  expect_match(output[5], "Updated settings in", info = "Settings update confirmation message missing")
+  expect_match(output[4], "Updated settings in", info = "Settings update confirmation message missing")
   
   # Check that the directory and file were created
   expect_true(dir.exists(paths$dir), info = "Directory not created")
@@ -43,10 +42,6 @@ test_that("set_positron_settings creates/updates settings.json", {
     is.logical(settings[["rstudio.keymap.enable"]]) && settings[["rstudio.keymap.enable"]],
     info = "'rstudio.keymap.enable' not set to TRUE"
   )
-  expect_true(
-    is.logical(settings[["console.multipleConsoleSessions"]]) && settings[["console.multipleConsoleSessions"]],
-    info = "'console.multipleConsoleSessions' not set to TRUE"
-  )
 })
 
 test_that("Function does nothing if all settings are already set", {
@@ -57,8 +52,7 @@ test_that("Function does nothing if all settings are already set", {
   dir.create(paths$dir, recursive = TRUE)
   jsonlite::write_json(
     list(
-      "rstudio.keymap.enable" = TRUE,
-      "console.multipleConsoleSessions" = TRUE
+      "rstudio.keymap.enable" = TRUE
     ), 
     paths$file, pretty = TRUE, auto_unbox = TRUE
   )
@@ -80,8 +74,7 @@ test_that("Function does nothing if all settings are already set", {
   expect_equal(
     settings,
     list(
-      "rstudio.keymap.enable" = TRUE,
-      "console.multipleConsoleSessions" = TRUE
+      "rstudio.keymap.enable" = TRUE
     ),
     info = "Settings were modified unexpectedly"
   )
