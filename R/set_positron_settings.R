@@ -1,16 +1,19 @@
-#' @title Select Good Positron Settings
+#' @title Configure Positron Settings for Optimal Experience
+#' 
 #' @description
 #' Locates or creates the Positron `settings.json` file on Windows or macOS,
-#' then ensures the `"rstudio.keymap.enable": true` setting is present to enable
-#' RStudio keyboard shortcuts. If the setting already exists and is `true`, no
-#' changes are made; otherwise, it is added or updated. `set.binary` argument 
-#' determines if `options(pkgType = 'binary')` should be added to the `.Rprofile`.
+#' then updates multiple settings to enhance the Positron experience for R users.
+#' Key settings include enabling RStudio keyboard shortcuts, multiple console
+#' sessions and several other optimizations. The function can also optionally
+#' configure binary package preferences in the `.Rprofile`.
 #'
 #' @details
 #' This function uses the `jsonlite` package to handle JSON operations and
-#' creates the necessary directory structure if it doesn’t exist. It is
+#' creates the necessary directory structure if it doesn't exist. It is
 #' designed to work cross-platform by detecting the operating system and
-#' constructing the appropriate file path to Positron’s user settings.
+#' constructing the appropriate file path to Positron's user settings. The
+#' function applies a predefined list of settings rather than requiring the
+#' user to specify which settings to change.
 #'
 #' @param home_dir Optional character string specifying the base directory to use
 #'   as the user's home directory. Defaults to `path.expand("~")`. Useful for
@@ -19,15 +22,16 @@
 #'   `set_binary_only_in_r_profile()` after applying settings to configure binary
 #'   options in the R profile.
 #'
-#' @return Invisible `NULL`. The function’s purpose is its side effect: modifying
+#' @return Invisible `NULL`. The function's purpose is its side effect: modifying
 #'   or creating the `settings.json` file. It also prints messages to the console
 #'   indicating actions taken.
 #'
 #' @examples
 #' \dontrun{
-#'   # Run the function with default settings
+#'   # Apply all recommended Positron settings
 #'   set_positron_settings()
-#'   # Run with a custom home directory and disable binary setting
+#'   
+#'   # Apply settings with a custom home directory and disable binary setting
 #'   set_positron_settings(home_dir = tempdir(), set.binary = FALSE)
 #' }
 #'
@@ -35,7 +39,7 @@
 #' @export
 
 set_positron_settings <- function(home_dir = path.expand("~"), set.binary = TRUE) {
-  
+ 
   # Use provided home_dir instead of calling path.expand("~") directly
   if (Sys.info()["sysname"] == "Windows") {
     settings_dir <- file.path(home_dir, "AppData", "Roaming", "Positron", "User")
@@ -60,23 +64,40 @@ set_positron_settings <- function(home_dir = path.expand("~"), set.binary = TRUE
   # Read the current settings
   settings <- read_json(settings_file, simplifyVector = TRUE)
   
-  # Check if "rstudio.keymap.enable" is already TRUE
-  if (is.null(settings[["rstudio.keymap.enable"]]) || 
-      settings[["rstudio.keymap.enable"]] != TRUE) {
-    # Add or update the setting
-    settings[["rstudio.keymap.enable"]] <- TRUE
-    # Write back to file with proper formatting
+  # Define the settings we want to apply
+  positron_settings <- list(
+    list("rstudio.keymap.enable", TRUE),
+    list("console.multipleConsoleSessions", TRUE)
+  )
+  
+  # Apply all settings in the list
+  changes_made <- FALSE
+  
+  for (i in seq_along(positron_settings)) {
+    setting <- positron_settings[[i]][[1]]
+    value <- positron_settings[[i]][[2]]
+    
+    # Check if the setting needs to be updated
+    if (is.null(settings[[setting]]) || !identical(settings[[setting]], value)) {
+      settings[[setting]] <- value
+      changes_made <- TRUE
+      cat("Setting", setting, "to", as.character(value), "\n")
+    }
+  }
+  
+  # Write back to file if changes were made
+  if (changes_made) {
     write_json(settings, settings_file, pretty = TRUE, auto_unbox = TRUE)
-    cat("Added/updated 'rstudio.keymap.enable': true in", settings_file, "\n")
+    cat("Updated settings in", settings_file, "\n")
   } else {
-    cat("'rstudio.keymap.enable' is already true in", settings_file, "\n")
+    cat("No settings changes needed in", settings_file, "\n")
   }
   
   # Apply binary settings if requested
   if (isTRUE(set.binary)) {
+    cat("Running set_binary_only_in_r_profile() to configure binary options.\n")
     set_binary_only_in_r_profile()
-    cat("Ran set_binary_only_in_r_profile() to configure binary options.\n")
   }
   
   invisible(NULL)
-}
+ }

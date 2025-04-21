@@ -2,7 +2,7 @@
 % Please edit documentation in R/set_positron_settings.R
 \name{set_positron_settings}
 \alias{set_positron_settings}
-\title{Select Good Positron Settings}
+\title{Configure Positron Settings for Optimal Experience}
 \usage{
 set_positron_settings(home_dir = path.expand("~"), set.binary = TRUE)
 }
@@ -16,28 +16,31 @@ testing or custom setups.}
 options in the R profile.}
 }
 \value{
-Invisible \code{NULL}. The function’s purpose is its side effect: modifying
+Invisible \code{NULL}. The function's purpose is its side effect: modifying
 or creating the \code{settings.json} file. It also prints messages to the console
 indicating actions taken.
 }
 \description{
 Locates or creates the Positron \code{settings.json} file on Windows or macOS,
-then ensures the \code{"rstudio.keymap.enable": true} setting is present to enable
-RStudio keyboard shortcuts. If the setting already exists and is \code{true}, no
-changes are made; otherwise, it is added or updated. \code{set.binary} argument
-determines if \code{options(pkgType = 'binary')} should be added to the \code{.Rprofile}.
+then updates multiple settings to enhance the Positron experience for R users.
+Key settings include enabling RStudio keyboard shortcuts, multiple console
+sessions and several other optimizations. The function can also optionally
+configure binary package preferences in the \code{.Rprofile}.
 }
 \details{
 This function uses the \code{jsonlite} package to handle JSON operations and
-creates the necessary directory structure if it doesn’t exist. It is
+creates the necessary directory structure if it doesn't exist. It is
 designed to work cross-platform by detecting the operating system and
-constructing the appropriate file path to Positron’s user settings.
+constructing the appropriate file path to Positron's user settings. The
+function applies a predefined list of settings rather than requiring the
+user to specify which settings to change.
 }
 \examples{
 \dontrun{
-  # Run the function with default settings
+  # Apply all recommended Positron settings
   set_positron_settings()
-  # Run with a custom home directory and disable binary setting
+  
+  # Apply settings with a custom home directory and disable binary setting
   set_positron_settings(home_dir = tempdir(), set.binary = FALSE)
 }
 

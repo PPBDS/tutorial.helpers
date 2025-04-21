@@ -27,10 +27,11 @@ test_that("set_positron_settings creates/updates settings.json", {
   })
   
   # Check individual expected messages
-  expect_match(output[1], "Created directory.*Positron/User", info = "Directory creation message missing")
-  expect_match(output[2], "Created new settings.json at.*settings.json", info = "File creation message missing")
-  expect_match(output[3], "Added/updated 'rstudio.keymap.enable': true in.*settings.json", 
-               info = "Setting update message missing")
+  expect_match(output[1], "Created directory:", info = "Directory creation message missing")
+  expect_match(output[2], "Created new settings.json at:", info = "File creation message missing")
+  expect_match(output[3], "Setting rstudio.keymap.enable to TRUE", info = "Setting update message missing")
+  expect_match(output[4], "Setting console.multipleConsoleSessions to TRUE", info = "Setting update message missing")
+  expect_match(output[5], "Updated settings in", info = "Settings update confirmation message missing")
   
   # Check that the directory and file were created
   expect_true(dir.exists(paths$dir), info = "Directory not created")
@@ -42,33 +43,46 @@ test_that("set_positron_settings creates/updates settings.json", {
     is.logical(settings[["rstudio.keymap.enable"]]) && settings[["rstudio.keymap.enable"]],
     info = "'rstudio.keymap.enable' not set to TRUE"
   )
+  expect_true(
+    is.logical(settings[["console.multipleConsoleSessions"]]) && settings[["console.multipleConsoleSessions"]],
+    info = "'console.multipleConsoleSessions' not set to TRUE"
+  )
 })
 
-test_that("Function does nothing if keymap is already enabled", {
+test_that("Function does nothing if all settings are already set", {
   temp_home <- tempdir()
   paths <- setup_temp_settings(temp_home)
   
-  # Pre-create settings.json with the setting
+  # Pre-create settings.json with all settings
   dir.create(paths$dir, recursive = TRUE)
-  write_json(list("rstudio.keymap.enable" = TRUE), paths$file, pretty = TRUE, auto_unbox = TRUE)
+  jsonlite::write_json(
+    list(
+      "rstudio.keymap.enable" = TRUE,
+      "console.multipleConsoleSessions" = TRUE
+    ), 
+    paths$file, pretty = TRUE, auto_unbox = TRUE
+  )
   
   # Run function and capture output
   output <- capture.output({
     set_positron_settings(home_dir = temp_home, set.binary = FALSE)
   })
   
-  # Check for the "already true" message
+  # Check for the "No settings changes needed" message
   expect_match(
     output[1],
-    "'rstudio.keymap.enable' is already true in.*settings.json",
-    info = "Function did not recognize existing setting"
+    "No settings changes needed in",
+    info = "Function did not recognize existing settings"
   )
   
-  # Verify content didn’t change
-  settings <- read_json(paths$file, simplifyVector = TRUE)
+  # Verify content didn't change
+  settings <- jsonlite::read_json(paths$file, simplifyVector = TRUE)
   expect_equal(
     settings,
-    list("rstudio.keymap.enable" = TRUE),
+    list(
+      "rstudio.keymap.enable" = TRUE,
+      "console.multipleConsoleSessions" = TRUE
+    ),
     info = "Settings were modified unexpectedly"
   )
 })
@@ -97,10 +111,10 @@ test_that("set.binary = TRUE calls set_binary_only_in_r_profile()", {
   
   # Check for the binary message, matching literally
   expect_match(
-    tail(output, 1),
-    "Ran set_binary_only_in_r_profile() to configure binary options",
+    tail(output, 1)[[1]],
+    "Running set_binary_only_in_r_profile() to configure binary options.", 
     fixed = TRUE,
-    info = "Binary configuration message missing"
+    info = "Binary configuration message missing or incorrect"
   )
 })
 
@@ -127,7 +141,7 @@ test_that("set.binary = FALSE skips set_binary_only_in_r_profile()", {
   
   # Check that the binary message is absent
   expect_false(
-    any(grepl("Ran set_binary_only_in_r_profile", output)),
-    info = "Binary configuration message appeared when it shouldn’t"
+    any(grepl("Running set_binary_only_in_r_profile", output)),
+    info = "Binary configuration message appeared when it shouldn't"
   )
 })
