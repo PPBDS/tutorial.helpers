@@ -25,6 +25,8 @@ options(tutorial.exercise.timelimit = 60,
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
 
+<!-- Biggest current annoyance is that the variable `console.multipleConsoleSessions` is set to false by default. But that means that we can't do the tutorial at the same time as we interact with the Console, since running the tutorial takes over (one instance of the) Console. So, we need to run set_positron_settings() at the start. But we can't do that till we start the tutorial! Arrg! -->
+
 ## Introduction
 ### 
 
