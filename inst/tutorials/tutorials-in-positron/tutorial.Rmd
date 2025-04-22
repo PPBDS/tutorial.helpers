@@ -25,7 +25,6 @@ options(tutorial.exercise.timelimit = 60,
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- Biggest current annoyance is that the variable `console.multipleConsoleSessions` is set to false by default. But that means that we can't do the tutorial at the same time as we interact with the Console, since running the tutorial takes over (one instance of the) Console. So, we need to run set_positron_settings() at the start. But we can't do that till we start the tutorial! Arrg! -->
 
 ## Introduction
 ### 
@@ -34,10 +33,10 @@ This tutorial is an introduction, for students using [Positron](https://positron
 
 ### 
 
-<!-- DK: Update computer set up link. -->
-<!-- DK: Add new document discussing Workbench. -->
+<!-- DK: Revist these instructions once you can use Positron in the cloud. -->
+<!-- DK: Perhaps add new vignette discussing Workbench. -->
 
-You may complete a tutorial either on your laptop or on a cloud computing platform like [Posit Workbench](https://posit.co/products/enterprise/workbench/). (See our discussion about [setting up your own computer](https://ppbds.github.io/primer/getting-started.html).) Either way, you will download a copy of your answers to the Downloads folder on your computer once you are done with a tutorial. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
+You may complete a tutorial on your laptop. You will then download a copy of your answers to the Downloads folder on your computer once you are done with a tutorial. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
 
 ### 
 
@@ -54,7 +53,7 @@ In each tutorial, there will be a set of exercises for you to complete. For non-
 
 ### 
 
-Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work for a tutorial and allows you to begin the entire tutorial again. (If you are working on your tutorial in the Viewer, the screen might not be wide enough to show the left-hand side menu. If so, just expand the Viewer until it appears.)
+Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work and allows you to begin the entire tutorial again. (If you are working on your tutorial in the Secondary Side Bar, the screen might not be wide enough to show the left-hand side menu. If so, just expand the Secondary Side Bar until it appears.)
 
 <!-- DK: Also, or better, we can just click on the tutorial name in the top left and Start Over appears at the bottom of the resulting menu. -->
 
@@ -136,13 +135,6 @@ Note that the assignment symbol, `<-`, is a less-than-sign followed by a dash. W
 
 Did you remember to hit the "Run Code" button above? Lots of people forget! You must hit the button for your answer to be recorded.
 
-### 
-
-If you used the hint, note how we did not provide the entire answer. This is our standard approach with hints.
-
-
-
-
 ### Exercise 4
 
 <!-- DK: Seems like it should be possible to restart the R session. But the various buttons don't seem to work very well, at least when you are in a tutorial. Try this again in a month. In the meantime, this radical close-Positron approach is OK. -->
@@ -166,7 +158,11 @@ Note how all your answers to previous questions have been saved. It is not a pro
 
 ### Exercise 5
 
-We often ask you to execute an R command in the Console, a pane on the lower left portion of your Positron screen. Type `version[['version.string']]` into the Console and hit the return/enter key.
+We often ask you to execute an R command in the Console, a pane on the lower left portion of your Positron screen. The problem is that your current Console is running this tutorial. So, press the "Start a New Session" button --- the `+` sign to the right of the Console menu --- to create a second Console. You will probably need to select the R option. 
+
+You now have two Consoles: one running this tutorial and the other empty. You can move back and forth between them, but you will probably most stay in the new Console.
+
+In the new Console, type `version[['version.string']]` and hit the return/enter key.
 
 **Do not just type the command into the answer box!** You must paste the command into the Console and then execute the command.
 
@@ -187,8 +183,8 @@ Your answer should look something like:
 
 ````
 > version[['version.string']]
-[1] "R version 4.4.2 (2024-10-31)"
-> 
+[1] "R version 4.5.0 (2025-04-11)"
+>
 ````
 
 Your version of R may be more recent, but it should not be older. It is OK if your formatting differs from ours. Exactness does not matter. What matters is that you prove that you have executed the command as instructed.
@@ -222,7 +218,7 @@ The output from this function will report the changes, if any, which were made. 
 
 ### 
 
-You can generally call functions by just giving their name along with the ending parentheses, as with `set_positron_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_positron_settings()` is in the **tutorial.helpers** package, we can also call it using the double colon notation: `tutorial.helpers::set_positron_settings()`, as we do above.
+You can generally call functions by just giving their name along with the ending parentheses, as with `set_positron_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_positron_settings()` is in the **tutorial.helpers** package, we can call it using the double colon notation: `tutorial.helpers::set_positron_settings()`, as we do above.
 
 ### Exercise 7
 
@@ -295,9 +291,9 @@ At the end of every tutorial, you will save your work (and submit it, at the dis
 
 Make sure to answer the question about how many **minutes** you spent on the tutorial and to click "Submit Answer."
 
-After hitting the "Download" button, you will be prompted to save a file named `getting-started_answers.html`. This file will be saved in the default Downloads folder on your computer, even if you completed the tutorial on a cloud computing platform. 
+After hitting the "Download" button, you will be prompted to save a file named `tutorials-in-positron_answers.html`. This file should be saved in the default Downloads folder on your computer. 
 
-Unless told otherwise by your instructor, you should use the default file name, which will usually be of the form `name-of-tutorial` + `_answers` + `.html`. 
+Unless told otherwise by your instructor, you should use the default file name, which will usually be of the form `short-name-of-tutorial` + `_answers` + `.html`. 
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
