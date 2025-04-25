@@ -14,7 +14,7 @@ description: Tutorial for introducing students to tutorials when using Positron.
 ```{r setup, include = FALSE}
 library(learnr)
 library(tutorial.helpers)
-library(remotes)
+library(knitr)
 
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(out.width = '90%')
@@ -53,7 +53,7 @@ In each tutorial, there will be a set of exercises for you to complete. For non-
 
 ### 
 
-Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work and allows you to begin the entire tutorial again. (If you are working on your tutorial in the Secondary Side Bar, the screen might not be wide enough to show the left-hand side menu. If so, just expand the Secondary Side Bar until it appears.)
+Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work and allows you to begin the entire tutorial again. (If you are working on your tutorial in the Viewer in the Secondary Side Bar, the screen might not be wide enough to show the left-hand side menu. If so, just expand the Secondary Side Bar until it appears.)
 
 <!-- DK: Also, or better, we can just click on the tutorial name in the top left and Start Over appears at the bottom of the resulting menu. -->
 
@@ -158,9 +158,21 @@ Note how all your answers to previous questions have been saved. It is not a pro
 
 ### Exercise 5
 
-We often ask you to execute an R command in the Console, a pane on the lower left portion of your Positron screen. The problem is that your current Console is running this tutorial. So, press the "Start a New Session" button --- the `+` sign to the right of the Console menu --- to create a second Console. You will probably need to select the R option. 
+After starting the tutorial, your Positron window looked something like this:
 
-You now have two Consoles: one running this tutorial and the other empty. You can move back and forth between them, but you will probably most stay in the new Console.
+```{r}
+include_graphics("images/positron-start-up-1.png")
+```
+
+Your Console is currently "busy" running the tutorial. But, you will still want to run R commands, so you will need a second Console. Create it by pressing the "Start a New Session" button, as indicated by the red arrow, and choose the R option, if you are asked. After you do so, the Console should look like:
+
+```{r}
+include_graphics("images/positron-start-up-2.png")
+```
+
+You can switch back-and-forth between the two Consoles, but you will rarely want to since the first is just running the tutorial.
+
+###
 
 In the new Console, type `version[['version.string']]` and hit the return/enter key.
 
