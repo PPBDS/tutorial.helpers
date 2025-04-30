@@ -36,15 +36,18 @@ This tutorial is an introduction, for students using [Positron](https://positron
 <!-- DK: Revist these instructions once you can use Positron in the cloud. -->
 <!-- DK: Perhaps add new vignette discussing Posit Workbench. -->
 
-You may complete a tutorial on your laptop. You will then download a copy of your answers to the Downloads folder on your computer once you are done with a tutorial. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
+You may complete a tutorial on your laptop. You download a copy of your answers to the `Downloads` folder on your computer. Then, you submit your answers to your instructor and/or keep a copy for yourself.
 
 ### 
 
 Most tutorials begin by asking for your your name and email. (Your instructor might also request that you fill in the "ID" field so that your work can be matched to a grading database. If not, leave the "ID" field blank.) Click "Continue" and then fill in your name and email. Click the **"Submit Answer"** button each time. If you make a mistake, you can click **"Try Again"** and, uh, try again. 
 
-
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
+
+###
+
+You can also "pop" a tutorial up into your browser by pressing the "Open the current URL in the default browser" button --- the item in the Viewer menu just to the left of the circular arrow. It looks like a rectangle containing an arrow pointing up and to the right.
 
 ## Exercises 
 ### 
@@ -53,11 +56,10 @@ In each tutorial, there will be a set of exercises for you to complete. For non-
 
 ### 
 
-Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work and allows you to begin the entire tutorial again. (If you are working on your tutorial in the Viewer in the Secondary Side Bar, the screen might not be wide enough to show the left-hand side menu. If so, just expand the Secondary Side Bar until it appears.)
+Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work and allows you to begin the entire tutorial again. 
 
-<!-- DK: Also, or better, we can just click on the tutorial name in the top left and Start Over appears at the bottom of the resulting menu. -->
+If you are working on your tutorial in the Viewer in the Secondary Side Bar, the screen might not be wide enough to show the left-hand side menu. If so, just click on a the name of the tutorial. This brings up the section menu of the tutorial with "Start Over" on the bottom.
 
-<!-- DK: Test to see if you can just pull out the whole pane into a separate window. -->
 
 ### Exercise 1
 
