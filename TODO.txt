@@ -1,5 +1,46 @@
 # Priorities
 
+Explain in tutorial about having multiple windows and/or multiple Consoles. This is an important concept to understand and fits naturally since we have to restart the tutorial anyway.
+
+Biggest current issue is that it seems like Positron does not remember the location of the projects directory, so you need to select it each time, which is annoying! Need to solve this somehow. Or maybe this is now solved?
+
+Second issue is making a decision about guiding students to using two Windows or one.
+
+Adjust Primer (and elsewhere?) for new tutorial names.
+
+Where should I explain shortcut keys, especially ones like `Cmd/Ctrl + //` which don't currently come up in the tutorials?
+
+
+Perhaps I should add some default shortcut key creations to set_positron_settings(). 
+
+But also of interest is the setting of the default value of the projects directory, which does not seem to be saved even once you choose it by hand. Other items of interest:
+
+{
+  "editor.wordWrap": "on",
+  "files.defaultLanguage": "r",
+  "rewrap.wrappingColumn": 80,
+  "workbench.startupEditor": "newUntitledFile",
+  "files.hotExit": "onExitAndWindowClose",
+  "explorer.openEditors.dynamicHeight": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "files.insertFinalNewline": true,
+  "editor.renderFinalNewline": "dimmed",
+  "editor.renderWhitespace": "trailing",
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+}
+
+Also, seems like there is a keybindings.json file (in the same location), in which we can do stuff like:
+
+[]
+    {
+        "key": "cmd+d",
+        "command": "-editor.action.deleteLines",
+        "when": "config.rstudio.keymap.enable && editorTextFocus"
+    }
+]
+
+
 There is a bug in format_tutorials() which causes it to fail when, I think, there is a four tick environment which includes some #| code options in a three tick R code chunk. Should investigate.
 
 show_file should fail if chunk is anything other than the allowed character strings, i.e., chunk = 1 should fail.

@@ -2,7 +2,7 @@
 title: Tutorials in RStudio
 author: David Kane
 tutorial:
-  id: tutorials-in-rstudio
+  id: rstudio
 output:
   learnr::tutorial:
     progressive: yes

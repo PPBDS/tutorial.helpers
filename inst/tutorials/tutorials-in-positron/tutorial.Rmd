@@ -2,7 +2,7 @@
 title: Tutorials in Positron
 author: David Kane
 tutorial:
-  id: tutorials-in-positron
+  id: positron
 output:
   learnr::tutorial:
     progressive: yes
@@ -34,7 +34,7 @@ This tutorial is an introduction, for students using [Positron](https://positron
 ### 
 
 <!-- DK: Revist these instructions once you can use Positron in the cloud. -->
-<!-- DK: Perhaps add new vignette discussing Workbench. -->
+<!-- DK: Perhaps add new vignette discussing Posit Workbench. -->
 
 You may complete a tutorial on your laptop. You will then download a copy of your answers to the Downloads folder on your computer once you are done with a tutorial. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
 
