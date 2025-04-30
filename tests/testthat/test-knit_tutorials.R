@@ -18,14 +18,14 @@ test_that("knit_tutorials() works on installed tutorials", {
   
   expect_null(
     knit_tutorials(
-      system.file("tutorials/tutorials-in-rstudio/tutorial.Rmd", 
+      system.file("tutorials/rstudio/tutorial.Rmd", 
                   package = "tutorial.helpers")
       )
   )
   
   expect_null(
     knit_tutorials(
-      system.file("tutorials/tutorials-in-positron/tutorial.Rmd", 
+      system.file("tutorials/positron/tutorial.Rmd", 
                   package = "tutorial.helpers")
     )
   )
