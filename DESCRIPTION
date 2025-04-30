@@ -1,6 +1,6 @@
 Package: tutorial.helpers
 Title: Helper Functions for Creating Tutorials
-Version: 0.4.2.9007
+Version: 0.4.2.9008
 Authors@R: 
     person(given = "David",
            family = "Kane",
@@ -24,7 +24,6 @@ Suggests:
     remotes,
     roxygen2,
     rsconnect,
-    shinytest,
     testthat (>= 3.0.0),
     tidyverse
 Config/testthat/edition: 3
