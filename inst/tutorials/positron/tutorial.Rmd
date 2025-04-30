@@ -25,7 +25,6 @@ options(tutorial.exercise.timelimit = 60,
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
 
-
 ## Introduction
 ### 
 
@@ -33,21 +32,33 @@ This tutorial is an introduction, for students using [Positron](https://positron
 
 ### 
 
-<!-- DK: Revist these instructions once you can use Positron in the cloud. -->
-<!-- DK: Perhaps add new vignette discussing Posit Workbench. -->
+After you started the tutorial, your Positron window looked something like this:
+
+```{r}
+include_graphics("images/run-tutorial.png")
+```
+
+Note the red square at the top of the Console menu. This indicates that the Console is "busy." You can't do anything with this Console unless you stop running the tutorial. You can complete the tutorial in the Viewer pane in the Secondary Side Bar. 
+
+Or you can also "pop" a tutorial up into your browser by pressing the "Open the current URL in the default browser" button --- the item in the Viewer menu just to the left of the circular arrow. It looks like a rectangle containing an arrow pointing up and to the right.
+
+```{r}
+include_graphics("images/send-tutorial-to-browser.png")
+```
+
+### 
+
+<!-- DK: Revist these instructions once you can use Positron in the cloud. Perhaps add a new vignette discussing Posit Workbench. -->
 
 You may complete a tutorial on your laptop. You download a copy of your answers to the `Downloads` folder on your computer. Then, you submit your answers to your instructor and/or keep a copy for yourself.
 
 ### 
 
-Most tutorials begin by asking for your your name and email. (Your instructor might also request that you fill in the "ID" field so that your work can be matched to a grading database. If not, leave the "ID" field blank.) Click "Continue" and then fill in your name and email. Click the **"Submit Answer"** button each time. If you make a mistake, you can click **"Try Again"** and, uh, try again. 
+Most tutorials begin by asking for your name and email. (Your instructor might also request that you fill in the "ID" field so that your work can be matched to a grading database. If not, leave the "ID" field blank.) Click "Continue" and then fill in your name and email. Click the **"Submit Answer"** button each time. If you make a mistake, you can click **"Try Again"** and, uh, try again. 
 
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
-###
-
-You can also "pop" a tutorial up into your browser by pressing the "Open the current URL in the default browser" button --- the item in the Viewer menu just to the left of the circular arrow. It looks like a rectangle containing an arrow pointing up and to the right.
 
 ## Exercises 
 ### 
@@ -58,7 +69,11 @@ In each tutorial, there will be a set of exercises for you to complete. For non-
 
 Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work and allows you to begin the entire tutorial again. 
 
-If you are working on your tutorial in the Viewer in the Secondary Side Bar, the screen might not be wide enough to show the left-hand side menu. If so, just click on a the name of the tutorial. This brings up the section menu of the tutorial with "Start Over" on the bottom.
+If you are working on your tutorial in the Viewer in the Secondary Side Bar, the screen might not be wide enough to show the left-hand side menu. If so, just click on the name of the tutorial. This brings up the section menu of the tutorial with "Start Over" on the bottom.
+
+```{r}
+include_graphics("images/start-over.png")
+```
 
 
 ### Exercise 1
@@ -77,7 +92,19 @@ Let's practice some simple math. Type `4 + 5` into the box below. Hit **"Run Cod
 
 Once you click "Run Code," the answer `[1] 9` should appear below the code you entered. This is the same behavior you would see if you ran this code in the Console, which is where R is run, in a tab beneath the Welcome page.
 
+###
+
+The problem right now is that we can't check that claim since the Console is currently busy with the tutorial. To confirm the claim, you will need a second Console. Create it by pressing the "Start a New Session" button, as indicated by the red arrow, and choose the R option, if you are asked. After you do so, the Console should look like:
+
+```{r}
+include_graphics("images/positron-start-up-2.png")
+```
+
 ### 
+
+Typing `4 + 5` and hitting return/enter produces the same result in the Console as it does in the exercise.
+
+###
 
 There are two types of answers for tutorial questions: prose and code. With prose answers, you will use the "Submit Answer" button, as you did with your name and email. With code answers, you use the "Run Code" button, as you did for this question.
 
@@ -143,12 +170,12 @@ Did you remember to hit the "Run Code" button above? Lots of people forget! You 
 
 Read all of the following instructions before continuing.
 
-* Close and then restart Positron. (The purpose of this exercise is to demonstrate that your work is saved automatically.)
+* Close and then restart Positron. (The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.)
 
 * Restart the tutorial. The most common approach is to run this command at the Console:
 
 ```
-learnr::run_tutorial("tutorials-in-positron", package = "tutorial.helpers")
+learnr::run_tutorial("positron", package = "tutorial.helpers")
 ```
 
 Now that you have read all the instructions, go ahead and follow them.
@@ -160,23 +187,17 @@ Note how all your answers to previous questions have been saved. It is not a pro
 
 ### Exercise 5
 
-After starting the tutorial, your Positron window looked something like this:
+Instead of creating a new Console, as we did before, click `File -> New Window` in the Positron menu.
 
 ```{r}
-include_graphics("images/positron-start-up-1.png")
+include_graphics("images/new-window.png")
 ```
 
-Your Console is currently "busy" running the tutorial. But, you will still want to run R commands, so you will need a second Console. Create it by pressing the "Start a New Session" button, as indicated by the red arrow, and choose the R option, if you are asked. After you do so, the Console should look like:
-
-```{r}
-include_graphics("images/positron-start-up-2.png")
-```
-
-You can switch back-and-forth between the two Consoles, but you will rarely want to since the first is just running the tutorial.
+This brings up a new instance of Positron, completely independent of this one. This is the most common set up when working on tutorials. One Positron window, this one, runs the tutorial, but we don't do any work in it. We generally don't even bother to create a second Console. The second Positron window is where we do the work which the tutorial requires.
 
 ###
 
-In the new Console, type `version[['version.string']]` and hit the return/enter key.
+In the Console in the new window, type `version[['version.string']]` and hit the return/enter key.
 
 **Do not just type the command into the answer box!** You must paste the command into the Console and then execute the command.
 

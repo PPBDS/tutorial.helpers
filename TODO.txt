@@ -8,6 +8,8 @@ Second issue is making a decision about guiding students to using two Windows or
 
 Adjust Primer (and elsewhere?) for new tutorial names.
 
+There are fewer and fewer reasons why we need a copy previous code option.
+
 Where should I explain shortcut keys, especially ones like `Cmd/Ctrl + //` which don't currently come up in the tutorials?
 
 
