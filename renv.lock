@@ -142,28 +142,6 @@
       "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
       "Repository": "CRAN"
     },
-    "assertthat": {
-      "Package": "assertthat",
-      "Version": "0.2.1",
-      "Source": "Repository",
-      "Title": "Easy Pre and Post Assertions",
-      "Authors@R": "person(\"Hadley\", \"Wickham\", , \"hadley@rstudio.com\", c(\"aut\", \"cre\"))",
-      "Description": "An extension to stopifnot() that makes it easy to declare  the pre and post conditions that you code should satisfy, while also  producing friendly error messages so that your users know what's gone wrong.",
-      "License": "GPL-3",
-      "Imports": [
-        "tools"
-      ],
-      "Suggests": [
-        "testthat",
-        "covr"
-      ],
-      "RoxygenNote": "6.0.1",
-      "Collate": "'assert-that.r' 'on-failure.r' 'assertions-file.r' 'assertions-scalar.R' 'assertions.r' 'base.r' 'base-comparison.r' 'base-is.r' 'base-logical.r' 'base-misc.r' 'utils.r' 'validate-that.R'",
-      "NeedsCompilation": "no",
-      "Author": "Hadley Wickham [aut, cre]",
-      "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
-      "Repository": "CRAN"
-    },
     "backports": {
       "Package": "backports",
       "Version": "1.5.0",
@@ -772,39 +750,6 @@
       "NeedsCompilation": "yes",
       "Author": "Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>), Hadley Wickham [ctb], Posit Software, PBC [cph]",
       "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
-      "Repository": "CRAN"
-    },
-    "debugme": {
-      "Package": "debugme",
-      "Version": "1.2.0",
-      "Source": "Repository",
-      "Title": "Debug R Packages",
-      "Authors@R": "c( person(\"Gábor\", \"Csárdi\", , \"csardi.gabor@gmail.com\", role = c(\"aut\", \"cre\")), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
-      "Description": "Specify debug messages as special string constants, and control debugging of packages via environment variables.",
-      "License": "MIT + file LICENSE",
-      "URL": "https://github.com/r-lib/debugme#readme, https://r-lib.github.io/debugme/",
-      "BugReports": "https://github.com/r-lib/debugme/issues",
-      "Depends": [
-        "R (>= 3.6)"
-      ],
-      "Imports": [
-        "crayon",
-        "grDevices"
-      ],
-      "Suggests": [
-        "covr",
-        "mockery",
-        "R6",
-        "testthat (>= 3.0.0)",
-        "withr"
-      ],
-      "Config/Needs/website": "tidyverse/tidytemplate",
-      "Config/testthat/edition": "3",
-      "Encoding": "UTF-8",
-      "RoxygenNote": "7.2.3",
-      "NeedsCompilation": "no",
-      "Author": "Gábor Csárdi [aut, cre], Posit Software, PBC [cph, fnd]",
-      "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
       "Repository": "CRAN"
     },
     "desc": {
@@ -2147,83 +2092,6 @@
       "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
       "Repository": "CRAN"
     },
-    "pak": {
-      "Package": "pak",
-      "Version": "0.8.0.2",
-      "Source": "Repository",
-      "Title": "Another Approach to Package Installation",
-      "Authors@R": "c( person(\"Gábor\", \"Csárdi\", , \"csardi.gabor@gmail.com\", role = c(\"aut\", \"cre\")), person(\"Jim\", \"Hester\", role = \"aut\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")), person(\"Winston\", \"Chang\", role = \"ctb\", comment = \"R6, callr, processx\"), person(\"Ascent Digital Services\", role = c(\"cph\", \"fnd\"), comment = \"callr, processx\"), person(\"Hadley\", \"Wickham\", role = c(\"ctb\", \"cph\"), comment = \"cli, curl, pkgbuild\"), person(\"Jeroen\", \"Ooms\", role = \"ctb\", comment = \"curl, jsonlite\"), person(\"Maëlle\", \"Salmon\", role = \"ctb\", comment = \"desc, pkgsearch\"), person(\"Duncan\", \"Temple Lang\", role = \"ctb\", comment = \"jsonlite\"), person(\"Lloyd\", \"Hilaiel\", role = \"cph\", comment = \"jsonlite\"), person(\"Michel Berkelaar and lpSolve authors\", role = \"ctb\", comment = \"lpSolve\"), person(\"R Consortium\", role = \"fnd\", comment = \"pkgsearch\"), person(\"Jay\", \"Loden\", role = \"ctb\", comment = \"ps\"), person(\"Dave\", \"Daeschler\", role = \"ctb\", comment = \"ps\"), person(\"Giampaolo\", \"Rodola\", role = \"ctb\", comment = \"ps\"), person(\"Kuba\", \"Podgórski\", role = \"ctb\", comment = \"zip\"), person(\"Rich\", \"Geldreich\", role = \"ctb\", comment = \"zip\") )",
-      "Description": "The goal of 'pak' is to make package installation faster and more reliable. In particular, it performs all HTTP operations in parallel, so metadata resolution and package downloads are fast. Metadata and package files are cached on the local disk as well. 'pak' has a dependency solver, so it finds version conflicts before performing the installation. This version of 'pak' supports CRAN, 'Bioconductor' and 'GitHub' packages as well.",
-      "License": "GPL-3",
-      "URL": "https://pak.r-lib.org/, https://github.com/r-lib/pak",
-      "BugReports": "https://github.com/r-lib/pak/issues",
-      "Depends": [
-        "R (>= 3.5)"
-      ],
-      "Imports": [
-        "tools",
-        "utils"
-      ],
-      "Suggests": [
-        "callr (>= 3.7.0)",
-        "cli (>= 3.2.0)",
-        "covr",
-        "curl (>= 4.3.2)",
-        "desc (>= 1.4.1)",
-        "filelock (>= 1.0.2)",
-        "gitcreds",
-        "glue (>= 1.6.2)",
-        "jsonlite (>= 1.8.0)",
-        "mockery",
-        "pingr",
-        "pkgbuild (>= 1.4.2)",
-        "pkgcache (>= 2.0.4)",
-        "pkgdepends (>= 0.5.0.9001)",
-        "pkgload",
-        "pkgsearch (>= 3.1.0)",
-        "processx (>= 3.8.1)",
-        "ps (>= 1.6.0)",
-        "rstudioapi",
-        "testthat (>= 3.2.0)",
-        "withr"
-      ],
-      "ByteCompile": "true",
-      "Config/build/extra-sources": "configure*",
-      "Config/needs/dependencies": "callr, desc, cli, curl, filelock, jsonlite, gaborcsardi/lpSolve, pkgbuild, r-lib/pkgcache, r-lib/pkgdepends, pkgsearch, processx, ps,",
-      "Config/Needs/website": "r-lib/asciicast, rmarkdown, roxygen2, tidyverse/tidytemplate",
-      "Config/Needs/deploy": "cli@3.6.2, curl, desc, gitcreds, glue@1.6.2, jsonlite, processx",
-      "Config/testthat/edition": "3",
-      "Encoding": "UTF-8",
-      "RoxygenNote": "7.3.2",
-      "Biarch": "true",
-      "NeedsCompilation": "yes",
-      "Author": "Gábor Csárdi [aut, cre], Jim Hester [aut], Posit Software, PBC [cph, fnd], Winston Chang [ctb] (R6, callr, processx), Ascent Digital Services [cph, fnd] (callr, processx), Hadley Wickham [ctb, cph] (cli, curl, pkgbuild), Jeroen Ooms [ctb] (curl, jsonlite), Maëlle Salmon [ctb] (desc, pkgsearch), Duncan Temple Lang [ctb] (jsonlite), Lloyd Hilaiel [cph] (jsonlite), Michel Berkelaar and lpSolve authors [ctb] (lpSolve), R Consortium [fnd] (pkgsearch), Jay Loden [ctb] (ps), Dave Daeschler [ctb] (ps), Giampaolo Rodola [ctb] (ps), Kuba Podgórski [ctb] (zip), Rich Geldreich [ctb] (zip)",
-      "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
-      "Repository": "CRAN"
-    },
-    "parsedate": {
-      "Package": "parsedate",
-      "Version": "1.3.2",
-      "Source": "Repository",
-      "Title": "Recognize and Parse Dates in Various Formats, Including All ISO 8601 Formats",
-      "Authors@R": "c( person(\"Gábor\", \"Csárdi\", , \"csardi.gabor@gmail.com\", role = c(\"aut\", \"cre\")), person(\"Linus\", \"Torvalds\", role = \"aut\") )",
-      "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
-      "Description": "Parse dates automatically, without the need of specifying a format. Currently it includes the git date parser.  It can also recognize and parse all ISO 8601 formats.",
-      "License": "GPL-2",
-      "URL": "https://github.com/gaborcsardi/parsedate",
-      "BugReports": "https://github.com/gaborcsardi/parsedate/issues",
-      "Suggests": [
-        "covr",
-        "testthat (>= 3.0.0)",
-        "withr"
-      ],
-      "Config/testthat/edition": "3",
-      "Encoding": "UTF-8",
-      "RoxygenNote": "7.3.2",
-      "NeedsCompilation": "yes",
-      "Author": "Gábor Csárdi [aut, cre], Linus Torvalds [aut]",
-      "Repository": "CRAN"
-    },
     "pillar": {
       "Package": "pillar",
       "Version": "1.10.2",
@@ -2279,38 +2147,6 @@
       "NeedsCompilation": "no",
       "Author": "Kirill Müller [aut, cre] (<https://orcid.org/0000-0002-1416-3412>), Hadley Wickham [aut], RStudio [cph]",
       "Maintainer": "Kirill Müller <kirill@cynkra.com>",
-      "Repository": "CRAN"
-    },
-    "pingr": {
-      "Package": "pingr",
-      "Version": "2.0.5",
-      "Source": "Repository",
-      "Title": "Check if a Remote Computer is Up",
-      "Authors@R": "c( person(\"Gábor\", \"Csárdi\", , \"csardi.gabor@gmail.com\", role = c(\"aut\", \"cre\")), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
-      "Description": "Check if a remote computer is up. It can either just call the system ping command, or check a specified TCP port.",
-      "License": "MIT + file LICENSE",
-      "URL": "https://r-lib.github.io/pingr/, https://github.com/r-lib/pingr",
-      "BugReports": "https://github.com/r-lib/pingr/issues",
-      "Depends": [
-        "R (>= 3.6)"
-      ],
-      "Imports": [
-        "processx",
-        "utils"
-      ],
-      "Suggests": [
-        "covr",
-        "ps",
-        "testthat (>= 3.0.0)"
-      ],
-      "Config/Needs/website": "tidyverse/tidytemplate",
-      "Config/testthat/edition": "3",
-      "Encoding": "UTF-8",
-      "RoxygenNote": "7.2.3",
-      "Biarch": "true",
-      "NeedsCompilation": "yes",
-      "Author": "Gábor Csárdi [aut, cre], Posit Software, PBC [cph, fnd]",
-      "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
       "Repository": "CRAN"
     },
     "pkgbuild": {
@@ -2492,23 +2328,6 @@
       "NeedsCompilation": "no",
       "Author": "Hadley Wickham [aut], Winston Chang [aut], Jim Hester [aut], Lionel Henry [aut, cre], Posit Software, PBC [cph, fnd], R Core team [ctb] (Some namespace and vignette code extracted from base R)",
       "Maintainer": "Lionel Henry <lionel@posit.co>",
-      "Repository": "CRAN"
-    },
-    "png": {
-      "Package": "png",
-      "Version": "0.1-8",
-      "Source": "Repository",
-      "Title": "Read and write PNG images",
-      "Author": "Simon Urbanek <Simon.Urbanek@r-project.org>",
-      "Maintainer": "Simon Urbanek <Simon.Urbanek@r-project.org>",
-      "Depends": [
-        "R (>= 2.9.0)"
-      ],
-      "Description": "This package provides an easy and simple way to read, write and display bitmap images stored in the PNG format. It can read and write both files and in-memory raw vectors.",
-      "License": "GPL-2 | GPL-3",
-      "SystemRequirements": "libpng",
-      "URL": "http://www.rforge.net/png/",
-      "NeedsCompilation": "yes",
       "Repository": "CRAN"
     },
     "praise": {
@@ -2995,26 +2814,6 @@
       "NeedsCompilation": "yes",
       "Author": "Hadley Wickham [aut], Jim Hester [aut], Romain Francois [ctb], Jennifer Bryan [aut, cre] (<https://orcid.org/0000-0002-6983-2759>), Shelby Bearrows [ctb], Posit Software, PBC [cph, fnd], https://github.com/mandreyel/ [cph] (mio library), Jukka Jylänki [ctb, cph] (grisu3 implementation), Mikkel Jørgensen [ctb, cph] (grisu3 implementation)",
       "Maintainer": "Jennifer Bryan <jenny@posit.co>",
-      "Repository": "CRAN"
-    },
-    "rematch": {
-      "Package": "rematch",
-      "Version": "2.0.0",
-      "Source": "Repository",
-      "Title": "Match Regular Expressions with a Nicer 'API'",
-      "Author": "Gabor Csardi",
-      "Maintainer": "Gabor Csardi <csardi.gabor@gmail.com>",
-      "Description": "A small wrapper on 'regexpr' to extract the matches and captured groups from the match of a regular expression to a character vector.",
-      "License": "MIT + file LICENSE",
-      "URL": "https://github.com/gaborcsardi/rematch",
-      "BugReports": "https://github.com/gaborcsardi/rematch/issues",
-      "RoxygenNote": "5.0.1.9000",
-      "Suggests": [
-        "covr",
-        "testthat"
-      ],
-      "Encoding": "UTF-8",
-      "NeedsCompilation": "no",
       "Repository": "CRAN"
     },
     "remotes": {
@@ -3507,76 +3306,6 @@
       "NeedsCompilation": "no",
       "Author": "Winston Chang [aut, cre] (<https://orcid.org/0000-0002-1576-2126>), Joe Cheng [aut], JJ Allaire [aut], Carson Sievert [aut] (<https://orcid.org/0000-0002-4958-2844>), Barret Schloerke [aut] (<https://orcid.org/0000-0001-9986-114X>), Yihui Xie [aut], Jeff Allen [aut], Jonathan McPherson [aut], Alan Dipert [aut], Barbara Borges [aut], Posit Software, PBC [cph, fnd], jQuery Foundation [cph] (jQuery library and jQuery UI library), jQuery contributors [ctb, cph] (jQuery library; authors listed in inst/www/shared/jquery-AUTHORS.txt), jQuery UI contributors [ctb, cph] (jQuery UI library; authors listed in inst/www/shared/jqueryui/AUTHORS.txt), Mark Otto [ctb] (Bootstrap library), Jacob Thornton [ctb] (Bootstrap library), Bootstrap contributors [ctb] (Bootstrap library), Twitter, Inc [cph] (Bootstrap library), Prem Nawaz Khan [ctb] (Bootstrap accessibility plugin), Victor Tsaran [ctb] (Bootstrap accessibility plugin), Dennis Lembree [ctb] (Bootstrap accessibility plugin), Srinivasu Chakravarthula [ctb] (Bootstrap accessibility plugin), Cathy O'Connor [ctb] (Bootstrap accessibility plugin), PayPal, Inc [cph] (Bootstrap accessibility plugin), Stefan Petre [ctb, cph] (Bootstrap-datepicker library), Andrew Rowls [ctb, cph] (Bootstrap-datepicker library), Brian Reavis [ctb, cph] (selectize.js library), Salmen Bejaoui [ctb, cph] (selectize-plugin-a11y library), Denis Ineshin [ctb, cph] (ion.rangeSlider library), Sami Samhuri [ctb, cph] (Javascript strftime library), SpryMedia Limited [ctb, cph] (DataTables library), John Fraser [ctb, cph] (showdown.js library), John Gruber [ctb, cph] (showdown.js library), Ivan Sagalaev [ctb, cph] (highlight.js library), R Core Team [ctb, cph] (tar implementation from R)",
       "Maintainer": "Winston Chang <winston@posit.co>",
-      "Repository": "CRAN"
-    },
-    "shinytest": {
-      "Package": "shinytest",
-      "Version": "1.6.1",
-      "Source": "Repository",
-      "Title": "Test Shiny Apps",
-      "Authors@R": "c(person(given = \"Winston\", family = \"Chang\", role = c(\"aut\", \"cre\"), email = \"winston@posit.co\"), person(given = \"Gábor\", family = \"Csárdi\", role = \"aut\", email = \"gabor@posit.co\"), person(given = \"Hadley\", family = \"Wickham\", role = \"aut\", email = \"hadley@posit.co\"), person(given = \"Posit Software, PBC\", role = c(\"cph\", \"fnd\")), person(given = \"Ascent Digital Services\", role = c(\"cph\", \"ccp\")))",
-      "Description": "Please see the 'shinytest' to 'shinytest2' migration guide at <https://rstudio.github.io/shinytest2/articles/z-migration.html>.",
-      "License": "MIT + file LICENSE",
-      "URL": "https://github.com/rstudio/shinytest",
-      "BugReports": "https://github.com/rstudio/shinytest/issues",
-      "Imports": [
-        "assertthat",
-        "callr (>= 2.0.3)",
-        "crayon",
-        "debugme",
-        "digest",
-        "htmlwidgets",
-        "httpuv",
-        "httr",
-        "jsonlite",
-        "parsedate",
-        "pingr",
-        "R6",
-        "rematch",
-        "rlang",
-        "rstudioapi (>= 0.8.0.9002)",
-        "shiny (>= 1.3.2)",
-        "testthat (>= 1.0.0)",
-        "utils",
-        "webdriver (>= 1.0.6)",
-        "withr"
-      ],
-      "Suggests": [
-        "flexdashboard",
-        "globals",
-        "rmarkdown"
-      ],
-      "Encoding": "UTF-8",
-      "RoxygenNote": "7.3.1",
-      "SystemRequirements": "PhantomJS (http://phantomjs.org/)",
-      "NeedsCompilation": "no",
-      "Author": "Winston Chang [aut, cre], Gábor Csárdi [aut], Hadley Wickham [aut], Posit Software, PBC [cph, fnd], Ascent Digital Services [cph, ccp]",
-      "Maintainer": "Winston Chang <winston@posit.co>",
-      "Repository": "CRAN"
-    },
-    "showimage": {
-      "Package": "showimage",
-      "Version": "1.0.0",
-      "Source": "Repository",
-      "Title": "Show an Image on an 'R' Graphics Device",
-      "Author": "Gábor Csárdi",
-      "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
-      "Description": "Sometimes it is handy to be able to view an image file on an 'R' graphics device. This package just does that. Currently it supports 'PNG' files.",
-      "License": "GPL-2 | GPL-3",
-      "LazyData": "true",
-      "URL": "https://github.com/r-lib/showimage#readme",
-      "BugReports": "https://github.com/r-lib/showimage/issues",
-      "Imports": [
-        "png",
-        "tools"
-      ],
-      "Suggests": [
-        "covr",
-        "testthat"
-      ],
-      "RoxygenNote": "5.0.1",
-      "Encoding": "UTF-8",
-      "NeedsCompilation": "no",
       "Repository": "CRAN"
     },
     "sourcetools": {
@@ -4222,43 +3951,6 @@
       "NeedsCompilation": "no",
       "Author": "Hadley Wickham [aut, cre], Posit Software, PBC [cph, fnd]",
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
-      "Repository": "CRAN"
-    },
-    "webdriver": {
-      "Package": "webdriver",
-      "Version": "1.0.6",
-      "Source": "Repository",
-      "Title": "'WebDriver' Client for 'PhantomJS'",
-      "Author": "Ariya Hidayat, Gábor Csárdi, Gabor Torok, Ivan De Marino, Robert Gieseke, Steven Masala, Winston Chang, Zack Weinberg",
-      "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
-      "Description": "A client for the 'WebDriver' 'API'. It allows driving a (probably headless) web browser, and can be used to test web applications, including 'Shiny' apps. In theory it works with any 'WebDriver' implementation, but it was only tested with 'PhantomJS'.",
-      "License": "MIT + file LICENSE",
-      "LazyData": "true",
-      "URL": "https://github.com/rstudio/webdriver",
-      "BugReports": "https://github.com/rstudio/webdriver/issues",
-      "RoxygenNote": "6.0.1",
-      "Imports": [
-        "callr (>= 3.4.0)",
-        "base64enc",
-        "curl (>= 2.0)",
-        "debugme",
-        "httr",
-        "jsonlite",
-        "R6",
-        "showimage",
-        "utils",
-        "withr"
-      ],
-      "Suggests": [
-        "covr",
-        "pingr",
-        "rprojroot",
-        "servr",
-        "testthat"
-      ],
-      "Encoding": "UTF-8",
-      "SystemRequirements": "PhantomJS (http://phantomjs.org/)",
-      "NeedsCompilation": "no",
       "Repository": "CRAN"
     },
     "whisker": {

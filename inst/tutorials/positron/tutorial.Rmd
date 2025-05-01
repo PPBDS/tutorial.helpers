@@ -40,7 +40,7 @@ include_graphics("images/run-tutorial.png")
 
 Note the red square at the top of the Console menu. This indicates that the Console is "busy." You can't do anything with this Console unless you stop running the tutorial. You can complete the tutorial in the Viewer pane in the Secondary Side Bar. 
 
-Or you can also "pop" a tutorial up into your browser by pressing the "Open the current URL in the default browser" button --- the item in the Viewer menu just to the left of the circular arrow. It looks like a rectangle containing an arrow pointing up and to the right.
+Or you can "pop" a tutorial up into your browser by pressing the "Open the current URL in the default browser" button --- the item in the Viewer menu just to the right of the circular arrow. It looks like a rectangle containing an arrow pointing up and to the right.
 
 ```{r}
 include_graphics("images/send-tutorial-to-browser.png")
@@ -94,7 +94,7 @@ Once you click "Run Code," the answer `[1] 9` should appear below the code you e
 
 ###
 
-The problem right now is that we can't check that claim since the Console is currently busy with the tutorial. To confirm the claim, you will need a second Console. Create it by pressing the "Start a New Session" button, as indicated by the red arrow, and choose the R option, if you are asked. After you do so, the Console should look like:
+The problem right now is that we can't check that claim since the Console is currently busy with the tutorial. To confirm the claim, you will need a second Console. Create it by pressing the "Start a New Session" button: the `+` sign, as indicated by the red arrow. Choose the R option, if you are asked. After you do so, the Console should look like:
 
 ```{r}
 include_graphics("images/positron-start-up-2.png")

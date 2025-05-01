@@ -6,8 +6,6 @@ Biggest current issue is that it seems like Positron does not remember the locat
 
 Second issue is making a decision about guiding students to using two Windows or one.
 
-Adjust Primer (and elsewhere?) for new tutorial names.
-
 There are fewer and fewer reasons why we need a copy previous code option.
 
 Where should I explain shortcut keys, especially ones like `Cmd/Ctrl + //` which don't currently come up in the tutorials?
@@ -69,7 +67,7 @@ Consider changing the JSON file so that Windows users will use bash. Ask Grok fo
 
 No idea if this would work. And, if we start using it, we might need to update the Terminal tutorial.
 
-Nice for show_all() to take "YAML" as an option and just return the YALM header.
+Nice for show_all() to take "YAML" as an option and just return the YAML header.
 
 Sometimes, if there is a include graphics chunk, the main chunk label gets added to it, even if that label already exists for that question a few lines down. Not sure what to do. Best would be if check_current_tutorial, at the end, checked that there are no duplicate labels and then reported any that it found.
 
@@ -121,8 +119,7 @@ Standardize an instruction which says to paste from the HTML result. This is dif
 
 Consider getting rid of Copy code button. Now that we can pre-place code from previous questions into the Exericise code chunk, we don't need to allow students to Copy from previous exercise. Since that is the only use case for the Copy code button, we can delete it, and all its associated junk. The counter-argument is that if you populate the starting code for Exercise N + 1, then a student working on Exercise N can cheat and just look at by skipping ahead. Counter-counter-argument is that students can already do this by looking at the Hint for Exercise N + 1. Since they don't (?), we don't really have to worry about them cheating in this way. Moreover, the vast majority of questions are so easy that cheating is actually more work. Just look at the provided hint!
 
-Consider providing a simple hash to guarantee that students haven't cheated, even if they submit html. The function would run some R code which produced a string including things like date, time, pwd, whois, computer name, and whatever else. It then takes that string and turns it into a hash. That hash is output into the html. If there are concerns about cheating, an instructor can check the hash. This might also us to get rid of the rds options, since its only purpose is probably cheat-detection. Might also provide an execuse to get rid of the PDF option.
-
+Consider providing a simple hash to guarantee that students haven't cheated, even if they submit html. The function would run some R code which produced a string including things like date, time, pwd, whois, computer name, and whatever else. It then takes that string and turns it into a hash. That hash is output into the html. If there are concerns about cheating, an instructor can check the hash. 
 
 Ensure that this code handles our test code chunks in non-code questions. See Positron and Github (gert) for examples. Seems to work, but some test cases would be nice.
 
@@ -138,7 +135,7 @@ Think harder about whether write_answer should write out questions which the stu
 
 * With rstudioapi, use selectFile and friends as an easier way of saving student answers.
 
-* The **downloadthis** package looks very interesting. It seems easy to download a file without all the rigamarole of the Shiny server. But it requires that the file exists. Can we automatically run the code to create the files? Yes! We can write the code in the final exercise and then tell students to hit Run Code. They can then hit the download button. But would that really work? Isn't an Exercise code chunk its own separate world, with no notion of the tutorial of which it is a part? Maybe the same local{()} nonsense that we use submission_server() would do the trick. But that would make for some ugly code. Maybe we can hide the code, but they still press the Run Code button.
+* The **downloadthis** package looks very interesting. It seems easy to download a file without all the rigamarole of the Shiny server. But it requires that the file exists. Can we automatically run the code to create the files? Yes! We can write the code in the final exercise and then tell students to hit Run Code. They can then hit the download button. But would that really work? Isn't an Exercise code chunk its own separate world, with no notion of the tutorial of which it is a part? Maybe the same local{()} nonsense that we use for submission_server() would do the trick. But that would make for some ugly code. Maybe we can hide the code, but they still press the Run Code button.
 
 
 ## write_answers()
@@ -147,12 +144,7 @@ Think harder about whether write_answer should write out questions which the stu
 
 * See the comments at test-write_answers.R for detailed discussion. 
 
-* We should split write_answers() into two parts. The first part just grabs everything we need from the session and returns a tibble. (This part might be too big for CRAN.) The second part takes the tibble and outputs the answers as html/pdf/rds. We can test this a lot. Do this first. The current test case will help ensure that, at least, nothing is worse.
-
 * Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
-
-* A different approach to the pdf file creation problem in write_answers() would be to create the Rmd document on the file as a character object rmd and then do render(text = rmd, output_file = filename).
-
 
 ## Points about testing
 
