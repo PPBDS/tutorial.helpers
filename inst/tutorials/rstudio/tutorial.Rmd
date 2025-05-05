@@ -33,7 +33,7 @@ This tutorial is an introduction to the general use of R tutorials created with 
 
 ### 
 
-You may complete a tutorial either on your laptop or on a cloud computing platform like [Posit Cloud](https://posit.cloud/). (See our discussion about [setting up your own computer](https://ppbds.github.io/primer/getting-started.html) or about [using Posit Cloud](https://ppbds.github.io/tutorial.helpers/articles/cloud.html).) Either way, you will download a copy of your answers to the Downloads folder on your computer once you are done with a tutorial. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
+You may complete a tutorial either on your laptop or on a cloud computing platform like [Posit Cloud](https://posit.cloud/). (See our discussion about [setting up your own computer](https://ppbds.github.io/primer/getting-started-with-rstudio.html) or about [using Posit Cloud](https://ppbds.github.io/tutorial.helpers/articles/cloud.html).) Either way, you will download a copy of your answers to the Downloads folder on your computer once you are done with a tutorial. Then, you will submit your answers to your instructor and/or keep a copy for yourself.
 
 ### 
 
@@ -323,7 +323,7 @@ At the end of every tutorial, you will save your work (and submit it, at the dis
 
 Make sure to answer the question about how many **minutes** you spent on the tutorial and to click "Submit Answer."
 
-After hitting the "Download" button, you will be prompted to save a file named `getting-started_answers.html`. This file will be saved in the default Downloads folder on your computer, even if you completed the tutorial on a cloud computing platform. 
+After hitting the "Download" button, you will be prompted to save a file named `rstudio_answers.html`. This file will be saved in the default Downloads folder on your computer, even if you completed the tutorial on a cloud computing platform. 
 
 Unless told otherwise by your instructor, you should use the default file name, which will usually be of the form `name-of-tutorial` + `_answers` + `.html`. 
 
