@@ -203,7 +203,7 @@ This brings up a new instance of Positron, completely independent of this one. T
 
 ###
 
-There are many ways to move between Positron windows. The most command is to hold down the Command key (Mac) or Ctrl key(Windows) and then hit the backtick key: `\``. We abbreviate these sorts of shortcut keys as `Cmd/Ctrl + \``. 
+There are many ways to move between Positron windows. The most command is to hold down the Command key (Mac) or Ctrl key(Windows) and then hit the backtick key: `` ` ``. We abbreviate these sorts of shortcut keys as ``Cmd/Ctrl + ` ``.
 
 ###
 
