@@ -1,5 +1,14 @@
 # Priorities
 
+Should there be a better way to switch between Positron windows than Cmd/Ctrl + `?
+
+Figure out why check_current_tutorial() didn't work on Project 2 on second Github tutorial, at least on the last few questions. Issue probably connected to this comment from Positron and Code tutorial: "To Format the chunk labels you need to comment out the example comment line in Script 1. And there is at least one more example later." So, we really need to make  check_current_tutorial() more robust.
+
+Need to deal with the issue of keyboard short cuts. For now, I have mostly deleted them. Need to figure out which set to use and how to add them back.
+
+Should the tutorial recommend/focus on the new window option?
+
+
 Explain in tutorial about having multiple windows and/or multiple Consoles. This is an important concept to understand and fits naturally since we have to restart the tutorial anyway.
 
 Biggest current issue is that it seems like Positron does not remember the location of the projects directory, so you need to select it each time, which is annoying! Need to solve this somehow. Or maybe this is now solved?

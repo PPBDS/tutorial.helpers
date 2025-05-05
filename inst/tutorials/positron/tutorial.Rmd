@@ -40,13 +40,17 @@ include_graphics("images/run-tutorial.png")
 
 Note the red square at the top of the Console menu. This indicates that the Console is "busy." You can't do anything with this Console unless you stop running the tutorial. You can complete the tutorial in the Viewer pane in the Secondary Side Bar. 
 
+###
+
 Or you can "pop" a tutorial up into your browser by pressing the "Open the current URL in the default browser" button --- the item in the Viewer menu just to the right of the circular arrow. It looks like a rectangle containing an arrow pointing up and to the right.
 
 ```{r}
 include_graphics("images/send-tutorial-to-browser.png")
 ```
 
-### 
+You can go back and forth between the Viewer tab and the browser. The tutorial is easier to read in the browser, but many students prefer to just keep everything inside of the Positron window.
+
+###
 
 <!-- DK: Revist these instructions once you can use Positron in the cloud. Perhaps add a new vignette discussing Posit Workbench. -->
 
@@ -170,13 +174,15 @@ Did you remember to hit the "Run Code" button above? Lots of people forget! You 
 
 Read all of the following instructions before continuing.
 
-* Close and then restart Positron. (The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.)
+* Quit and then restart Positron. (The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.)
 
 * Restart the tutorial. The most common approach is to run this command at the Console:
 
 ```
 learnr::run_tutorial("positron", package = "tutorial.helpers")
 ```
+
+* Copy the above code now so that you can easily paste it into the Console after you restart Positron.
 
 Now that you have read all the instructions, go ahead and follow them.
 
@@ -194,6 +200,10 @@ include_graphics("images/new-window.png")
 ```
 
 This brings up a new instance of Positron, completely independent of this one. This is the most common set up when working on tutorials. One Positron window, this one, runs the tutorial, but we don't do any work in it. We generally don't even bother to create a second Console. The second Positron window is where we do the work which the tutorial requires.
+
+###
+
+There are many ways to move between Positron windows. The most command is to hold down the Command key (Mac) or Ctrl key(Windows) and then hit the backtick key: `\``. We abbreviate these sorts of shortcut keys as `Cmd/Ctrl + \``. 
 
 ###
 
@@ -226,7 +236,7 @@ Your version of R may be more recent, but it should not be older. It is OK if yo
 
 ### 
 
-Tutorial workflow will often look like this. We tell you to run a command **in the Console**. You run it. We then ask you to copy/paste, from the Console, both the command itself and the response returned. Because we ask you to **c**opy/**p**aste the **c**ommand/**r**esponse so often, we usually shorten this instruction to CP/CR.
+Tutorial workflow will often look like this. We tell you to run a command **in the Console**, generally in your second Positron window. You run it. We then ask you to copy/paste, from the Console, both the command itself and the response returned. Because we ask you to **c**opy/**p**aste the **c**ommand/**r**esponse so often, we usually shorten this instruction to CP/CR.
 
 ### Exercise 6
 
@@ -273,7 +283,7 @@ question_text(NULL,
 
 ### Exercise 8
 
-`show_file()` is another commonly-used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file which you have edited. 
+`show_file()` is a commonly-used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file which you have edited. 
 
 From the Console, run this command:
 
@@ -289,7 +299,7 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 3)
+	rows = 10)
 ```
 
 <!-- I really want a test case to ensure that this works on all OSs. -->
@@ -326,7 +336,7 @@ At the end of every tutorial, you will save your work (and submit it, at the dis
 
 Make sure to answer the question about how many **minutes** you spent on the tutorial and to click "Submit Answer."
 
-After hitting the "Download" button, you will be prompted to save a file named `tutorials-in-positron_answers.html`. This file should be saved in the default Downloads folder on your computer. 
+After hitting the "Download" button, you will be prompted to save a file named `positron_answers.html`. This file should be saved in the default Downloads folder on your computer. 
 
 Unless told otherwise by your instructor, you should use the default file name, which will usually be of the form `short-name-of-tutorial` + `_answers` + `.html`. 
 
