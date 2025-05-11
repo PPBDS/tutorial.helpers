@@ -1,10 +1,30 @@
 # Priorities
 
-Ask GitHub about sensible Positron settings for students.
+0) Create a Positron extension which would make finding and starting tutorials easier.
 
-How do we switch between Positron windows on Windows? Alt-tab?
+1) How does Positron decide where new projects are going to go? Seems like the default might be to offer the current working directory. At least, that was my testing suggests. Claude suggests we can overrule that default behavior by adding
 
-Should there be a better way to switch between Positron windows on the mac than Cmd + `?
+{
+"files.dialog.defaultPath": "YOUR_PREFERRED_PATH"
+}
+
+to settings.json. That seems to work. But how/where do we help students to do it? Claude suggests:
+
+You can access this setting by:
+
+Opening Settings (Ctrl+, or Cmd+, on Mac)
+Searching for "files.dialog.defaultPath"
+Entering your preferred directory path
+
+Maybe do this somewhere?
+
+2) How do we teach students to switch between Positron windows? I think:
+
+* `^w` might be the best approach. Works on Mac (and Windows?). Only annoyance is that it does not switch Windows. Instead, it pulls up that set of open Positron windows for you to choose from. But, if there are only two, and you just hit enter, you switch to the other one, which is what you want.
+
+* `Cmd + `` works, but only the Mac. It is what I use, but it is not a convenient shortcut key.
+
+* `Alt + Tab` works on Windows? But it cycles through all Windows, including other applications that you might have open.
 
 Maybe workbench.action.quickSwitchWindow is the key command, and we should set that to a specific command sequence for everyone. This would involve, I think, editing/creating the keybindings.json file. Maybe:
 
@@ -28,17 +48,62 @@ Or:
   }
 ]
 
-Or maybe the default ^ W is fine. It doesn't switch the window. It pulls up the list of open windows and then you pick the one you want to go to. If there are just 2, then it defaults to wanting you to move to the other, so you can just hit return. By the way, is `^ W` also Ctrl + W on Windows? Maybe . . . 
+3) I am still concerned about the Terminal for Windows users. Does installing RTools just magically make that work OK? Consider changing the JSON file so that Windows users will use bash. Ask Grok for details. Example:
 
-Figure out why check_current_tutorial() didn't work on Project 2 on second Github tutorial, at least on the last few questions. Issue probably connected to this comment from Positron and Code tutorial: "To Format the chunk labels you need to comment out the example comment line in Script 1. And there is at least one more example later." So, we really need to make  check_current_tutorial() more robust.
+{
+  "terminal.integrated.profiles.windows": {
+    "RTools Bash": {
+      "path": "C:\\rtools45\\usr\\bin\\bash.exe",
+      "args": ["--login"]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "RTools Bash"
+}
 
-Biggest current issue is that it seems like Positron does not remember the location of the projects directory, so you need to select it each time, which is annoying! Need to solve this somehow. Or maybe this is now solved?
+No idea if this would work. And, if we start using it, we might need to update the Terminal tutorial.
 
-There are fewer and fewer reasons why we need a copy previous code option.
+4) Figure out why check_current_tutorial() didn't work on Project 2 on second Github tutorial, at least on the last few questions. Issue probably connected to this comment from Positron and Code tutorial: "To Format the chunk labels you need to comment out the example comment line in Script 1. And there is at least one more example later." So, we really need to make  check_current_tutorial() more robust.
+
+
+# show_file()
+
+show_file() should fail if chunk is anything other than the allowed character strings, i.e., chunk = 1 should fail.
+
+show_all() should take "YAML" as an option and just return the YAML header.
+
+What should show_file(test_file, start = 0) return? Not sure it should be an error . . .
+
+# process_submissions()
+
+Consider a very common use case for process_submissions(). I want, for all submitted answers, name, email and any answer which included http. I don't want to have to remember the weird id for all the answers that had an http. I want the function to figure that out. Really, what I want is for the function to figure out any id which has (at least 2?) answers which start with http. Then, I want that many lines for each answer. So, we have column name, email, id and answer, with missing values for any student which did not submit for that id. 
+
+return_type = "All" in process_submissions() should not include submission_type column
+
+Fix code and then test case for this example: 
+"~/Downloads/submissions/four-parameters-categorical_answers - Kushagra Singh.html"
+
+process_submissions() test cases should not just spit out "Could not process file: getting-started_answers.pdf". Handle it better.
+
+I don't like the way the test cases for process_submissions spit out the pdf files names that they are ignoring, even if it does not effect the tests passing. At least, we should add a new test case for this behavior. Perhaps reorganize the test files into a couple of different directories. Or make the pattern ignore the pdf files in the test cases. But I couldn't get that to work.
+
+# format_tutorial()
+
+Change format_tutorial() so it looks to see if you have any chunk names in your file with reserved names (name, email, ID, minutes, answers), and then warns you about that fact.
+
+It is annoying that R attempts to run `r scales::comma(x)` even when it is placed in a verbatim environment. That is annoying! But how can format_tutorial() prevent? It can't! This is a problem with learnr::run_tutorial().
+
+Sometimes, if there is a include graphics chunk, the main chunk label gets added to it, even if that label already exists for that question a few lines down. Not sure what to do. Best would be if check_current_tutorial, at the end, checked that there are no duplicate labels and then reported any that it found.
+
+Do we need to deal with the case in which the only option is echo = FALSE. Right now, it just gets deleted. Which does not matter since echo = FALSE is a global option set by all tutorials. But, this might be a sign of bad behavior in general. Like why delete a code chunk option under any circumstances? No good reason to do so! Need to fix because current code leaves a duplicate code chunk there.
+
+# set_positron_settings()
 
 Perhaps I should add some default shortcut key creations to set_positron_settings(). 
 
-But also of interest is the setting of the default value of the projects directory, which does not seem to be saved even once you choose it by hand. Other items of interest:
+How does line-wrapping work in Positron? And, whatever the answer, is this something 
+that we should set for students in the Positron tutorial?
+
+Other items of interest:
 
 {
   "editor.wordWrap": "on",
@@ -53,6 +118,8 @@ But also of interest is the setting of the default value of the projects directo
   "editor.renderWhitespace": "trailing",
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "diffEditor.ignoreTrimWhitespace": true,
+  "workbench.editor.enablePreview": false
 }
 
 Also, seems like there is a keybindings.json file (in the same location), in which we can do stuff like:
@@ -65,61 +132,19 @@ Also, seems like there is a keybindings.json file (in the same location), in whi
     }
 ]
 
-Seems like this settings.json addition is needed to prevent Positron from defaulting to your home directory when you start a new project.
-
-"files.dialog.defaultPath": "YOUR_PREFERRED_PATH"
+# Tutorial Quality
 
 
-There is a bug in format_tutorials() which causes it to fail when, I think, there is a four tick environment which includes some #| code options in a three tick R code chunk. Should investigate.
 
-show_file should fail if chunk is anything other than the allowed character strings, i.e., chunk = 1 should fail.
-
-Here is my current json file. How did I end up with the two things besides the keymap? Should students have the same?
-
-{
-  "diffEditor.ignoreTrimWhitespace": true,
-  "rstudio.keymap.enable": true,
-  "workbench.editor.enablePreview": false
-}
-
-Consider changing the JSON file so that Windows users will use bash. Ask Grok for details. Example:
-
-{
-  "terminal.integrated.profiles.windows": {
-    "RTools Bash": {
-      "path": "C:\\rtools45\\usr\\bin\\bash.exe",
-      "args": ["--login"]
-    }
-  },
-  "terminal.integrated.defaultProfile.windows": "RTools Bash"
-}
-
-No idea if this would work. And, if we start using it, we might need to update the Terminal tutorial.
-
-Nice for show_all() to take "YAML" as an option and just return the YAML header.
-
-Sometimes, if there is a include graphics chunk, the main chunk label gets added to it, even if that label already exists for that question a few lines down. Not sure what to do. Best would be if check_current_tutorial, at the end, checked that there are no duplicate labels and then reported any that it found.
-
-Consider a very common use case for process_submissions(). I want, for all submitted answers, name, email and any answer which included http. I don't want to have to remember the weird id for all the answers that had an http. I want the function to figure that out. Really, what I want is for the function to figure out any id which has (at least 2?) answers which start with http. Then, I want that many lines for each answer. So, we have column name, email, id and answer, with missing values for any student which did not submit for that id. 
+# Other Topics
 
 I think that there is a bug (or at least a change) in how to handle links within a vignette. That is, within instructions.qmd, I want to link discussion of knowledge drops to the Knowledge Drops section. The old way of doing that in Rmd files still *seemed* to work, in the sense that the links worked in the result html, but R CMD check seemed to identify those links as have an Empty URL, generating a NOTE in R CMD check which led to CRAN rejection. 
 
 Figure out why Check is 0/0/0 but Test is 2 FAILs and 5 SKIPs.
 
-Change format_tutorial() so it looks to see if you have any chunk names in your file with reserved names (name, email, ID, minutes, answers), and then warns you about that fact.
-
-What other Positron settings should we set by default?
-
 Which packages do we really need, either in Imports or in Suggests?
 
 Check out all unit tests.
-
-Do we need to deal with the case in which the only option is echo = FALSE. Right now, it just gets deleted. Which does not matter since echo = FALSE is a global option set by all tutorials. But, this might be a sign of bad behavior in general. Like why delete a code chunk option under any circumstances? No good reason to do so! Need to fix because current code leaves a duplicate code chunk there.
-
-It is annoying that R attempts to run `r scales::comma(x)` even when it is placed in a verbatim environment. That is annoying! But how can format_tutorial() prevent? It can't! This is a problem with learnr::run_tutorial().
-
-How does line-wrapping work in Positron? And, whatever the answer, is this something 
-that we should set for students in the Positron tutorial?
 
 Related to the above is that the Github Actions files differ in that R CMD check uses renv and pkgdown.yml uses dependencies. The former ensures that the quarto package is available because it is in the renv.lock file. But with dependencies, I suspect that quarto must appear in the imports part of the DESCRIPTION file, but maybe Suggests would be enough?
 
@@ -127,26 +152,13 @@ Do a complete clean up of the Github Action files.
 
 Vignette about Posit Workbench.
 
-return_type = "All" in process_submissions() should not include submission_type column
-
-Fix code and then test case for this example: 
-"~/Downloads/submissions/four-parameters-categorical_answers - Kushagra Singh.html"
-
-
 Better error message if the pattern does not match any of the files in the directory.
 
 Might be nice if the email entry field at least attempted to note/warn if the submitted information was not a legitimate email. Perhaps at least check if there is an `@`.
 
-process_submissions() test cases should not just spit out "Could not process file: getting-started_answers.pdf". Handle it better.
-
-I don't like the way the test cases for process_submissions spit out the pdf files names that they are ignoring, even if it does not effect the tests passing. At least, we should add a new test case for this behavior. Perhaps reorganize the test files into a couple of different directories. Or make the pattern ignore the pdf files in the test cases. But I couldn't get that to work.
-
-
-What should show_file(test_file, start = 0) return? Not sure it should be an error . . .
-
 Standardize an instruction which says to paste from the HTML result. This is different from CP/CR, obviously.
 
-Consider getting rid of Copy code button. Now that we can pre-place code from previous questions into the Exericise code chunk, we don't need to allow students to Copy from previous exercise. Since that is the only use case for the Copy code button, we can delete it, and all its associated junk. The counter-argument is that if you populate the starting code for Exercise N + 1, then a student working on Exercise N can cheat and just look at by skipping ahead. Counter-counter-argument is that students can already do this by looking at the Hint for Exercise N + 1. Since they don't (?), we don't really have to worry about them cheating in this way. Moreover, the vast majority of questions are so easy that cheating is actually more work. Just look at the provided hint!
+There are fewer and fewer reasons why we need a copy previous code option. Consider getting rid of Copy code button. Now that we can pre-place code from previous questions into the Exericise code chunk, we don't need to allow students to Copy from previous exercise. Since that is the only use case for the Copy code button, we can delete it, and all its associated junk. The counter-argument is that if you populate the starting code for Exercise N + 1, then a student working on Exercise N can cheat and just look at by skipping ahead. Counter-counter-argument is that students can already do this by looking at the Hint for Exercise N + 1. Since they don't (?), we don't really have to worry about them cheating in this way. Moreover, the vast majority of questions are so easy that cheating is actually more work. Just look at the provided hint!
 
 Consider providing a simple hash to guarantee that students haven't cheated, even if they submit html. The function would run some R code which produced a string including things like date, time, pwd, whois, computer name, and whatever else. It then takes that string and turns it into a hash. That hash is output into the html. If there are concerns about cheating, an instructor can check the hash. 
 
