@@ -106,7 +106,7 @@ include_graphics("images/positron-start-up-2.png")
 
 ### 
 
-Typing `4 + 5` and hitting return/enter produces the same result in the Console as it does in the exercise.
+Typing `4 + 5` and hitting `return/enter` produces the same result in the Console as it does in the exercise.
 
 ###
 
@@ -203,11 +203,11 @@ This brings up a new instance of Positron, completely independent of this one. T
 
 ###
 
-There are many ways to move between Positron windows. The most command is to hold down the Command key (Mac) or Ctrl key(Windows) and then hit the backtick key: `` ` ``. We abbreviate these sorts of shortcut keys as ``Cmd/Ctrl + ` ``.
+There are many ways to move between Positron windows. One approach is to hold down the Control key and hit the letter W. This is usually abbreviated as `Ctrl + w`. This pulls up a list of the open Positron windows. You then select the one you want and hit `return/enter`. On the Mac, you can hold down the Command key and then hit the backtick key: `` ` ``, i.e., ``Cmd + ` ``. This "cycles through" the open Positron windows. `Alt + Tab` on Windows has a similar effect, although the cycle will include all open applications, not just Positron windows.
 
 ###
 
-In the Console in the new window, type `version[['version.string']]` and hit the return/enter key.
+In the Console in the new window, type `version[['version.string']]` and hit the `return/enter` key.
 
 **Do not just type the command into the answer box!** You must paste the command into the Console and then execute the command.
 

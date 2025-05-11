@@ -1,24 +1,40 @@
 # Priorities
 
-Should there be a better way to switch between Positron windows than Cmd/Ctrl + `?
+Ask GitHub about sensible Positron settings for students.
+
+How do we switch between Positron windows on Windows? Alt-tab?
+
+Should there be a better way to switch between Positron windows on the mac than Cmd + `?
+
+Maybe workbench.action.quickSwitchWindow is the key command, and we should set that to a specific command sequence for everyone. This would involve, I think, editing/creating the keybindings.json file. Maybe:
+
+{
+  "key": "ctrl+alt+w",
+  "command": "workbench.action.quickSwitchWindow"
+}
+
+Or: 
+
+[
+  {
+    "key": "ctrl+alt+w",
+    "command": "workbench.action.quickSwitchWindow",
+    "when": "!isMac"
+  },
+  {
+    "key": "cmd+opt+w",
+    "command": "workbench.action.quickSwitchWindow",
+    "when": "isMac"
+  }
+]
+
+Or maybe the default ^ W is fine. It doesn't switch the window. It pulls up the list of open windows and then you pick the one you want to go to. If there are just 2, then it defaults to wanting you to move to the other, so you can just hit return. By the way, is `^ W` also Ctrl + W on Windows? Maybe . . . 
 
 Figure out why check_current_tutorial() didn't work on Project 2 on second Github tutorial, at least on the last few questions. Issue probably connected to this comment from Positron and Code tutorial: "To Format the chunk labels you need to comment out the example comment line in Script 1. And there is at least one more example later." So, we really need to make  check_current_tutorial() more robust.
 
-Need to deal with the issue of keyboard short cuts. For now, I have mostly deleted them. Need to figure out which set to use and how to add them back.
-
-Should the tutorial recommend/focus on the new window option?
-
-
-Explain in tutorial about having multiple windows and/or multiple Consoles. This is an important concept to understand and fits naturally since we have to restart the tutorial anyway.
-
 Biggest current issue is that it seems like Positron does not remember the location of the projects directory, so you need to select it each time, which is annoying! Need to solve this somehow. Or maybe this is now solved?
 
-Second issue is making a decision about guiding students to using two Windows or one.
-
 There are fewer and fewer reasons why we need a copy previous code option.
-
-Where should I explain shortcut keys, especially ones like `Cmd/Ctrl + //` which don't currently come up in the tutorials?
-
 
 Perhaps I should add some default shortcut key creations to set_positron_settings(). 
 
@@ -49,6 +65,10 @@ Also, seems like there is a keybindings.json file (in the same location), in whi
     }
 ]
 
+Seems like this settings.json addition is needed to prevent Positron from defaulting to your home directory when you start a new project.
+
+"files.dialog.defaultPath": "YOUR_PREFERRED_PATH"
+
 
 There is a bug in format_tutorials() which causes it to fail when, I think, there is a four tick environment which includes some #| code options in a three tick R code chunk. Should investigate.
 
@@ -67,7 +87,7 @@ Consider changing the JSON file so that Windows users will use bash. Ask Grok fo
 {
   "terminal.integrated.profiles.windows": {
     "RTools Bash": {
-      "path": "C:\\rtools44\\usr\\bin\\bash.exe",
+      "path": "C:\\rtools45\\usr\\bin\\bash.exe",
       "args": ["--login"]
     }
   },
