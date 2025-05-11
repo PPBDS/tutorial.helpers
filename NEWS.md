@@ -2,7 +2,7 @@
 
 * make_exercise() no longer includes '-ex' in code chunk labels for exercises.
 
-* format_tutorial() bug fixes.
+* Fix format_tutorial() bugs.
 
 # tutorial.helpers 0.4.2
 

@@ -17,7 +17,7 @@ advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html)
 about the best way to do so. This approach is currently used in several
 packages, including
 [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) and
-[**primer.tutorials**](https://ppbds.github.io/primer.tutorials/).
+[**positron.tutorials**](https://ppbds.github.io/positron.tutorials/).
 
 ## Installation
 
@@ -110,4 +110,7 @@ The package includes two tutorials: “Tutorials in Positron” and
 “Tutorials in RStudio.” These provide an introduction to tutorials for
 beginning students. You should require your students to complete the
 tutorial associated with the IDE you are using if you are creating your
-own tutorials with **tutorial.helpers** package.
+own tutorials with **tutorial.helpers** package. For example, in
+Positron, have students run:
+
+    learnr::run_tutorial("positron", package = "tutorial.helpers")
