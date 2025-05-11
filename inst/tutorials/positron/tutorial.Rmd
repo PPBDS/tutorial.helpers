@@ -54,7 +54,7 @@ You can go back and forth between the Viewer tab and the browser. The tutorial i
 
 <!-- DK: Revist these instructions once you can use Positron in the cloud. Perhaps add a new vignette discussing Posit Workbench. -->
 
-You may complete a tutorial on your laptop. You download a copy of your answers to the `Downloads` folder on your computer. Then, you submit your answers to your instructor and/or keep a copy for yourself.
+You complete a tutorial on your computer. You download a copy of your answers to the `Downloads` folder on your computer. Then, you submit your answers to your instructor and/or keep a copy for yourself.
 
 ### 
 
@@ -138,7 +138,7 @@ Once you click "Run Code", the answer `[1] 9` should appear below the code you e
 
 ### Exercise 3
 
-We will often need to copy code from our previous exercises to continue working on a multi-stage problem. To make this easier, we provide a "Copy previous code" button. Below the following box, click on the "Copy previous code" button. 
+We will often need to copy code from the previous exercise to continue working on a multi-step problem. To make this easier, we provide a "Copy previous code" button. Below the following box, click on the "Copy previous code" button. 
 
 ```{r exercises-3, exercise = TRUE}
 
@@ -162,7 +162,7 @@ Change the values to `x <- 6` and `y <- 10`. Hit "Run Code." You should get the 
 
 ### 
 
-Note that the assignment symbol, `<-`, is a less-than-sign followed by a dash. We often pronounce the symbol as "gets." So, we might say, when reading this code, that "x gets 6."
+Note that the assignment symbol, `<-`, is a less-than-sign followed by a dash. We often pronounce this symbol as "gets." So, we might say, when reading this code, that "x gets 6."
 
 ### 
 
@@ -273,7 +273,7 @@ Copy and paste everything from `Exercise 7` above through the end of this senten
 
 ```{r exercises-7}
 question_text(NULL,
-    message = "We will sometimes provide an answer to written questions. Other times, like here, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",          
+    message = "We will sometimes provide an answer to written questions, as we do here. Other times, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",          
     answer(NULL, 
            correct = TRUE),
     allow_retry = FALSE,
