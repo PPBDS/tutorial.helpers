@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -363,7 +363,12 @@
 <p>Because students will complete the tutorials using screens of very different widths, it is a good idea to put <code>knitr::opts_chunk$set(out.width = '90%')</code> in your <code>setup</code> code chunk. In this way, images will appear at a sensible size regardless of whether students are using a phone screen or a big monitor.</p>
 </section><section class="level3"><h3 id="complex-text">Complex text<a class="anchor" aria-label="anchor" href="#complex-text"></a>
 </h3>
-<p>You sometimes want to include “complex” text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which Rmarkdown wants to process in certain ways. You can usually place such code in an environment started by four backticks along with the <code>{verbatim}</code> and then ended with four more backticks.</p>
+<p>You sometimes want to include “complex” text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which R markdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. This works often, but not always. Comments characters like <code>#</code> are especially problematic. We also use the <a href="https://rundel.github.io/parsermd/" class="external-link"><strong>parsermd</strong></a> package behind the scenes. It does not work as well as one might like.</p>
+<p>Further complexity arises because tutorials are R markdown whereas all our other work is in Quarto. In Quarto documents (like this vignette), you can use an environment started by four backticks along with <code>{verbatim}</code> and then ended with four more backticks. This won’t work in R markdown.</p>
+<p>The “file” trick solves this problem. Create a txt file, <code>example-file.txt</code>, with the text which you want to appear in the tutorial. You can either leave it in the same directory as the <code>tutorial.Rmd</code> file or, probably better, place it in either the <code>data</code> or <code>images</code> directory. You then add this code chunk to your tutorial.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>```{r file = "example-file.txt", echo = TRUE, eval = FALSE}</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<p>The <code>file</code> code chunk object loads the specified file. The other code chunk options ensure that the text is echoed but not evaluated.</p>
 </section></section><section class="level2"><h2 id="processing-submissions">Processing submissions<a class="anchor" aria-label="anchor" href="#processing-submissions"></a>
 </h2>
 <p>Instructors have different needs and priorities when it comes to processing student answers. For now, we provide one function, <code><a href="../reference/process_submissions.html">tutorial.helpers::process_submissions()</a></code> to help them. Read the help page: <code><a href="../reference/process_submissions.html">?process_submissions</a></code>. There are many arguments and options.</p>
@@ -371,7 +376,7 @@
 </h2>
 <p>The simplest way to test the <code>tutorial.Rmd</code> with which you are working on is to hit the “Run Document” button. This is the same thing as running <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> on that file:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span><span class="st">"inst/tutorials/02-terminal/tutorial.Rmd"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <p>This assumes that you are located in the main directory of <strong>your.package</strong>, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace <code>02-terminal</code> with the appropriate directory.</p>
