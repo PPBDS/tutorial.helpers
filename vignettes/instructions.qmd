@@ -446,17 +446,18 @@ Because students will complete the tutorials using screens of very different wid
 
 ### Complex text
 
-You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which Rmarkdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. This works often, but not always. Comments characters like `#` are especially problematic. We also use the [**parsermd**](https://rundel.github.io/parsermd/) package behind the scenes. It does not work as well as one might like.
+You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which R markdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. This works often, but not always. Comments characters like `#` are especially problematic. We also use the [**parsermd**](https://rundel.github.io/parsermd/) package behind the scenes. It does not work as well as one might like.
 
-The "file" trick solves this problem. Create a txt file, `example.txt`, with the text which you want to appear in the tutorial. You can either leave it in the same directory as the `tutorial.Rmd` file or, probably better, place it in either the `data` or `images` directory. You then add this code chunk to your tutorial.
+Further complexity arises because tutorials are R markdown whereas all our other work is in Quarto. In Quarto documents (like this vignette), you can use an environment started by four backticks along with `{verbatim}` and then ended with four more backticks. This won't work in R markdown.
 
+The "file" trick solves this problem. Create a txt file, `example-file.txt`, with the text which you want to appear in the tutorial. You can either leave it in the same directory as the `tutorial.Rmd` file or, probably better, place it in either the `data` or `images` directory. You then add this code chunk to your tutorial.
+
+````{verbatim}
 ```{r file = "example-file.txt", echo = TRUE, eval = FALSE}
 ```
+````
 
 The `file` code chunk object loads the specified file. The other code chunk options ensure that the text is echoed but not evaluated.
-
-For a time, it seemed like using an environment started by four backticks along with `{verbatim}` and then ended with four more backticks worked but then, inexplicably, it stopped working.
-
 
 ## Processing submissions
 

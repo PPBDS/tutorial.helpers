@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,11 +35,11 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/addins.html">Rstudio Addins</a></li>
-    <li><a class="dropdown-item" href="../articles/books.html">Tutorials for Books</a></li>
-    <li><a class="dropdown-item" href="../articles/cloud.html">Using Tutorials with Posit Cloud</a></li>
-    <li><a class="dropdown-item" href="../articles/downloads.html">Enable Students to Download Their Tutorial Answers</a></li>
+<li><a class="dropdown-item" href="../articles/downloads.html">Enable Students to Download Their Tutorial Answers</a></li>
     <li><a class="dropdown-item" href="../articles/instructions.html">Instructions for Writing R Tutorials</a></li>
+    <li><a class="dropdown-item" href="../articles/books.html">Tutorials for Books</a></li>
+    <li><a class="dropdown-item" href="../articles/addins.html">Functions for Working with Tutorials</a></li>
+    <li><a class="dropdown-item" href="../articles/cloud.html">Using Tutorials with Posit Cloud</a></li>
     <li><a class="dropdown-item" href="../articles/testing.html">Testing Your Package of Tutorials</a></li>
   </ul>
 </li>
@@ -83,7 +83,7 @@
 <p>This document describes the best way to write R tutorials using the <a href="https://rstudio.github.io/learnr/" class="external-link"><strong>learnr</strong></a> package. The most common use case is a tutorial which covers <a href="books.html">the material in an assigned textbook</a>, as with the <a href="https://CRAN.R-project.org/package=r4ds.tutorials" class="external-link"><strong>r4ds.tutorials</strong></a> package for <a href="https://r4ds.hadley.nz/" class="external-link"><em>R for Data Science (2e)</em></a> by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund..</p>
 <p>Instructors assign textbook readings to students. We want our students to read and, perhaps more importantly, go through the associated code, typing it in and confirming what it does. Sadly, students almost never do so. Fortunately, the <a href="https://CRAN.R-project.org/package=tutorial.helpers" class="external-link"><strong>tutorial.helpers</strong></a> package provides tools for ensuring that students type in all the assigned code.</p>
 <p>Imagine the <em>shallowest</em> possible learning curve. Almost every student should be able to answer almost every exercise, albeit perhaps with the help of a hint. There are no hard questions. In fact, there really aren’t any <em>questions</em> at all. Instead, there are <em>instructions</em>: Do one thing, then the next, and then the next.</p>
-<p>Almost all exercises feature a <a href="#kd"><em>knowledge drop</em></a>, a bit of information, rarely more than two sentences, provided after the student has answered the question.</p>
+<p>Almost all exercises feature a knowledge drop, a bit of information, rarely more than two sentences, provided after the student has answered the question.</p>
 <p>Assume that you are giving the student a private lesson. You ask them a question. They give you an answer. What would you say to them next? What do you want to teach them, given that context?</p>
 <p>We are building a “<a href="https://ricomariani.medium.com/the-pit-of-success-cfefc6cb64c8" class="external-link">pit of success</a>.” Generally, students don’t do the assigned reading, at least in a large class. However, they will complete required work. They will do the assigned tutorials. <em>Our promise: If you complete the tutorials, you will learn the material. There is simply no way not to.</em></p>
 </section><section class="section level3"><h3 id="set-up">Set Up<a class="anchor" aria-label="anchor" href="#set-up"></a>
@@ -141,7 +141,7 @@
 </ul>
 </li>
 <li><p>The three code chunks are always followed by a triple hash. We want a student to pause after she has submitted her answer so that she is more likely to consider the output from her submission before moving on.</p></li>
-<li><p>The last part of an exercise is the end, our main opportunity to drop some knowledge. See <a href="#kd">Knowledge Drops</a> for extensive discussion.</p></li>
+<li><p>The last part of an exercise is the end, our main opportunity to drop some knowledge.</p></li>
 <li><p>The last part of the topic is another knowledge drop. It is not another exercise. It is just a knowledge drop after the last exercise which tries to take a broader overview. It is often separated from that last exercise by a simple <code>###</code>. Again, this can’t be more than a sentence or two. But it should be more substantive than a simple “Good job.” For example, if the topic has involved creating a scatter plot, then the last exercise will be putting the final touches on that scatter plot. The last knowledge drop should be something about scatter plots in general, not a minor point about the particular scatter plot which the student has just created.</p></li>
 </ul></section><section class="level3"><h4 id="question-types">Question types<a class="anchor" aria-label="anchor" href="#question-types"></a>
 </h4>
@@ -284,8 +284,7 @@
 <p>You want to first show the graphic that you will create by the end of the topic. You show it once at the start of the topic and once before the last exercise, as a reminder of what the graphic should look like so students do not need to scroll all the way back up.</p>
 <p>You should put the code for the graphic in the <code>setup</code> code chunk. Save the code to an object. The name of the object should have a “_p” suffix, where the “p” stands for “plot.” This way, you only have to put the object name in the code chunk at the end of the topic rather than copying the code.</p>
 <p>You then build up the graphic, line by line, over a series of exercises, providing hints along the way.</p>
-</section><section class="level3"><h4 id="knowledge-drops">Knowledge Drops<a id="kd" href=""></a>
-<a class="anchor" aria-label="anchor" href="#knowledge-drops"></a>
+</section><section class="level3"><h4 id="knowledge-drops">Knowledge Drops<a class="anchor" aria-label="anchor" href="#knowledge-drops"></a>
 </h4>
 <p>The most difficult part of tutorial creation is writing the “knowledge drops,” the snippets of wisdom (and the associated links) which are used at the end of each exercise. These generally come in two categories: details about R functions/packages/websites and background information about the substative data science problem at hand.</p>
 <p>Do not expect this to be easy! Good knowledge drops are hard. Make them short. Students will not read more than a sentence or two.</p>
@@ -364,7 +363,12 @@
 <p>Because students will complete the tutorials using screens of very different widths, it is a good idea to put <code>knitr::opts_chunk$set(out.width = '90%')</code> in your <code>setup</code> code chunk. In this way, images will appear at a sensible size regardless of whether students are using a phone screen or a big monitor.</p>
 </section><section class="level3"><h4 id="complex-text">Complex text<a class="anchor" aria-label="anchor" href="#complex-text"></a>
 </h4>
-<p>You sometimes want to include “complex” text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which Rmarkdown wants to process in certain ways. You can usually place such code in an environment surrounded by four backticks.</p>
+<p>You sometimes want to include “complex” text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which Rmarkdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. This works often, but not always. Comments characters like <code>#</code> are especially problematic. We also use the <a href="https://rundel.github.io/parsermd/" class="external-link"><strong>parsermd</strong></a> package behind the scenes. It does not work as well as one might like.</p>
+<p>The “file” trick solves this problem. Create a txt file, <code>example.txt</code>, with the text which you want to appear in the tutorial. You can either leave it in the same directory as the <code>tutorial.Rmd</code> file or, probably better, place it in either the <code>data</code> or <code>images</code> directory. You then add this code chunk to your tutorial.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>```{r file = "example-file.txt", echo = TRUE, eval = FALSE}</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<p>The <code>file</code> code chunk object loads the specified file. The other code chunk options ensure that the text is echoed but not evaluated.</p>
+<p>For a time, it seemed like using an environment started by four backticks along with <code>{verbatim}</code> and then ended with four more backticks worked but then, inexplicably, it stopped working.</p>
 </section></section><section class="section level3"><h3 id="processing-submissions">Processing submissions<a class="anchor" aria-label="anchor" href="#processing-submissions"></a>
 </h3>
 <p>Instructors have different needs and priorities when it comes to processing student answers. For now, we provide one function, <code><a href="../reference/process_submissions.html">tutorial.helpers::process_submissions()</a></code> to help them. Read the help page: <code><a href="../reference/process_submissions.html">?process_submissions</a></code>. There are many arguments and options.</p>
@@ -372,7 +376,7 @@
 </h3>
 <p>The simplest way to test the <code>tutorial.Rmd</code> with which you are working on is to hit the “Run Document” button. This is the same thing as running <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> on that file:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span><span class="st">"inst/tutorials/02-terminal/tutorial.Rmd"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <p>This assumes that you are located in the main directory of <strong>your.package</strong>, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace <code>02-terminal</code> with the appropriate directory.</p>
@@ -512,7 +516,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

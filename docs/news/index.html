@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.1.9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,11 +18,11 @@
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/addins.html">Rstudio Addins</a></li>
-    <li><a class="dropdown-item" href="../articles/books.html">Tutorials for Books</a></li>
-    <li><a class="dropdown-item" href="../articles/cloud.html">Using Tutorials with Posit Cloud</a></li>
-    <li><a class="dropdown-item" href="../articles/downloads.html">Enable Students to Download Their Tutorial Answers</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/downloads.html">Enable Students to Download Their Tutorial Answers</a></li>
     <li><a class="dropdown-item" href="../articles/instructions.html">Instructions for Writing R Tutorials</a></li>
+    <li><a class="dropdown-item" href="../articles/books.html">Tutorials for Books</a></li>
+    <li><a class="dropdown-item" href="../articles/addins.html">Functions for Working with Tutorials</a></li>
+    <li><a class="dropdown-item" href="../articles/cloud.html">Using Tutorials with Posit Cloud</a></li>
     <li><a class="dropdown-item" href="../articles/testing.html">Testing Your Package of Tutorials</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -43,9 +43,18 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="tutorialhelpers-development-version">tutorial.helpers (development version)<a class="anchor" aria-label="anchor" href="#tutorialhelpers-development-version"></a></h2>
+<ul><li>Edit “Instructions” vignette.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.0" id="tutorialhelpers-050">tutorial.helpers 0.5.0<a class="anchor" aria-label="anchor" href="#tutorialhelpers-050"></a></h2><p class="text-muted">CRAN release: 2025-05-11</p>
+<ul><li><p>make_exercise() no longer includes ‘-ex’ in code chunk labels for exercises.</p></li>
+<li><p>Fix format_tutorial() bugs.</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.2" id="tutorialhelpers-042">tutorial.helpers 0.4.2<a class="anchor" aria-label="anchor" href="#tutorialhelpers-042"></a></h2><p class="text-muted">CRAN release: 2025-03-05</p>
 <ul><li><p>Change original tutorial title to “Tutorials in RStudio.”</p></li>
 <li><p>Add new tutorial: “Tutorials in Positron.”</p></li>
-<li><p>Add set_positron_rstudio_keymap() function.</p></li>
+<li><p>Add set_positron_settings() function.</p></li>
 <li><p>Rewrite format_tutorial() to not use <strong>parsermd</strong> package.</p></li>
 </ul></div>
     <div class="section level2">
@@ -135,7 +144,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>
