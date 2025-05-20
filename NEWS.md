@@ -1,5 +1,7 @@
 # tutorial.helpers (development version)
 
+* Edit "Instructions" vignette.
+
 # tutorial.helpers 0.5.0
 
 * make_exercise() no longer includes '-ex' in code chunk labels for exercises.

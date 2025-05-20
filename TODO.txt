@@ -64,6 +64,7 @@ No idea if this would work. And, if we start using it, we might need to update t
 
 4) Figure out why check_current_tutorial() didn't work on Project 2 on second Github tutorial, at least on the last few questions. Issue probably connected to this comment from Positron and Code tutorial: "To Format the chunk labels you need to comment out the example comment line in Script 1. And there is at least one more example later." So, we really need to make  check_current_tutorial() more robust.
 
+5) make_exercise(type = "no") ought to work. That is, make_exercise() should be able to use just the first few letters of the type argument to determine what you want.
 
 # show_file()
 
