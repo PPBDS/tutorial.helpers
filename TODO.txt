@@ -1,22 +1,70 @@
 # Priorities
 
+-1) This is what the line in settings.json looks like:
+
+"terminal.integrated.defaultProfile.windows": "Git Bash"
+
+0) Install Git for Windows. Get Bash Shell to be the default! Background info on Terminal profiles: https://code.visualstudio.com/docs/terminal/profiles
+
+As a one-off, it would be nice to allow staff to say: Give me all the answers to this question for my students. Or for me to say the same about all students. Most common is to gather all the URL locations for student work. Even cooler would be to automatically open up a tab for each, with the tab given the name of the student.
+
+1) Move over settings.json manipulations to this package.
+
+2) Move over Git install to here from positron.tutorials. Related: Add some Terminal questions to the tutorial. We should be exposed to it just a bit. Makes doing the first couple of Positron tutorials easier. Also might provide an excuse to check whether or not Windows users have installed RTools.
+
+3) set_positron_settings should report what settings it found and what, if any, settings it changed.
+
+3) Maybe this should be placed in everyone's .Rprofile
+
+options(timeout = max(300, getOption("timeout")))
+
+Or maybe set some other way? Can't hurt and often helps.
+
+We often ask you to "copy" from the HTML. It is OK if what you copy looks ugly, has lost its formatting and so on. We just want to make sure that your HTML includes, more or less, the information that it should.
+
+Early on, explain that we often just follow the answer with our answer, without labelling it as such. Explain that an example answer after your answer is just an example, yours may differ for all sorts of reasons. Add this to first tutorial.
+
+4) This makes check_current_tutorial() fail
+
+-------
+````
+dkane@macbook project-1 % quarto publish gh-pages quarto-1.qmd
+? Publish site to https://davidkane9.github.io/project-1/ using gh-pages? (Y/n) › Yes
+````
+
+The first time you publish, Quarto will confirm the location, which is just the standard GitHub Pages address, using your user name and the repo name.
+
+````
+Saved working directory and index state WIP on main: 71e6d06 initial version
+Switched to a new branch 'gh-pages'
+[gh-pages (root-commit) b8263f3] Initializing gh-pages branch
+remote: 
+remote: Create a pull request for 'gh-pages' on GitHub by visiting:        
+remote:      https://github.com/davidkane9/project-1/pull/new/gh-pages        
+remote: 
+To https://github.com/davidkane9/project-1.git
+ * [new branch]      HEAD -> gh-pages
+ ````
+
+ Quarto interacts with your GitHub repo directly, creating a new branch, `gh-pages`, which will be used to construct the website. 
+
+````
+[✓] Deploying gh-pages branch to website (this may take a few minutes)
+[✓] Published to https://davidkane9.github.io/project-1/
+
+dkane@macbook project-1 % 
+```` 
+------
+
+Not sure why, but it is like how any line starting with a hash mark also causes a failure. Please fix!
+
+Advanced: Get Format Code Chunk Labels add-in to catch the case in which a non-question code chunk is duplicated.
+
+
+-2) Update the images now that the add a new Console button looks and behaves a little differently?
+
 0) Create a Positron extension which would make finding and starting tutorials easier.
 
-1) How does Positron decide where new projects are going to go? Seems like the default might be to offer the current working directory. At least, that was my testing suggests. Claude suggests we can overrule that default behavior by adding
-
-{
-"files.dialog.defaultPath": "YOUR_PREFERRED_PATH"
-}
-
-to settings.json. That seems to work. But how/where do we help students to do it? Claude suggests:
-
-You can access this setting by:
-
-Opening Settings (Ctrl+, or Cmd+, on Mac)
-Searching for "files.dialog.defaultPath"
-Entering your preferred directory path
-
-Maybe do this somewhere?
 
 2) How do we teach students to switch between Positron windows? I think:
 
@@ -48,7 +96,7 @@ Or:
   }
 ]
 
-3) I am still concerned about the Terminal for Windows users. Does installing RTools just magically make that work OK? Consider changing the JSON file so that Windows users will use bash. Ask Grok for details. Example:
+3) I am still concerned about the Terminal for Windows users. Does installing RTools just magically make that work OK? No! Consider changing the JSON file so that Windows users will use bash. Ask Grok for details. Example:
 
 {
   "terminal.integrated.profiles.windows": {

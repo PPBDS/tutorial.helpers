@@ -466,14 +466,13 @@ Instructors have different needs and priorities when it comes to processing stud
 
 ## Checks 
 
-The simplest way to test the `tutorial.Rmd` with which you are working on is to hit the "Run Document" button. This is the same thing as running `rmarkdown::render()` on that file:
+The simplest way to test the `tutorial.Rmd` with which you are working on is to run `rmarkdown::render()` on that file:
 
 ```{r, eval = FALSE}
 rmarkdown::render("inst/tutorials/02-terminal/tutorial.Rmd")
 ```
 
-This assumes that you are located in the main directory of **your.package**, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace `02-terminal` with the appropriate directory.
-
+This assumes that you are located in the main directory of **your.package**, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace `02-terminal` with the appropriate directory. Note that, if using Positron, you should *not* us `Cmd/Ctrl + Shift + K` since this will run `quarto render`. This is not what you want because tutorials are R Markdown documents, not Quarto documents.
 
 ### Test before submitting a pull request
 
