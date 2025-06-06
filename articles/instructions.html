@@ -374,12 +374,12 @@
 <p>Instructors have different needs and priorities when it comes to processing student answers. For now, we provide one function, <code><a href="../reference/process_submissions.html">tutorial.helpers::process_submissions()</a></code> to help them. Read the help page: <code><a href="../reference/process_submissions.html">?process_submissions</a></code>. There are many arguments and options.</p>
 </section><section class="level2"><h2 id="checks">Checks<a class="anchor" aria-label="anchor" href="#checks"></a>
 </h2>
-<p>The simplest way to test the <code>tutorial.Rmd</code> with which you are working on is to hit the “Run Document” button. This is the same thing as running <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> on that file:</p>
+<p>The simplest way to test the <code>tutorial.Rmd</code> with which you are working on is to run <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> on that file:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rmarkdown</span><span class="fu">::</span><span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span><span class="st">"inst/tutorials/02-terminal/tutorial.Rmd"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<p>This assumes that you are located in the main directory of <strong>your.package</strong>, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace <code>02-terminal</code> with the appropriate directory.</p>
+<p>This assumes that you are located in the main directory of <strong>your.package</strong>, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace <code>02-terminal</code> with the appropriate directory. Note that, if using Positron, you should <em>not</em> us <code>Cmd/Ctrl + Shift + K</code> since this will run <code>quarto render</code>. This is not what you want because tutorials are R Markdown documents, not Quarto documents.</p>
 <section class="level3"><h3 id="test-before-submitting-a-pull-request">Test before submitting a pull request<a class="anchor" aria-label="anchor" href="#test-before-submitting-a-pull-request"></a>
 </h3>
 <p>Once you are done editing a tutorial, you need to make sure it works before you submit a pull request to the package maintainer.</p>
@@ -498,7 +498,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
