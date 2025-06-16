@@ -16,7 +16,8 @@ process_submissions(
 \arguments{
 \item{path}{The path to the directory containing the HTML/XML files.}
 
-\item{pattern}{The pattern to match against the file names (default: ".").}
+\item{pattern}{A character vector of patterns to match against the file names (default: ".").
+Each pattern is processed separately and results are combined.}
 
 \item{return_value}{The type of value to return. Allowed values are "Summary" (default) or "All".}
 
@@ -43,6 +44,9 @@ process_submissions("path/to/directory")
 
 # Process submissions with a specific pattern and key variables
 process_submissions("path/to/directory", pattern = "^submission", key_vars = c("name", "email"))
+
+# Process submissions with multiple patterns
+process_submissions("path/to/directory", pattern = c("^submission", "final"), key_vars = c("email"))
 
 # Process submissions and return all data
 process_submissions("path/to/directory", return_value = "All")

@@ -2,6 +2,8 @@
 
 * Edit "Instructions" vignette.
 
+* pattern argument to process_submissions() now accepts a vector.
+
 # tutorial.helpers 0.5.0
 
 * make_exercise() no longer includes '-ex' in code chunk labels for exercises.
