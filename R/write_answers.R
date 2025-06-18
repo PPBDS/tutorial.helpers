@@ -64,8 +64,11 @@ write_answers <- function(file, session, is_test = FALSE){
                         .default = NA),
     submission_type = purrr::map_chr(objs, "type",
                                      .default = NA),
-    answer = purrr::map_chr(objs, "answer",
-                            .default = NA)
+    answer = purrr::map_chr(
+      objs, 
+      ~ if (length(.x$answer) > 1) paste(.x$answer, collapse = ", ") else as.character(.x$answer),
+      .default = NA
+    )
   )
 
   # Hacky
