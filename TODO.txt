@@ -1,5 +1,7 @@
 # Priorities
 
+Think harder about the changes that will be allowed once we have a new Tutorial Selector Extension for Positron available.  In essence, there are three things we care about. One: What order do tutorials appear in the selector? They will be sorted by package, obviously, but we want package authors to be able to order them as they see fit, with perhaps the default ordering being the ordering of directory names. Second, we need to display a name of the tutorial which students will see. Presumably, this will just be the title of the tutorial. Third, we have the file name of the saved answers. Presumably, this will just use the id variable.
+
 Without the double backslashes, this command fails on Windows because /U gets interpreted as hex. Please fix!
 
 tutorial.helpers::set_positron_settings(positron_settings = 
