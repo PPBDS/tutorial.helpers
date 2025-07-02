@@ -1,3 +1,30 @@
+# Positron Tutorial Projects
+
+* In tutorial, teach `Ctrl + c` by having them type `sleep(5)` at the Terminal, see how that works, then type `sleep(60)`, and then `Ctrl + c` out of that command.
+
+* Add questions about the Terminal to ensure that students are using a Unix-alike. Tricky issue is always Windows users. Theoretically, they will all have installed Git for Windows, but we need to check that and, if not, tell them to do so. We also want to ensure that they have set:
+
+"terminal.integrated.defaultProfile.windows": "Git Bash"
+
+But maybe that can now be part of the default set_positron_settings() call. If maybe they need to run command to fix this one setting, after we ensure that they have installed Git for Windows.
+
+* Move over Git install to here from positron.tutorials. Related: Add some Terminal questions to the tutorial. We should be exposed to it just a bit. Makes doing the first couple of Positron tutorials easier. Also might provide an excuse to check whether or not Windows users have installed RTools.
+
+# Articles
+
+* The Instructions vignette Testing section is out of date because it uses RStudio.
+
+
+# process_submissions()
+
+* Create a new function, perhaps find_submissions(), whose job is to find submissions and confirm that they are OK, reporting problems. This is, essentially, the first part of process_submissions(). But having this split out will make other things easier.
+
+* Change process_submissions() to use find_submissions(). Should make code much easier, while also allowing all the test cases to still work.
+
+Add test cases for `pattern` as vector.
+
+
+
 # Priorities
 
 Think harder about the changes that will be allowed once we have a new Tutorial Selector Extension for Positron available.  In essence, there are three things we care about. One: What order do tutorials appear in the selector? They will be sorted by package, obviously, but we want package authors to be able to order them as they see fit, with perhaps the default ordering being the ordering of directory names. Second, we need to display a name of the tutorial which students will see. Presumably, this will just be the title of the tutorial. Third, we have the file name of the saved answers. Presumably, this will just use the id variable.
@@ -8,9 +35,9 @@ tutorial.helpers::set_positron_settings(positron_settings =
    list("files.dialog.defaultPath" = "C://Users//dkane//projects"))
 
 
-Add test cases for pattern as vector in process_submissions.
 
-In tutorial, teach `Ctrl + c` by having them type `sleep(5)` at the Terminal, see how that works, then type `sleep(60)`, and then `Ctrl + c` out of that command.
+
+
 
 
 -1) This is what the line in settings.json looks like:
@@ -21,11 +48,9 @@ In tutorial, teach `Ctrl + c` by having them type `sleep(5)` at the Terminal, se
 
 As a one-off, it would be nice to allow staff to say: Give me all the answers to this question for my students. Or for me to say the same about all students. Most common is to gather all the URL locations for student work. Even cooler would be to automatically open up a tab for each, with the tab given the name of the student.
 
-The Instructions vignette Testing section is out of date because it uses RStudio.
-
 1) Move over settings.json manipulations to this package.
 
-2) Move over Git install to here from positron.tutorials. Related: Add some Terminal questions to the tutorial. We should be exposed to it just a bit. Makes doing the first couple of Positron tutorials easier. Also might provide an excuse to check whether or not Windows users have installed RTools.
+2) 
 
 For when we revisit the details of the terminal: https://code.visualstudio.com/docs/terminal/basics
 
