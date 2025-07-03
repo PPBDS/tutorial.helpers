@@ -353,3 +353,4 @@ tutorials/[^/]*/(?!(data|images|.*Rmd))
 ````
 
 This excludes everything in any subdirectory of the tutorials directory except an `images` directory (a file named images would also be included) or a `data` directory or a file suffixed with `.Rmd`.
+Stepher Sabio
