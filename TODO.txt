@@ -1,10 +1,23 @@
 # Priorities
 
-* Download/install version with proposed change. Run (answer all the questions) and download the html answers for the Positron tutorial. Check that the HTML looks good. Send me HTML. Put comment in PR that things look good.
+* Download/install version with proposed change. 
+
+remotes::install_github("PPBDS/tutorial.helpers", ref = "e607ac5"). 
+
+Run (answer all the questions) and download the html answers for the Positron tutorial. 
+
+learnr::run_tutorial("positron", "tutorial.helpers")
+
+Check that the HTML looks good. Send me HTML. Put comment in PR that things look good. SS:
+
 
 # Positron Tutorial Projects
 
-* In tutorial, teach `Ctrl + c` by having them type `sleep(5)` at the Terminal, see how that works, then type `sleep(60)`, and then `Ctrl + c` out of that command. Two separate questions, with knowledge drops about processes running at the command line.
+* Add first Terminal question. Type `pwd`. Discuss output.
+
+* Early on, explain that we often just follow the answer with our answer, without labelling it as such. Explain that an example answer after your answer is just an example, yours may differ for all sorts of reasons. 
+
+* In tutorial, teach `Ctrl + c` by having them type `sleep 5` at the Terminal, see how that works, then type `sleep 60`, and then `Ctrl + c` out of that command. Two separate questions, with knowledge drops about processes running at the command line.
 
 * Add questions about the Terminal to ensure that students are using a Unix-alike. Tricky issue is always Windows users. Theoretically, they will all have installed Git for Windows, but we need to check that and, if not, tell them to do so. We also want to ensure that they have set:
 
@@ -24,7 +37,7 @@ But maybe that can now be part of the default set_positron_settings() call. Mayb
 
 * We often ask you to "copy" from the HTML. It is OK if what you copy looks ugly, has lost its formatting and so on. We just want to make sure that your HTML includes, more or less, the information that it should. Add a question about copying from https://ppbds.github.io/tutorial.helpers/: "Copy everything in the browser window from 'tutorial.helpers' in the upper right corner through "About this package". Note how this picks up (always?) "Search for" in the search bar. 
 
-* Early on, explain that we often just follow the answer with our answer, without labelling it as such. Explain that an example answer after your answer is just an example, yours may differ for all sorts of reasons. 
+* 
 
 * Update the images now that the add a new Console button looks and behaves a little differently?
 
@@ -61,6 +74,8 @@ But maybe that can now be part of the default set_positron_settings() call. Mayb
 # Articles
 
 * The Instructions vignette Testing section is out of date because it uses RStudio.
+
+* Explain rmarkdown::render more clearly.
 
 
 # process_submissions()
@@ -361,4 +376,3 @@ tutorials/[^/]*/(?!(data|images|.*Rmd))
 ````
 
 This excludes everything in any subdirectory of the tutorials directory except an `images` directory (a file named images would also be included) or a `data` directory or a file suffixed with `.Rmd`.
-Stepher Sabio
