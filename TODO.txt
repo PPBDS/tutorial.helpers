@@ -1,14 +1,62 @@
+# Priorities
+
+* Download/install version with proposed change. Run (answer all the questions) and download the html answers for the Positron tutorial. Check that the HTML looks good. Send me HTML. Put comment in PR that things look good.
+
 # Positron Tutorial Projects
 
-* In tutorial, teach `Ctrl + c` by having them type `sleep(5)` at the Terminal, see how that works, then type `sleep(60)`, and then `Ctrl + c` out of that command.
+* In tutorial, teach `Ctrl + c` by having them type `sleep(5)` at the Terminal, see how that works, then type `sleep(60)`, and then `Ctrl + c` out of that command. Two separate questions, with knowledge drops about processes running at the command line.
 
 * Add questions about the Terminal to ensure that students are using a Unix-alike. Tricky issue is always Windows users. Theoretically, they will all have installed Git for Windows, but we need to check that and, if not, tell them to do so. We also want to ensure that they have set:
 
 "terminal.integrated.defaultProfile.windows": "Git Bash"
 
-But maybe that can now be part of the default set_positron_settings() call. If maybe they need to run command to fix this one setting, after we ensure that they have installed Git for Windows.
+But maybe that can now be part of the default set_positron_settings() call. Maybe they need to run this command to fix this one setting, after we ensure that they have installed Git for Windows. Anyway, the key material/images from https://ppbds.github.io/primer/getting-started-with-positron.html#the-terminal needs to be in the tutorial.
 
-* Move over Git install to here from positron.tutorials. Related: Add some Terminal questions to the tutorial. We should be exposed to it just a bit. Makes doing the first couple of Positron tutorials easier. Also might provide an excuse to check whether or not Windows users have installed RTools.
+* Move over Git install to here from positron.tutorials. Related: Add some other Terminal questions to the tutorial. We should be exposed to it just a bit. Makes doing the first couple of Positron tutorials easier. Also might provide an excuse to check whether or not Windows users have installed RTools, or maybe we don't need that because of Git Bash.
+
+* Remove rstudio tutorial.
+
+* Change tutorial name/id to just Getting Started/getting-started.
+
+* Update README.Rmd and recreate README.md
+
+* Should we set a projects directory in this tutorial as well? Not sure . . .
+
+* We often ask you to "copy" from the HTML. It is OK if what you copy looks ugly, has lost its formatting and so on. We just want to make sure that your HTML includes, more or less, the information that it should. Add a question about copying from https://ppbds.github.io/tutorial.helpers/: "Copy everything in the browser window from 'tutorial.helpers' in the upper right corner through "About this package". Note how this picks up (always?) "Search for" in the search bar. 
+
+* Early on, explain that we often just follow the answer with our answer, without labelling it as such. Explain that an example answer after your answer is just an example, yours may differ for all sorts of reasons. 
+
+* Update the images now that the add a new Console button looks and behaves a little differently?
+
+* How do we teach students to switch between Positron windows? I think:
+
+    + `^w` might be the best approach. Works on Mac (and Windows?). Only annoyance is that it does not switch Windows. Instead, it pulls up that set of open Positron windows for you to choose from. But, if there are only two, and you just hit enter, you switch to the other one, which is what you want.
+
+    + `Cmd + `` works, but only the Mac. It is what I use, but it is not a convenient shortcut key.
+
+    + `Alt + Tab` works on Windows? But it cycles through all Windows, including other applications that you might have open.
+
+    Maybe workbench.action.quickSwitchWindow is the key command, and we should set that to a specific command sequence for everyone. This would involve, I think, editing/creating the keybindings.json file. Maybe:
+
+{
+  "key": "ctrl+alt+w",
+  "command": "workbench.action.quickSwitchWindow"
+}
+
+    Or: 
+
+[
+  {
+    "key": "ctrl+alt+w",
+    "command": "workbench.action.quickSwitchWindow",
+    "when": "!isMac"
+  },
+  {
+    "key": "cmd+opt+w",
+    "command": "workbench.action.quickSwitchWindow",
+    "when": "isMac"
+  }
+]
 
 # Articles
 
@@ -17,56 +65,38 @@ But maybe that can now be part of the default set_positron_settings() call. If m
 
 # process_submissions()
 
-* Create a new function, perhaps find_submissions(), whose job is to find submissions and confirm that they are OK, reporting problems. This is, essentially, the first part of process_submissions(). But having this split out will make other things easier.
+* Create a new function, perhaps find_submissions(), whose job is to find submissions and confirm that they are OK, reporting problems. This is, essentially, the first part of process_submissions(). But having this split out will make other things easier. Does find_submissions() take a vector for `pattern` or just a single value? Not sure.
 
 * Change process_submissions() to use find_submissions(). Should make code much easier, while also allowing all the test cases to still work.
 
-Add test cases for `pattern` as vector.
+* Add test cases for `pattern` as vector.
 
+# set_positron_settings() 
 
+* should report what settings it found and what, if any, settings it changed.
 
-# Priorities
+* Maybe this should be placed in everyone's .Rprofile?
 
-Think harder about the changes that will be allowed once we have a new Tutorial Selector Extension for Positron available.  In essence, there are three things we care about. One: What order do tutorials appear in the selector? They will be sorted by package, obviously, but we want package authors to be able to order them as they see fit, with perhaps the default ordering being the ordering of directory names. Second, we need to display a name of the tutorial which students will see. Presumably, this will just be the title of the tutorial. Third, we have the file name of the saved answers. Presumably, this will just use the id variable.
+  options(timeout = max(300, getOption("timeout")))
 
-Without the double backslashes, this command fails on Windows because /U gets interpreted as hex. Please fix!
+  Or maybe set some other way? Can't hurt and often helps.
+
+* Without the double backslashes, this command fails on Windows because /U gets interpreted as hex. Please fix!
 
 tutorial.helpers::set_positron_settings(positron_settings = 
    list("files.dialog.defaultPath" = "C://Users//dkane//projects"))
 
+# show_file()
 
+show_file() should fail if chunk is anything other than the allowed character strings, i.e., chunk = 1 should fail.
 
+show_all() should take "YAML" as an option and just return the YAML header.
 
+What should show_file(test_file, start = 0) return? Not sure it should be an error . . .
 
+# check_current_tutorial()
 
-
--1) This is what the line in settings.json looks like:
-
-"terminal.integrated.defaultProfile.windows": "Git Bash"
-
-0) Install Git for Windows. Get Bash Shell to be the default! Background info on Terminal profiles: https://code.visualstudio.com/docs/terminal/profiles
-
-As a one-off, it would be nice to allow staff to say: Give me all the answers to this question for my students. Or for me to say the same about all students. Most common is to gather all the URL locations for student work. Even cooler would be to automatically open up a tab for each, with the tab given the name of the student.
-
-1) Move over settings.json manipulations to this package.
-
-2) 
-
-For when we revisit the details of the terminal: https://code.visualstudio.com/docs/terminal/basics
-
-3) set_positron_settings should report what settings it found and what, if any, settings it changed.
-
-3) Maybe this should be placed in everyone's .Rprofile
-
-options(timeout = max(300, getOption("timeout")))
-
-Or maybe set some other way? Can't hurt and often helps.
-
-We often ask you to "copy" from the HTML. It is OK if what you copy looks ugly, has lost its formatting and so on. We just want to make sure that your HTML includes, more or less, the information that it should.
-
-Early on, explain that we often just follow the answer with our answer, without labelling it as such. Explain that an example answer after your answer is just an example, yours may differ for all sorts of reasons. Add this to first tutorial.
-
-4) This makes check_current_tutorial() fail
+* This makes check_current_tutorial() fail
 
 -------
 ````
@@ -100,43 +130,27 @@ dkane@macbook project-1 %
 
 Not sure why, but it is like how any line starting with a hash mark also causes a failure. Please fix!
 
-Advanced: Get Format Code Chunk Labels add-in to catch the case in which a non-question code chunk is duplicated.
+* Advanced: Get Format Code Chunk Labels add-in to catch the case in which a non-question code chunk is duplicated.
+
+# Other new user functions
+
+As a one-off, it would be nice to allow staff to say: Give me all the answers to this question for my students. Or for me to say the same about all students. Most common is to gather all the URL locations for student work. Even cooler would be to automatically open up a tab for each, with the tab given the name of the student.
+
+With find_submissions() to set up collect/process the tutorials, it is easier to create some new functions. 
+
+* Give a vector of emails (and, optionally, a pattern). Download all the tutorials which have that email in the email field and whose name matches the pattern. This is for TFs to examine just their students work. This returns the same object, a list (?) of tutorial answers, as find_submissions(). Indeed, maybe it just calls find_submissions(). Or maybe this `emails` is an optional argument to find_submissions.
+
+* process_group() takes 
 
 
--2) Update the images now that the add a new Console button looks and behaves a little differently?
 
-0) Create a Positron extension which would make finding and starting tutorials easier.
+# Other Stuff
+
+Think harder about the changes that will be allowed once we have a new Tutorial Selector Extension for Positron available.  In essence, there are three things we care about. One: What order do tutorials appear in the selector? They will be sorted by package, obviously, but we want package authors to be able to order them as they see fit, with perhaps the default ordering being the ordering of directory names. Second, we need to display a name of the tutorial which students will see. Presumably, this will just be the title of the tutorial. Third, we have the file name of the saved answers. Presumably, this will just use the id variable.
 
 
-2) How do we teach students to switch between Positron windows? I think:
+Move over settings.json manipulations to this package. (??)
 
-* `^w` might be the best approach. Works on Mac (and Windows?). Only annoyance is that it does not switch Windows. Instead, it pulls up that set of open Positron windows for you to choose from. But, if there are only two, and you just hit enter, you switch to the other one, which is what you want.
-
-* `Cmd + `` works, but only the Mac. It is what I use, but it is not a convenient shortcut key.
-
-* `Alt + Tab` works on Windows? But it cycles through all Windows, including other applications that you might have open.
-
-Maybe workbench.action.quickSwitchWindow is the key command, and we should set that to a specific command sequence for everyone. This would involve, I think, editing/creating the keybindings.json file. Maybe:
-
-{
-  "key": "ctrl+alt+w",
-  "command": "workbench.action.quickSwitchWindow"
-}
-
-Or: 
-
-[
-  {
-    "key": "ctrl+alt+w",
-    "command": "workbench.action.quickSwitchWindow",
-    "when": "!isMac"
-  },
-  {
-    "key": "cmd+opt+w",
-    "command": "workbench.action.quickSwitchWindow",
-    "when": "isMac"
-  }
-]
 
 3) I am still concerned about the Terminal for Windows users. Does installing RTools just magically make that work OK? No! Consider changing the JSON file so that Windows users will use bash. Ask Grok for details. Example:
 
@@ -156,13 +170,7 @@ No idea if this would work. And, if we start using it, we might need to update t
 
 5) make_exercise(type = "no") ought to work. That is, make_exercise() should be able to use just the first few letters of the type argument to determine what you want.
 
-# show_file()
 
-show_file() should fail if chunk is anything other than the allowed character strings, i.e., chunk = 1 should fail.
-
-show_all() should take "YAML" as an option and just return the YAML header.
-
-What should show_file(test_file, start = 0) return? Not sure it should be an error . . .
 
 # process_submissions()
 
@@ -342,7 +350,7 @@ Whenever you `library()` a package, R looks through, in order, the values return
 
 ## Comments on .Rbuildignore
 
-For some reason, it is impossible to include comments in the `.Rbuildignore`, at least by using the "#" symbol. I think the key issue is that using `*` (or maybe a parenthesis) in a line which begins with `#` causes trouble. Regardless, here are some thoughts on the version we currently use in **all.primer.tutorials**.
+For some reason, it is impossible to include comments in the `.Rbuildignore`, at least by using the "#" symbol. I think the key issue is that using `*` (or maybe a parenthesis) in a line which begins with `#` causes trouble. Regardless, here are some thoughts on the version we currently use in **primer.tutorials**.
 
 We would like to ensure that all the junk files which end up in the `tutorials/*` directories are not included in the build. Such files are often large. They also run the risk of messing things up in that they might cause certain tests to pass for us but which would fail for anyone who downloads from Github. (The `.gitignore` file does a reasonable job of ensuring that such files do not end up on Github.)
 
