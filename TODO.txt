@@ -1,15 +1,5 @@
 # Priorities
 
-* Download/install version with proposed change. 
-
-remotes::install_github("PPBDS/tutorial.helpers", ref = "e607ac5"). 
-
-Run (answer all the questions) and download the html answers for the Positron tutorial. 
-
-learnr::run_tutorial("positron", "tutorial.helpers")
-
-Check that the HTML looks good. Send me HTML. Put comment in PR that things look good. SS: Done
-
 # Positron Tutorial Projects
 
 * Add first Terminal question. Type `pwd`. Discuss output.
@@ -26,7 +16,7 @@ But maybe that can now be part of the default set_positron_settings() call. Mayb
 
 * Move over Git install to here from positron.tutorials. Related: Add some other Terminal questions to the tutorial. We should be exposed to it just a bit. Makes doing the first couple of Positron tutorials easier. Also might provide an excuse to check whether or not Windows users have installed RTools, or maybe we don't need that because of Git Bash.
 
-* Remove rstudio tutorial.
+* Ensure no mentions of RStudio.
 
 * Change tutorial name/id to just Getting Started/getting-started.
 

@@ -4,6 +4,8 @@
 
 * pattern argument to process_submissions() now accepts a vector.
 
+* Remove RStudio material.
+
 # tutorial.helpers 0.5.0
 
 * make_exercise() no longer includes '-ex' in code chunk labels for exercises.

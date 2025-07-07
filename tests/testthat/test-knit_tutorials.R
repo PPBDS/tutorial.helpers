@@ -16,12 +16,6 @@ test_that("knit_tutorials() works on legal tutorials", {
 
 test_that("knit_tutorials() works on installed tutorials", {
   
-  expect_null(
-    knit_tutorials(
-      system.file("tutorials/rstudio/tutorial.Rmd", 
-                  package = "tutorial.helpers")
-      )
-  )
   
   expect_null(
     knit_tutorials(
