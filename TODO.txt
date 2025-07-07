@@ -8,8 +8,7 @@ Run (answer all the questions) and download the html answers for the Positron tu
 
 learnr::run_tutorial("positron", "tutorial.helpers")
 
-Check that the HTML looks good. Send me HTML. Put comment in PR that things look good. SS:
-
+Check that the HTML looks good. Send me HTML. Put comment in PR that things look good. SS: Done
 
 # Positron Tutorial Projects
 
