@@ -240,8 +240,224 @@ Tutorial workflow will often look like this. We tell you to run a command **in t
 
 <!-- DK: New Terminal stuff. -->
 
+###
 
 ### Exercise 6
+
+The Terminal tab is next to the Console tab within the Panel in the lower left portion of the Positron window. We use the Console tab to talk to R. We use the Terminal tab to talk directly with the computer.
+
+Now, let us try to figure out the current location of our folder in which we are in. Type this magic code at the Terminal `pwd`. Hit `Enter` (Windows) or `Return` (Mac) key to run the command.
+
+CP/CR.
+
+```{r exercises-6}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+Your answer should look something like this:
+
+````
+Davids-MacBook-Pro-2:averages dkane$ pwd
+/Users/dkane/Desktop/projects/averages
+Davids-MacBook-Pro-2:averages dkane$
+````
+
+Notice how the last directory (folder) in the path is included in my prompt. Yours does not have to look exactly like mine.  
+
+### Exercise 7
+
+Let us make a directory called `example`. Run `mkdir example` and run `ls` at the Terminal to confirm that you have succesfully created the new directory. 
+
+CP/CR.
+
+```{r exercises-7}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+Your answer should look something like this:
+
+````
+stepher@Johns-MacBook-Air project % mkdir example
+stepher@Johns-MacBook-Air project % ls
+example
+stepher@Johns-MacBook-Air project %
+````
+
+`ls` lists the files and folders in a directory (like "show me what's here"). The command `mkdir` creates new directories/folders.
+
+### Exercise 8
+
+Move into the `example` directory by running `cd example`. Run `pwd`. To move up to the parent directory, run `cd ..`. Run `pwd` to confirm that you are now in the parent directory. 
+
+CP/CR.
+
+```{r exercises-8}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+Your answer should look something like this:
+
+````
+stepher@Johns-MacBook-Air project % cd example
+stepher@Johns-MacBook-Air example % pwd
+/Users/stepher/desktop/project/example
+stepher@Johns-MacBook-Air example % cd .. 
+stepher@Johns-MacBook-Air project % pwd
+/Users/stepher/desktop/project
+stepher@Johns-MacBook-Air project %
+````
+
+The command `cd` changes your current directory to a specified folder (like "go to this location"). And `cd ..` moves you up one level to the parent directory (like "go back up one folder"). These commands let you navigate through your file system.
+
+### Exercise 9
+
+Let us remove the directory we made. Run `rm -r example`. 
+
+CP/CR.
+
+```{r exercises-9}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+Your answer should look something like this:
+
+````
+stepher@Johns-MacBook-Air project % rm -r example
+stepher@Johns-MacBook-Air project %
+````
+
+`rm -r` removes (deletes) a directory and all its contents recursively, including all files and subdirectories inside it.
+
+### Exercise 10
+
+Let us make the Terminal sleep by typing the command `sleep 5` at the Terminal. Hit 'Enter/Return' and see what happens next. 
+
+###
+
+The `sleep 5` command at the Terminal pauses execution for 5 seconds. It stops the Terminal from executing the next command for exactly 5 seconds. 
+
+CP/CR. 
+
+```{r exercises-10}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+Your answer should look something like this:
+
+````
+stepher@Johns-MacBook-Air ~ % sleep 5
+stepher@Johns-MacBook-Air ~ %
+````
+
+We can change the duration of the sleep using this format `sleep [number]`. The number you put in is the duration (in seconds) for which the Terminal goes to sleep. 
+
+###
+
+### Exercise 11
+
+Type `sleep 60` at the Terminal. The command made the Terminal go to sleep for 60 seconds which is a long wait. To wake up the Terminal press `Ctrl + C` in your keyboard. When you press `Ctrl + C` while sleep is running, it immediately terminates the sleep command and returns you to the command prompt.
+
+CP/CR.
+
+```{r exercises-11}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+
+### 
+
+Your answer should look something like this:
+
+````
+stepher@Johns-MacBook-Air ~ % sleep 60
+^C
+stepher@Johns-MacBook-Air ~ %
+````
+
+###
+
+`Ctrl + C` is a fundamental keyboard shortcut that terminates/interrupts the currently running process or command at the Terminal. It is not only limited to stop `sleep` command but essentially the "emergency stop" button for almost every currently running process at the Terminal.
+
+### Exercise 12
+
+At the Terminal, type `git --version` and hit `Enter/Return`. Your computer may respond by asking if you want to install Git. You do. Go ahead and install.
+
+CP/CR.
+
+```{r exercises-12}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+Your answer should look something like this:
+
+````
+dkane@macbook positron.tutorials % git --version
+git version 2.39.3 (Apple Git-146)
+dkane@macbook positron.tutorials % 
+````
+
+If you get an error like: 
+
+````
+command not found: git
+````
+Or:
+
+````
+The term 'git' is not recognized as the name of a cmdlet, function, script file, or operable program.
+````
+
+Either means that Git is not installed on your computer. If you get an error follow [these instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install Git. 
+
+
+### Exercise 13
 
 Positron and your R installation have some default settings which are not good for new users. Run this command at the Console to change them:
 
@@ -251,7 +467,7 @@ tutorial.helpers::set_positron_settings()
 
 CP/CR.
 
-```{r exercises-6}
+```{r exercises-13}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -268,13 +484,13 @@ The output from this function will report the changes, if any, which were made. 
 
 You can generally call functions by just giving their name along with the ending parentheses, as with `set_positron_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_positron_settings()` is in the **tutorial.helpers** package, we can call it using the double colon notation: `tutorial.helpers::set_positron_settings()`, as we do above.
 
-### Exercise 7
+### Exercise 14
 
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are just copies of the R commands and their results. Other times, we will ask you to write one or more sentences of prose. 
 
 Copy and paste everything from `Exercise 7` above through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
-```{r exercises-7}
+```{r exercises-14}
 question_text(NULL,
     message = "We will sometimes provide an answer to written questions, as we do here. Other times, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",          
     answer(NULL, 
@@ -284,7 +500,7 @@ question_text(NULL,
     rows = 6)
 ```
 
-### Exercise 8
+### Exercise 15
 
 `show_file()` is a commonly-used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file which you have edited. 
 
@@ -296,7 +512,7 @@ tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 
 CP/CR.
 
-```{r exercises-8}
+```{r exercises-15}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -307,7 +523,7 @@ question_text(NULL,
 
 <!-- I really want a test case to ensure that this works on all OSs. -->
 
-```{r exercises-8-test, include = FALSE}
+```{r exercises-15-test, include = FALSE}
 tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 ```
 
