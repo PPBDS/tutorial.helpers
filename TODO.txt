@@ -2,13 +2,64 @@
 
 # Positron Tutorial Projects
 
-* Add first Terminal question. Type `pwd`. Discuss output. SS: Done
+* Early on, explain that we often just follow the answer with our answer, without labelling it as such. Explain that an example answer after your answer is just an example, yours may differ for all sorts of reasons. 
 
-* Early on, explain that we often just follow the answer with our answer, without labelling it as such. Explain that an example answer after your answer is just an example, yours may differ for all sorts of reasons. SS: Done
+* In tutorial, teach `Ctrl + c` by having them type `sleep 5` at the Terminal, see how that works, then type `sleep 60`, and then `Ctrl + c` out of that command. Two separate questions, with knowledge drops about processes running at the command line. Fix further.
 
-* In tutorial, teach `Ctrl + c` by having them type `sleep 5` at the Terminal, see how that works, then type `sleep 60`, and then `Ctrl + c` out of that command. Two separate questions, with knowledge drops about processes running at the command line. SS: Done
+* Add questions about the Terminal to ensure that students are using a Unix-alike. Tricky issue is always Windows users. Theoretically, they will all have installed Git for Windows, but we need to check that and, if not, tell them to do so. We also want to ensure that they have set. 
 
-* Add questions about the Terminal to ensure that students are using a Unix-alike. Tricky issue is always Windows users. Theoretically, they will all have installed Git for Windows, but we need to check that and, if not, tell them to do so. We also want to ensure that they have set. SS: Done
+## Stepher
+
+* Ensure no mentions of RStudio.
+
+* We often ask you to "copy" from the HTML. It is OK if what you copy looks ugly, has lost its formatting and so on. We just want to make sure that your HTML includes, more or less, the information that it should. Add a question about copying from https://ppbds.github.io/tutorial.helpers/: "Copy everything in the browser window from 'tutorial.helpers' in the upper right corner through "About this package". Note how this picks up (always?) "Search for" in the search bar. 
+
+### Instructions
+
+* The Instructions vignette Testing section is out of date because it uses RStudio. Use devtools. 
+
+* Explain rmarkdown::render more clearly.
+
+* Study check_current_tutorial() and format_tutorial().
+
+* Read R Packages book: Whole game and testing chapters.
+
+* This makes check_current_tutorial() fail
+
+-------
+````
+dkane@macbook project-1 % quarto publish gh-pages quarto-1.qmd
+? Publish site to https://davidkane9.github.io/project-1/ using gh-pages? (Y/n) › Yes
+````
+
+The first time you publish, Quarto will confirm the location, which is just the standard GitHub Pages address, using your user name and the repo name.
+
+````
+Saved working directory and index state WIP on main: 71e6d06 initial version
+Switched to a new branch 'gh-pages'
+[gh-pages (root-commit) b8263f3] Initializing gh-pages branch
+remote: 
+remote: Create a pull request for 'gh-pages' on GitHub by visiting:        
+remote:      https://github.com/davidkane9/project-1/pull/new/gh-pages        
+remote: 
+To https://github.com/davidkane9/project-1.git
+ * [new branch]      HEAD -> gh-pages
+ ````
+
+ Quarto interacts with your GitHub repo directly, creating a new branch, `gh-pages`, which will be used to construct the website. 
+
+````
+[✓] Deploying gh-pages branch to website (this may take a few minutes)
+[✓] Published to https://davidkane9.github.io/project-1/
+
+dkane@macbook project-1 % 
+```` 
+------
+
+Not sure why, but it is like how any line starting with a hash mark also causes a failure. Please fix!
+
+
+## Later
 
 "terminal.integrated.defaultProfile.windows": "Git Bash"
 
@@ -16,7 +67,7 @@ But maybe that can now be part of the default set_positron_settings() call. Mayb
 
 * Move over Git install to here from positron.tutorials. Related: Add some other Terminal questions to the tutorial. We should be exposed to it just a bit. Makes doing the first couple of Positron tutorials easier. Also might provide an excuse to check whether or not Windows users have installed RTools, or maybe we don't need that because of Git Bash.
 
-* Ensure no mentions of RStudio.
+
 
 * Change tutorial name/id to just Getting Started/getting-started.
 
@@ -24,7 +75,6 @@ But maybe that can now be part of the default set_positron_settings() call. Mayb
 
 * Should we set a projects directory in this tutorial as well? Not sure . . .
 
-* We often ask you to "copy" from the HTML. It is OK if what you copy looks ugly, has lost its formatting and so on. We just want to make sure that your HTML includes, more or less, the information that it should. Add a question about copying from https://ppbds.github.io/tutorial.helpers/: "Copy everything in the browser window from 'tutorial.helpers' in the upper right corner through "About this package". Note how this picks up (always?) "Search for" in the search bar. 
 
 * 
 
@@ -62,9 +112,7 @@ But maybe that can now be part of the default set_positron_settings() call. Mayb
 
 # Articles
 
-* The Instructions vignette Testing section is out of date because it uses RStudio.
 
-* Explain rmarkdown::render more clearly.
 
 
 # process_submissions()
@@ -100,39 +148,7 @@ What should show_file(test_file, start = 0) return? Not sure it should be an err
 
 # check_current_tutorial()
 
-* This makes check_current_tutorial() fail
 
--------
-````
-dkane@macbook project-1 % quarto publish gh-pages quarto-1.qmd
-? Publish site to https://davidkane9.github.io/project-1/ using gh-pages? (Y/n) › Yes
-````
-
-The first time you publish, Quarto will confirm the location, which is just the standard GitHub Pages address, using your user name and the repo name.
-
-````
-Saved working directory and index state WIP on main: 71e6d06 initial version
-Switched to a new branch 'gh-pages'
-[gh-pages (root-commit) b8263f3] Initializing gh-pages branch
-remote: 
-remote: Create a pull request for 'gh-pages' on GitHub by visiting:        
-remote:      https://github.com/davidkane9/project-1/pull/new/gh-pages        
-remote: 
-To https://github.com/davidkane9/project-1.git
- * [new branch]      HEAD -> gh-pages
- ````
-
- Quarto interacts with your GitHub repo directly, creating a new branch, `gh-pages`, which will be used to construct the website. 
-
-````
-[✓] Deploying gh-pages branch to website (this may take a few minutes)
-[✓] Published to https://davidkane9.github.io/project-1/
-
-dkane@macbook project-1 % 
-```` 
-------
-
-Not sure why, but it is like how any line starting with a hash mark also causes a failure. Please fix!
 
 * Advanced: Get Format Code Chunk Labels add-in to catch the case in which a non-question code chunk is duplicated.
 

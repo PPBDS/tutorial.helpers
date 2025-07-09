@@ -238,15 +238,17 @@ Your version of R may be more recent, but it should not be older. It is OK if yo
 
 Tutorial workflow will often look like this. We tell you to run a command **in the Console**, generally in your second Positron window. You run it. We then ask you to copy/paste, from the Console, both the command itself and the response returned. Because we ask you to **c**opy/**p**aste the **c**ommand/**r**esponse so often, we usually shorten this instruction to CP/CR.
 
-<!-- DK: New Terminal stuff. -->
-
-###
-
 ### Exercise 6
+
+<!-- DK: make more like Primer. -->
 
 The Terminal tab is next to the Console tab within the Panel in the lower left portion of the Positron window. We use the Console tab to talk to R. We use the Terminal tab to talk directly with the computer.
 
+<!-- DK: Add image. -->
+
 Now, let us try to figure out the current location of our folder in which we are in. Type this magic code at the Terminal `pwd`. Hit `Enter` (Windows) or `Return` (Mac) key to run the command.
+
+<!-- DK: Make enter/return like above. -->
 
 CP/CR.
 
@@ -271,9 +273,11 @@ Davids-MacBook-Pro-2:averages dkane$
 
 Notice how the last directory (folder) in the path is included in my prompt. Yours does not have to look exactly like mine.  
 
+<!-- DK: Delete other commands. -->
+
 ### Exercise 7
 
-Let us make a directory called `example`. Run `mkdir example` and run `ls` at the Terminal to confirm that you have succesfully created the new directory. 
+Let us make a directory called `example`. Run `mkdir example` and run `ls` at the Terminal to confirm that you have successfully created the new directory. 
 
 CP/CR.
 
@@ -377,8 +381,6 @@ question_text(NULL,
 
 ###
 
-Your answer should look something like this:
-
 ````
 stepher@Johns-MacBook-Air ~ % sleep 5
 stepher@Johns-MacBook-Air ~ %
@@ -386,11 +388,10 @@ stepher@Johns-MacBook-Air ~ %
 
 We can change the duration of the sleep using this format `sleep [number]`. The number you put in is the duration (in seconds) for which the Terminal goes to sleep. 
 
-###
 
 ### Exercise 11
 
-Type `sleep 60` at the Terminal. The command made the Terminal go to sleep for 60 seconds which is a long wait. To wake up the Terminal press `Ctrl + C` in your keyboard. When you press `Ctrl + C` while sleep is running, it immediately terminates the sleep command and returns you to the command prompt.
+Type `sleep 60` at the Terminal. The command made the Terminal go to sleep for 60 seconds which is a long wait. To wake up the Terminal press `Ctrl + c` in your keyboard. When you press `Ctrl + c` while sleep is running, it immediately terminates the sleep command and returns you to the command prompt.
 
 CP/CR.
 
@@ -406,7 +407,6 @@ question_text(NULL,
 
 ### 
 
-Your answer should look something like this:
 
 ````
 stepher@Johns-MacBook-Air ~ % sleep 60
@@ -418,9 +418,11 @@ stepher@Johns-MacBook-Air ~ %
 
 `Ctrl + C` is a fundamental keyboard shortcut that terminates/interrupts the currently running process or command at the Terminal. It is not only limited to stop `sleep` command but essentially the "emergency stop" button for almost every currently running process at the Terminal.
 
+<!-- DK: Drop git -->
+
 ### Exercise 12
 
-At the Terminal, type `git --version` and hit `Enter/Return`. Your computer may respond by asking if you want to install Git. You do. Go ahead and install.
+At the Terminal, type `git --version` and hit `Enter/Return`. 
 
 CP/CR.
 
