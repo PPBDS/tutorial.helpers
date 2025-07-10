@@ -493,7 +493,7 @@ Once you are done editing a tutorial, you need to make sure it works before you 
 2. Another way is by doing the tutorial. Before running the following codes make sure to do this without `renv` since this will cause some issue. One way to do this is by running `renv::deactivate()`.
 Run `devtools::install()` and update everything (it will ask you which would you like to update after running the code). After succesfully installing it, run `learnr::run_tutorial("positron", "tutorial.helpers")`. Remember to change `positron` with whatever directory name is appropriate for your specific tutorial. Do not forget to `renv::activate()` after doing the tutorial.
 
-3. Do a full test, which means running `devtools::check()`. This might take time to finish but worthwhile. This is essentially the "gold standard" for R package validation - it's what CRAN (the official R package repository) uses to test packages before accepting them. 
+3. Do a full test, which means running `devtools::check()`. Make sure to have quarto package installed by typing `install.packages("quarto")`.
 
 ### What to do if `R CMD check` fails
 
