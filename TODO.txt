@@ -2,17 +2,17 @@
 
 # Positron Tutorial Projects
 
-* Early on, explain that we often just follow the answer with our answer, without labelling it as such. Explain that an example answer after your answer is just an example, yours may differ for all sorts of reasons. 
+* Early on, explain that we often just follow the answer with our answer, without labelling it as such. Explain that an example answer after your answer is just an example, yours may differ for all sorts of reasons.  SS: Done
 
-* In tutorial, teach `Ctrl + c` by having them type `sleep 5` at the Terminal, see how that works, then type `sleep 60`, and then `Ctrl + c` out of that command. Two separate questions, with knowledge drops about processes running at the command line. Fix further.
+* In tutorial, teach `Ctrl + c` by having them type `sleep 5` at the Terminal, see how that works, then type `sleep 60`, and then `Ctrl + c` out of that command. Two separate questions, with knowledge drops about processes running at the command line. Fix further. SS: Done
 
-* Add questions about the Terminal to ensure that students are using a Unix-alike. Tricky issue is always Windows users. Theoretically, they will all have installed Git for Windows, but we need to check that and, if not, tell them to do so. We also want to ensure that they have set. 
+* Add questions about the Terminal to ensure that students are using a Unix-alike. Tricky issue is always Windows users. Theoretically, they will all have installed Git for Windows, but we need to check that and, if not, tell them to do so. We also want to ensure that they have set. SS: Done
 
 ## Stepher
 
 * Ensure no mentions of RStudio.
 
-* We often ask you to "copy" from the HTML. It is OK if what you copy looks ugly, has lost its formatting and so on. We just want to make sure that your HTML includes, more or less, the information that it should. Add a question about copying from https://ppbds.github.io/tutorial.helpers/: "Copy everything in the browser window from 'tutorial.helpers' in the upper right corner through "About this package". Note how this picks up (always?) "Search for" in the search bar. 
+* We often ask you to "copy" from the HTML. It is OK if what you copy looks ugly, has lost its formatting and so on. We just want to make sure that your HTML includes, more or less, the information that it should. Add a question about copying from https://ppbds.github.io/tutorial.helpers/: "Copy everything in the browser window from 'tutorial.helpers' in the upper right corner through "About this package". Note how this picks up (always?) "Search for" in the search bar. SS: Done
 
 ### Instructions
 
