@@ -16,9 +16,9 @@
 
 ### Instructions
 
-* The Instructions vignette Testing section is out of date because it uses RStudio. Use devtools. 
+* The Instructions vignette Testing section is out of date because it uses RStudio. Use devtools. SS: Done
 
-* Explain rmarkdown::render more clearly.
+* Explain rmarkdown::render more clearly. SS: Done
 
 * Study check_current_tutorial() and format_tutorial().
 

@@ -468,21 +468,32 @@ Instructors have different needs and priorities when it comes to processing stud
 
 ## Checks 
 
-The simplest way to test the `tutorial.Rmd` with which you are working on is to run `rmarkdown::render()` on that file:
+The simplest way to test the `tutorial.Rmd` with which you are working on is to run `rmarkdown::render()` on that file. This function takes your R Markdown document and transforms it into a finished, viewable format by going through several steps: 
+
+1. Reads through your document and executes any R code chunks you've included, capturing their output (whether that's text results, plots, tables, or error messages).
+
+2. Processes all the markdown formatting like headers, bold text, and links.
+
+3. Finally, it combines everything together into a single HTML file that you can open in a browser to see exactly how your tutorial will appear to users. 
+
+You can do this by running:
 
 ```{r, eval = FALSE}
-rmarkdown::render("inst/tutorials/02-terminal/tutorial.Rmd")
+rmarkdown::render("inst/tutorials/positron/tutorial.Rmd")
 ```
 
-This assumes that you are located in the main directory of **your.package**, as you normally would be. I am not sure if this will catch all potential errors, but it will catch many issues, and it is very quick. Replace `02-terminal` with the appropriate directory. Note that, if using Positron, you should *not* us `Cmd/Ctrl + Shift + K` since this will run `quarto render`. This is not what you want because tutorials are R Markdown documents, not Quarto documents.
+This assumes that you are located in the main directory of **your.package**, as you normally would be. While this approach may not catch every possible error, it will identify many common issues and runs very quickly, making it an efficient way to test your tutorial. Remember to replace `positron` with whatever directory name is appropriate for your specific tutorial. If you're using Positron as your IDE, it's important *not* to use the `Cmd/Ctrl + Shift + K` shortcut, as this will execute `quarto render` instead of the R Markdown rendering process you actually need, since tutorials are R Markdown documents rather than Quarto documents.
 
 ### Test before submitting a pull request
 
-Once you are done editing a tutorial, you need to make sure it works before you submit a pull request to the package maintainer.
+Once you are done editing a tutorial, you need to make sure it works before you submit a pull request to the package maintainer. There are several ways to do checks:
 
-1. Click "Install and Restart" from the Build tab. Then, hit "Start Tutorial" in the Tutorial tab. This mimics the experience that users will have. This will catch some common errors, like having two code chunks with the same name. (I am not sure if this does more or less than the simple test as above.)
+1. Type `rmarkdown::render("file_location")` in the console. This will give you a file with the same file name and a .html extension. Right click the file and select `Open in Browser`. This open up a webpage and you can check the tutorial for some errors. 
 
-2. Do a full test, which means running `R CMD check`. Go to the top right window of RStudio. Click the Build pane and hit the "Check" button (with the green check mark). You will then see a bunch of code and tests running. Make sure it says "OK" next to “testthat”. You should always run this before submitting a pull request.
+2. Another way is by doing the tutorial. Before running the following codes make sure to do this without `renv` since this will cause some issue. One way to do this is by running `renv::deactivate()`.
+Run `devtools::install()` and update everything (it will ask you which would you like to update after running the code). After succesfully installing it, run `learnr::run_tutorial("positron", "tutorial.helpers")`. Remember to change `positron` with whatever directory name is appropriate for your specific tutorial. Do not forget to `renv::activate()` after doing the tutorial.
+
+3. Do a full test, which means running `devtools::check()`. This might take time to finish but worthwhile. This is essentially the "gold standard" for R package validation - it's what CRAN (the official R package repository) uses to test packages before accepting them. 
 
 ### What to do if `R CMD check` fails
 
