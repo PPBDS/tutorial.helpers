@@ -515,8 +515,202 @@ But the file is there! You can see it! The tests work on your local machine. The
 * `R CMD check` will test that all tutorials have the default code chunks exactly as they are in the Helper Tutorial template. So, use the template. If either the "Information" or "Download answers" chunks are missing, `R CMD check` will return something like "Missing a component part from file /path/to/your/Rmd/file.Rmd".
 
 
+## Tutorials in the age of AI
+
+The rise of AI leads to a new kind of tutorial. Our purpose is no longer to teach students how to code. *Our purpose is to teach students how to use AI to code.* Here are some initial thoughts, which assume that students already have some experience, say through the GitHub tutorials in **positron.tutorials**.
+
+### GitHub set up
+
+Always begin by having students set up a repo and Quarto document to work in.
 
 
+````{verbatim}
+### Exercise 2
+
+Create a Github repo called `XX`. Make sure to click the 
+"Add a README file" check box.
+
+Connect the repo to a project on your computer using 
+`File -> New Folder from Git ...`.  Make sure to select the 
+"Open in a new window" box. 
+
+You need two Positon windows: this one for running the 
+tutorial and the one you just created for writing your code 
+and interacting with the Console.
+
+Select `File -> New File -> Quarto Document ...`. Provide a 
+title -- `"XX"` -- and an author (you). Render the document 
+and save it as `XX.qmd`.
+
+Create a `.gitignore` file with `XX_files` on the first 
+line and then a blank line. Save and push.
+
+In the Console, run:
+
+```         
+show_file(".gitignore")
+```
+
+If that fails, it is probably because you have not yet loaded
+ `library(tutorial.helpers)` in the Console.
+
+CP/CR.
+
+```{r introduction-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+Feel free to copy/paste this question as-is, but replacing `XX` with whatever makes sense for your assignment. Of course, the code chunk name will change when your run `check_current_tutorial()`.
+
+You are, obviously, responsible for adding a knowledge drop which teaches the students something about the larger topic.
 
 
+### Always interactive
+
+Students always need more progress working in the QMD and the Console at the same time. Good data scientists go back and forth between these two modes, writing something in the QMD, executing it in the Console, editing the QMD, executing again, and so on. We need to force students to do that here. Example:
+
+````{verbatim}
+### Exercise 3
+
+In your QMD, put `library(tidyverse)` in a new code chunk. 
+Render the file.
+
+Notice that the file does not look good because the code 
+is visible and there are annoying messages. To take care 
+of this, add `#| message: false` to remove all the messages 
+in this `setup` chunk. Also add the following to the YAML 
+header to remove all code echos from the HTML:
+
+```         
+execute: 
+  echo: false
+```
+
+In the Console, run:
+
+```         
+show_file("XX.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r introduction-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+Again, feel free to copy/paste this, or, indeed, anything from this document. However, you will need to do some edits, like with `"XX.qmd"`.
+
+If the target audience for the tutorial is more experienced, you can be less didactic, leaving out several of these instructions. You could also add more steps, like loading more libraries at once.
+
+We then tell students, explicitly, the work with the Console as well.
+
+````{verbatim}
+### Exercise 4
+
+Place your cursor in the QMD file on the `library(tidyverse)` 
+line. Use `Cmd/Ctrl + Enter` to execute that line.
+
+Note that this causes `library(tidyverse)` to be copied down 
+to the Console and then executed. 
+
+CP/CR.
+
+```{r introduction-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+I recommend offering these explicit instructions many, many times. First, students need lots of practice. Second, each time you tell them to add something to the QMD, you give yourself an opportunity for a knowledge drop. The same applies when you tell students to execute, in the Console, this new addition to the QMD. 
+
+
+Consider an example of creating an object in the QMD:
+
+````{verbatim}
+### Exercise 12
+
+Create a new code chunk in your QMD. Add a code chunk option: `#| cache: true`. Copy/paste the R code for the final model into the code chunk, assigning the result to `fit_XX`. 
+
+`Cmd/Ctrl + Shift + K`. It may take some time to render your QMD, depending on how complex your model is. But, by including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved fitted object.
+
+At the Console, run:
+
+```
+tutorial.helpers::show_file("XX.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r courage-12}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+### 
+
+To confirm, `Cmd/Ctrl + Shift + K` again. It should be quick.
+````
+
+Once we have create the object in the QMD, we can execute the same code in the Console:
+
+````{verbatim}
+### Exercise 13
+
+Place your cursor in the QMD file on the `fit_XX` line. Use `Cmd/Ctrl + Enter` to execute that line. 
+
+At the Console, run `ls()`. CP/CR.
+
+```{r courage-13}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+### 
+
+XX: Drop some knowledge and/or comment on the different objects we now have in the workspace.
+````
+
+Of course, you can combine these last two questions together, but you probably shouldn't. We want easier questions, not harder. Splitting up questions makes them simpler. Perhaps more importantly, more questions provide more opportunities for knowledge drops.
+
+This still leaves unclear the process by which you built up the code which creates the model . . .  Leave discussioon about that for another day.
+
+### Asking AI
+
+The more students practice using AI, the better. 
 
