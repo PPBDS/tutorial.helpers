@@ -353,14 +353,14 @@ question_text(NULL,
 ### 
 
 ````
-stepher@Johns-MacBook-Air ~ % sleep 60
+dkane@MacBookPro ~ % sleep 60
 ^C
-stepher@Johns-MacBook-Air ~ %
+dkane@MacBookPro ~ % 
 ````
 
 ###
 
-`Ctrl + C` is not only limited to stop `sleep` command but essentially the "emergency stop" button for almost every currently running process at the Terminal.
+`Ctrl + C` can stop any process from the Terminal.
 
 ### Exercise 10
 
