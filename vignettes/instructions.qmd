@@ -468,40 +468,35 @@ Instructors have different needs and priorities when it comes to processing stud
 
 ## Checks 
 
-The simplest way to test the `tutorial.Rmd` with which you are working on is to run `rmarkdown::render()` on that file. This function takes your R Markdown document and transforms it into a finished, viewable format by going through several steps: 
-
-1. Reads through your document and executes any R code chunks you've included, capturing their output (whether that's text results, plots, tables, or error messages).
-
-2. Processes all the markdown formatting like headers, bold text, and links.
-
-3. Finally, it combines everything together into a single HTML file that you can open in a browser to see exactly how your tutorial will appear to users. 
+The simplest way to test the `tutorial.Rmd` with which you are working on is to run `rmarkdown::render()` on that file. This function takes your R Markdown document and transforms it into a single HTML file that you can open in a browser to see how your tutorial will appear to users. 
 
 You can do this by running:
 
 ```{r, eval = FALSE}
-rmarkdown::render("inst/tutorials/positron/tutorial.Rmd")
+rmarkdown::render("file_path")
 ```
 
-This assumes that you are located in the main directory of **your.package**, as you normally would be. While this approach may not catch every possible error, it will identify many common issues and runs very quickly, making it an efficient way to test your tutorial. Remember to replace `positron` with whatever directory name is appropriate for your specific tutorial. If you're using Positron as your IDE, it's important *not* to use the `Cmd/Ctrl + Shift + K` shortcut, as this will execute `quarto render` instead of the R Markdown rendering process you actually need, since tutorials are R Markdown documents rather than Quarto documents.
+This assumes that you are located in the main directory of **your.package**, as you normally would be. While this approach may not catch every possible error, it will identify many common issues and runs very quickly, making it an efficient way to test your tutorial. Remember to replace `file_path` with whatever directory name is appropriate for your specific tutorial. If you're using Positron as your IDE, it's important *not* to use the `Cmd/Ctrl + Shift + K` shortcut, as this will execute `quarto render` instead of the R Markdown rendering process you actually need, since tutorials are R Markdown documents rather than Quarto documents.
 
 ### Test before submitting a pull request
 
 Once you are done editing a tutorial, you need to make sure it works before you submit a pull request to the package maintainer. There are several ways to do checks:
 
-1. Type `rmarkdown::render("file_location")` in the console. This will give you a file with the same file name and a .html extension. Right click the file and select `Open in Browser`. This open up a webpage and you can check the tutorial for some errors. 
+1. Type `rmarkdown::render("file_path")` in the console. This will give you a file with the same file name and a `.html` extension. Right click the file and select `Open in Browser`. This open up a webpage and you can check the tutorial for some errors. It is smart to use `rmarkdown::render("file_path")` regularly since it identify syntax errors quickly. A good practice is to render after completing each exercise. 
 
-2. Another way is by doing the tutorial. Before running the following codes make sure to do this without `renv` since this will cause some issue. One way to do this is by running `renv::deactivate()`.
-Run `devtools::install()` and update everything (it will ask you which would you like to update after running the code). After succesfully installing it, run `learnr::run_tutorial("positron", "tutorial.helpers")`. Remember to change `positron` with whatever directory name is appropriate for your specific tutorial. Do not forget to `renv::activate()` after doing the tutorial.
+2. Do a full test, which means running `devtools::check()`. This is the equivalent of `R CMD check` which validates package structure, documentation, tests, and compliance with CRAN standards. A good result would be `0 errors ✓ | 0 warnings ✓ `.
 
-3. Do a full test, which means running `devtools::check()`. Make sure to have quarto package installed by typing `install.packages("quarto")`.
+### What to do if `devtools::check()` fails
 
-### What to do if `R CMD check` fails
-
-1. Read the error message at the bottom of the Build pane. You want to see "R CMD check succeeded." If not, there is a problem. The error message will often provide a clue as to where in your code the error occurred.
+1. Read the error message carefully. You always want to see `0 errors ✓ | 0 warnings ✓` under the `R CMD check results`. If not, there is a problem. The error message will often provide a clue as to where in your code the error occurred.
 
 2. If that error message is not detailed enough, go to the `your.package.rcheck` folder, which should be located in the same directory as `your.package` on your computer. This is a folder created by the `R CMD check` process, and it will be automatically deleted if the check process succeeds. If the process fails, the `your.package.rcheck` folder stays around so that you can examine it. The key file is `testthat.Rout.fail`, which should be in the `tests` directory. It has more details on what went wrong.
 
 The most common source of errors is something wrong with the hint code chunks, which are not evaluated when you just Run Document. Make sure the `eval = FALSE` argument is set in the code chunk for all hints. 
+
+### Try out the tutorial like a student
+
+Test your tutorial from a student's perspective after completing package checks by following this local testing workflow. You can do this without the hustle of needing to push changes to the main repository and re-download the package. First, temporarily disable renv by running `renv::deactivate()` to prevent installation conflicts that can cause issues with `devtools::install()`. Next, install your local package using `devtools::install()` and when prompted about updating packages, choose to update everything to ensure all dependencies are current. Once installation is complete, run your tutorial with `learnr::run_tutorial("tutorial_name", "your_package_name")`, replacing the placeholder names with your actual tutorial and package names. This allows you to test the tutorial in a clean environment similar to what students will experience, checking that all code chunks run without errors, instructions are clear, and there's no dependence on objects from your development environment. Finally, don't forget to reactivate renv by running `renv::activate()` to return to your managed environment.
 
 ### Difficult bugs
 
