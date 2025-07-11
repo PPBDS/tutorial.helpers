@@ -3,7 +3,7 @@
 
 f_1_test <- tutorial.helpers::format_tutorial("fixtures/addin_test_inputs/format_input_1.Rmd")
 
-# writeLines(f_1_test, "fixtures/addin_test_outputs/format_output_1.Rmd")
+writeLines(f_1_test, "fixtures/addin_test_outputs/format_output_1.Rmd")
 
 f_1_truth <- paste(readLines("fixtures/addin_test_outputs/format_output_1.Rmd"),
                  collapse = "\n")

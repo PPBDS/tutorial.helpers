@@ -262,3 +262,45 @@ Test to make sure that this four backtick environment does not cause trouble. No
 ```{r zz, exercise = TRUE}
 
 ```
+
+## GitHub Pages Output Problem
+### 
+
+Problem is that the Terminal output from GitHub Pages publishing command causes problems.
+
+````
+dkane@macbook project-1 % quarto publish gh-pages quarto-1.qmd
+? Publish site to https://davidkane9.github.io/project-1/ using gh-pages? (Y/n) › Yes
+````
+
+The first time you publish, Quarto will confirm the location, which is just the standard GitHub Pages address, using your user name and the repo name.
+
+````
+Saved working directory and index state WIP on main: 71e6d06 initial version
+Switched to a new branch 'gh-pages'
+[gh-pages (root-commit) b8263f3] Initializing gh-pages branch
+remote: 
+remote: Create a pull request for 'gh-pages' on GitHub by visiting:        
+remote:      https://github.com/davidkane9/project-1/pull/new/gh-pages        
+remote: 
+To https://github.com/davidkane9/project-1.git
+ * [new branch]      HEAD -> gh-pages
+ ````
+
+ Quarto interacts with your GitHub repo directly, creating a new branch, `gh-pages`, which will be used to construct the website. 
+
+````
+[✓] Deploying gh-pages branch to website (this may take a few minutes)
+[✓] Published to https://davidkane9.github.io/project-1/
+
+dkane@macbook project-1 % 
+```` 
+
+
+### Exercise 2
+
+ 
+
+```{r zz, exercise = TRUE}
+
+```
