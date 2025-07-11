@@ -69,10 +69,6 @@ Most tutorials begin by asking for your name and email. (Your instructor might a
 
 In each tutorial, there will be a set of exercises for you to complete. For non-coding questions, you write your answer and then hit the "Submit Answer" button, as you did above. 
 
-###
-
-We often follow example answer after you submit yours. Don't worry if the answer you submitted is not exactly the same with the given example answer.
-
 ### 
 
 Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work and allows you to begin the entire tutorial again. 
@@ -228,6 +224,8 @@ question_text(NULL,
 
 ### 
 
+We typically provide example answers (like the answer below) after you submit your own response. Don't be concerned if your submitted answer differs from the example answer we show.
+
 ````
 > version[['version.string']]
 [1] "R version 4.5.0 (2025-04-11)"
@@ -362,7 +360,7 @@ stepher@Johns-MacBook-Air ~ %
 
 ###
 
-`Ctrl + C` is a fundamental keyboard shortcut that terminates/interrupts the currently running process or command at the Terminal. It is not only limited to stop `sleep` command but essentially the "emergency stop" button for almost every currently running process at the Terminal.
+`Ctrl + C` is not only limited to stop `sleep` command but essentially the "emergency stop" button for almost every currently running process at the Terminal.
 
 ### Exercise 10
 
@@ -487,7 +485,7 @@ About this package
 tutorial.helpers provides functions and RStudio Addins to help you write R tutorials, especially if you follow my advice about the best way to do so. This approach is currently used in several packages, including r4ds.tutorials and positron.tutorials.
 ````
 
-If your computer cannot copy "Search for" in the search bar, it is fine. As long as you copy everything else.
+Your answer may appear differently and it's totally fine. As long as you copy everything else.
 
 ## Your answers
 ### 
