@@ -3,13 +3,17 @@
 
 ### Instructions
 
-* Ensure no mentions of RStudio.
+* Ensure no mentions of RStudio. SS: Done
 
-* Study check_current_tutorial() and format_tutorial().
+* Study check_current_tutorial() and format_tutorial(). SS: Done
 
-* Read R Packages book: Whole game and testing chapters.
+* Read R Packages book: Whole game SS: Done
 
-* Examine problem cases in positron.tutorials. Add test cases for those problems. Change format_tutorial until it works there as well.
+* Read R Packages book: testing chapters. 
+
+* Examine problem cases in positron.tutorials. Add test cases for those problems. SS: Done. The check_current_tutorial() function does not modify spacing in topic headers (##). It leaves the spacing around topic headers unchanged. 
+
+* Change format_tutorial until it works there as well. SS: Done 
 
 
 ## Later

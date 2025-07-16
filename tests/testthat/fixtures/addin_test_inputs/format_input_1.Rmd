@@ -206,7 +206,7 @@ Should work even if there are no labels, even if the comma is not included. The 
 
 ###
 
-## Exercises 
+## Exercises
 ### 
 
 Weird case which used to produce exercises--1 instead of exercise-1.
@@ -217,7 +217,16 @@ Weird case which used to produce exercises--1 instead of exercise-1.
 
 ```
 
-## Hask marks 
+
+## Exercises 1
+
+### Exercise 1
+
+```{r exercises-1-1, exercise = TRUE}
+
+```
+
+## Hask marks
 ### 
 
 An example to conform that hashmarks within four backtick environments do not mess up the reformatting. This test confirms that the exercise section number and the code chunk label get changed.
@@ -242,16 +251,16 @@ penguins
 # ℹ 2 more variables: sex <fct>, year <int>
 ````
 
-### Exercise 4
+### Exercise 1
 
-```{r zz, exercise = TRUE}
+```{r hask-marks-1, exercise = TRUE}
 
 ```
 
 ## Four ticks problem
 ### 
 
-### Exercise 2
+### Exercise 1
 
 Test to make sure that this four backtick environment does not cause trouble. Not sure what made this trouble in previous versions!
 
@@ -259,7 +268,7 @@ Test to make sure that this four backtick environment does not cause trouble. No
 
 ````  
 
-```{r zz, exercise = TRUE}
+```{r four-ticks-problem-1, exercise = TRUE}
 
 ```
 
@@ -297,10 +306,18 @@ dkane@macbook project-1 %
 ```` 
 
 
-### Exercise 2
+### Exercise 1
 
  
 
-```{r zz, exercise = TRUE}
+```{r github-pages-output-problem-1, exercise = TRUE}
+
+```
+
+## Space     Test Case 1
+
+### Exercise 1
+
+```{r space-----test-case-1-1, exercise = TRUE}
 
 ```

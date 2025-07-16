@@ -46,7 +46,7 @@ The `id` value is important. It should be the same as the directory in which the
 
 <!-- DK: Matching directory and id may no longer be necessary once the tutorial selector extension is built.  -->
 
-Note that tutorials must be [R Markdown](https://rmarkdown.rstudio.com/) documents, meaning that their suffix is `.Rmd`. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the `{}`. Don't worry about this detail. Just use the provided [RStudio Addin functions](addins.html).
+Note that tutorials must be [R Markdown](https://rmarkdown.rstudio.com/) documents, meaning that their suffix is `.Rmd`. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the `{}`. Don't worry about this detail. 
 
 There is a `setup` code chunk at the top of a tutorial. You must have `library(learnr)` and, if you use our tools, `library(tutorial.helpers)` in this chunk. Our template also provides useful settings for various options.
 
@@ -362,7 +362,7 @@ A knowledge drop should not be a road sign. Example: "In the next section we wil
   
 * Use high quality links. 
   * The second edition of [*R for Data Science*](https://r4ds.hadley.nz/) is amazing. Link to it as often as you can.
-  * Anything associated with [Posit](https://posit.co/) (formerly named RStudio) is high quality. Examples include sites associated with [Tidyverse](https://www.tidyverse.org/) and [Tidymodels](https://www.tidymodels.org/).
+  * Anything associated with [Posit](https://posit.co/) is high quality. Examples include sites associated with [Tidyverse](https://www.tidyverse.org/) and [Tidymodels](https://www.tidymodels.org/).
 
 * Avoid links to low quality sites like `https://rdrr.io/` , `https://www.rdocumentation.org/`, and `https://www.datamentor.io/`. Any site which uses ads should be avoided.
 
@@ -381,7 +381,7 @@ Note how we concisely provide both the command which brings up the help page and
 
 ### Addins
 
-The **tutorial.helpers** package provides a collection of RStudio Addins which facilitate the creation and testing of tutorial packages. Read about them in the "[Rstudio Addins](addins.html)" vignette. Three of the vignettes create new exercises. A fourth, "Format Tutorial Chunk Labels," renumbers all the exercises in a tutorial if you add or remove an exercise. It also ensures consistency in code chunk labels. Highly recommended!
+The **tutorial.helpers** package provides a collection of Positron Addins which facilitate the creation and testing of tutorial packages. Three of the vignettes create new exercises. A fourth, "Format Tutorial Chunk Labels," renumbers all the exercises in a tutorial if you add or remove an exercise. It also ensures consistency in code chunk labels. Highly recommended!
 
 
 ## Inputs
