@@ -15,11 +15,12 @@ Character string containing the formatted R Markdown content.
 \description{
 This function processes an R Markdown tutorial file to standardize code chunk labels
 based on section names and exercise numbers. It also renumbers exercises sequentially
-within each section.
+within each section and fixes spacing in topic headers.
 }
 \details{
 The function applies the following formatting rules:
 \itemize{
+\item Topic headers (# headers) have their spacing standardized
 \item Exercises are renumbered sequentially within each section
 \item Code chunks are relabeled according to the pattern: section-name-exercise-number
 \item Chunks with \code{eval = FALSE} receive a \code{-hint-N} suffix

@@ -305,11 +305,13 @@ dkane@macbook project-1 %
 
 ```
 
-## Space Test Case 1
+## Space   Test Case 1
 ###
 
-### Exercise 1
+This test ensures that (mistaken) extra spaces in a section name are replaced by a single dash in code chunk names rather than multiple dashes.
 
-```{r space-test-case-1-1, exercise = TRUE}
+### Exercise 2
+
+```{r zz, exercise = TRUE}
 
 ```

@@ -382,7 +382,7 @@ Note how we concisely provide both the command which brings up the help page and
 
 ### Functions for Working with Tutorials
 
-The **tutorial.helpers** package provides a collection of Positron Addins which facilitate the creation and testing of tutorial packages. Read about them in the “[Functions for Working with Tutorial](https://ppbds.github.io/tutorial.helpers/articles/instructions.html)” vignette. Three of the vignettes create new exercises. A fourth, "[Testing Your Package of Tutorials](https://ppbds.github.io/tutorial.helpers/articles/testing.html)," demonstrates how to use the tutorial.helpers package to “test” the tutorials in your package. It also ensures consistency in code chunk labels and that your tutorial can be knitted without error. Highly recommended!
+The **tutorial.helpers** package provides a collection of functions which facilitate the creation and testing of tutorial packages. Read about them in the “[Functions for Working with Tutorial](https://ppbds.github.io/tutorial.helpers/articles/instructions.html)” vignette. Three of the vignettes create new tutorial exercises. A [fourth](https://ppbds.github.io/tutorial.helpers/articles/testing.html) demonstrates how to test the tutorials in your package. Highly recommended!
 
 
 ## Inputs
@@ -658,9 +658,17 @@ Consider an example of creating an object in the QMD:
 ````{verbatim}
 ### Exercise 12
 
-Create a new code chunk in your QMD. Add a code chunk option: `#| cache: true`. Copy/paste the R code for the final model into the code chunk, assigning the result to `fit_XX`. 
+Create a new code chunk in your QMD. Add a code chunk 
+option: `#| cache: true`. Copy/paste the R code for the 
+final model into the code chunk, assigning the result to 
+`fit_XX`. 
 
-`Cmd/Ctrl + Shift + K`. It may take some time to render your QMD, depending on how complex your model is. But, by including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved fitted object.
+`Cmd/Ctrl + Shift + K`. It may take some time to render 
+your QMD, depending on how complex your model is. But, by 
+including `#| cache: true` you cause Quarto to cache the 
+results of the chunk. The next time you render your QMD, 
+as long as you have not changed the code, Quarto will just 
+load up the saved fitted object.
 
 At the Console, run:
 
@@ -689,7 +697,8 @@ Once we have create the object in the QMD, we can execute the same code in the C
 ````{verbatim}
 ### Exercise 13
 
-Place your cursor in the QMD file on the `fit_XX` line. Use `Cmd/Ctrl + Enter` to execute that line. 
+Place your cursor in the QMD file on the `fit_XX` line. 
+Use `Cmd/Ctrl + Enter` to execute that line. 
 
 At the Console, run `ls()`. CP/CR.
 
@@ -704,7 +713,7 @@ question_text(NULL,
 
 ### 
 
-XX: Drop some knowledge and/or comment on the different objects we now have in the workspace.
+<!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
 Of course, you can combine these last two questions together, but you probably shouldn't. We want easier questions, not harder. Splitting up questions makes them simpler. Perhaps more importantly, more questions provide more opportunities for knowledge drops.
@@ -713,4 +722,12 @@ This still leaves unclear the process by which you built up the code which creat
 
 ### Asking AI
 
-The more students practice using AI, the better. 
+The more students practice using AI, the better. It is, however, difficult to check that students are, in fact, using AI, and that they are using AI in a way which prepares them for the real world. Some initial thoughts:
+
+* Give them some rough guidance in what to ask AI and then have them copy/paste the AI's response, 
+
+
+### Walking the path
+
+To teach students about topic X, we first need to decide the final destination. What do we want students to be able to do on their own after completing the tutorial? For us, this will almost always be a plot, and often several plots. Having envisioned this goal, we need to create a "path" which students can use to reach that goal, first under our supervision and, second, on their own. The path will consist of several stepping stones, or stops along the way.
+
