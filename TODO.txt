@@ -9,11 +9,11 @@
 
 * Read R Packages book: Whole game. SS: Done
 
-* Read R Packages book: testing chapters.
+* Read R Packages book: testing chapters. SS: Done
 
-* Examine problem cases in positron.tutorials. Add test cases for those problems. Change format_tutorial until it works there as well.
+* Examine problem cases in positron.tutorials. Add test cases for those problems. Change format_tutorial until it works there as well. SS: Done
 
-* Add back quarto example file using the file = trick.
+* Add back quarto example file using the file = trick. SS: Done, made code chunks verbatim. 
 
 * Figure out why this is failing! Problem is in rmarkdown::render(), I think. Learn about render(). Ask AI. Come up with simple example. 
 
