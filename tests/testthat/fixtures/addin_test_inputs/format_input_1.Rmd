@@ -304,3 +304,12 @@ dkane@macbook project-1 %
 ```{r zz, exercise = TRUE}
 
 ```
+
+## Space Test Case 1
+###
+
+### Exercise 1
+
+```{r space-test-case-1-1, exercise = TRUE}
+
+```
