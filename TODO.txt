@@ -1,21 +1,19 @@
 # Priorities
 
 
-### Instructions
+* Explain the <pre><code> trick in instructions.qmd, presumably around the file = trick discussion.
 
-* Ensure no mentions of RStudio. SS: Done 
+* Start working on process_submissions(). Skim the code. Look at the test cases. Understand how they run. 
 
-* Study check_current_tutorial() and format_tutorial(). SS: Done
+* Add test cases for `pattern` as vector.
 
-* Read R Packages book: Whole game. SS: Done
+## Hold Off on This
 
-* Read R Packages book: testing chapters. SS: Done
+* Create a new function, perhaps find_submissions(), whose job is to find submissions and confirm that they are OK, reporting problems. This is, essentially, the first part of process_submissions(). But having this split out will make other things easier. Does find_submissions() take a vector for `pattern` or just a single value? Not sure.
 
-* Examine problem cases in positron.tutorials. Add test cases for those problems. Change format_tutorial until it works there as well. SS: Done
+* Change process_submissions() to use find_submissions(). Should make code much easier, while also allowing all the test cases to still work.
 
-* Add back quarto example file using the file = trick. SS: Done, made code chunks verbatim. 
 
-* Figure out why this is failing! Problem is in rmarkdown::render(), I think. Learn about render(). Ask AI. Come up with simple example. 
 
 ## Later
 
@@ -29,7 +27,6 @@ But maybe that can now be part of the default set_positron_settings() call. Mayb
 
 * Change tutorial name/id to just Getting Started/getting-started.
 
-* Update README.Rmd and recreate README.md
 
 * Should we set a projects directory in this tutorial as well? Not sure . . .
 
