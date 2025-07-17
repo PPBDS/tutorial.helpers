@@ -2,13 +2,14 @@
 #'
 #' This function processes an R Markdown tutorial file to standardize code chunk labels
 #' based on section names and exercise numbers. It also renumbers exercises sequentially
-#' within each section.
+#' within each section and fixes spacing in topic headers.
 #'
 #' @param file_path Character string. Path to the R Markdown file to process.
 #'
 #' @details
 #' The function applies the following formatting rules:
 #' \itemize{
+#'   \item Topic headers (# headers) have their spacing standardized
 #'   \item Exercises are renumbered sequentially within each section
 #'   \item Code chunks are relabeled according to the pattern: section-name-exercise-number
 #'   \item Chunks with `eval = FALSE` receive a `-hint-N` suffix
@@ -47,7 +48,7 @@ format_tutorial <- function(file_path) {
   # Add a variable to track hint counters per exercise
   hint_counters <- list()
   
-  # First pass: Identify and renumber exercises
+  # First pass: Fix topic header spacing and identify/renumber exercises
   i <- 1
   while (i <= length(lines)) {
     current_line <- lines[i]
@@ -79,12 +80,33 @@ format_tutorial <- function(file_path) {
       next
     }
     
-    # Detect sections (## headers)
-    if (grepl("^## ", current_line)) {
-      section_title <- sub("^## ", "", current_line)
+    # Fix topic headers (# headers) - standardize spacing
+    if (grepl("^#\\s+", current_line)) {
+      # Extract the topic title and clean up spacing
+      topic_title <- sub("^#\\s+", "", current_line)
+      # Remove extra spaces and standardize
+      topic_title <- gsub("\\s+", " ", trimws(topic_title))
+      lines[i] <- paste0("# ", topic_title)
+      i <- i + 1
+      next
+    }
+    
+    # Detect sections (## headers) - handle multiple spaces after ##
+    if (grepl("^##\\s+", current_line)) {
+      section_title <- sub("^##\\s+", "", current_line)
+      # Clean up the section title first
+      section_title <- gsub("\\s+", " ", trimws(section_title))
+      # Update the line with standardized spacing
+      lines[i] <- paste0("## ", section_title)
+      
+      # Create section name for code chunks
       section_name <- tolower(section_title)
-      section_name <- gsub(" ", "-", section_name)
+      section_name <- gsub("\\s+", "-", section_name)
       section_name <- gsub("[^a-z0-9-]", "", section_name)
+      # Remove consecutive dashes
+      section_name <- gsub("-+", "-", section_name)
+      # Remove consecutive dashes
+      section_name <- gsub("-+", "-", section_name)
       
       # Check if section_name already ends with a hyphen and remove it
       if (grepl("-$", section_name)) {
@@ -152,11 +174,21 @@ format_tutorial <- function(file_path) {
       next
     }
     
-    # Detect sections (## headers)
-    if (grepl("^## ", current_line)) {
-      section_title <- sub("^## ", "", current_line)
+    # Skip topic headers in second pass (already processed)
+    if (grepl("^#\\s+", current_line)) {
+      i <- i + 1
+      next
+    }
+    
+    # Detect sections (## headers) - handle multiple spaces after ##
+    if (grepl("^##\\s+", current_line)) {
+      section_title <- sub("^##\\s+", "", current_line)
+      # Clean up the section title first
+      section_title <- gsub("\\s+", " ", trimws(section_title))
+      
+      # Create section name for code chunks
       section_name <- tolower(section_title)
-      section_name <- gsub(" ", "-", section_name)
+      section_name <- gsub("\\s+", "-", section_name)
       section_name <- gsub("[^a-z0-9-]", "", section_name)
       
       # Check if section_name already ends with a hyphen and remove it

@@ -3,17 +3,19 @@
 
 ### Instructions
 
-* Ensure no mentions of RStudio.
+* Ensure no mentions of RStudio. SS: Done 
 
-* Study check_current_tutorial() and format_tutorial().
+* Study check_current_tutorial() and format_tutorial(). SS: Done
 
-* Read R Packages book: Whole game and testing chapters.
+* Read R Packages book: Whole game. SS: Done
 
-* Examine problem cases in positron.tutorials. Add test cases for those problems. Change format_tutorial until it works there as well.
+* Read R Packages book: testing chapters. SS: Done
 
-Add back quarto example file using the file = trick.
+* Examine problem cases in positron.tutorials. Add test cases for those problems. Change format_tutorial until it works there as well. SS: Done
 
-Figure out why this is failing! Problem is in rmarkdown::render(), I think. Learn about render(). Ask AI. Come up with simple example. 
+* Add back quarto example file using the file = trick. SS: Done, made code chunks verbatim. 
+
+* Figure out why this is failing! Problem is in rmarkdown::render(), I think. Learn about render(). Ask AI. Come up with simple example. 
 
 ## Later
 
