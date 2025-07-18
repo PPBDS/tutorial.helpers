@@ -453,14 +453,35 @@ You sometimes want to include "complex" text in a tutorial. This is most common 
 
 Further complexity arises because tutorials are R markdown whereas all our other work is in Quarto. In Quarto documents (like this vignette), you can use an environment started by four backticks along with `{verbatim}` and then ended with four more backticks. This won't work in R markdown.
 
-The "file" trick solves this problem. Create a txt file, `example-file.txt`, with the text which you want to appear in the tutorial. You can either leave it in the same directory as the `tutorial.Rmd` file or, probably better, place it in either the `data` or `images` directory. You then add this code chunk to your tutorial.
+The `<pre><code>` trick solves this problem. You add this before and after a code chunk to a tutorial.
 
 ````{verbatim}
-```{r file = "example-file.txt", echo = TRUE, eval = FALSE}
-```
+<pre><code>```{r}
+1 + 1
+```</code></pre>
 ````
 
-The `file` code chunk object loads the specified file. The other code chunk options ensure that the text is echoed but not evaluated.
+If you want to display an R code chunk nested inside a four backticks environment, you can replace the four backticks with `<pre><code>` like this
+
+````{verbatim}
+<pre><code>
+> tutorial.helpers::show_file("quarto-1.qmd")
+---
+title: "Quarto 1"
+author: David Kane
+format: html
+execute: 
+  echo: false
+---
+<pre><code>```{r}
+suppressPackageStartupMessages(library(tidyverse))
+library(palmerpenguins)
+```</code></pre>
+>
+</code></pre>
+````
+
+The `<pre><code>` serves the same purpose as the four backticks but it displays R code chunks verbatim. 
 
 ## Processing submissions
 
