@@ -1,11 +1,7 @@
 # Priorities
 
 
-* Explain the <pre><code> trick in instructions.qmd, presumably around the file = trick discussion. SS: Done
-
-* Start working on process_submissions(). Skim the code. Look at the test cases. Understand how they run. SS: Done 
-
-* Add test cases for `pattern` as vector. SS: Done
+* Revise test cases for `pattern` as vector.
 
 ## Hold Off on This
 

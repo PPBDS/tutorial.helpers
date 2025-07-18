@@ -168,6 +168,18 @@ process_submissions <- function(path,
       message("There were ", well_formed_files, " files with valid HTML tables.")
     }
     
+# DK: Maybe the break goes here. find_submissions() takes a path and a pattern. It returns a list of tibbles 
+# including the contents of all the html files in path which match any element of pattern. New file name will
+# be find_submissions.R. 
+    
+# Change process_submissions() to just call find_submissions() right here, assigning its result to a variable
+# called tibble_list.
+     
+# tibble_list <- find_submissions(path = path, pattern = patterm)
+    
+# Test cases for find_submission can just check that the returned object is a list of tibble and how long the list is.
+
+
     filtered_tibble_list <- list()
     removed_files <- character()
     missing_key_vars_files <- character()
