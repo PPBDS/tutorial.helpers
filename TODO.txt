@@ -1,15 +1,18 @@
 # Priorities
 
+? easy to download directly from Google drive? Flexible on security. Easy is best. Public is fine.
 
-* Revise test cases for `pattern` as vector. SS: Done
+Need arguement to process_submissions: "drive". Is NULL be default. Error if both "drive" and "path". Drive is, I suspect, an http address for the shared Google drive.
 
-## Hold Off on This
+Get homework for just some students by passing in a vector of something.
 
-* Create a new function, perhaps find_submissions(), whose job is to find submissions and confirm that they are OK, reporting problems. This is, essentially, the first part of process_submissions(). But having this split out will make other things easier. Does find_submissions() take a vector for `pattern` or just a single value? Not sure. SS: Done, it can take a vector for pattern. 
+Get specific answers for some students.
 
-* Change process_submissions() to use find_submissions(). Should make code much easier, while also allowing all the test cases to still work. SS: Done
+Change "pattern" argument name to "title" in both find_ and process_
 
+Add in an "emails" argument which takes a vector of emails just keeps the results for those rows with matching email addresses. By default, the value of emails could be "*", which is a regular expresssion which matches everything. But the actual action takes place in find_submissions().
 
+Pull out specific answers.
 
 ## Later
 
