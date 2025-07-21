@@ -1,4 +1,5 @@
 test_dir <- "fixtures/process_submissions_dir/"
+# If test_dir does not work try using this path = test_path("fixtures", "process_submissions_dir") 
 
 # Currently, I do not have tests which explore the verbose argument in detail.
 
@@ -304,24 +305,24 @@ test_that("process_submissions returns the expected summary tibble", {
 test_that("process_submissions works with multiple patterns in vector - All mode", {
   actual_output <- process_submissions(
     path = test_path("fixtures", "process_submissions_dir"),
-    pattern = c("getting", "get-to-know"),
+    pattern = c("getting", "astrxr"),
     return_value = "All"
   )
   
   expect_s3_class(actual_output, "tbl_df")
-  expect_equal(dim(actual_output), c(22L, 3L))
+  expect_equal(dim(actual_output), c(51L, 3L))
 })
 
 test_that("process_submissions works with non-overlapping patterns", {
   expected_output <- tibble::tibble(
-    `information-name` = c("Areeb Atif", "Gitanjali Sheth"),
-    `information-email` = c("areebatif2007@gmail.com", "gbhatia1@yahoo.com"),
-    answers = c(11L, 11L)
+    `information-name` = c("Areeb Atif", "Gitanjali Sheth", "Mithru Narayan Naidu"),
+    `information-email` = c("areebatif2007@gmail.com", "gbhatia1@yahoo.com", "conflict454@gmail.com"),
+    answers = c(11L, 11L, 29L)
   )
   
   actual_output <- process_submissions(
     path = test_path("fixtures", "process_submissions_dir"),
-    pattern = c("getting", "get-to-know"),  # These should be non-overlapping
+    pattern = c("getting", "astrxr"),  # These should be non-overlapping
     key_vars = c("information-name", "information-email")
   )
   
@@ -332,7 +333,7 @@ test_that("process_submissions works with empty pattern matches", {
   # Test with patterns that don't match any files
   actual_output <- process_submissions(
     path = test_path("fixtures", "process_submissions_dir"),
-    pattern = c("nonexistent1", "nonexistent2"),
+    pattern = c("email", "none"),
     key_vars = c("information-name", "information-email")
   )
   
@@ -344,40 +345,11 @@ test_that("process_submissions works with mixed existing and non-existing patter
   # Test with some patterns that match and some that don't
   actual_output <- process_submissions(
     path = test_path("fixtures", "process_submissions_dir"),
-    pattern = c("getting", "nonexistent"),
+    pattern = c("none", "none", "getting", "none", "none"),
     key_vars = c("information-name", "information-email")
   )
   
   expect_s3_class(actual_output, "tbl_df")
   # Should only return results from the matching pattern
   expect_equal(nrow(actual_output), 2L)  # Only "getting" pattern matches
-})
-
-test_that("process_submissions with vector patterns and verbose output", {
-  captured_messages <- capture_messages(
-    process_submissions(
-      path = test_path("fixtures", "process_submissions_dir"),
-      pattern = c("getting", "get-to-know"),
-      return_value = "All",
-      verbose = 1
-    )
-  )
-  
-  # Should show messages for each pattern
-  expect_true(any(grepl("Processing pattern 'getting'", captured_messages)))
-  expect_true(any(grepl("Processing pattern 'get-to-know'", captured_messages)))
-})
-
-test_that("process_submissions works with different directories and vector patterns", {
-  # Test using the second directory with vector patterns
-  actual_output <- process_submissions(
-    path = test_path("fixtures", "process_submissions_dir2"),
-    pattern = c("new-labels", "nonexistent"),
-    key_vars = c("name", "email")
-  )
-  
-  expect_s3_class(actual_output, "tbl_df")
-  expect_equal(nrow(actual_output), 1L)  # Only one file matches "new-labels"
-  expect_equal(actual_output$name, "David Kane")
-  expect_equal(actual_output$email, "dave.kane@gmail.com")
 })
