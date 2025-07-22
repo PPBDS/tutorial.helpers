@@ -19,11 +19,13 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 VignetteBuilder: quarto
 Suggests:
+    googledrive,
+    httr,
     knitr,
     quarto,
     remotes,
-    roxygen2,
     rsconnect,
+    roxygen2,
     testthat (>= 3.0.0),
     tidyverse
 Config/testthat/edition: 3

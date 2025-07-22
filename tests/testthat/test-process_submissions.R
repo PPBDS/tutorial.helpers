@@ -13,7 +13,7 @@ test_that("process_submissions returns the expected summary tibble", {
   
   actual_output <- process_submissions(
     path = test_dir,
-    pattern = "getting",
+    title = "getting",
     key_vars = c("information-name")
   )
   
@@ -28,7 +28,7 @@ test_that("process_submissions returns the expected summary tibble with email ke
   
   actual_output <- process_submissions(
     path = test_dir,
-    pattern = "get",
+    title = "get",
     key_vars = c("information-email")
   )
   
@@ -44,7 +44,7 @@ test_that("process_submissions returns the expected summary tibble with name and
   
   actual_output <- process_submissions(
     path = test_dir,
-    pattern = "get",
+    title = "get",
     key_vars = c("information-name", "information-email")
   )
   
@@ -54,7 +54,7 @@ test_that("process_submissions returns the expected summary tibble with name and
 test_that("process_submissions returns a tibble of the expected size with return_value 'All'", {
   actual_output <- process_submissions(
     path = test_dir,
-    pattern = "getting",
+    title = "getting",
     return_value = "All"
   )
   
@@ -62,10 +62,10 @@ test_that("process_submissions returns a tibble of the expected size with return
   expect_equal(dim(actual_output), c(22L, 3L))
 })
 
-test_that("process_submissions returns a tibble of the expected size with return_value 'All' and pattern 'get'", {
+test_that("process_submissions returns a tibble of the expected size with return_value 'All' and title 'get'", {
   actual_output <- process_submissions(
     path = test_dir,
-    pattern = "get",
+    title = "get",
     return_value = "All"
   )
   
@@ -76,7 +76,7 @@ test_that("process_submissions returns a tibble of the expected size with return
 test_that("process_submissions with one key_var", {
   actual_output <- process_submissions(
     path = test_dir,
-    pattern = "get",
+    title = "get",
     return_value = "All",
     key_vars = "information-name"
   )
@@ -88,7 +88,7 @@ test_that("process_submissions with one key_var", {
 test_that("process_submissions with two key_vars", {
   actual_output <- process_submissions(
     path = test_dir,
-    pattern = "get",
+    title = "get",
     return_value = "All",
     key_vars = c("information-name", "information-email")
   )
@@ -103,7 +103,7 @@ test_that("process_submissions prints the correct messages when verbose is 1", {
   captured_messages <- capture_messages(
     process_submissions(
       path = test_dir,
-      pattern = "getting",
+      title = "getting",
       return_value = "All",
       verbose = 1
     )
@@ -125,7 +125,7 @@ test_that("process_submissions prints the correct messages for error files", {
   captured_messages <- capture_messages(
     process_submissions(
       path = test_dir,
-      pattern = "err1|err2",
+      title = "err1|err2",
       return_value = "All",
       key_vars = "information-id",
       verbose = 1
@@ -150,7 +150,7 @@ test_that("process_submissions stops with an error when return_value is 'Summary
   expect_error(
     process_submissions(
       path = test_dir,
-      pattern = "get",
+      title = "get",
       return_value = "Summary"
     ),
     "key_vars must be provided when return_value is 'Summary'."
@@ -161,7 +161,7 @@ test_that("process_submissions stops with an error when the specified directory 
   expect_error(
     process_submissions(
       path = "z",
-      pattern = "get",
+      title = "get",
       return_value = "All"
     ),
     "The specified directory does not exist."
@@ -172,7 +172,7 @@ test_that("process_submissions stops with an error when an invalid return_value 
   expect_error(
     process_submissions(
       path = test_dir,
-      pattern = "get",
+      title = "get",
       return_value = "wrong"
     ),
     "Invalid return_value. Allowed values are 'Summary' or 'All'."
@@ -185,11 +185,23 @@ test_that("process_submissions stops with an error when an invalid keep_file_nam
   expect_error(
     process_submissions(
       path = test_dir,
-      pattern = "getting",
+      title = "getting",
       key_vars = c("information-name"),
       keep_file_name = "Hey"
     ),
     "Invalid keep_file_name. Allowed values are NULL, 'All', 'Space', or 'Underscore'."
+  )
+})
+
+test_that("process_submissions stops with an error when keep_file_name is used with return_value 'All'", {
+  expect_error(
+    process_submissions(
+      path = test_dir,
+      title = "getting",
+      return_value = "All",
+      keep_file_name = "All"
+    ),
+    "keep_file_name can only be used when return_value is 'Summary'."
   )
 })
 
@@ -210,7 +222,7 @@ test_that("process_submissions returns the expected summary tibble with keep_fil
 
   actual_output <- process_submissions(
     path = Sys.getenv("TEST_DIR"),
-    pattern = "introduction",
+    title = "introduction",
     key_vars = c("information-name"),
     keep_file_name = "All"
   ) %>%
@@ -234,7 +246,7 @@ test_that("process_submissions returns the expected summary tibble with keep_fil
 
   actual_output <- process_submissions(
     path = Sys.getenv("TEST_DIR"),
-    pattern = "introduction",
+    title = "introduction",
     key_vars = c("information-name"),
     keep_file_name = "Space"
   ) %>%
@@ -257,7 +269,7 @@ test_that("process_submissions returns the expected summary tibble with keep_fil
   
   actual_output <- process_submissions(
     path = Sys.getenv("TEST_DIR"),
-    pattern = "introduction",
+    title = "introduction",
     key_vars = c("information-name"),
     keep_file_name = "Underscore"
   ) %>%
@@ -276,7 +288,7 @@ test_that("process_submissions returns the expected summary tibble", {
   
   actual_output <- process_submissions(
     path = "fixtures/process_submissions_dir2/",
-    pattern = "new-labels",
+    title = "new-labels",
     key_vars = c("name")
   )
   
@@ -293,19 +305,19 @@ test_that("process_submissions returns the expected summary tibble", {
   
   actual_output <- process_submissions(
     path = "fixtures/process_submissions_dir2/",
-    pattern = "new-labels",
+    title = "new-labels",
     key_vars = c("name", "email", "minutes")
   )
   
   expect_equal(actual_output, expected_output)
 })
 
-# Tests for pattern as vector
+# Tests for title as vector
 
-test_that("process_submissions works with multiple patterns in vector - All mode", {
+test_that("process_submissions works with multiple titles in vector - All mode", {
   actual_output <- process_submissions(
     path = test_path("fixtures", "process_submissions_dir"),
-    pattern = c("getting", "astrxr"),
+    title = c("getting", "astrxr"),
     return_value = "All"
   )
   
@@ -313,7 +325,7 @@ test_that("process_submissions works with multiple patterns in vector - All mode
   expect_equal(dim(actual_output), c(51L, 3L))
 })
 
-test_that("process_submissions works with non-overlapping patterns", {
+test_that("process_submissions works with non-overlapping titles", {
   expected_output <- tibble::tibble(
     `information-name` = c("Areeb Atif", "Gitanjali Sheth", "Mithru Narayan Naidu"),
     `information-email` = c("areebatif2007@gmail.com", "gbhatia1@yahoo.com", "conflict454@gmail.com"),
@@ -322,18 +334,18 @@ test_that("process_submissions works with non-overlapping patterns", {
   
   actual_output <- process_submissions(
     path = test_path("fixtures", "process_submissions_dir"),
-    pattern = c("getting", "astrxr"),  # These should be non-overlapping
+    title = c("getting", "astrxr"),  # These should be non-overlapping
     key_vars = c("information-name", "information-email")
   )
   
   expect_equal(actual_output, expected_output)
 })
 
-test_that("process_submissions works with empty pattern matches", {
-  # Test with patterns that don't match any files
+test_that("process_submissions works with empty title matches", {
+  # Test with titles that don't match any files
   actual_output <- process_submissions(
     path = test_path("fixtures", "process_submissions_dir"),
-    pattern = c("email", "none"),
+    title = c("email", "none"),
     key_vars = c("information-name", "information-email")
   )
   
@@ -341,15 +353,59 @@ test_that("process_submissions works with empty pattern matches", {
   expect_equal(nrow(actual_output), 0L)
 })
 
-test_that("process_submissions works with mixed existing and non-existing patterns", {
-  # Test with some patterns that match and some that don't
+test_that("process_submissions works with mixed existing and non-existing titles", {
+  # Test with some titles that match and some that don't
   actual_output <- process_submissions(
     path = test_path("fixtures", "process_submissions_dir"),
-    pattern = c("none", "none", "getting", "none", "none"),
+    title = c("none", "none", "getting", "none", "none"),
     key_vars = c("information-name", "information-email")
   )
   
   expect_s3_class(actual_output, "tbl_df")
-  # Should only return results from the matching pattern
-  expect_equal(nrow(actual_output), 2L)  # Only "getting" pattern matches
+  # Should only return results from the matching title
+  expect_equal(nrow(actual_output), 2L)  # Only "getting" title matches
+})
+
+# Tests for emails parameter
+
+test_that("process_submissions works with default emails parameter", {
+  result_default <- process_submissions(
+    path = test_path("fixtures", "process_submissions_dir"),
+    title = "get",
+    key_vars = c("information-email")
+  )
+  
+  result_explicit <- process_submissions(
+    path = test_path("fixtures", "process_submissions_dir"),
+    title = "get",
+    key_vars = c("information-email"),
+    emails = "*"
+  )
+  
+  expect_equal(result_default, result_explicit)
+})
+
+test_that("process_submissions filters by specific emails", {
+  # This test assumes there are files with specific email addresses
+  actual_output <- process_submissions(
+    path = test_path("fixtures", "process_submissions_dir"),
+    title = "get",
+    key_vars = c("information-email"),
+    emails = c("dave.kane@gmail.com")
+  )
+  
+  # Should only return results with the specified email
+  expect_true(all(actual_output$`information-email` == "dave.kane@gmail.com"))
+})
+
+test_that("process_submissions with multiple specific emails", {
+  actual_output <- process_submissions(
+    path = test_path("fixtures", "process_submissions_dir"),
+    title = "get",
+    key_vars = c("information-email"),
+    emails = c("dave.kane@gmail.com", "areebatif2007@gmail.com")
+  )
+  
+  # Should only return results with the specified emails
+  expect_true(all(actual_output$`information-email` %in% c("dave.kane@gmail.com", "areebatif2007@gmail.com")))
 })

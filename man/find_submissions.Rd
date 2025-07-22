@@ -4,13 +4,17 @@
 \alias{find_submissions}
 \title{Find Submissions}
 \usage{
-find_submissions(path, pattern, verbose = 0)
+find_submissions(path = NULL, drive = NULL, title, emails = "*", verbose = 0)
 }
 \arguments{
-\item{path}{The path to the directory containing the HTML/XML files.}
+\item{path}{The path to the local directory containing the HTML/XML files. Cannot be used together with drive.}
 
-\item{pattern}{A character vector of patterns to match against the file names.
+\item{drive}{A public Google Drive folder link to access files online. Cannot be used together with path.}
+
+\item{title}{A character vector of patterns to match against the file names.
 Each pattern is processed separately and results are combined.}
+
+\item{emails}{A character vector of email addresses to filter results by, or "\emph{" to match all (default: "}").}
 
 \item{verbose}{An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).}
 }
@@ -19,15 +23,18 @@ A named list of tibbles, where each tibble contains the data from one HTML/XML f
 that matches any of the specified patterns and has valid table structure.
 }
 \description{
-This function finds and reads HTML/XML files from a directory that match specified patterns.
+This function finds and reads HTML/XML files from a directory or Google Drive folder that match specified patterns.
 It extracts tables from the files and returns a list of tibbles.
 }
 \examples{
 \dontrun{
-# Find submissions with default pattern
-tibble_list <- find_submissions("path/to/directory", pattern = ".")
+# Find submissions from local directory
+tibble_list <- find_submissions(path = "path/to/directory", title = ".")
 
-# Find submissions with specific patterns
-tibble_list <- find_submissions("path/to/directory", pattern = c("getting", "get-to-know"))
+# Find submissions from Google Drive (requires googledrive package)
+tibble_list <- find_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", title = c("getting", "get-to-know"))
+
+# Find submissions with specific patterns and email filtering
+tibble_list <- find_submissions(path = "path/to/directory", title = c("getting", "get-to-know"), emails = c("user1@example.com", "user2@example.com"))
 }
 }

@@ -5,18 +5,22 @@
 \title{Process Submissions}
 \usage{
 process_submissions(
-  path,
-  pattern = ".",
+  path = NULL,
+  drive = NULL,
+  title = ".",
   return_value = "Summary",
   key_vars = NULL,
   verbose = 0,
-  keep_file_name = NULL
+  keep_file_name = NULL,
+  emails = "*"
 )
 }
 \arguments{
-\item{path}{The path to the directory containing the HTML/XML files.}
+\item{path}{The path to the local directory containing the HTML/XML files. Cannot be used together with drive.}
 
-\item{pattern}{A character vector of patterns to match against the file names (default: ".").
+\item{drive}{A public Google Drive folder link to access files online. Cannot be used together with path.}
+
+\item{title}{A character vector of patterns to match against the file names (default: ".").
 Each pattern is processed separately and results are combined.}
 
 \item{return_value}{The type of value to return. Allowed values are "Summary" (default) or "All".}
@@ -26,6 +30,8 @@ Each pattern is processed separately and results are combined.}
 \item{verbose}{An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).}
 
 \item{keep_file_name}{Specifies whether to keep the file name in the summary tibble. Allowed values are NULL (default), "All" (keep entire file name), "Space" (keep up to first space), or "Underscore" (keep up to first underscore). Only used when \code{return_value} is "Summary".}
+
+\item{emails}{A character vector of email addresses to filter results by, or "\emph{" to match all (default: "}").}
 }
 \value{
 If \code{return_value} is "Summary", returns a tibble with one row for each file, columns corresponding to the \code{key_vars},
@@ -33,28 +39,31 @@ and an additional "answers" column indicating the number of rows in each tibble.
 If \code{return_value} is "All", returns a tibble with all the data combined from all the files.
 }
 \description{
-This function processes submissions from a directory containing HTML/XML files.
+This function processes submissions from a local directory or Google Drive folder containing HTML/XML files.
 It extracts tables from the files, filters them based on a pattern and key variables,
 and returns either a summary tibble or a combined tibble with all the data.
 }
 \examples{
 \dontrun{
-# Process submissions with default settings
-process_submissions("path/to/directory")
+# Process submissions from local directory
+process_submissions(path = "path/to/directory")
 
-# Process submissions with a specific pattern and key variables
-process_submissions("path/to/directory", pattern = "^submission", key_vars = c("name", "email"))
+# Process submissions from Google Drive
+process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", title = "^submission", key_vars = c("name", "email"))
 
-# Process submissions with multiple patterns
-process_submissions("path/to/directory", pattern = c("^submission", "final"), key_vars = c("email"))
+# Process submissions with multiple patterns from local directory
+process_submissions(path = "path/to/directory", title = c("^submission", "final"), key_vars = c("email"))
+
+# Process submissions with email filtering from Google Drive
+process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", title = c("^submission", "final"), key_vars = c("email"), emails = c("user1@example.com", "user2@example.com"))
 
 # Process submissions and return all data
-process_submissions("path/to/directory", return_value = "All")
+process_submissions(path = "path/to/directory", return_value = "All")
 
 # Process submissions with verbose output (level 3)
-process_submissions("path/to/directory", verbose = 3)
+process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", verbose = 3)
 
 # Process submissions and keep the entire file name in the summary tibble
-process_submissions("path/to/directory", return_value = "Summary", keep_file_name = "All")
+process_submissions(path = "path/to/directory", return_value = "Summary", keep_file_name = "All")
 }
 }

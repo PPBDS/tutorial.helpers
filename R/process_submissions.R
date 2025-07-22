@@ -1,12 +1,14 @@
 #' Process Submissions
 #'
-#' This function processes submissions from a directory containing HTML/XML files.
+#' This function processes submissions from a local directory or Google Drive folder containing HTML/XML files.
 #' It extracts tables from the files, filters them based on a pattern and key variables,
 #' and returns either a summary tibble or a combined tibble with all the data.
 #'
-#' @param path The path to the directory containing the HTML/XML files.
-#' @param pattern A character vector of patterns to match against the file names (default: ".").
+#' @param path The path to the local directory containing the HTML/XML files. Cannot be used together with drive.
+#' @param drive A public Google Drive folder link to access files online. Cannot be used together with path.
+#' @param title A character vector of patterns to match against the file names (default: ".").
 #'        Each pattern is processed separately and results are combined.
+#' @param emails A character vector of email addresses to filter results by, or "*" to match all (default: "*").
 #' @param return_value The type of value to return. Allowed values are "Summary" (default) or "All".
 #' @param key_vars A character vector of key variables to extract from the "id" column (default: NULL).
 #' @param verbose An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).
@@ -18,36 +20,57 @@
 #'
 #' @importFrom dplyr select slice mutate bind_rows all_of
 #' @importFrom purrr map_dfr
-#' @importFrom tibble as_tibble tibble
+#' @importFrom tibble as_tibble tibble add_column
 #'
 #' @examples
 #' \dontrun{
-#' # Process submissions with default settings
-#' process_submissions("path/to/directory")
+#' # Process submissions from local directory
+#' process_submissions(path = "path/to/directory")
 #'
-#' # Process submissions with a specific pattern and key variables
-#' process_submissions("path/to/directory", pattern = "^submission", key_vars = c("name", "email"))
+#' # Process submissions from Google Drive
+#' process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", title = "^submission", key_vars = c("name", "email"))
 #'
-#' # Process submissions with multiple patterns
-#' process_submissions("path/to/directory", pattern = c("^submission", "final"), key_vars = c("email"))
+#' # Process submissions with multiple patterns from local directory
+#' process_submissions(path = "path/to/directory", title = c("^submission", "final"), key_vars = c("email"))
+#'
+#' # Process submissions with email filtering from Google Drive
+#' process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", title = c("^submission", "final"), key_vars = c("email"), emails = c("user1@example.com", "user2@example.com"))
 #'
 #' # Process submissions and return all data
-#' process_submissions("path/to/directory", return_value = "All")
+#' process_submissions(path = "path/to/directory", return_value = "All")
 #'
 #' # Process submissions with verbose output (level 3)
-#' process_submissions("path/to/directory", verbose = 3)
+#' process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", verbose = 3)
 #'
 #' # Process submissions and keep the entire file name in the summary tibble
-#' process_submissions("path/to/directory", return_value = "Summary", keep_file_name = "All")
+#' process_submissions(path = "path/to/directory", return_value = "Summary", keep_file_name = "All")
 #' }
 #' @export
 
-process_submissions <- function(path, 
-                                pattern = ".", 
+process_submissions <- function(path = NULL, 
+                                drive = NULL,
+                                title = ".", 
                                 return_value = "Summary", 
                                 key_vars = NULL, 
                                 verbose = 0, 
-                                keep_file_name = NULL) {
+                                keep_file_name = NULL,
+                                emails = "*") {
+  
+  # Validation: path and drive cannot both be NULL or both be non-NULL
+  if (is.null(path) && is.null(drive)) {
+    stop("Either 'path' or 'drive' must be provided, but not both.")
+  }
+  
+  if (!is.null(path) && !is.null(drive)) {
+    stop("Only one of 'path' or 'drive' can be provided, not both.")
+  }
+  
+  # Check if using local directory
+  if (!is.null(path)) {
+    if (!dir.exists(path)) {
+      stop("The specified directory does not exist.")
+    }
+  }
   
   # Check if return_value is valid
   if (!(return_value %in% c("Summary", "All"))) {
@@ -68,23 +91,23 @@ process_submissions <- function(path,
   }
   
   # Call find_submissions to get the list of tibbles
-  tibble_list <- find_submissions(path = path, pattern = pattern, verbose = verbose)
+  tibble_list <- find_submissions(path = path, drive = drive, title = title, emails = emails, verbose = verbose)
   
   # Initialize list to store results from each pattern
   all_pattern_results <- list()
   
   # Process each pattern for filtering and formatting
-  for (current_pattern in pattern) {
+  for (current_title in title) {
     
     # Filter tibbles that match the current pattern
-    pattern_tibbles <- tibble_list[grep(current_pattern, names(tibble_list))]
+    title_tibbles <- tibble_list[grep(current_title, names(tibble_list))]
     
     filtered_tibble_list <- list()
     removed_files <- character()
     missing_key_vars_files <- character()
     
-    for (file_name in names(pattern_tibbles)) {
-      tibble_data <- pattern_tibbles[[file_name]]
+    for (file_name in names(title_tibbles)) {
+      tibble_data <- title_tibbles[[file_name]]
       
       if (!"id" %in% colnames(tibble_data)) {
         if (verbose == 2) {
@@ -140,13 +163,13 @@ process_submissions <- function(path,
           
           summary_row
         })
-        all_pattern_results[[current_pattern]] <- summary_tibble
+        all_pattern_results[[current_title]] <- summary_tibble
       }
     }
     else if (return_value == "All") {
       if (length(filtered_tibble_list) > 0) {
         all_tibble <- dplyr::bind_rows(filtered_tibble_list)
-        all_pattern_results[[current_pattern]] <- all_tibble
+        all_pattern_results[[current_title]] <- all_tibble
       }
     }
   }
