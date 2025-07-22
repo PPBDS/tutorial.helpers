@@ -16,15 +16,13 @@
 #' @importFrom rvest read_html html_table
 #' @importFrom tibble as_tibble
 #' @importFrom mime guess_type
-#' @importFrom googledrive drive_ls drive_download as_id
-#' @importFrom httr GET content
 #'
 #' @examples
 #' \dontrun{
 #' # Find submissions from local directory
 #' tibble_list <- find_submissions(path = "path/to/directory", title = ".")
 #'
-#' # Find submissions from Google Drive
+#' # Find submissions from Google Drive (requires googledrive package)
 #' tibble_list <- find_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", title = c("getting", "get-to-know"))
 #'
 #' # Find submissions with specific patterns and email filtering
@@ -51,6 +49,12 @@ find_submissions <- function(path = NULL, drive = NULL, title, emails = "*", ver
     use_drive <- FALSE
   } else {
     use_drive <- TRUE
+    
+    # Check if required packages are available for Google Drive functionality
+    if (!requireNamespace("googledrive", quietly = TRUE)) {
+      stop("Package 'googledrive' is required for Google Drive functionality. Please install it with: install.packages('googledrive')")
+    }
+    
     # Validate Google Drive link format
     if (!grepl("drive\\.google\\.com", drive)) {
       stop("Invalid Google Drive link format.")

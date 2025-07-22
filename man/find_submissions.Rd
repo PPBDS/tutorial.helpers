@@ -31,7 +31,7 @@ It extracts tables from the files and returns a list of tibbles.
 # Find submissions from local directory
 tibble_list <- find_submissions(path = "path/to/directory", title = ".")
 
-# Find submissions from Google Drive
+# Find submissions from Google Drive (requires googledrive package)
 tibble_list <- find_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", title = c("getting", "get-to-know"))
 
 # Find submissions with specific patterns and email filtering
