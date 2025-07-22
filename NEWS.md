@@ -2,11 +2,15 @@
 
 * Edit "Instructions" vignette.
 
-* pattern argument to process_submissions() now accepts a vector.
+* title argument to process_submissions() now accepts a vector.
 
 * Remove RStudio material.
 
 * Create find_submissions().
+
+* emails argument added to process_submissions() and find_submissions.
+
+* process_submissions() can access public google drive links directly.
 
 # tutorial.helpers 0.5.0
 

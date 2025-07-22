@@ -5,7 +5,8 @@
 \title{Process Submissions}
 \usage{
 process_submissions(
-  path,
+  path = NULL,
+  drive = NULL,
   title = ".",
   return_value = "Summary",
   key_vars = NULL,
@@ -15,7 +16,9 @@ process_submissions(
 )
 }
 \arguments{
-\item{path}{The path to the directory containing the HTML/XML files.}
+\item{path}{The path to the local directory containing the HTML/XML files. Cannot be used together with drive.}
+
+\item{drive}{A public Google Drive folder link to access files online. Cannot be used together with path.}
 
 \item{title}{A character vector of patterns to match against the file names (default: ".").
 Each pattern is processed separately and results are combined.}
@@ -36,31 +39,31 @@ and an additional "answers" column indicating the number of rows in each tibble.
 If \code{return_value} is "All", returns a tibble with all the data combined from all the files.
 }
 \description{
-This function processes submissions from a directory containing HTML/XML files.
+This function processes submissions from a local directory or Google Drive folder containing HTML/XML files.
 It extracts tables from the files, filters them based on a pattern and key variables,
 and returns either a summary tibble or a combined tibble with all the data.
 }
 \examples{
 \dontrun{
-# Process submissions with default settings
-process_submissions("path/to/directory")
+# Process submissions from local directory
+process_submissions(path = "path/to/directory")
 
-# Process submissions with a specific pattern and key variables
-process_submissions("path/to/directory", title = "^submission", key_vars = c("name", "email"))
+# Process submissions from Google Drive
+process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", title = "^submission", key_vars = c("name", "email"))
 
-# Process submissions with multiple patterns
-process_submissions("path/to/directory", title = c("^submission", "final"), key_vars = c("email"))
+# Process submissions with multiple patterns from local directory
+process_submissions(path = "path/to/directory", title = c("^submission", "final"), key_vars = c("email"))
 
-# Process submissions with email filtering
-process_submissions("path/to/directory", title = c("^submission", "final"), key_vars = c("email"), emails = c("user1@example.com", "user2@example.com"))
+# Process submissions with email filtering from Google Drive
+process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", title = c("^submission", "final"), key_vars = c("email"), emails = c("user1@example.com", "user2@example.com"))
 
 # Process submissions and return all data
-process_submissions("path/to/directory", return_value = "All")
+process_submissions(path = "path/to/directory", return_value = "All")
 
 # Process submissions with verbose output (level 3)
-process_submissions("path/to/directory", verbose = 3)
+process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", verbose = 3)
 
 # Process submissions and keep the entire file name in the summary tibble
-process_submissions("path/to/directory", return_value = "Summary", keep_file_name = "All")
+process_submissions(path = "path/to/directory", return_value = "Summary", keep_file_name = "All")
 }
 }
