@@ -8,9 +8,9 @@ Get homework for just some students by passing in a vector of something.
 
 Get specific answers for some students.
 
-Change "pattern" argument name to "title" in both find_ and process_
+Change "pattern" argument name to "title" in both find_ and process_ SS: Done
 
-Add in an "emails" argument which takes a vector of emails just keeps the results for those rows with matching email addresses. By default, the value of emails could be "*", which is a regular expresssion which matches everything. But the actual action takes place in find_submissions().
+Add in an "emails" argument which takes a vector of emails just keeps the results for those rows with matching email addresses. By default, the value of emails could be "*", which is a regular expresssion which matches everything. But the actual action takes place in find_submissions(). SS: Done
 
 Pull out specific answers.
 

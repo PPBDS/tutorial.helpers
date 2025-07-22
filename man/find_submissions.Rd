@@ -4,13 +4,15 @@
 \alias{find_submissions}
 \title{Find Submissions}
 \usage{
-find_submissions(path, pattern, verbose = 0)
+find_submissions(path, title, emails = "*", verbose = 0)
 }
 \arguments{
 \item{path}{The path to the directory containing the HTML/XML files.}
 
-\item{pattern}{A character vector of patterns to match against the file names.
+\item{title}{A character vector of patterns to match against the file names.
 Each pattern is processed separately and results are combined.}
+
+\item{emails}{A character vector of email addresses to filter results by, or "\emph{" to match all (default: "}").}
 
 \item{verbose}{An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).}
 }
@@ -28,6 +30,9 @@ It extracts tables from the files and returns a list of tibbles.
 tibble_list <- find_submissions("path/to/directory", pattern = ".")
 
 # Find submissions with specific patterns
-tibble_list <- find_submissions("path/to/directory", pattern = c("getting", "get-to-know"))
+tibble_list <- find_submissions("path/to/directory", title = c("getting", "get-to-know"))
+
+# Find submissions with specific patterns and email filtering
+tibble_list <- find_submissions("path/to/directory", title = c("getting", "get-to-know"), emails = c("user1@example.com", "user2@example.com"))
 }
 }

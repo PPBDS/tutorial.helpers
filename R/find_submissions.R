@@ -4,8 +4,9 @@
 #' It extracts tables from the files and returns a list of tibbles.
 #'
 #' @param path The path to the directory containing the HTML/XML files.
-#' @param pattern A character vector of patterns to match against the file names.
+#' @param title A character vector of patterns to match against the file names.
 #'        Each pattern is processed separately and results are combined.
+#' @param emails A character vector of email addresses to filter results by, or "*" to match all (default: "*").
 #' @param verbose An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).
 #'
 #' @return A named list of tibbles, where each tibble contains the data from one HTML/XML file
@@ -21,11 +22,14 @@
 #' tibble_list <- find_submissions("path/to/directory", pattern = ".")
 #'
 #' # Find submissions with specific patterns
-#' tibble_list <- find_submissions("path/to/directory", pattern = c("getting", "get-to-know"))
+#' tibble_list <- find_submissions("path/to/directory", title = c("getting", "get-to-know"))
+#'
+#' # Find submissions with specific patterns and email filtering
+#' tibble_list <- find_submissions("path/to/directory", title = c("getting", "get-to-know"), emails = c("user1@example.com", "user2@example.com"))
 #' }
 #' @export
 
-find_submissions <- function(path, pattern, verbose = 0) {
+find_submissions <- function(path, title, emails = "*", verbose = 0) {
   
   # Check if the directory exists
   if (!dir.exists(path)) {
@@ -36,15 +40,15 @@ find_submissions <- function(path, pattern, verbose = 0) {
   all_tibbles <- list()
   
   # Process each pattern
-  for (current_pattern in pattern) {
+  for (current_title in title) {
     
     # Get the list of all files in the directory
     all_files <- list.files(path, full.names = FALSE)
     num_files <- length(all_files)
     
     if (verbose >= 1) {
-      if (length(pattern) > 1) {
-        message("Processing pattern '", current_pattern, "':")
+      if (length(title) > 1) {
+        message("Processing pattern '", current_title, "':")
       }
       message("There are ", num_files, " files in the directory.")
     }
@@ -66,18 +70,18 @@ find_submissions <- function(path, pattern, verbose = 0) {
       message("There are ", length(html_xml_file_names), " HTML/XML files in the directory.")
     }
     
-    matching_files <- grep(current_pattern, html_xml_file_names, value = TRUE)
+    matching_files <- grep(current_title, html_xml_file_names, value = TRUE)
     non_matching_files <- setdiff(html_xml_file_names, matching_files)
     
     if (verbose == 3 && length(non_matching_files) > 0) {
-      message("Removing file(s) '", paste(non_matching_files, collapse = "', '"), "' for not matching the pattern '", current_pattern, "'.")
+      message("Removing file(s) '", paste(non_matching_files, collapse = "', '"), "' for not matching the pattern '", current_title, "'.")
     }
     
     if (verbose >= 1) {
-      message("There are ", length(matching_files), " HTML/XML files matching the pattern '", current_pattern, "'.")
+      message("There are ", length(matching_files), " HTML/XML files matching the pattern '", current_title, "'.")
     }
     
-    matching_file_paths <- file.path(path, matching_files)
+    matching_file_paths <- file.path(path, all_files)[all_files %in% matching_files]
     tibble_list <- list()
     well_formed_files <- 0
     malformed_files <- character()
@@ -88,7 +92,7 @@ find_submissions <- function(path, pattern, verbose = 0) {
           rvest::read_html(file)
         },
         error = function(e) {
-          malformed_files <- c(malformed_files, basename(file))
+          malformed_files <<- c(malformed_files, basename(file))
           return(NULL)
         }
       )
@@ -102,17 +106,69 @@ find_submissions <- function(path, pattern, verbose = 0) {
           rvest::html_table(html_content)[[1]]
         },
         error = function(e) {
-          malformed_files <- c(malformed_files, basename(file))
+          malformed_files <<- c(malformed_files, basename(file))
           return(NULL)
         }
       )
       
       if (is.null(table_data)) {
-        malformed_files <- c(malformed_files, basename(file))
+        malformed_files <<- c(malformed_files, basename(file))
         next
       }
       
       tibble_data <- tibble::as_tibble(table_data)
+      
+      # Filter by email if specified
+      if (!identical(emails, "*")) {
+        # Check if tibble has 'id' and 'answer' columns for email filtering
+        if ("id" %in% colnames(tibble_data) && "answer" %in% colnames(tibble_data)) {
+          # Try multiple possible email field names
+          email_fields <- c("email", "information-email", "Email", "e-mail", 
+                           "Email Address", "email-address", "information_email")
+          email_row <- NULL
+          found_email_field <- FALSE
+          
+          for (field_name in email_fields) {
+            email_row <- tibble_data[tibble_data$id == field_name, ]
+            if (nrow(email_row) > 0) {
+              found_email_field <- TRUE
+              if (verbose >= 3) {
+                message("Found email field '", field_name, "' in file: ", basename(file))
+              }
+              break  # Found email field
+            }
+          }
+          
+          if (found_email_field && nrow(email_row) > 0) {
+            email_value <- email_row$answer[1]
+            # Only keep this tibble if email matches one in the emails vector
+            if (!email_value %in% emails) {
+              if (verbose >= 3) {
+                message("Email '", email_value, "' in file '", basename(file), "' does not match any target emails. Skipping.")
+              }
+              next  # Skip this file
+            } else {
+              if (verbose >= 3) {
+                message("Email '", email_value, "' in file '", basename(file), "' matches target. Keeping file.")
+              }
+            }
+          } else {
+            # No email found in this file, skip it
+            if (verbose >= 2) {
+              message("No email field found in file: ", basename(file), 
+                     ". Available id values: ", paste(tibble_data$id, collapse = ", "))
+            }
+            next
+          }
+        } else {
+          # No proper structure for email filtering, skip this file
+          if (verbose >= 2) {
+            message("File '", basename(file), "' does not have proper 'id' and 'answer' columns for email filtering. Skipping.")
+          }
+          next
+        }
+      }
+      
       file_name <- basename(file)
       tibble_list[[file_name]] <- tibble_data
       well_formed_files <- well_formed_files + 1

@@ -5,8 +5,9 @@
 #' and returns either a summary tibble or a combined tibble with all the data.
 #'
 #' @param path The path to the directory containing the HTML/XML files.
-#' @param pattern A character vector of patterns to match against the file names (default: ".").
+#' @param title A character vector of patterns to match against the file names (default: ".").
 #'        Each pattern is processed separately and results are combined.
+#' @param emails A character vector of email addresses to filter results by, or "*" to match all (default: "*").
 #' @param return_value The type of value to return. Allowed values are "Summary" (default) or "All".
 #' @param key_vars A character vector of key variables to extract from the "id" column (default: NULL).
 #' @param verbose An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).
@@ -26,10 +27,13 @@
 #' process_submissions("path/to/directory")
 #'
 #' # Process submissions with a specific pattern and key variables
-#' process_submissions("path/to/directory", pattern = "^submission", key_vars = c("name", "email"))
+#' process_submissions("path/to/directory", title = "^submission", key_vars = c("name", "email"))
 #'
 #' # Process submissions with multiple patterns
-#' process_submissions("path/to/directory", pattern = c("^submission", "final"), key_vars = c("email"))
+#' process_submissions("path/to/directory", title = c("^submission", "final"), key_vars = c("email"))
+#'
+#' # Process submissions with email filtering
+#' process_submissions("path/to/directory", title = c("^submission", "final"), key_vars = c("email"), emails = c("user1@example.com", "user2@example.com"))
 #'
 #' # Process submissions and return all data
 #' process_submissions("path/to/directory", return_value = "All")
@@ -43,11 +47,17 @@
 #' @export
 
 process_submissions <- function(path, 
-                                pattern = ".", 
+                                title = ".", 
                                 return_value = "Summary", 
                                 key_vars = NULL, 
                                 verbose = 0, 
-                                keep_file_name = NULL) {
+                                keep_file_name = NULL,
+                                emails = "*") {
+  
+  # Check if the directory exists
+  if (!dir.exists(path)) {
+    stop("The specified directory does not exist.")
+  }
   
   # Check if return_value is valid
   if (!(return_value %in% c("Summary", "All"))) {
@@ -68,23 +78,23 @@ process_submissions <- function(path,
   }
   
   # Call find_submissions to get the list of tibbles
-  tibble_list <- find_submissions(path = path, pattern = pattern, verbose = verbose)
+  tibble_list <- find_submissions(path = path, title = title, emails = emails, verbose = verbose)
   
   # Initialize list to store results from each pattern
   all_pattern_results <- list()
   
   # Process each pattern for filtering and formatting
-  for (current_pattern in pattern) {
+  for (current_title in title) {
     
     # Filter tibbles that match the current pattern
-    pattern_tibbles <- tibble_list[grep(current_pattern, names(tibble_list))]
+    title_tibbles <- tibble_list[grep(current_title, names(tibble_list))]
     
     filtered_tibble_list <- list()
     removed_files <- character()
     missing_key_vars_files <- character()
     
-    for (file_name in names(pattern_tibbles)) {
-      tibble_data <- pattern_tibbles[[file_name]]
+    for (file_name in names(title_tibbles)) {
+      tibble_data <- title_tibbles[[file_name]]
       
       if (!"id" %in% colnames(tibble_data)) {
         if (verbose == 2) {
@@ -140,13 +150,13 @@ process_submissions <- function(path,
           
           summary_row
         })
-        all_pattern_results[[current_pattern]] <- summary_tibble
+        all_pattern_results[[current_title]] <- summary_tibble
       }
     }
     else if (return_value == "All") {
       if (length(filtered_tibble_list) > 0) {
         all_tibble <- dplyr::bind_rows(filtered_tibble_list)
-        all_pattern_results[[current_pattern]] <- all_tibble
+        all_pattern_results[[current_title]] <- all_tibble
       }
     }
   }
