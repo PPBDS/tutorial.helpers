@@ -2,9 +2,9 @@
 
 ? easy to download directly from Google drive? Flexible on security. Easy is best. Public is fine. Must be a way to download the entire folder, given just the url.
 
-Not a separate `path` and `drive` argument. Instead, we have just a `path` argument. And process_submissions() looks at the value of `path`, which must not be missing, and if it is a http, assumes that it is a Google drive, and then downloads the zip file to a temp directory and then unzips it. At that point, it assigns real_path to that location. If `path` is given as a local directory, then real_path <- path, and then the code is the same for both.
+Not a separate `path` and `drive` argument. Instead, we have just a `path` argument. And process_submissions() looks at the value of `path`, which must not be missing, and if it is a http, assumes that it is a Google drive, and then downloads the zip file to a temp directory and then unzips it. At that point, it assigns real_path to that location. If `path` is given as a local directory, then real_path <- path, and then the code is the same for both. SS: Done
 
-Default value for `emails` should be NULL.
+Default value for `emails` should be NULL. SS: Done
 
 ## Later
 
