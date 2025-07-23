@@ -8,9 +8,11 @@
 
 * Create find_submissions().
 
-* emails argument added to process_submissions() and find_submissions.
+* changed `pattern` argument to `title`.
 
-* process_submissions() can access public google drive links directly.
+* `emails` argument added to process_submissions().
+
+* `path` can take and access public google drive links.
 
 # tutorial.helpers 0.5.0
 

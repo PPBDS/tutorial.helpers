@@ -4,11 +4,11 @@
 #' It extracts tables from the files, filters them based on a pattern and key variables,
 #' and returns either a summary tibble or a combined tibble with all the data.
 #'
-#' @param path The path to the local directory containing the HTML/XML files. Cannot be used together with drive.
-#' @param drive A public Google Drive folder link to access files online. Cannot be used together with path.
+#' @param path The path to the local directory containing the HTML/XML files, or a Google Drive folder URL.
+#'        If it's a Google Drive URL, the function will download individual files to a temporary directory.
 #' @param title A character vector of patterns to match against the file names (default: ".").
 #'        Each pattern is processed separately and results are combined.
-#' @param emails A character vector of email addresses to filter results by, or "*" to match all (default: "*").
+#' @param emails A character vector of email addresses to filter results by, "*" to include all emails, or NULL to skip email filtering (default: NULL).
 #' @param return_value The type of value to return. Allowed values are "Summary" (default) or "All".
 #' @param key_vars A character vector of key variables to extract from the "id" column (default: NULL).
 #' @param verbose An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).
@@ -28,48 +28,39 @@
 #' process_submissions(path = "path/to/directory")
 #'
 #' # Process submissions from Google Drive
-#' process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", title = "^submission", key_vars = c("name", "email"))
+#' process_submissions(path = "https://drive.google.com/drive/folders/your_folder_id", title = "^submission", key_vars = c("name", "email"))
 #'
 #' # Process submissions with multiple patterns from local directory
 #' process_submissions(path = "path/to/directory", title = c("^submission", "final"), key_vars = c("email"))
 #'
 #' # Process submissions with email filtering from Google Drive
-#' process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", title = c("^submission", "final"), key_vars = c("email"), emails = c("user1@example.com", "user2@example.com"))
+#' process_submissions(path = "https://drive.google.com/drive/folders/your_folder_id", title = c("^submission", "final"), key_vars = c("email"), emails = c("user1@example.com", "user2@example.com"))
+#'
+#' # Process submissions and include all emails (no email filtering)
+#' process_submissions(path = "path/to/directory", title = c("^submission", "final"), key_vars = c("email"), emails = "*")
 #'
 #' # Process submissions and return all data
 #' process_submissions(path = "path/to/directory", return_value = "All")
 #'
 #' # Process submissions with verbose output (level 3)
-#' process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", verbose = 3)
+#' process_submissions(path = "https://drive.google.com/drive/folders/your_folder_id", verbose = 3)
 #'
 #' # Process submissions and keep the entire file name in the summary tibble
 #' process_submissions(path = "path/to/directory", return_value = "Summary", keep_file_name = "All")
 #' }
 #' @export
 
-process_submissions <- function(path = NULL, 
-                                drive = NULL,
+process_submissions <- function(path, 
                                 title = ".", 
                                 return_value = "Summary", 
                                 key_vars = NULL, 
                                 verbose = 0, 
                                 keep_file_name = NULL,
-                                emails = "*") {
+                                emails = NULL) {
   
-  # Validation: path and drive cannot both be NULL or both be non-NULL
-  if (is.null(path) && is.null(drive)) {
-    stop("Either 'path' or 'drive' must be provided, but not both.")
-  }
-  
-  if (!is.null(path) && !is.null(drive)) {
-    stop("Only one of 'path' or 'drive' can be provided, not both.")
-  }
-  
-  # Check if using local directory
-  if (!is.null(path)) {
-    if (!dir.exists(path)) {
-      stop("The specified directory does not exist.")
-    }
+  # Validation: path must be provided
+  if (missing(path) || is.null(path)) {
+    stop("'path' must be provided.")
   }
   
   # Check if return_value is valid
@@ -91,7 +82,7 @@ process_submissions <- function(path = NULL,
   }
   
   # Call find_submissions to get the list of tibbles
-  tibble_list <- find_submissions(path = path, drive = drive, title = title, emails = emails, verbose = verbose)
+  tibble_list <- find_submissions(path = path, title = title, emails = emails, verbose = verbose)
   
   # Initialize list to store results from each pattern
   all_pattern_results <- list()

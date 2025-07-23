@@ -5,20 +5,18 @@
 \title{Process Submissions}
 \usage{
 process_submissions(
-  path = NULL,
-  drive = NULL,
+  path,
   title = ".",
   return_value = "Summary",
   key_vars = NULL,
   verbose = 0,
   keep_file_name = NULL,
-  emails = "*"
+  emails = NULL
 )
 }
 \arguments{
-\item{path}{The path to the local directory containing the HTML/XML files. Cannot be used together with drive.}
-
-\item{drive}{A public Google Drive folder link to access files online. Cannot be used together with path.}
+\item{path}{The path to the local directory containing the HTML/XML files, or a Google Drive folder URL.
+If it's a Google Drive URL, the function will download individual files to a temporary directory.}
 
 \item{title}{A character vector of patterns to match against the file names (default: ".").
 Each pattern is processed separately and results are combined.}
@@ -31,7 +29,7 @@ Each pattern is processed separately and results are combined.}
 
 \item{keep_file_name}{Specifies whether to keep the file name in the summary tibble. Allowed values are NULL (default), "All" (keep entire file name), "Space" (keep up to first space), or "Underscore" (keep up to first underscore). Only used when \code{return_value} is "Summary".}
 
-\item{emails}{A character vector of email addresses to filter results by, or "\emph{" to match all (default: "}").}
+\item{emails}{A character vector of email addresses to filter results by, "*" to include all emails, or NULL to skip email filtering (default: NULL).}
 }
 \value{
 If \code{return_value} is "Summary", returns a tibble with one row for each file, columns corresponding to the \code{key_vars},
@@ -49,19 +47,22 @@ and returns either a summary tibble or a combined tibble with all the data.
 process_submissions(path = "path/to/directory")
 
 # Process submissions from Google Drive
-process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", title = "^submission", key_vars = c("name", "email"))
+process_submissions(path = "https://drive.google.com/drive/folders/your_folder_id", title = "^submission", key_vars = c("name", "email"))
 
 # Process submissions with multiple patterns from local directory
 process_submissions(path = "path/to/directory", title = c("^submission", "final"), key_vars = c("email"))
 
 # Process submissions with email filtering from Google Drive
-process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", title = c("^submission", "final"), key_vars = c("email"), emails = c("user1@example.com", "user2@example.com"))
+process_submissions(path = "https://drive.google.com/drive/folders/your_folder_id", title = c("^submission", "final"), key_vars = c("email"), emails = c("user1@example.com", "user2@example.com"))
+
+# Process submissions and include all emails (no email filtering)
+process_submissions(path = "path/to/directory", title = c("^submission", "final"), key_vars = c("email"), emails = "*")
 
 # Process submissions and return all data
 process_submissions(path = "path/to/directory", return_value = "All")
 
 # Process submissions with verbose output (level 3)
-process_submissions(drive = "https://drive.google.com/drive/folders/your_folder_id", verbose = 3)
+process_submissions(path = "https://drive.google.com/drive/folders/your_folder_id", verbose = 3)
 
 # Process submissions and keep the entire file name in the summary tibble
 process_submissions(path = "path/to/directory", return_value = "Summary", keep_file_name = "All")
