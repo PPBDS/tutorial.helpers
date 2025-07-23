@@ -1,18 +1,85 @@
 # Priorities
 
-? easy to download directly from Google drive? Flexible on security. Easy is best. Public is fine. Must be a way to download the entire folder, given just the url.
+Solve Issue: https://github.com/PPBDS/tutorial.helpers/issues/30
 
-Not a separate `path` and `drive` argument. Instead, we have just a `path` argument. And process_submissions() looks at the value of `path`, which must not be missing, and if it is a http, assumes that it is a Google drive, and then downloads the zip file to a temp directory and then unzips it. At that point, it assigns real_path to that location. If `path` is given as a local directory, then real_path <- path, and then the code is the same for both. SS: Done
+Must be a way to download the entire folder, given just the url, as opposed to downloading each file one at a time.
+For Google drive, download the whole folder. (Maybe confirm that it is a folder. That is the only case we allow.)
 
-Default value for `emails` should be NULL. SS: Done
+Git rid of all this weird output, seemingly caused by the emails argument.
+
+No email field found in file: 01-code_answers - Ailene Ettinger.html. Available id values: tutorial-id, name, ID, installing-git-1, installing-git-2, installing-git-3, checking-your-setup-1, checking-your-setup-2, checking-your-setup-3, checking-your-setup-4, checking-your-setup-5, checking-your-setup-6, checking-your-setup-7, checking-your-setup-8, checking-your-setup-9, checking-your-setup-10, checking-your-setup-11, checking-your-setup-12, checking-your-setup-14, checking-your-setup-15, projects-1, projects-2, sc
+
+temp_dir <- tempdir(check = TRUE) might be better than what you have.
+
+Get rid of the NOTE from check.
+
+
+# This Summer
+
+## process_submission
+
+
+Get specific answers for some students. find_answers(). Use find_submissions. Adds `questions` and a vector argument: c("temerance-17", "temperance-18"). Creates a tibble with emails answers to questions. How structure? Include `name` if available? find_answers only allows for one title. Checks this.
+
+name, email, question-1, question-2
+
+If questions = c("*"), give all questions? Not yet!
+
+return_type = "All" in process_submissions() should not include submission_type column
+
+Fix code and then test case for this example: 
+"~/Downloads/submissions/four-parameters-categorical_answers - Kushagra Singh.html"
+
+process_submissions() test cases should not just spit out "Could not process file: getting-started_answers.pdf". Handle it better.
+
+I don't like the way the test cases for process_submissions spit out the pdf files names that they are ignoring, even if it does not effect the tests passing. At least, we should add a new test case for this behavior. Perhaps reorganize the test files into a couple of different directories. Or make the pattern ignore the pdf files in the test cases. But I couldn't get that to work.
+
+# show_file()
+
+show_file() should fail if chunk is anything other than the allowed character strings, i.e., chunk = 1 should fail.
+
+show_all() should take "YAML" as an option and just return the YAML header.
+
+What should show_file(test_file, start = 0) return? Not sure it should be an error . . .
+
+# check_current_tutorial()
+
+* Advanced: Get Format Code Chunk Labels add-in to catch the case in which a non-question code chunk is duplicated.
+
+## write_answers()
+
+* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
+
+* See the comments at test-write_answers.R for detailed discussion. 
+
+* Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
+
+### Points about testing
+
+* Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
+
+* Understand https://r-pkgs.org/testing-basics.html#sec-snapshot-tests and other advanced testing stuff. I bet that "withr::local_options" will be valuable for doing the next two tasks.
+
+* Use testing_package() rather than hard-coding the package name.
+
+* Read https://testthat.r-lib.org/articles/test-fixtures.html
+
+* test_path() does not work if the file is not in tests/testthat/. Might still be useful since it means we don't need to setwd() to play with testing interactively.
+
+* Explore tutorial testing: https://pkgs.rstudio.com/learnr/articles/exercises.html#test-code-or-cases
+
+* Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason.
+
+* Do something about test-return_tutorial_paths(). 
+
+* Maybe testing_package() or skip_if_offline() would be useful. 
+
+
 
 ## Later
 
-Get homework for just some students by passing in a vector of something.
 
-Get specific answers for some students.
 
-Pull out specific answers.
 
 ## Later
 
@@ -69,13 +136,7 @@ But maybe that can now be part of the default set_positron_settings() call. Mayb
 
 
 
-# process_submissions()
 
-* Create a new function, perhaps find_submissions(), whose job is to find submissions and confirm that they are OK, reporting problems. This is, essentially, the first part of process_submissions(). But having this split out will make other things easier. Does find_submissions() take a vector for `pattern` or just a single value? Not sure.
-
-* Change process_submissions() to use find_submissions(). Should make code much easier, while also allowing all the test cases to still work.
-
-* Add test cases for `pattern` as vector.
 
 # set_positron_settings() 
 
@@ -92,29 +153,6 @@ But maybe that can now be part of the default set_positron_settings() call. Mayb
 tutorial.helpers::set_positron_settings(positron_settings = 
    list("files.dialog.defaultPath" = "C://Users//dkane//projects"))
 
-# show_file()
-
-show_file() should fail if chunk is anything other than the allowed character strings, i.e., chunk = 1 should fail.
-
-show_all() should take "YAML" as an option and just return the YAML header.
-
-What should show_file(test_file, start = 0) return? Not sure it should be an error . . .
-
-# check_current_tutorial()
-
-
-
-* Advanced: Get Format Code Chunk Labels add-in to catch the case in which a non-question code chunk is duplicated.
-
-# Other new user functions
-
-As a one-off, it would be nice to allow staff to say: Give me all the answers to this question for my students. Or for me to say the same about all students. Most common is to gather all the URL locations for student work. Even cooler would be to automatically open up a tab for each, with the tab given the name of the student.
-
-With find_submissions() to set up collect/process the tutorials, it is easier to create some new functions. 
-
-* Give a vector of emails (and, optionally, a pattern). Download all the tutorials which have that email in the email field and whose name matches the pattern. This is for TFs to examine just their students work. This returns the same object, a list (?) of tutorial answers, as find_submissions(). Indeed, maybe it just calls find_submissions(). Or maybe this `emails` is an optional argument to find_submissions.
-
-* process_group() takes 
 
 
 
@@ -148,16 +186,7 @@ No idea if this would work. And, if we start using it, we might need to update t
 
 # process_submissions()
 
-Consider a very common use case for process_submissions(). I want, for all submitted answers, name, email and any answer which included http. I don't want to have to remember the weird id for all the answers that had an http. I want the function to figure that out. Really, what I want is for the function to figure out any id which has (at least 2?) answers which start with http. Then, I want that many lines for each answer. So, we have column name, email, id and answer, with missing values for any student which did not submit for that id. 
 
-return_type = "All" in process_submissions() should not include submission_type column
-
-Fix code and then test case for this example: 
-"~/Downloads/submissions/four-parameters-categorical_answers - Kushagra Singh.html"
-
-process_submissions() test cases should not just spit out "Could not process file: getting-started_answers.pdf". Handle it better.
-
-I don't like the way the test cases for process_submissions spit out the pdf files names that they are ignoring, even if it does not effect the tests passing. At least, we should add a new test case for this behavior. Perhaps reorganize the test files into a couple of different directories. Or make the pattern ignore the pdf files in the test cases. But I couldn't get that to work.
 
 # format_tutorial()
 
@@ -252,33 +281,6 @@ Think harder about whether write_answer should write out questions which the stu
 * The **downloadthis** package looks very interesting. It seems easy to download a file without all the rigamarole of the Shiny server. But it requires that the file exists. Can we automatically run the code to create the files? Yes! We can write the code in the final exercise and then tell students to hit Run Code. They can then hit the download button. But would that really work? Isn't an Exercise code chunk its own separate world, with no notion of the tutorial of which it is a part? Maybe the same local{()} nonsense that we use for submission_server() would do the trick. But that would make for some ugly code. Maybe we can hide the code, but they still press the Run Code button.
 
 
-## write_answers()
-
-* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
-
-* See the comments at test-write_answers.R for detailed discussion. 
-
-* Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
-
-## Points about testing
-
-* Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
-
-* Understand https://r-pkgs.org/testing-basics.html#sec-snapshot-tests and other advanced testing stuff. I bet that "withr::local_options" will be valuable for doing the next two tasks.
-
-* Use testing_package() rather than hard-coding the package name.
-
-* Read https://testthat.r-lib.org/articles/test-fixtures.html
-
-* test_path() does not work if the file is not in tests/testthat/. Might still be useful since it means we don't need to setwd() to play with testing interactively.
-
-* Explore tutorial testing: https://pkgs.rstudio.com/learnr/articles/exercises.html#test-code-or-cases
-
-* Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason.
-
-* Do something about test-return_tutorial_paths(). 
-
-* Maybe testing_package() or skip_if_offline() would be useful. 
 
 
 ## Using ___
