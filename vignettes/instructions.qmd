@@ -771,6 +771,8 @@ The third of the three prior questions tells the student to type `x` in the Cons
 Could all four of these questions be combined into one? Probably. But spreading things has two advantages. First, it ensures that even the weaker students do not get lost. Second, it provides us with four opportunities to drop some knowledge. 
 
 
+<!-- https://pkgs.rstudio.com/learnr/articles/exercises.html#exercise-setup-chunks
+
 DK: The section after a plot is interesting. 
 
 Our question is always a show_file().
@@ -779,4 +781,4 @@ Our answer is always an R code chunk.
 
 One, we show our code. But our code should be good, often better than what the AI gives as default. It is clean, concise, does not include tons of junk. We don't just use the raw AI. We always ensure that there is a subtitle and caption which provides the data source. Et cetera.
 
-Then, we show what our code produces, by getting rid of `eval=FALSE`. But that is tricky, because we need to ensure that the data object exists for our plot to use. And that is so annoying, that we don't do it.
+Then, we show what our code produces, by getting rid of `eval=FALSE`. But that is tricky, because we need to ensure that the data object exists for our plot to use. And that is so annoying, that we don't do it. -->
