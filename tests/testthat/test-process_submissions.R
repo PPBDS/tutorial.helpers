@@ -139,7 +139,7 @@ test_that("process_submissions prints the correct messages for error files", {
       "There are 9 HTML/XML files in the directory.\n",
       "There are 2 HTML/XML files matching the pattern 'err1|err2'.\n",
       "There were 1 files with valid HTML tables.\n",
-      "There were 0 files with no problems.\n"
+      "There were 1 files with no problems.\n"
     )
   )
 })

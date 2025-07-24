@@ -12,7 +12,6 @@ temp_dir <- tempdir(check = TRUE) might be better than what you have. SS: Done
 
 Get rid of the NOTE from check. SS: Done
 
-
 # This Summer
 
 ## find_answers()
