@@ -753,7 +753,50 @@ The more students practice using AI, the better. It is, however, difficult to ch
 To teach students about topic X, we first need to decide the final destination. What do we want students to be able to do on their own after completing the tutorial? For us, this will almost always be a plot, and often several plots. Having envisioned this goal, we need to create a "path" which students can use to reach that goal, first under our supervision and, second, on their own. The path will consist of several stepping stones, or stops along the way.
 
 
-<!-- Luke: There are two ways for providing an answer to the question. One is in the r chunk, one is with flour backticks. The former must be used if you are going to ask students to copy/paste your code into the QMD in place of their current code. -->
+### Providing Answers
+
+To ensure that students are on the right path with their code, we need to provide them with our code that is verified to be correct. Although we should not tell students to replace their code with ours at every step, if a student is lost, they should be able to refer to our code to get back on track. Also, on our end editing the tutorials, we want to easily run the code in the Console or render it. With this goal in mind, we will add r chunks to provide our code to students.
+
+````{verbatim}
+### Exercise 6
+
+Using your favorite AI, prompt it to generate R code that ... Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
+
+In the Console, run:
+
+```         
+show_file("XX.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r something-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+Our code:
+
+```{r, echo=TRUE}
+...
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+The r chunk with `echo=TRUE` and `eval=TRUE` (which is default) allows us to see the code as well as see what it produces. This makes it easy for the students to copy and paste our code if they need to, and they can also look at the outputs to see if they match.
+
+Using 4 backticks would only show the students whatever we type within the backticks. Additionally, it would not be an r chunk, so a person editing the tutorial would not easily be able to run any code within the backticks. On top of that, the 4 backticks are not able to evaluate any code within.
+
+<!-- Luke: There are two ways for providing an answer to the question. One is in the r chunk, one is with four backticks. The former must be used if you are going to ask students to copy/paste your code into the QMD in place of their current code. -->
 
 
 ### Plotting Questions
