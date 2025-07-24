@@ -60,16 +60,27 @@ write_answers <- function(file, session, is_test = FALSE){
   # variable names? Better ways to include tutorial information?
 
   out <- tibble::tibble(
-    id = purrr::map_chr(objs, "id",
-                        .default = NA),
-    submission_type = purrr::map_chr(objs, "type",
-                                     .default = NA),
-    answer = purrr::map_chr(
-      objs, 
-      ~ if (length(.x$answer) > 1) paste(.x$answer, collapse = ", ") else as.character(.x$answer),
-      .default = NA
-    )
+  id = purrr::map_chr(objs, ~ {
+    if (is.null(.x$id) || length(.x$id) == 0) NA_character_ else as.character(.x$id)
+  }, .default = NA_character_),
+  submission_type = purrr::map_chr(objs, ~ {
+    if (is.null(.x$type) || length(.x$type) == 0) NA_character_ else as.character(.x$type)
+  }, .default = NA_character_),
+  answer = purrr::map_chr(
+    objs, 
+    ~ {
+      ans <- .x$answer
+      if (is.null(ans) || length(ans) == 0) {
+        return(NA_character_)
+      } else if (length(ans) > 1) {
+        return(paste(as.character(ans), collapse = ", "))
+      } else {
+        return(as.character(ans))
+      }
+    },
+    .default = NA_character_
   )
+)
 
   # Hacky
 
