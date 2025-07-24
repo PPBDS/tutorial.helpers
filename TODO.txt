@@ -36,11 +36,11 @@ I don't like the way the test cases for process_submissions spit out the pdf fil
 
 # show_file()
 
-show_file() should fail if chunk is anything other than the allowed character strings, i.e., chunk = 1 should fail.
+show_file() should fail if `chunk` is anything other than the allowed character strings, i.e., chunk = 1 should fail.
 
-show_all() should take "YAML" as an option and just return the YAML header.
+If `chunk` equals "YAML", then just return the YAML header, without the surrounding ----.
 
-What should show_file(test_file, start = 0) return? Not sure it should be an error . . .
+`show_file(test_file, start = 0)` should return the whole file.
 
 # check_current_tutorial()
 
@@ -54,7 +54,7 @@ What should show_file(test_file, start = 0) return? Not sure it should be an err
 
 * Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
 
-### Points about testing
+## Points about testing
 
 * Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
 
@@ -74,32 +74,45 @@ What should show_file(test_file, start = 0) return? Not sure it should be an err
 
 * Maybe testing_package() or skip_if_offline() would be useful. 
 
+## set_positron_settings() 
+
+* should report what settings it found and what, if any, settings it changed.
+
+* Maybe this should be placed in everyone's .Rprofile?
+
+  options(timeout = max(300, getOption("timeout")))
+
+  Or maybe set some other way? Can't hurt and often helps.
+
+* Without the double backslashes, this command fails on Windows because /U gets interpreted as hex. Please fix!
+
+tutorial.helpers::set_positron_settings(positron_settings = 
+   list("files.dialog.defaultPath" = "C://Users//dkane//projects"))
+
+## make_exercise()
+
+* make_exercise(type = "no") ought to work. That is, make_exercise() should be able to use just the first few letters of the type argument to determine what you want.
+
+* Are there test cases for make_exercise()? There should be!
 
 
-## Later
+
+## After This Summer
+
+### Tutorial
+
+* Should we set a projects directory in this tutorial as well? Not sure . . .
+
+* Update the images now that the add a new Console button looks and behaves a little differently?
 
 
-
-
-## Later
+### Other
 
 "terminal.integrated.defaultProfile.windows": "Git Bash"
 
 But maybe that can now be part of the default set_positron_settings() call. Maybe they need to run this command to fix this one setting, after we ensure that they have installed Git for Windows. Anyway, the key material/images from https://ppbds.github.io/primer/getting-started-with-positron.html#the-terminal needs to be in the tutorial.
 
-* Move over Git install to here from positron.tutorials. Related: Add some other Terminal questions to the tutorial. We should be exposed to it just a bit. Makes doing the first couple of Positron tutorials easier. Also might provide an excuse to check whether or not Windows users have installed RTools, or maybe we don't need that because of Git Bash.
 
-
-
-* Change tutorial name/id to just Getting Started/getting-started.
-
-
-* Should we set a projects directory in this tutorial as well? Not sure . . .
-
-
-* 
-
-* Update the images now that the add a new Console button looks and behaves a little differently?
 
 * How do we teach students to switch between Positron windows? I think:
 
@@ -131,30 +144,6 @@ But maybe that can now be part of the default set_positron_settings() call. Mayb
   }
 ]
 
-# Articles
-
-
-
-
-
-
-# set_positron_settings() 
-
-* should report what settings it found and what, if any, settings it changed.
-
-* Maybe this should be placed in everyone's .Rprofile?
-
-  options(timeout = max(300, getOption("timeout")))
-
-  Or maybe set some other way? Can't hurt and often helps.
-
-* Without the double backslashes, this command fails on Windows because /U gets interpreted as hex. Please fix!
-
-tutorial.helpers::set_positron_settings(positron_settings = 
-   list("files.dialog.defaultPath" = "C://Users//dkane//projects"))
-
-
-
 
 # Other Stuff
 
@@ -180,11 +169,8 @@ No idea if this would work. And, if we start using it, we might need to update t
 
 4) Figure out why check_current_tutorial() didn't work on Project 2 on second Github tutorial, at least on the last few questions. Issue probably connected to this comment from Positron and Code tutorial: "To Format the chunk labels you need to comment out the example comment line in Script 1. And there is at least one more example later." So, we really need to make  check_current_tutorial() more robust.
 
-5) make_exercise(type = "no") ought to work. That is, make_exercise() should be able to use just the first few letters of the type argument to determine what you want.
+5) 
 
-
-
-# process_submissions()
 
 
 

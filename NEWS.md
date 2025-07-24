@@ -2,7 +2,7 @@
 
 * Edit "Instructions" vignette.
 
-* title argument to process_submissions() now accepts a vector.
+* `title` argument to process_submissions() now accepts a vector.
 
 * Remove RStudio material.
 
@@ -13,6 +13,8 @@
 * `emails` argument added to process_submissions().
 
 * `path` can take and access public google drive links.
+
+* Rename tutorial to "Getting Started."
 
 # tutorial.helpers 0.5.0
 
