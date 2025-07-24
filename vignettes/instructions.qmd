@@ -9,6 +9,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+<!-- DK: Some things that work in QMD (because it uses quarto to render) do not work in RMD (because it uses R to render). -->
+
 <!-- Expand processing_submissions section. -->
 
 *There are no questions here. There are only simple instructions.*
@@ -81,7 +83,8 @@ The one topic which only has the double hash (##) and not a triple hash (###) on
 
 Each topic begins with a sentence or two about what this group of exercises is trying to accomplish. Example:
 
-````markdown
+
+````{verbatim}
 ## Interacting with sites with `GET()`
 ###
 
@@ -173,7 +176,7 @@ Second, the instruction requires that students write some code. Good instruction
 
 Third, any exercise which requires the copying of code from the prior exercise should place the *Copy previous code* button below the exercise code chunk.
 
-````markdown
+````{verbatim}
 <button onclick = "transfer_code(this)">Copy previous code</button>
 ````
 
@@ -320,7 +323,7 @@ x <- read_csv("data/myfile.csv")
 
 in an R code chunk, presumably in the global `setup` chunk. But, if you try to execute that line of code with `Command + Return`, it will fail because, by default, you are located in the main directory of **your.package** when you start working on your tutorials. Using `setwd()` will solve this problem.
 
-````markdown
+````{verbatim}
 > getwd()
 [1] "/Users/davidkane/Desktop/projects/r4ds.tutorials"
 > setwd("inst/tutorials/031-data-files/")
@@ -677,6 +680,8 @@ I recommend offering these explicit instructions many, many times. First, studen
 
 Consider an example of creating an object in the QMD:
 
+<!-- Luke: Make sure that the three back tick trick is explained earlier in the document. If not, explain it the first time we show students. -->
+
 ````{verbatim}
 ### Exercise 12
 
@@ -756,12 +761,14 @@ To teach students about topic X, we first need to decide the final destination. 
 
 ### Providing Answers
 
-To ensure that students are on the right path with their code, we need to provide them with our code that is verified to be correct. Although we should not tell students to replace their code with ours at every step, if a student is lost, they should be able to refer to our code to get back on track. Also, on our end editing the tutorials, we want to easily run the code in the Console or render it. With this goal in mind, we will add r chunks to provide our code to students.
+To ensure that students are on the right path with their code, we need to provide them with our code that is verified to be correct. Although we should not tell students to replace their code with ours at every step, if a student is lost, they should be able to refer to our code to get back on track. Also, on our end editing the tutorials, we want to easily run the code in the Console or render it. With this goal in mind, we will add `r` chunks to provide our code to students.
 
 ````{verbatim}
 ### Exercise 6
 
-Using your favorite AI, prompt it to generate R code that ... Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
+Using your favorite AI, prompt it to generate R code that ... Add 
+the code to your QMD in a new chunk. Place your cursor on the first 
+line of the code and run `Cmd/Ctrl + Enter`.
 
 In the Console, run:
 
@@ -793,14 +800,20 @@ Our code:
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-The r chunk with `echo=TRUE` and `eval=TRUE` (which is default) allows us to see the code as well as see what it produces. This makes it easy for the students to copy and paste our code if they need to, and they can also look at the outputs to see if they match.
+<!-- DK: Change r to R everywhere. -->
 
-Using 4 backticks would only show the students whatever we type within the backticks. Additionally, it would not be an r chunk, so a person editing the tutorial would not easily be able to run any code within the backticks. On top of that, the 4 backticks are not able to evaluate any code within.
+<!-- DK: Clean up next paragraph. -->
 
-<!-- Luke: There are two ways for providing an answer to the question. One is in the r chunk, one is with four backticks. The former must be used if you are going to ask students to copy/paste your code into the QMD in place of their current code. -->
+The R chunk with `echo=TRUE` and `eval=TRUE` (which is default) allows us to see the code as well as see what it produces. This makes it easy for the students to copy and paste our code if they need to, and they can also look at the outputs to see if they match.
+
+
 
 
 ### Plotting Questions
+
+Plotting exercises are generally handled with a sequence of four questions.
+
+<!-- DK: Outline what those four questions are, and give an example (using four backticks verbatim trick). -->
 
 Plotting questions are almost always proceeded by three questions about the tibble from which the plot will be created. Prior to these, the tutorial will probably have walked the student through the process of gathering, organizing, and cleaning the data, generally by using a pipe. 
 
