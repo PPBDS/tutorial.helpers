@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -616,11 +616,17 @@
 <p>The second of the three prior questions tells the student to, in the QMD, assign the result of the pipe to a new variable, often <code>x</code>. We then tell the student to <code>Cmd/Ctrl + Enter</code> this code, followed by “CP/CR,” so that the workspace includes a copy of <code>x</code>.</p>
 <p>The third of the three prior questions tells the student to type <code>x</code> in the Console, followed by “CP/CR.” The purpose is both to have the student look at the tibble and also to set the stage for the actual graphics question.</p>
 <p>Could all four of these questions be combined into one? Probably. But spreading things has two advantages. First, it ensures that even the weaker students do not get lost. Second, it provides us with four opportunities to drop some knowledge.</p>
-<p>DK: The section after a plot is interesting.</p>
-<p>Our question is always a show_file().</p>
-<p>Our answer is always an R code chunk.</p>
-<p>One, we show our code. But our code should be good, often better than what the AI gives as default. It is clean, concise, does not include tons of junk. We don’t just use the raw AI. We always ensure that there is a subtitle and caption which provides the data source. Et cetera.</p>
-<p>Then, we show what our code produces, by getting rid of <code>eval=FALSE</code>. But that is tricky, because we need to ensure that the data object exists for our plot to use. And that is so annoying, that we don’t do it.</p>
+<!-- https://pkgs.rstudio.com/learnr/articles/exercises.html#exercise-setup-chunks
+
+DK: The section after a plot is interesting.
+
+Our question is always a show_file().
+
+Our answer is always an R code chunk.
+
+One, we show our code. But our code should be good, often better than what the AI gives as default. It is clean, concise, does not include tons of junk. We don't just use the raw AI. We always ensure that there is a subtitle and caption which provides the data source. Et cetera.
+
+Then, we show what our code produces, by getting rid of `eval=FALSE`. But that is tricky, because we need to ensure that the data object exists for our plot to use. And that is so annoying, that we don't do it. -->
 </section></section><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
