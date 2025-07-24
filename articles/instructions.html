@@ -608,6 +608,19 @@
 </ul></section><section class="level3"><h3 id="walking-the-path">Walking the path<a class="anchor" aria-label="anchor" href="#walking-the-path"></a>
 </h3>
 <p>To teach students about topic X, we first need to decide the final destination. What do we want students to be able to do on their own after completing the tutorial? For us, this will almost always be a plot, and often several plots. Having envisioned this goal, we need to create a “path” which students can use to reach that goal, first under our supervision and, second, on their own. The path will consist of several stepping stones, or stops along the way.</p>
+<!-- Luke: There are two ways for providing an answer to the question. One is in the r chunk, one is with flour backticks. The former must be used if you are going to ask students to copy/paste your code into the QMD in place of their current code. -->
+</section><section class="level3"><h3 id="plotting-questions">Plotting Questions<a class="anchor" aria-label="anchor" href="#plotting-questions"></a>
+</h3>
+<p>Plotting questions are almost always proceeded by three questions about the tibble from which the plot will be created. Prior to these, the tutorial will probably have walked the student through the process of gathering, organizing, and cleaning the data, generally by using a pipe.</p>
+<p>The first of the three prior questions tells the student to replace the current pipe which they have in the QMD with our code. We check that they have done so with <code><a href="../reference/show_file.html">show_file()</a></code>. The purpose of this question is to ensure that the student’s data will match our data.</p>
+<p>The second of the three prior questions tells the student to, in the QMD, assign the result of the pipe to a new variable, often <code>x</code>. We then tell the student to <code>Cmd/Ctrl + Enter</code> this code, followed by “CP/CR,” so that the workspace includes a copy of <code>x</code>.</p>
+<p>The third of the three prior questions tells the student to type <code>x</code> in the Console, followed by “CP/CR.” The purpose is both to have the student look at the tibble and also to set the stage for the actual graphics question.</p>
+<p>Could all four of these questions be combined into one? Probably. But spreading things has two advantages. First, it ensures that even the weaker students do not get lost. Second, it provides us with four opportunities to drop some knowledge.</p>
+<p>DK: The section after a plot is interesting.</p>
+<p>Our question is always a show_file().</p>
+<p>Our answer is always an R code chunk.</p>
+<p>One, we show our code. But our code should be good, often better than what the AI gives as default. It is clean, concise, does not include tons of junk. We don’t just use the raw AI. We always ensure that there is a subtitle and caption which provides the data source. Et cetera.</p>
+<p>Then, we show what our code produces, by getting rid of <code>eval=FALSE</code>. But that is tricky, because we need to ensure that the data object exists for our plot to use. And that is so annoying, that we don’t do it.</p>
 </section></section><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
