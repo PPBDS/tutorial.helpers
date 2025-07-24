@@ -16,49 +16,68 @@ Get rid of the NOTE from check.
 
 # This Summer
 
-## process_submission
+## find_answers()
+
+* Get specific answers for some students. find_answers(). Use find_submissions. Adds `questions` and a vector argument: c("temerance-17", "temperance-18"). Creates a tibble with emails answers to questions. How structure? Include `name` if available? find_answers only allows for one title. Checks this.
+
+* name, email, question-1, question-2
+
+* If questions = c("*"), give all questions? Not yet!
+
+* Is there a way to have find_answers() open all the URLs for a given answer? Context is asking find_answers() for a single title and a single question which is an URL. Would be cool to open a new browser window with one tab for each URL, making it easier for a TF to skim the work of all her students.
+
+## process_submissions()
+
+* return_type = "All" in process_submissions() should not include submission_type column
+
+* process_submissions() test cases should not just spit out "Could not process file: getting-started_answers.pdf". Handle it better.
+
+* I don't like the way the test cases for process_submissions spit out the pdf files names that they are ignoring, even if it does not effect the tests passing. At least, we should add a new test case for this behavior. Perhaps reorganize the test files into a couple of different directories. Or make the pattern ignore the pdf files in the test cases. But I couldn't get that to work. (I am no longer sure what this comment means!) 
 
 
-Get specific answers for some students. find_answers(). Use find_submissions. Adds `questions` and a vector argument: c("temerance-17", "temperance-18"). Creates a tibble with emails answers to questions. How structure? Include `name` if available? find_answers only allows for one title. Checks this.
+## check_current_tutorial(), meaning format_tutorial()
 
-name, email, question-1, question-2
+* Figure out why check_current_tutorial() didn't work on Project 2 on second Github tutorial, at least on the last few questions. Issue probably connected to this comment from Positron and Code tutorial: "To Format the chunk labels you need to comment out the example comment line in Script 1. And there is at least one more example later." So, we really need to make  check_current_tutorial() more robust.
 
-If questions = c("*"), give all questions? Not yet!
+* Change format_tutorial() so it looks to see if you have any chunk names in your file with reserved names (name, email, ID, minutes, answers), and then warns you about that fact.
 
-return_type = "All" in process_submissions() should not include submission_type column
+* It is annoying that R attempts to run `r scales::comma(x)` even when it is placed in a verbatim environment. That is annoying! But how can format_tutorial() prevent? It can't! This is a problem with learnr::run_tutorial().
 
-Fix code and then test case for this example: 
-"~/Downloads/submissions/four-parameters-categorical_answers - Kushagra Singh.html"
+* Sometimes, if there is a include graphics chunk, the main chunk label gets added to it, even if that label already exists for that question a few lines down. Not sure what to do. Best would be if check_current_tutorial, at the end, checked that there are no duplicate labels and then reported any that it found.
 
-process_submissions() test cases should not just spit out "Could not process file: getting-started_answers.pdf". Handle it better.
-
-I don't like the way the test cases for process_submissions spit out the pdf files names that they are ignoring, even if it does not effect the tests passing. At least, we should add a new test case for this behavior. Perhaps reorganize the test files into a couple of different directories. Or make the pattern ignore the pdf files in the test cases. But I couldn't get that to work.
-
-# show_file()
-
-show_file() should fail if `chunk` is anything other than the allowed character strings, i.e., chunk = 1 should fail.
-
-If `chunk` equals "YAML", then just return the YAML header, without the surrounding ----.
-
-`show_file(test_file, start = 0)` should return the whole file.
-
-# check_current_tutorial()
+* Do we need to deal with the case in which the only option is echo = FALSE. Right now, it just gets deleted. Which does not matter since echo = FALSE is a global option set by all tutorials. But, this might be a sign of bad behavior in general. Like why delete a code chunk option under any circumstances? No good reason to do so! Need to fix because current code leaves a duplicate code chunk there.
 
 * Advanced: Get Format Code Chunk Labels add-in to catch the case in which a non-question code chunk is duplicated.
 
+
+## show_file()
+
+* show_file() should fail if `chunk` is anything other than the allowed character strings, i.e., chunk = 1 should fail.
+
+* If `chunk` equals "YAML", then just return the YAML header, without the surrounding ----.
+
+* `show_file(test_file, start = 0)` should return the whole file.
+
+
 ## write_answers()
 
-* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
+* Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
 
 * See the comments at test-write_answers.R for detailed discussion. 
 
 * Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
 
+* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
+
 ## Points about testing
+
+* Figure out why devtools::check() is 0/0/0 but devtools::test() is 2 FAILs and 4 SKIPs.
+
+* Running devtools::check(remote = TRUE, manual = TRUE) produces some spurious documentation warnings. Produce a reprex for the devtools folks.
 
 * Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
 
-* Understand https://r-pkgs.org/testing-basics.html#sec-snapshot-tests and other advanced testing stuff. I bet that "withr::local_options" will be valuable for doing the next two tasks.
+* Understand https://r-pkgs.org/testing-basics.html#sec-snapshot-tests and other advanced testing stuff. I bet that "withr::local_options" will be valuable.
 
 * Use testing_package() rather than hard-coding the package name.
 
@@ -68,11 +87,9 @@ If `chunk` equals "YAML", then just return the YAML header, without the surround
 
 * Explore tutorial testing: https://pkgs.rstudio.com/learnr/articles/exercises.html#test-code-or-cases
 
-* Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason.
-
 * Do something about test-return_tutorial_paths(). 
 
-* Maybe testing_package() or skip_if_offline() would be useful. 
+* Maybe functions like testing_package() or skip_if_offline() would be useful. 
 
 ## set_positron_settings() 
 
@@ -89,30 +106,70 @@ If `chunk` equals "YAML", then just return the YAML header, without the surround
 tutorial.helpers::set_positron_settings(positron_settings = 
    list("files.dialog.defaultPath" = "C://Users//dkane//projects"))
 
+* Maybe this can now be part of the default set_positron_settings() call:
+
+ "terminal.integrated.defaultProfile.windows": "Git Bash"
+
+ Maybe they need to run this command to fix this one setting, after we ensure that they have installed Git for Windows. Anyway, the key material/images from https://ppbds.github.io/primer/getting-started-with-positron.html#the-terminal needs to be in the tutorial.
+
+
+* Perhaps I should add some default shortcut key creations to set_positron_settings(). 
+
+* How does line-wrapping work in Positron? And, whatever the answer, is this something 
+that we should set for students in the Positron tutorial?
+
+* Other items of interest:
+
+{
+  "editor.wordWrap": "on",
+  "files.defaultLanguage": "r",
+  "rewrap.wrappingColumn": 80,
+  "workbench.startupEditor": "newUntitledFile",
+  "files.hotExit": "onExitAndWindowClose",
+  "explorer.openEditors.dynamicHeight": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "files.insertFinalNewline": true,
+  "editor.renderFinalNewline": "dimmed",
+  "editor.renderWhitespace": "trailing",
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "diffEditor.ignoreTrimWhitespace": true,
+  "workbench.editor.enablePreview": false
+}
+
+* Also, seems like there is a keybindings.json file (in the same location), in which we can do stuff like:
+
+[]
+    {
+        "key": "cmd+d",
+        "command": "-editor.action.deleteLines",
+        "when": "config.rstudio.keymap.enable && editorTextFocus"
+    }
+]
+
+* Move over settings.json manipulations to this package. (??)
+
 ## make_exercise()
 
 * make_exercise(type = "no") ought to work. That is, make_exercise() should be able to use just the first few letters of the type argument to determine what you want.
 
+* Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason.
+
 * Are there test cases for make_exercise()? There should be!
+
+* Should Written Exercises with no answers have test code chunks by default? I seem to be using these a lot in 22-arrow. Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code.
 
 
 
 ## After This Summer
+
+The below are projects that we probably won't get to this summer.
 
 ### Tutorial
 
 * Should we set a projects directory in this tutorial as well? Not sure . . .
 
 * Update the images now that the add a new Console button looks and behaves a little differently?
-
-
-### Other
-
-"terminal.integrated.defaultProfile.windows": "Git Bash"
-
-But maybe that can now be part of the default set_positron_settings() call. Maybe they need to run this command to fix this one setting, after we ensure that they have installed Git for Windows. Anyway, the key material/images from https://ppbds.github.io/primer/getting-started-with-positron.html#the-terminal needs to be in the tutorial.
-
-
 
 * How do we teach students to switch between Positron windows? I think:
 
@@ -145,15 +202,12 @@ But maybe that can now be part of the default set_positron_settings() call. Mayb
 ]
 
 
-# Other Stuff
+### Other Stuff
 
-Think harder about the changes that will be allowed once we have a new Tutorial Selector Extension for Positron available.  In essence, there are three things we care about. One: What order do tutorials appear in the selector? They will be sorted by package, obviously, but we want package authors to be able to order them as they see fit, with perhaps the default ordering being the ordering of directory names. Second, we need to display a name of the tutorial which students will see. Presumably, this will just be the title of the tutorial. Third, we have the file name of the saved answers. Presumably, this will just use the id variable.
-
-
-Move over settings.json manipulations to this package. (??)
+* Think harder about the changes that will be allowed once we have a new Tutorial Selector Extension for Positron available.  In essence, there are three things we care about. One: What order do tutorials appear in the selector? They will be sorted by package, obviously, but we want package authors to be able to order them as they see fit, with perhaps the default ordering being the ordering of directory names. Second, we need to display a name of the tutorial which students will see. Presumably, this will just be the title of the tutorial. Third, we have the file name of the saved answers. Presumably, this will just use the id variable.
 
 
-3) I am still concerned about the Terminal for Windows users. Does installing RTools just magically make that work OK? No! Consider changing the JSON file so that Windows users will use bash. Ask Grok for details. Example:
+* I am still concerned about the Terminal for Windows users. Does installing RTools just magically make that work OK? No! Consider changing the JSON file so that Windows users will use bash. Ask Grok for details. Example:
 
 {
   "terminal.integrated.profiles.windows": {
@@ -167,96 +221,30 @@ Move over settings.json manipulations to this package. (??)
 
 No idea if this would work. And, if we start using it, we might need to update the Terminal tutorial.
 
-4) Figure out why check_current_tutorial() didn't work on Project 2 on second Github tutorial, at least on the last few questions. Issue probably connected to this comment from Positron and Code tutorial: "To Format the chunk labels you need to comment out the example comment line in Script 1. And there is at least one more example later." So, we really need to make  check_current_tutorial() more robust.
 
-5) 
+* I think that there is a bug (or at least a change) in how to handle links within a vignette. That is, within instructions.qmd, I want to link discussion of knowledge drops to the Knowledge Drops section. The old way of doing that in Rmd files still *seemed* to work, in the sense that the links worked in the result html, but R CMD check seemed to identify those links as have an Empty URL, generating a NOTE in R CMD check which led to CRAN rejection. 
 
+* Which packages do we really need, either in Imports or in Suggests?
 
+* Check out all unit tests.
 
+* Related to the above is that the Github Actions files differ in that R CMD check uses renv and pkgdown.yml uses dependencies. The former ensures that the quarto package is available because it is in the renv.lock file. But with dependencies, I suspect that quarto must appear in the imports part of the DESCRIPTION file, but maybe Suggests would be enough?
 
-# format_tutorial()
+* Do a complete clean up of the Github Action files.
 
-Change format_tutorial() so it looks to see if you have any chunk names in your file with reserved names (name, email, ID, minutes, answers), and then warns you about that fact.
+* Vignette about Posit Workbench.
 
-It is annoying that R attempts to run `r scales::comma(x)` even when it is placed in a verbatim environment. That is annoying! But how can format_tutorial() prevent? It can't! This is a problem with learnr::run_tutorial().
+* Might be nice if the email entry field at least attempted to note/warn if the submitted information was not a legitimate email. Perhaps at least check if there is an `@`.
 
-Sometimes, if there is a include graphics chunk, the main chunk label gets added to it, even if that label already exists for that question a few lines down. Not sure what to do. Best would be if check_current_tutorial, at the end, checked that there are no duplicate labels and then reported any that it found.
+* There are fewer and fewer reasons why we need a copy previous code option. Consider getting rid of Copy code button. Now that we can pre-place code from previous questions into the Exericise code chunk, we don't need to allow students to Copy from previous exercise. Since that is the only use case for the Copy code button, we can delete it, and all its associated junk. The counter-argument is that if you populate the starting code for Exercise N + 1, then a student working on Exercise N can cheat and just look at by skipping ahead. Counter-counter-argument is that students can already do this by looking at the Hint for Exercise N + 1. Since they don't (?), we don't really have to worry about them cheating in this way. Moreover, the vast majority of questions are so easy that cheating is actually more work. Just look at the provided hint!
 
-Do we need to deal with the case in which the only option is echo = FALSE. Right now, it just gets deleted. Which does not matter since echo = FALSE is a global option set by all tutorials. But, this might be a sign of bad behavior in general. Like why delete a code chunk option under any circumstances? No good reason to do so! Need to fix because current code leaves a duplicate code chunk there.
+* Consider providing a simple hash to guarantee that students haven't cheated, even if they submit html. The function would run some R code which produced a string including things like date, time, pwd, whois, computer name, and whatever else. It then takes that string and turns it into a hash. That hash is output into the html. If there are concerns about cheating, an instructor can check the hash. 
 
-# set_positron_settings()
+* Ensure that this code handles our test code chunks in non-code questions. See Positron and Github (gert) for examples. Seems to work, but some test cases would be nice.
 
-Perhaps I should add some default shortcut key creations to set_positron_settings(). 
-
-How does line-wrapping work in Positron? And, whatever the answer, is this something 
-that we should set for students in the Positron tutorial?
-
-Other items of interest:
-
-{
-  "editor.wordWrap": "on",
-  "files.defaultLanguage": "r",
-  "rewrap.wrappingColumn": 80,
-  "workbench.startupEditor": "newUntitledFile",
-  "files.hotExit": "onExitAndWindowClose",
-  "explorer.openEditors.dynamicHeight": true,
-  "workbench.editor.highlightModifiedTabs": true,
-  "files.insertFinalNewline": true,
-  "editor.renderFinalNewline": "dimmed",
-  "editor.renderWhitespace": "trailing",
-  "files.trimFinalNewlines": true,
-  "files.trimTrailingWhitespace": true,
-  "diffEditor.ignoreTrimWhitespace": true,
-  "workbench.editor.enablePreview": false
-}
-
-Also, seems like there is a keybindings.json file (in the same location), in which we can do stuff like:
-
-[]
-    {
-        "key": "cmd+d",
-        "command": "-editor.action.deleteLines",
-        "when": "config.rstudio.keymap.enable && editorTextFocus"
-    }
-]
-
-# Tutorial Quality
+* reactiveConsole(TRUE) might make it easier to experiment with reactivity in the Console.
 
 
-
-# Other Topics
-
-I think that there is a bug (or at least a change) in how to handle links within a vignette. That is, within instructions.qmd, I want to link discussion of knowledge drops to the Knowledge Drops section. The old way of doing that in Rmd files still *seemed* to work, in the sense that the links worked in the result html, but R CMD check seemed to identify those links as have an Empty URL, generating a NOTE in R CMD check which led to CRAN rejection. 
-
-Figure out why Check is 0/0/0 but Test is 2 FAILs and 5 SKIPs.
-
-Which packages do we really need, either in Imports or in Suggests?
-
-Check out all unit tests.
-
-Related to the above is that the Github Actions files differ in that R CMD check uses renv and pkgdown.yml uses dependencies. The former ensures that the quarto package is available because it is in the renv.lock file. But with dependencies, I suspect that quarto must appear in the imports part of the DESCRIPTION file, but maybe Suggests would be enough?
-
-Do a complete clean up of the Github Action files.
-
-Vignette about Posit Workbench.
-
-Better error message if the pattern does not match any of the files in the directory.
-
-Might be nice if the email entry field at least attempted to note/warn if the submitted information was not a legitimate email. Perhaps at least check if there is an `@`.
-
-Standardize an instruction which says to paste from the HTML result. This is different from CP/CR, obviously.
-
-There are fewer and fewer reasons why we need a copy previous code option. Consider getting rid of Copy code button. Now that we can pre-place code from previous questions into the Exericise code chunk, we don't need to allow students to Copy from previous exercise. Since that is the only use case for the Copy code button, we can delete it, and all its associated junk. The counter-argument is that if you populate the starting code for Exercise N + 1, then a student working on Exercise N can cheat and just look at by skipping ahead. Counter-counter-argument is that students can already do this by looking at the Hint for Exercise N + 1. Since they don't (?), we don't really have to worry about them cheating in this way. Moreover, the vast majority of questions are so easy that cheating is actually more work. Just look at the provided hint!
-
-Consider providing a simple hash to guarantee that students haven't cheated, even if they submit html. The function would run some R code which produced a string including things like date, time, pwd, whois, computer name, and whatever else. It then takes that string and turns it into a hash. That hash is output into the html. If there are concerns about cheating, an instructor can check the hash. 
-
-Ensure that this code handles our test code chunks in non-code questions. See Positron and Github (gert) for examples. Seems to work, but some test cases would be nice.
-
-Should Written Exercises with no answers have test code chunks by default? I seem to be using these a lot in 22-arrow. Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code.
-
-reactiveConsole(TRUE) might make it easier to experiment with reactivity in the Console.
-
-Think harder about whether write_answer should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
 
 ## Downloading answers
 
@@ -282,7 +270,9 @@ Blanks are detected using regular expressions (since blanks may make the code un
 * Want to change the color of the OK box so that it is green when students enter
 their email or other text. This seem relevant:  https://stackoverflow.com/questions/33620133/change-the-color-of-action-button-in-shiny/35871042.
 
-* Running devtools::check(remote = TRUE, manual = TRUE) produces some spurious documentation warnings. Produce a reprex for the devtools folks.
+
+
+# Add this material as a technical appendix in instructions.qmd.
 
 
 ## Get a better understanding of package locations

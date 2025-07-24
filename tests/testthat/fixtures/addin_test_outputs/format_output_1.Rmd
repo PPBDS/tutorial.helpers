@@ -206,7 +206,7 @@ Should work even if there are no labels, even if the comma is not included. The 
 
 ###
 
-## Exercises 
+## Exercises
 ### 
 
 Weird case which used to produce exercises--1 instead of exercise-1.
@@ -217,7 +217,7 @@ Weird case which used to produce exercises--1 instead of exercise-1.
 
 ```
 
-## Hask marks 
+## Hask marks
 ### 
 
 An example to conform that hashmarks within four backtick environments do not mess up the reformatting. This test confirms that the exercise section number and the code chunk label get changed.
@@ -307,6 +307,8 @@ dkane@macbook project-1 %
 
 ## Space Test Case 1
 ###
+
+This test ensures that (mistaken) extra spaces in a section name are replaced by a single dash in code chunk names rather than multiple dashes.
 
 ### Exercise 1
 
