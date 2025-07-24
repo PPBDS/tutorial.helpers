@@ -46,17 +46,11 @@ and returns either a summary tibble or a combined tibble with all the data.
 # Process submissions from local directory
 process_submissions(path = "path/to/directory")
 
-# Process submissions from Google Drive
-process_submissions(path = "https://drive.google.com/drive/folders/your_folder_id", title = "^submission", key_vars = c("name", "email"))
-
 # Process submissions with multiple patterns from local directory
-process_submissions(path = "path/to/directory", title = c("^submission", "final"), key_vars = c("email"))
-
-# Process submissions with email filtering from Google Drive
-process_submissions(path = "https://drive.google.com/drive/folders/your_folder_id", title = c("^submission", "final"), key_vars = c("email"), emails = c("user1@example.com", "user2@example.com"))
+process_submissions(path = "path/to/directory", title = "final", key_vars = c("email"))
 
 # Process submissions and include all emails (no email filtering)
-process_submissions(path = "path/to/directory", title = c("^submission", "final"), key_vars = c("email"), emails = "*")
+process_submissions(path = "path/to/directory", key_vars = "email", emails = "*")
 
 # Process submissions and return all data
 process_submissions(path = "path/to/directory", return_value = "All")

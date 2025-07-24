@@ -27,17 +27,11 @@
 #' # Process submissions from local directory
 #' process_submissions(path = "path/to/directory")
 #'
-#' # Process submissions from Google Drive
-#' process_submissions(path = "https://drive.google.com/drive/folders/your_folder_id", title = "^submission", key_vars = c("name", "email"))
-#'
 #' # Process submissions with multiple patterns from local directory
-#' process_submissions(path = "path/to/directory", title = c("^submission", "final"), key_vars = c("email"))
-#'
-#' # Process submissions with email filtering from Google Drive
-#' process_submissions(path = "https://drive.google.com/drive/folders/your_folder_id", title = c("^submission", "final"), key_vars = c("email"), emails = c("user1@example.com", "user2@example.com"))
+#' process_submissions(path = "path/to/directory", title = "final", key_vars = c("email"))
 #'
 #' # Process submissions and include all emails (no email filtering)
-#' process_submissions(path = "path/to/directory", title = c("^submission", "final"), key_vars = c("email"), emails = "*")
+#' process_submissions(path = "path/to/directory", key_vars = "email", emails = "*")
 #'
 #' # Process submissions and return all data
 #' process_submissions(path = "path/to/directory", return_value = "All")
@@ -101,7 +95,7 @@ process_submissions <- function(path,
       tibble_data <- title_tibbles[[file_name]]
       
       if (!"id" %in% colnames(tibble_data)) {
-        if (verbose == 2) {
+        if (verbose >= 2) {
           message("File '", file_name, "' does not have an 'id' column. Removing from list.")
         }
         removed_files <- c(removed_files, file_name)
@@ -121,9 +115,7 @@ process_submissions <- function(path,
       message("Removing file(s) '", paste(missing_key_vars_files, collapse = "', '"), "' due to missing key variables.")
     }
     
-    if (verbose >= 1) {
-      message("There were ", length(filtered_tibble_list), " files with no problems.")
-    }
+    # Note: Additional filtering messages removed to avoid redundancy with find_submissions output
     
     # Process results for this pattern based on return_value
     if (return_value == "Summary") {

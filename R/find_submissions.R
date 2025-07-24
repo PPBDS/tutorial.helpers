@@ -4,7 +4,7 @@
 #' It extracts tables from the files and returns a list of tibbles.
 #'
 #' @param path The path to the local directory containing the HTML/XML files, or a Google Drive folder URL.
-#'        If it's a Google Drive URL, the function will download individual files to a temporary directory.
+#'        If it's a Google Drive URL, the function will download the entire folder to a temporary directory.
 #' @param title A character vector of patterns to match against the file names.
 #'        Each pattern is processed separately and results are combined.
 #' @param emails A character vector of email addresses to filter results by, "*" to include all emails, or NULL to skip email filtering (default: NULL).
@@ -16,74 +16,471 @@
 #' @importFrom rvest read_html html_table
 #' @importFrom tibble as_tibble
 #' @importFrom mime guess_type
-#' @importFrom utils download.file unzip
+#' @importFrom utils download.file unzip head
 #'
 #' @examples
 #' \dontrun{
 #' # Find submissions from local directory
 #' tibble_list <- find_submissions(path = "path/to/directory", title = ".")
 #'
-#' # Find submissions from Google Drive
-#' tibble_list <- find_submissions(path = "https://drive.google.com/drive/folders/your_folder_id", title = c("getting", "get-to-know"))
+#' # Find submissions from Google Drive folder
+#' drive_url <- "https://drive.google.com/drive/folders/your_folder_id"
+#' tibble_list <- find_submissions(
+#'   path = drive_url, 
+#'   title = c("getting", "get-to-know")
+#' )
 #'
 #' # Find submissions with specific patterns and email filtering
-#' tibble_list <- find_submissions(path = "path/to/directory", title = c("getting", "get-to-know"), emails = c("user1@example.com", "user2@example.com"))
+#' tibble_list <- find_submissions(
+#'   path = "path/to/directory", 
+#'   title = c("getting", "get-to-know"), 
+#'   emails = c("user1@example.com", "user2@example.com")
+#' )
 #' 
 #' # Find submissions including all emails (no email filtering)
-#' tibble_list <- find_submissions(path = "path/to/directory", title = c("getting", "get-to-know"), emails = "*")
+#' tibble_list <- find_submissions(
+#'   path = "path/to/directory", 
+#'   title = c("getting", "get-to-know"), 
+#'   emails = "*"
+#' )
 #' }
 #' @export
 
 find_submissions <- function(path, title, emails = NULL, verbose = 0) {
   
-  # Validation: path must be provided
+  # Input validation
   if (missing(path) || is.null(path)) {
     stop("'path' must be provided.")
+  }
+  
+  if (missing(title) || is.null(title)) {
+    stop("'title' must be provided.")
   }
   
   # Determine if path is a Google Drive URL or local directory
   is_drive_url <- grepl("^https?://", path)
   
   if (is_drive_url) {
-    # Handle Google Drive URL
+    real_path <- handle_google_drive_url(path, verbose)
+  } else {
+    real_path <- handle_local_directory(path, verbose)
+  }
+  
+  # Get all files in directory
+  all_files <- list.files(real_path, full.names = FALSE, recursive = TRUE)
+  
+  if (verbose >= 1) {
+    message("There are ", length(all_files), " files in the directory.")
+  }
+  
+  # Filter HTML/XML files
+  html_xml_files <- filter_html_xml_files(all_files, real_path, verbose)
+  
+  if (verbose >= 1) {
+    message("There are ", length(html_xml_files), " HTML/XML files in the directory.")
+  }
+  
+  # Filter by title patterns
+  matching_files <- filter_by_title_patterns(html_xml_files, title, verbose)
+  
+  if (verbose >= 1) {
+    message("There are ", length(matching_files), " HTML/XML files matching the pattern '", 
+            paste(title, collapse = "|"), "'.")
+  }
+  
+  # Process matching files
+  tibble_list <- process_matching_files(matching_files, real_path, emails, verbose)
+  
+  # Final summary messages  
+  valid_files_count <- length(tibble_list)
+  
+  if (verbose >= 1) {
+    message("There were ", valid_files_count, " files with valid HTML tables.")
+    # Count files that have usable data AND proper structure (id and answer columns)
+    no_problems_count <- sum(sapply(tibble_list, function(x) {
+      !is.null(x) && nrow(x) > 0 && 
+      "id" %in% colnames(x) && "answer" %in% colnames(x)
+    }))
+    message("There were ", no_problems_count, " files with no problems.")
+  }
+  
+  return(tibble_list)
+}
+
+# Handle Google Drive URL
+# @param path Google Drive URL
+# @param verbose Verbosity level
+# @return Path to downloaded folder
+handle_google_drive_url <- function(path, verbose) {
+  if (verbose >= 1) {
+    message("Detected Google Drive URL. Downloading entire folder...")
+  }
+  
+  # Check if required packages are available
+  if (!requireNamespace("googledrive", quietly = TRUE)) {
+    stop("Package 'googledrive' is required for Google Drive functionality. ",
+         "Please install it with: install.packages('googledrive')")
+  }
+  
+  # Validate Google Drive link format
+  if (!grepl("drive\\.google\\.com", path)) {
+    stop("Invalid Google Drive link format.")
+  }
+  
+  if (!grepl("/folders/", path)) {
+    stop("Only Google Drive folder URLs are supported. ",
+         "Please provide a folder URL in the format: ",
+         "https://drive.google.com/drive/folders/FOLDER_ID")
+  }
+  
+  # Extract folder ID and download
+  folder_id <- extract_drive_folder_id(path)
+  temp_dir <- tempdir(check = TRUE)
+  folder_download_path <- file.path(temp_dir, paste0("drive_folder_", folder_id))
+  
+  # Check for cached folder
+  if (dir.exists(folder_download_path)) {
+    folder_age <- difftime(Sys.time(), file.info(folder_download_path)$mtime, units = "hours")
+    if (folder_age < 1) {
+      if (verbose >= 1) {
+        message("Using cached Google Drive folder from: ", folder_download_path)
+      }
+      return(folder_download_path)
+    } else {
+      unlink(folder_download_path, recursive = TRUE)
+    }
+  }
+  
+  return(download_drive_folder(folder_id, folder_download_path, verbose))
+}
+
+# Handle Local Directory
+# @param path Local directory path
+# @param verbose Verbosity level
+# @return Validated directory path
+handle_local_directory <- function(path, verbose) {
+  if (!dir.exists(path)) {
+    stop("The specified directory does not exist: ", path)
+  }
+  
+  return(normalizePath(path))
+}
+
+# Filter HTML/XML Files
+# @param all_files Vector of all file names
+# @param real_path Base directory path
+# @param verbose Verbosity level
+# @return Vector of HTML/XML file names
+filter_html_xml_files <- function(all_files, real_path, verbose) {
+  if (length(all_files) == 0) {
+    return(character(0))
+  }
+  
+  full_file_paths <- file.path(real_path, all_files)
+  
+  html_xml_files <- sapply(full_file_paths, function(file) {
+    if (!file.exists(file)) return(FALSE)
+    
+    # Check MIME type
+    mime_type <- tryCatch({
+      mime::guess_type(file)
+    }, error = function(e) "")
+    
+    # Check both MIME type and extension
+    grepl("html|xml", mime_type, ignore.case = TRUE) || 
+      grepl("\\.(html?|xml)$", basename(file), ignore.case = TRUE)
+  })
+  
+  html_xml_file_names <- all_files[html_xml_files]
+  non_html_xml_file_names <- all_files[!html_xml_files]
+  
+  if (verbose >= 3 && length(non_html_xml_file_names) > 0) {
+    files_to_show <- head(non_html_xml_file_names, 3)
+    message("Removing file(s) '", paste(files_to_show, collapse = "', '"), 
+           if(length(non_html_xml_file_names) > 3) "', ..." else "'", 
+           " for not being HTML/XML.")
+  }
+  
+  return(html_xml_file_names)
+}
+
+# Filter Files by Title Patterns
+# @param html_xml_files Vector of HTML/XML file names
+# @param title Vector of patterns to match
+# @param verbose Verbosity level
+# @return Vector of matching file names
+filter_by_title_patterns <- function(html_xml_files, title, verbose) {
+  if (length(html_xml_files) == 0) {
+    return(character(0))
+  }
+  
+  all_matching_files <- character()
+  
+  for (current_title in title) {
+    pattern_matches <- grep(current_title, html_xml_files, value = TRUE)
+    all_matching_files <- c(all_matching_files, pattern_matches)
+    
+    if (verbose >= 2 && length(title) > 1) {
+      message("Pattern '", current_title, "' matched ", length(pattern_matches), " files.")
+    }
+  }
+  
+  return(unique(all_matching_files))
+}
+
+# Process Matching Files
+# @param matching_files Vector of file names to process
+# @param real_path Base directory path
+# @param emails Email filter (NULL, "*", or vector of emails)
+# @param verbose Verbosity level
+# @return Named list of tibbles
+process_matching_files <- function(matching_files, real_path, emails, verbose) {
+  if (length(matching_files) == 0) {
+    return(list())
+  }
+  
+  tibble_list <- list()
+  processed_count <- 0
+  
+  for (file_name in matching_files) {
+    result <- process_single_file(file_name, real_path, emails, verbose)
+    
+    if (!is.null(result)) {
+      tibble_list[[file_name]] <- result
+    }
+    
+    processed_count <- processed_count + 1
+    
+    # Progress indicator for large file sets
+    if (verbose >= 2 && length(matching_files) > 10 && processed_count %% 5 == 0) {
+      message("Processed ", processed_count, "/", length(matching_files), " files...")
+    }
+  }
+  
+  return(tibble_list)
+}
+
+# Process Single File
+# @param file_name Name of the file to process
+# @param real_path Base directory path
+# @param emails Email filter
+# @param verbose Verbosity level
+# @return Tibble or NULL if processing failed
+process_single_file <- function(file_name, real_path, emails, verbose) {
+  file_path <- file.path(real_path, file_name)
+  
+  # Read HTML content
+  html_content <- tryCatch({
+    rvest::read_html(file_path)
+  }, error = function(e) {
+    if (verbose >= 3) {
+      message("Failed to read HTML from: ", file_name, " - ", e$message)
+    }
+    return(NULL)
+  })
+  
+  if (is.null(html_content)) {
+    return(NULL)
+  }
+  
+  # Extract table data
+  table_data <- tryCatch({
+    tables <- rvest::html_table(html_content)
+    if (length(tables) == 0) {
+      if (verbose >= 3) {
+        message("No tables found in: ", file_name)
+      }
+      return(NULL)
+    }
+    tables[[1]]
+  }, error = function(e) {
+    if (verbose >= 3) {
+      message("Failed to extract table from: ", file_name, " - ", e$message)
+    }
+    return(NULL)
+  })
+  
+  if (is.null(table_data) || nrow(table_data) == 0) {
+    if (verbose >= 3) {
+      message("Empty or invalid table in: ", file_name)
+    }
+    return(NULL)
+  }
+  
+  # Convert to tibble
+  tibble_data <- tryCatch({
+    tibble::as_tibble(table_data)
+  }, error = function(e) {
+    if (verbose >= 3) {
+      message("Failed to convert to tibble: ", file_name, " - ", e$message)
+    }
+    return(NULL)
+  })
+  
+  if (is.null(tibble_data)) {
+    return(NULL)
+  }
+  
+  # Apply email filtering if specified
+  if (!is.null(emails) && !identical(emails, "*")) {
+    tibble_data <- filter_by_email(tibble_data, emails, file_name, verbose)
+  }
+  
+  return(tibble_data)
+}
+
+# Filter Tibble by Email
+# @param tibble_data The tibble to filter
+# @param emails Vector of allowed emails
+# @param file_name Name of source file (for messages)
+# @param verbose Verbosity level
+# @return Filtered tibble or NULL if no match
+filter_by_email <- function(tibble_data, emails, file_name, verbose) {
+  # Check if tibble has required structure for email filtering
+  if (!("id" %in% colnames(tibble_data) && "answer" %in% colnames(tibble_data))) {
+    if (verbose >= 3) {
+      message("File '", file_name, "' lacks 'id' and 'answer' columns for email filtering. Skipping.")
+    }
+    return(NULL)
+  }
+  
+  # Try multiple possible email field names
+  email_fields <- c("email", "information-email", "Email", "e-mail", 
+                   "Email Address", "email-address", "information_email")
+  
+  email_value <- NULL
+  for (field_name in email_fields) {
+    email_rows <- tibble_data[tibble_data$id == field_name, ]
+    if (nrow(email_rows) > 0) {
+      email_value <- email_rows$answer[1]
+      break
+    }
+  }
+  
+  if (is.null(email_value)) {
+    if (verbose >= 3) {
+      message("No email field found in file '", file_name, "'. Skipping.")
+    }
+    return(NULL)
+  }
+  
+  # Check if email matches filter
+  if (!email_value %in% emails) {
+    if (verbose >= 3) {
+      message("Email '", email_value, "' in file '", file_name, "' does not match filter. Skipping.")
+    }
+    return(NULL)
+  }
+  
+  return(tibble_data)
+}
+
+# Extract Google Drive Folder ID from URL
+# @param drive_url The Google Drive URL
+# @return The folder ID string
+extract_drive_folder_id <- function(drive_url) {
+  folder_id <- NULL
+  
+  if (grepl("/folders/", drive_url)) {
+    # Standard folder URL
+    folder_id <- regmatches(drive_url, regexpr("(?<=/folders/)[^/?]+", drive_url, perl = TRUE))
+  } else if (grepl("id=", drive_url)) {
+    # URL with id parameter
+    folder_id <- regmatches(drive_url, regexpr("(?<=id=)[^&]+", drive_url, perl = TRUE))
+  } else if (grepl("/open\\?id=", drive_url)) {
+    # Open format
+    folder_id <- regmatches(drive_url, regexpr("(?<=id=)[^&]+", drive_url, perl = TRUE))
+  }
+  
+  if (is.null(folder_id) || length(folder_id) == 0) {
+    stop("Unable to extract folder ID from Google Drive URL: ", drive_url)
+  }
+  
+  return(folder_id)
+}
+
+# Download Google Drive Folder
+# @param folder_id Google Drive folder ID
+# @param folder_download_path Local path to download to
+# @param verbose Verbosity level
+# @return Path to downloaded folder
+download_drive_folder <- function(folder_id, folder_download_path, verbose) {
+  # Verify folder exists and is accessible
+  tryCatch({
+    folder_info <- googledrive::drive_get(googledrive::as_id(folder_id))
+    
+    if (nrow(folder_info) == 0) {
+      stop("Google Drive folder not found or not accessible. ",
+           "Please check the folder ID and sharing permissions.")
+    }
+    
+    # Verify it's actually a folder
+    if (folder_info$drive_resource[[1]]$mimeType != "application/vnd.google-apps.folder") {
+      stop("The provided Google Drive URL does not point to a folder.")
+    }
+    
+    if (verbose >= 2) {
+      message("Confirmed Google Drive folder: ", folder_info$name)
+    }
+    
+  }, error = function(e) {
+    stop("Failed to verify Google Drive folder: ", e$message)
+  })
+  
+  # Download the folder
+  tryCatch({
     if (verbose >= 1) {
-      message("Detected Google Drive URL. Accessing Google Drive folder...")
+      message("Downloading Google Drive folder to temporary directory...")
     }
     
-    # Check if required packages are available for Google Drive functionality
-    if (!requireNamespace("googledrive", quietly = TRUE)) {
-      stop("Package 'googledrive' is required for Google Drive functionality. Please install it with: install.packages('googledrive')")
+    # Create download directory
+    dir.create(folder_download_path, recursive = TRUE, showWarnings = FALSE)
+    
+    # Get all files in the folder
+    drive_files <- googledrive::drive_ls(googledrive::as_id(folder_id), recursive = TRUE)
+    
+    if (nrow(drive_files) == 0) {
+      stop("No files found in the Google Drive folder.")
     }
     
-    # Validate Google Drive link format
-    if (!grepl("drive\\.google\\.com", path)) {
-      stop("Invalid Google Drive link format.")
+    # Filter out folders, keep only files
+    files_to_download <- drive_files[sapply(drive_files$drive_resource, function(x) {
+      x$mimeType != "application/vnd.google-apps.folder"
+    }), ]
+    
+    if (nrow(files_to_download) == 0) {
+      stop("No downloadable files found in the Google Drive folder.")
     }
     
-    # Extract folder ID from Google Drive link
-    folder_id <- extract_drive_folder_id(path)
+    if (verbose >= 1) {
+      message("Downloading ", nrow(files_to_download), " files...")
+    }
     
-    # Create temporary directory for downloaded files
-    temp_dir <- file.path(tempdir(), paste0("drive_files_", as.numeric(Sys.time())))
-    dir.create(temp_dir, recursive = TRUE)
-    
-    # Get list of files from Google Drive and download them
-    tryCatch({
-      drive_files <- googledrive::drive_ls(googledrive::as_id(folder_id))
+    # Download files
+    for (i in seq_len(nrow(files_to_download))) {
+      file_info <- files_to_download[i, ]
+      local_path <- file.path(folder_download_path, file_info$name)
       
-      if (nrow(drive_files) == 0) {
-        stop("No files found in the Google Drive folder or folder is not accessible.")
+      # Create subdirectories if needed
+      local_dir <- dirname(local_path)
+      if (!dir.exists(local_dir)) {
+        dir.create(local_dir, recursive = TRUE, showWarnings = FALSE)
       }
       
-      # Download each file to temp directory
-      for (i in seq_len(nrow(drive_files))) {
-        file_info <- drive_files[i, ]
-        local_path <- file.path(temp_dir, file_info$name)
-        
-        if (verbose >= 2) {
-          message("Downloading: ", file_info$name)
-        }
-        
+      if (verbose >= 3) {
+        message("Downloading: ", file_info$name)
+      }
+      
+      # Download with appropriate verbosity
+      if (verbose < 3) {
+        googledrive::with_drive_quiet(
+          googledrive::drive_download(
+            googledrive::as_id(file_info$id), 
+            path = local_path, 
+            overwrite = TRUE
+          )
+        )
+      } else {
         googledrive::drive_download(
           googledrive::as_id(file_info$id), 
           path = local_path, 
@@ -91,199 +488,19 @@ find_submissions <- function(path, title, emails = NULL, verbose = 0) {
         )
       }
       
-      real_path <- temp_dir
-      
-      if (verbose >= 2) {
-        message("Files downloaded to: ", real_path)
+      # Progress indicator
+      if (verbose >= 1 && nrow(files_to_download) > 10 && i %% 5 == 0) {
+        message("Downloaded ", i, "/", nrow(files_to_download), " files...")
       }
-      
-    }, error = function(e) {
-      stop("Failed to access Google Drive folder. Please check the link and ensure it's publicly accessible. Error: ", e$message)
-    })
-    
-  } else {
-    # Handle local directory
-    if (!dir.exists(path)) {
-      stop("The specified directory does not exist.")
-    }
-    real_path <- path
-  }
-  
-  # Initialize list to store results from all patterns
-  all_tibbles <- list()
-  
-  # Process each pattern
-  for (current_title in title) {
-    
-    # Get list of files from the real path
-    all_files <- list.files(real_path, full.names = FALSE)
-    num_files <- length(all_files)
-    
-    if (verbose >= 1) {
-      if (length(title) > 1) {
-        message("Processing pattern '", current_title, "':")
-      }
-      message("There are ", num_files, " files in the directory.")
-    }
-    
-    # Filter HTML/XML files
-    full_file_paths <- file.path(real_path, all_files)
-    html_xml_files <- sapply(full_file_paths, function(file) {
-      mime_type <- mime::guess_type(file)
-      grepl("html|xml", mime_type, ignore.case = TRUE)
-    })
-    
-    html_xml_file_names <- all_files[html_xml_files]
-    non_html_xml_file_names <- all_files[!html_xml_files]
-    
-    if (verbose == 3 && length(non_html_xml_file_names) > 0) {
-      message("Removing file(s) '", paste(non_html_xml_file_names, collapse = "', '"), "' for not being HTML/XML.")
     }
     
     if (verbose >= 1) {
-      message("There are ", length(html_xml_file_names), " HTML/XML files in the directory.")
+      message("Google Drive folder successfully downloaded to: ", folder_download_path)
     }
     
-    matching_files <- grep(current_title, html_xml_file_names, value = TRUE)
-    non_matching_files <- setdiff(html_xml_file_names, matching_files)
+    return(folder_download_path)
     
-    if (verbose == 3 && length(non_matching_files) > 0) {
-      message("Removing file(s) '", paste(non_matching_files, collapse = "', '"), "' for not matching the pattern '", current_title, "'.")
-    }
-    
-    if (verbose >= 1) {
-      message("There are ", length(matching_files), " HTML/XML files matching the pattern '", current_title, "'.")
-    }
-    
-    tibble_list <- list()
-    well_formed_files <- 0
-    malformed_files <- character()
-    
-    for (file_name in matching_files) {
-      # Process local file
-      file_path <- file.path(real_path, file_name)
-      html_content <- tryCatch({
-        rvest::read_html(file_path)
-      }, error = function(e) {
-        malformed_files <<- c(malformed_files, file_name)
-        return(NULL)
-      })
-      
-      if (is.null(html_content)) {
-        next
-      }
-      
-      table_data <- tryCatch({
-        rvest::html_table(html_content)[[1]]
-      }, error = function(e) {
-        malformed_files <<- c(malformed_files, file_name)
-        return(NULL)
-      })
-      
-      if (is.null(table_data)) {
-        malformed_files <<- c(malformed_files, file_name)
-        next
-      }
-      
-      tibble_data <- tibble::as_tibble(table_data)
-      
-      # Filter by email if specified and not "*"
-      if (!is.null(emails) && !identical(emails, "*")) {
-        # Check if tibble has 'id' and 'answer' columns for email filtering
-        if ("id" %in% colnames(tibble_data) && "answer" %in% colnames(tibble_data)) {
-          # Try multiple possible email field names
-          email_fields <- c("email", "information-email", "Email", "e-mail", 
-                           "Email Address", "email-address", "information_email")
-          email_row <- NULL
-          found_email_field <- FALSE
-          
-          for (field_name in email_fields) {
-            email_row <- tibble_data[tibble_data$id == field_name, ]
-            if (nrow(email_row) > 0) {
-              found_email_field <- TRUE
-              if (verbose >= 3) {
-                message("Found email field '", field_name, "' in file: ", file_name)
-              }
-              break  # Found email field
-            }
-          }
-          
-          if (found_email_field && nrow(email_row) > 0) {
-            email_value <- email_row$answer[1]
-            # Only keep this tibble if email matches one in the emails vector
-            if (!email_value %in% emails) {
-              if (verbose >= 3) {
-                message("Email '", email_value, "' in file '", file_name, "' does not match any target emails. Skipping.")
-              }
-              next  # Skip this file
-            } else {
-              if (verbose >= 3) {
-                message("Email '", email_value, "' in file '", file_name, "' matches target. Keeping file.")
-              }
-            }
-          } else {
-            # No email found in this file, skip it
-            if (verbose >= 2) {
-              message("No email field found in file: ", file_name, 
-                     ". Available id values: ", paste(tibble_data$id, collapse = ", "))
-            }
-            next
-          }
-        } else {
-          # No proper structure for email filtering, skip this file
-          if (verbose >= 2) {
-            message("File '", file_name, "' does not have proper 'id' and 'answer' columns for email filtering. Skipping.")
-          }
-          next
-        }
-      } else if (identical(emails, "*") && verbose >= 3) {
-        # Special case: emails = "*" includes all files
-        message("Including all emails (emails = '*'). Keeping file: ", file_name)
-      }
-      
-      tibble_list[[file_name]] <- tibble_data
-      well_formed_files <- well_formed_files + 1
-    }
-    
-    if (verbose >= 2 && length(malformed_files) > 0) {
-      message("Removing file(s) '", paste(malformed_files, collapse = "', '"), "' due to invalid table structure.")
-    }
-    
-    if (verbose >= 1) {
-      message("There were ", well_formed_files, " files with valid HTML tables.")
-    }
-    
-    # Add tibbles from this pattern to the overall list
-    all_tibbles <- c(all_tibbles, tibble_list)
-  }
-  
-  return(all_tibbles)
-}
-
-#' Extract Google Drive Folder ID from URL
-#'
-#' Helper function to extract folder ID from various Google Drive URL formats
-#'
-#' @param drive_url The Google Drive URL
-#' @return The folder ID string
-extract_drive_folder_id <- function(drive_url) {
-  # Handle different Google Drive URL formats
-  if (grepl("/folders/", drive_url)) {
-    # Standard folder URL: https://drive.google.com/drive/folders/FOLDER_ID
-    folder_id <- regmatches(drive_url, regexpr("(?<=/folders/)[^/?]+", drive_url, perl = TRUE))
-  } else if (grepl("id=", drive_url)) {
-    # URL with id parameter: https://drive.google.com/drive/u/0/folders/FOLDER_ID?id=FOLDER_ID
-    folder_id <- regmatches(drive_url, regexpr("(?<=id=)[^&]+", drive_url, perl = TRUE))
-  } else if (grepl("/open\\?id=", drive_url)) {
-    # Open format: https://drive.google.com/open?id=FOLDER_ID
-    folder_id <- regmatches(drive_url, regexpr("(?<=id=)[^&]+", drive_url, perl = TRUE))
-  } else {
-    stop("Unable to extract folder ID from Google Drive URL. Please check the URL format.")
-  }
-  
-  if (length(folder_id) == 0) {
-    stop("Unable to extract folder ID from Google Drive URL.")
-  }
-  
-  return(folder_id)
+  }, error = function(e) {
+    stop("Failed to download Google Drive folder: ", e$message)
+  })
 }

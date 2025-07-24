@@ -8,7 +8,7 @@ find_submissions(path, title, emails = NULL, verbose = 0)
 }
 \arguments{
 \item{path}{The path to the local directory containing the HTML/XML files, or a Google Drive folder URL.
-If it's a Google Drive URL, the function will download individual files to a temporary directory.}
+If it's a Google Drive URL, the function will download the entire folder to a temporary directory.}
 
 \item{title}{A character vector of patterns to match against the file names.
 Each pattern is processed separately and results are combined.}
@@ -30,13 +30,25 @@ It extracts tables from the files and returns a list of tibbles.
 # Find submissions from local directory
 tibble_list <- find_submissions(path = "path/to/directory", title = ".")
 
-# Find submissions from Google Drive
-tibble_list <- find_submissions(path = "https://drive.google.com/drive/folders/your_folder_id", title = c("getting", "get-to-know"))
+# Find submissions from Google Drive folder
+drive_url <- "https://drive.google.com/drive/folders/your_folder_id"
+tibble_list <- find_submissions(
+  path = drive_url, 
+  title = c("getting", "get-to-know")
+)
 
 # Find submissions with specific patterns and email filtering
-tibble_list <- find_submissions(path = "path/to/directory", title = c("getting", "get-to-know"), emails = c("user1@example.com", "user2@example.com"))
+tibble_list <- find_submissions(
+  path = "path/to/directory", 
+  title = c("getting", "get-to-know"), 
+  emails = c("user1@example.com", "user2@example.com")
+)
 
 # Find submissions including all emails (no email filtering)
-tibble_list <- find_submissions(path = "path/to/directory", title = c("getting", "get-to-know"), emails = "*")
+tibble_list <- find_submissions(
+  path = "path/to/directory", 
+  title = c("getting", "get-to-know"), 
+  emails = "*"
+)
 }
 }
