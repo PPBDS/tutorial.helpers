@@ -19,7 +19,7 @@ test_that("knit_tutorials() works on installed tutorials", {
   
   expect_null(
     knit_tutorials(
-      system.file("tutorials/positron/tutorial.Rmd", 
+      system.file("tutorials/getting-started/tutorial.Rmd", 
                   package = "tutorial.helpers")
     )
   )
