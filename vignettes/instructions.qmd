@@ -545,6 +545,8 @@ The rise of AI leads to a new kind of tutorial. Our purpose is no longer to teac
 
 Always begin by having students set up a repo and Quarto document to work in.
 
+<!-- Luke: Figure out if we can have line-wrapping within a verbatim environment. -->
+
 
 ````{verbatim}
 ### Exercise 2
@@ -556,9 +558,9 @@ Connect the repo to a project on your computer using
 `File -> New Folder from Git ...`.  Make sure to select the 
 "Open in a new window" box. 
 
-You need two Positon windows: this one for running the 
-tutorial and the one you just created for writing your code 
-and interacting with the Console.
+You need two Positon windows: this one for running the tutorial 
+and the one you just created for writing your code and interacting 
+with the Console.
 
 Select `File -> New File -> Quarto Document ...`. Provide a 
 title -- `"XX"` -- and an author (you). Render the document 
@@ -672,7 +674,6 @@ question_text(NULL,
 ````
 
 I recommend offering these explicit instructions many, many times. First, students need lots of practice. Second, each time you tell them to add something to the QMD, you give yourself an opportunity for a knowledge drop. The same applies when you tell students to execute, in the Console, this new addition to the QMD. 
-
 
 Consider an example of creating an object in the QMD:
 
