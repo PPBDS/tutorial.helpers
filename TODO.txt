@@ -6,16 +6,15 @@ Must be a way to download the entire folder, given just the url, as opposed to d
 
 ## write_answers()
 
-* we need a test case for write_answers.
+* we need a test case for write_answers. SS: Done
 
-* Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
+* Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version? SS: Done
 
-* See the comments at test-write_answers.R for detailed discussion. 
+* See the comments at test-write_answers.R for detailed discussion. SS: Done
 
-* Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
+* Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. SS: Done
 
-* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
-
+* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports SS: Done
 
 # This Summer
 
