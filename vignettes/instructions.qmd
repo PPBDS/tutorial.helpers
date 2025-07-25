@@ -89,8 +89,8 @@ Each topic begins with a sentence or two about what this group of exercises is t
 ###
 
 In order to get data from an API, we use the **httr** package. 
-The package is designed to imitate standard HTTP in R. Read 
-more about HTTP [here](https://www.jmarshall.com/easy/http/).
+The package is designed to imitate standard HTTP in R. 
+Read more about HTTP [here](https://www.jmarshall.com/easy/http/).
 
 ### Exercise 1
 ````
@@ -452,7 +452,7 @@ Because students will complete the tutorials using screens of very different wid
 
 ### Complex text
 
-You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which R markdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. This works often, but not always. Comments characters like `#` are especially problematic. We also use the [**parsermd**](https://rundel.github.io/parsermd/) package behind the scenes. It does not work as well as one might like.
+You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which R markdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. The plain three or four backtick environments create a plain code block and content inside is displayed as-is. No syntax highlighting or execution is applied, and they show example code or text exactly as typed. Four backtick environments allow three backticks to be written within the block. This works often, but not always. Comments characters like `#` are especially problematic. We also use the [**parsermd**](https://rundel.github.io/parsermd/) package behind the scenes. It does not work as well as one might like.
 
 Further complexity arises because tutorials are R markdown whereas all our other work is in Quarto. In Quarto documents (like this vignette), you can use an environment started by four backticks along with `{verbatim}` and then ended with four more backticks. This won't work in R markdown.
 
@@ -548,7 +548,7 @@ The rise of AI leads to a new kind of tutorial. Our purpose is no longer to teac
 
 Always begin by having students set up a repo and Quarto document to work in.
 
-<!-- Luke: Figure out if we can have line-wrapping within a verbatim environment. -->
+<!-- Luke: Figure out if we can have line-wrapping within a verbatim environment. NOT DONE: could not figure out how to. AI said to add a css file and change the html style, but it did not work -->
 
 
 ````{verbatim}
@@ -680,7 +680,7 @@ I recommend offering these explicit instructions many, many times. First, studen
 
 Consider an example of creating an object in the QMD:
 
-<!-- Luke: Make sure that the three back tick trick is explained earlier in the document. If not, explain it the first time we show students. -->
+<!-- Luke: Make sure that the three backtick trick is explained earlier in the document. If not, explain it the first time we show students. -->
 
 ````{verbatim}
 ### Exercise 12
@@ -761,7 +761,7 @@ To teach students about topic X, we first need to decide the final destination. 
 
 ### Providing Answers
 
-To ensure that students are on the right path with their code, we need to provide them with our code that is verified to be correct. Although we should not tell students to replace their code with ours at every step, if a student is lost, they should be able to refer to our code to get back on track. Also, on our end editing the tutorials, we want to easily run the code in the Console or render it. With this goal in mind, we will add `r` chunks to provide our code to students.
+To ensure that students are on the right path with their code, we need to provide them with our code that is verified to be correct. Although we should not tell students to replace their code with ours at every step, if a student is lost, they should be able to refer to our code to get back on track. Also, on our end editing the tutorials, we want to easily run the code in the Console or render it. With this goal in mind, we will add R chunks to provide our code to students.
 
 ````{verbatim}
 ### Exercise 6
@@ -800,32 +800,196 @@ Our code:
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-<!-- DK: Change r to R everywhere. -->
+<!-- DK: Change r to R everywhere. DONE (already was like this)-->
 
-<!-- DK: Clean up next paragraph. -->
+<!-- DK: Clean up next paragraph. DONE -->
 
-The R chunk with `echo=TRUE` and `eval=TRUE` (which is default) allows us to see the code as well as see what it produces. This makes it easy for the students to copy and paste our code if they need to, and they can also look at the outputs to see if they match.
+The R chunk with `echo=TRUE` allows the students to see the code we have written within it. This makes it easy for the students to copy and paste our code if they need to. 
 
+Additionally, `eval=TRUE` is the default argument in an R chunk, so the code within will automatically be run as well. To the students, they will be able to see any output from the code, which can be helpful if the code plots a graph. If it is inappropriate or unnecessary to include the output of the code, just set `eval=FALSE`.
 
+Then, the answer chunk would look like:
 
+````
+```{r, echo=TRUE, eval=FALSE}
+...
+```
+````
 
 ### Plotting Questions
 
 Plotting exercises are generally handled with a sequence of four questions.
 
-<!-- DK: Outline what those four questions are, and give an example (using four backticks verbatim trick). -->
+<!-- DK: Outline what those four questions are, and give an example (using four backticks verbatim trick). DONE -->
 
 Plotting questions are almost always proceeded by three questions about the tibble from which the plot will be created. Prior to these, the tutorial will probably have walked the student through the process of gathering, organizing, and cleaning the data, generally by using a pipe. 
 
 The first of the three prior questions tells the student to replace the current pipe which they have in the QMD with our code. We check that they have done so with `show_file()`. The purpose of this question is to ensure that the student's data will match our data.
 
+````{verbatim}
+### Exercise 8
+
+Now that we have filtered our dataset through a pipe, 
+we need to be on track with the same, correct, code. 
+Replace your code with our code in your QMD.
+
+In the Console, run:
+
+```         
+show_file("XX.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r ai-usage-8}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+
+````
+
 The second of the three prior questions tells the student to, in the QMD, assign the result of the pipe to a new variable, often `x`. We then tell the student to `Cmd/Ctrl + Enter` this code, followed by "CP/CR," so that the workspace includes a copy of `x`. 
+
+````{verbatim}
+### Exercise 9
+
+Within the recent code chunk, add the
+option: `#| cache: true`. Assign the result of our pipe to 
+`x`. 
+
+`Cmd/Ctrl + Shift + K`. By including `#| cache: true` 
+you cause Quarto to cache the results of the chunk. 
+The next time you render your QMD, as long as you have not changed 
+the code, Quarto will just load up the saved fitted object.
+
+Place your cursor on the line where the pipe is assigned to x,
+run `Cmd/Ctrl + Enter`. Now, the workspace also includes a copy
+of `x`.
+
+CP/CR.
+
+```{r ai-usage-9}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 6)
+```
+
+###
+
+Our code:
+
+```{r, echo=TRUE, eval=FALSE}
+x <- ...
+```
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+
+````
 
 The third of the three prior questions tells the student to type `x` in the Console, followed by "CP/CR." The purpose is both to have the student look at the tibble and also to set the stage for the actual graphics question.
 
+````{verbatim}
+### Exercise 10
 
+Within the Console, type `x`, which we previously assigned to a pipe
+and ran in the Console. Hit `Enter`.
+
+CP/CR.
+
+```{r ai-usage-10}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 8)
+```
+
+###
+
+Our code:
+
+```{r, echo=TRUE}
+x
+...
+```
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+
+````
 
 Could all four of these questions be combined into one? Probably. But spreading things has two advantages. First, it ensures that even the weaker students do not get lost. Second, it provides us with four opportunities to drop some knowledge. 
+
+Now, we can move on to the plotting question. In the age of AI, students will have AI write code for their plot. They will do that while specifying that their data is `x` from earlier. The student will add their new code to a new code cell, and we check that they have done so with `show_file()`. The purpose of this question is to ensure that the student has generated their own code.
+
+````{verbatim}
+### Exercise 11
+
+Go to the AI and ask it to generate R code that plots a basic graph 
+showing ... Mention you want to use the data from `x` and copy and paste 
+the `x` you ran in the Console with the resulting tibble. 
+You only need the top 3 lines, mainly to include column names.
+
+Within `labs()` edit or add a proper title, subtitle, and caption. 
+If axis labels are appropriate, add them, but if unnecessary, don't bother. 
+Don't assign the code for the plot to any variable. 
+Add this code to a new code cell. Run `Cmd/Ctrl + Shift + K`.
+
+In the Console, run:
+
+```         
+show_file("XX.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r ai-usage-11}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 12)
+```
+
+
+###
+
+Our code:
+
+```{r echo=FALSE}
+x <- ...
+```
+
+```{r, echo=TRUE}
+ggplot(x, aes(...)) +
+  ... +
+  labs(
+    title = "...",
+    subtitle = "...",
+    x = "...",
+    y = "...",
+    caption = "..."
+    ) +
+  ...
+```
+
+###
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+
+````
 
 
 <!-- https://pkgs.rstudio.com/learnr/articles/exercises.html#exercise-setup-chunks
