@@ -1,0 +1,479 @@
+
+---
+title: "Tutorials in the Age of AI"
+author: David Kane
+format: html
+vignette: >
+  %\VignetteEngine{quarto::html}
+  %\VignetteIndexEntry{Tutorials in the Age of AI}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+## Introduction
+
+AI changes everything.
+
+This document describes the best way to write R tutorials which embrace AI usage by students. Prior to the rise of AI, [this was](instructions.html) the best way to write tutorials, especially those which cover [the material in an assigned textbook](books.html). This document assumes that you already know how to [construct tutorials](instructions.html) using the [**learnr**](https://rstudio.github.io/learnr/) package and with the help of the [**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers) package. Students need some background in order to complete these sorts of tutorials, some familiarity with R, GitHub and so on. Completing the first four tutorials (i.e., through "Positron and GitHub Introduction") from [**positron.tutorials**](https://ppbds.github.io/positron.tutorials/) and a few tutorials from [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) is usually enough preparation.
+
+The rise of AI leads to a new kind of tutorial. Our purpose is no longer to teach students how to code. *Our purpose is to teach students how to use AI to code.* 
+
+### GitHub set up
+
+Always begin by having students set up a repo and Quarto document to work in.
+
+<!-- Luke: Figure out if we can have line-wrapping within a verbatim environment. NOT DONE: could not figure out how to. AI said to add a css file and change the html style, but it did not work -->
+
+
+````{verbatim}
+### Exercise 2
+
+Create a Github repo called `XX`. Make sure to click the 
+"Add a README file" check box.
+
+Connect the repo to a project on your computer using 
+`File -> New Folder from Git ...`.  Make sure to select the 
+"Open in a new window" box. 
+
+You need two Positon windows: this one for running the tutorial 
+and the one you just created for writing your code and interacting 
+with the Console.
+
+Select `File -> New File -> Quarto Document ...`. Provide a 
+title -- `"XX"` -- and an author (you). Render the document 
+and save it as `XX.qmd`.
+
+Create a `.gitignore` file with `XX_files` on the first 
+line and then a blank line. Save and push.
+
+In the Console, run:
+
+```         
+show_file(".gitignore")
+```
+
+If that fails, it is probably because you have not yet loaded
+ `library(tutorial.helpers)` in the Console.
+
+CP/CR.
+
+```{r introduction-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+Feel free to copy/paste this question as-is, but replacing `XX` with whatever makes sense for your assignment. Of course, the code chunk name will change when your run `check_current_tutorial()`.
+
+You are, obviously, responsible for adding a knowledge drop which teaches the students something about the larger topic.
+
+
+### Always interactive
+
+Students always need more progress working in the QMD and the Console at the same time. Good data scientists go back and forth between these two modes, writing something in the QMD, executing it in the Console, editing the QMD, executing again, and so on. We need to force students to do that here. Example:
+
+````{verbatim}
+### Exercise 3
+
+In your QMD, put `library(tidyverse)` in a new code chunk. 
+Render the file.
+
+Notice that the file does not look good because the code 
+is visible and there are annoying messages. To take care 
+of this, add `#| message: false` to remove all the messages 
+in this `setup` chunk. Also add the following to the YAML 
+header to remove all code echos from the HTML:
+
+```         
+execute: 
+  echo: false
+```
+
+In the Console, run:
+
+```         
+show_file("XX.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r introduction-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+Again, feel free to copy/paste this, or, indeed, anything from this document. However, you will need to do some edits, like with `"XX.qmd"`.
+
+If the target audience for the tutorial is more experienced, you can be less didactic, leaving out several of these instructions. You could also add more steps, like loading more libraries at once.
+
+We then tell students, explicitly, the work with the Console as well.
+
+````{verbatim}
+### Exercise 4
+
+Place your cursor in the QMD file on the `library(tidyverse)` 
+line. Use `Cmd/Ctrl + Enter` to execute that line.
+
+Note that this causes `library(tidyverse)` to be copied down 
+to the Console and then executed. 
+
+CP/CR.
+
+```{r introduction-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+I recommend offering these explicit instructions many, many times. First, students need lots of practice. Second, each time you tell them to add something to the QMD, you give yourself an opportunity for a knowledge drop. The same applies when you tell students to execute, in the Console, this new addition to the QMD. 
+
+Consider an example of creating an object in the QMD:
+
+<!-- Luke: Make sure that the three backtick trick is explained earlier in the document. If not, explain it the first time we show students. -->
+
+````{verbatim}
+### Exercise 12
+
+Create a new code chunk in your QMD. Add a code chunk 
+option: `#| cache: true`. Copy/paste the R code for the 
+final model into the code chunk, assigning the result to 
+`fit_XX`. 
+
+`Cmd/Ctrl + Shift + K`. It may take some time to render 
+your QMD, depending on how complex your model is. But, by 
+including `#| cache: true` you cause Quarto to cache the 
+results of the chunk. The next time you render your QMD, 
+as long as you have not changed the code, Quarto will just 
+load up the saved fitted object.
+
+At the Console, run:
+
+```
+tutorial.helpers::show_file("XX.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r courage-12}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+### 
+
+To confirm, `Cmd/Ctrl + Shift + K` again. It should be quick.
+````
+
+Once we have create the object in the QMD, we can execute the same code in the Console:
+
+````{verbatim}
+### Exercise 13
+
+Place your cursor in the QMD file on the `fit_XX` line. 
+Use `Cmd/Ctrl + Enter` to execute that line. 
+
+At the Console, run `ls()`. CP/CR.
+
+```{r courage-13}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+Of course, you can combine these last two questions together, but you probably shouldn't. We want easier questions, not harder. Splitting up questions makes them simpler. Perhaps more importantly, more questions provide more opportunities for knowledge drops.
+
+This still leaves unclear the process by which you built up the code which creates the model . . .  Leave discussioon about that for another day.
+
+### Asking AI
+
+The more students practice using AI, the better. It is, however, difficult to check that students are, in fact, using AI, and that they are using AI in a way which prepares them for the real world. Some initial thoughts:
+
+* Give them some rough guidance in what to ask AI and then have them copy/paste the AI's response, 
+
+
+### Walking the path
+
+To teach students about topic X, we first need to decide the final destination. What do we want students to be able to do on their own after completing the tutorial? For us, this will almost always be a plot, and often several plots. Having envisioned this goal, we need to create a "path" which students can use to reach that goal, first under our supervision and, second, on their own. The path will consist of several stepping stones, or stops along the way.
+
+
+### Providing Answers
+
+To ensure that students are on the right path with their code, we need to provide them with our code that is verified to be correct. Although we should not tell students to replace their code with ours at every step, if a student is lost, they should be able to refer to our code to get back on track. Also, on our end editing the tutorials, we want to easily run the code in the Console or render it. With this goal in mind, we will add R chunks to provide our code to students.
+
+````{verbatim}
+### Exercise 6
+
+Using your favorite AI, prompt it to generate R code that ... Add 
+the code to your QMD in a new chunk. Place your cursor on the first 
+line of the code and run `Cmd/Ctrl + Enter`.
+
+In the Console, run:
+
+```         
+show_file("XX.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r something-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 4)
+```
+
+###
+
+Our code:
+
+```{r, echo=TRUE}
+...
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+<!-- DK: Change r to R everywhere. DONE (already was like this)-->
+
+<!-- DK: Clean up next paragraph. DONE -->
+
+The R chunk with `echo=TRUE` allows the students to see the code we have written within it. This makes it easy for the students to copy and paste our code if they need to. 
+
+Additionally, `eval=TRUE` is the default argument in an R chunk, so the code within will automatically be run as well. To the students, they will be able to see any output from the code, which can be helpful if the code plots a graph. If it is inappropriate or unnecessary to include the output of the code, just set `eval=FALSE`.
+
+Then, the answer chunk would look like:
+
+````{verbatim}
+```{r, echo=TRUE, eval=FALSE}
+...
+```
+````
+
+### Plotting Questions
+
+Plotting exercises are generally handled with a sequence of four questions.
+
+<!-- DK: Outline what those four questions are, and give an example (using four backticks verbatim trick). DONE -->
+
+Plotting questions are almost always proceeded by three questions about the tibble from which the plot will be created. Prior to these, the tutorial will probably have walked the student through the process of gathering, organizing, and cleaning the data, generally by using a pipe. 
+
+The first of the three prior questions tells the student to replace the current pipe which they have in the QMD with our code. We check that they have done so with `show_file()`. The purpose of this question is to ensure that the student's data will match our data.
+
+````{verbatim}
+### Exercise 8
+
+Now that we have filtered our dataset through a pipe, 
+we need to be on track with the same, correct, code. 
+Replace your code with our code in your QMD.
+
+In the Console, run:
+
+```         
+show_file("XX.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r ai-usage-8}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+
+````
+
+The second of the three prior questions tells the student to, in the QMD, assign the result of the pipe to a new variable, often `x`. We then tell the student to `Cmd/Ctrl + Enter` this code, followed by "CP/CR," so that the workspace includes a copy of `x`. 
+
+````{verbatim}
+### Exercise 9
+
+Within the recent code chunk, add the
+option: `#| cache: true`. Assign the result of our pipe to 
+`x`. 
+
+`Cmd/Ctrl + Shift + K`. By including `#| cache: true` 
+you cause Quarto to cache the results of the chunk. 
+The next time you render your QMD, as long as you have not changed 
+the code, Quarto will just load up the saved fitted object.
+
+Place your cursor on the line where the pipe is assigned to x,
+run `Cmd/Ctrl + Enter`. Now, the workspace also includes a copy
+of `x`.
+
+CP/CR.
+
+```{r ai-usage-9}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 6)
+```
+
+###
+
+Our code:
+
+```{r, echo=TRUE, eval=FALSE}
+x <- ...
+```
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+
+````
+
+The third of the three prior questions tells the student to type `x` in the Console, followed by "CP/CR." The purpose is both to have the student look at the tibble and also to set the stage for the actual graphics question.
+
+````{verbatim}
+### Exercise 10
+
+Within the Console, type `x`, which we previously assigned to a pipe
+and ran in the Console. Hit `Enter`.
+
+CP/CR.
+
+```{r ai-usage-10}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 8)
+```
+
+###
+
+Our code:
+
+```{r, echo=TRUE}
+x
+...
+```
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+
+````
+
+Could all four of these questions be combined into one? Probably. But spreading things has two advantages. First, it ensures that even the weaker students do not get lost. Second, it provides us with four opportunities to drop some knowledge. 
+
+Now, we can move on to the plotting question. In the age of AI, students will have AI write code for their plot. They will do that while specifying that their data is `x` from earlier. The student will add their new code to a new code cell, and we check that they have done so with `show_file()`. The purpose of this question is to ensure that the student has generated their own code.
+
+````{verbatim}
+### Exercise 11
+
+Go to the AI and ask it to generate R code that plots a basic graph 
+showing ... Mention you want to use the data from `x` and copy and paste 
+the `x` you ran in the Console with the resulting tibble. 
+You only need the top 3 lines, mainly to include column names.
+
+Within `labs()` edit or add a proper title, subtitle, and caption. 
+If axis labels are appropriate, add them, but if unnecessary, don't bother. 
+Don't assign the code for the plot to any variable. 
+Add this code to a new code cell. Run `Cmd/Ctrl + Shift + K`.
+
+In the Console, run:
+
+```         
+show_file("XX.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r ai-usage-11}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 12)
+```
+
+
+###
+
+Our code:
+
+```{r echo=FALSE}
+x <- ...
+```
+
+```{r, echo=TRUE}
+ggplot(x, aes(...)) +
+  ... +
+  labs(
+    title = "...",
+    subtitle = "...",
+    x = "...",
+    y = "...",
+    caption = "..."
+    ) +
+  ...
+```
+
+###
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+
+````
+
+
+<!-- https://pkgs.rstudio.com/learnr/articles/exercises.html#exercise-setup-chunks
+
+DK: The section after a plot is interesting. 
+
+Our question is always a show_file().
+
+Our answer is always an R code chunk.
+
+One, we show our code. But our code should be good, often better than what the AI gives as default. It is clean, concise, does not include tons of junk. We don't just use the raw AI. We always ensure that there is a subtitle and caption which provides the data source. Et cetera.
+
+Then, we show what our code produces, by getting rid of `eval=FALSE`. But that is tricky, because we need to ensure that the data object exists for our plot to use. And that is so annoying, that we don't do it. -->
