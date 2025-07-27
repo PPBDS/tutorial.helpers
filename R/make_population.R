@@ -14,19 +14,19 @@ make_population <- function() {
   
   code <- '
 tibble(
-  Source = c("Data", "Preceptor", "..."),           # First column always "Source"
-  Year = c("...", "...", "..."),                    # Time variable
-  Location = c("...", "...", "..."),                # Unit context (e.g., City)
-  ID = c("...", "...", "..."),                      # Unique unit IDs
-  outcome = c("...", "...", "..."),                 # Observed or missing outcome
-  covariate_1 = c("...", "...", "..."),
-  covariate_2 = c("...", "...", "..."),
-  covariate_3 = c("...", "...", "..."),
-  "..." = c("...", "...", "...")
+  Source = c("Data", "Preceptor", "..."),           # Edit sources as needed
+  Year = c("...", "...", "..."),                    # Replace with actual years or time points
+  Location = c("...", "...", "..."),                # Replace with relevant locations/units
+  ID = c("...", "...", "..."),                      # Replace with unique unit IDs
+  outcome = c("...", "...", "..."),                 # Replace with observed or potential outcomes
+  covariate_1 = c("...", "...", "..."),             # Replace with first covariate values
+  covariate_2 = c("...", "...", "..."),             # Replace with second covariate values
+  covariate_3 = c("...", "...", "..."),             # Replace with third covariate values
+  "..." = c("...", "...", "...")                    # Keep as placeholder for additional covariates
 ) |>
   gt() |>
   tab_header(
-    title = "Population Table: [Describe Units and Time Here]"
+    title = "Population Table: [Describe Units and Time Here]"  # Edit title for your context
   ) |>
   cols_label(
     Source = md("Source"),
@@ -34,9 +34,9 @@ tibble(
     Location = md("Location"),
     ID = md("Unit ID"),
     outcome = md("Outcome / Potential Outcome"),
-    covariate_1 = md("[Covariate 1 Label]"),
-    covariate_2 = md("[Covariate 2 Label]"),
-    covariate_3 = md("[Covariate 3 Label]"),
+    covariate_1 = md("[Covariate 1 Label]"),          # Edit label
+    covariate_2 = md("[Covariate 2 Label]"),          # Edit label
+    covariate_3 = md("[Covariate 3 Label]"),          # Edit label
     "..." = md("...")
   ) |>
   tab_spanner(label = "Units/Time", columns = c(Year, Location, ID)) |>
