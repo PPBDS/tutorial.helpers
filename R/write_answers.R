@@ -1,6 +1,4 @@
 #' Write tutorial answers to file
-#'
-#' 
 #' 
 #' @description Take a tutorial session, extract out all the submitted answers,
 #'   and write out an html file with all of those answers.
