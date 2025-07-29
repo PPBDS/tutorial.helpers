@@ -8,7 +8,7 @@ If so, then maybe we quickly return the list of everything, match against title 
 
 Does test cases need to load libraries like library(tibble) and library(dplyr)?
 
-Add a paragraph at the top of write answers test (which you can ask AI to help you with) which gives some insight into how it does he trick of a test tutorial session.
+Add a paragraph at the top of write answers test (which you can ask AI to help you with) which gives some insight into how it does he trick of a test tutorial session. SS: Done
 
 Add response to Issue. Thank her. Ask her to install new version and check.
 
