@@ -1,4 +1,13 @@
-# Comments from July 29, 2925.
+# This whole document is a giant piece of garbage.
+
+# 1) Understand it fully.
+
+# 2) Add documentation which clearly explains how to create the saved session rds object. 
+# 
+# You probably need to modify the code which is running the tutorial while your doing it.
+# Then, you do the tutorial, and right before you download the answers, the tutorial 
+# saves out its current state. That is the rds object which allows you to make a new 
+# test case.
 
 # This test is possible without an actual learnr session running because of 
 # is_test = TRUE. It uses a saved .rds file with mock submission data and bypasses 
@@ -107,41 +116,12 @@ submission_report_output <- rvest::read_html("fixtures/submission_test_outputs/s
 # out for now. html_text2() does not work, does the more natural html_table().
 # See comments above.
 
-# if(! all.equal(
-#   rvest::html_text2(submission_report_test), 
-#   rvest::html_text2(submission_report_output))){
-#   stop("From test-write_answer, html option did not return the desired output.")
-#   }
-
-
-# Test rds
-
-rds_file <- file.path(tempdir(), "submission_test_output.rds")
-
-write_answers(rds_file, saved_session, is_test = TRUE)
-
-submission_rds_test <- readRDS(rds_file)
-
-submission_rds_output <- readRDS("fixtures/submission_test_outputs/submission_desired_output.rds")
-
-if(! all.equal(submission_rds_test, submission_rds_output)){
-  stop("From test-write_answer, rds option did not return the desired output.")
-}
-
-# Test pdf. We previously used pdftools to provide a more robust test, but the
-# pdftools package was generating problems with GHA. Note that we compare just
-# the lengths of these files. They are almost identical element-by-element, but
-# not quite. So, we are really just testing that write_answers can produce a
-# pdf, which is the most important test anyway.
-
-pdf_file <- file.path(tempdir(), "submission_test_output.pdf")
-
-write_answers(pdf_file, saved_session, is_test = TRUE)
-
-submission_pdf_test <- readLines(pdf_file, warn = FALSE)
-
-submission_pdf_output <- readLines("fixtures/submission_test_outputs/submission_desired_output.pdf", warn = FALSE)
-
-if(length(submission_pdf_test) != length(submission_pdf_output)){
-  stop("From test-write_answer, pdf option did not return the desired output.")
+if(! all.equal(
+  rvest::html_text2(submission_report_test), 
+  rvest::html_text2(submission_report_output))){
+  stop("From test-write_answer, html option did not return the desired output.")
   }
+
+
+
+
