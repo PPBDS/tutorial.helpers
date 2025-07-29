@@ -1,16 +1,16 @@
 # Priorities
 
-Contact hannahcarroll and set up Zoom interview.
+Contact hannahcarroll and set up Zoom interview. SS: Done, sent an email. 
 
 Can you quickly return a list of all the files in a google drive folder?
 
 If so, then maybe we quickly return the list of everything, match against title to see which we want, then download those one at a time.
 
-Does test cases need to load libraries like library(tibble) and library(dplyr)?
+Does test cases need to load libraries like library(tibble) and library(dplyr)? SS: No need, only testthat.R needs to load library(testthat) 
 
 Add a paragraph at the top of write answers test (which you can ask AI to help you with) which gives some insight into how it does he trick of a test tutorial session.
 
-Add response to Issue. Thank her. Ask her to install new version and check.
+Add response to Issue. Thank her. Ask her to install new version and check. SS: Done
 
 Must be a way to download the entire folder, given just the url, as opposed to downloading each file one at a time. For Google drive, download the whole folder. (Maybe confirm that it is a folder. That is the only case we allow.) Make sure to thoroughly document what going mess.
 
