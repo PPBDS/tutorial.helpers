@@ -10,6 +10,8 @@ vignette: >
 ---
 
 
+<!-- DK: Anytime you ask a student to execute something in the Console, you confirm that they have done so with CP/CR. -->
+
 ## Introduction
 
 AI changes everything.
@@ -18,15 +20,23 @@ This document describes the best way to write R tutorials which embrace AI usage
 
 The rise of AI leads to a new kind of tutorial. Our purpose is no longer to teach students how to code. *Our purpose is to teach students how to use AI to code.* 
 
-### GitHub set up
+AI tutorials begin with an Introduction which begins with a summary of the skills which the tutorial will cover. The Introduction continues with a series of exercises which set up the repo/project/QMD in which most of the tutorial will be completed.
+
+After the Introduction, there are 3 to 5 Sections --- the official **learnr** nomenclature is "Topics" --- which are the meat of the tutorial. 
+
+The last topic is the Summary. It starts with the same overview with which the Introduction began, but in the past tense. It then has a couple exercises which finish up the tutorial by using `quarto publish gh-pages analysis.qmd` to create a webpage with all the cool plots which the student has created. The URL for this new webpage is usually the answer to the last exercise in Summary.
+
+### Introduction
 
 Always begin by having students set up a repo and Quarto document to work in.
 
-<!-- Luke: Figure out if we can have line-wrapping within a verbatim environment. NOT DONE: could not figure out how to. AI said to add a css file and change the html style, but it did not work -->
+<!-- Figure out if we can have line-wrapping within a verbatim environment.
+
+LL reports: could not figure out how to. AI said to add a css file and change the html style, but it did not work -->
 
 
 ````{verbatim}
-### Exercise 2
+### Exercise 1
 
 Create a Github repo called `XX`. Make sure to click the 
 "Add a README file" check box.
@@ -57,7 +67,7 @@ If that fails, it is probably because you have not yet loaded
 
 CP/CR.
 
-```{r introduction-2}
+```{r introduction-1}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -71,17 +81,14 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-Feel free to copy/paste this question as-is, but replacing `XX` with whatever makes sense for your assignment. Of course, the code chunk name will change when your run `check_current_tutorial()`.
+Feel free to copy/paste this question as-is, but replacing `XX` with whatever makes sense for your assignment. That is, you need to provide your own repo name, Quarto document title and so on. The repo name should be descriptive and also not likely to have conflicts with other repos in the students GitHUb account. So, `golf-scores` not `project-1`. Of course, the code chunk name might change when your run `check_current_tutorial()`.
 
 You are, obviously, responsible for adding a knowledge drop which teaches the students something about the larger topic.
 
-
-### Always interactive
-
-Students always need more progress working in the QMD and the Console at the same time. Good data scientists go back and forth between these two modes, writing something in the QMD, executing it in the Console, editing the QMD, executing again, and so on. We need to force students to do that here. Example:
+The second question in the Introduction is often:
 
 ````{verbatim}
-### Exercise 3
+### Exercise 2
 
 In your QMD, put `library(tidyverse)` in a new code chunk. 
 Render the file.
@@ -105,7 +112,7 @@ show_file("XX.qmd", chunk = "Last")
 
 CP/CR.
 
-```{r introduction-3}
+```{r introduction-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -119,14 +126,11 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-Again, feel free to copy/paste this, or, indeed, anything from this document. However, you will need to do some edits, like with `"XX.qmd"`.
+The third question generally load the **tidyverse** library into the Console:
 
-If the target audience for the tutorial is more experienced, you can be less didactic, leaving out several of these instructions. You could also add more steps, like loading more libraries at once.
-
-We then tell students, explicitly, the work with the Console as well.
 
 ````{verbatim}
-### Exercise 4
+### Exercise 3
 
 Place your cursor in the QMD file on the `library(tidyverse)` 
 line. Use `Cmd/Ctrl + Enter` to execute that line.
@@ -136,7 +140,7 @@ to the Console and then executed.
 
 CP/CR.
 
-```{r introduction-4}
+```{r introduction-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -149,6 +153,23 @@ question_text(NULL,
 
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
+
+
+
+### Always interactive
+
+Students always need more progress working in the QMD and the Console at the same time. Good data scientists go back and forth between these two modes, writing something in the QMD, executing it in the Console, editing the QMD, executing again, and so on. We need to force students to do that here. Example:
+
+
+
+Again, feel free to copy/paste this, or, indeed, anything from this document. However, you will need to do some edits, like with `"XX.qmd"`.
+
+If the target audience for the tutorial is more experienced, you can be less didactic, leaving out several of these instructions. You could also add more steps, like loading more libraries at once.
+
+We then tell students, explicitly, the work with the Console as well.
+
+
+
 
 I recommend offering these explicit instructions many, many times. First, students need lots of practice. Second, each time you tell them to add something to the QMD, you give yourself an opportunity for a knowledge drop. The same applies when you tell students to execute, in the Console, this new addition to the QMD. 
 
