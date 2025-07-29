@@ -1,3 +1,9 @@
+# Comments from July 29, 2925.
+
+# This test is possible without an actual learnr session running because of 
+# is_test = TRUE. It uses a saved .rds file with mock submission data and bypasses 
+# the need to interact with a real Shiny/learnr session. 
+
 # Comments from May 21, 2023, after uploading version 0.2.5 to CRAN.
 
 # First, this test, because of the associated fixtures/session_save.rds file,
