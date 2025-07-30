@@ -28,7 +28,7 @@
 #' @examples
 #' \dontrun{
 #' # Download all files from a folder using URL
-#' result <- download_google_drive("https://drive.google.com/drive/folders/ABC?usp=sharing")
+#' result <- download_google_drive("https://drive.google.com/drive/folders/1ABC123def456GHI789jkl?usp=sharing")
 #' 
 #' # Download all files from a folder using ID
 #' result <- download_google_drive("1ABC123def456GHI789jkl")
@@ -369,7 +369,7 @@ download_google_drive <- function(folder_link,
           download_success <- TRUE
           
           if (verbose) {
-            message("[OK] Successfully downloaded: ", file_info$name)
+            message("✓ Successfully downloaded: ", file_info$name)
           }
         }
         
@@ -411,7 +411,7 @@ download_google_drive <- function(folder_link,
           download_success <- TRUE
           
           if (verbose) {
-            message("[OK] Public access download succeeded: ", file_info$name)
+            message("✓ Public access download succeeded: ", file_info$name)
           }
         }
         
@@ -458,7 +458,7 @@ download_google_drive <- function(folder_link,
             download_success <- TRUE
             
             if (verbose) {
-              message("[OK] Temp file method succeeded: ", file_info$name)
+              message("✓ Temp file method succeeded: ", file_info$name)
             }
           }
         }
@@ -494,7 +494,7 @@ download_google_drive <- function(folder_link,
           download_success <- TRUE
           
           if (verbose) {
-            message("[OK] Fresh file reference succeeded: ", file_info$name)
+            message("✓ Fresh file reference succeeded: ", file_info$name)
           }
         }
         
@@ -512,7 +512,7 @@ download_google_drive <- function(folder_link,
       results$error_message[i] <- "All download methods failed"
       
       if (verbose) {
-        message("[FAIL] All download methods failed for: ", file_info$name)
+        message("✗ All download methods failed for: ", file_info$name)
       }
     }
     
@@ -537,7 +537,7 @@ download_google_drive <- function(folder_link,
       message("Downloaded files:")
       successful_files <- results[results$downloaded, ]
       for (j in seq_len(nrow(successful_files))) {
-        message("  [OK] ", successful_files$name[j])
+        message("  ✓ ", successful_files$name[j])
       }
     }
     
@@ -545,7 +545,7 @@ download_google_drive <- function(folder_link,
       failed_files <- results[!results$downloaded, ]
       message("Failed downloads:")
       for (j in seq_len(nrow(failed_files))) {
-        message("  [FAIL] ", failed_files$name[j], ": ", failed_files$error_message[j])
+        message("  ✗ ", failed_files$name[j], ": ", failed_files$error_message[j])
       }
     }
   }
