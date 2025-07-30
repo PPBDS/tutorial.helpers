@@ -1,6 +1,26 @@
 # Priorities
 
-Contact hannahcarroll and set up Zoom interview.
+Contact hannahcarroll and set up Zoom interview. Email her again on Aug 1.
+
+Change find_submissions to gather_submissions().
+
+Under process_submissions(). It is too complex! Does too many things!
+
+New function: submissions_answers(). Takes a list of tibbles. Returns a tibble with a number of rows equal to the length of the list of tibbles. Takes a list of questions (like email, minutes, temperance-17), each of which becomes a column in the answer tibble. If a given input tibble is missing that question, then the result in the returned tibble is NA.
+
+Change process_submission to use submissions_answers(). I think . . .
+
+Checking key vars is its own function: check_key_answers() take a tibble, checks and reports on key answers being present.
+
+  * Records the answer to the "minutes" question. (Replaced with find_answers().)
+  * Has two modes: summary and all. 
+
+New name for process_submissions() ... submissions_summary()
+
+find_answers()                         submissions_answers()
+
+
+
 
 Can you quickly return a list of all the files in a google drive folder?
 
