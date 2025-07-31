@@ -14,6 +14,7 @@
 <url><loc>https://ppbds.github.io/tutorial.helpers/index.html</loc></url>
 <url><loc>https://ppbds.github.io/tutorial.helpers/news/index.html</loc></url>
 <url><loc>https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.html</loc></url>
+<url><loc>https://ppbds.github.io/tutorial.helpers/reference/check_key_vars.html</loc></url>
 <url><loc>https://ppbds.github.io/tutorial.helpers/reference/check_tutorial_defaults.html</loc></url>
 <url><loc>https://ppbds.github.io/tutorial.helpers/reference/determine_code_chunk_name.html</loc></url>
 <url><loc>https://ppbds.github.io/tutorial.helpers/reference/determine_exercise_number.html</loc></url>
@@ -25,12 +26,13 @@
 <url><loc>https://ppbds.github.io/tutorial.helpers/reference/get_submissions_from_learnr_session.html</loc></url>
 <url><loc>https://ppbds.github.io/tutorial.helpers/reference/index.html</loc></url>
 <url><loc>https://ppbds.github.io/tutorial.helpers/reference/knit_tutorials.html</loc></url>
-<url><loc>https://ppbds.github.io/tutorial.helpers/reference/process_submissions.html</loc></url>
 <url><loc>https://ppbds.github.io/tutorial.helpers/reference/return_tutorial_paths.html</loc></url>
 <url><loc>https://ppbds.github.io/tutorial.helpers/reference/set_binary_only_in_r_profile.html</loc></url>
 <url><loc>https://ppbds.github.io/tutorial.helpers/reference/set_positron_settings.html</loc></url>
 <url><loc>https://ppbds.github.io/tutorial.helpers/reference/show_file.html</loc></url>
 <url><loc>https://ppbds.github.io/tutorial.helpers/reference/submission_functions.html</loc></url>
+<url><loc>https://ppbds.github.io/tutorial.helpers/reference/submissions_answers.html</loc></url>
+<url><loc>https://ppbds.github.io/tutorial.helpers/reference/submissions_summary.html</loc></url>
 <url><loc>https://ppbds.github.io/tutorial.helpers/reference/write_answers.html</loc></url>
 </urlset>
 
