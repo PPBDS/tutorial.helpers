@@ -2,7 +2,7 @@
 
 Contact hannahcarroll and set up Zoom interview. Email her again on Aug 1.
 
-Change find_submissions to gather_submissions().
+Change find_submissions to gather_submissions(). SS: Done
 
 Under process_submissions(). It is too complex! Does too many things! SS: Done
 
