@@ -1,5 +1,5 @@
-test_that("find_submissions returns a list", {
-  result <- find_submissions(
+test_that("gather_submissions returns a list", {
+  result <- gather_submissions(
     path = test_path("fixtures", "process_submissions_dir"),
     title = "."
   )
@@ -7,8 +7,8 @@ test_that("find_submissions returns a list", {
   expect_type(result, "list")
 })
 
-test_that("find_submissions returns tibbles in the list", {
-  result <- find_submissions(
+test_that("gather_submissions returns tibbles in the list", {
+  result <- gather_submissions(
     path = test_path("fixtures", "process_submissions_dir"),
     title = "."
   )
@@ -17,8 +17,8 @@ test_that("find_submissions returns tibbles in the list", {
   expect_true(all(sapply(result, function(x) inherits(x, "tbl_df"))))
 })
 
-test_that("find_submissions works with single pattern", {
-  result <- find_submissions(
+test_that("gather_submissions works with single pattern", {
+  result <- gather_submissions(
     path = test_path("fixtures", "process_submissions_dir"),
     title = "getting"
   )

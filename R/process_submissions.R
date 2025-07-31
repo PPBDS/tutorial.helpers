@@ -75,8 +75,8 @@ process_submissions <- function(path,
     stop("Invalid keep_file_name. Allowed values are NULL, 'All', 'Space', or 'Underscore'.")
   }
   
-  # Call find_submissions to get the list of tibbles
-  tibble_list <- find_submissions(path = path, title = title, emails = emails, verbose = verbose)
+  # Call gather_submissions to get the list of tibbles
+  tibble_list <- gather_submissions(path = path, title = title, emails = emails, verbose = verbose)
   
   # Initialize list to store results from each pattern
   all_pattern_results <- list()
@@ -115,7 +115,7 @@ process_submissions <- function(path,
       message("Removing file(s) '", paste(missing_key_vars_files, collapse = "', '"), "' due to missing key variables.")
     }
     
-    # Note: Additional filtering messages removed to avoid redundancy with find_submissions output
+    # Note: Additional filtering messages removed to avoid redundancy with gather_submissions output
     
     # Process results for this pattern based on return_value
     if (return_value == "Summary") {
