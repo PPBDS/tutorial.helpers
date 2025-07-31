@@ -2,28 +2,22 @@
 
 Contact hannahcarroll and set up Zoom interview. Email her again on Aug 1.
 
-Change find_submissions to gather_submissions(). SS: Done
+check_key_vars() should take a list of tibble and return a list of tibbles which are not missing key vars. If verbose > 0 (the default), it reports the names of files which are removed and which key vars they are missing.
 
-Under process_submissions(). It is too complex! Does too many things! SS: Done
+check_membership() should take a list of tibbles and a key var and a vector of allowed values. It returns a list of the tibbles whose key var value is among the allowed list. find_answers() will use check_membership().
 
-New function: submissions_answers(). Takes a list of tibbles. Returns a tibble with a number of rows equal to the length of the list of tibbles. Takes a list of questions (like email, minutes, temperance-17), each of which becomes a column in the answer tibble. If a given input tibble is missing that question, then the result in the returned tibble is NA. SS: Done
+submissions_answers(title, key_var = "email", membership = c("joe@gmail.com"), vars = c("name", "email", "temeperance-17"))) :
+  gathers_submissions() (but only for those which match title) -> list of tibbles
+  check_key_vars() to make sure that the files have the id variable which will be used in  
+    check_membership() list of tibbles -> list_tibbles
+  check_membership() to only keep my students list of tibbles -> list of tibbles
+  create the tibble which it will return. Each vars becomes a column in the resulting tibble.
 
-Change process_submission to use submissions_answers(). I think . . . SS: Done
-
-Checking key vars is its own function: check_key_answers() take a tibble, checks and reports on key answers being present. SS: Done
-
-  * Records the answer to the "minutes" question. (Replaced with find_answers().)
-  * Has two modes: summary and all. 
-
-New name for process_submissions() ... submissions_summary() SS: Done
-
-find_answers()                         submissions_answers() SS: Done
 
 check_vars(tibble_list, vars, verbose = 0) issue. https://github.com/PPBDS/tutorial.helpers/issues/43
 
-Can you quickly return a list of all the files in a google drive folder?
 
-If so, then maybe we quickly return the list of everything, match against title to see which we want, then download those one at a time.
+
 
 Does test cases need to load libraries like library(tibble) and library(dplyr)?
 
