@@ -1,4 +1,4 @@
-#' Process Submissions
+#' Process Submissions Summary
 #'
 #' This function processes submissions from a local directory or Google Drive folder containing HTML/XML files.
 #' It extracts tables from the files, filters them based on a pattern and key variables,
@@ -25,26 +25,26 @@
 #' @examples
 #' \dontrun{
 #' # Process submissions from local directory
-#' process_submissions(path = "path/to/directory")
+#' submissions_summary(path = "path/to/directory")
 #'
 #' # Process submissions with multiple patterns from local directory
-#' process_submissions(path = "path/to/directory", title = "final", key_vars = c("email"))
+#' submissions_summary(path = "path/to/directory", title = "final", key_vars = c("email"))
 #'
 #' # Process submissions and include all emails (no email filtering)
-#' process_submissions(path = "path/to/directory", key_vars = "email", emails = "*")
+#' submissions_summary(path = "path/to/directory", key_vars = "email", emails = "*")
 #'
 #' # Process submissions and return all data
-#' process_submissions(path = "path/to/directory", return_value = "All")
+#' submissions_summary(path = "path/to/directory", return_value = "All")
 #'
 #' # Process submissions with verbose output (level 3)
-#' process_submissions(path = "https://drive.google.com/drive/folders/your_folder_id", verbose = 3)
+#' submissions_summary(path = "https://drive.google.com/drive/folders/your_folder_id", verbose = 3)
 #'
 #' # Process submissions and keep the entire file name in the summary tibble
-#' process_submissions(path = "path/to/directory", return_value = "Summary", keep_file_name = "All")
+#' submissions_summary(path = "path/to/directory", return_value = "Summary", keep_file_name = "All")
 #' }
 #' @export
 
-process_submissions <- function(path, 
+submissions_summary <- function(path, 
                                 title = ".", 
                                 return_value = "Summary", 
                                 key_vars = NULL, 
