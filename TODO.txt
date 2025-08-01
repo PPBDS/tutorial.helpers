@@ -42,6 +42,17 @@ Add response to Issue. Thank her. Ask her to install new version and check.
 
 Must be a way to download the entire folder, given just the url, as opposed to downloading each file one at a time. For Google drive, download the whole folder. (Maybe confirm that it is a folder. That is the only case we allow.) Make sure to thoroughly document what going mess.
 
+
+## make_exercise()
+
+* make_exercise(type = "no") ought to work. That is, make_exercise() should be able to use just the first few letters of the type argument to determine what you want.
+
+* Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason.
+
+* The default for make_exercises() should probably be "no-answer" instead of "code". In the world of AI, most exercises with be type "no-answer."
+
+* make_exercises("no-answer") should have a test code chunk by default. (I assume that this would not cause problems?) Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code.
+
 ## write_answers()
 
 * Delete rds and pdf portions of test-write_answers().
@@ -184,15 +195,7 @@ that we should set for students in the Positron tutorial?
 
 * Move over settings.json manipulations to this package. (??)
 
-## make_exercise()
 
-* make_exercise(type = "no") ought to work. That is, make_exercise() should be able to use just the first few letters of the type argument to determine what you want.
-
-* Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason.
-
-* Are there test cases for make_exercise()? There should be!
-
-* Should Written Exercises with no answers have test code chunks by default? I seem to be using these a lot in 22-arrow. Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code.
 
 
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/gather_submissions.R
 \name{gather_submissions}
 \alias{gather_submissions}
-\title{Find Submissions}
+\title{Gather Submissions}
 \usage{
 gather_submissions(path, title, emails = NULL, verbose = 0)
 }
