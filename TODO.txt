@@ -21,14 +21,12 @@ Obviously, you need to download the directory by hand to your computer to do the
 
 
 
-check_membership() should take a list of tibbles and a key var and a vector of allowed values. It returns a list of the tibbles whose key var value is among the allowed list. find_answers() will use check_membership(). SS: Done
-
 submissions_answers(title, key_var = "email", membership = c("joe@gmail.com"), vars = c("name", "email", "temeperance-17"))) :
   gathers_submissions() (but only for those which match title) -> list of tibbles
   check_key_vars() to make sure that the files have the id variable which will be used in  
     check_membership() list of tibbles -> list_tibbles
   check_membership() to only keep my students list of tibbles -> list of tibbles
-  create the tibble which it will return. Each vars becomes a column in the resulting tibble. SS: Done
+  create the tibble which it will return. Each vars becomes a column in the resulting tibble.
 
 
 check_vars(tibble_list, vars, verbose = 0) issue. https://github.com/PPBDS/tutorial.helpers/issues/43
