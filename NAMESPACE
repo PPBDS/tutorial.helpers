@@ -2,6 +2,7 @@
 
 export(check_current_tutorial)
 export(check_key_vars)
+export(check_membership)
 export(check_tutorial_defaults)
 export(determine_code_chunk_name)
 export(determine_exercise_number)
