@@ -1,4 +1,4 @@
-#' Find Submissions
+#' Gather Submissions
 #'
 #' This function finds and reads HTML/XML files from a local directory or Google Drive folder that match specified patterns.
 #' It extracts tables from the files and returns a list of tibbles.

@@ -1,8 +1,25 @@
 # Priorities
 
-Contact hannahcarroll and set up Zoom interview. Email her again on Aug 1. SS: Done
+* Why do these two commands produce different number of downloads:
 
-check_key_vars() should take a list of tibble and return a list of tibbles which are not missing key vars. If verbose > 0 (the default), it reports the names of files which are removed and which key vars they are missing. SS: Done
+x <- gather_submissions(path = "~/Downloads/responses/", title = "arrow", verbose = 2)
+x2 <- gather_submissions(path = "https://drive.google.com/drive/folders/1RgxfiwPmcKrhYLOqitLQt4KeODYZEu9ZMVvh029qBfy37V0wEbxIg95gwUE0JWL_hXEBuAlT?usp=sharing", title = "arrow", verbose = 2)
+
+Obviously, you need to download the directory by hand to your computer to do the comparison.
+
+* With verbose = 2, gather_submissions() should be telling me stuff when using the emails argument.
+
+* More importantly, gather_submissions() should not take an email argument in the first place. It only uses title to restrict the set of files.
+
+* Fix check_membership(). `data` should probably be `id`. Should handle memberships that are not there.
+
+* Only two possible values of verbose, maybe TRUE and FALSE. Default is FALSE.
+
+* Create a nice test case using real data. Not too big. Can be used for many functions. A good test input is probably a list of tibble of length 3 saved to an rds object.
+
+* Do not dump downloaded files in the current directory. It places stuff in a tmp, and then you delete that directory at the end of the function. Maybe there is an argument like `keep_loc`, which is NULL by default. But if it is present, the downloaded files are dumped there and left alone. But keep_loc must be NULL unless it is a Google Drive download. 
+
+
 
 check_membership() should take a list of tibbles and a key var and a vector of allowed values. It returns a list of the tibbles whose key var value is among the allowed list. find_answers() will use check_membership(). SS: Done
 
