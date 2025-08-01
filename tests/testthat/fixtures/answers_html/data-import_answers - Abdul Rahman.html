@@ -1,0 +1,494 @@
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> id </th>
+   <th style="text-align:left;"> submission_type </th>
+   <th style="text-align:left;"> answer </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> tutorial-id </td>
+   <td style="text-align:left;"> none </td>
+   <td style="text-align:left;"> data-import </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> name </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Abdul Rahman </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> email </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> mono.punjabian@gmail.com </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-1 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Version:                    2.1.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-2 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> students &lt;- read_csv("data/students.csv") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-3 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> students &lt;- read_csv("data/students.csv") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-4 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> print(students) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-5 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> students &lt;- read_csv("data/students.csv", na = c("N/A", "")) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-6 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> students &lt;- read_csv("data/students.csv", na = c("N/A", "")) |&gt;
+  rename(student_id = `Student ID`) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-7 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> library(janitor) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-8 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> students |&gt;
+  clean_names() </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-9 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> students &lt;- read_csv("data/students.csv", na = c("N/A", "")) |&gt;
+  clean_names() |&gt;
+  mutate(meal_plan = factor(meal_plan)) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-10 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> spec (students &lt;- read_csv("data/students.csv", na = c("N/A", "")) |&gt;
+  clean_names() |&gt;
+  mutate(
+    meal_plan = factor(meal_plan),
+    age = if_else(age == "five", "5", age)
+  )) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-11 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> students &lt;- read_csv("data/students.csv", na = c("N/A", ""), show_col_types = TRUE) |&gt;
+  clean_names() |&gt;
+  mutate(
+    meal_plan = factor(meal_plan),
+    age = if_else(age == "five", "5", age),
+    age = parse_number(age)
+  ) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-12 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(file = "data/test_1.csv") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-13 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(file = "data/test_1.csv", show_col_types = FALSE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-14 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv("data/test_2.csv", skip = 2, show_col_types = TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-15 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(file = "data/test_3.csv" , col_names = FALSE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-16 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(
+  file = "data/test_3.csv",
+  col_names = c("a", "b", "c"),
+  col_types = cols(
+    a = col_double(),
+    b = col_double(),
+    c = col_double()
+  )
+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-17 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(
+  "data/test_3.csv",
+ 
+  col_types = cols(
+    a = col_double(),
+    b = col_double(),
+    c = col_double()
+  )
+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-18 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(
+  file = "data/test_5.csv",
+  na = "."
+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-19 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(
+  file = "data/test_6.csv",
+  comment = "#"
+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-20 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(
+  file = "data/test_7.csv",
+  col_types = cols(
+    grade = col_integer(),
+    student = col_character()
+  )
+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-21 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(
+  file = "data/test_bad_names.csv",
+  name_repair = "universal"
+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-22 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv("data/test_bad_names.csv") |&gt;
+  clean_names() </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-23 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(
+  file = "data/test_bad_names.csv",
+  name_repair = janitor::make_clean_names
+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-24 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_delim(
+  file = "data/delim_1.txt",
+  delim = "|"
+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-a-file-25 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_delim(
+  file = "data/delim_1.txt",
+  delim = "|",
+  col_types = cols(
+    population = col_integer(),
+    date = col_date()
+  )
+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-1 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv("
+         a, b, c
+         1, 2, 3") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-2 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv("
+  logical,numeric,date,string
+  TRUE,1,2021-01-15,abc
+  false,4.5,2021-02-15,def
+  T,Inf,2021-02-16,ghi
+") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-3 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> simple_csv &lt;- "
+  x
+  10
+  .
+  20
+  30"
+
+read_csv(simple_csv) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-4 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(
+  file = simple_csv,  # Replace with actual file path if different
+  col_types = list(x = col_double())
+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-5 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> df &lt;- read_csv(
+  file = simple_csv,  # Replace with actual file path if different
+  col_types = list(x = col_double())
+)
+problems(df) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-6 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(simple_csv, "na" = ".") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-7 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> df &lt;- read_csv(
+  file = another_csv,
+  col_types = cols(.default = col_character())
+) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-8 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(another_csv, col_types = cols_only(x = col_character())) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-9 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(file = "data/ex_2.csv") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-10 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(file = "data/ex_2.csv", col_types = cols(.default = col_character())) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-11 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(file = "data/ex_2.csv", col_types = cols(.default = col_character())) |&gt;
+  dplyr::mutate(a = readr::parse_integer(a)) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-12 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> readr::read_csv(file = "data/ex_2.csv", col_types = cols(.default = col_character())) |&gt;
+  dplyr::mutate(
+    a = readr::parse_integer(a),
+    b = readr::parse_date(b, format = "%Y%M%D")
+  ) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-13 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> df &lt;- read_csv("data/ex_3.csv")
+problems(df) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-14 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> readr::read_csv("data/ex_3.csv") |&gt;
+  dplyr::mutate(x = readr::parse_date(x, "%d %B %Y")) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> controlling-column-types-15 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> readr::read_csv("data/ex_3.csv") |&gt;
+  dplyr::mutate(
+    x = readr::parse_date(x, "%d %B %Y"),
+    z = readr::parse_number(z)
+  ) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-multiple-fil-1 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> list.files("data") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-multiple-fil-2 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> list.files("data", pattern = "similar") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-multiple-fil-3 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> list.files("data", pattern = "similar", full.names = TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-multiple-fil-4 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> list.files("data", 
+           pattern = "similar", 
+           full.names = TRUE) |&gt; 
+  purrr::map_dfr(readr::read_csv) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-multiple-fil-5 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> list.files("data", 
+           pattern = "similar", 
+           full.names = TRUE) |&gt; 
+  purrr::map_dfr(~ readr::read_csv(.x, na = ".")) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-multiple-fil-6 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> list.files("data", 
+           pattern = "similar", 
+           full.names = TRUE) |&gt; 
+  purrr::map_dfr(~ readr::read_csv(.x, na = ".", show_col_types = FALSE)) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-multiple-fil-7 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> list.files("data", pattern = "sales") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-multiple-fil-8 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> list.files("data", 
+           pattern = "sales", 
+           full.names = TRUE) |&gt; 
+  purrr::map_dfr(readr::read_csv) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> reading-data-from-multiple-fil-9 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> list.files("data", 
+           pattern = "sales", 
+           full.names = TRUE) |&gt; 
+  purrr::map_dfr(readr::read_csv, id = "file") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> writing-to-a-file-1 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> students2 &lt;- students |&gt; 
+  clean_names() |&gt; 
+  mutate(
+    meal_plan = factor(meal_plan),
+    age = if_else(age == "five", "5", age),
+    age = parse_number(age)
+  )
+
+students2 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> writing-to-a-file-2 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> students2
+print(students2) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> writing-to-a-file-3 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> write_csv(x = students2, file = "data/students2.csv") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> writing-to-a-file-4 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_csv(file = "data/students2.csv") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> writing-to-a-file-5 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> iris_p &lt;- iris |&gt; 
+  ggplot(aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_jitter() +
+  labs(title = "Sepal Dimensions of Various Species of Iris",
+       x = "Sepal Length",
+       y = "Sepal Width") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> writing-to-a-file-6 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> list.files("data") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> writing-to-a-file-7 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_rds(file = "data/test_1.rds") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> writing-to-a-file-8 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> write_rds(x = mtcars, file = "data/test_2.rds") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> writing-to-a-file-9 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> list.files("data") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> writing-to-a-file-10 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> read_rds(file = "data/test_2.rds") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> writing-to-a-file-11 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Why define a standard for columnar in-memory?
+Traditionally, data processing engine developers have created custom data structures to represent datasets in-memory while they are being processed. Given the “custom” nature of these data structures, they must also develop serialization interfaces to convert between these data structures and different file formats, network wire protocols, database clients, and other data transport interface. The net result of this is an incredible amount of waste both in developer time and in CPU cycles spend serializing data from one format to another.
+
+The rationale for Arrow’s in-memory columnar data format is to provide an out-of-the-box solution to several interrelated problems:
+
+A general purpose tabular data representation that is highly efficient to process on modern hardware while also being suitable for a wide spectrum of use cases. We believe that fewer and fewer systems will create their own data structures and simply use Arrow.
+Supports both random access and streaming / scan-based workloads.
+A standardized memory format facilitates reuse of libraries of algorithms. When custom in-memory data formats are used, common algorithms must often be rewritten to target those custom data formats.
+Systems that both use or support Arrow can transfer data between them at little-to-no cost. This results in a radical reduction in the amount of serialization overhead in analytical workloads that can often represent 80-90% of computing costs.
+The language-agnostic design of the Arrow format enables systems written in different programming languages (even running on the JVM) to communicate datasets without serialization overhead. For example, a Java application can call a C or C++ algorithm on data that originated in the JVM. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> data-entry-1 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> # Create the tibble
+my_tibble &lt;- tibble(
+  x = c(1, 2, 5),
+  y = c("h", "m", "g"),
+  z = c(0.08, 0.83, 0.60)
+)
+
+# Print the tibble
+print(my_tibble) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> data-entry-2 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> # Load the tibble package
+library(tibble)
+
+# Create the tibble using tribble()
+my_tibble &lt;- tribble(
+  ~x, ~y, ~z,
+  1,  "h", 0.08,
+  2,  "m", 0.83,
+  5,  "g", 0.60
+)
+
+# Print the tibble
+print(my_tibble) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> minutes </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> 130 </td>
+  </tr>
+</tbody>
+</table>

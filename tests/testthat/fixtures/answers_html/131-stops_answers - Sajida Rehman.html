@@ -1,0 +1,794 @@
+<table>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> id </th>
+   <th style="text-align:left;"> submission_type </th>
+   <th style="text-align:left;"> answer </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> tutorial-id </td>
+   <td style="text-align:left;"> none </td>
+   <td style="text-align:left;"> 131-stops </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> name </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Sajida Rehman </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> email </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> sajidarehman259@gmail.com </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> ID </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> 6674 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-1 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Wisdom, Justice, Courage, and Temperance. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-2 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; show_file(".gitignore")
+stops_files
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-3 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; show_file("stops.qmd", chunk = "Last")
+#| message: false
+library(tidyverse)
+library(primer.data)
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-4 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; library(tidyverse)
+── Attaching core tidyverse packages ──────────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package to force all conflicts to become errors
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-5 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Description
+This data is from the Stanford Open Policing Project, which aims to improve police accountability and transparency by providing data on traffic stops across the United States. The New Orleans dataset includes detailed information about traffic stops conducted by the New Orleans Police Department. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-6 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> A causal effect is the difference between two potential outcomes. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-7 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> The fundamental problem of causal inference is that we can only observe one potential outcome. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-8 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> outcome variable is arrested </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-9 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> An example of a binary, manipulable variable is officer_warning_given, which indicates whether an officer gave a verbal warning before deciding to arrest; this can be influenced through policy or training to potentially reduce unnecessary arrests. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-10 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Each arrest has two potential outcomes—one if the driver is wearing a mask and one if they are not—because we are considering how the treatment variable mask could causally affect the likelihood of arrest. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-11 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> For a single driver, the treatment variable mask can take on two values: 1 if the driver is wearing a mask, and 0 if they are not. Suppose that if the driver wears a mask (mask = 1), they are not arrested (outcome = 0), but if they do not wear a mask (mask = 0), they are arrested (outcome = 1). The causal effect of wearing a mask for this driver is the difference in outcomes: 
+0−1=−1, meaning that wearing a mask reduced the chance of arrest for this individual. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-12 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> One variable in the stops dataset that likely has an important connection to arrested is race. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-13 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Black drivers and White drivers may have different average arrest rates during traffic stops, reflecting potential racial disparities in policing outcomes. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> introduction-14 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> How does a driver's race influence the probability of being arrested during a traffic stop? </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wisdom-1 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Wisdom requires a question, the creation of a Preceptor Table and an examination of our data. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wisdom-2 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> A Preceptor Table is the smallest possible table of data with rows and columns such that, if there is no missing data, we can easily calculate the quantities of interest. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wisdom-3 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> The rows of the Preceptor Table are the units. The outcome is at least one of the columns. If the problem is causal, there will be at least two (potential) outcome columns. The other columns are covariates. If the problem is causal, at least one of the covariates will be a treatment. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wisdom-4 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> The units for this problem are individual traffic stops. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wisdom-5 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> The outcome variable for this problem is arrested, which indicates whether or not an arrest occurred during the traffic stop. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wisdom-6 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> A useful covariate for this problem would be the reason for the stop (e.g., speeding, broken taillight, expired registration). </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wisdom-7 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> In this observational problem, there is no actual treatment applied. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wisdom-8 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> The Preceptor Table refers to the moment after the traffic stop has occurred. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wisdom-9 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> The Preceptor Table for this problem is a structured summary of data, where each row represents a single traffic stop involving one driver. For each stop, the table records the outcome, and several covariates that may help explain that outcome. These covariates include the driver’s race, sex, and possibly age and type of car, as well as the zone where the stop occurred. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wisdom-10 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Are Black drivers more likely to be arrested than White drivers, after accounting for age, sex, and zone? </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> wisdom-11 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Arrests during traffic stops represent a critical area for examining how individual characteristics may influence law enforcement outcomes. This analysis uses data from the Stanford Open Policing Project, comprising approximately 400,000 traffic stops conducted in New Orleans between 2011 and 2018, to investigate whether Black drivers are more likely to be arrested than White drivers, controlling for age, sex, and zone. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-1 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Justice concerns the Population Table and the four key assumptions which underlie it: validity, stability, representativeness, and unconfoundedness. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-2 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Validity is the consistency, or lack thereof, in the columns of the data set and the corresponding columns in the Preceptor Table. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-3 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> One reason the assumption of validity might not hold is that the race column is based on the officer’s perception rather than self-identification, which could lead to misclassification and affect the accuracy of our analysis. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-4 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> The Population Table includes a row for each unit/time combination in the underlying population from which both the Preceptor Table and the data are drawn. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-5 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Each row in the Population Table represents a unique unit/time combination, where the unit is an individual traffic stop involving a single driver, and the time is the specific date and time at which that stop occurred. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-6 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Stability means that the relationship between the columns in the Population Table is the same for three categories of rows: the data, the Preceptor Table, and the larger population from which both are drawn. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-7 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> One reason the assumption of stability might not hold is that officer behavior or department policies may change over time. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-8 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Representativeness, or the lack thereof, concerns two relationships among the rows in the Population Table. The first is between the data and the other rows. The second is between the other rows and the Preceptor Table. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-9 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> One reason the assumption of representativeness might not hold is that the data only includes stops where complete information was recorded, and stops resulting in arrests were more likely to have missing values, so the observed data may not accurately reflect the overall population of all traffic stops. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-10 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> One reason the assumption of representativeness might not be true is that the Preceptor Table excludes cases with missing data, whereas the full Population includes all traffic stops. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-11 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Unconfoundedness means that the treatment assignment is independent of the potential outcomes, when we condition on pre-treatment covariates. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-12 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; library(tidymodels)
+── Attaching packages ────────────────────────────────────────── tidymodels 1.3.0 ──
+✔ broom        1.0.8     ✔ rsample      1.3.0
+✔ dials        1.4.0     ✔ tune         1.3.0
+✔ infer        1.0.8     ✔ workflows    1.2.0
+✔ modeldata    1.4.0     ✔ workflowsets 1.1.1
+✔ parsnip      1.3.2     ✔ yardstick    1.3.2
+✔ recipes      1.3.1     
+── Conflicts ───────────────────────────────────────────── tidymodels_conflicts() ──
+✖ scales::discard() masks purrr::discard()
+✖ dplyr::filter()   masks stats::filter()
+✖ recipes::fixed()  masks stringr::fixed()
+✖ dplyr::lag()      masks stats::lag()
+✖ yardstick::spec() masks readr::spec()
+✖ recipes::step()   masks stats::step()
+• Search for functions across packages at https://www.tidymodels.org/find/
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-13 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; library(broom)
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-14 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> $$
+Y \sim \text{Bernoulli}(\rho)
+$$
+
+$$
+\rho = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_k X_k)}}
+$$
+
+$$
+P(Y = 1) = \rho
+$$ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> justice-15 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> One potential limitation of our model is that it is based only on complete cases, which may bias results if the excluded stops with missing data. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-1 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Courage starts with math, explores models, and then creates the data generating mechanism. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-2 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> linear_reg(engine = "lm") </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-3 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> linear_reg(engine = "lm") |&gt; 
+   fit(arrested ~ sex, data = x) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-4 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> linear_reg(engine = "lm") |&gt; 
+   fit(arrested ~ sex, data = x) |&gt; 
+   tidy(conf.int = TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-5 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> linear_reg(engine = "lm") |&gt; 
+  fit(arrested ~ race, data = x) |&gt; 
+  tidy(conf.int = TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-6 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> linear_reg(engine = "lm") |&gt; 
+  fit(arrested ~ race, data = x) |&gt; 
+  tidy(conf.int = TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-7 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> linear_reg(engine = "lm") |&gt; 
+  fit(arrested ~ sex + race, data = x) |&gt; 
+  tidy(conf.int = TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-8 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> linear_reg(engine = "lm") |&gt; 
+  fit(arrested ~ sex + race * zone, data = x) |&gt; 
+  tidy(conf.int = TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-9 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> fit_stops </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-10 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; fit_stops
+parsnip model object
+
+
+Call:
+stats::lm(formula = arrested ~ sex + race * zone, data = data)
+
+Coefficients:
+    (Intercept)          sexMale        raceWhite            zoneB  
+      0.1773298        0.0614460       -0.0445247        0.0146036  
+          zoneC            zoneD            zoneE            zoneF  
+      0.0061012        0.0780600        0.0019025       -0.0027057  
+          zoneG            zoneH            zoneI            zoneJ  
+      0.0308717        0.0757019        0.0330416        0.0237773  
+          zoneK            zoneL            zoneM            zoneN  
+      0.0586687       -0.0038877        0.0393026        0.0139437  
+          zoneO            zoneP            zoneQ            zoneR  
+      0.0232251        0.0140617        0.0126170        0.0119566  
+          zoneS            zoneT            zoneU            zoneV  
+      0.0594727        0.0113267        0.0071986        0.0770051  
+          zoneW            zoneX            zoneY  raceWhite:zoneB  
+      0.1143814        0.0057280        0.0386437       -0.0077384  
+raceWhite:zoneC  raceWhite:zoneD  raceWhite:zoneE  raceWhite:zoneF  
+      0.0065557        0.0294040        0.0068179       -0.0137965  
+raceWhite:zoneG  raceWhite:zoneH  raceWhite:zoneI  raceWhite:zoneJ  
+      0.0088500        0.0085970       -0.0339373       -0.0244272  
+raceWhite:zoneK  raceWhite:zoneL  raceWhite:zoneM  raceWhite:zoneN  
+     -0.0381747       -0.0075094       -0.0423222       -0.0566405  
+raceWhite:zoneO  raceWhite:zoneP  raceWhite:zoneQ  raceWhite:zoneR  
+     -0.0149832        0.0092133       -0.0544990       -0.0379411  
+raceWhite:zoneS  raceWhite:zoneT  raceWhite:zoneU  raceWhite:zoneV  
+     -0.0250048       -0.0272932        0.0383220       -0.0387945  
+raceWhite:zoneW  raceWhite:zoneX  raceWhite:zoneY  
+     -0.1233162        0.0843196       -0.0002596  
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-11 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; library(easystats)
+# Attaching packages: easystats 0.7.4 (red = needs update)
+✖ bayestestR  0.16.0   ✖ correlation 0.8.7 
+✖ datawizard  1.1.0    ✔ effectsize  1.0.1 
+✖ insight     1.3.0    ✖ modelbased  0.11.2
+✖ performance 0.14.0   ✖ parameters  0.26.0
+✔ report      0.6.1    ✔ see         0.11.0
+
+Restart the R-Session and update packages with `easystats::easystats_update()`.
+
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-12 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; check_predictions(extract_fit_engine(fit_stops))
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-13 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> $$
+\widehat{\text{arrested}} =\ 
+0.1770 
++ 0.0614 \cdot \text{sex}_{\text{Male}} 
+- 0.0445 \cdot \text{race}_{\text{White}} \\
++ 0.0146 \cdot \text{zone}_{\text{B}} 
++ 0.0061 \cdot \text{zone}_{\text{C}} 
++ 0.0781 \cdot \text{zone}_{\text{D}} \\
++ 0.0019 \cdot \text{zone}_{\text{E}} 
+- 0.0027 \cdot \text{zone}_{\text{F}} 
++ 0.0309 \cdot \text{zone}_{\text{G}} 
++ 0.0757 \cdot \text{zone}_{\text{H}} \\
++ \text{(interaction terms for race and zone)}
+$$ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-14 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; tutorial.helpers::show_file("stops.qmd", chunk = "Last")
+#| cache: true
+x &lt;- stops |&gt;
+  filter(race %in% c("black", "white")) |&gt;
+  mutate(race = str_to_title(race), 
+         sex = str_to_title(sex))
+
+fit_stops &lt;- linear_reg() |&gt;
+    set_engine("lm") |&gt;
+    fit(arrested ~ sex + race*zone, data = x)
+fit_stops
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-15 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; tutorial.helpers::show_file(".gitignore")
+stops_files
+
+*_cache
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-16 </td>
+   <td style="text-align:left;"> exercise </td>
+   <td style="text-align:left;"> tidy(fit_stops, conf.int = TRUE) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-17 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; tutorial.helpers::show_file("stops.qmd", chunk = "Last")
+#| label: tbl-fit-summary
+#| cache: true
+
+tidy(fit_stops, conf.int = TRUE) |&gt;
+  select(term, estimate, conf.low, conf.high) |&gt;
+  mutate(across(where(is.numeric), ~round(.x, 3))) |&gt;
+  gt() |&gt;
+  tab_header(
+    title = "Estimated Coefficients and 95% Confidence Intervals",
+    subtitle = "Linear model for predicting arrest during traffic stops"
+  ) |&gt;
+  cols_label(
+    term = "Variable",
+    estimate = "Estimate",
+    conf.low = "Lower 95% CI",
+    conf.high = "Upper 95% CI"
+  )
+
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> courage-18 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> We model the likelihood of being arrested during a traffic stop, a binary outcome, as a logistic function of driver sex, race, and the zone in which the stop occurred, including interaction effects between race and zone. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-1 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Temperance uses the data generating mechanism to answer the questions with which we began. Humility reminds us that this answer is always a lie. We can also use the DGM to calculate many similar quantities of interest, displaying the results graphically. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-2 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> The estimated coefficient of 0.06 for sexMale suggests that, holding race and zone constant, male drivers are associated with a 6 percentage point higher probability of being arrested during a traffic stop compared to female drivers. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-3 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> The estimated coefficient of -0.04 for raceWhite indicates that, holding sex and zone constant, White drivers are associated with a 4 percentage point lower probability of being arrested during a traffic stop compared to black drivers. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-4 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> he estimated intercept of 0.18 represents the predicted probability of arrest for the reference group, typically female, non-White drivers in the baseline zone </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-5 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; library(marginaleffects)
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-6 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> How does a driver's race, sex, and location (zone) influence the probability of being arrested during a traffic stop in New Orleans? </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-7 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; predictions(fit_stops)
+
+ Estimate Std. Error    z Pr(&gt;|z|)     S 2.5 % 97.5 %
+    0.179    0.00343 52.2   &lt;0.001   Inf 0.173  0.186
+    0.142    0.00419 33.8   &lt;0.001 828.0 0.133  0.150
+    0.250    0.00451 55.5   &lt;0.001   Inf 0.241  0.259
+    0.142    0.00419 33.8   &lt;0.001 828.0 0.133  0.150
+    0.232    0.01776 13.1   &lt;0.001 127.6 0.198  0.267
+--- 378457 rows omitted. See ?print.marginaleffects ---
+    0.208    0.00390 53.4   &lt;0.001   Inf 0.201  0.216
+    0.270    0.00377 71.5   &lt;0.001   Inf 0.262  0.277
+    0.270    0.00377 71.5   &lt;0.001   Inf 0.262  0.277
+    0.270    0.00377 71.5   &lt;0.001   Inf 0.262  0.277
+    0.189    0.00545 34.7   &lt;0.001 874.0 0.179  0.200
+Type: numeric
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-8 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; plot_predictions(fit_stops, by = "sex")
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-9 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; plot_predictions(fit_stops, condition = "sex")
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-10 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> plot_predictions(fit_stops, condition = c("sex", "race")) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-11 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> # Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(scales)
+library(tidytext)  # for reorder_within() and scale_x_reordered()
+
+# Create a polished plot
+plot_predictions(fit_stops$fit,
+                 newdata = "balanced",
+                 condition = c("zone", "race", "sex"),
+                 draw = FALSE) |&gt; 
+  as_tibble() |&gt; 
+  group_by(zone, sex) |&gt; 
+  mutate(sort_order = estimate[race == "Black"]) |&gt; 
+  ungroup() |&gt; 
+  mutate(zone = reorder_within(zone, sort_order, sex)) |&gt; 
+  ggplot(aes(x = zone, 
+             y = estimate, 
+             color = race)) +
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high), 
+                width = 0.2,
+                position = position_dodge(width = 0.5),
+                linewidth = 0.8,
+                alpha = 0.8) +
+  geom_point(size = 2.5, 
+             position = position_dodge(width = 0.5)) +
+  facet_wrap(~ sex, scales = "free_x") +
+  scale_x_reordered() +  # ← Corrected function name
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  scale_color_manual(values = c("Black" = "#1b9e77", "White" = "#d95f02")) +
+  labs(
+    title = "Predicted Arrest Probability by Race, Zone, and Sex",
+    subtitle = "Black drivers face higher arrest rates across zones, especially among males",
+    x = "Zone",
+    y = "Predicted Probability of Arrest",
+    caption = "Source: New Orleans Traffic Stops Dataset"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 13, margin = margin(b = 10)),
+    plot.caption = element_text(size = 10, hjust = 0),
+    axis.text.x = element_text(size = 10, angle = 45, hjust = 1),
+    legend.position = "top",
+    strip.text = element_text(face = "bold", size = 12)
+  ) </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-12 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; tutorial.helpers::show_file("stops.qmd", chunk = "Last")
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(scales)
+library(tidytext)  # for reorder_within() and scale_x_reordered()
+
+# Create a polished plot
+plot_predictions(fit_stops$fit,
+                 newdata = "balanced",
+                 condition = c("zone", "race", "sex"),
+                 draw = FALSE) |&gt; 
+  as_tibble() |&gt; 
+  group_by(zone, sex) |&gt; 
+  mutate(sort_order = estimate[race == "Black"]) |&gt; 
+  ungroup() |&gt; 
+  mutate(zone = reorder_within(zone, sort_order, sex)) |&gt; 
+  ggplot(aes(x = zone, 
+             y = estimate, 
+             color = race)) +
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high), 
+                width = 0.2,
+                position = position_dodge(width = 0.5),
+                linewidth = 0.8,
+                alpha = 0.8) +
+  geom_point(size = 2.5, 
+             position = position_dodge(width = 0.5)) +
+  facet_wrap(~ sex, scales = "free_x") +
+  scale_x_reordered() +  # ← Corrected function name
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  scale_color_manual(values = c("Black" = "#1b9e77", "White" = "#d95f02")) +
+  labs(
+    title = "Predicted Arrest Probability by Race, Zone, and Sex",
+    subtitle = "Black drivers face higher arrest rates across zones, especially among males",
+    x = "Zone",
+    y = "Predicted Probability of Arrest",
+    caption = "Source: New Orleans Traffic Stops Dataset"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 13, margin = margin(b = 10)),
+    plot.caption = element_text(size = 10, hjust = 0),
+    axis.text.x = element_text(size = 10, angle = 45, hjust = 1),
+    legend.position = "top",
+    strip.text = element_text(face = "bold", size = 12)
+  )
+
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-13 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> We estimate that Black male drivers in Zone D face a 25% chance of arrest, with a 95% confidence interval of 23% to 27%. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-14 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> Our estimates may be biased due to unmeasured factors and data imbalance, such as overrepresentation of certain zones or officer bias. A better approach could involve weighting or mixed-effects models, which might lower the estimated arrest probability for Black drivers to around 22% with a 95% confidence interval of [20%, 24%]. </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-15 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> &gt; tutorial.helpers::show_file("stops.qmd")
+---
+title: "Stops"
+author: "Sajida Rehman"
+execute: 
+  echo: false
+format: html
+---
+
+Arrests during traffic stops represent a critical area for examining how individual characteristics may influence law enforcement outcomes. Using data from a study of New Orleans drivers, we seek to understand the relationship between driver race and the probability of getting arrested during a traffic stop. However, the data used in both our Preceptor Table and dataset may not fully represent the broader population, as they may cover different time periods and could reflect biases from certain officers who unfairly target specific groups. We modeled arrested as a linear function of both sex and the product of race and zone. From this, we examined that Males are less likely of getting arrested than Females. Our analysis suggests that males are less likely to be arrested than females. Specifically, we estimate that Black drivers in New Orleans face about a 25% chance of being arrested during a traffic stop, compared to roughly 20% for White drivers, with this estimate incorporating inherent uncertainty.
+
+$$
+Y \sim \text{Bernoulli}(\rho)
+$$
+
+$$
+\rho = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_k X_k)}}
+$$
+
+$$
+P(Y = 1) = \rho
+$$
+
+$$
+\widehat{\text{arrested}} =\ 
+0.1770 
++ 0.0614 \cdot \text{sex}_{\text{Male}} 
+- 0.0445 \cdot \text{race}_{\text{White}} \\
++ 0.0146 \cdot \text{zone}_{\text{B}} 
++ 0.0061 \cdot \text{zone}_{\text{C}} 
++ 0.0781 \cdot \text{zone}_{\text{D}} \\
++ 0.0019 \cdot \text{zone}_{\text{E}} 
+- 0.0027 \cdot \text{zone}_{\text{F}} 
++ 0.0309 \cdot \text{zone}_{\text{G}} 
++ 0.0757 \cdot \text{zone}_{\text{H}} \\
++ \text{(interaction terms for race and zone)}
+$$
+
+
+```{r}
+#| message: false
+library(tidyverse)
+library(primer.data)
+library(tidymodels)
+library(broom)
+library(marginaleffects)
+```
+
+```{r}
+#| cache: true
+x &lt;- stops |&gt;
+  filter(race %in% c("black", "white")) |&gt;
+  mutate(race = str_to_title(race), 
+         sex = str_to_title(sex))
+
+fit_stops &lt;- linear_reg() |&gt;
+    set_engine("lm") |&gt;
+    fit(arrested ~ sex + race*zone, data = x)
+fit_stops
+```
+
+```{r}
+fit_stops_logistic &lt;- logistic_reg() |&gt;
+  set_engine("glm") |&gt;
+  fit(as.factor(arrested) ~ sex + race, data = x)
+
+tidy(fit_stops_logistic, conf.int = TRUE) |&gt;
+  select(term, estimate, conf.low, conf.high) |&gt;
+  mutate(across(where(is.numeric), ~round(., 3))) |&gt;
+  knitr::kable(
+    caption = "Logistic Regression Estimates for Arrest Probability (Source: Traffic stops dataset filtered for Black and White drivers)"
+  )
+```
+
+```{r}
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(scales)
+library(tidytext)  # for reorder_within() and scale_x_reordered()
+
+# Create a polished plot
+plot_predictions(fit_stops$fit,
+                 newdata = "balanced",
+                 condition = c("zone", "race", "sex"),
+                 draw = FALSE) |&gt; 
+  as_tibble() |&gt; 
+  group_by(zone, sex) |&gt; 
+  mutate(sort_order = estimate[race == "Black"]) |&gt; 
+  ungroup() |&gt; 
+  mutate(zone = reorder_within(zone, sort_order, sex)) |&gt; 
+  ggplot(aes(x = zone, 
+             y = estimate, 
+             color = race)) +
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high), 
+                width = 0.2,
+                position = position_dodge(width = 0.5),
+                linewidth = 0.8,
+                alpha = 0.8) +
+  geom_point(size = 2.5, 
+             position = position_dodge(width = 0.5)) +
+  facet_wrap(~ sex, scales = "free_x") +
+  scale_x_reordered() +  # ← Corrected function name
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  scale_color_manual(values = c("Black" = "#1b9e77", "White" = "#d95f02")) +
+  labs(
+    title = "Predicted Arrest Probability by Race, Zone, and Sex",
+    subtitle = "Black drivers face higher arrest rates across zones, especially among males",
+    x = "Zone",
+    y = "Predicted Probability of Arrest",
+    caption = "Source: New Orleans Traffic Stops Dataset"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 13, margin = margin(b = 10)),
+    plot.caption = element_text(size = 10, hjust = 0),
+    axis.text.x = element_text(size = 10, angle = 45, hjust = 1),
+    legend.position = "top",
+    strip.text = element_text(face = "bold", size = 12)
+  )
+
+```
+&gt; </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-16 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> https://sajida25.github.io/stops/ </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> temperance-17 </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> https://github.com/Sajida25/stops </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> minutes </td>
+   <td style="text-align:left;"> question </td>
+   <td style="text-align:left;"> 180 </td>
+  </tr>
+</tbody>
+</table>
