@@ -2,33 +2,73 @@
 % Please edit documentation in R/submissions_answers.R
 \name{submissions_answers}
 \alias{submissions_answers}
-\title{Extract Answers from List of Tibbles}
+\title{Extract Answers from Submissions with Filtering}
 \usage{
-submissions_answers(tibble_list, questions, keep_file_name = NULL)
+submissions_answers(
+  path,
+  title,
+  key_var,
+  membership,
+  vars,
+  keep_file_name = NULL,
+  verbose = 0
+)
 }
 \arguments{
-\item{tibble_list}{A named list of tibbles, each containing "id" and "answer" columns}
+\item{path}{The path to the local directory or Google Drive folder URL containing submissions}
 
-\item{questions}{A character vector of questions/variables to extract}
+\item{title}{A character vector of patterns to match against file names (passed to gather_submissions)}
+
+\item{key_var}{A character string specifying the key variable to check for membership (e.g., "email")}
+
+\item{membership}{A character vector of allowed values for the key variable, or "*" to include all submissions}
+
+\item{vars}{A character vector of variables/questions to extract}
 
 \item{keep_file_name}{How to handle file names: NULL (don't include), "All" (full name),
 "Space" (up to first space), "Underscore" (up to first underscore)}
+
+\item{verbose}{Verbosity level: 0 (no messages), 1 (basic), 2 (detailed), 3 (very detailed)}
 }
 \value{
-A tibble with one row per input tibble, columns for each question,
+A tibble with one row per valid submission, columns for each variable,
 optionally a "source" column, and an "answers" column with row counts
 }
 \description{
-This function takes a list of tibbles and extracts specified questions/variables,
-returning a tibble with one row per input tibble and one column per question.
-Missing questions result in NA values.
+This function gathers submissions matching a title pattern, filters them by membership,
+and extracts specified variables, returning a tibble with one row per valid submission
+and one column per variable.
 }
 \examples{
 \dontrun{
-# Extract email and age from list of tibbles
-result <- submissions_answers(my_tibble_list, c("email", "age"))
+# Extract specific variables from submissions matching title pattern
+result <- submissions_answers(
+  path = "path/to/submissions",
+  title = c("getting", "survey"), 
+  key_var = "email",
+  membership = c("joe@gmail.com", "jane@student.edu"),
+  vars = c("name", "email", "temperance-17")
+)
 
-# Include source file names
-result <- submissions_answers(my_tibble_list, c("email", "age"), keep_file_name = "All")
+# Include all submissions regardless of email
+result <- submissions_answers(
+  path = "path/to/submissions",
+  title = "assignment",
+  key_var = "email",
+  membership = "*",
+  vars = c("name", "email", "question1"),
+  verbose = 1
+)
+
+# Include source file names and use current directory
+result <- submissions_answers(
+  path = ".",
+  title = "assignment",
+  key_var = "email", 
+  membership = c("student1@edu.com", "student2@edu.com"),
+  vars = c("name", "email", "question1"),
+  keep_file_name = "All",
+  verbose = 1
+)
 }
 }
