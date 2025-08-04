@@ -31,6 +31,9 @@ Anytime you ask a student to execute something in the Console, you confirm that 
 
 Feel free to use any of the example Exercises from this document. Soon, we will add options to `tutorial.helpers::make_exercises()` to make this easier. Either way, you will need to do some edits, like with `"XX.qmd"`. That is, any time you see `XX` in an example exercise, you need to replace it with something sensible. 
 
+
+
+
 ### Introduction
 
 Always begin by having students set up a repo and Quarto document to work in.

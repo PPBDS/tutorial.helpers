@@ -1,3 +1,96 @@
+## Anish
+
+* Reach chapter 1 (whole game) and testing chapters (13-15) in R Packages: https://r-pkgs.org/
+
+* Under make_exercise() and the test-make_exercise().
+
+* Reading discussion below.
+
+## make_exercise()
+
+* Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason. But maybe we can test. Ask AI! There are rstudioapi functions which create a blank file. I bet that, after you run that, you can run make_exercise() and it will file that file. Then you just need to check that the contests of the file match what it should.
+
+* Test cases for the three allowed `type` values.
+
+* make_exercise(type = "no") ought to work. That is, make_exercise() should be able to use just the first few letters of the type argument to determine what you want.
+
+* The default for make_exercises() should probably be "no-answer" instead of "code". In the world of AI, most exercises with be type "no-answer." Should include `echo = TRUE`. Three hashes before and after the tets chunk. Should we include "Our code:"? -- probably not. 
+
+* What about the chunk label? Take a look at format_tutorial(). It must be something, probably 
+
+### Exercise 1
+
+
+```{r makeexercise-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+Our code:
+
+```{r echo = TRUE}
+
+```
+
+
+
+
+
+
+
+* make_exercises("no-answer") should have a test code chunk by default. (I assume that this would not cause problems?) Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code. Inserting our code both tests that it works and shows students our code, and what it produces. Or maybe this isn't used widely enough to be worth it?
+
+
+* We need new options for make_exercises() which create the default questions for some of the new AI stuff.
+
+  + type = "introduction" gives you the first three questions in the Introduction of an ai.tutorial. (Note that make_exercises handles making the exercise number and chunk names for one question work automatically. Will it do that for three added questions.)
+
+  + type = "summary" gives you the 
+
+  + type = "plot" gives you the four questions which result in a plot, which is the usual fashion in which we complete a section (topic) within a tutorial.
+
+  + type = "ai" gives something like:
+
+````{verbatim}
+### Exercise 3
+
+Place your cursor in the QMD file in the last code chunk. Use `Cmd/Ctrl + Enter` to execute the last line or pipe.
+
+Note that this causes the code to be copied down to the Console and then executed. 
+
+CP/CR.
+
+```{r introduction-3}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 3)
+```
+
+###
+
+Our code:
+
+```{r, echo=TRUE}
+...
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+
+
+
 # Priorities
 
 * Why do these two commands produce different number of downloads:
@@ -43,57 +136,6 @@ Add response to Issue. Thank her. Ask her to install new version and check.
 Must be a way to download the entire folder, given just the url, as opposed to downloading each file one at a time. For Google drive, download the whole folder. (Maybe confirm that it is a folder. That is the only case we allow.) Make sure to thoroughly document what going mess.
 
 
-## make_exercise()
-
-* make_exercise(type = "no") ought to work. That is, make_exercise() should be able to use just the first few letters of the type argument to determine what you want.
-
-* Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason.
-
-* The default for make_exercises() should probably be "no-answer" instead of "code". In the world of AI, most exercises with be type "no-answer."
-
-* make_exercises("no-answer") should have a test code chunk by default. (I assume that this would not cause problems?) Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code. Inserting our code both tests that it works and shows students our code, and what it produces. Or maybe this isn't used widely enough to be worth it?
-
-
-* We need new options for make_exercises() which create the default questions for some of the new AI stuff.
-
-  + type = "introduction" gives you the first three questions in the Introduction of an ai.tutorial. (Note that make_exercises handles making the exercise number and chunk names for one question work automatically. Will it do that for three added questions.)
-
-  + type = "summary" gives you the 
-
-  + type = "plot" gives you the four questions which result in a plot, which is the usual fashion in which we complete a section (topic) within a tutorial.
-
-  + type = "ai" gives something like:
-
-````{verbatim}
-### Exercise 3
-
-Place your cursor in the QMD file in the last code chunk. Use `Cmd/Ctrl + Enter` to execute the last line or pipe.
-
-Note that this causes the code to be copied down to the Console and then executed. 
-
-CP/CR.
-
-```{r introduction-3}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
-```
-
-###
-
-Our code:
-
-```{r, echo=TRUE}
-...
-```
-
-### 
-
-<!-- XX: Insert a knowledge drop related to this project. -->
-````
 
 
 ## write_answers()
