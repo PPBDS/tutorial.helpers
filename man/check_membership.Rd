@@ -7,7 +7,7 @@
 check_membership(tibble_list, key_var, membership, verbose = 0)
 }
 \arguments{
-\item{tibble_list}{A named list of tibbles, each containing an "id" column and a data column}
+\item{tibble_list}{A named list of tibbles, each containing an "id" column and an "answer" column}
 
 \item{key_var}{A character string specifying the key variable to check}
 
@@ -33,9 +33,9 @@ students or participants.
 \dontrun{
 # Create sample data with student emails
 tibble1 <- tibble(id = c("name", "email", "age"), 
-                  data = c("John", "john@student.edu", "20"))
+                  answer = c("John", "john@student.edu", "20"))
 tibble2 <- tibble(id = c("name", "email", "age"), 
-                  data = c("Jane", "jane@external.com", "22"))
+                  answer = c("Jane", "jane@external.com", "22"))
 
 tibble_list <- list("student1.html" = tibble1, "student2.html" = tibble2)
 my_students <- c("john@student.edu", "mary@student.edu", "bob@student.edu")
