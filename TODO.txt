@@ -1,8 +1,8 @@
 ## Anish
 
-* Reach chapter 1 (whole game) and testing chapters (13-15) in R Packages: https://r-pkgs.org/
+* Read chapter 1 (whole game) and testing chapters (13-15) in R Packages: https://r-pkgs.org/
 
-* Under make_exercise() and the test-make_exercise().
+* Look at make_exercise() and the test-make_exercise().
 
 * Reading discussion below.
 
@@ -14,35 +14,18 @@
 
 * make_exercise(type = "no") ought to work. That is, make_exercise() should be able to use just the first few letters of the type argument to determine what you want.
 
-* The default for make_exercises() should probably be "no-answer" instead of "code". In the world of AI, most exercises with be type "no-answer." Should include `echo = TRUE`. Three hashes before and after the tets chunk. Should we include "Our code:"? -- probably not. 
-
-* What about the chunk label? Take a look at format_tutorial(). It must be something, probably 
-
-### Exercise 1
+* The default for make_exercises() should probably be "no-answer" instead of "code". In the world of AI, most exercises with be type "no-answer." 
 
 
-```{r makeexercise-1}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
-```
+* Add a test chunk for type = "no-answer". Should include `echo = TRUE`. Three hashes before and after the test chunk. 
 
-###
+* What about the chunk label? Take a look at format_tutorial(). It must be something, probably just like the code chunk label in exercise test. In other words, something like:
 
-Our code:
-
-```{r echo = TRUE}
+```{r makeexercise-2-test, echo = TRUE}
 
 ```
 
-
-
-
-
-
+Stop here.
 
 * make_exercises("no-answer") should have a test code chunk by default. (I assume that this would not cause problems?) Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code. Inserting our code both tests that it works and shows students our code, and what it produces. Or maybe this isn't used widely enough to be worth it?
 
@@ -58,7 +41,7 @@ Our code:
   + type = "ai" gives something like:
 
 ````{verbatim}
-### Exercise 3
+### Exercise 2
 
 Place your cursor in the QMD file in the last code chunk. Use `Cmd/Ctrl + Enter` to execute the last line or pipe.
 
@@ -66,7 +49,7 @@ Note that this causes the code to be copied down to the Console and then execute
 
 CP/CR.
 
-```{r introduction-3}
+```{r makeexercise-2}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
