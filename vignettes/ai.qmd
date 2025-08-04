@@ -9,31 +9,31 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
-<!-- DK: Anytime you ask a student to execute something in the Console, you confirm that they have done so with CP/CR. -->
-
-## Introduction
+### Introduction
 
 AI changes everything.
 
-This document describes the best way to write R tutorials which embrace AI usage by students. Prior to the rise of AI, [this was](instructions.html) the best way to write tutorials, especially those which cover [the material in an assigned textbook](books.html). This document assumes that you already know how to [construct tutorials](instructions.html) using the [**learnr**](https://rstudio.github.io/learnr/) package and with the help of the [**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers) package. Students need some background in order to complete these sorts of tutorials, some familiarity with R, GitHub and so on. Completing the first four tutorials (i.e., through "Positron and GitHub Introduction") from [**positron.tutorials**](https://ppbds.github.io/positron.tutorials/) and a few tutorials from [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) is usually enough preparation.
+This document describes the best way to write R tutorials which embrace AI usage by students. Prior to the rise of AI, [this was](instructions.html) the best way to write tutorials, especially those which cover [the material in an assigned textbook](books.html). This document assumes that you already know how to [construct tutorials](instructions.html) using the [**learnr**](https://rstudio.github.io/learnr/) package, and with the help of the [**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers) package. Students need some background in order to complete these sorts of tutorials, some familiarity with R, GitHub and so on. Completing the first four tutorials (i.e., through "Positron and GitHub Introduction") from [**positron.tutorials**](https://ppbds.github.io/positron.tutorials/) and a few tutorials from [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) is usually enough preparation.
 
-The rise of AI leads to a new kind of tutorial. Our purpose is no longer to teach students how to code. *Our purpose is to teach students how to use AI to code.* 
+The rise of AI leads to a new kind of tutorial. Our purpose is no longer to teach students how to code. 
+
+*Our purpose is to teach students how to use AI to create.* 
+
+Students always need more progress working in the Quarto document (the QMD) and the Console at the same time. Good data scientists go back and forth between these two modes, writing something in the QMD, executing it in the Console, editing the QMD, executing again, and so on. We need to force students to do that here.
 
 AI tutorials begin with an Introduction which begins with a summary of the skills which the tutorial will cover. The Introduction continues with a series of exercises which set up the repo/project/QMD in which most of the tutorial will be completed.
 
 After the Introduction, there are 3 to 5 Sections --- the official **learnr** nomenclature is "Topics" --- which are the meat of the tutorial. 
 
-The last topic is the Summary. It starts with the same overview with which the Introduction began, but in the past tense. It then has a couple exercises which finish up the tutorial by using `quarto publish gh-pages analysis.qmd` to create a webpage with all the cool plots which the student has created. The URL for this new webpage is usually the answer to the last exercise in Summary.
+The last topic is the Summary. It starts with the same overview with which the Introduction began, but in the past tense. It then has a couple exercises which finish up the tutorial by using `quarto publish gh-pages analysis.qmd` to create a webpage with all the cool plots which the student has created. The URL for this new webpage is usually the answer to the last Exercise in Summary, thereby finishing the tutorial.
+
+Anytime you ask a student to execute something in the Console, you confirm that they have done so with CP/CR, the abbreviation to **c**opy/**p**aste the **c**ommand/**r**esponse.
+
+Feel free to use any of the example Exercises from this document. Soon, we will add options to `tutorial.helpers::make_exercises()` to make this easier. Either way, you will need to do some edits, like with `"XX.qmd"`. That is, any time you see `XX` in an example exercise, you need to replace it with something sensible. 
 
 ### Introduction
 
 Always begin by having students set up a repo and Quarto document to work in.
-
-<!-- Figure out if we can have line-wrapping within a verbatim environment.
-
-LL reports: could not figure out how to. AI said to add a css file and change the html style, but it did not work -->
-
 
 ````{verbatim}
 ### Exercise 1
@@ -81,7 +81,7 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-Feel free to copy/paste this question as-is, but replacing `XX` with whatever makes sense for your assignment. That is, you need to provide your own repo name, Quarto document title and so on. The repo name should be descriptive and also not likely to have conflicts with other repos in the students GitHUb account. So, `golf-scores` not `project-1`. Of course, the code chunk name might change when your run `check_current_tutorial()`.
+Feel free to copy/paste this question as-is, but replacing `XX` with whatever makes sense for your assignment. That is, you need to provide your own repo name, Quarto document title and so on. The repo name should be descriptive and also not likely to have conflicts with other repos in the students GitHUb account. So, `golf-scores` not `project-1`. Of course, the code chunk name might change when your run `tutorial.helpers::check_current_tutorial()`.
 
 You are, obviously, responsible for adding a knowledge drop which teaches the students something about the larger topic.
 
@@ -91,7 +91,7 @@ The second question in the Introduction is often:
 ### Exercise 2
 
 In your QMD, put `library(tidyverse)` in a new code chunk. 
-Render the file.
+Render the file using `Cmd/Ctrl + Shift + K`.
 
 Notice that the file does not look good because the code 
 is visible and there are annoying messages. To take care 
@@ -126,8 +126,7 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-The third question generally load the **tidyverse** library into the Console:
-
+The third question generally loads the **tidyverse** library into the Console:
 
 ````{verbatim}
 ### Exercise 3
@@ -155,27 +154,12 @@ question_text(NULL,
 ````
 
 
-
-### Always interactive
-
-Students always need more progress working in the QMD and the Console at the same time. Good data scientists go back and forth between these two modes, writing something in the QMD, executing it in the Console, editing the QMD, executing again, and so on. We need to force students to do that here. Example:
-
-
-
-Again, feel free to copy/paste this, or, indeed, anything from this document. However, you will need to do some edits, like with `"XX.qmd"`.
-
 If the target audience for the tutorial is more experienced, you can be less didactic, leaving out several of these instructions. You could also add more steps, like loading more libraries at once.
-
-We then tell students, explicitly, the work with the Console as well.
-
-
-
 
 I recommend offering these explicit instructions many, many times. First, students need lots of practice. Second, each time you tell them to add something to the QMD, you give yourself an opportunity for a knowledge drop. The same applies when you tell students to execute, in the Console, this new addition to the QMD. 
 
 Consider an example of creating an object in the QMD:
 
-<!-- Luke: Make sure that the three backtick trick is explained earlier in the document. If not, explain it the first time we show students. -->
 
 ````{verbatim}
 ### Exercise 12
@@ -190,7 +174,7 @@ your QMD, depending on how complex your model is. But, by
 including `#| cache: true` you cause Quarto to cache the 
 results of the chunk. The next time you render your QMD, 
 as long as you have not changed the code, Quarto will just 
-load up the saved fitted object.
+load up the saved object.
 
 At the Console, run:
 
@@ -240,13 +224,7 @@ question_text(NULL,
 
 Of course, you can combine these last two questions together, but you probably shouldn't. We want easier questions, not harder. Splitting up questions makes them simpler. Perhaps more importantly, more questions provide more opportunities for knowledge drops.
 
-This still leaves unclear the process by which you built up the code which creates the model . . .  Leave discussioon about that for another day.
-
-### Asking AI
-
-The more students practice using AI, the better. It is, however, difficult to check that students are, in fact, using AI, and that they are using AI in a way which prepares them for the real world. Some initial thoughts:
-
-* Give them some rough guidance in what to ask AI and then have them copy/paste the AI's response, 
+This still leaves unclear the process by which you built up the code which creates the model . . .  Leave discussion about that for another day.
 
 
 ### Walking the path
@@ -256,7 +234,7 @@ To teach students about topic X, we first need to decide the final destination. 
 
 ### Providing Answers
 
-To ensure that students are on the right path with their code, we need to provide them with our code that is verified to be correct. Although we should not tell students to replace their code with ours at every step, if a student is lost, they should be able to refer to our code to get back on track. Also, on our end editing the tutorials, we want to easily run the code in the Console or render it. With this goal in mind, we will add R chunks to provide our code to students.
+To ensure that students are on the right path with their code, we need to provide them with our code that is verified to be correct. Although we should not tell students to replace their code with ours at every step, if a student is lost, they should be able to refer to our code to get back on track. Also, when we are editing the tutorials, we want to easily run the code in the Console or render it. With this goal in mind, we will add R chunks to provide our code to students.
 
 ````{verbatim}
 ### Exercise 6
@@ -295,15 +273,11 @@ Our code:
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-<!-- DK: Change r to R everywhere. DONE (already was like this)-->
-
-<!-- DK: Clean up next paragraph. DONE -->
-
 The R chunk with `echo=TRUE` allows the students to see the code we have written within it. This makes it easy for the students to copy and paste our code if they need to. 
 
 Additionally, `eval=TRUE` is the default argument in an R chunk, so the code within will automatically be run as well. To the students, they will be able to see any output from the code, which can be helpful if the code plots a graph. If it is inappropriate or unnecessary to include the output of the code, just set `eval=FALSE`.
 
-Then, the answer chunk would look like:
+In that case, the answer chunk would look like:
 
 ````{verbatim}
 ```{r, echo=TRUE, eval=FALSE}
@@ -314,8 +288,6 @@ Then, the answer chunk would look like:
 ### Plotting Questions
 
 Plotting exercises are generally handled with a sequence of four questions.
-
-<!-- DK: Outline what those four questions are, and give an example (using four backticks verbatim trick). DONE -->
 
 Plotting questions are almost always proceeded by three questions about the tibble from which the plot will be created. Prior to these, the tutorial will probably have walked the student through the process of gathering, organizing, and cleaning the data, generally by using a pipe. 
 
@@ -365,7 +337,7 @@ you cause Quarto to cache the results of the chunk.
 The next time you render your QMD, as long as you have not changed 
 the code, Quarto will just load up the saved fitted object.
 
-Place your cursor on the line where the pipe is assigned to x,
+Place your cursor on the line where the pipe is assigned to `x`,
 run `Cmd/Ctrl + Enter`. Now, the workspace also includes a copy
 of `x`.
 
@@ -462,10 +434,6 @@ question_text(NULL,
 ###
 
 Our code:
-
-```{r echo=FALSE}
-x <- ...
-```
 
 ```{r, echo=TRUE}
 ggplot(x, aes(...)) +

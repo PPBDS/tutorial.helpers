@@ -51,7 +51,50 @@ Must be a way to download the entire folder, given just the url, as opposed to d
 
 * The default for make_exercises() should probably be "no-answer" instead of "code". In the world of AI, most exercises with be type "no-answer."
 
-* make_exercises("no-answer") should have a test code chunk by default. (I assume that this would not cause problems?) Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code.
+* make_exercises("no-answer") should have a test code chunk by default. (I assume that this would not cause problems?) Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code. Inserting our code both tests that it works and shows students our code, and what it produces. Or maybe this isn't used widely enough to be worth it?
+
+
+* We need new options for make_exercises() which create the default questions for some of the new AI stuff.
+
+  + type = "introduction" gives you the first three questions in the Introduction of an ai.tutorial. (Note that make_exercises handles making the exercise number and chunk names for one question work automatically. Will it do that for three added questions.)
+
+  + type = "summary" gives you the 
+
+  + type = "plot" gives you the four questions which result in a plot, which is the usual fashion in which we complete a section (topic) within a tutorial.
+
+  + type = "ai" gives something like:
+
+````{verbatim}
+### Exercise 3
+
+Place your cursor in the QMD file in the last code chunk. Use `Cmd/Ctrl + Enter` to execute the last line or pipe.
+
+Note that this causes the code to be copied down to the Console and then executed. 
+
+CP/CR.
+
+```{r introduction-3}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 3)
+```
+
+###
+
+Our code:
+
+```{r, echo=TRUE}
+...
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
 
 ## write_answers()
 
@@ -112,7 +155,11 @@ Must be a way to download the entire folder, given just the url, as opposed to d
 
 * `show_file(test_file, start = 0)` should return the whole file.
 
+## Copy code buttons
 
+It is becoming clear that the copy code button is not really needed in modern tutorials because no longer spend much/any time building up code pipes line by line. And, even when we do, we can just use the __ trick to include the prior answers in the next exercise code chunk. 
+
+So, that would suggest that an author might not want to include the copy button in her tutorial. And that should be fine! But, right now, we encourage people to run check_tutorial_defaults(). That will fail if there is no copy code button. So, we need to add an argument to check_tutorial_defaults() which allows one to not require the copy code button.
 
 
 ## Points about testing
