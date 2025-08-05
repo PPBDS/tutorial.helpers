@@ -1,29 +1,11 @@
 ## Anish
 
-* Read chapter 1 (whole game) and testing chapters (13-15) in R Packages: https://r-pkgs.org/
-
-* Look at make_exercise() and the test-make_exercise().
-
-* Reading discussion below.
-
 ## make_exercise()
 
 * Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason. But maybe we can test. Ask AI! There are rstudioapi functions which create a blank file. I bet that, after you run that, you can run make_exercise() and it will file that file. Then you just need to check that the contests of the file match what it should.
 
 * Test cases for the three allowed `type` values.
 
-* make_exercise(type = "no") ought to work. That is, make_exercise() should be able to use just the first few letters of the type argument to determine what you want.
-
-* The default for make_exercises() should probably be "no-answer" instead of "code". In the world of AI, most exercises with be type "no-answer." 
-
-
-* Add a test chunk for type = "no-answer". Should include `echo = TRUE`. Three hashes before and after the test chunk. 
-
-* What about the chunk label? Take a look at format_tutorial(). It must be something, probably just like the code chunk label in exercise test. In other words, something like:
-
-```{r makeexercise-2-test, echo = TRUE}
-
-```
 
 Stop here.
 
