@@ -1,16 +1,30 @@
 ## Anish
 
-## make_exercise()
+* Delete `# Add test code here` from make_exercise("no-answer) 
+
+* Change default to 5 rows.
+
+* Add second `###`.
 
 * Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason. But maybe we can test. Ask AI! There are rstudioapi functions which create a blank file. I bet that, after you run that, you can run make_exercise() and it will file that file. Then you just need to check that the contests of the file match what it should.
 
+* Instead of making a blank file, make a blank file and then add this at the top:
+
+
+## My section
+###
+
+### Exercise 1
+
+### Exercise 2
+
 * Test cases for the three allowed `type` values.
 
+* Read about Positron Extensions (a page or two).
+
+* Learn about write_answers()
 
 Stop here.
-
-* make_exercises("no-answer") should have a test code chunk by default. (I assume that this would not cause problems?) Most useful for the case in which the answer requires CP/CR but you still want to confirm that your code works, presumably on a simpler/quicker version of required code. Inserting our code both tests that it works and shows students our code, and what it produces. Or maybe this isn't used widely enough to be worth it?
-
 
 * We need new options for make_exercises() which create the default questions for some of the new AI stuff.
 
