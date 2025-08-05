@@ -29,14 +29,7 @@
 #' @export
 
 make_exercise <- function(type = "no-answer", file_path = NULL) {
-  # Need to fix behavior when it is called outside an Rmd with Section headings.
-
-  # Function should first, check all the section names, confirming that they are
-  # all unique, and reporting an error if not. Add this!
-  # (Not implemented yet, as that's a more structural thing.)
-
-  # To create the code chunks, we need to know the next exercise number and the
-  # section title.
+  # To create the code chunks, we need to know the next exercise number and the section title.
   exercise_number <- determine_exercise_number(file_path)
   section_id <- determine_code_chunk_name(file_path)
 
@@ -51,9 +44,8 @@ make_exercise <- function(type = "no-answer", file_path = NULL) {
 
   # Compose the exercise skeleton
   new_exercise <-
-    dplyr::case_match(
-      type,
-      "no-answer" ~ sprintf(
+    switch(type,
+      "no-answer" = sprintf(
         "### Exercise %s\n\n\n```{r %s-%s}\nquestion_text(NULL,\n\tanswer(NULL, correct = TRUE),\n\tallow_retry = TRUE,\n\ttry_again_button = \"Edit Answer\",\n\tincorrect = NULL,\n\trows = 3)\n```\n\n```{r %s-%s-test, echo = TRUE}\n# Add test code here\n```\n\n###\n\n",
         exercise_number,
         section_id,
@@ -61,13 +53,13 @@ make_exercise <- function(type = "no-answer", file_path = NULL) {
         section_id,
         exercise_number
       ),
-      "yes-answer" ~ sprintf(
+      "yes-answer" = sprintf(
         "### Exercise %s\n\n\n```{r %s-%s}\nquestion_text(NULL,\n\tmessage = \"Place correct answer here.\",\n\tanswer(NULL, correct = TRUE),\n\tallow_retry = FALSE,\n\tincorrect = NULL,\n\trows = 6)\n```\n\n###\n\n",
         exercise_number,
         section_id,
         exercise_number
       ),
-      "code" ~ sprintf(
+      "code" = sprintf(
         "### Exercise %s\n\n\n```{r %s-%s, exercise = TRUE}\n\n```\n\n<button onclick = \"transfer_code(this)\">Copy previous code</button>\n\n```{r %s-%s-hint, eval = FALSE}\n\n```\n\n```{r %s-%s-test, include = FALSE}\n\n```\n\n###\n\n",
         exercise_number,
         section_id,
@@ -76,15 +68,44 @@ make_exercise <- function(type = "no-answer", file_path = NULL) {
         exercise_number,
         section_id,
         exercise_number
-      )
+      ),
+      stop("Unknown type argument to make_exercise()")
     )
 
-  # Insert the skeleton into the current active document.
-  # Note: for automated tests, this could be reworked to return the skeleton string instead.
-  rstudioapi::insertText(
-    location = rstudioapi::getActiveDocumentContext()$selection[[1]]$range,
-    text = new_exercise
-  )
+  # --- Robust insertion logic ---
+  # If file_path is NULL, we are in RStudio and want to insert into the active document
+  if (is.null(file_path)) {
+    ctx <- rstudioapi::getActiveDocumentContext()
+    if (is.null(ctx)) stop("No active RStudio document. Please open an Rmd file.")
+
+    # Default: insert at cursor or end if no selection
+    if (length(ctx$selection) == 0) {
+      # No selection: insert at end of document
+      last_line <- length(ctx$contents)
+      insert_pos <- document_range(
+        document_position(last_line + 1, 1),
+        document_position(last_line + 1, 1)
+      )
+    } else {
+      insert_pos <- ctx$selection[[1]]$range
+    }
+    rstudioapi::insertText(
+      location = insert_pos,
+      text = new_exercise
+    )
+  } else {
+    # If file_path is provided (for testing): write or append to file
+    cat(new_exercise, file = file_path, append = TRUE)
+    invisible(new_exercise)
+  }
+}
+
+# Helper for RStudio API compatibility
+document_position <- function(row, column) {
+  structure(list(row = row, column = column), class = "document_position")
+}
+document_range <- function(start, end) {
+  structure(list(start = start, end = end), class = "document_range")
 }
 
 #' Make question skeleton without an answer
