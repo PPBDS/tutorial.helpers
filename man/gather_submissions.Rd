@@ -4,7 +4,7 @@
 \alias{gather_submissions}
 \title{Gather Submissions}
 \usage{
-gather_submissions(path, title, emails = NULL, verbose = 0)
+gather_submissions(path, title, keep_loc = NULL, verbose = FALSE)
 }
 \arguments{
 \item{path}{The path to the local directory containing the HTML/XML files, or a Google Drive folder URL.
@@ -13,9 +13,11 @@ If it's a Google Drive URL, the function will download the entire folder to a te
 \item{title}{A character vector of patterns to match against the file names.
 Each pattern is processed separately and results are combined.}
 
-\item{emails}{A character vector of email addresses to filter results by, "*" to include all emails, or NULL to skip email filtering (default: NULL).}
+\item{keep_loc}{A character string specifying where to save downloaded files (only for Google Drive URLs).
+If NULL (default), files are downloaded to a temporary directory and deleted after processing.
+If specified, files are downloaded to this location and kept.}
 
-\item{verbose}{An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).}
+\item{verbose}{A logical value specifying verbosity level. FALSE (default): no messages, TRUE: detailed messages.}
 }
 \value{
 A named list of tibbles, where each tibble contains the data from one HTML/XML file
@@ -30,25 +32,18 @@ It extracts tables from the files and returns a list of tibbles.
 # Find submissions from local directory
 tibble_list <- gather_submissions(path = "path/to/directory", title = ".")
 
-# Find submissions from Google Drive folder
+# Find submissions from Google Drive folder (temporary download)
 drive_url <- "https://drive.google.com/drive/folders/your_folder_id"
 tibble_list <- gather_submissions(
   path = drive_url, 
   title = c("getting", "get-to-know")
 )
 
-# Find submissions with specific patterns and email filtering
+# Find submissions from Google Drive folder (keep files)
 tibble_list <- gather_submissions(
-  path = "path/to/directory", 
-  title = c("getting", "get-to-know"), 
-  emails = c("user1@example.com", "user2@example.com")
-)
-
-# Find submissions including all emails (no email filtering)
-tibble_list <- gather_submissions(
-  path = "path/to/directory", 
-  title = c("getting", "get-to-know"), 
-  emails = "*"
+  path = drive_url, 
+  title = c("getting", "get-to-know"),
+  keep_loc = "~/my_downloads/"
 )
 }
 }
