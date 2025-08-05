@@ -16,80 +16,111 @@
 #'   `make_exercise()` while passing in the correct argument.
 #'
 #' @param type Character of question type. Must be one of "code", "no-answer",
-#'   or "yes-answer".
+#'   or "yes-answer". Abbreviations such as "no", "yes", and "co" are allowed.
 #'
 #' @param file_path Character path to a file. If NULL, the RStudio active
 #'   document is used, which is the default behavior. An actual file path is
 #'   used for testing.
 #'
-#' @importFrom rstudioapi getActiveDocumentContext
+#' @importFrom rstudioapi getActiveDocumentContext insertText
 #'
 #' @returns Exercise skeleton corresponding to the `type` argument.
 #'
 #' @export
 
-make_exercise <- function(type = "code", file_path = NULL){
-
-  # Need to fix behavior when it is called outside an Rmd with Section
-  # headings.
-  
-  # Function should first, check all the section names, confirming that they are
-  # all unique, and reporting an error if not. Add this!
-  
-  # To create the code chunks, we need to know the next exercise number and the
-  # section title.
-
+make_exercise <- function(type = "no-answer", file_path = NULL) {
+  # To create the code chunks, we need to know the next exercise number and the section title.
   exercise_number <- determine_exercise_number(file_path)
   section_id <- determine_code_chunk_name(file_path)
 
-  # Make new exercise skeleton by inserting the appropriate label and exercise
-  # number at the right places.
-  
-  # Both this function and format_tutorial() encode the information about the
-  # correct code chunk labels for exercises. That is bad! We should encode that
-  # stuff in just one location.
-  
+  # Allow abbreviated type inputs (e.g., "no" for "no-answer", "ye" for "yes-answer")
+  allowed_types <- c("no-answer", "yes-answer", "code")
+  # Expand abbreviations
+  if (!type %in% allowed_types) {
+    match_idx <- pmatch(type, allowed_types)
+    if (is.na(match_idx)) stop("Invalid type argument.")
+    type <- allowed_types[match_idx]
+  }
+
+  # Compose the exercise skeleton
   new_exercise <-
-    dplyr::case_match(
-      type,
-      "code"       ~ sprintf("### Exercise %s\n\n\n```{r %s-%s, exercise = TRUE}\n\n```\n\n<button onclick = \"transfer_code(this)\">Copy previous code</button>\n\n```{r %s-%s-hint, eval = FALSE}\n\n```\n\n```{r %s-%s-test, include = FALSE}\n\n```\n\n###\n\n",
-                             exercise_number,
-                             section_id,
-                             exercise_number,
-                             section_id,
-                             exercise_number,
-                             section_id,
-                             exercise_number),
-      "no-answer"  ~ sprintf("### Exercise %s\n\n\n```{r %s-%s}\nquestion_text(NULL,\n\tanswer(NULL, correct = TRUE),\n\tallow_retry = TRUE,\n\ttry_again_button = \"Edit Answer\",\n\tincorrect = NULL,\n\trows = 3)\n```\n\n###\n\n",
-                             exercise_number,
-                             section_id,
-                             exercise_number),
-      "yes-answer" ~ sprintf("### Exercise %s\n\n\n```{r %s-%s}\nquestion_text(NULL,\n\tmessage = \"Place correct answer here.\",\n\tanswer(NULL, correct = TRUE),\n\tallow_retry = FALSE,\n\tincorrect = NULL,\n\trows = 6)\n```\n\n###\n\n",
-                             exercise_number,
-                             section_id,
-                             exercise_number))
+    switch(type,
+      "no-answer" = sprintf(
+        "### Exercise %s\n\n\n```{r %s-%s}\nquestion_text(NULL,\n\tanswer(NULL, correct = TRUE),\n\tallow_retry = TRUE,\n\ttry_again_button = \"Edit Answer\",\n\tincorrect = NULL,\n\trows = 3)\n```\n\n```{r %s-%s-test, echo = TRUE}\n# Add test code here\n```\n\n###\n\n",
+        exercise_number,
+        section_id,
+        exercise_number,
+        section_id,
+        exercise_number
+      ),
+      "yes-answer" = sprintf(
+        "### Exercise %s\n\n\n```{r %s-%s}\nquestion_text(NULL,\n\tmessage = \"Place correct answer here.\",\n\tanswer(NULL, correct = TRUE),\n\tallow_retry = FALSE,\n\tincorrect = NULL,\n\trows = 6)\n```\n\n###\n\n",
+        exercise_number,
+        section_id,
+        exercise_number
+      ),
+      "code" = sprintf(
+        "### Exercise %s\n\n\n```{r %s-%s, exercise = TRUE}\n\n```\n\n<button onclick = \"transfer_code(this)\">Copy previous code</button>\n\n```{r %s-%s-hint, eval = FALSE}\n\n```\n\n```{r %s-%s-test, include = FALSE}\n\n```\n\n###\n\n",
+        exercise_number,
+        section_id,
+        exercise_number,
+        section_id,
+        exercise_number,
+        section_id,
+        exercise_number
+      ),
+      stop("Unknown type argument to make_exercise()")
+    )
 
-  # Insert the skeleton into the current active document. Still need to figure out how to test this.
+  # --- Robust insertion logic ---
+  # If file_path is NULL, we are in RStudio and want to insert into the active document
+  if (is.null(file_path)) {
+    ctx <- rstudioapi::getActiveDocumentContext()
+    if (is.null(ctx)) stop("No active RStudio document. Please open an Rmd file.")
 
-  rstudioapi::insertText(location = rstudioapi::getActiveDocumentContext()$selection[[1]]$range,
-                         text = new_exercise)
+    # Default: insert at cursor or end if no selection
+    if (length(ctx$selection) == 0) {
+      # No selection: insert at end of document
+      last_line <- length(ctx$contents)
+      insert_pos <- document_range(
+        document_position(last_line + 1, 1),
+        document_position(last_line + 1, 1)
+      )
+    } else {
+      insert_pos <- ctx$selection[[1]]$range
+    }
+    rstudioapi::insertText(
+      location = insert_pos,
+      text = new_exercise
+    )
+  } else {
+    # If file_path is provided (for testing): write or append to file
+    cat(new_exercise, file = file_path, append = TRUE)
+    invisible(new_exercise)
+  }
+}
+
+# Helper for RStudio API compatibility
+document_position <- function(row, column) {
+  structure(list(row = row, column = column), class = "document_position")
+}
+document_range <- function(start, end) {
+  structure(list(start = start, end = end), class = "document_range")
 }
 
 #' Make question skeleton without an answer
 #'
 #' @rdname exercise_creation
-
-
-make_no_answer <- function(){
-  make_exercise(type = 'no-answer')
+#' @export
+make_no_answer <- function() {
+  make_exercise(type = "no-answer")
 }
 
 #' Make question skeleton with an answer
 #'
 #' @rdname exercise_creation
-
-
-make_yes_answer <- function(){
-  make_exercise(type = 'yes-answer')
+#' @export
+make_yes_answer <- function() {
+  make_exercise(type = "yes-answer")
 }
 
