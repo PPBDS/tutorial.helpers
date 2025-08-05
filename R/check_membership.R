@@ -5,7 +5,7 @@
 #' key variable exists, then checks membership. Useful for keeping only specific 
 #' students or participants.
 #'
-#' @param tibble_list A named list of tibbles, each containing an "id" column and a data column
+#' @param tibble_list A named list of tibbles, each containing an "id" column and an "answer" column
 #' @param key_var A character string specifying the key variable to check
 #' @param membership A character vector of allowed values for the key variable
 #' @param verbose Verbosity level for reporting (default: 0)
@@ -19,9 +19,9 @@
 #' \dontrun{
 #' # Create sample data with student emails
 #' tibble1 <- tibble(id = c("name", "email", "age"), 
-#'                   data = c("John", "john@student.edu", "20"))
+#'                   answer = c("John", "john@student.edu", "20"))
 #' tibble2 <- tibble(id = c("name", "email", "age"), 
-#'                   data = c("Jane", "jane@external.com", "22"))
+#'                   answer = c("Jane", "jane@external.com", "22"))
 #' 
 #' tibble_list <- list("student1.html" = tibble1, "student2.html" = tibble2)
 #' my_students <- c("john@student.edu", "mary@student.edu", "bob@student.edu")
@@ -62,15 +62,23 @@ check_membership <- function(tibble_list, key_var, membership, verbose = 0) {
     # Get the value of the key variable
     key_var_row <- which(tibble_data$id == key_var)
     
-    # Check if tibble has a 'data' column
-    if (!"data" %in% colnames(tibble_data)) {
+    # Check if we found the key variable
+    if (length(key_var_row) == 0) {
       if (verbose >= 1) {
-        message("Removing '", file_name, "': no 'data' column to check value")
+        message("Removing '", file_name, "': key variable '", key_var, "' not found in id column")
       }
       next
     }
     
-    key_var_value <- tibble_data$data[key_var_row]
+    # Check if tibble has an 'answer' column (where the values are stored)
+    if (!"answer" %in% colnames(tibble_data)) {
+      if (verbose >= 1) {
+        message("Removing '", file_name, "': no 'answer' column to check value")
+      }
+      next
+    }
+    
+    key_var_value <- tibble_data$answer[key_var_row]
     
     # Check if the value is in the membership list
     if (key_var_value %in% membership) {

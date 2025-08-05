@@ -87,11 +87,11 @@ Obviously, you need to download the directory by hand to your computer to do the
 
 * More importantly, gather_submissions() should not take an email argument in the first place. It only uses title to restrict the set of files.
 
-* Fix check_membership(). `data` should probably be `id`. Should handle memberships that are not there.
+* Fix check_membership(). `data` should probably be `id`. Should handle memberships that are not there. SS: Done
 
 * Only two possible values of verbose, maybe TRUE and FALSE. Default is FALSE.
 
-* Create a nice test case using real data. Not too big. Can be used for many functions. A good test input is probably a list of tibble of length 3 saved to an rds object.
+* Create a nice test case using real data. Not too big. Can be used for many functions. A good test input is probably a list of tibble of length 3 saved to an rds object. SS: Done
 
 * Do not dump downloaded files in the current directory. It places stuff in a tmp, and then you delete that directory at the end of the function. Maybe there is an argument like `keep_loc`, which is NULL by default. But if it is present, the downloaded files are dumped there and left alone. But keep_loc must be NULL unless it is a Google Drive download. 
 
