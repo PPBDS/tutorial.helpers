@@ -74,40 +74,35 @@ Our code:
 
 
 
-# Priorities
+# Stepher
 
 * Fix check_membership() PR.
 
 * Add a note in @details of gather_submissions() about this issue: That Google Drive allows for more than one file with the exact same name. If you download "by hand," then you got both files but with one of them renamed. If you use the Google Drive argument, the second file overwrites the first. Actually, gather_submissions() should have a @description paragraph with an overview of what it does.
 
-* With verbose = 2, gather_submissions() should be telling me stuff when using the emails argument. SS: Done
+* Shouldn't there be an example that works? Hold off on this for now. Complex question:
 
-* More importantly, gather_submissions() should not take an email argument in the first place. It only uses title to restrict the set of files. SS: Done
-
-* Fix check_membership(). `data` should probably be `id`. Should handle memberships that are not there.
+gather_submissions(path = "tests/testthat/fixtures/answers_html/", 
+                   title = ".", 
+                   verbose = TRUE)
 
 * Only two possible values of verbose, maybe TRUE and FALSE. Default is FALSE. 
-  1. gather_submissions() SS: Done
+  1. gather_submissions() 
   2. submissions_summary()
   3. submissions_answers()
   4. check_membership()
   5. check_key_vars()
+
+* Fix check_membership(). `data` should probably be `id`. Should handle memberships that are not there.
 
 * Create a nice test case using real data. Not too big. Can be used for many functions. A good test input is probably a list of tibble of length 3 saved to an rds object.
 
 * Do not dump downloaded files in the current directory. It places stuff in a tmp, and then you delete that directory at the end of the function. Maybe there is an argument like `keep_loc`, which is NULL by default. But if it is present, the downloaded files are dumped there and left alone. But keep_loc must be NULL unless it is a Google Drive download.  SS: Done
 
 
-
-submissions_answers(title, key_var = "email", membership = c("joe@gmail.com"), vars = c("name", "email", "temeperance-17"))) :
-  gathers_submissions() (but only for those which match title) -> list of tibbles
-  check_key_vars() to make sure that the files have the id variable which will be used in  
-    check_membership() list of tibbles -> list_tibbles
-  check_membership() to only keep my students list of tibbles -> list of tibbles
-  create the tibble which it will return. Each vars becomes a column in the resulting tibble.
+* check_key_vars(x, key_vars = "email", verbose = TRUE) only reports bad files. It also reports total files checked and passed, as it does now.
 
 
-check_vars(tibble_list, vars, verbose = 0) issue. https://github.com/PPBDS/tutorial.helpers/issues/43
 
 
 
