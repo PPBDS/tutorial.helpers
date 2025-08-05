@@ -76,12 +76,9 @@ Our code:
 
 # Priorities
 
-* Why do these two commands produce different number of downloads:
+* Fix check_membership() PR.
 
-x <- gather_submissions(path = "~/Downloads/responses/", title = "arrow", verbose = 2)
-x2 <- gather_submissions(path = "https://drive.google.com/drive/folders/1RgxfiwPmcKrhYLOqitLQt4KeODYZEu9ZMVvh029qBfy37V0wEbxIg95gwUE0JWL_hXEBuAlT?usp=sharing", title = "arrow", verbose = 2)
-
-Obviously, you need to download the directory by hand to your computer to do the comparison.
+* Add a note in @details of gather_submissions() about this issue: That Google Drive allows for more than one file with the exact same name. If you download "by hand," then you got both files but with one of them renamed. If you use the Google Drive argument, the second file overwrites the first. Actually, gather_submissions() should have a @description paragraph with an overview of what it does.
 
 * With verbose = 2, gather_submissions() should be telling me stuff when using the emails argument. SS: Done
 
