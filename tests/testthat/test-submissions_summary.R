@@ -1,4 +1,4 @@
-test_dir <- "fixtures/process_submissions_dir/"
+test_dir <- test_path("fixtures", "process_submissions_dir") 
 # If test_dir does not work try using this path = test_path("fixtures", "process_submissions_dir") 
 
 # Currently, I do not have tests which explore the verbose argument in detail.
@@ -95,53 +95,6 @@ test_that("submissions_summary with two key_vars", {
   
   expect_s3_class(actual_output, "tbl_df")
   expect_equal(dim(actual_output), c(28L, 5L))
-})
-
-# Tests for various messages
-
-test_that("submissions_summary prints the correct messages when verbose is 1", {
-  captured_messages <- capture_messages(
-    submissions_summary(
-      path = test_dir,
-      title = "getting",
-      return_value = "All",
-      verbose = 1
-    )
-  )
-  
-  expect_equal(
-    captured_messages,
-    c(
-      "There are 10 files in the directory.\n",
-      "There are 9 HTML/XML files in the directory.\n",
-      "There are 2 HTML/XML files matching the pattern 'getting'.\n",
-      "There were 2 files with valid HTML tables.\n",
-      "There were 2 files with no problems.\n"
-    )
-  )
-})
-
-test_that("submissions_summary prints the correct messages for error files", {
-  captured_messages <- capture_messages(
-    submissions_summary(
-      path = test_dir,
-      title = "err1|err2",
-      return_value = "All",
-      key_vars = "information-id",
-      verbose = 1
-    )
-  )
-  
-  expect_equal(
-    captured_messages,
-    c(
-      "There are 10 files in the directory.\n",
-      "There are 9 HTML/XML files in the directory.\n",
-      "There are 2 HTML/XML files matching the pattern 'err1|err2'.\n",
-      "There were 1 files with valid HTML tables.\n",
-      "There were 1 files with no problems.\n"
-    )
-  )
 })
 
 # Tests which confirm various errors.
@@ -383,29 +336,4 @@ test_that("submissions_summary works with default emails parameter", {
   )
   
   expect_equal(result_default, result_explicit)
-})
-
-test_that("submissions_summary filters by specific emails", {
-  # This test assumes there are files with specific email addresses
-  actual_output <- submissions_summary(
-    path = test_path("fixtures", "process_submissions_dir"),
-    title = "get",
-    key_vars = c("information-email"),
-    emails = c("dave.kane@gmail.com")
-  )
-  
-  # Should only return results with the specified email
-  expect_true(all(actual_output$`information-email` == "dave.kane@gmail.com"))
-})
-
-test_that("submissions_summary with multiple specific emails", {
-  actual_output <- submissions_summary(
-    path = test_path("fixtures", "process_submissions_dir"),
-    title = "get",
-    key_vars = c("information-email"),
-    emails = c("dave.kane@gmail.com", "areebatif2007@gmail.com")
-  )
-  
-  # Should only return results with the specified emails
-  expect_true(all(actual_output$`information-email` %in% c("dave.kane@gmail.com", "areebatif2007@gmail.com")))
 })

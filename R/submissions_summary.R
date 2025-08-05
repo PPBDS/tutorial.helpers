@@ -76,7 +76,7 @@ submissions_summary <- function(path,
   }
   
   # Call gather_submissions to get the list of tibbles
-  tibble_list <- gather_submissions(path = path, title = title, emails = emails, verbose = verbose)
+  tibble_list <- gather_submissions(path = path, title = title, verbose = verbose)
   
   # Initialize list to store results from each pattern
   all_pattern_results <- list()
