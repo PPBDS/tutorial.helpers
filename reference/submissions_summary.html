@@ -60,7 +60,7 @@ and returns either a summary tibble or a combined tibble with all the data.</p>
 <span>  title <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>  return_value <span class="op">=</span> <span class="st">"Summary"</span>,</span>
 <span>  key_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  keep_file_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  emails <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -89,7 +89,8 @@ Each pattern is processed separately and results are combined.</p></dd>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).</p></dd>
+<dd><p>A logical value (TRUE or FALSE) specifying verbosity level.
+If TRUE, reports files that are removed during processing.</p></dd>
 
 
 <dt id="arg-keep-file-name">keep_file_name<a class="anchor" aria-label="anchor" href="#arg-keep-file-name"></a></dt>
@@ -122,8 +123,8 @@ If <code>return_value</code> is "All", returns a tibble with all the data combin
 <span class="r-in"><span><span class="co"># Process submissions and return all data</span></span></span>
 <span class="r-in"><span><span class="fu">submissions_summary</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"path/to/directory"</span>, return_value <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Process submissions with verbose output (level 3)</span></span></span>
-<span class="r-in"><span><span class="fu">submissions_summary</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"https://drive.google.com/drive/folders/your_folder_id"</span>, verbose <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Process submissions with verbose output</span></span></span>
+<span class="r-in"><span><span class="fu">submissions_summary</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"https://drive.google.com/drive/folders/your_folder_id"</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Process submissions and keep the entire file name in the summary tibble</span></span></span>
 <span class="r-in"><span><span class="fu">submissions_summary</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"path/to/directory"</span>, return_value <span class="op">=</span> <span class="st">"Summary"</span>, keep_file_name <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span></span>

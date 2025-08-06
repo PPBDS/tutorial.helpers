@@ -62,7 +62,7 @@ and one column per variable.</p>
 <span>  <span class="va">membership</span>,</span>
 <span>  <span class="va">vars</span>,</span>
 <span>  keep_file_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="fl">0</span></span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -96,7 +96,8 @@ and one column per variable.</p>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>Verbosity level: 0 (no messages), 1 (basic), 2 (detailed), 3 (very detailed)</p></dd>
+<dd><p>A logical value (TRUE or FALSE) specifying verbosity level.
+If TRUE, reports files that are removed during processing.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -124,7 +125,7 @@ optionally a "source" column, and an "answers" column with row counts</p>
 <span class="r-in"><span>  key_var <span class="op">=</span> <span class="st">"email"</span>,</span></span>
 <span class="r-in"><span>  membership <span class="op">=</span> <span class="st">"*"</span>,</span></span>
 <span class="r-in"><span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"email"</span>, <span class="st">"question1"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  verbose <span class="op">=</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Include source file names and use current directory</span></span></span>
@@ -135,7 +136,7 @@ optionally a "source" column, and an "answers" column with row counts</p>
 <span class="r-in"><span>  membership <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"student1@edu.com"</span>, <span class="st">"student2@edu.com"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"email"</span>, <span class="st">"question1"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  keep_file_name <span class="op">=</span> <span class="st">"All"</span>,</span></span>
-<span class="r-in"><span>  verbose <span class="op">=</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>

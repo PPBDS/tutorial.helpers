@@ -52,7 +52,7 @@ and returns only tibbles that contain all required key variables.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_key_vars</span><span class="op">(</span><span class="va">tibble_list</span>, <span class="va">key_vars</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_key_vars</span><span class="op">(</span><span class="va">tibble_list</span>, <span class="va">key_vars</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -68,10 +68,8 @@ and returns only tibbles that contain all required key variables.</p>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>Verbosity level for reporting (default: 1)</p><ul><li><p>0: No messages</p></li>
-<li><p>1: Report removed files and missing variables</p></li>
-<li><p>2: Also report files that pass validation</p></li>
-</ul></dd>
+<dd><p>A logical value (TRUE or FALSE) specifying verbosity level.
+If TRUE, reports tibbles that are removed and why.</p></dd>
 
 </dl></div>
     <div class="section level2">
