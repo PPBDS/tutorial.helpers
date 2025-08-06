@@ -6,7 +6,7 @@
 \alias{make_yes_answer}
 \title{Add a tutorial code exercise or question to the active document}
 \usage{
-make_exercise(type = "code", file_path = NULL)
+make_exercise(type = "no-answer", file_path = NULL)
 
 make_no_answer()
 
@@ -14,7 +14,7 @@ make_yes_answer()
 }
 \arguments{
 \item{type}{Character of question type. Must be one of "code", "no-answer",
-or "yes-answer".}
+or "yes-answer". Abbreviations such as "no", "yes", and "co" are allowed.}
 
 \item{file_path}{Character path to a file. If NULL, the RStudio active
 document is used, which is the default behavior. An actual file path is
