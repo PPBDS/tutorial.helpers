@@ -11,7 +11,8 @@
 #' @param vars A character vector of variables/questions to extract
 #' @param keep_file_name How to handle file names: NULL (don't include), "All" (full name),
 #'        "Space" (up to first space), "Underscore" (up to first underscore)
-#' @param verbose Verbosity level: 0 (no messages), 1 (basic), 2 (detailed), 3 (very detailed)
+#' @param verbose A logical value (TRUE or FALSE) specifying verbosity level.
+#'        If TRUE, reports files that are removed during processing.
 #'
 #' @return A tibble with one row per valid submission, columns for each variable,
 #'         optionally a "source" column, and an "answers" column with row counts
@@ -38,7 +39,7 @@
 #'   key_var = "email",
 #'   membership = "*",
 #'   vars = c("name", "email", "question1"),
-#'   verbose = 1
+#'   verbose = TRUE
 #' )
 #'
 #' # Include source file names and use current directory
@@ -49,12 +50,12 @@
 #'   membership = c("student1@edu.com", "student2@edu.com"),
 #'   vars = c("name", "email", "question1"),
 #'   keep_file_name = "All",
-#'   verbose = 1
+#'   verbose = TRUE
 #' )
 #' }
 #' @export
 submissions_answers <- function(path, title, key_var, membership, vars, 
-                               keep_file_name = NULL, verbose = 0) {
+                               keep_file_name = NULL, verbose = FALSE) {
   
   # Input validation
   if (missing(path) || is.null(path)) {
@@ -77,54 +78,40 @@ submissions_answers <- function(path, title, key_var, membership, vars,
     stop("'vars' must be provided.")
   }
   
+  # Validate verbose parameter
+  if (!is.logical(verbose) || length(verbose) != 1) {
+    stop("'verbose' must be a single logical value (TRUE or FALSE).")
+  }
+  
   # Validate keep_file_name parameter
   if (!is.null(keep_file_name) && !(keep_file_name %in% c("All", "Space", "Underscore"))) {
     stop("Invalid keep_file_name. Allowed values are NULL, 'All', 'Space', or 'Underscore'.")
-  }
-  
-  if (verbose >= 1) {
-    message("Step 1: Gathering submissions matching title pattern(s): ", paste(title, collapse = ", "))
   }
   
   # Step 1: Gather submissions matching the title pattern
   tibble_list <- gather_submissions(path = path, title = title, verbose = verbose)
   
   if (length(tibble_list) == 0) {
-    if (verbose >= 1) {
+    if (verbose) {
       message("No submissions found matching the title pattern.")
     }
     return(tibble::tibble())
-  }
-  
-  if (verbose >= 1) {
-    if (length(membership) == 1 && membership == "*") {
-      message("Step 2: Including all submissions (membership = '*')")
-    } else {
-      message("Step 2: Checking membership based on key variable '", key_var, "'")
-    }
   }
   
   # Step 2: Filter by membership using check_membership, or skip if membership is "*"
   if (length(membership) == 1 && membership == "*") {
     # Include all submissions - no membership filtering
     valid_tibbles <- tibble_list
-    if (verbose >= 1) {
-      message("All ", length(valid_tibbles), " submissions included")
-    }
   } else {
     # Apply membership filtering
     valid_tibbles <- check_membership(tibble_list, key_var, membership, verbose = verbose)
   }
   
   if (length(valid_tibbles) == 0) {
-    if (verbose >= 1) {
+    if (verbose) {
       message("No submissions passed the membership check.")
     }
     return(tibble::tibble())
-  }
-  
-  if (verbose >= 1) {
-    message("Step 3: Extracting variables: ", paste(vars, collapse = ", "))
   }
   
   # Step 3: Extract answers and create final tibble
@@ -175,11 +162,6 @@ submissions_answers <- function(path, title, key_var, membership, vars,
     # Convert to tibble
     tibble::as_tibble(row_data)
   })
-  
-  if (verbose >= 1) {
-    message("Final result: ", nrow(result), " submissions with ", ncol(result) - 
-            (if (!is.null(keep_file_name)) 1 else 0) - 1, " variables extracted")
-  }
   
   return(result)
 }

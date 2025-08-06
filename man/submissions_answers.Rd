@@ -11,7 +11,7 @@ submissions_answers(
   membership,
   vars,
   keep_file_name = NULL,
-  verbose = 0
+  verbose = FALSE
 )
 }
 \arguments{
@@ -28,7 +28,8 @@ submissions_answers(
 \item{keep_file_name}{How to handle file names: NULL (don't include), "All" (full name),
 "Space" (up to first space), "Underscore" (up to first underscore)}
 
-\item{verbose}{Verbosity level: 0 (no messages), 1 (basic), 2 (detailed), 3 (very detailed)}
+\item{verbose}{A logical value (TRUE or FALSE) specifying verbosity level.
+If TRUE, reports files that are removed during processing.}
 }
 \value{
 A tibble with one row per valid submission, columns for each variable,
@@ -57,7 +58,7 @@ result <- submissions_answers(
   key_var = "email",
   membership = "*",
   vars = c("name", "email", "question1"),
-  verbose = 1
+  verbose = TRUE
 )
 
 # Include source file names and use current directory
@@ -68,7 +69,7 @@ result <- submissions_answers(
   membership = c("student1@edu.com", "student2@edu.com"),
   vars = c("name", "email", "question1"),
   keep_file_name = "All",
-  verbose = 1
+  verbose = TRUE
 )
 }
 }

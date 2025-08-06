@@ -4,19 +4,15 @@
 \alias{check_key_vars}
 \title{Check Key Variables in List of Tibbles}
 \usage{
-check_key_vars(tibble_list, key_vars, verbose = 0)
+check_key_vars(tibble_list, key_vars, verbose = FALSE)
 }
 \arguments{
 \item{tibble_list}{A named list of tibbles, each containing an "id" column with question identifiers}
 
 \item{key_vars}{A character vector of key variables to check for}
 
-\item{verbose}{Verbosity level for reporting (default: 1)
-\itemize{
-\item 0: No messages
-\item 1: Report removed files and missing variables
-\item 2: Also report files that pass validation
-}}
+\item{verbose}{A logical value (TRUE or FALSE) specifying verbosity level.
+If TRUE, reports tibbles that are removed and why.}
 }
 \value{
 A list of tibbles that contain all required key variables
