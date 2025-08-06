@@ -67,6 +67,19 @@ Our code:
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
+## write_answers()
+
+* Delete rds and pdf portions of test-write_answers().
+
+* we need a test case for write_answers.
+
+* Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
+
+* See the comments at test-write_answers.R for detailed discussion. 
+
+* Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
+
+* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
 
 
 
@@ -117,38 +130,18 @@ Use your judgment.
 
 * Explore the ability to write a function which would gather all the github.io pages, launch a new browser, which would have a tab for each of them, with the name of the tab being the `label_var`, like "name".
 
+* * If questions = c("*"), give all questions? 
+
+* What should 
 
 
 
-
-
-
-## write_answers()
-
-* Delete rds and pdf portions of test-write_answers().
-
-* we need a test case for write_answers.
-
-* Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
-
-* See the comments at test-write_answers.R for detailed discussion. 
-
-* Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
-
-* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
 
 
 # This Summer
 
-## find_answers()
 
-* Get specific answers for some students. find_answers(). Use find_submissions. Adds `questions` and a vector argument: c("temerance-17", "temperance-18"). Creates a tibble with emails answers to questions. How structure? Include `name` if available? find_answers only allows for one title. Checks this.
 
-* name, email, question-1, question-2
-
-* If questions = c("*"), give all questions? Not yet!
-
-* Is there a way to have find_answers() open all the URLs for a given answer? Context is asking find_answers() for a single title and a single question which is an URL. Would be cool to open a new browser window with one tab for each URL, making it easier for a TF to skim the work of all her students.
 
 ## process_submissions()
 
