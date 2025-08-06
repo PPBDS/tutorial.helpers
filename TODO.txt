@@ -72,43 +72,53 @@ Our code:
 
 # Stepher
 
-* Fix check_membership() PR. SS: Done
+* For gather_submission(), I don't care about this:
 
-* Add a note in @details of gather_submissions() about this issue: That Google Drive allows for more than one file with the exact same name. If you download "by hand," then you got both files but with one of them renamed. If you use the Google Drive argument, the second file overwrites the first. Actually, gather_submissions() should have a @description paragraph with an overview of what it does. SS: Done
+Removed 27 file(s) that didn't match pattern 'import': '131_stops_answers_AFung.html', '131_stops_answers_Ayush_Chandra.html', '131_stops_answers_Faisal_Jan.html', ...
 
-* Shouldn't there be an example that works? Hold off on this for now. Complex question:
+I would like to know how many files did match the pattern.
 
-gather_submissions(path = "tests/testthat/fixtures/answers_html/", 
-                   title = ".", 
+* For this:  check_membership(y, key_var = "email", membership = c("manish.gupta321@gmail.com", "bluebird.jack.xu@gmail.com"), verbose = TRUE)
+Step 1: Checking for required key variable 'email'...
+Step 2: Checking membership for key variable 'email'...
+Removing '07_data_import_Rishith_Bethina.html': email = 'bethinarishith@gmail.com' not in membership list
+
+Do not show all the files being removed. Just show emails of people who were present and those not present.
+
+
+* Shouldn't there be an example that works? To do this, you need to know where our test examples are:
+
+path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
+
+gather_submissions(path = path, 
+                   title = "import", 
                    verbose = TRUE)
 
-* Only two possible values of verbose, maybe TRUE and FALSE. Default is FALSE. SS: Done
-  1. gather_submissions() 
-  2. submissions_summary()
-  3. submissions_answers()
-  4. check_membership()
-  5. check_key_vars()
+Use your judgment.
 
-* Fix check_membership(). `data` should probably be `id`. Should handle memberships that are not there. SS: Done
-
-* Create a nice test case using real data. Not too big. Can be used for many functions. A good test input is probably a list of tibble of length 3 saved to an rds object. SS: Done
-
-* Do not dump downloaded files in the current directory. It places stuff in a tmp, and then you delete that directory at the end of the function. Maybe there is an argument like `keep_loc`, which is NULL by default. But if it is present, the downloaded files are dumped there and left alone. But keep_loc must be NULL unless it is a Google Drive download.  SS: Done
-
-* check_key_vars(x, key_vars = "email", verbose = TRUE) only reports bad files. It also reports total files checked and passed, as it does now. SS: Done
+* Working examples for the other key functions, each of which can start off with gather_submissions().
 
 
+* submissions_answers: remove `answers` column
+
+* Should be a test case which captures the current (correct) behavior when a vars which is missing is asked for. That is, this is good behavior:
+
+# A tibble: 2 × 3
+  name            email2 answers
+  <chr>           <lgl>    <int>
+1 Jack Xu         NA          66
+2 Paramanyu Gupta NA          66
+
+
+* leaves open: Is there a special function that the teacher might run which would gather overview data and in which we might calculate answers? Sure. But not today.
+
+
+* New function: match_questions(x, pattern). Take one html file (or maybe also one tibble), but only one thing. Then, it reads in that one thing, and finds all the answers which include `pattern`. It then returns a vector of the value for the id variable for those rows. Example: c("temperance-16", "temperance-19").
+
+* Explore the ability to write a function which would gather all the github.io pages, launch a new browser, which would have a tab for each of them, with the name of the tab being the `label_var`, like "name".
 
 
 
-
-Does test cases need to load libraries like library(tibble) and library(dplyr)?
-
-Add a paragraph at the top of write answers test (which you can ask AI to help you with) which gives some insight into how it does the trick of a test tutorial session. SS: Done
-
-Add response to Issue. Thank her. Ask her to install new version and check.
-
-Must be a way to download the entire folder, given just the url, as opposed to downloading each file one at a time. For Google drive, download the whole folder. (Maybe confirm that it is a folder. That is the only case we allow.) Make sure to thoroughly document what going mess.
 
 
 
