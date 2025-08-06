@@ -1,0 +1,60 @@
+## My section
+###
+
+### Exercise 1
+
+### Exercise 2
+
+### Exercise 3
+
+
+```{r my-section-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```{r my-section-3-test, echo = TRUE}
+
+```
+
+###
+
+### Exercise 4
+
+
+```{r my-section-4}
+question_text(NULL,
+	message = "Place correct answer here.",
+	answer(NULL, correct = TRUE),
+	allow_retry = FALSE,
+	incorrect = NULL,
+	rows = 6)
+```
+
+###
+
+### Exercise 5
+
+
+```{r my-section-5, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{r my-section-5-hint, eval = FALSE}
+
+```
+
+```{r my-section-5-test, include = FALSE}
+
+```
+
+###
+

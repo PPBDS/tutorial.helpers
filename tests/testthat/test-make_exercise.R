@@ -6,16 +6,50 @@
 #
 # Error: RStudio not running
 #
-# The cause, I think, the call to rstudioapi::getActiveDocumentContext(). There
 # must be a way around this . . .
 
-# tutorial.helpers::make_exercise(type = "code", 
-#                                 file_path = "fixtures/tutorial_examples/code-chunk-name-test-tutorial-1.Rmd")
-# 
-# tutorial.helpers::make_exercise(type = "no-answer",
-#                                 file_path = "fixtures/tutorial_examples/code-chunk-name-test-tutorial-1.Rmd")
-# tutorial.helpers::make_exercise(type = "yes-answer")
+library(testthat)
 
-# We can, however, check to ensure that they error when given bad input.
+create_test_file <- function(path, add_headers = TRUE) {
+  if (add_headers) {
+    writeLines(
+      c("## My section", "###", "", "### Exercise 1", "", "### Exercise 2", ""),
+      con = path
+    )
+  } else {
+    file.create(path)
+  }
+}
 
-expect_error(tutorial.helpers::make_exercise(type = "bad-input"))
+# ---- MAIN TEST ----
+
+test_that("make_exercise() generates correct output for all types", {
+  # Create temp file and add section headers for proper numbering
+  tmp <- tempfile(fileext = ".Rmd")
+  create_test_file(tmp, add_headers = TRUE)
+  
+  tutorial.helpers::make_exercise(type = "no", file_path = tmp)
+  tutorial.helpers::make_exercise(type = "yes", file_path = tmp)
+  tutorial.helpers::make_exercise(type = "co", file_path = tmp)
+  
+  output <- paste(readLines(tmp), collapse = "\n")
+  
+  truth <- paste(
+    readLines(testthat::test_path("fixtures", "tutorial_examples", "make_exercise_expected.Rmd")),
+    collapse = "\n"
+  )
+  
+  # Test: do they match?
+  expect_equal(output, truth)
+})
+
+# ---- ERROR HANDLING TEST ----
+
+test_that("make_exercise() errors with bad input", {
+  tmp <- tempfile(fileext = ".Rmd")
+  create_test_file(tmp)
+  expect_error(tutorial.helpers::make_exercise(type = "bad-input", file_path = tmp))
+})
+
+# (Optional: test behavior if section header missing, etc.)
+
