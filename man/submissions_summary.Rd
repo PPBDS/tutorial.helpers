@@ -9,7 +9,7 @@ submissions_summary(
   title = ".",
   return_value = "Summary",
   key_vars = NULL,
-  verbose = 0,
+  verbose = FALSE,
   keep_file_name = NULL,
   emails = NULL
 )
@@ -25,7 +25,8 @@ Each pattern is processed separately and results are combined.}
 
 \item{key_vars}{A character vector of key variables to extract from the "id" column (default: NULL).}
 
-\item{verbose}{An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).}
+\item{verbose}{A logical value (TRUE or FALSE) specifying verbosity level.
+If TRUE, reports files that are removed during processing.}
 
 \item{keep_file_name}{Specifies whether to keep the file name in the summary tibble. Allowed values are NULL (default), "All" (keep entire file name), "Space" (keep up to first space), or "Underscore" (keep up to first underscore). Only used when \code{return_value} is "Summary".}
 
@@ -55,8 +56,8 @@ submissions_summary(path = "path/to/directory", key_vars = "email", emails = "*"
 # Process submissions and return all data
 submissions_summary(path = "path/to/directory", return_value = "All")
 
-# Process submissions with verbose output (level 3)
-submissions_summary(path = "https://drive.google.com/drive/folders/your_folder_id", verbose = 3)
+# Process submissions with verbose output
+submissions_summary(path = "https://drive.google.com/drive/folders/your_folder_id", verbose = TRUE)
 
 # Process submissions and keep the entire file name in the summary tibble
 submissions_summary(path = "path/to/directory", return_value = "Summary", keep_file_name = "All")

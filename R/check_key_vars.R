@@ -5,10 +5,8 @@
 #'
 #' @param tibble_list A named list of tibbles, each containing an "id" column with question identifiers
 #' @param key_vars A character vector of key variables to check for
-#' @param verbose Verbosity level for reporting (default: 1)
-#'   - 0: No messages
-#'   - 1: Report removed files and missing variables
-#'   - 2: Also report files that pass validation
+#' @param verbose A logical value (TRUE or FALSE) specifying verbosity level. 
+#'        If TRUE, reports tibbles that are removed and why.
 #'
 #' @return A list of tibbles that contain all required key variables
 #'
@@ -25,10 +23,17 @@
 #' valid_tibbles <- check_key_vars(tibble_list, c("email", "age"))
 #' }
 #' @export
-check_key_vars <- function(tibble_list, key_vars, verbose = 0) {
+check_key_vars <- function(tibble_list, key_vars, verbose = FALSE) {
+  
+  # Validate verbose parameter
+  if (!is.logical(verbose) || length(verbose) != 1) {
+    stop("'verbose' must be a single logical value (TRUE or FALSE).")
+  }
   
   # Initialize list to store valid tibbles
   valid_tibbles <- list()
+  removed_files <- character()
+  removal_reasons <- character()
   
   # Get names of tibbles (use indices if no names provided)
   if (is.null(names(tibble_list))) {
@@ -44,42 +49,30 @@ check_key_vars <- function(tibble_list, key_vars, verbose = 0) {
     
     # Check if tibble has an 'id' column
     if (!"id" %in% colnames(tibble_data)) {
-      if (verbose >= 1) {
-        message("Removing '", file_name, "': no 'id' column")
-      }
+      removed_files <- c(removed_files, file_name)
+      removal_reasons <- c(removal_reasons, "no 'id' column")
       next
     }
     
     # Check which key variables are present
-    present_vars <- intersect(key_vars, tibble_data$id)
     missing_vars <- setdiff(key_vars, tibble_data$id)
     
     # If all key variables are present, keep the tibble
     if (length(missing_vars) == 0) {
       valid_tibbles[[file_name]] <- tibble_data
-      if (verbose >= 2) {
-        message("Keeping '", file_name, "': has all required key variables")
-      }
     } else {
-      # Report missing variables if verbose
-      if (verbose >= 1) {
-        message("Removing '", file_name, "': missing key variables: ", 
-                paste(missing_vars, collapse = ", "))
-      }
+      # Track removal
+      removed_files <- c(removed_files, file_name)
+      removal_reasons <- c(removal_reasons, paste("missing key variables:", paste(missing_vars, collapse = ", ")))
     }
   }
   
-  # Report summary if verbose
-  if (verbose >= 1) {
-    n_original <- length(tibble_list)
-    n_valid <- length(valid_tibbles)
-    n_removed <- n_original - n_valid
-    
-    if (n_removed > 0) {
-      message("Summary: ", n_removed, " tibble(s) removed, ", n_valid, " tibble(s) retained")
-    } else {
-      message("Summary: All ", n_original, " tibble(s) retained")
+  # Report removed files if verbose
+  if (verbose && length(removed_files) > 0) {
+    for (i in seq_along(removed_files)) {
+      message("Removed '", removed_files[i], "': ", removal_reasons[i])
     }
+    message("Summary: ", length(removed_files), " tibble(s) removed, ", length(valid_tibbles), " tibble(s) retained")
   }
   
   return(valid_tibbles)

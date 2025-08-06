@@ -1,7 +1,8 @@
 #' Gather Submissions
 #'
-#' This function finds and reads HTML/XML files from a local directory or Google Drive folder that match specified patterns.
-#' It extracts tables from the files and returns a list of tibbles.
+#' @description This function finds and reads HTML/XML files from a local directory 
+#' or Google Drive folder that match specified patterns. It extracts tables from the 
+#' files and returns a list of tibbles containing the submission data.
 #'
 #' @param path The path to the local directory containing the HTML/XML files, or a Google Drive folder URL.
 #'        If it's a Google Drive URL, the function will download the entire folder to a temporary directory.
@@ -10,7 +11,14 @@
 #' @param keep_loc A character string specifying where to save downloaded files (only for Google Drive URLs). 
 #'        If NULL (default), files are downloaded to a temporary directory and deleted after processing.
 #'        If specified, files are downloaded to this location and kept.
-#' @param verbose A logical value specifying verbosity level. FALSE (default): no messages, TRUE: detailed messages.
+#' @param verbose A logical value (TRUE or FALSE) specifying verbosity level. 
+#'        If TRUE, reports files that are removed during processing.
+#'
+#' @details Google Drive allows for more than one file with the exact same name. 
+#' If you download files manually ("by hand"), you will get both files but with 
+#' one of them automatically renamed by your browser. However, if you use the 
+#' Google Drive functionality in this function, the second file will overwrite 
+#' the first, potentially resulting in data loss.
 #'
 #' @return A named list of tibbles, where each tibble contains the data from one HTML/XML file
 #'         that matches any of the specified patterns and has valid table structure.
@@ -47,6 +55,11 @@ gather_submissions <- function(path, title, keep_loc = NULL, verbose = FALSE) {
     stop("'title' must be provided.")
   }
   
+  # Validate verbose parameter
+  if (!is.logical(verbose) || length(verbose) != 1) {
+    stop("'verbose' must be a single logical value (TRUE or FALSE).")
+  }
+  
   # Determine if path is a Google Drive URL or local directory
   is_drive_url <- grepl("^https?://", path)
   
@@ -69,40 +82,14 @@ gather_submissions <- function(path, title, keep_loc = NULL, verbose = FALSE) {
   # Get all files in directory
   all_files <- list.files(real_path, full.names = FALSE, recursive = TRUE)
   
-  if (verbose) {
-    message("There are ", length(all_files), " files in the directory.")
-  }
-  
   # Filter HTML/XML files
   html_xml_files <- filter_html_xml_files(all_files, real_path, verbose)
-  
-  if (verbose) {
-    message("There are ", length(html_xml_files), " HTML/XML files in the directory.")
-  }
   
   # Filter by title patterns
   matching_files <- filter_by_title_patterns(html_xml_files, title, verbose)
   
-  if (verbose) {
-    message("There are ", length(matching_files), " HTML/XML files matching the pattern '", 
-            paste(title, collapse = "|"), "'.")
-  }
-  
   # Process matching files
   tibble_list <- process_matching_files(matching_files, real_path, verbose)
-  
-  # Final summary messages  
-  valid_files_count <- length(tibble_list)
-  
-  if (verbose) {
-    message("There were ", valid_files_count, " files with valid HTML tables.")
-    # Count files that have usable data AND proper structure (id and answer columns)
-    no_problems_count <- sum(sapply(tibble_list, function(x) {
-      !is.null(x) && nrow(x) > 0 && 
-      "id" %in% colnames(x) && "answer" %in% colnames(x)
-    }))
-    message("There were ", no_problems_count, " files with no problems.")
-  }
   
   # Cleanup temporary directory if needed
   if (!is.null(temp_dir_to_cleanup) && dir.exists(temp_dir_to_cleanup)) {
@@ -210,14 +197,15 @@ filter_html_xml_files <- function(all_files, real_path, verbose) {
   html_xml_file_names <- all_files[html_xml_files]
   non_html_xml_file_names <- all_files[!html_xml_files]
   
+  # Only report removed files when verbose = TRUE
   if (verbose && length(non_html_xml_file_names) > 0) {
     if (!requireNamespace("utils", quietly = TRUE)) {
       stop("Package 'utils' is required. Please install it with: install.packages('utils')")
     }
     files_to_show <- utils::head(non_html_xml_file_names, 3)
-    message("Removing file(s) '", paste(files_to_show, collapse = "', '"), 
-           if(length(non_html_xml_file_names) > 3) "', ..." else "'", 
-           " for not being HTML/XML.")
+    message("Removed ", length(non_html_xml_file_names), " non-HTML/XML file(s): '", 
+           paste(files_to_show, collapse = "', '"), 
+           if(length(non_html_xml_file_names) > 3) "', ..." else "'")
   }
   
   return(html_xml_file_names)
@@ -234,13 +222,26 @@ filter_by_title_patterns <- function(html_xml_files, title, verbose) {
   for (current_title in title) {
     pattern_matches <- grep(current_title, html_xml_files, value = TRUE)
     all_matching_files <- c(all_matching_files, pattern_matches)
-    
-    if (verbose && length(title) > 1) {
-      message("Pattern '", current_title, "' matched ", length(pattern_matches), " files.")
+  }
+  
+  all_matching_files <- unique(all_matching_files)
+  
+  # Report files that didn't match patterns when verbose = TRUE
+  if (verbose) {
+    non_matching_files <- setdiff(html_xml_files, all_matching_files)
+    if (length(non_matching_files) > 0) {
+      if (!requireNamespace("utils", quietly = TRUE)) {
+        stop("Package 'utils' is required. Please install it with: install.packages('utils')")
+      }
+      files_to_show <- utils::head(non_matching_files, 3)
+      message("Removed ", length(non_matching_files), " file(s) that didn't match pattern '", 
+             paste(title, collapse = "|"), "': '", 
+             paste(files_to_show, collapse = "', '"), 
+             if(length(non_matching_files) > 3) "', ..." else "'")
     }
   }
   
-  return(unique(all_matching_files))
+  return(all_matching_files)
 }
 
 # Process Matching Files
@@ -250,21 +251,27 @@ process_matching_files <- function(matching_files, real_path, verbose) {
   }
   
   tibble_list <- list()
-  processed_count <- 0
+  failed_files <- character()
   
   for (file_name in matching_files) {
     result <- process_single_file(file_name, real_path, verbose)
     
     if (!is.null(result)) {
       tibble_list[[file_name]] <- result
+    } else {
+      failed_files <- c(failed_files, file_name)
     }
-    
-    processed_count <- processed_count + 1
-    
-    # Progress indicator for large file sets
-    if (verbose && length(matching_files) > 10 && processed_count %% 5 == 0) {
-      message("Processed ", processed_count, "/", length(matching_files), " files...")
+  }
+  
+  # Report files that failed processing when verbose = TRUE
+  if (verbose && length(failed_files) > 0) {
+    if (!requireNamespace("utils", quietly = TRUE)) {
+      stop("Package 'utils' is required. Please install it with: install.packages('utils')")
     }
+    files_to_show <- utils::head(failed_files, 3)
+    message("Removed ", length(failed_files), " file(s) due to processing failures: '", 
+           paste(files_to_show, collapse = "', '"), 
+           if(length(failed_files) > 3) "', ..." else "'")
   }
   
   return(tibble_list)
@@ -287,9 +294,6 @@ process_single_file <- function(file_name, real_path, verbose) {
   html_content <- tryCatch({
     rvest::read_html(file_path)
   }, error = function(e) {
-    if (verbose) {
-      message("Failed to read HTML from: ", file_name, " - ", e$message)
-    }
     return(NULL)
   })
   
@@ -301,23 +305,14 @@ process_single_file <- function(file_name, real_path, verbose) {
   table_data <- tryCatch({
     tables <- rvest::html_table(html_content)
     if (length(tables) == 0) {
-      if (verbose) {
-        message("No tables found in: ", file_name)
-      }
       return(NULL)
     }
     tables[[1]]
   }, error = function(e) {
-    if (verbose) {
-      message("Failed to extract table from: ", file_name, " - ", e$message)
-    }
     return(NULL)
   })
   
   if (is.null(table_data) || nrow(table_data) == 0) {
-    if (verbose) {
-      message("Empty or invalid table in: ", file_name)
-    }
     return(NULL)
   }
   
@@ -330,9 +325,6 @@ process_single_file <- function(file_name, real_path, verbose) {
   tibble_data <- tryCatch({
     tibble::as_tibble(table_data)
   }, error = function(e) {
-    if (verbose) {
-      message("Failed to convert to tibble: ", file_name, " - ", e$message)
-    }
     return(NULL)
   })
   
