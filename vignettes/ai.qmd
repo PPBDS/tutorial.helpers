@@ -19,7 +19,7 @@ The rise of AI leads to a new kind of tutorial. Our purpose is no longer to teac
 
 *Our purpose is to teach students how to use AI to create.* 
 
-Students always need more progress working in the Quarto document (the QMD) and the Console at the same time. Good data scientists go back and forth between these two modes, writing something in the QMD, executing it in the Console, editing the QMD, executing again, and so on. We need to force students to do that here.
+Students always need more practice working in a Quarto document (the QMD) and the Console at the same time. Good data scientists go back and forth between these two modes, writing something in the QMD, executing it in the Console, editing the QMD, executing again, and so on. We need to force students to do that here.
 
 AI tutorials begin with an Introduction which begins with a summary of the skills which the tutorial will cover. The Introduction continues with a series of exercises which set up the repo/project/QMD in which most of the tutorial will be completed.
 
@@ -54,9 +54,9 @@ with the Console.
 
 Select `File -> New File -> Quarto Document ...`. Provide a 
 title -- `"XX"` -- and an author (you). Render the document 
-and save it as `XX.qmd`.
+and save it as `analysis.qmd`.
 
-Create a `.gitignore` file with `XX_files` on the first 
+Create a `.gitignore` file with `analysis_files` on the first 
 line and then a blank line. Save and push.
 
 In the Console, run:
@@ -84,7 +84,9 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-Feel free to copy/paste this question as-is, but replacing `XX` with whatever makes sense for your assignment. That is, you need to provide your own repo name, Quarto document title and so on. The repo name should be descriptive and also not likely to have conflicts with other repos in the students GitHUb account. So, `golf-scores` not `project-1`. Of course, the code chunk name might change when your run `tutorial.helpers::check_current_tutorial()`.
+Feel free to copy/paste this question as-is, but replacing `XX` with whatever makes sense for your assignment. That is, you need to provide your own repo name, Quarto document title and so on. The repo name should be descriptive and also not likely to have conflicts with other repos in the students GitHub account. So, `golf-scores` not `project-1`. Of course, the code chunk name might change after you run `tutorial.helpers::check_current_tutorial()`.
+
+You do not need to use `analysis.qmd` as the name of the QMD file which the student creates. But using the same name doesn't hurt anything and is convenient since it decreases the number of things which the user of these example exercises needs to change.
 
 You are, obviously, responsible for adding a knowledge drop which teaches the students something about the larger topic.
 
