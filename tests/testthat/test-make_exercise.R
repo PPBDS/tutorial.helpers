@@ -34,7 +34,7 @@ test_that("make_exercise() generates correct output for all types", {
   
   output <- paste(readLines(tmp), collapse = "\n")
   
-  truth <- paste(readLines("fixtures/tutorial_examples/make_exercise_expected.Rmd"), collapse = "\n")
+  truth <- paste(readLines("C:/Users/922485/tutorial.helpers/tests/testthat/fixtures/tutorial_examples/make_exercise_expected.Rmd"), collapse = "\n")
   
   # Test: do they match?
   expect_equal(output, truth)
