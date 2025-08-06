@@ -1,30 +1,30 @@
 ## Anish
 
-* Delete `# Add test code here` from make_exercise("no-answer). Done
+Three projects: Finishing make_exercises(). Cleaning up write_answers(). Positron Extension for make_exercises.
 
-* Change default to 5 rows. Done
+### write_answers
 
-* Add second `###`. Done
+* Read submission_functions.R
 
-* Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason. But maybe we can test. Ask AI! There are rstudioapi functions which create a blank file. I bet that, after you run that, you can run make_exercise() and it will file that file. Then you just need to check that the contests of the file match what it should.
+* Read test-write_answers.R
 
-* Instead of making a blank file, make a blank file and then add this at the top:
+* Read write-answers.R
 
+* You are going to ask AI a lot of questions.
 
-## My section
-###
+* Learn a bit about debugging. I *think* that you need to stop the tutorial at the end, and enter debug mode. At that point, you are in a Shiny session. And you can issue a save session command (not sure on exact command) and then save it as a .rds object.
 
-### Exercise 1
+* Add a new simple test case. Just a few answers to the getting-started tutorial in tutorial.helpers. Document the way in which you created it. Get rid of old test case. Looks like just putting browser() into submission_server() just before the download does the trick, along with write_rds(session, "some/path/session.rds"). 
 
-### Exercise 2
+* Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
 
-* Test cases for the three allowed `type` values. Done, used temp file and compared output with "expected" file. 
+* Clean up all old stupid documentation. Save interesting comments.
 
-* Read about Positron Extensions (a page or two). Done
+* Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version? Don't do anything.
 
-* Learn about write_answers() 
+* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
 
-Stop here.
+### make_exercises
 
 * We need new options for make_exercises() which create the default questions for some of the new AI stuff.
 
@@ -67,21 +67,9 @@ Our code:
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-## write_answers()
+### Extension
 
-* Delete rds and pdf portions of test-write_answers().
-
-* we need a test case for write_answers.
-
-* Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version?
-
-* See the comments at test-write_answers.R for detailed discussion. 
-
-* Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. 
-
-* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
-
-
+* Build a Positron Extension to make the use of make_exercises easier. How hard is this? How much do we care? Where does it go? For now, keep it in a repo in your personal GitHub account. But this is not the highest priority. It is fun!
 
 # Stepher
 
