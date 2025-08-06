@@ -1,8 +1,8 @@
 ## Anish
 
-* Delete `# Add test code here` from make_exercise("no-answer) 
+* Delete `# Add test code here` from make_exercise("no-answer). Done
 
-* Change default to 5 rows.
+* Change default to 5 rows. Done
 
 * Add second `###`.
 
