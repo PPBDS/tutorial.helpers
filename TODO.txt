@@ -4,7 +4,7 @@
 
 * Change default to 5 rows. Done
 
-* Add second `###`.
+* Add second `###`. Done
 
 * Testing for make_exercise() is a mess. This might be connected to some poor design of the function itself. But it also seems like rstudioapi functions might be problematic to test for some reason. But maybe we can test. Ask AI! There are rstudioapi functions which create a blank file. I bet that, after you run that, you can run make_exercise() and it will file that file. Then you just need to check that the contests of the file match what it should.
 
@@ -18,11 +18,11 @@
 
 ### Exercise 2
 
-* Test cases for the three allowed `type` values.
+* Test cases for the three allowed `type` values. Done, used temp file and compared output with "expected" file. 
 
-* Read about Positron Extensions (a page or two).
+* Read about Positron Extensions (a page or two). Done
 
-* Learn about write_answers()
+* Learn about write_answers() 
 
 Stop here.
 
