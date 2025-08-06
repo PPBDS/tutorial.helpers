@@ -17,15 +17,24 @@ Each pattern is processed separately and results are combined.}
 If NULL (default), files are downloaded to a temporary directory and deleted after processing.
 If specified, files are downloaded to this location and kept.}
 
-\item{verbose}{A logical value specifying verbosity level. FALSE (default): no messages, TRUE: detailed messages.}
+\item{verbose}{A logical value (TRUE or FALSE) specifying verbosity level.
+If TRUE, reports files that are removed during processing.}
 }
 \value{
 A named list of tibbles, where each tibble contains the data from one HTML/XML file
 that matches any of the specified patterns and has valid table structure.
 }
 \description{
-This function finds and reads HTML/XML files from a local directory or Google Drive folder that match specified patterns.
-It extracts tables from the files and returns a list of tibbles.
+This function finds and reads HTML/XML files from a local directory
+or Google Drive folder that match specified patterns. It extracts tables from the
+files and returns a list of tibbles containing the submission data.
+}
+\details{
+Google Drive allows for more than one file with the exact same name.
+If you download files manually ("by hand"), you will get both files but with
+one of them automatically renamed by your browser. However, if you use the
+Google Drive functionality in this function, the second file will overwrite
+the first, potentially resulting in data loss.
 }
 \examples{
 \dontrun{

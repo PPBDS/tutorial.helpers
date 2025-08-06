@@ -4,7 +4,7 @@
 \alias{check_membership}
 \title{Check Membership in List of Tibbles}
 \usage{
-check_membership(tibble_list, key_var, membership, verbose = 0)
+check_membership(tibble_list, key_var, membership, verbose = FALSE)
 }
 \arguments{
 \item{tibble_list}{A named list of tibbles, each containing an "id" column and a data column}
@@ -13,12 +13,8 @@ check_membership(tibble_list, key_var, membership, verbose = 0)
 
 \item{membership}{A character vector of allowed values for the key variable}
 
-\item{verbose}{Verbosity level for reporting (default: 0)
-\itemize{
-\item 0: No messages
-\item 1: Report removed files and their values, plus summary
-\item 2: Also report files that pass each check
-}}
+\item{verbose}{A logical value (TRUE or FALSE) specifying verbosity level.
+If TRUE, reports files that are removed and why.}
 }
 \value{
 A list of tibbles where the key variable exists and its value is in the membership list

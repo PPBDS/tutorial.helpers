@@ -11,7 +11,8 @@
 #' @param emails A character vector of email addresses to filter results by, "*" to include all emails, or NULL to skip email filtering (default: NULL).
 #' @param return_value The type of value to return. Allowed values are "Summary" (default) or "All".
 #' @param key_vars A character vector of key variables to extract from the "id" column (default: NULL).
-#' @param verbose An integer specifying the verbosity level. 0: no messages, 1: file count messages, 2: some detailed messages about files, 3: detailed messages including all file problems (default: 0).
+#' @param verbose A logical value (TRUE or FALSE) specifying verbosity level.
+#'        If TRUE, reports files that are removed during processing.
 #' @param keep_file_name Specifies whether to keep the file name in the summary tibble. Allowed values are NULL (default), "All" (keep entire file name), "Space" (keep up to first space), or "Underscore" (keep up to first underscore). Only used when `return_value` is "Summary".
 #'
 #' @return If `return_value` is "Summary", returns a tibble with one row for each file, columns corresponding to the `key_vars`,
@@ -36,25 +37,29 @@
 #' # Process submissions and return all data
 #' submissions_summary(path = "path/to/directory", return_value = "All")
 #'
-#' # Process submissions with verbose output (level 3)
-#' submissions_summary(path = "https://drive.google.com/drive/folders/your_folder_id", verbose = 3)
+#' # Process submissions with verbose output
+#' submissions_summary(path = "https://drive.google.com/drive/folders/your_folder_id", verbose = TRUE)
 #'
 #' # Process submissions and keep the entire file name in the summary tibble
 #' submissions_summary(path = "path/to/directory", return_value = "Summary", keep_file_name = "All")
 #' }
 #' @export
-
 submissions_summary <- function(path, 
                                 title = ".", 
                                 return_value = "Summary", 
                                 key_vars = NULL, 
-                                verbose = 0, 
+                                verbose = FALSE, 
                                 keep_file_name = NULL,
                                 emails = NULL) {
   
   # Validation: path must be provided
   if (missing(path) || is.null(path)) {
     stop("'path' must be provided.")
+  }
+  
+  # Validate verbose parameter
+  if (!is.logical(verbose) || length(verbose) != 1) {
+    stop("'verbose' must be a single logical value (TRUE or FALSE).")
   }
   
   # Check if return_value is valid
@@ -89,19 +94,18 @@ submissions_summary <- function(path,
     
     filtered_tibble_list <- list()
     removed_files <- character()
-    missing_key_vars_files <- character()
+    removal_reasons <- character()
     
     for (file_name in names(title_tibbles)) {
       tibble_data <- title_tibbles[[file_name]]
       
       if (!"id" %in% colnames(tibble_data)) {
-        if (verbose >= 2) {
-          message("File '", file_name, "' does not have an 'id' column. Removing from list.")
-        }
         removed_files <- c(removed_files, file_name)
+        removal_reasons <- c(removal_reasons, "no 'id' column")
       } else if (!is.null(key_vars) && !all(key_vars %in% tibble_data$id)) {
-        missing_key_vars_files <- c(missing_key_vars_files, file_name)
+        missing_vars <- setdiff(key_vars, tibble_data$id)
         removed_files <- c(removed_files, file_name)
+        removal_reasons <- c(removal_reasons, paste("missing key variables:", paste(missing_vars, collapse = ", ")))
       } else {
         for (key_var in key_vars) {
           key_var_value <- tibble_data$answer[tibble_data$id == key_var]
@@ -111,11 +115,12 @@ submissions_summary <- function(path,
       }
     }
     
-    if (verbose >= 2 && length(missing_key_vars_files) > 0) {
-      message("Removing file(s) '", paste(missing_key_vars_files, collapse = "', '"), "' due to missing key variables.")
+    # Report removed files if verbose
+    if (verbose && length(removed_files) > 0) {
+      for (i in seq_along(removed_files)) {
+        message("Removed '", removed_files[i], "': ", removal_reasons[i])
+      }
     }
-    
-    # Note: Additional filtering messages removed to avoid redundancy with gather_submissions output
     
     # Process results for this pattern based on return_value
     if (return_value == "Summary") {

@@ -8,10 +8,8 @@
 #' @param tibble_list A named list of tibbles, each containing an "id" column and a data column
 #' @param key_var A character string specifying the key variable to check
 #' @param membership A character vector of allowed values for the key variable
-#' @param verbose Verbosity level for reporting (default: 0)
-#'   - 0: No messages
-#'   - 1: Report removed files and their values, plus summary
-#'   - 2: Also report files that pass each check
+#' @param verbose A logical value (TRUE or FALSE) specifying verbosity level.
+#'        If TRUE, reports files that are removed and why.
 #'
 #' @return A list of tibbles where the key variable exists and its value is in the membership list
 #'
@@ -30,30 +28,30 @@
 #' valid_students <- check_membership(tibble_list, "email", my_students)
 #' }
 #' @export
-check_membership <- function(tibble_list, key_var, membership, verbose = 0) {
+check_membership <- function(tibble_list, key_var, membership, verbose = FALSE) {
   
-  # First, use check_key_vars to filter tibbles that have the required key variable
-  if (verbose >= 1) {
-    message("Step 1: Checking for required key variable '", key_var, "'...")
+  # Validate verbose parameter
+  if (!is.logical(verbose) || length(verbose) != 1) {
+    stop("'verbose' must be a single logical value (TRUE or FALSE).")
   }
   
-  # Set verbose level for check_key_vars (reduce verbosity to avoid duplicate messages)
-  check_verbose <- ifelse(verbose >= 2, 1, 0)
-  tibbles_with_key <- check_key_vars(tibble_list, key_var, verbose = check_verbose)
+  # First, use check_key_vars to filter tibbles that have the required key variable
+  tibbles_with_key <- check_key_vars(tibble_list, key_var, verbose = FALSE)
   
   if (length(tibbles_with_key) == 0) {
-    if (verbose >= 1) {
-      message("No tibbles contain the required key variable '", key_var, "'")
+    if (verbose) {
+      message("Removed all ", length(tibble_list), " tibble(s): none contain the required key variable '", key_var, "'")
     }
     return(list())
   }
   
-  if (verbose >= 1) {
-    message("Step 2: Checking membership for key variable '", key_var, "'...")
-  }
+  # Track removed files from key variable check
+  key_removed_count <- length(tibble_list) - length(tibbles_with_key)
   
   # Initialize list to store valid tibbles
   valid_tibbles <- list()
+  removed_files <- character()
+  removal_reasons <- character()
   
   # Check membership for each tibble that passed the key variable check
   for (file_name in names(tibbles_with_key)) {
@@ -64,9 +62,8 @@ check_membership <- function(tibble_list, key_var, membership, verbose = 0) {
     
     # Check if tibble has a 'data' column
     if (!"data" %in% colnames(tibble_data)) {
-      if (verbose >= 1) {
-        message("Removing '", file_name, "': no 'data' column to check value")
-      }
+      removed_files <- c(removed_files, file_name)
+      removal_reasons <- c(removal_reasons, "no 'data' column to check value")
       next
     }
     
@@ -75,29 +72,30 @@ check_membership <- function(tibble_list, key_var, membership, verbose = 0) {
     # Check if the value is in the membership list
     if (key_var_value %in% membership) {
       valid_tibbles[[file_name]] <- tibble_data
-      if (verbose >= 2) {
-        message("Keeping '", file_name, "': ", key_var, " = '", key_var_value, "' is in membership list")
-      }
     } else {
-      if (verbose >= 1) {
-        message("Removing '", file_name, "': ", key_var, " = '", key_var_value, "' not in membership list")
-      }
+      removed_files <- c(removed_files, file_name)
+      removal_reasons <- c(removal_reasons, paste0(key_var, " = '", key_var_value, "' not in membership list"))
     }
   }
   
-  # Report summary if verbose
-  if (verbose >= 1) {
-    n_original <- length(tibble_list)
-    n_with_key <- length(tibbles_with_key)
-    n_final <- length(valid_tibbles)
-    n_removed_key <- n_original - n_with_key
-    n_removed_membership <- n_with_key - n_final
+  # Report removed files if verbose
+  if (verbose) {
+    # Report files removed for missing key variable
+    if (key_removed_count > 0) {
+      message("Removed ", key_removed_count, " tibble(s): missing key variable '", key_var, "'")
+    }
     
-    message("Final summary:")
-    message("- Started with: ", n_original, " tibble(s)")
-    message("- Removed ", n_removed_key, " tibble(s) for missing key variable '", key_var, "'")
-    message("- Removed ", n_removed_membership, " tibble(s) for membership check")
-    message("- Final result: ", n_final, " tibble(s) retained")
+    # Report files removed for membership check
+    if (length(removed_files) > 0) {
+      for (i in seq_along(removed_files)) {
+        message("Removed '", removed_files[i], "': ", removal_reasons[i])
+      }
+    }
+    
+    # Final summary
+    n_original <- length(tibble_list)
+    n_final <- length(valid_tibbles)
+    message("Summary: ", (n_original - n_final), " tibble(s) removed, ", n_final, " tibble(s) retained")
   }
   
   return(valid_tibbles)
