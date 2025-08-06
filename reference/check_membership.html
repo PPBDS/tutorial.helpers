@@ -58,7 +58,7 @@ students or participants.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_membership</span><span class="op">(</span><span class="va">tibble_list</span>, <span class="va">key_var</span>, <span class="va">membership</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">check_membership</span><span class="op">(</span><span class="va">tibble_list</span>, <span class="va">key_var</span>, <span class="va">membership</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -66,7 +66,7 @@ students or participants.</p>
 
 
 <dl><dt id="arg-tibble-list">tibble_list<a class="anchor" aria-label="anchor" href="#arg-tibble-list"></a></dt>
-<dd><p>A named list of tibbles, each containing an "id" column and a data column</p></dd>
+<dd><p>A named list of tibbles, each containing an "id" column and an "answer" column</p></dd>
 
 
 <dt id="arg-key-var">key_var<a class="anchor" aria-label="anchor" href="#arg-key-var"></a></dt>
@@ -78,10 +78,7 @@ students or participants.</p>
 
 
 <dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>Verbosity level for reporting (default: 0)</p><ul><li><p>0: No messages</p></li>
-<li><p>1: Report removed files and their values, plus summary</p></li>
-<li><p>2: Also report files that pass each check</p></li>
-</ul></dd>
+<dd><p>Logical indicating whether to report removed items (default: FALSE)</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -94,15 +91,18 @@ students or participants.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co"># Create sample data with student emails</span></span></span>
 <span class="r-in"><span><span class="va">tibble1</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"email"</span>, <span class="st">"age"</span><span class="op">)</span>, </span></span>
-<span class="r-in"><span>                  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"John"</span>, <span class="st">"john@student.edu"</span>, <span class="st">"20"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  answer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"John"</span>, <span class="st">"john@student.edu"</span>, <span class="st">"20"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">tibble2</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"email"</span>, <span class="st">"age"</span><span class="op">)</span>, </span></span>
-<span class="r-in"><span>                  data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Jane"</span>, <span class="st">"jane@external.com"</span>, <span class="st">"22"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>                  answer <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Jane"</span>, <span class="st">"jane@external.com"</span>, <span class="st">"22"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">tibble_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"student1.html"</span> <span class="op">=</span> <span class="va">tibble1</span>, <span class="st">"student2.html"</span> <span class="op">=</span> <span class="va">tibble2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">my_students</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"john@student.edu"</span>, <span class="st">"mary@student.edu"</span>, <span class="st">"bob@student.edu"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Keep only students with allowed emails</span></span></span>
 <span class="r-in"><span><span class="va">valid_students</span> <span class="op">&lt;-</span> <span class="fu">check_membership</span><span class="op">(</span><span class="va">tibble_list</span>, <span class="st">"email"</span>, <span class="va">my_students</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># With verbose output</span></span></span>
+<span class="r-in"><span><span class="va">valid_students</span> <span class="op">&lt;-</span> <span class="fu">check_membership</span><span class="op">(</span><span class="va">tibble_list</span>, <span class="st">"email"</span>, <span class="va">my_students</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
