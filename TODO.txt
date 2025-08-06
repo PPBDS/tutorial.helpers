@@ -74,7 +74,7 @@ Our code:
 
 * Fix check_membership() PR.
 
-* Add a note in @details of gather_submissions() about this issue: That Google Drive allows for more than one file with the exact same name. If you download "by hand," then you got both files but with one of them renamed. If you use the Google Drive argument, the second file overwrites the first. Actually, gather_submissions() should have a @description paragraph with an overview of what it does.
+* Add a note in @details of gather_submissions() about this issue: That Google Drive allows for more than one file with the exact same name. If you download "by hand," then you got both files but with one of them renamed. If you use the Google Drive argument, the second file overwrites the first. Actually, gather_submissions() should have a @description paragraph with an overview of what it does. SS: Done
 
 * Shouldn't there be an example that works? Hold off on this for now. Complex question:
 
@@ -82,7 +82,7 @@ gather_submissions(path = "tests/testthat/fixtures/answers_html/",
                    title = ".", 
                    verbose = TRUE)
 
-* Only two possible values of verbose, maybe TRUE and FALSE. Default is FALSE. 
+* Only two possible values of verbose, maybe TRUE and FALSE. Default is FALSE.  SS: Done
   1. gather_submissions() 
   2. submissions_summary()
   3. submissions_answers()
