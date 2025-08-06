@@ -4,21 +4,16 @@
 \alias{check_membership}
 \title{Check Membership in List of Tibbles}
 \usage{
-check_membership(tibble_list, key_var, membership, verbose = 0)
+check_membership(tibble_list, key_var, membership, verbose = FALSE)
 }
 \arguments{
-\item{tibble_list}{A named list of tibbles, each containing an "id" column and a data column}
+\item{tibble_list}{A named list of tibbles, each containing an "id" column and an "answer" column}
 
 \item{key_var}{A character string specifying the key variable to check}
 
 \item{membership}{A character vector of allowed values for the key variable}
 
-\item{verbose}{Verbosity level for reporting (default: 0)
-\itemize{
-\item 0: No messages
-\item 1: Report removed files and their values, plus summary
-\item 2: Also report files that pass each check
-}}
+\item{verbose}{Logical indicating whether to report removed items (default: FALSE)}
 }
 \value{
 A list of tibbles where the key variable exists and its value is in the membership list
@@ -33,14 +28,17 @@ students or participants.
 \dontrun{
 # Create sample data with student emails
 tibble1 <- tibble(id = c("name", "email", "age"), 
-                  data = c("John", "john@student.edu", "20"))
+                  answer = c("John", "john@student.edu", "20"))
 tibble2 <- tibble(id = c("name", "email", "age"), 
-                  data = c("Jane", "jane@external.com", "22"))
+                  answer = c("Jane", "jane@external.com", "22"))
 
 tibble_list <- list("student1.html" = tibble1, "student2.html" = tibble2)
 my_students <- c("john@student.edu", "mary@student.edu", "bob@student.edu")
 
 # Keep only students with allowed emails
 valid_students <- check_membership(tibble_list, "email", my_students)
+
+# With verbose output
+valid_students <- check_membership(tibble_list, "email", my_students, verbose = TRUE)
 }
 }

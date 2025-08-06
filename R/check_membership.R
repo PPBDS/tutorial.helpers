@@ -5,13 +5,10 @@
 #' key variable exists, then checks membership. Useful for keeping only specific 
 #' students or participants.
 #'
-#' @param tibble_list A named list of tibbles, each containing an "id" column and a data column
+#' @param tibble_list A named list of tibbles, each containing an "id" column and an "answer" column
 #' @param key_var A character string specifying the key variable to check
 #' @param membership A character vector of allowed values for the key variable
-#' @param verbose Verbosity level for reporting (default: 0)
-#'   - 0: No messages
-#'   - 1: Report removed files and their values, plus summary
-#'   - 2: Also report files that pass each check
+#' @param verbose Logical indicating whether to report removed items (default: FALSE)
 #'
 #' @return A list of tibbles where the key variable exists and its value is in the membership list
 #'
@@ -19,36 +16,38 @@
 #' \dontrun{
 #' # Create sample data with student emails
 #' tibble1 <- tibble(id = c("name", "email", "age"), 
-#'                   data = c("John", "john@student.edu", "20"))
+#'                   answer = c("John", "john@student.edu", "20"))
 #' tibble2 <- tibble(id = c("name", "email", "age"), 
-#'                   data = c("Jane", "jane@external.com", "22"))
+#'                   answer = c("Jane", "jane@external.com", "22"))
 #' 
 #' tibble_list <- list("student1.html" = tibble1, "student2.html" = tibble2)
 #' my_students <- c("john@student.edu", "mary@student.edu", "bob@student.edu")
 #' 
 #' # Keep only students with allowed emails
 #' valid_students <- check_membership(tibble_list, "email", my_students)
+#' 
+#' # With verbose output
+#' valid_students <- check_membership(tibble_list, "email", my_students, verbose = TRUE)
 #' }
 #' @export
-check_membership <- function(tibble_list, key_var, membership, verbose = 0) {
+check_membership <- function(tibble_list, key_var, membership, verbose = FALSE) {
   
   # First, use check_key_vars to filter tibbles that have the required key variable
-  if (verbose >= 1) {
+  if (verbose) {
     message("Step 1: Checking for required key variable '", key_var, "'...")
   }
   
-  # Set verbose level for check_key_vars (reduce verbosity to avoid duplicate messages)
-  check_verbose <- ifelse(verbose >= 2, 1, 0)
-  tibbles_with_key <- check_key_vars(tibble_list, key_var, verbose = check_verbose)
+  # Use check_key_vars without verbose output to avoid duplicate messages
+  tibbles_with_key <- check_key_vars(tibble_list, key_var, verbose = FALSE)
   
   if (length(tibbles_with_key) == 0) {
-    if (verbose >= 1) {
+    if (verbose) {
       message("No tibbles contain the required key variable '", key_var, "'")
     }
     return(list())
   }
   
-  if (verbose >= 1) {
+  if (verbose) {
     message("Step 2: Checking membership for key variable '", key_var, "'...")
   }
   
@@ -62,31 +61,36 @@ check_membership <- function(tibble_list, key_var, membership, verbose = 0) {
     # Get the value of the key variable
     key_var_row <- which(tibble_data$id == key_var)
     
-    # Check if tibble has a 'data' column
-    if (!"data" %in% colnames(tibble_data)) {
-      if (verbose >= 1) {
-        message("Removing '", file_name, "': no 'data' column to check value")
+    # Check if we found the key variable
+    if (length(key_var_row) == 0) {
+      if (verbose) {
+        message("Removing '", file_name, "': key variable '", key_var, "' not found in id column")
       }
       next
     }
     
-    key_var_value <- tibble_data$data[key_var_row]
+    # Check if tibble has an 'answer' column (where the values are stored)
+    if (!"answer" %in% colnames(tibble_data)) {
+      if (verbose) {
+        message("Removing '", file_name, "': no 'answer' column to check value")
+      }
+      next
+    }
+    
+    key_var_value <- tibble_data$answer[key_var_row]
     
     # Check if the value is in the membership list
     if (key_var_value %in% membership) {
       valid_tibbles[[file_name]] <- tibble_data
-      if (verbose >= 2) {
-        message("Keeping '", file_name, "': ", key_var, " = '", key_var_value, "' is in membership list")
-      }
     } else {
-      if (verbose >= 1) {
+      if (verbose) {
         message("Removing '", file_name, "': ", key_var, " = '", key_var_value, "' not in membership list")
       }
     }
   }
   
   # Report summary if verbose
-  if (verbose >= 1) {
+  if (verbose) {
     n_original <- length(tibble_list)
     n_with_key <- length(tibbles_with_key)
     n_final <- length(valid_tibbles)
