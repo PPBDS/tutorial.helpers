@@ -15,7 +15,7 @@
 #'        If TRUE, reports files that are removed during processing.
 #'
 #' @return A tibble with one row per valid submission, columns for each variable,
-#'         optionally a "source" column, and an "answers" column with row counts
+#'         and optionally a "source" column
 #'
 #' @importFrom dplyr mutate select
 #' @importFrom tibble tibble as_tibble add_column
@@ -24,32 +24,14 @@
 #' @examples
 #' \dontrun{
 #' # Extract specific variables from submissions matching title pattern
+#' path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
+#' 
 #' result <- submissions_answers(
-#'   path = "path/to/submissions",
-#'   title = c("getting", "survey"), 
+#'   path = path,
+#'   title = c("stop"), 
 #'   key_var = "email",
-#'   membership = c("joe@gmail.com", "jane@student.edu"),
-#'   vars = c("name", "email", "temperance-17")
-#' )
-#'
-#' # Include all submissions regardless of email
-#' result <- submissions_answers(
-#'   path = "path/to/submissions",
-#'   title = "assignment",
-#'   key_var = "email",
-#'   membership = "*",
-#'   vars = c("name", "email", "question1"),
-#'   verbose = TRUE
-#' )
-#'
-#' # Include source file names and use current directory
-#' result <- submissions_answers(
-#'   path = ".",
-#'   title = "assignment",
-#'   key_var = "email", 
-#'   membership = c("student1@edu.com", "student2@edu.com"),
-#'   vars = c("name", "email", "question1"),
-#'   keep_file_name = "All",
+#'   membership = c("bluebird.jack.xu@gmail.com", "abdul.hannan20008@gmail.com"),
+#'   vars = c("name", "email", "introduction-1"),
 #'   verbose = TRUE
 #' )
 #' }
@@ -89,7 +71,11 @@ submissions_answers <- function(path, title, key_var, membership, vars,
   }
   
   # Step 1: Gather submissions matching the title pattern
-  tibble_list <- gather_submissions(path = path, title = title, verbose = verbose)
+  tibble_list <- gather_submissions(path = path, title = title, verbose = FALSE)
+  
+  if (verbose && length(tibble_list) > 0) {
+    message("Found ", length(tibble_list), " submission(s) matching title pattern '", paste(title, collapse = "|"), "'")
+  }
   
   if (length(tibble_list) == 0) {
     if (verbose) {
@@ -104,7 +90,11 @@ submissions_answers <- function(path, title, key_var, membership, vars,
     valid_tibbles <- tibble_list
   } else {
     # Apply membership filtering
-    valid_tibbles <- check_membership(tibble_list, key_var, membership, verbose = verbose)
+    valid_tibbles <- check_membership(tibble_list, key_var, membership, verbose = FALSE)
+    
+    if (verbose) {
+      message("After membership filtering: ", length(valid_tibbles), " submission(s) retained")
+    }
   }
   
   if (length(valid_tibbles) == 0) {
@@ -155,9 +145,6 @@ submissions_answers <- function(path, title, key_var, membership, vars,
         row_data[[var]] <- NA
       }
     }
-    
-    # Add count of total answers in this tibble
-    row_data[["answers"]] <- nrow(tibble_data)
     
     # Convert to tibble
     tibble::as_tibble(row_data)
