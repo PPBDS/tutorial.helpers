@@ -33,7 +33,7 @@ If TRUE, reports files that are removed during processing.}
 }
 \value{
 A tibble with one row per valid submission, columns for each variable,
-optionally a "source" column, and an "answers" column with row counts
+and optionally a "source" column
 }
 \description{
 This function gathers submissions matching a title pattern, filters them by membership,
@@ -43,32 +43,14 @@ and one column per variable.
 \examples{
 \dontrun{
 # Extract specific variables from submissions matching title pattern
-result <- submissions_answers(
-  path = "path/to/submissions",
-  title = c("getting", "survey"), 
-  key_var = "email",
-  membership = c("joe@gmail.com", "jane@student.edu"),
-  vars = c("name", "email", "temperance-17")
-)
+path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
 
-# Include all submissions regardless of email
 result <- submissions_answers(
-  path = "path/to/submissions",
-  title = "assignment",
+  path = path,
+  title = c("stop"), 
   key_var = "email",
-  membership = "*",
-  vars = c("name", "email", "question1"),
-  verbose = TRUE
-)
-
-# Include source file names and use current directory
-result <- submissions_answers(
-  path = ".",
-  title = "assignment",
-  key_var = "email", 
-  membership = c("student1@edu.com", "student2@edu.com"),
-  vars = c("name", "email", "question1"),
-  keep_file_name = "All",
+  membership = c("bluebird.jack.xu@gmail.com", "abdul.hannan20008@gmail.com"),
+  vars = c("name", "email", "introduction-1"),
   verbose = TRUE
 )
 }
