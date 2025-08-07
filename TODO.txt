@@ -97,7 +97,7 @@ gather_submissions(path = path,
 
 Use your judgment.
 
-* Working examples for the other key functions, each of which can start off with gather_submissions().
+* Working examples for the other key functions, each of which can start off with gather_submissions(). SS: Done
 
 
 * submissions_answers: remove `answers` column
@@ -108,7 +108,7 @@ Use your judgment.
   name            email2 answers
   <chr>           <lgl>    <int>
 1 Jack Xu         NA          66
-2 Paramanyu Gupta NA          66
+2 Paramanyu Gupta NA          66 
 
 
 * leaves open: Is there a special function that the teacher might run which would gather overview data and in which we might calculate answers? Sure. But not today.
