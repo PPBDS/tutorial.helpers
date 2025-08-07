@@ -37,14 +37,14 @@
 submission_server <- function() {
   p <- parent.frame()
 
+
+
   # All main logic is run in the parent frame to access live session/reactive values.
   local({
     output$downloadHtml <- shiny::downloadHandler(
       filename = paste0(learnr::get_tutorial_info()$tutorial_id, "_answers.html"),
       content = function(file) {
-        # At the prompt, you can call:
-        # answers <- tutorial.helpers:::get_submissions_from_learnr_session(session)
-        # readr::write_rds(answers, "your/path/answers.rds")
+        # saveRDS(session, file = "~/Desktop/test_session.rds")
         write_answers(file, session)
       }
     )
