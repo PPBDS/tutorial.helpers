@@ -31,7 +31,7 @@ utils::globalVariables(c("session"))
 
 submission_server <- function() {
   p <- parent.frame()
-
+  browser()
 
   # Note that this code is called from within
   # inst/child_documents/download_answers.Rmd. We need information from the
@@ -63,7 +63,6 @@ submission_server <- function() {
       filename = paste0(learnr::get_tutorial_info()$tutorial_id,
                         "_answers.html"),
       content = function(file){
-        browser()
         
         # Note that you must wrap the call to write_answers() inside a function. I
         # am confused about why. No doubt some weird Shiny/reactive thing . . .
