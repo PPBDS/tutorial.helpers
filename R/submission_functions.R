@@ -31,7 +31,7 @@ utils::globalVariables(c("session"))
 
 submission_server <- function() {
   p <- parent.frame()
-    browser()
+
 
   # Note that this code is called from within
   # inst/child_documents/download_answers.Rmd. We need information from the
