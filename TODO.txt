@@ -84,7 +84,7 @@ Step 1: Checking for required key variable 'email'...
 Step 2: Checking membership for key variable 'email'...
 Removing '07_data_import_Rishith_Bethina.html': email = 'bethinarishith@gmail.com' not in membership list
 
-Do not show all the files being removed. Just show emails of people who were present and those not present.
+Do not show all the files being removed. Just show emails of people who were present and those not present. SS: Done
 
 
 * Shouldn't there be an example that works? To do this, you need to know where our test examples are:
