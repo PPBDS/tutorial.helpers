@@ -33,43 +33,47 @@
 
 write_answers <- function(file, session) {
   # Helper: Get all possible question/exercise IDs for the current tutorial
-  get_all_question_ids <- function(session) {
+  get_all_question_ids <- function(session, objs = NULL) {
     state <- tryCatch(learnr::get_tutorial_state(session), error = function(e) NULL)
-    if (is.null(state)) return(character(0))
+    print("Debugging get_all_question_ids")
+    print(state)
     ex_ids <- if (!is.null(state$exercises)) names(state$exercises) else character(0)
     question_ids <- if (!is.null(state$questions)) names(state$questions) else character(0)
     all_ids <- unique(c(ex_ids, question_ids))
     # Fallback: if state returns nothing, pull from any submitted objs
-    if (length(all_ids) == 0 && exists("objs")) {
+    if (length(all_ids) == 0 && !is.null(objs)) {
       all_ids <- unique(vapply(objs, function(x) x$id, character(1)))
+      print("Fallback: using IDs from objs")
     }
+    print("All possible IDs:")
+    print(all_ids)
     all_ids
   }
-  
-  print("Debugging get_all_question_ids")
-  print(state)
-  print("All possible IDs:")
-  print(all_ids)
-  return(all_ids)
 
   # Accept either a session object or a pre-extracted list of submissions (for tests).
   if (inherits(session, "ShinySession")) {
     objs <- get_submissions_from_learnr_session(session)
     tutorial_id <- learnr::get_tutorial_info()$tutorial_id
     tutorial_version <- learnr::get_tutorial_info()$tutorial_version
-    all_ids <- get_all_question_ids(session)
+    all_ids <- get_all_question_ids(session, objs)
   } else {
     # For testing, session is just a list of answer objects and all_ids must be provided
     objs <- session
     tutorial_id <- "test-tutorial"
     tutorial_version <- NA_character_
-    # For tests, assume all IDs in the list plus some extras (for test coverage)
+    # For tests, use IDs in the answer list
     all_ids <- unique(vapply(objs, function(x) x$id, character(1)))
+    print("Test mode: all_ids from answer objects")
+    print(all_ids)
   }
 
   # Build a lookup for submitted answers
   objs_by_id <- setNames(objs, vapply(objs, function(x) x$id, character(1)))
-  
+  print("Objs:")
+  print(objs)
+  print("All possible IDs after all logic:")
+  print(all_ids)
+
   out <- tibble::tibble(
     id = all_ids,
     submission_type = purrr::map_chr(all_ids, function(qid) {
