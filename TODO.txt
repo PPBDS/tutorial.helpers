@@ -114,7 +114,7 @@ Use your judgment. SS: Done
 * leaves open: Is there a special function that the teacher might run which would gather overview data and in which we might calculate answers? Sure. But not today.
 
 
-* New function: match_questions(x, pattern). Take one html file (or maybe also one tibble), but only one thing. Then, it reads in that one thing, and finds all the answers which include `pattern`. It then returns a vector of the value for the id variable for those rows. Example: c("temperance-16", "temperance-19").
+* New function: match_questions(x, pattern). Take one html file (or maybe also one tibble), but only one thing. Then, it reads in that one thing, and finds all the answers which include `pattern`. It then returns a vector of the value for the id variable for those rows. Example: c("temperance-16", "temperance-19"). SS: Done
 
 * Explore the ability to write a function which would gather all the github.io pages, launch a new browser, which would have a tab for each of them, with the name of the tab being the `label_var`, like "name".
 
