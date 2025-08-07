@@ -13,14 +13,13 @@
 #' @examples
 #' \dontrun{
 #' # Create sample data
-#' tibble1 <- tibble(id = c("email", "age", "name"))
-#' tibble2 <- tibble(id = c("email", "phone"))
-#' tibble3 <- tibble(id = c("email", "age", "address"))
+#' path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
 #' 
-#' tibble_list <- list("file1.html" = tibble1, "file2.html" = tibble2, "file3.html" = tibble3)
+#' tibble_list <- gather_submissions(path, "stop")
 #' 
-#' # Check for required variables
-#' valid_tibbles <- check_key_vars(tibble_list, c("email", "age"))
+#' result <- check_key_vars(tibble_list, 
+#'                          key_vars = c("name", "email"))
+#'
 #' }
 #' @export
 check_key_vars <- function(tibble_list, key_vars, verbose = FALSE) {

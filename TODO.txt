@@ -77,7 +77,7 @@ Our code:
 
 Removed 27 file(s) that didn't match pattern 'import': '131_stops_answers_AFung.html', '131_stops_answers_Ayush_Chandra.html', '131_stops_answers_Faisal_Jan.html', ...
 
-I would like to know how many files did match the pattern.
+I would like to know how many files did match the pattern. SS: Done
 
 * For this:  check_membership(y, key_var = "email", membership = c("manish.gupta321@gmail.com", "bluebird.jack.xu@gmail.com"), verbose = TRUE)
 Step 1: Checking for required key variable 'email'...
@@ -87,7 +87,7 @@ Removing '07_data_import_Rishith_Bethina.html': email = 'bethinarishith@gmail.co
 Do not show all the files being removed. Just show emails of people who were present and those not present.
 
 
-* Shouldn't there be an example that works? To do this, you need to know where our test examples are:
+* Shouldn't there be an example that works? To do this, you need to know where our test examples are: 
 
 path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
 
@@ -95,9 +95,11 @@ gather_submissions(path = path,
                    title = "import", 
                    verbose = TRUE)
 
-Use your judgment.
+Use your judgment. SS: Done
+
 
 * Working examples for the other key functions, each of which can start off with gather_submissions(). SS: Done
+
 
 
 * submissions_answers: remove `answers` column
@@ -114,7 +116,7 @@ Use your judgment.
 * leaves open: Is there a special function that the teacher might run which would gather overview data and in which we might calculate answers? Sure. But not today.
 
 
-* New function: match_questions(x, pattern). Take one html file (or maybe also one tibble), but only one thing. Then, it reads in that one thing, and finds all the answers which include `pattern`. It then returns a vector of the value for the id variable for those rows. Example: c("temperance-16", "temperance-19").
+* New function: match_questions(x, pattern). Take one html file (or maybe also one tibble), but only one thing. Then, it reads in that one thing, and finds all the answers which include `pattern`. It then returns a vector of the value for the id variable for those rows. Example: c("temperance-16", "temperance-19"). SS: Done
 
 * Explore the ability to write a function which would gather all the github.io pages, launch a new browser, which would have a tab for each of them, with the name of the tab being the `label_var`, like "name".
 
