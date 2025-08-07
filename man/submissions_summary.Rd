@@ -45,21 +45,11 @@ and returns either a summary tibble or a combined tibble with all the data.
 \examples{
 \dontrun{
 # Process submissions from local directory
-submissions_summary(path = "path/to/directory")
+path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
 
-# Process submissions with multiple patterns from local directory
-submissions_summary(path = "path/to/directory", title = "final", key_vars = c("email"))
+result <- submissions_summary(path = path,
+                             key_vars = "email",
+                             title = "stop")
 
-# Process submissions and include all emails (no email filtering)
-submissions_summary(path = "path/to/directory", key_vars = "email", emails = "*")
-
-# Process submissions and return all data
-submissions_summary(path = "path/to/directory", return_value = "All")
-
-# Process submissions with verbose output
-submissions_summary(path = "https://drive.google.com/drive/folders/your_folder_id", verbose = TRUE)
-
-# Process submissions and keep the entire file name in the summary tibble
-submissions_summary(path = "path/to/directory", return_value = "Summary", keep_file_name = "All")
 }
 }
