@@ -1,24 +1,29 @@
-# What we really want is a single function which, when called from the tutorial,
-# does all the stuff we need. But, presumably, that is impossible. We need (?) a
-# Shiny server and Shiny ui. There is not (?) any other way to produce this
-# effect.
-
-# Perhaps we can replace this function with the downloadthis package someday:
-# https://CRAN.R-project.org/package=downloadthis. My initial testing suggests
-# not.
-
-# I need to declare a global variable in order to fix the NOTE from R CMD check.
-
-utils::globalVariables(c("session"))
-
 #' @title Tutorial submission functions
 #' @rdname submission_functions
 #'
-#' @description The following function was modified from Colin Rundel's
-#'   learnrhash package, available at https://github.com/rundel/learnrhash. Note
-#'   that when including these functions in a learnr Rmd document it is
-#'   necessary that the server function, `submission_server()`, be included in
-#'   an R chunk where `context="server"`.
+#' @description 
+#'   Provides the core Shiny server and UI hooks for collecting and downloading student answers
+#'   from a learnr tutorial. `submission_server()` should be called in an Rmd code chunk with
+#'   `context="server"`. 
+#'   
+#'   This function was modified from Colin Rundel's learnrhash package
+#'   (https://github.com/rundel/learnrhash).
+#'
+#' @details
+#'   The server function uses a Shiny downloadHandler to let students download their answers.
+#'   All main logic must be wrapped in `local()` with `parent.frame()` to ensure access to the live
+#'   learnr session and objects created in the parent environment.
+#'
+#'   The `session` object (created by Shiny) is only available inside the `downloadHandler$content`
+#'   function, so any test-case extraction or answer writing must happen there.
+#'
+#'   For reference: the `file` argument in `content` is a temporary file path created by Shiny,
+#'   and your handler's job is to write the downloadable file there.
+#'
+#'   If you want to generate test fixtures, insert `browser()` inside the `content` function,
+#'   then use functions like `get_submissions_from_learnr_session(session)` at the prompt.
+#'
+#'   See also: https://mastering-shiny.org/action-transfer.html#downloading-reports
 #'
 #' @examples
 #' if(interactive()){
@@ -27,99 +32,48 @@ utils::globalVariables(c("session"))
 #'
 #' @export
 #'
-#' @returns No return value, called for side effects.
+#' @returns No return value; called for side effects in a Shiny/learnr session.
 
 submission_server <- function() {
   p <- parent.frame()
-  
 
-  # Note that this code is called from within
-  # inst/child_documents/download_answers.Rmd. We need information from the
-  # parent frame --- from the Rmd code which being run (by Shiny?) for this
-  # tutorial. This is the environment which is calling this function,
-  # submission_server(). Only this parent environment has access to objects
-  # (like session) which we need to access. So, local() makes everything below
-  # evaluated in the parent frame.
-  
-  # Sure seems like a better approach would be to make use of the same mechanism
-  # by which Shiny stores the student's work in between sessions. Couldn't we
-  # just find that and load it up somehow?
-  
+  # All main logic is run in the parent frame to access live session/reactive values.
   local({
-
-    # downloadHandler is a function, one of the arguments for which is filename.
-    # We want to have the file name be different for each tutorial. But how do
-    # we know the name of the tutorial in the middle of the session? It is easy
-    # to access some information from the session object if we know the correct
-    # learnr function. (Note that the session object only seems to exist within
-    # a reactive function like this.)
-    
-    # Since the filename is just the tutorial_id plus the suffix, and since the
-    # id information also exists in the session object, we don't really need the
-    # call to get_tutorial_info() here.
-    
-    
     output$downloadHtml <- shiny::downloadHandler(
-      filename = paste0(learnr::get_tutorial_info()$tutorial_id,
-                        "_answers.html"),
-      content = function(file){
-        browser()
-        
-        # Note that you must wrap the call to write_answers() inside a function. I
-        # am confused about why. No doubt some weird Shiny/reactive thing . . .
-        # But, then, why don't we need to do th same wrapping for the value of
-        # filename just above?
-        
-        # Also, where does the value for "file" come from below? The Shiny book
-        # reports that "`content` should be a function with one argument, `file`,
-        # which is the path to save the file. The job of this function is to save
-        # the file in a place that Shiny knows about, so it can then send it to
-        # the user." Confusing!
-        
-        # The use of session is also weird. First, there is no explicit "session"
-        # object. Presumably, this comes from the magic of Shiny, along with
-        # local() and parent.frame(). Second, Section 9.2.2 of the Shiny Book
-        # gives an example which uses a reactive object. Maybe this is a better
-        # approach? Maybe is a reactive object which is automatically created in
-        # Shiny?
-        
-        # This is how we make test cases. Uncomment this line and commit
-        # write_answers(). Then, install the package. This assumes your test
-        # case comes from one of the installed tutorials in tutorial.helpers.
-        # Then run your tutorial as normal. The rds object will get saved when
-        # you save your answers at the end.
-        
-        # saveRDS(session, file = "~/Desktop/test_session_3.rds")
+      filename = paste0(learnr::get_tutorial_info()$tutorial_id, "_answers.html"),
+      content = function(file) {
+        # Place browser() here for test-case generation. Session is available in this scope.
+        # At the prompt, you can call:
+        # answers <- tutorial.helpers:::get_submissions_from_learnr_session(session)
+        # readr::write_rds(answers, "your/path/answers.rds")
         write_answers(file, session)
       }
     )
-    
   }, envir = p)
   
   NULL
 }
 
-
 #' @rdname submission_functions
-#' 
+#'
+#' @description UI block to include a download button and simple instructions for students.
+#'
 #' @examples
 #' if(interactive()){
-#'   submision_ui
+#'   submission_ui
 #' }
-#' 
+#'
 #' @export
-#' 
-#' @returns An object of class shiny.tag.
-
+#'
+#' @returns An object of class shiny.tag
 
 submission_ui <- shiny::div(
-
   "When you have completed this tutorial, follow these steps:",
-
   shiny::tags$br(),
   shiny::tags$ol(
     shiny::tags$li("Click the button to download a file containing your answers."),
-    shiny::tags$li("Save the file onto your computer in a convenient location.")),
+    shiny::tags$li("Save the file onto your computer in a convenient location.")
+  ),
   shiny::fluidPage(
     shiny::mainPanel(
       shiny::div(id = "form",
@@ -128,10 +82,8 @@ submission_ui <- shiny::div(
   ),
   shiny::div(
     shiny::tags$br(),
-    
-    "(If no file seems to download, try clicking with the alternative button on the download button and choose \"Save link as...\")",
-    
+    "(If no file seems to download, try right-clicking the download button and choose \"Save link as...\")",
     shiny::tags$br()
-    )
+  )
 )
 
