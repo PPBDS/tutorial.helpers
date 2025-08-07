@@ -1,4 +1,4 @@
-#' Write tutorial answers to file
+#' @title Write tutorial answers to file
 #'
 #' @description
 #'   Take a tutorial session, extract all submitted answers,
@@ -7,13 +7,12 @@
 #' @details
 #'   Currently only records questions/exercises the student has completed.
 #'   It may be better to include all questions/exercises, with unanswered as NA.
-#'   See also: https://mastering-shiny.org/action-transfer.html#downloading-reports
 #'
 #'   Data structure of a learnr submission object:
-#'     - obj$data$answer[[1]] question answer
-#'     - obj$data$code[[1]] exercise answer
-#'     - obj$type[[1]] "exercise_submission"
-#'     - obj$id[[1]] "id"
+#'     - `obj$data$answer[[1]]` question answer
+#'     - `obj$data$code[[1]]` exercise answer
+#'     - `obj$type[[1]]` "exercise_submission"
+#'     - `obj$id[[1]]` "id"
 #'
 #' @param file Path to write HTML answers file.
 #' @param session Session object from `Shiny` with `learnr`, or a list of submission objects (for testing).
@@ -21,7 +20,7 @@
 #' @returns NULL (side effect: writes file)
 #'
 #' @examples
-#' if(interactive()){
+#' \dontrun{
 #'   write_answers("getting-started_answers.html", sess)
 #' }
 #'

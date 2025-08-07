@@ -2,6 +2,8 @@
 
 Three projects: Finishing make_exercises(). Cleaning up write_answers(). Positron Extension for make_exercises.
 
+* Fix the errors and warnings. The "global" stuff can often be solved by creating 
+
 ### write_answers
 
 * Read submission_functions.R

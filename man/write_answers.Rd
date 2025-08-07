@@ -21,16 +21,15 @@ and write out an HTML file with those answers.
 \details{
 Currently only records questions/exercises the student has completed.
 It may be better to include all questions/exercises, with unanswered as NA.
-See also: https://mastering-shiny.org/action-transfer.html#downloading-reports
 
 Data structure of a learnr submission object:
-- obj$data$answer[\link{1}] question answer
-- obj$data$code[\link{1}] exercise answer
-- obj$type[\link{1}] "exercise_submission"
-- obj$id[\link{1}] "id"
+- \code{obj$data$answer[[1]]} question answer
+- \code{obj$data$code[[1]]} exercise answer
+- \code{obj$type[[1]]} "exercise_submission"
+- \code{obj$id[[1]]} "id"
 }
 \examples{
-if(interactive()){
+\dontrun{
   write_answers("getting-started_answers.html", sess)
 }
 
