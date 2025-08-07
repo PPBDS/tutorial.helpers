@@ -45,6 +45,12 @@ write_answers <- function(file, session) {
     }
     all_ids
   }
+  
+  print("Debugging get_all_question_ids")
+  print(state)
+  print("All possible IDs:")
+  print(all_ids)
+  return(all_ids)
 
   # Accept either a session object or a pre-extracted list of submissions (for tests).
   if (inherits(session, "ShinySession")) {
