@@ -41,23 +41,15 @@ Always begin by having students set up a repo and Quarto document to work in.
 ````{verbatim}
 ### Exercise 1
 
-Create a Github repo called `XX`. Make sure to click the 
-"Add a README file" check box.
+Create a Github repo called `XX`. Make sure to click the "Add a README file" check box.
 
-Connect the repo to a project on your computer using 
-`File -> New Folder from Git ...`.  Make sure to select the 
-"Open in a new window" box. 
+Connect the repo to a project on your computer using `File -> New Folder from Git ...`.  Make sure to select the "Open in a new window" box. 
 
-You need two Positon windows: this one for running the tutorial 
-and the one you just created for writing your code and interacting 
-with the Console.
+You need two Positon windows: this one for running the tutorial and the one you just created for writing your code and interacting with the Console.
 
-Select `File -> New File -> Quarto Document ...`. Provide a 
-title -- `"XX"` -- and an author (you). Render the document 
-and save it as `analysis.qmd`.
+Select `File -> New File -> Quarto Document ...`. Provide a title -- `"XX"` -- and an author (you). Render the document and save it as `analysis.qmd`.
 
-Create a `.gitignore` file with `analysis_files` on the first 
-line and then a blank line. Save and push.
+Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.
 
 In the Console, run:
 
@@ -65,8 +57,7 @@ In the Console, run:
 show_file(".gitignore")
 ```
 
-If that fails, it is probably because you have not yet loaded
- `library(tutorial.helpers)` in the Console.
+If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the Console.
 
 CP/CR.
 
@@ -95,14 +86,9 @@ The second question in the Introduction is often:
 ````{verbatim}
 ### Exercise 2
 
-In your QMD, put `library(tidyverse)` in a new code chunk. 
-Render the file using `Cmd/Ctrl + Shift + K`.
+In your QMD, put `library(tidyverse)` in a new code chunk. Render the file using `Cmd/Ctrl + Shift + K`.
 
-Notice that the file does not look good because the code 
-is visible and there are annoying messages. To take care 
-of this, add `#| message: false` to remove all the messages 
-in this `setup` chunk. Also add the following to the YAML 
-header to remove all code echos from the HTML:
+Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| message: false` to remove all the messages in this `setup` chunk. Also add the following to the YAML header to remove all code echos from the HTML:
 
 ```         
 execute: 
@@ -112,7 +98,7 @@ execute:
 In the Console, run:
 
 ```         
-show_file("XX.qmd", chunk = "Last")
+show_file("analysis.qmd", chunk = "Last")
 ```
 
 CP/CR.
@@ -136,11 +122,9 @@ The third question generally loads the **tidyverse** library into the Console:
 ````{verbatim}
 ### Exercise 3
 
-Place your cursor in the QMD file on the `library(tidyverse)` 
-line. Use `Cmd/Ctrl + Enter` to execute that line.
+Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Enter` to execute that line.
 
-Note that this causes `library(tidyverse)` to be copied down 
-to the Console and then executed. 
+Note that this causes `library(tidyverse)` to be copied down to the Console and then executed. 
 
 CP/CR.
 
@@ -169,17 +153,9 @@ Consider an example of creating an object in the QMD:
 ````{verbatim}
 ### Exercise 12
 
-Create a new code chunk in your QMD. Add a code chunk 
-option: `#| cache: true`. Copy/paste the R code for the 
-final model into the code chunk, assigning the result to 
-`fit_XX`. 
+Create a new code chunk in your QMD. Add a code chunk option: `#| cache: true`. Copy/paste the R code for the final model into the code chunk, assigning the result to `fit_XX`. 
 
-`Cmd/Ctrl + Shift + K`. It may take some time to render 
-your QMD, depending on how complex your model is. But, by 
-including `#| cache: true` you cause Quarto to cache the 
-results of the chunk. The next time you render your QMD, 
-as long as you have not changed the code, Quarto will just 
-load up the saved object.
+`Cmd/Ctrl + Shift + K`. It may take some time to render your QMD, depending on how complex your model is. But, by including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.
 
 At the Console, run:
 
@@ -208,8 +184,7 @@ Once we have create the object in the QMD, we can execute the same code in the C
 ````{verbatim}
 ### Exercise 13
 
-Place your cursor in the QMD file on the `fit_XX` line. 
-Use `Cmd/Ctrl + Enter` to execute that line. 
+Place your cursor in the QMD file on the `fit_XX` line. Use `Cmd/Ctrl + Enter` to execute that line. 
 
 At the Console, run `ls()`. CP/CR.
 
@@ -244,14 +219,12 @@ To ensure that students are on the right path with their code, we need to provid
 ````{verbatim}
 ### Exercise 6
 
-Using your favorite AI, prompt it to generate R code that ... Add 
-the code to your QMD in a new chunk. Place your cursor on the first 
-line of the code and run `Cmd/Ctrl + Enter`.
+Using your favorite AI, prompt it to generate R code that ... Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
 
 In the Console, run:
 
 ```         
-show_file("XX.qmd", chunk = "Last")
+show_file("analysis.qmd", chunk = "Last")
 ```
 
 CP/CR.
@@ -267,10 +240,8 @@ question_text(NULL,
 
 ###
 
-Our code:
-
 ```{r, echo=TRUE}
-...
+
 ```
 
 ### 
@@ -286,7 +257,7 @@ In that case, the answer chunk would look like:
 
 ````{verbatim}
 ```{r, echo=TRUE, eval=FALSE}
-...
+
 ```
 ````
 
@@ -301,14 +272,12 @@ The first of the three prior questions tells the student to replace the current 
 ````{verbatim}
 ### Exercise 8
 
-Now that we have filtered our dataset through a pipe, 
-we need to be on track with the same, correct, code. 
-Replace your code with our code in your QMD.
+Now that we have filtered our dataset through a pipe, we need to be on track with the same, correct, code. Replace your code with our code in your QMD.
 
 In the Console, run:
 
 ```         
-show_file("XX.qmd", chunk = "Last")
+show_file("analysis.qmd", chunk = "Last")
 ```
 
 CP/CR.
@@ -325,7 +294,6 @@ question_text(NULL,
 ###
 
 <!-- XX: Insert a knowledge drop related to this project. -->
-
 ````
 
 The second of the three prior questions tells the student to, in the QMD, assign the result of the pipe to a new variable, often `x`. We then tell the student to `Cmd/Ctrl + Enter` this code, followed by "CP/CR," so that the workspace includes a copy of `x`. 
@@ -333,18 +301,11 @@ The second of the three prior questions tells the student to, in the QMD, assign
 ````{verbatim}
 ### Exercise 9
 
-Within the recent code chunk, add the
-option: `#| cache: true`. Assign the result of our pipe to 
-`x`. 
+Within the recent code chunk, add the option: `#| cache: true`. Assign the result of our pipe to `x`. 
 
-`Cmd/Ctrl + Shift + K`. By including `#| cache: true` 
-you cause Quarto to cache the results of the chunk. 
-The next time you render your QMD, as long as you have not changed 
-the code, Quarto will just load up the saved fitted object.
+`Cmd/Ctrl + Shift + K`. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved fitted object.
 
-Place your cursor on the line where the pipe is assigned to `x`,
-run `Cmd/Ctrl + Enter`. Now, the workspace also includes a copy
-of `x`.
+Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Enter`. Now, the workspace also includes a copy of `x`.
 
 CP/CR.
 
@@ -366,7 +327,6 @@ x <- ...
 ```
 
 <!-- XX: Insert a knowledge drop related to this project. -->
-
 ````
 
 The third of the three prior questions tells the student to type `x` in the Console, followed by "CP/CR." The purpose is both to have the student look at the tibble and also to set the stage for the actual graphics question.
@@ -374,8 +334,7 @@ The third of the three prior questions tells the student to type `x` in the Cons
 ````{verbatim}
 ### Exercise 10
 
-Within the Console, type `x`, which we previously assigned to a pipe
-and ran in the Console. Hit `Enter`.
+Within the Console, type `x`, which we previously assigned to a pipe and ran in the Console. Hit `Enter`.
 
 CP/CR.
 
@@ -398,7 +357,6 @@ x
 ```
 
 <!-- XX: Insert a knowledge drop related to this project. -->
-
 ````
 
 Could all four of these questions be combined into one? Probably. But spreading things has two advantages. First, it ensures that even the weaker students do not get lost. Second, it provides us with four opportunities to drop some knowledge. 
@@ -408,20 +366,14 @@ Now, we can move on to the plotting question. In the age of AI, students will ha
 ````{verbatim}
 ### Exercise 11
 
-Go to the AI and ask it to generate R code that plots a basic graph 
-showing ... Mention you want to use the data from `x` and copy and paste 
-the `x` you ran in the Console with the resulting tibble. 
-You only need the top 3 lines, mainly to include column names.
+Go to the AI and ask it to generate R code that plots a basic graph showing ... Mention you want to use the data from `x` and copy and paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
 
-Within `labs()` edit or add a proper title, subtitle, and caption. 
-If axis labels are appropriate, add them, but if unnecessary, don't bother. 
-Don't assign the code for the plot to any variable. 
-Add this code to a new code cell. Run `Cmd/Ctrl + Shift + K`.
+Within `labs()` edit or add a proper title, subtitle, and caption. If axis labels are appropriate, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Add this code to a new code cell. Run `Cmd/Ctrl + Shift + K`.
 
 In the Console, run:
 
 ```         
-show_file("XX.qmd", chunk = "Last")
+show_file("analysis.qmd", chunk = "Last")
 ```
 
 CP/CR.
@@ -434,7 +386,6 @@ question_text(NULL,
 	incorrect = NULL,
 	rows = 12)
 ```
-
 
 ###
 
@@ -456,7 +407,6 @@ ggplot(x, aes(...)) +
 ###
 
 <!-- XX: Insert a knowledge drop related to this project. -->
-
 ````
 
 
