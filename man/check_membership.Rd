@@ -33,7 +33,8 @@ tibble_list <- gather_submissions(path, "stop")
 
 result <- check_membership(tibble_list, 
                            key_var = "email", 
-                           membership = c("bluebird.jack.xu@gmail.com", "hassan.alisoni007@gmail.com"))
+                           membership = c("bluebird.jack.xu@gmail.com", 
+                                          "hassan.alisoni007@gmail.com"))
 
 }
 }

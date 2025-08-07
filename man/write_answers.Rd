@@ -4,26 +4,30 @@
 \alias{write_answers}
 \title{Write tutorial answers to file}
 \usage{
-write_answers(file, session, is_test = FALSE)
+write_answers(file, session)
 }
 \arguments{
-\item{file}{Location to render answers to. Output file type determined by
-file suffix. Only "html" is acceptable.}
+\item{file}{Path to write HTML answers file.}
 
-\item{session}{Session object from \code{Shiny} with \code{learnr}.}
-
-\item{is_test}{\code{TRUE}/\code{FALSE} depending on whether or not we are just testing
-the function. Default is \code{TRUE}.}
+\item{session}{Session object from \code{Shiny} with \code{learnr}, or a list of submission objects (for testing).}
+}
+\value{
+NULL (side effect: writes file)
 }
 \description{
-Take a tutorial session, extract out all the submitted answers,
-and write out an html file with all of those answers.
+Take a tutorial session, extract all submitted answers,
+and write out an HTML file with those answers.
 }
 \details{
-We only keep track of the questions/exercises that the student has
-completed. The other obvious approach is to keep all the
-questions/exercises and leave unanswered ones as NA. Not sure if that
-approach is better, or even possible.
+Currently only records questions/exercises the student has completed.
+It may be better to include all questions/exercises, with unanswered as NA.
+See also: https://mastering-shiny.org/action-transfer.html#downloading-reports
+
+Data structure of a learnr submission object:
+- obj$data$answer[\link{1}] question answer
+- obj$data$code[\link{1}] exercise answer
+- obj$type[\link{1}] "exercise_submission"
+- obj$id[\link{1}] "id"
 }
 \examples{
 if(interactive()){
