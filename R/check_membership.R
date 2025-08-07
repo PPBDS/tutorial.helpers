@@ -15,19 +15,14 @@
 #' @examples
 #' \dontrun{
 #' # Create sample data with student emails
-#' tibble1 <- tibble(id = c("name", "email", "age"), 
-#'                   answer = c("John", "john@student.edu", "20"))
-#' tibble2 <- tibble(id = c("name", "email", "age"), 
-#'                   answer = c("Jane", "jane@external.com", "22"))
+#' path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
 #' 
-#' tibble_list <- list("student1.html" = tibble1, "student2.html" = tibble2)
-#' my_students <- c("john@student.edu", "mary@student.edu", "bob@student.edu")
+#' tibble_list <- gather_submissions(path, "stop")
 #' 
-#' # Keep only students with allowed emails
-#' valid_students <- check_membership(tibble_list, "email", my_students)
+#' result <- check_membership(tibble_list, 
+#'                            key_var = "email", 
+#'                            membership = c("bluebird.jack.xu@gmail.com", "hassan.alisoni007@gmail.com"))
 #' 
-#' # With verbose output
-#' valid_students <- check_membership(tibble_list, "email", my_students, verbose = TRUE)
 #' }
 #' @export
 check_membership <- function(tibble_list, key_var, membership, verbose = FALSE) {
@@ -54,6 +49,11 @@ check_membership <- function(tibble_list, key_var, membership, verbose = FALSE) 
   # Initialize list to store valid tibbles
   valid_tibbles <- list()
   
+  # Track emails found for verbose reporting
+  emails_found <- character()
+  emails_kept <- character()
+  emails_removed <- character()
+  
   # Check membership for each tibble that passed the key variable check
   for (file_name in names(tibbles_with_key)) {
     tibble_data <- tibbles_with_key[[file_name]]
@@ -63,29 +63,23 @@ check_membership <- function(tibble_list, key_var, membership, verbose = FALSE) 
     
     # Check if we found the key variable
     if (length(key_var_row) == 0) {
-      if (verbose) {
-        message("Removing '", file_name, "': key variable '", key_var, "' not found in id column")
-      }
       next
     }
     
     # Check if tibble has an 'answer' column (where the values are stored)
     if (!"answer" %in% colnames(tibble_data)) {
-      if (verbose) {
-        message("Removing '", file_name, "': no 'answer' column to check value")
-      }
       next
     }
     
     key_var_value <- tibble_data$answer[key_var_row]
+    emails_found <- c(emails_found, key_var_value)
     
     # Check if the value is in the membership list
     if (key_var_value %in% membership) {
       valid_tibbles[[file_name]] <- tibble_data
+      emails_kept <- c(emails_kept, key_var_value)
     } else {
-      if (verbose) {
-        message("Removing '", file_name, "': ", key_var, " = '", key_var_value, "' not in membership list")
-      }
+      emails_removed <- c(emails_removed, key_var_value)
     }
   }
   
@@ -96,6 +90,30 @@ check_membership <- function(tibble_list, key_var, membership, verbose = FALSE) 
     n_final <- length(valid_tibbles)
     n_removed_key <- n_original - n_with_key
     n_removed_membership <- n_with_key - n_final
+    
+    message("Email summary:")
+    
+    # Show emails that were kept (present in membership)
+    if (length(emails_kept) > 0) {
+      message("- Emails found and kept (", length(emails_kept), "): ", paste(emails_kept, collapse = ", "))
+    } else {
+      message("- Emails found and kept: none")
+    }
+    
+    # Show emails that were removed (not in membership)
+    if (length(emails_removed) > 0) {
+      message("- Emails found but not in membership (", length(emails_removed), "): ", paste(emails_removed, collapse = ", "))
+    } else {
+      message("- Emails found but not in membership: none")
+    }
+    
+    # Show membership emails that were not found
+    emails_not_found <- setdiff(membership, emails_found)
+    if (length(emails_not_found) > 0) {
+      message("- Membership emails not found (", length(emails_not_found), "): ", paste(emails_not_found, collapse = ", "))
+    } else {
+      message("- All membership emails were found")
+    }
     
     message("Final summary:")
     message("- Started with: ", n_original, " tibble(s)")
