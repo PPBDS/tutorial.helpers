@@ -27,18 +27,13 @@ students or participants.
 \examples{
 \dontrun{
 # Create sample data with student emails
-tibble1 <- tibble(id = c("name", "email", "age"), 
-                  answer = c("John", "john@student.edu", "20"))
-tibble2 <- tibble(id = c("name", "email", "age"), 
-                  answer = c("Jane", "jane@external.com", "22"))
+path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
 
-tibble_list <- list("student1.html" = tibble1, "student2.html" = tibble2)
-my_students <- c("john@student.edu", "mary@student.edu", "bob@student.edu")
+tibble_list <- gather_submissions(path, "stop")
 
-# Keep only students with allowed emails
-valid_students <- check_membership(tibble_list, "email", my_students)
+result <- check_membership(tibble_list, 
+                           key_var = "email", 
+                           membership = c("bluebird.jack.xu@gmail.com", "hassan.alisoni007@gmail.com"))
 
-# With verbose output
-valid_students <- check_membership(tibble_list, "email", my_students, verbose = TRUE)
 }
 }
