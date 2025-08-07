@@ -39,19 +39,22 @@ the first, potentially resulting in data loss.
 \examples{
 \dontrun{
 # Find submissions from local directory
-tibble_list <- gather_submissions(path = "path/to/directory", title = ".")
+
+path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
+
+tibble_list <- gather_submissions(path = path, title = "stop", verbose = TRUE)
 
 # Find submissions from Google Drive folder (temporary download)
 drive_url <- "https://drive.google.com/drive/folders/your_folder_id"
 tibble_list <- gather_submissions(
   path = drive_url, 
-  title = c("getting", "get-to-know")
+  title = c("probability")
 )
 
 # Find submissions from Google Drive folder (keep files)
 tibble_list <- gather_submissions(
   path = drive_url, 
-  title = c("getting", "get-to-know"),
+  title = c("probability"),
   keep_loc = "~/my_downloads/"
 )
 }
