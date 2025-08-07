@@ -26,19 +26,22 @@
 #' @examples
 #' \dontrun{
 #' # Find submissions from local directory
-#' tibble_list <- gather_submissions(path = "path/to/directory", title = ".")
+#' 
+#' path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
+#' 
+#' tibble_list <- gather_submissions(path = path, title = "stop", verbose = TRUE)
 #'
 #' # Find submissions from Google Drive folder (temporary download)
 #' drive_url <- "https://drive.google.com/drive/folders/your_folder_id"
 #' tibble_list <- gather_submissions(
 #'   path = drive_url, 
-#'   title = c("getting", "get-to-know")
+#'   title = c("probability")
 #' )
 #'
 #' # Find submissions from Google Drive folder (keep files)
 #' tibble_list <- gather_submissions(
 #'   path = drive_url, 
-#'   title = c("getting", "get-to-know"),
+#'   title = c("probability"),
 #'   keep_loc = "~/my_downloads/"
 #' )
 #' }
@@ -226,19 +229,16 @@ filter_by_title_patterns <- function(html_xml_files, title, verbose) {
   
   all_matching_files <- unique(all_matching_files)
   
-  # Report files that didn't match patterns when verbose = TRUE
-  if (verbose) {
-    non_matching_files <- setdiff(html_xml_files, all_matching_files)
-    if (length(non_matching_files) > 0) {
-      if (!requireNamespace("utils", quietly = TRUE)) {
-        stop("Package 'utils' is required. Please install it with: install.packages('utils')")
-      }
-      files_to_show <- utils::head(non_matching_files, 3)
-      message("Removed ", length(non_matching_files), " file(s) that didn't match pattern '", 
-             paste(title, collapse = "|"), "': '", 
-             paste(files_to_show, collapse = "', '"), 
-             if(length(non_matching_files) > 3) "', ..." else "'")
+  # Report files that matched patterns when verbose = TRUE
+  if (verbose && length(all_matching_files) > 0) {
+    if (!requireNamespace("utils", quietly = TRUE)) {
+      stop("Package 'utils' is required. Please install it with: install.packages('utils')")
     }
+    files_to_show <- utils::head(all_matching_files, 3)
+    message("Found ", length(all_matching_files), " file(s) matching pattern '", 
+           paste(title, collapse = "|"), "': '", 
+           paste(files_to_show, collapse = "', '"), 
+           if(length(all_matching_files) > 3) "', ..." else "'")
   }
   
   return(all_matching_files)
