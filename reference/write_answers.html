@@ -74,20 +74,19 @@ and write out an HTML file with those answers.</p>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Currently only records questions/exercises the student has completed.
-It may be better to include all questions/exercises, with unanswered as NA.
-See also: https://mastering-shiny.org/action-transfer.html#downloading-reports</p>
+It may be better to include all questions/exercises, with unanswered as NA.</p>
 <p>Data structure of a learnr submission object:
-- obj$data$answer[1] question answer
-- obj$data$code[1] exercise answer
-- obj$type[1] "exercise_submission"
-- obj$id[1] "id"</p>
+- <code>obj$data$answer[[1]]</code> question answer
+- <code>obj$data$code[[1]]</code> exercise answer
+- <code>obj$type[[1]]</code> "exercise_submission"
+- <code>obj$id[[1]]</code> "id"</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span>  <span class="fu">write_answers</span><span class="op">(</span><span class="st">"getting-started_answers.html"</span>, <span class="va">sess</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
