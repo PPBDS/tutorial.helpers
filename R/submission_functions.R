@@ -42,7 +42,6 @@ submission_server <- function() {
     output$downloadHtml <- shiny::downloadHandler(
       filename = paste0(learnr::get_tutorial_info()$tutorial_id, "_answers.html"),
       content = function(file) {
-        # Place browser() here for test-case generation. Session is available in this scope.
         # At the prompt, you can call:
         # answers <- tutorial.helpers:::get_submissions_from_learnr_session(session)
         # readr::write_rds(answers, "your/path/answers.rds")
