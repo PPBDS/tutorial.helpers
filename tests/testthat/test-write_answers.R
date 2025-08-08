@@ -35,10 +35,11 @@ write_answers(test_html, answers)
 
 # Load generated and expected HTML
 actual_html   <- rvest::read_html(test_html)
-expected_html <- rvest::read_html("C:/Users/922485/tutorial.helpers/tests/testthat/fixtures/submission_test_outputs/submission_report_output.html")
+expected_html <- rvest::read_html("C:/Users/922485/tutorial.helpers/tests/testthat/fixtures/session_output.html")
 
 # Compare normalized HTML content
 if (!identical(rvest::html_text2(actual_html), rvest::html_text2(expected_html))) {
   stop("Test failed: HTML output does not match the expected result.")
 }
+
 
