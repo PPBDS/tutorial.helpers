@@ -141,6 +141,7 @@ format_tutorial <- function(file_path) {
   in_verbatim <- FALSE
   verbatim_count <- 0
   hint_counters <- list()
+  force_exercise_chunk <- FALSE  # NEW: Added force exercise chunk flag
   
   # Second pass: Update code chunk labels based on corrected exercise numbers
   i <- 1
@@ -207,12 +208,25 @@ format_tutorial <- function(file_path) {
       # Initialize hint counter for this exercise
       hint_key <- paste0(section_name, "-", exercise_counter)
       hint_counters[[hint_key]] <- 0
+      force_exercise_chunk <- TRUE  # NEW: Set force flag after exercise header
       i <- i + 1
       next
     }
     
     # Process code chunks - match the start of an R code chunk with more robust detection
     if (grepl("^```\\{r", current_line)) {
+      # NEW: Handle forced exercise chunk (must come first)
+      if (force_exercise_chunk) {
+        # This is the main exercise chunk, relabel it
+        new_base_label <- paste0(section_name, "-", exercise_counter)
+        # Remove existing label (if any), keep options
+        chunk_options <- sub("^```\\{r\\s*([^,}]*)", "", current_line)
+        lines[i] <- paste0("```{r ", new_base_label, chunk_options)
+        force_exercise_chunk <- FALSE
+        i <- i + 1
+        next
+      }
+      
       # Handle broken -test and -hint-* chunk labels (normalize them!)
       chunk_line <- current_line
       label_match <- regexpr("^```\\{r\\s+([^,}]*)", chunk_line, perl = TRUE)
