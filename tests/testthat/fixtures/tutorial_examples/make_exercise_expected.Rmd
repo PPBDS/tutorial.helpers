@@ -8,9 +8,8 @@
 ### Exercise 3
 
 
-
-```{r my-section-3, exercise = TRUE}
-	question_text(NULL,
+```{r my-section-3}
+question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
