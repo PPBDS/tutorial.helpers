@@ -315,3 +315,25 @@ This test ensures that (mistaken) extra spaces in a section name are replaced by
 ```{r space-test-case-1-1, exercise = TRUE}
 
 ```
+
+### Exercise 2
+
+Had some problems with the new version of "no-answer" type questions. In particular, format_tutorial() had trouble with the test code chunk, perhaps because of the combination of -test in the code chunk name and `echo = TRUE`. The current problem is that the code chunk name in the test code block is not updated by check_format_tutorial().
+
+```{r space-test-case-1-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```{r space-test-case-1-2-test, echo = TRUE}
+
+```
+
+###
+
