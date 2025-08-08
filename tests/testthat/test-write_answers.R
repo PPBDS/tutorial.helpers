@@ -29,7 +29,7 @@ library(rvest)
 
 test_that("write_answers() generates correct HTML output from answers fixture", {
   # Load answers list (from session_save.rds)
-  answers <- readRDS("tests/testthat/fixtures/session_save.rds")
+  answers <- readRDS("fixtures/session_save.rds")
   
   # Generate HTML from the answers list
   test_html <- file.path(tempdir(), "submission_report_test.html")
@@ -37,7 +37,7 @@ test_that("write_answers() generates correct HTML output from answers fixture", 
   
   # Load generated and expected HTML
   actual_html   <- rvest::read_html(test_html)
-  expected_html <- rvest::read_html("tests/testthat/fixtures/session_output.html")
+  expected_html <- rvest::read_html("fixtures/session_output.html")
   
   # Compare normalized HTML content
   expect_identical(

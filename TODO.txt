@@ -1,5 +1,15 @@
 ## Anish
 
+* Update test-write_answer.R documentation. Restart R. Make sure your in the right location, meaning tutorial.helpers. Make Change code first, but choose a thoughtful name for new rds.  Then devtools::install(). Then do tutorial.
+
+* Do library calls belong at the top?
+
+* Investigate where the R process is when testthat tests are running. I think it is located on tests/testthat directory.
+
+* Why doesn't devtools::test() work?
+
+* Should we be using test_path() everywhere, rather than hard-coding stuff?
+
 Three projects: Finishing make_exercises(). Cleaning up write_answers(). Positron Extension for make_exercises.
 
 * Fix the errors and warnings. The "global" stuff can often be solved by creating 
