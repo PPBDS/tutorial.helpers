@@ -219,7 +219,12 @@ format_tutorial <- function(file_path) {
         new_base_label <- paste0(section_name, "-", exercise_counter)
         # Remove any existing label but preserve options
         chunk_options <- sub("^```\\{r\\s*([^,}]*)(,?\\s*.*)?\\}$", "\\2", current_line)
-        lines[i] <- paste0("```{r ", new_base_label, chunk_options)
+        # Guarantee chunk_options starts with comma if not empty and doesn't already
+        if (chunk_options != "" && !grepl("^,", chunk_options)) {
+          chunk_options <- paste0(",", chunk_options)
+        }
+        # Always add closing }
+        lines[i] <- paste0("```{r ", new_base_label, chunk_options, "}")
         force_exercise_chunk <- FALSE  # Reset the flag
         i <- i + 1
         next
