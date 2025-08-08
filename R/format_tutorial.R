@@ -213,6 +213,40 @@ format_tutorial <- function(file_path) {
     
     # Process code chunks - match the start of an R code chunk with more robust detection
     if (grepl("^```\\{r", current_line)) {
+      # Handle broken -test and -hint-* chunk labels (normalize them!)
+      chunk_line <- current_line
+      label_match <- regexpr("^```\\{r\\s+([^,}]*)", chunk_line, perl = TRUE)
+      chunk_label <- ifelse(label_match > 0, trimws(regmatches(chunk_line, label_match)[[1]]), "")
+      
+      if (chunk_label != "") {
+        new_base_label <- paste0(section_name, "-", exercise_counter)
+        new_base_label <- gsub("-+", "-", new_base_label)
+        
+        # Fix -test chunks
+        if (grepl("-test$", chunk_label)) {
+          lines[i] <- sub(
+            "^```\\{r\\s+([^,}]*)",
+            paste0("```{r ", new_base_label, "-test"),
+            lines[i]
+          )
+          i <- i + 1
+          next
+        }
+        # Fix -hint-* chunks
+        if (grepl("-hint-\\d+$", chunk_label)) {
+          hint_key <- paste0(section_name, "-", exercise_counter)
+          hint_counters[[hint_key]] <- hint_counters[[hint_key]] + 1
+          hint_number <- hint_counters[[hint_key]]
+          lines[i] <- sub(
+            "^```\\{r\\s+([^,}]*)",
+            paste0("```{r ", new_base_label, "-hint-", hint_number),
+            lines[i]
+          )
+          i <- i + 1
+          next
+        }
+      }
+      
       # Skip if we're not in a section or exercise
       if (section_name == "" || exercise_counter == 0) {
         i <- i + 1
