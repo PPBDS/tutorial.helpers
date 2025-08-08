@@ -202,16 +202,21 @@ format_tutorial <- function(file_path) {
       # Handle forced relabeling after Exercise header
       if (force_exercise_chunk) {
         new_base_label <- paste0(section_name, "-", exercise_counter)
-        chunk_options <- sub("^```\\{r\\s*([^,}]*)\\s*(,.*|\\}.*)?$", "\\2", current_line)
-        if (chunk_options != "" && !grepl("^,", chunk_options)) {
-          chunk_options <- paste0(",", chunk_options)
+        chunk_options <- sub("^```\\{r\\s*[^,}]*\\s*(,.*)?\\s*\\}?\\s*$", "\\1", current_line)
+        chunk_options <- trimws(chunk_options)
+        # <--- ADD THIS LINE HERE:
+        chunk_options <- sub("\\}+$", "", chunk_options)
+        if (nchar(chunk_options) > 0) {
+          chunk_options <- sub("^,", "", chunk_options)
+          lines[i] <- paste0("```{r ", new_base_label, ", ", chunk_options, "}")
+        } else {
+          lines[i] <- paste0("```{r ", new_base_label, "}")
         }
-        # Always close the chunk properly
-        lines[i] <- paste0("```{r ", new_base_label, chunk_options, "}")
         force_exercise_chunk <- FALSE
         i <- i + 1
         next
       }
+      
       
       # Extract label or first arg
       chunk_start <- sub("^```\\{r\\s*", "", current_line)
