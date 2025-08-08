@@ -4,33 +4,15 @@
 \alias{write_answers}
 \title{Write tutorial answers to file}
 \usage{
-write_answers(file, session)
+write_answers(file, obj)
 }
 \arguments{
-\item{file}{Path to write HTML answers file.}
+\item{file}{Output file path (should end in .html).}
 
-\item{session}{Session object from \code{Shiny} with \code{learnr}, or a list of submission objects (for testing).}
-}
-\value{
-NULL (side effect: writes file)
+\item{obj}{Either a Shiny session object (from learnr) or a list of submissions
+(as returned by get_submissions_from_learnr_session()).}
 }
 \description{
-Take a tutorial session, extract all submitted answers,
+Take a tutorial session (or a submission list), extract all submitted answers,
 and write out an HTML file with those answers.
-}
-\details{
-Currently only records questions/exercises the student has completed.
-It may be better to include all questions/exercises, with unanswered as NA.
-
-Data structure of a learnr submission object:
-- \code{obj$data$answer[[1]]} question answer
-- \code{obj$data$code[[1]]} exercise answer
-- \code{obj$type[[1]]} "exercise_submission"
-- \code{obj$id[[1]]} "id"
-}
-\examples{
-\dontrun{
-  write_answers("getting-started_answers.html", sess)
-}
-
 }

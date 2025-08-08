@@ -32,13 +32,3 @@ The function applies the following formatting rules:
 \item Content between quadruple backticks (\verb{ }) is preserved untouched
 }
 }
-\examples{
-\dontrun{
-# Format a tutorial file
-new_content <- format_tutorial("path/to/tutorial.Rmd")
-
-# Write the formatted content to a file
-writeLines(new_content, "path/to/formatted_tutorial.Rmd")
-}
-
-}
