@@ -8,7 +8,8 @@
 #' @param sess session object from shiny with learnr
 #'
 #' @returns a list which includes the exercise submissions of tutorial
-
+#' 
+#' @export
 get_submissions_from_learnr_session <- function(sess){
 
   # Why not just make this a tibble, rather than a nested list? Certainly  would
