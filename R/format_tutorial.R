@@ -41,13 +41,11 @@ format_tutorial <- function(file_path) {
   section_name <- ""
   exercise_counter <- 0
   in_yaml <- FALSE
-  in_verbatim <- FALSE  # Flag to track if we're inside quadruple backticks
+  in_verbatim <- FALSE
   in_section <- FALSE
-  verbatim_count <- 0   # Track the number of backtick toggles to ensure proper pairing
-  
-  # Add a variable to track hint counters per exercise
+  verbatim_count <- 0
   hint_counters <- list()
-  force_exercise_chunk <- FALSE  # New flag to force labeling of next chunk after exercise header
+  force_exercise_chunk <- FALSE
   
   # First pass: Fix topic header spacing and identify/renumber exercises
   i <- 1
@@ -57,7 +55,7 @@ format_tutorial <- function(file_path) {
     # Check for quadruple backticks - toggles verbatim mode
     if (grepl("^````\\s*$", trimws(current_line))) {
       verbatim_count <- verbatim_count + 1
-      in_verbatim <- verbatim_count %% 2 != 0  # Toggle state based on count parity
+      in_verbatim <- verbatim_count %% 2 != 0
       i <- i + 1
       next
     }
@@ -83,31 +81,24 @@ format_tutorial <- function(file_path) {
     
     # Fix topic headers (# headers) - standardize spacing
     if (grepl("^#\\s+", current_line)) {
-      # Extract the topic title and clean up spacing
       topic_title <- sub("^#\\s+", "", current_line)
-      # Remove extra spaces and standardize
       topic_title <- gsub("\\s+", " ", trimws(topic_title))
       lines[i] <- paste0("# ", topic_title)
       i <- i + 1
       next
     }
     
-    # Detect sections (## headers) - handle multiple spaces after ##
+    # Detect sections (## headers)
     if (grepl("^##\\s+", current_line)) {
       section_title <- sub("^##\\s+", "", current_line)
-      # Clean up the section title first
       section_title <- gsub("\\s+", " ", trimws(section_title))
-      # Update the line with standardized spacing
       lines[i] <- paste0("## ", section_title)
       
-      # Create section name for code chunks
       section_name <- tolower(section_title)
       section_name <- gsub("\\s+", "-", section_name)
       section_name <- gsub("[^a-z0-9-]", "", section_name)
-      # Remove consecutive dashes
       section_name <- gsub("-+", "-", section_name)
       
-      # Check if section_name already ends with a hyphen and remove it
       if (grepl("-$", section_name)) {
         section_name <- sub("-$", "", section_name)
       }
@@ -121,9 +112,7 @@ format_tutorial <- function(file_path) {
     # Detect and renumber exercise sections
     if (in_section && grepl("^### Exercise", current_line)) {
       exercise_counter <- exercise_counter + 1
-      # Update the exercise number in the header
       lines[i] <- paste0("### Exercise ", exercise_counter)
-      # Initialize hint counter for this exercise
       hint_key <- paste0(section_name, "-", exercise_counter)
       hint_counters[[hint_key]] <- 0
       i <- i + 1
@@ -140,17 +129,17 @@ format_tutorial <- function(file_path) {
   in_verbatim <- FALSE
   verbatim_count <- 0
   hint_counters <- list()
-  force_exercise_chunk <- FALSE  # Reset the flag for second pass
+  force_exercise_chunk <- FALSE
   
-  # Second pass: Update code chunk labels based on corrected exercise numbers
+  # Second pass: Update code chunk labels
   i <- 1
   while (i <= length(lines)) {
     current_line <- lines[i]
     
-    # Check for quadruple backticks - toggles verbatim mode with more robust detection
+    # Check for quadruple backticks
     if (grepl("^````\\s*$", trimws(current_line))) {
       verbatim_count <- verbatim_count + 1
-      in_verbatim <- verbatim_count %% 2 != 0  # Toggle based on count parity
+      in_verbatim <- verbatim_count %% 2 != 0
       i <- i + 1
       next
     }
@@ -174,24 +163,21 @@ format_tutorial <- function(file_path) {
       next
     }
     
-    # Skip topic headers in second pass (already processed)
+    # Skip topic headers in second pass
     if (grepl("^#\\s+", current_line)) {
       i <- i + 1
       next
     }
     
-    # Detect sections (## headers) - handle multiple spaces after ##
+    # Detect sections (## headers)
     if (grepl("^##\\s+", current_line)) {
       section_title <- sub("^##\\s+", "", current_line)
-      # Clean up the section title first
       section_title <- gsub("\\s+", " ", trimws(section_title))
       
-      # Create section name for code chunks
       section_name <- tolower(section_title)
       section_name <- gsub("\\s+", "-", section_name)
       section_name <- gsub("[^a-z0-9-]", "", section_name)
       
-      # Check if section_name already ends with a hyphen and remove it
       if (grepl("-$", section_name)) {
         section_name <- sub("-$", "", section_name)
       }
@@ -204,33 +190,46 @@ format_tutorial <- function(file_path) {
     # Detect exercise sections and increment counter
     if (grepl("^### Exercise", current_line)) {
       exercise_counter <- exercise_counter + 1
-      # Initialize hint counter for this exercise
       hint_key <- paste0(section_name, "-", exercise_counter)
       hint_counters[[hint_key]] <- 0
-      force_exercise_chunk <- TRUE  # Set flag to force labeling of next chunk
+      force_exercise_chunk <- TRUE
       i <- i + 1
       next
     }
     
-    # Process code chunks - match the start of an R code chunk with more robust detection
+    # Process code chunks
     if (grepl("^```\\{r", current_line)) {
       # Handle forced relabeling after Exercise header
       if (force_exercise_chunk) {
         new_base_label <- paste0(section_name, "-", exercise_counter)
-        # Remove any existing label but preserve options
-        chunk_options <- sub("^```\\{r\\s*([^,}]*)(,?\\s*.*)?\\}$", "\\2", current_line)
-        # Guarantee chunk_options starts with comma if not empty and doesn't already
+        chunk_options <- sub("^```\\{r\\s*([^,}]*)\\s*(,.*|\\}.*)?$", "\\2", current_line)
         if (chunk_options != "" && !grepl("^,", chunk_options)) {
           chunk_options <- paste0(",", chunk_options)
         }
-        # Always add closing }
+        # Always close the chunk properly
         lines[i] <- paste0("```{r ", new_base_label, chunk_options, "}")
-        force_exercise_chunk <- FALSE  # Reset the flag
+        force_exercise_chunk <- FALSE
         i <- i + 1
         next
       }
       
-      # Handle broken -test and -hint-* chunk labels (normalize them!)
+      # Extract label or first arg
+      chunk_start <- sub("^```\\{r\\s*", "", current_line)
+      first_arg <- sub(",.*|}.*", "", chunk_start)
+      
+      # If chunk is completely unlabeled (```{r}), do not relabel
+      if (nchar(trimws(first_arg)) == 0) {
+        i <- i + 1
+        next
+      }
+      
+      # If first arg is file = ..., do not relabel
+      if (grepl("^file\\s*=", trimws(first_arg))) {
+        i <- i + 1
+        next
+      }
+      
+      # Handle broken -test and -hint-* chunk labels
       chunk_line <- current_line
       label_match <- regexpr("^```\\{r\\s+([^,}]*)", chunk_line, perl = TRUE)
       chunk_label <- ifelse(label_match > 0, trimws(regmatches(chunk_line, label_match)[[1]]), "")
@@ -239,7 +238,7 @@ format_tutorial <- function(file_path) {
         new_base_label <- paste0(section_name, "-", exercise_counter)
         new_base_label <- gsub("-+", "-", new_base_label)
         
-        # Fix -test chunks (keep the -test suffix)
+        # Fix -test chunks
         if (grepl("-test$", chunk_label)) {
           lines[i] <- sub(
             "^```\\{r\\s+([^,}]*)",
@@ -270,22 +269,8 @@ format_tutorial <- function(file_path) {
         next
       }
       
-      # LOGIC FOR UPDATING CODE CHUNKS:
-      # 1. Label "setup" = no change
-      # 2. Chunks with "file" option = no change
-      # 3. No label without key options = no change
-      # 4. Label with other options but without key options = no change
-      # 5. Label without any options = change
-      # 6. Any chunk with "exercise", "eval", or "include" = change (even if no label)
-      
-      # Skip "setup" chunks - they should not be changed
+      # Skip "setup" chunks
       if (grepl("^```\\{r\\s+setup", current_line)) {
-        i <- i + 1
-        next
-      }
-      
-      # Skip chunks with "file" option - they should not be changed
-      if (grepl("file\\s*=", current_line)) {
         i <- i + 1
         next
       }
@@ -294,7 +279,6 @@ format_tutorial <- function(file_path) {
       current_label_pattern <- paste0("^```\\{r\\s+", section_name, "-", exercise_counter, "(,|\\})")
       is_already_correct <- grepl(current_label_pattern, current_line)
       
-      # Skip if the label is already correctly formatted
       if (is_already_correct) {
         i <- i + 1
         next
@@ -303,16 +287,14 @@ format_tutorial <- function(file_path) {
       # Create the new base label
       new_base_label <- paste0(section_name, "-", exercise_counter)
       
-      # Handle the special case of unlabeled chunks with include=FALSE, eval=FALSE, or exercise=TRUE
+      # Handle special cases
       if (grepl("^```\\{r\\s+include\\s*=\\s*FALSE", current_line) || grepl("^```\\{r,\\s*include\\s*=\\s*FALSE", current_line)) {
-        # Direct match for unlabeled chunk with include=FALSE (test chunk)
         lines[i] <- gsub("^```\\{r\\s*(.*)$", paste0("```{r ", new_base_label, "-test, \\1"), current_line)
         i <- i + 1
         next
       }
       
       if (grepl("^```\\{r\\s+eval\\s*=\\s*FALSE", current_line) || grepl("^```\\{r,\\s*eval\\s*=\\s*FALSE", current_line)) {
-        # Direct match for unlabeled chunk with eval=FALSE (hint chunk)
         hint_key <- paste0(section_name, "-", exercise_counter)
         hint_counters[[hint_key]] <- hint_counters[[hint_key]] + 1
         hint_number <- hint_counters[[hint_key]]
@@ -324,7 +306,6 @@ format_tutorial <- function(file_path) {
       
       if (grepl("^```\\{r\\s+exercise\\s*=\\s*TRUE", current_line) || grepl("^```\\{r,\\s*exercise\\s*=\\s*TRUE", current_line) || 
           grepl("^```\\{r\\s+[^,]+,\\s*exercise\\s*=\\s*TRUE", current_line)) {
-        # Match for both unlabeled and labeled chunk with exercise=TRUE
         lines[i] <- gsub("^```\\{r(?:\\s+[^,]+)?\\s*,?\\s*(.*)$", paste0("```{r ", new_base_label, ", \\1"), current_line)
         i <- i + 1
         next
@@ -338,50 +319,40 @@ format_tutorial <- function(file_path) {
                         grepl("eval\\s*=", current_line) || 
                         grepl("include\\s*=", current_line)
       
-      # Check if the chunk has any options (indicated by a comma)
+      # Check if the chunk has any options
       has_options <- grepl(",", current_line)
       
       # Determine if we should update this chunk
       should_update <- FALSE
       
-      # Logic for determining if a chunk should be updated
       if (!has_label) {
-        # No label - only update if it has key options
         should_update <- has_key_option
       } else {
         if (has_options) {
-          # Label with options - only update if it has a key option
           should_update <- has_key_option
         } else {
-          # Label without options - always update
           should_update <- TRUE
         }
       }
       
       # Update the chunk if needed
       if (should_update) {
-        # Handle specific cases based on options
         if (grepl("eval\\s*=\\s*FALSE", current_line)) {
-          # Hint chunks with eval=FALSE
           hint_key <- paste0(section_name, "-", exercise_counter)
           hint_counters[[hint_key]] <- hint_counters[[hint_key]] + 1
           hint_number <- hint_counters[[hint_key]]
           
           if (has_label && has_options) {
-            # Labeled chunk with options
             options <- sub("^```\\{r\\s+[^,]+,\\s*(.+)\\}$", "\\1", current_line)
             lines[i] <- paste0("```{r ", new_base_label, "-hint-", hint_number, ", ", options, "}")
           } else if (has_label && !has_options) {
-            # Labeled chunk without other options
             lines[i] <- paste0("```{r ", new_base_label, "-hint-", hint_number, "}")
           } else {
-            # Unlabeled chunk with eval=FALSE
             options <- sub("^```\\{r\\s*,?\\s*(.+)\\}$", "\\1", current_line)
             lines[i] <- paste0("```{r ", new_base_label, "-hint-", hint_number, ", ", options, "}")
           }
         }
         else if (grepl("include\\s*=\\s*FALSE", current_line)) {
-          # Test chunks get -test suffix
           if (has_label && has_options) {
             options <- sub("^```\\{r\\s+[^,]+,\\s*(.+)\\}$", "\\1", current_line)
             lines[i] <- paste0("```{r ", new_base_label, "-test, ", options, "}")
@@ -393,7 +364,6 @@ format_tutorial <- function(file_path) {
           }
         }
         else if (grepl("exercise\\s*=\\s*TRUE", current_line)) {
-          # Exercise chunks
           if (has_label && has_options) {
             options <- sub("^```\\{r\\s+[^,]+,\\s*(.+)\\}$", "\\1", current_line)
             lines[i] <- paste0("```{r ", new_base_label, ", ", options, "}")
@@ -405,7 +375,6 @@ format_tutorial <- function(file_path) {
           }
         }
         else if (has_options && has_key_option) {
-          # Other chunks with key options
           if (has_label) {
             options <- sub("^```\\{r\\s+[^,]+,\\s*(.+)\\}$", "\\1", current_line)
             lines[i] <- paste0("```{r ", new_base_label, ", ", options, "}")
@@ -415,7 +384,6 @@ format_tutorial <- function(file_path) {
           }
         }
         else {
-          # Label without options
           lines[i] <- paste0("```{r ", new_base_label, "}")
         }
       }
@@ -430,4 +398,5 @@ format_tutorial <- function(file_path) {
   # Return formatted content with exactly the same line endings
   return(paste(lines, collapse = "\n"))
 }
+
 
