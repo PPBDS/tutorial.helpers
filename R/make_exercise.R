@@ -46,7 +46,7 @@ make_exercise <- function(type = "no-answer", file_path = NULL) {
   new_exercise <-
     switch(type,
       "no-answer" = sprintf(
-        "### Exercise %s\n\n\n```{r %s-%s}\nquestion_text(NULL,\n\tanswer(NULL, correct = TRUE),\n\tallow_retry = TRUE,\n\ttry_again_button = \"Edit Answer\",\n\tincorrect = NULL,\n\trows = 5)\n```\n\n###\n\n```{r %s-%s-test, echo = TRUE}\n\n```\n\n###\n\n",
+        "### Exercise %s\n\n\n```{r %s-%s, exercise = TRUE}\nquestion_text(NULL,\n\tanswer(NULL, correct = TRUE),\n\tallow_retry = TRUE,\n\ttry_again_button = \"Edit Answer\",\n\tincorrect = NULL,\n\trows = 5)\n```\n\n###\n\n```{r %s-%s-test, echo = TRUE}\n\n```\n\n###\n\n",
         exercise_number,
         section_id,
         exercise_number,
