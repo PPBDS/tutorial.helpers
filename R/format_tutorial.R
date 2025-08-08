@@ -222,7 +222,7 @@ format_tutorial <- function(file_path) {
         new_base_label <- paste0(section_name, "-", exercise_counter)
         new_base_label <- gsub("-+", "-", new_base_label)
         
-        # Fix -test chunks
+        # Fix -test chunks (keep the -test suffix)
         if (grepl("-test$", chunk_label)) {
           lines[i] <- sub(
             "^```\\{r\\s+([^,}]*)",
@@ -288,14 +288,14 @@ format_tutorial <- function(file_path) {
       
       # Handle the special case of unlabeled chunks with include=FALSE, eval=FALSE, or exercise=TRUE
       if (grepl("^```\\{r\\s+include\\s*=\\s*FALSE", current_line) || grepl("^```\\{r,\\s*include\\s*=\\s*FALSE", current_line)) {
-        # Direct match for unlabeled chunk with include=FALSE
+        # Direct match for unlabeled chunk with include=FALSE (test chunk)
         lines[i] <- gsub("^```\\{r\\s*(.*)$", paste0("```{r ", new_base_label, "-test, \\1"), current_line)
         i <- i + 1
         next
       }
       
       if (grepl("^```\\{r\\s+eval\\s*=\\s*FALSE", current_line) || grepl("^```\\{r,\\s*eval\\s*=\\s*FALSE", current_line)) {
-        # Direct match for unlabeled chunk with eval=FALSE
+        # Direct match for unlabeled chunk with eval=FALSE (hint chunk)
         hint_key <- paste0(section_name, "-", exercise_counter)
         hint_counters[[hint_key]] <- hint_counters[[hint_key]] + 1
         hint_number <- hint_counters[[hint_key]]
@@ -364,25 +364,15 @@ format_tutorial <- function(file_path) {
           }
         }
         else if (grepl("include\\s*=\\s*FALSE", current_line)) {
-          # Chunks with include=FALSE get -test suffix
+          # Test chunks get -test suffix
           if (has_label && has_options) {
             options <- sub("^```\\{r\\s+[^,]+,\\s*(.+)\\}$", "\\1", current_line)
             lines[i] <- paste0("```{r ", new_base_label, "-test, ", options, "}")
           } else if (has_label && !has_options) {
             lines[i] <- paste0("```{r ", new_base_label, "-test}")
           } else {
-            # Unlabeled chunk with include=FALSE
             options <- sub("^```\\{r\\s*,?\\s*(.+)\\}$", "\\1", current_line)
             lines[i] <- paste0("```{r ", new_base_label, "-test, ", options, "}")
-          }
-        }
-        else if (grepl("-test", current_line)) {
-          # Chunks with -test in their label
-          if (has_options) {
-            options <- sub("^```\\{r\\s+[^,]+,\\s*(.+)\\}$", "\\1", current_line)
-            lines[i] <- paste0("```{r ", new_base_label, "-test, ", options, "}")
-          } else {
-            lines[i] <- paste0("```{r ", new_base_label, "-test}")
           }
         }
         else if (grepl("exercise\\s*=\\s*TRUE", current_line)) {
@@ -393,7 +383,6 @@ format_tutorial <- function(file_path) {
           } else if (has_label && !has_options) {
             lines[i] <- paste0("```{r ", new_base_label, "}")
           } else {
-            # Unlabeled chunk with exercise=TRUE
             options <- sub("^```\\{r\\s*,?\\s*(.+)\\}$", "\\1", current_line)
             lines[i] <- paste0("```{r ", new_base_label, ", ", options, "}")
           }
@@ -424,3 +413,4 @@ format_tutorial <- function(file_path) {
   # Return formatted content with exactly the same line endings
   return(paste(lines, collapse = "\n"))
 }
+
