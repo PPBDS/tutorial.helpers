@@ -23,23 +23,27 @@
 #
 # ------------------------------------------------------------------------
 
+library(testthat)
 library(tutorial.helpers)
 library(rvest)
 
-# Load answers list (from session_save.rds)
-answers <- readRDS("C:/Users/922485/tutorial.helpers/tests/testthat/fixtures/session_save.rds")
-
-# Generate HTML from the answers list
-test_html <- file.path(tempdir(), "submission_report_test.html")
-write_answers(test_html, answers)
-
-# Load generated and expected HTML
-actual_html   <- rvest::read_html(test_html)
-expected_html <- rvest::read_html("C:/Users/922485/tutorial.helpers/tests/testthat/fixtures/session_output.html")
-
-# Compare normalized HTML content
-if (!identical(rvest::html_text2(actual_html), rvest::html_text2(expected_html))) {
-  stop("Test failed: HTML output does not match the expected result.")
-}
-
+test_that("write_answers() generates correct HTML output from answers fixture", {
+  # Load answers list (from session_save.rds)
+  answers <- readRDS("C:/Users/922485/tutorial.helpers/tests/testthat/fixtures/session_save.rds")
+  
+  # Generate HTML from the answers list
+  test_html <- file.path(tempdir(), "submission_report_test.html")
+  write_answers(test_html, answers)
+  
+  # Load generated and expected HTML
+  actual_html   <- rvest::read_html(test_html)
+  expected_html <- rvest::read_html("C:/Users/922485/tutorial.helpers/tests/testthat/fixtures/session_output.html")
+  
+  # Compare normalized HTML content
+  expect_identical(
+    rvest::html_text2(actual_html),
+    rvest::html_text2(expected_html),
+    info = "HTML output does not match the expected result."
+  )
+})
 
