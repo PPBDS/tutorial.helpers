@@ -47,6 +47,7 @@ format_tutorial <- function(file_path) {
   
   # Add a variable to track hint counters per exercise
   hint_counters <- list()
+  force_exercise_chunk <- FALSE  # New flag to force labeling of next chunk after exercise header
   
   # First pass: Fix topic header spacing and identify/renumber exercises
   i <- 1
@@ -105,8 +106,6 @@ format_tutorial <- function(file_path) {
       section_name <- gsub("[^a-z0-9-]", "", section_name)
       # Remove consecutive dashes
       section_name <- gsub("-+", "-", section_name)
-      # Remove consecutive dashes
-      section_name <- gsub("-+", "-", section_name)
       
       # Check if section_name already ends with a hyphen and remove it
       if (grepl("-$", section_name)) {
@@ -141,6 +140,7 @@ format_tutorial <- function(file_path) {
   in_verbatim <- FALSE
   verbatim_count <- 0
   hint_counters <- list()
+  force_exercise_chunk <- FALSE  # Reset the flag for second pass
   
   # Second pass: Update code chunk labels based on corrected exercise numbers
   i <- 1
@@ -207,12 +207,24 @@ format_tutorial <- function(file_path) {
       # Initialize hint counter for this exercise
       hint_key <- paste0(section_name, "-", exercise_counter)
       hint_counters[[hint_key]] <- 0
+      force_exercise_chunk <- TRUE  # Set flag to force labeling of next chunk
       i <- i + 1
       next
     }
     
     # Process code chunks - match the start of an R code chunk with more robust detection
     if (grepl("^```\\{r", current_line)) {
+      # Handle forced relabeling after Exercise header
+      if (force_exercise_chunk) {
+        new_base_label <- paste0(section_name, "-", exercise_counter)
+        # Remove any existing label but preserve options
+        chunk_options <- sub("^```\\{r\\s*([^,}]*)(,?\\s*.*)?\\}$", "\\2", current_line)
+        lines[i] <- paste0("```{r ", new_base_label, chunk_options)
+        force_exercise_chunk <- FALSE  # Reset the flag
+        i <- i + 1
+        next
+      }
+      
       # Handle broken -test and -hint-* chunk labels (normalize them!)
       chunk_line <- current_line
       label_match <- regexpr("^```\\{r\\s+([^,}]*)", chunk_line, perl = TRUE)
