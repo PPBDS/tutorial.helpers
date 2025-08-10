@@ -19,24 +19,21 @@ The rise of AI leads to a new kind of tutorial. Our purpose is no longer to teac
 
 *Our purpose is to teach students how to use AI to create.* 
 
-Students always need more practice working in a Quarto document (the QMD) and the Console at the same time. Good data scientists go back and forth between these two modes, writing something in the QMD, executing it in the Console, editing the QMD, executing again, and so on. We need to force students to do that here.
+Students always need more practice working in a Quarto document (the QMD) and the Console at the same time. Good data scientists go back and forth between these two modes, writing something in the QMD, executing it in the Console, editing the QMD, executing again, and so on. We need to force students to do that more often.
 
-AI tutorials begin with an Introduction which begins with a summary of the skills which the tutorial will cover. The Introduction continues with a series of exercises which set up the repo/project/QMD in which most of the tutorial will be completed.
+AI tutorials begin with an Introduction which provides a summary of the key packages/functions which the tutorial will cover. The Introduction continues with a series of exercises which set up the repo/project/QMD in which most of the tutorial will be completed.
 
-After the Introduction, there are 3 to 5 Sections --- the official **learnr** nomenclature is "Topics" --- which are the meat of the tutorial. 
+After the Introduction, there are 2 to 4 sections --- the official **learnr** nomenclature is "Topics" --- which are the meat of the tutorial. 
 
-The last topic is the Summary. It starts with the same overview with which the Introduction began, but in the past tense. It then has a couple exercises which finish up the tutorial by using `quarto publish gh-pages analysis.qmd` to create a webpage with all the cool plots which the student has created. The URL for this new webpage is usually the answer to the last Exercise in Summary, thereby finishing the tutorial.
+The last section is the Summary. It starts with the same overview with which the Introduction began, but in the past tense. It then has a couple exercises which finish up the tutorial by using `quarto publish gh-pages analysis.qmd` to create a webpage featuring the cool plots which the student has created. The URL for this new webpage is usually the answer to the last exercise in Summary, thereby finishing the tutorial.
 
 Anytime you ask a student to execute something in the Console, you confirm that they have done so with CP/CR, the abbreviation to **c**opy/**p**aste the **c**ommand/**r**esponse.
 
-Feel free to use any of the example Exercises from this document. Soon, we will add options to `tutorial.helpers::make_exercises()` to make this easier. Either way, you will need to do some edits, like with `"XX.qmd"`. That is, any time you see `XX` in an example exercise, you need to replace it with something sensible. 
-
-
-
+Feel free to use any of the example exercises from this document. Soon, we will add options to `tutorial.helpers::make_exercises()` to make this easier. Either way, you will need to do some edits. Any time you see `XX` in an example exercise, you need to replace it with something sensible. 
 
 ### Introduction
 
-Always begin by having students set up a repo and Quarto document to work in.
+Always begin by having students set up a repo and Quarto document to work in. Again, you must replace `XX` with something sensible and usually different from the other `XX`'s. So, in the below example, the name of the repo and the title of the QMD will be different even though we hold their places with `XX` in both cases.
 
 ````{verbatim}
 ### Exercise 1
@@ -47,7 +44,7 @@ Connect the repo to a project on your computer using `File -> New Folder from Gi
 
 You need two Positon windows: this one for running the tutorial and the one you just created for writing your code and interacting with the Console.
 
-Select `File -> New File -> Quarto Document ...`. Provide a title -- `"XX"` -- and an author (you). Render the document and save it as `analysis.qmd`.
+In the new window, select `File -> New File -> Quarto Document ...`. Provide a title -- `"XX"` -- and an author (you). Render the document and save it as `analysis.qmd`.
 
 Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.
 
@@ -75,9 +72,9 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-Feel free to copy/paste this question as-is, but replacing `XX` with whatever makes sense for your assignment. That is, you need to provide your own repo name, Quarto document title and so on. The repo name should be descriptive and also not likely to have conflicts with other repos in the students GitHub account. So, `golf-scores` not `project-1`. Of course, the code chunk name might change after you run `tutorial.helpers::check_current_tutorial()`.
+Feel free to copy/paste this question as-is, but replacing `XX` with whatever makes sense for your assignment. That is, you need to provide your own repo name, Quarto document title and so on. The repo name should be descriptive and also not likely to have conflicts with other repos in the students GitHub account. So, `golf-scores` not `project-1`. 
 
-You do not need to use `analysis.qmd` as the name of the QMD file which the student creates. But using the same name doesn't hurt anything and is convenient since it decreases the number of things which the user of these example exercises needs to change.
+You do not need to use `analysis.qmd` as the name of the QMD file which the student creates. But using the same name doesn't hurt anything and is convenient since it decreases the number of things which tutorial author needs to change.
 
 You are, obviously, responsible for adding a knowledge drop which teaches the students something about the larger topic.
 
@@ -88,7 +85,7 @@ The second question in the Introduction is often:
 
 In your QMD, put `library(tidyverse)` in a new code chunk. Render the file using `Cmd/Ctrl + Shift + K`.
 
-Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| message: false` to remove all the messages in this `setup` chunk. Also add the following to the YAML header to remove all code echos from the HTML:
+Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| message: false` to remove all the messages in this `setup` chunk. Also, add the following to the YAML header to remove all code echos from the HTML:
 
 ```         
 execute: 
@@ -134,7 +131,7 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 3)
+	rows = 8)
 ```
 
 ###
@@ -142,10 +139,9 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-
 If the target audience for the tutorial is more experienced, you can be less didactic, leaving out several of these instructions. You could also add more steps, like loading more libraries at once.
 
-I recommend offering these explicit instructions many, many times. First, students need lots of practice. Second, each time you tell them to add something to the QMD, you give yourself an opportunity for a knowledge drop. The same applies when you tell students to execute, in the Console, this new addition to the QMD. 
+I recommend offering these explicit instructions in every tutorial. First, students need lots of practice. Second, each time you tell them to add something to the QMD, you give yourself an opportunity for a knowledge drop. The same applies when you tell students to execute, in the Console, a new addition to the QMD. 
 
 Consider an example of creating an object in the QMD:
 
@@ -240,7 +236,7 @@ question_text(NULL,
 
 ###
 
-```{r, echo=TRUE}
+```{r, echo = TRUE}
 
 ```
 
@@ -249,14 +245,14 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-The R chunk with `echo=TRUE` allows the students to see the code we have written within it. This makes it easy for the students to copy and paste our code if they need to. 
+The R chunk with `echo = TRUE` allows the students to see the code we have written within it. This makes it easy for the students to copy and paste our code if they need to. 
 
-Additionally, `eval=TRUE` is the default argument in an R chunk, so the code within will automatically be run as well. To the students, they will be able to see any output from the code, which can be helpful if the code plots a graph. If it is inappropriate or unnecessary to include the output of the code, just set `eval=FALSE`.
+Additionally, `eval = TRUE` is the default argument in an R chunk, so the code within will automatically be run as well. To the students, they will be able to see any output from the code, which can be helpful if the code plots a graph. If it is inappropriate or unnecessary to include the output of the code, just set `eval = FALSE` explicitly.
 
 In that case, the answer chunk would look like:
 
 ````{verbatim}
-```{r, echo=TRUE, eval=FALSE}
+```{r, echo = TRUE, eval = FALSE}
 
 ```
 ````
@@ -272,7 +268,7 @@ The first of the three prior questions tells the student to replace the current 
 ````{verbatim}
 ### Exercise 8
 
-Now that we have filtered our dataset through a pipe, we need to be on track with the same, correct, code. Replace your code with our code in your QMD.
+Before creating a plot, we need to ensure that your data matches our data. Replace your code with our code in your QMD.
 
 In the Console, run:
 
@@ -301,11 +297,13 @@ The second of the three prior questions tells the student to, in the QMD, assign
 ````{verbatim}
 ### Exercise 9
 
-Within the recent code chunk, add the option: `#| cache: true`. Assign the result of our pipe to `x`. 
+Within the latest code chunk, add the option: `#| cache: true`. Assign the result of the pipe to `x`. 
 
 `Cmd/Ctrl + Shift + K`. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved fitted object.
 
-Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Enter`. Now, the workspace also includes a copy of `x`.
+If you have not done so already, you should add `analysis_cache` to the `.gitginore`. The content of the cache file does not belong on GitHub.
+
+Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Enter`, thus ensuring that the workspace also includes a copy of `x`.
 
 CP/CR.
 
@@ -315,14 +313,14 @@ question_text(NULL,
     allow_retry = TRUE,
     try_again_button = "Edit Answer",
     incorrect = NULL,
-    rows = 6)
+    rows = 8)
 ```
 
 ###
 
 Our code:
 
-```{r, echo=TRUE, eval=FALSE}
+```{r, echo = TRUE}
 x <- ...
 ```
 
@@ -330,6 +328,7 @@ x <- ...
 ````
 
 The third of the three prior questions tells the student to type `x` in the Console, followed by "CP/CR." The purpose is both to have the student look at the tibble and also to set the stage for the actual graphics question.
+
 
 ````{verbatim}
 ### Exercise 10

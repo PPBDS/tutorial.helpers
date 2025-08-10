@@ -2,3 +2,4 @@ name: Helpers Tutorial
 description: Use this template to create a new tutorial which makes use of
   tools from the tutorial.helpers package.
 create_dir: false
+

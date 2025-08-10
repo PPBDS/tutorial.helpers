@@ -72,40 +72,20 @@ make_exercise <- function(type = "no-answer", file_path = NULL) {
       stop("Unknown type argument to make_exercise()")
     )
 
-  # --- Robust insertion logic ---
+  # --- Insertion logic ---
   # If file_path is NULL, we are in RStudio and want to insert into the active document
   if (is.null(file_path)) {
     ctx <- rstudioapi::getActiveDocumentContext()
     if (is.null(ctx)) stop("No active RStudio document. Please open an Rmd file.")
-
-    # Default: insert at cursor or end if no selection
-    if (length(ctx$selection) == 0) {
-      # No selection: insert at end of document
-      last_line <- length(ctx$contents)
-      insert_pos <- document_range(
-        document_position(last_line + 1, 1),
-        document_position(last_line + 1, 1)
-      )
-    } else {
-      insert_pos <- ctx$selection[[1]]$range
-    }
-    rstudioapi::insertText(
-      location = insert_pos,
-      text = new_exercise
-    )
+    
+    # Insert at current cursor position (this is the simplest approach)
+    rstudioapi::insertText(text = new_exercise)
+    
   } else {
     # If file_path is provided (for testing): write or append to file
     cat(new_exercise, file = file_path, append = TRUE)
     invisible(new_exercise)
   }
-}
-
-# Helper for RStudio API compatibility
-document_position <- function(row, column) {
-  structure(list(row = row, column = column), class = "document_position")
-}
-document_range <- function(start, end) {
-  structure(list(start = start, end = end), class = "document_range")
 }
 
 #' Make question skeleton without an answer
@@ -123,4 +103,3 @@ make_no_answer <- function() {
 make_yes_answer <- function() {
   make_exercise(type = "yes-answer")
 }
-
