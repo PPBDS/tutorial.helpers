@@ -4,26 +4,44 @@
 \alias{check_tutorial_defaults}
 \title{Confirm that a tutorial has the recommended components}
 \usage{
-check_tutorial_defaults(tutorial_paths)
+check_tutorial_defaults(
+  tutorial_paths,
+  libraries = c("learnr", "tutorial.helpers"),
+  children = c("info_section", "download_answers")
+)
 }
 \arguments{
 \item{tutorial_paths}{Character vector of the paths to the tutorials to be
 examined.}
+
+\item{libraries}{Character vector of library names that should be loaded
+in the tutorial. The function looks for \code{library(name)} calls. Default
+is \code{c("learnr", "tutorial.helpers")}.}
+
+\item{children}{Character vector of child document names (without the .Rmd
+extension) that should be included in the tutorial. The function looks
+for these in child document inclusion chunks. Default is
+\code{c("info_section", "download_answers")}.}
 }
 \value{
 No return value, called for side effects.
 }
 \description{
-There are three code components: the use of a copy-code button,
-an information request, and a download page. It is tricky to know where to
-store the "truth" of what these components should look like. For now, the
-truth is defined as the \code{skeleton.Rmd} which defines the template for
-creating a new tutorial.
-
-All tutorials should also have \code{library(learnr)} and
-\code{library(tutorial.helpers)}, both of which exist in the skeleton
+Checks that tutorials contain required libraries and child
+documents. The function looks for library() calls and child document
+inclusions in the tutorial files.
 }
 \examples{
-  check_tutorial_defaults(tutorial_paths = return_tutorial_paths("tutorial.helpers"))
+  # Check with default requirements
+  check_tutorial_defaults(
+    tutorial_paths = return_tutorial_paths("tutorial.helpers")
+  )
+  
+  # Check for specific libraries only
+  check_tutorial_defaults(
+    tutorial_paths = return_tutorial_paths("tutorial.helpers"),
+    libraries = c("learnr", "knitr"),
+    children = c("copy_button")
+  )
 
 }

@@ -1,57 +1,90 @@
 #' Confirm that a tutorial has the recommended components
 #'
-#' @description There are three code components: the use of a copy-code button,
-#'   an information request, and a download page. It is tricky to know where to
-#'   store the "truth" of what these components should look like. For now, the
-#'   truth is defined as the `skeleton.Rmd` which defines the template for
-#'   creating a new tutorial.
-#'
-#'   All tutorials should also have `library(learnr)` and
-#'   `library(tutorial.helpers)`, both of which exist in the skeleton
+#' @description Checks that tutorials contain required libraries and child 
+#'   documents. The function looks for library() calls and child document
+#'   inclusions in the tutorial files.
 #'
 #' @param tutorial_paths Character vector of the paths to the tutorials to be
 #'   examined.
+#'   
+#' @param libraries Character vector of library names that should be loaded
+#'   in the tutorial. The function looks for `library(name)` calls. Default
+#'   is `c("learnr", "tutorial.helpers")`.
+#'   
+#' @param children Character vector of child document names (without the .Rmd
+#'   extension) that should be included in the tutorial. The function looks 
+#'   for these in child document inclusion chunks. Default is 
+#'   `c("info_section", "download_answers")`.
 #'
 #' @examples
-#'   check_tutorial_defaults(tutorial_paths = return_tutorial_paths("tutorial.helpers"))
+#'   # Check with default requirements
+#'   check_tutorial_defaults(
+#'     tutorial_paths = return_tutorial_paths("tutorial.helpers")
+#'   )
+#'   
+#'   # Check for specific libraries only
+#'   check_tutorial_defaults(
+#'     tutorial_paths = return_tutorial_paths("tutorial.helpers"),
+#'     libraries = c("learnr", "knitr"),
+#'     children = c("copy_button")
+#'   )
 #'
 #' @returns No return value, called for side effects. 
 #'
 #' @export
 
-check_tutorial_defaults <- function(tutorial_paths){
+check_tutorial_defaults <- function(tutorial_paths,
+                                    libraries = c("learnr", "tutorial.helpers"),
+                                    children = c("info_section", "download_answers")) {
   
   stopifnot(all(file.exists(tutorial_paths)))
-
-  skeleton_lines <- readLines(
-    system.file(
-      "rmarkdown/templates/tutorial_template/skeleton/skeleton.Rmd",
-      package = "tutorial.helpers"))
-
-  # The true hack is reducing components to just the three lines which we want
-  # to ensure are present. This is especially dangerous because all the
-  # components in the skeleton are placed on a single line. However, a tutorial
-  # writer might format them differently. They would still work even if they
-  # included line breaks. But such components would fail this check.
-
-  components <- skeleton_lines[grepl("child = system.file", skeleton_lines) ]
-
-  # All tutorials should have library(learnr) and library(tutorial.helpers),
-  # both of which exist in the skeleton.
   
-  libs <- skeleton_lines[grepl("library", skeleton_lines) ]
-  
-  for(i in tutorial_paths){
-    target <- readLines(i)
-    if(! all(components %in% target)){
-      stop("Missing a component part from file ", i, "\n")
+  for(tutorial_path in tutorial_paths) {
+    
+    # Read the tutorial content
+    
+    tutorial_lines <- readLines(tutorial_path)
+    
+    
+    # Check for required libraries
+    # Look for lines like: library(learnr) or library("learnr") or library('learnr')
+    
+    if(length(libraries) > 0) {
+      for(lib in libraries) {
+        
+        # Create regex pattern to match library calls with or without quotes
+        
+        lib_pattern <- sprintf("library\\(['\"]?%s['\"]?\\)", lib)
+        
+        if(!any(grepl(lib_pattern, tutorial_lines))) {
+          stop("Missing library(", lib, ") call in file ", tutorial_path, "\n")
+        }
+      }
     }
-    if(! all(libs %in% target)){
-      stop("Missing a library call from file ", i, "\n")
+    
+    
+    # Check for required child documents
+    # Look for lines containing child document inclusions
+    # Pattern matches: child = system.file("child_documents/[name].Rmd", package = "tutorial.helpers")
+    # Also handles variations in spacing and quotes
+    
+    if(length(children) > 0) {
+      for(child in children) {
+        
+        # Create regex pattern to match child document inclusion
+        # This pattern is flexible about quotes and spacing
+        
+        child_pattern <- sprintf(
+          "child\\s*=\\s*system\\.file\\(['\"].*/%s\\.Rmd['\"]",
+          child
+        )
+        
+        if(!any(grepl(child_pattern, tutorial_lines))) {
+          stop("Missing child document '", child, "' in file ", tutorial_path, "\n")
+        }
+      }
     }
   }
-
-  NULL
+  
+  invisible(NULL)
 }
-
-

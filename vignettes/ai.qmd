@@ -259,16 +259,14 @@ In that case, the answer chunk would look like:
 
 ### Plotting Questions
 
-Plotting exercises are generally handled with a sequence of four questions.
-
-Plotting questions are almost always proceeded by three questions about the tibble from which the plot will be created. Prior to these, the tutorial will probably have walked the student through the process of gathering, organizing, and cleaning the data, generally by using a pipe. 
+Plotting exercises are generally handled with a sequence of four questions. Prior to these, the tutorial will probably have the student practice gathering, organizing, and cleaning the data. 
 
 The first of the three prior questions tells the student to replace the current pipe which they have in the QMD with our code. We check that they have done so with `show_file()`. The purpose of this question is to ensure that the student's data will match our data.
 
 ````{verbatim}
 ### Exercise 8
 
-Before creating a plot, we need to ensure that your data matches our data. Replace your code with our code in your QMD.
+Before creating a plot, we need to ensure that your data matches our data. In the QMD, replace your code from the previous exercise with our code.
 
 In the Console, run:
 
@@ -292,14 +290,16 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-The second of the three prior questions tells the student to, in the QMD, assign the result of the pipe to a new variable, often `x`. We then tell the student to `Cmd/Ctrl + Enter` this code, followed by "CP/CR," so that the workspace includes a copy of `x`. 
+Note that the numbering of theses questions is arbitrary. Just run `check_current_tutorial()` to fix them.
+
+The second question tells the student to, in the QMD, assign the result of the pipe to a new variable, often `x`. We then tell the student to `Cmd/Ctrl + Enter` this code so that the workspace includes a copy of `x`. 
 
 ````{verbatim}
 ### Exercise 9
 
 Within the latest code chunk, add the option: `#| cache: true`. Assign the result of the pipe to `x`. 
 
-`Cmd/Ctrl + Shift + K`. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved fitted object.
+`Cmd/Ctrl + Shift + K`. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.
 
 If you have not done so already, you should add `analysis_cache` to the `.gitginore`. The content of the cache file does not belong on GitHub.
 
@@ -327,8 +327,9 @@ x <- ...
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-The third of the three prior questions tells the student to type `x` in the Console, followed by "CP/CR." The purpose is both to have the student look at the tibble and also to set the stage for the actual graphics question.
+Note that we need `x` to be created in the QMD, not just in the Console, because latest chunks will use `x` to create the plot.
 
+The third question tells the student to type `x` in the Console, followed by "CP/CR." The purpose is both to have the student look at the tibble and also to set the stage for the actual graphics question. In defining `x`, you should probably require that the students keep only a reasonable number of variables.
 
 ````{verbatim}
 ### Exercise 10
@@ -365,9 +366,9 @@ Now, we can move on to the plotting question. In the age of AI, students will ha
 ````{verbatim}
 ### Exercise 11
 
-Go to the AI and ask it to generate R code that plots a basic graph showing ... Mention you want to use the data from `x` and copy and paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
+Ask AI to generate R code that uses `x` to plot a basic graph showing XX... Mention you want to use the data from `x` and copy/paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
 
-Within `labs()` edit or add a proper title, subtitle, and caption. If axis labels are appropriate, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Add this code to a new code cell. Run `Cmd/Ctrl + Shift + K`.
+Within `labs()`, edit or add a proper title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `Cmd/Ctrl + Shift + K` to ensure that everything works. Make your plot look nice.
 
 In the Console, run:
 
@@ -391,21 +392,12 @@ question_text(NULL,
 Our code:
 
 ```{r, echo=TRUE}
-ggplot(x, aes(...)) +
-  ... +
-  labs(
-    title = "...",
-    subtitle = "...",
-    x = "...",
-    y = "...",
-    caption = "..."
-    ) +
   ...
 ```
 
 ###
 
-<!-- XX: Insert a knowledge drop related to this project. -->
+<!-- XX: Make sure your plotting code is good! This will take some time. You had better have a subtitle which provides the take-away message of the plot. AI sometimes gives you too much code, lots of `theme()` stuff and so on. This is no good! In most cases, we are happy with concise, straightforward code. Insert a knowledge drop related to this project. -->
 ````
 
 

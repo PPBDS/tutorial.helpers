@@ -16,6 +16,8 @@
 
 * Rename tutorial to "Getting Started."
 
+* Change check_tutorial_defaults() to make it more flexible.
+
 # tutorial.helpers 0.5.0
 
 * make_exercise() no longer includes '-ex' in code chunk labels for exercises.

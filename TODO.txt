@@ -108,8 +108,13 @@ Fix:
 
 # This Summer
 
+* The determine_* functions are suspect. 
 
+  + Should they really look into the active document if file_path equals NULL. I don't think so . . . 
+  
+  + Perhaps more importantly, they should have sensible behavior when called a file with no Sections and no Exercises.
 
+  + They need test cases!
 
 ## process_submissions()
 
