@@ -4,7 +4,7 @@
 
 * `title` argument to process_submissions() now accepts a vector.
 
-* Remove RStudio material.
+* Remove RStudio material, including addins.
 
 * Create find_submissions().
 
