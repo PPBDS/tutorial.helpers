@@ -1,8 +1,8 @@
 ## Anish
 
-* Update test-write_answer.R documentation. Restart R. Make sure your in the right location, meaning tutorial.helpers. Make Change code first, but choose a thoughtful name for new rds.  Then devtools::install(). Then do tutorial.
+* Update test-write_answer.R documentation. Restart R. Make sure your in the right location, meaning tutorial.helpers. Make Change code first, but choose a thoughtful name for new rds.  Then devtools::install(). Then do tutorial. Done
 
-* Do library calls belong at the top?
+* Do library calls belong at the top? Nope, Done
 
 * Investigate where the R process is when testthat tests are running. I think it is located on tests/testthat directory.
 

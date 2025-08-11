@@ -48,8 +48,15 @@
 # ------------------------------------------------------------------------
 
 testthat::test_that("write_answers() generates correct HTML output from answers fixture", {
+  # Resolve fixture paths from the package root
+  rds_path    <- testthat::test_path("fixtures", "session_save.rds")
+  expect_true(file.exists(rds_path), info = paste("Missing fixture:", rds_path))
+
+  expected_ht <- testthat::test_path("fixtures", "session_output.html")
+  expect_true(file.exists(expected_ht), info = paste("Missing expected HTML:", expected_ht))
+
   # Load the saved answers list fixture
-  answers <- base::readRDS("tests/testthat/fixtures/session_save.rds")
+  answers <- base::readRDS(rds_path)
 
   # Generate HTML from the answers list to a temp location
   test_html <- file.path(tempdir(), "submission_report_test.html")
@@ -57,7 +64,7 @@ testthat::test_that("write_answers() generates correct HTML output from answers 
 
   # Load generated and expected HTML using namespaced rvest
   actual_html   <- rvest::read_html(test_html)
-  expected_html <- rvest::read_html("tests/testthat/fixtures/session_output.html")
+  expected_html <- rvest::read_html(expected_ht)
 
   # Compare normalized visible HTML content
   testthat::expect_identical(
@@ -66,5 +73,6 @@ testthat::test_that("write_answers() generates correct HTML output from answers 
     info = "HTML output does not match the expected result."
   )
 })
+
 
 
