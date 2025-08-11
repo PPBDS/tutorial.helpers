@@ -49,10 +49,10 @@
 
 testthat::test_that("write_answers() generates correct HTML output from answers fixture", {
   # Resolve fixture paths from the package root
-  rds_path <- "C:/Users/922485/tutorial.helpers/tests/testthat/fixtures/session_save.rds"
+  rds_path <- testthat::test_path("fixtures", "session_save.rds")
   expect_true(file.exists(rds_path), info = paste("Missing fixture:", rds_path))
 
-  expected_ht <- "C:/Users/922485/tutorial.helpers/tests/testthat/fixtures/session_output.html"
+  expected_ht <- testthat::test_path("fixtures", "session_output.html")
   expect_true(file.exists(expected_ht), info = paste("Missing expected HTML:", expected_ht))
 
   # Load the saved answers list fixture
