@@ -46,7 +46,7 @@ submission_server <- function() {
       content = function(file) {
         # browser()
         # subs <- tutorial.helpers:::get_submissions_from_learnr_session(session)
-        # saveRDS(subs, file = "tests/testthat/fixtures/session_save.rds")
+        # saveRDS(subs, testthat::test_path("fixtures", "session_save.rds"))
         write_answers(file, session)
       }
     )
