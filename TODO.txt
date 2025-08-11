@@ -1,6 +1,14 @@
 ## Anish
 
+
 * Update test-write_answer.R documentation. Restart R. Make sure your in the right location, meaning tutorial.helpers. Make Change code first, but choose a thoughtful name for new rds.  Then devtools::install(). Then do tutorial. Done
+
+* Last Day Wednesday!
+
+* Move Positron extension code to extension. 
+
+* Update test-write_answer.R documentation. Restart R. Make sure your in the right location, meaning tutorial.helpers. Make Change code first, but choose a thoughtful name for new rds.  Then devtools::install(). Then do tutorial.
+
 
 * Do library calls belong at the top? Nope, Done
 
