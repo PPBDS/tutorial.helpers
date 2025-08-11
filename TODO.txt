@@ -85,7 +85,7 @@ Our code:
 
 # Stepher
 
-* The default values for submissions_answers() and other related functions should not require key_var or membership. By default, you just get everyone.
+* The default values for submissions_answers() and other related functions should not require key_var or membership. By default, you just get everyone. SS: Done
 
 Fix:
 
@@ -100,10 +100,9 @@ Fix:
 * Leaves open: Is there a special function that the teacher might run which would gather overview data and in which we might calculate answers? Sure. But not today. DK: Think about what submission_summary() should be doing.
 
 
-* Explore the ability to write a function which would gather all the github.io pages, launch a new browser, which would have a tab for each of them, with the name of the tab being the `label_var`, like "name". Not a requirement to have the name on the tab. But is a requirement to be able to launch multiple sites at once. Better one instance of the browswer with multiple tabs, but maybe launch the browser several times, once for each url, is OK? Goal: Make life easier for a teaching fellow with 10 students who wants to quickly look at their webpages.
+* Explore the ability to write a function which would gather all the github.io pages, launch a new browser, which would have a tab for each of them, with the name of the tab being the `label_var`, like "name". Not a requirement to have the name on the tab. But is a requirement to be able to launch multiple sites at once. Better one instance of the browswer with multiple tabs, but maybe launch the browser several times, once for each url, is OK? Goal: Make life easier for a teaching fellow with 10 students who wants to quickly look at their webpages. 
 
-* If vars = c("*"), give all questions. 
-
+* If vars = c("*"), give all questions.
 
 
 # This Summer
