@@ -54,7 +54,7 @@ system performance and browser behavior.
 \examples{
 \dontrun{
 # Open multiple GitHub Pages from vector
-student_sited <- c("https://github.com/Abdul-Hannan96/stops.git")
+student_sites <- c("https://github.com/Abdul-Hannan96/stops.git")
 
 open_github_pages(student_sites, verbose = TRUE)
 
