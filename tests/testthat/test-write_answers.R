@@ -22,13 +22,13 @@
 # 6) Temporarily add these two lines inside the downloadHandler content
 #    function in submission_server(), just before write_answers(file, session):
 #       subs <- tutorial.helpers:::get_submissions_from_learnr_session(session)
-#       saveRDS(subs, file = "tests/testthat/fixtures/session_save.rds")
+#       saveRDS(subs, file = testthat::test_path("fixtures", "session_save.rds"))
 #    Then click the Download button in the tutorial. This overwrites
 #    tests/testthat/fixtures/session_save.rds with your latest answers.
 #    Remove or comment those two lines immediately after creating the fixture.
 #
 # Create the canonical HTML from the fixture
-# 7) In a clean R session at the package root:
+# 7) Restart R and in a clean R session at the package root:
 #       a <- readRDS("tests/testthat/fixtures/session_save.rds")
 #       tutorial.helpers::write_answers("tests/testthat/fixtures/session_output.html", a)
 #    Open tests/testthat/fixtures/session_output.html in a browser and verify it.
