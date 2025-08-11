@@ -6,9 +6,11 @@
 #'
 #' @param path The path to the local directory or Google Drive folder URL containing submissions
 #' @param title A character vector of patterns to match against file names (passed to gather_submissions)
-#' @param key_var A character string specifying the key variable to check for membership (e.g., "email")
-#' @param membership A character vector of allowed values for the key variable, or "*" to include all submissions
-#' @param vars A character vector of variables/questions to extract
+#' @param key_var A character string specifying the key variable to check for membership (e.g., "email").
+#'        If NULL (default), no membership filtering is applied.
+#' @param membership A character vector of allowed values for the key variable, or "*" to include all submissions.
+#'        If NULL (default), no membership filtering is applied. Ignored if key_var is NULL.
+#' @param vars A character vector of variables/questions to extract, or "*" to extract all available variables
 #' @param keep_file_name How to handle file names: NULL (don't include), "All" (full name),
 #'        "Space" (up to first space), "Underscore" (up to first underscore)
 #' @param verbose A logical value (TRUE or FALSE) specifying verbosity level.
@@ -34,9 +36,19 @@
 #'   vars = c("name", "email", "introduction-1"),
 #'   verbose = TRUE
 #' )
+#' 
+#' # Extract all variables from submissions
+#' result_all <- submissions_answers(
+#'   path = path,
+#'   title = c("stop"), 
+#'   key_var = "email",
+#'   membership = c("bluebird.jack.xu@gmail.com", "abdul.hannan20008@gmail.com"),
+#'   vars = "*",
+#'   verbose = TRUE
+#' )
 #' }
 #' @export
-submissions_answers <- function(path, title, key_var, membership, vars, 
+submissions_answers <- function(path, title, key_var = NULL, membership = NULL, vars, 
                                keep_file_name = NULL, verbose = FALSE) {
   
   # Input validation
@@ -48,16 +60,17 @@ submissions_answers <- function(path, title, key_var, membership, vars,
     stop("'title' must be provided.")
   }
   
-  if (missing(key_var) || is.null(key_var)) {
-    stop("'key_var' must be provided.")
-  }
-  
-  if (missing(membership) || is.null(membership)) {
-    stop("'membership' must be provided.")
-  }
-  
   if (missing(vars) || is.null(vars)) {
     stop("'vars' must be provided.")
+  }
+  
+  # Validate key_var and membership consistency
+  if (!is.null(key_var) && is.null(membership)) {
+    stop("'membership' must be provided when 'key_var' is specified.")
+  }
+  
+  if (is.null(key_var) && !is.null(membership)) {
+    stop("'key_var' must be provided when 'membership' is specified.")
   }
   
   # Validate verbose parameter
@@ -84,10 +97,19 @@ submissions_answers <- function(path, title, key_var, membership, vars,
     return(tibble::tibble())
   }
   
-  # Step 2: Filter by membership using check_membership, or skip if membership is "*"
-  if (length(membership) == 1 && membership == "*") {
+  # Step 2: Filter by membership using check_membership, or skip if no filtering requested
+  if (is.null(key_var) || is.null(membership)) {
+    # No membership filtering - include all submissions
+    valid_tibbles <- tibble_list
+    if (verbose) {
+      message("No membership filtering applied - including all ", length(tibble_list), " submission(s)")
+    }
+  } else if (length(membership) == 1 && membership == "*") {
     # Include all submissions - no membership filtering
     valid_tibbles <- tibble_list
+    if (verbose) {
+      message("Membership set to '*' - including all ", length(tibble_list), " submission(s)")
+    }
   } else {
     # Apply membership filtering
     valid_tibbles <- check_membership(tibble_list, key_var, membership, verbose = FALSE)
@@ -102,6 +124,24 @@ submissions_answers <- function(path, title, key_var, membership, vars,
       message("No submissions passed the membership check.")
     }
     return(tibble::tibble())
+  }
+  
+  # Step 2.5: Determine which variables to extract
+  if (length(vars) == 1 && vars == "*") {
+    # Extract all available variables from all submissions
+    all_vars <- character(0)
+    for (tibble_data in valid_tibbles) {
+      if ("id" %in% colnames(tibble_data)) {
+        all_vars <- unique(c(all_vars, tibble_data$id))
+      }
+    }
+    vars_to_extract <- all_vars
+    
+    if (verbose) {
+      message("Extracting all available variables: ", paste(vars_to_extract, collapse = ", "))
+    }
+  } else {
+    vars_to_extract <- vars
   }
   
   # Step 3: Extract answers and create final tibble
@@ -128,7 +168,7 @@ submissions_answers <- function(path, title, key_var, membership, vars,
     }
     
     # Extract each variable
-    for (var in vars) {
+    for (var in vars_to_extract) {
       if ("id" %in% colnames(tibble_data) && var %in% tibble_data$id) {
         # Get the answer for this variable - check for both 'answer' and 'data' columns
         if ("answer" %in% colnames(tibble_data)) {
