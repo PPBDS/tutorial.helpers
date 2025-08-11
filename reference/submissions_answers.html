@@ -58,8 +58,8 @@ and one column per variable.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">submissions_answers</span><span class="op">(</span></span>
 <span>  <span class="va">path</span>,</span>
 <span>  <span class="va">title</span>,</span>
-<span>  <span class="va">key_var</span>,</span>
-<span>  <span class="va">membership</span>,</span>
+<span>  key_var <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  membership <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">vars</span>,</span>
 <span>  keep_file_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -79,15 +79,17 @@ and one column per variable.</p>
 
 
 <dt id="arg-key-var">key_var<a class="anchor" aria-label="anchor" href="#arg-key-var"></a></dt>
-<dd><p>A character string specifying the key variable to check for membership (e.g., "email")</p></dd>
+<dd><p>A character string specifying the key variable to check for membership (e.g., "email").
+If NULL (default), no membership filtering is applied.</p></dd>
 
 
 <dt id="arg-membership">membership<a class="anchor" aria-label="anchor" href="#arg-membership"></a></dt>
-<dd><p>A character vector of allowed values for the key variable, or "*" to include all submissions</p></dd>
+<dd><p>A character vector of allowed values for the key variable, or "*" to include all submissions.
+If NULL (default), no membership filtering is applied. Ignored if key_var is NULL.</p></dd>
 
 
 <dt id="arg-vars">vars<a class="anchor" aria-label="anchor" href="#arg-vars"></a></dt>
-<dd><p>A character vector of variables/questions to extract</p></dd>
+<dd><p>A character vector of variables/questions to extract, or "*" to extract all available variables</p></dd>
 
 
 <dt id="arg-keep-file-name">keep_file_name<a class="anchor" aria-label="anchor" href="#arg-keep-file-name"></a></dt>
@@ -118,6 +120,16 @@ and optionally a "source" column</p>
 <span class="r-in"><span>  key_var <span class="op">=</span> <span class="st">"email"</span>,</span></span>
 <span class="r-in"><span>  membership <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bluebird.jack.xu@gmail.com"</span>, <span class="st">"abdul.hannan20008@gmail.com"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"email"</span>, <span class="st">"introduction-1"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Extract all variables from submissions</span></span></span>
+<span class="r-in"><span><span class="va">result_all</span> <span class="op">&lt;-</span> <span class="fu">submissions_answers</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  path <span class="op">=</span> <span class="va">path</span>,</span></span>
+<span class="r-in"><span>  title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"stop"</span><span class="op">)</span>, </span></span>
+<span class="r-in"><span>  key_var <span class="op">=</span> <span class="st">"email"</span>,</span></span>
+<span class="r-in"><span>  membership <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bluebird.jack.xu@gmail.com"</span>, <span class="st">"abdul.hannan20008@gmail.com"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  vars <span class="op">=</span> <span class="st">"*"</span>,</span></span>
 <span class="r-in"><span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
