@@ -10,7 +10,7 @@
 * Why doesn't devtools::test() work? AT: # devtools::test() passed because the wrong path ("tests/testthat/...") skipped the failing code, so adding correct "fixtures/..." paths or file.exists() checks prevents false passes.
 
 
-* Should we be using test_path() everywhere, rather than hard-coding stuff?
+* Should we be using test_path() everywhere, rather than hard-coding stuff? AT: Yes, I took out the hardcoding from several files.
 AT: Use: "path <- testthat::test_path("fixtures", "answers_html")" Instead of: "path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")" in the top documentation part of some R files. 
 
 Three projects: Finishing make_exercises(). Cleaning up write_answers(). Positron Extension for make_exercises.
@@ -33,7 +33,7 @@ Three projects: Finishing make_exercises(). Cleaning up write_answers(). Positro
 
 * Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. Done
 
-* Clean up all old stupid documentation. Save interesting comments.
+* Clean up all old stupid documentation. Save interesting comments. In progress
 
 * Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version? Don't do anything.
 
