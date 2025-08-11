@@ -94,7 +94,7 @@ Fix:
     \examples lines wider than 100 characters:
                                   membership = c("bluebird.jack.xu@gmail.com", "hassan.alisoni007@gmail.com"))
   
-  These lines will be truncated in the PDF manual.
+  These lines will be truncated in the PDF manual. SS: Done
 
 
 * Leaves open: Is there a special function that the teacher might run which would gather overview data and in which we might calculate answers? Sure. But not today. DK: Think about what submission_summary() should be doing.
