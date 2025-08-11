@@ -1,16 +1,37 @@
 ## Anish
 
+* After your attempt to get published goes through and you test it, then remove your extension.
 
-* Update test-write_answer.R documentation. Restart R. Make sure your in the right location, meaning tutorial.helpers. Make Change code first, but choose a thoughtful name for new rds.  Then devtools::install(). Then do tutorial. Done
+* Move Positron Extension code to extension. Name of the extension is "Positron Tutorial Helpers" or something like that.
 
-* Last Day Wednesday!
+* Add `README.txt` at the highest level of `extentions` which explains what this is and how it is put together. Has links which explain whats going on.
 
-* Move Positron extension code to extension. 
+* Make it so I know how (and do on Tuesday) start the submission process to the marketplace.
 
-* Update test-write_answer.R documentation. Restart R. Make sure your in the right location, meaning tutorial.helpers. Make Change code first, but choose a thoughtful name for new rds.  Then devtools::install(). Then do tutorial.
+* Provide Tutorial Pane functionality.
+  + Determine all installed R packages. 
+  + Determine all tutorials in those packages.
+  + Create table
+  + Allow user to search that table dynamically. So, I type "primer" and, instead of seeing all the packages/tutorials, I only see packages or tutorials which include "primer".
+  + In the results of the search bar, there is the package and tutorial name and a "Run" button which you can press to run the tutorial. Behind the scenes, that issues something like `learnr:run_tutorial("name", "package")`, presumably by copying the command to the live Console and then hitting return.
 
 
-* Do library calls belong at the top? Nope, Done
+ Examples:
+
+dkane@MacBookPro tutorial.helpers % R --quiet --slave -e "print(vignette()[['results']][,c('Package','Item')])"
+       Package       Item                                           
+  [1,] "bit"         "bit-demo"                                     
+  [2,] "bit"         "bit-performance"                              
+  [3,] "bit"         "bit-usage"                                    
+  [4,] "broom"       "available-methods"                            
+  [5,] "broom"       "broom_and_dplyr"                              
+  [6,] "broom"       "broom"                                        
+  [7,] "broom"       "kmeans"                                       
+  [8,] "broom"       "bootstrapping"  
+
+               
+
+## Later Projects
 
 * Investigate where the R process is when testthat tests are running. I think it is located on tests/testthat directory. AT: The R process runs tests from the package root (not tests/testthat), so "fixtures/..." resolves to the top-level fixtures/ folder; our repo has both a root fixtures/ (used by most tests) and tests/testthat/fixtures/ (used by newer tests like write_answers), we don’t change the working directory in setup.R, so to reliably access tests/testthat/fixtures/ you should use testthat::test_path("fixtures", "file.ext") instead of hardcoding paths.
 
