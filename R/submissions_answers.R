@@ -8,7 +8,7 @@
 #' @param title A character vector of patterns to match against file names (passed to gather_submissions)
 #' @param key_var A character string specifying the key variable to check for membership (e.g., "email")
 #' @param membership A character vector of allowed values for the key variable, or "*" to include all submissions
-#' @param vars A character vector of variables/questions to extract
+#' @param vars A character vector of variables/questions to extract, or "*" to extract all available variables
 #' @param keep_file_name How to handle file names: NULL (don't include), "All" (full name),
 #'        "Space" (up to first space), "Underscore" (up to first underscore)
 #' @param verbose A logical value (TRUE or FALSE) specifying verbosity level.
@@ -32,6 +32,16 @@
 #'   key_var = "email",
 #'   membership = c("bluebird.jack.xu@gmail.com", "abdul.hannan20008@gmail.com"),
 #'   vars = c("name", "email", "introduction-1"),
+#'   verbose = TRUE
+#' )
+#' 
+#' # Extract all variables from submissions
+#' result_all <- submissions_answers(
+#'   path = path,
+#'   title = c("stop"), 
+#'   key_var = "email",
+#'   membership = c("bluebird.jack.xu@gmail.com", "abdul.hannan20008@gmail.com"),
+#'   vars = "*",
 #'   verbose = TRUE
 #' )
 #' }
@@ -104,6 +114,24 @@ submissions_answers <- function(path, title, key_var, membership, vars,
     return(tibble::tibble())
   }
   
+  # Step 2.5: Determine which variables to extract
+  if (length(vars) == 1 && vars == "*") {
+    # Extract all available variables from all submissions
+    all_vars <- character(0)
+    for (tibble_data in valid_tibbles) {
+      if ("id" %in% colnames(tibble_data)) {
+        all_vars <- unique(c(all_vars, tibble_data$id))
+      }
+    }
+    vars_to_extract <- all_vars
+    
+    if (verbose) {
+      message("Extracting all available variables: ", paste(vars_to_extract, collapse = ", "))
+    }
+  } else {
+    vars_to_extract <- vars
+  }
+  
   # Step 3: Extract answers and create final tibble
   result <- purrr::map_dfr(names(valid_tibbles), function(file_name) {
     tibble_data <- valid_tibbles[[file_name]]
@@ -128,7 +156,7 @@ submissions_answers <- function(path, title, key_var, membership, vars,
     }
     
     # Extract each variable
-    for (var in vars) {
+    for (var in vars_to_extract) {
       if ("id" %in% colnames(tibble_data) && var %in% tibble_data$id) {
         # Get the answer for this variable - check for both 'answer' and 'data' columns
         if ("answer" %in% colnames(tibble_data)) {

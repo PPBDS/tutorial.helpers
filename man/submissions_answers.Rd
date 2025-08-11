@@ -23,7 +23,7 @@ submissions_answers(
 
 \item{membership}{A character vector of allowed values for the key variable, or "*" to include all submissions}
 
-\item{vars}{A character vector of variables/questions to extract}
+\item{vars}{A character vector of variables/questions to extract, or "*" to extract all available variables}
 
 \item{keep_file_name}{How to handle file names: NULL (don't include), "All" (full name),
 "Space" (up to first space), "Underscore" (up to first underscore)}
@@ -51,6 +51,16 @@ result <- submissions_answers(
   key_var = "email",
   membership = c("bluebird.jack.xu@gmail.com", "abdul.hannan20008@gmail.com"),
   vars = c("name", "email", "introduction-1"),
+  verbose = TRUE
+)
+
+# Extract all variables from submissions
+result_all <- submissions_answers(
+  path = path,
+  title = c("stop"), 
+  key_var = "email",
+  membership = c("bluebird.jack.xu@gmail.com", "abdul.hannan20008@gmail.com"),
+  vars = "*",
   verbose = TRUE
 )
 }
