@@ -23,7 +23,7 @@ vignette: >
 
 *Drop some knowledge with each exercise.*
 
-*Use our tools., especially functions like [`check_current_tutorial()`](https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.html) and []`make_exercise()`](https://ppbds.github.io/tutorial.helpers/reference/exercise_creation.html).*
+*Use our tools, especially functions like [`check_current_tutorial()`](https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.html) and [`make_exercise()`](https://ppbds.github.io/tutorial.helpers/reference/exercise_creation.html).*
 
 ## Introduction
 
