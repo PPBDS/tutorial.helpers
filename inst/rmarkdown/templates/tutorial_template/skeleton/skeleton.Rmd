@@ -30,6 +30,7 @@ options(tutorial.exercise.timelimit = 60,
 <!-- * Edit yaml at the top of this file -->
 <!-- * Save the file as "tutorial.Rmd" in the correct directory under inst/tutorials/. -->
 <!-- * Load any necessary libraries for the tutorial in the first code chunk -->
+<!-- * Anytime to have a student `Cmd/Ctrl + Enter`, you ask for CP/CR and then provide your code. -->
 <!-- * Delete this and the other commented instructions below. -->
 
 ## Introduction
@@ -125,6 +126,43 @@ question_text(NULL,
 
 <!-- XX: Insert a knowledge drop related to this project. -->
 
+
+### Exercise 4
+
+From the Console, run these three commands:
+
+`getwd()`
+`dir.create("data")`
+`list.files()`
+
+This will create a `data` directory in your project. This is a good place to store any data that you are working with.
+
+CP/CR
+
+```{r introduction-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+You answer should look something like, although your path will be different.
+
+````
+> getwd()
+[1] "/Users/dkane/Desktop/projects/XX"
+> dir.create("data")
+> list.files()
+ [1] "analysis.qmd"        "data"    "README.md"
+>
+````
+
+
+
 <!-- XX: You will probably have two or three Sections, in between the Introduction and Summary. We provide on example below. Before editing it, you may want to copy/paste it to create the skeleton for Second section. Any tutorial which both uses a lot of AI and is supppsed to take an hour or so will probably only have two Sections.  -->
 
 ## XX: First section (use sentence case)
@@ -134,17 +172,17 @@ question_text(NULL,
 
 ### Exercise 1
 
-<!-- XX: The first Exercise or two are in a Section often involved in getting the data for the tutorial.  -->
+<!-- XX: The first Exercise or two are in a Section often involved in getting the data for the tutorial. You must download the data into the `data` directory, obviously.  -->
 
 
-### Exercise 5
+### Exercise 2
 
 <!-- XX: The meet of a Section generally involves asking AI to create a pipe which accomplishes some goal. -->
 
 
 <!-- XX: The end of a Section always finishes up with a plot. These four questions set up and then guide the student to creating that plot. If you want the student to mimic a plot, you can place it in the `images` subdirectory and then use knitr::include_graphics("images/plot.png") to show it to students. -->
 
-### Exercise 8
+### Exercise 3
 
 Before creating a plot, we need to ensure that your data matches our data. In the QMD, replace your code from the previous exercise with our code.
 
@@ -156,7 +194,7 @@ show_file("analysis.qmd", chunk = "Last")
 
 CP/CR.
 
-```{r ai-usage-8}
+```{r xx-first-section-use-sentence-case-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -169,7 +207,7 @@ question_text(NULL,
 
 <!-- XX: Insert a knowledge drop related to this project. -->
 
-### Exercise 9
+### Exercise 4
 
 Within the latest code chunk, add the option: `#| cache: true`. Assign the result of the pipe to `x`. 
 
@@ -181,7 +219,7 @@ Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl +
 
 CP/CR.
 
-```{r ai-usage-9}
+```{r xx-first-section-use-sentence-case-4}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -195,20 +233,20 @@ question_text(NULL,
 Our code:
 
 ```{r, echo = TRUE}
-# x <- ... where the ellipsis are replaced with 
+# x <- ... where the ellipsis are replaced with
 ```
 
 ###
 
 <!-- XX: Insert a knowledge drop related to this project. -->
 
-### Exercise 10
+### Exercise 5
 
 Within the Console, type `x`, which we previously assigned to a pipe and ran in the Console. Hit `Enter`.
 
 CP/CR.
 
-```{r ai-usage-10}
+```{r xx-first-section-use-sentence-case-5}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -229,7 +267,7 @@ x
 
 <!-- XX: Insert a knowledge drop related to this project. -->
 
-### Exercise 11
+### Exercise 6
 
 Ask AI to generate R code that uses `x` to plot a basic graph showing XX ... Mention you want to use the data from `x` and copy/paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
 
@@ -243,7 +281,7 @@ show_file("analysis.qmd", chunk = "Last")
 
 CP/CR.
 
-```{r ai-usage-11}
+```{r xx-first-section-use-sentence-case-6}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
