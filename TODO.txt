@@ -1,8 +1,10 @@
 ## Anish
 
-* After your attempt to get published goes through and you test it, then remove your extension. AT: Got published waiting to remove it.
+* Remove your version.
 
-* Move Positron Extension code to extension. Name of the extension is "Positron Tutorial Helpers" or something like that. Done
+* Update README.md
+
+* Make version number like 0.1.0
 
 * Add `README.txt` at the highest level of `extentions` which explains what this is and how it is put together. Has links which explain whats going on. Done
 

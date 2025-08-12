@@ -1,7 +1,9 @@
 # Positron Tutorial Helpers Extension
+
 Anish Talla
 
 ## Overview
+
 This extension ("Positron Tutorial Helpers") is a Visual Studio Code / Positron extension that adds convenient commands and a status bar button to insert different types of exercises into `.Rmd` tutorials.
 
 It integrates with the **`tutorial.helpers`** R package, specifically calling `make_exercise()` with different arguments to insert:
@@ -15,10 +17,10 @@ It works inside **Positron** with an active R session, allowing quick template i
 
 ## Folder Structure
 
-This `extension/` folder contains all source code and build configuration for the extension.
+This `positron-tutorial-helpers/` folder contains all source code and build configuration for the extension.
 
 ```
-extension/
+positron-tutorial-helpers/
 │
 ├─ src/                   # TypeScript source code
 │   └─ extension.ts       # Main extension logic
@@ -30,7 +32,6 @@ extension/
 ├─ tsconfig.json          # TypeScript configuration
 ├─ esbuild.js             # Build script
 ├─ .vscodeignore          # Files to exclude from the VSIX package
-├─ README.txt             # This file
 ├─ README.md              # Extension README for publishing
 ├─ CHANGELOG.md           # Version history
 ```
@@ -40,11 +41,13 @@ extension/
 ## How It Works
 
 ### 1. Activation
+
 The extension activates when:
 - Positron starts (`onStartupFinished`)
 - A command is run (`makeExercise.code`, `makeExercise.no`, `makeExercise.yes`, `makeExercise.pick`)
 
 ### 2. Commands
+
 Defined in `package.json` under `contributes.commands`:
 - **Insert Exercise: code** → `make_exercise("code")`
 - **Insert Exercise: no-answer** → `make_exercise("no-answer")`
@@ -52,9 +55,11 @@ Defined in `package.json` under `contributes.commands`:
 - **Insert Exercise (choose type)** → Opens a dropdown to pick the exercise type.
 
 ### 3. Positron API
+
 Uses `@posit-dev/positron` to execute R code inside the active Positron R session.
 
 ### 4. Status Bar Button
+
 A status bar button (left side) appears after activation:
 - Label: "➕ Exercise"
 - Click → Opens the exercise type picker
@@ -67,7 +72,7 @@ A status bar button (left side) appears after activation:
 1. Install [Node.js 20.x](https://nodejs.org/) (Positron requires this range for compatibility).
 2. Install npm dependencies:
    ```sh
-   cd extension
+   cd positron-tutorial-helpers/
    npm install
    ```
 
@@ -76,15 +81,15 @@ A status bar button (left side) appears after activation:
 ### **Running in Development Mode**
 
 1. Open the `tutorial.helpers` root folder in Positron.
-2. Ensure `.vscode/launch.json` is set to load from the `extension/` folder:
+2. Ensure `.vscode/launch.json` is set to load from the `positron-tutorial-helpers/` folder:
 
    ```json
-   "--extensionDevelopmentPath=${workspaceFolder}/extension"
+   "--extensionDevelopmentPath=${workspaceFolder}/positron-tutorial-helpers"
    ```
 3. Compile:
 
    ```sh
-   cd extension
+   cd positron-tutorial-helpers
    npm run compile
    ```
 4. Press **F5** in Positron to launch an Extension Development Host.
@@ -114,14 +119,14 @@ Then press **F5** — changes will auto-compile as you edit `src/extension.ts`.
 To create a `.vsix` file:
 
 ```sh
-cd extension
+cd positron-tutorial-helpers
 npx @vscode/vsce package
 ```
 
 Output example:
 
 ```
-DONE  Packaged: C:\path\to\extension\positron-tutorial-helpers-0.1.0.vsix
+DONE  Packaged: C:\path\to\positron-tutorial-helpers\positron-tutorial-helpers-0.1.0.vsix
 ```
 
 ---
