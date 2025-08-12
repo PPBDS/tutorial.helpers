@@ -129,6 +129,8 @@ question_text(NULL,
 
 ### Exercise 4
 
+<!-- XX: Delete this question if you do not make use of the `data` directory in this tutorial. -->
+
 From the Console, run these three commands:
 
 `getwd()`
