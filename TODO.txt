@@ -1,12 +1,10 @@
 ## Anish
 
-* Remove your version.
+* Goal tomorrow is to have a version, your version, where Positron users can easily find it and install it.
 
-* Update README.md
+* Update README.md. Special focus on the process of updating things. Make the README as good as you can. So good that I don't feel the need to bother you!
 
 * Make version number like 0.1.0
-
-* Add `README.txt` at the highest level of `extentions` which explains what this is and how it is put together. Has links which explain whats going on. Done
 
 * Make it so I know how (and do on Tuesday) start the submission process to the marketplace.
 
@@ -17,19 +15,7 @@
   + Allow user to search that table dynamically. So, I type "primer" and, instead of seeing all the packages/tutorials, I only see packages or tutorials which include "primer".
   + In the results of the search bar, there is the package and tutorial name and a "Run" button which you can press to run the tutorial. Behind the scenes, that issues something like `learnr:run_tutorial("name", "package")`, presumably by copying the command to the live Console and then hitting return.
 
-
- Examples:
-
-dkane@MacBookPro tutorial.helpers % R --quiet --slave -e "print(vignette()[['results']][,c('Package','Item')])"
-       Package       Item                                           
-  [1,] "bit"         "bit-demo"                                     
-  [2,] "bit"         "bit-performance"                              
-  [3,] "bit"         "bit-usage"                                    
-  [4,] "broom"       "available-methods"                            
-  [5,] "broom"       "broom_and_dplyr"                              
-  [6,] "broom"       "broom"                                        
-  [7,] "broom"       "kmeans"                                       
-  [8,] "broom"       "bootstrapping"  
+ 
 
                
 
