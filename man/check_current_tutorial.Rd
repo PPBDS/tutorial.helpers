@@ -7,8 +7,10 @@
 check_current_tutorial()
 }
 \description{
-An add-in for formatting tutorials.
-
-Uses format_tutorial() to format the tutorial Rmd open
-in the current editor
+A function which formats the exercise numbers and code chunk
+labels correctly. \code{check_current_tutorial()} reads in the tutorial
+which is in the active editor window in Positron. It determines what
+the number of each exercise should be and fixes any mistakes. It
+ensures that all code chunk labels are the correct function of the
+section title and exercise number.
 }

@@ -1,5 +1,6 @@
 ---
 title: "XX ADD TITLE"
+author: 
 tutorial:
   id: "XX ADD ID, which should be the same as the directory in which this tutorial is located"
 output: 
@@ -18,9 +19,6 @@ library(tutorial.helpers)
 knitr::opts_chunk$set(echo = FALSE)
 options(tutorial.exercise.timelimit = 60, 
         tutorial.storage = "local") 
-```
-
-```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
 
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}

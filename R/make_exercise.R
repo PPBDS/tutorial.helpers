@@ -5,7 +5,7 @@
 #' @description When writing tutorials, it is handy to be able to insert the
 #'   skeleton for a new code exercise or question. Note that the
 #'   function determines the correct exercise number to use and also adds
-#'   appropriate code chunk names, based on the exercise number and section
+#'   appropriate code chunk labels, based on the exercise number and section
 #'   title.
 #'
 #' @param type Character of question type. Must be one of "code", "no-answer",
