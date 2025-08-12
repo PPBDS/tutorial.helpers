@@ -1,4 +1,5 @@
 # Positron Tutorial Helpers Extension
+Anish Talla
 
 ## Overview
 This extension ("Positron Tutorial Helpers") is a Visual Studio Code / Positron extension that adds convenient commands and a status bar button to insert different types of exercises into `.Rmd` tutorials.

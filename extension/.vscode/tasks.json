@@ -5,30 +5,72 @@
       "type": "npm",
       "script": "compile",
       "label": "npm: compile",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "problemMatcher": [],
-      "detail": "Compile TypeScript and bundle extension"
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": ["$tsc"],
+      "detail": "Type-check, lint, and bundle to dist/"
+    },
+    {
+      "type": "npm",
+      "script": "package",
+      "label": "npm: package (production)",
+      "group": "build",
+      "problemMatcher": ["$tsc"],
+      "detail": "Production bundle for VSIX"
     },
     {
       "type": "npm",
       "script": "watch",
       "label": "npm: watch",
       "isBackground": true,
-      "group": {
-        "kind": "build",
-        "isDefault": false
-      },
-      "problemMatcher": [],
+      "group": "build",
+      "problemMatcher": [
+        "$tsc-watch",
+        {
+          "owner": "esbuild",
+          "fileLocation": ["relative", "${workspaceFolder}"],
+          "pattern": [
+            {
+              "regexp": "^✘ \\[ERROR\\] (.*)$",
+              "message": 1
+            },
+            {
+              "regexp": "^\\s+(.*):(\\d+):(\\d+):$",
+              "file": 1,
+              "line": 2,
+              "column": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "^\\[watch\\] build started",
+            "endsPattern": "^\\[watch\\] build finished"
+          }
+        }
+      ],
       "presentation": {
         "reveal": "never",
         "panel": "dedicated",
         "group": "watch"
       },
-      "detail": "Watch files and recompile on change"
+      "detail": "Parallel watch on tsc and esbuild"
+    },
+    {
+      "type": "npm",
+      "script": "check-types",
+      "label": "npm: check-types",
+      "group": "build",
+      "problemMatcher": ["$tsc"],
+      "detail": "Type-check only"
+    },
+    {
+      "type": "npm",
+      "script": "lint",
+      "label": "npm: lint",
+      "group": "build",
+      "problemMatcher": ["$eslint-stylish"],
+      "detail": "ESLint over src/"
     }
   ]
 }
+
 
