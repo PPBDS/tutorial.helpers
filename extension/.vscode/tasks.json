@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm: compile (nested)",
+      "type": "npm",
+      "script": "compile",
+      "path": "positron-tutorial-helpers",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": "$tsc"
+    }
+  ]
+}
+
+
+

@@ -1,8 +1,19 @@
 import * as vscode from 'vscode';
-import { tryAcquirePositronApi, inPositron, previewUrl } from '@posit-dev/positron';
-import type { RuntimeCodeExecutionMode } from '@posit-dev/positron';
-const log = vscode.window.createOutputChannel('Positron Tutorial Helpers');
+import { tryAcquirePositronApi, inPositron } from '@posit-dev/positron';
 
+// Run R code quietly. Prefer NonInteractive to avoid clogging the Console,
+// but fall back to Interactive on older Positron builds.
+async function execR(code: string, requireComplete = true): Promise<void> {
+  const api = tryAcquirePositronApi();
+  if (!api) {
+    throw new Error('Positron API not available.');
+  }
+  try {
+    await api.runtime.executeCode('r', code, false, requireComplete, 'NonInteractive' as any);
+  } catch {
+    await api.runtime.executeCode('r', code, false, requireComplete, 'Interactive' as any);
+  }
+}
 
 // ---------- Exercise helpers ----------
 
@@ -27,7 +38,7 @@ async function runMakeExercise(type: string) {
     make_exercise("${type}")
   `;
 
-  await api.runtime.executeCode('r', r, false, false, 'Interactive' as RuntimeCodeExecutionMode);
+  await execR(r);
 }
 
 async function chooseExerciseType() {
@@ -43,6 +54,20 @@ async function chooseExerciseType() {
     await runMakeExercise(choice.type);
   }
 }
+
+async function writeTempR(context: vscode.ExtensionContext, filename: string, code: string): Promise<vscode.Uri> {
+  await vscode.workspace.fs.createDirectory(context.globalStorageUri);
+  const uri = vscode.Uri.joinPath(context.globalStorageUri, filename);
+  await vscode.workspace.fs.writeFile(uri, Buffer.from(code, 'utf8'));
+  return uri;
+}
+
+async function sourceTempR(uri: vscode.Uri) {
+  const p = uri.fsPath.replace(/\\/g, '/');
+  const src = `source(normalizePath("${p}", winslash = "/"), echo = FALSE, print.eval = FALSE)`;
+  await execR(src);
+}
+
 
 // ---------- Tutorials webview provider ----------
 
@@ -74,8 +99,8 @@ class TutorialsViewProvider implements vscode.WebviewViewProvider {
           return;
         }
 
-        const data = await this.fetchTutorials();
-        webview.postMessage({ type: 'data', rows: data.rows, error: data.error });
+        const result = await this.fetchTutorials();
+        webview.postMessage({ type: 'data', rows: result.rows, error: result.error });
         return;
       }
 
@@ -94,14 +119,10 @@ class TutorialsViewProvider implements vscode.WebviewViewProvider {
   }
 
   private async waitForR(maxMs = 20000, intervalMs = 500): Promise<string | undefined> {
-    const api = tryAcquirePositronApi();
-    if (!api) {
-      return 'Positron API not available.';
-    }
     const start = Date.now();
     while (Date.now() - start < maxMs) {
       try {
-        await api.runtime.executeCode('r', 'invisible(TRUE)', false, false, 'Interactive' as RuntimeCodeExecutionMode);
+        await execR('invisible(TRUE)');
         return undefined;
       } catch {
         await new Promise((r) => setTimeout(r, intervalMs));
@@ -110,25 +131,28 @@ class TutorialsViewProvider implements vscode.WebviewViewProvider {
     return 'R session is not running. Start R, then click Refresh.';
   }
 
-  // New: launch in-app by capturing URL to a file, then opening via previewUrl
+  // Run only learnr::run_tutorial, and capture the local URL so the user can click it
   private async runTutorial(name: string, pkg: string, webview?: vscode.Webview) {
     const api = tryAcquirePositronApi();
     if (!api) {
       vscode.window.showErrorMessage('Positron API not available.');
       return;
     }
-  
-    // prepare a small file to capture the URL
+
     await vscode.workspace.fs.createDirectory(this.context.globalStorageUri);
     const urlFile = vscode.Uri.joinPath(this.context.globalStorageUri, 'launch-url.txt');
-    try { await vscode.workspace.fs.delete(urlFile); } catch { /* ignore */ }
+    try {
+      await vscode.workspace.fs.delete(urlFile);
+    } catch {
+      // ignore
+    }
     const urlPath = urlFile.fsPath.replace(/\\/g, '/');
-  
+
     const r = `
       if (!requireNamespace("learnr", quietly = TRUE)) {
         stop("Package 'learnr' is not installed.")
       }
-  
+
       p <- normalizePath("${urlPath}", winslash = "/", mustWork = FALSE)
       capture_url <- function(url, ...) {
         try({
@@ -138,41 +162,46 @@ class TutorialsViewProvider implements vscode.WebviewViewProvider {
         }, silent = TRUE)
         TRUE
       }
-  
-      # ensure any viewer paths also surface the URL
+
       options(shiny.launch.browser = capture_url, viewer = capture_url)
-  
+
       learnr::run_tutorial(
         ${JSON.stringify(name)},
         package = ${JSON.stringify(pkg)},
         shiny_args = list(launch.browser = capture_url, host = "127.0.0.1")
       )
     `;
-  
-    // run quietly
-    await api.runtime.executeCode('r', r, false, false, 'Interactive' as RuntimeCodeExecutionMode);
-  
-    // wait up to 30 seconds for the URL to appear
+
+    await execR(r);
+
+    // Wait up to 30s for the URL to appear
     const deadline = Date.now() + 30000;
     let url: string | undefined;
     while (Date.now() < deadline) {
       try {
         const buf = await vscode.workspace.fs.readFile(urlFile);
-        const txt = new TextDecoder().decode(buf).trim();
-        if (txt) { url = txt; break; }
-      } catch { /* not yet */ }
-      await new Promise(res => setTimeout(res, 200));
+        const txt = Buffer.from(buf).toString('utf8').trim();
+        if (txt) {
+          url = txt;
+          break;
+        }
+      } catch {
+        // not yet
+      }
+      await new Promise((res) => setTimeout(res, 200));
     }
-  
+
     if (!url) {
-      vscode.window.showWarningMessage('Could not capture the tutorial URL. Try Refresh, then Run again after R is ready.');
+      vscode.window.showInformationMessage('Tutorial launched. If no browser opened, check the R Console or click Refresh and Run again.');
       return;
     }
-  
-    // show in the pane
-    try { webview?.postMessage({ type: 'launched', url }); } catch {}
-  
-    // toast with quick actions
+
+    try {
+      webview?.postMessage({ type: 'launched', url });
+    } catch {
+      // ignore
+    }
+
     const OPEN = 'Open in browser';
     const COPY = 'Copy link';
     const choice = await vscode.window.showInformationMessage(`Tutorial URL: ${url}`, OPEN, COPY);
@@ -182,50 +211,46 @@ class TutorialsViewProvider implements vscode.WebviewViewProvider {
       await vscode.env.clipboard.writeText(url);
       vscode.window.showInformationMessage('Link copied to clipboard');
     }
-  }  
+  }
 
   private async fetchTutorials(): Promise<{ rows: any[]; error?: string }> {
-    const api = tryAcquirePositronApi();
-    if (!api) {
-      return { rows: [], error: 'Positron API not available.' };
-    }
-
     try {
       await vscode.workspace.fs.createDirectory(this.context.globalStorageUri);
-
-      const fileUri = vscode.Uri.joinPath(this.context.globalStorageUri, 'tutorials.json');
-      const tmpUri  = vscode.Uri.joinPath(this.context.globalStorageUri, 'tutorials.tmp.json');
+  
+      const fileUri  = vscode.Uri.joinPath(this.context.globalStorageUri, 'tutorials.json');
+      const tmpUri   = vscode.Uri.joinPath(this.context.globalStorageUri, 'tutorials.tmp.json');
       const filePath = fileUri.fsPath.replace(/\\/g, '/');
       const tmpPath  = tmpUri.fsPath.replace(/\\/g, '/');
-
-      const r = `
+  
+      // Long R code goes into a temp script, then we source() it quietly
+      const rCode = `
         write_list <- function(path_tmp, path_final) {
           tryCatch({
             if (!requireNamespace("jsonlite", quietly = TRUE)) stop("Install 'jsonlite' first")
-
+  
             rows <- NULL
             if (requireNamespace("learnr", quietly = TRUE)) {
-              fun <- learnr::available_tutorials
+              fun  <- learnr::available_tutorials
               args <- names(formals(fun))
-              df <- if ("all" %in% args) fun(all = TRUE) else fun()
-              df <- tryCatch(as.data.frame(df), error = function(e) NULL)
+              df   <- if ("all" %in% args) fun(all = TRUE) else fun()
+              df   <- tryCatch(as.data.frame(df), error = function(e) NULL)
               if (!is.null(df) && nrow(df) > 0) {
                 if (!"package" %in% names(df) && "pkg" %in% names(df)) names(df)[names(df) == "pkg"] <- "package"
-                if (!"name" %in% names(df) && "tutorial" %in% names(df)) names(df)[names(df) == "tutorial"] <- "name"
-                if (!"title" %in% names(df)) df$title <- NA_character_
+                if (!"name"    %in% names(df) && "tutorial" %in% names(df)) names(df)[names(df) == "tutorial"] <- "name"
+                if (!"title"   %in% names(df)) df$title <- NA_character_
                 keep <- intersect(c("package","name","title"), names(df))
-                df <- df[, keep, drop = FALSE]
+                df   <- df[, keep, drop = FALSE]
                 df[] <- lapply(df, function(x) if (is.factor(x)) as.character(x) else x)
                 rows <- df
               }
             }
-
+  
             if (is.null(rows)) {
-              v <- tryCatch(vignette()[['results']], error = function(e) NULL)
+              v <- tryCatch(vignette()[["results"]], error = function(e) NULL)
               if (!is.null(v) && nrow(v) > 0) {
                 rows <- data.frame(
-                  package = as.character(v[, 'Package']),
-                  name    = as.character(v[, 'Item']),
+                  package = as.character(v[, "Package"]),
+                  name    = as.character(v[, "Item"]),
                   title   = NA_character_,
                   stringsAsFactors = FALSE
                 )
@@ -233,26 +258,31 @@ class TutorialsViewProvider implements vscode.WebviewViewProvider {
                 rows <- data.frame(package=character(), name=character(), title=character())
               }
             }
-
+  
             jsonlite::write_json(rows, path_tmp, dataframe = "rows", auto_unbox = TRUE)
             file.rename(path_tmp, path_final)
             invisible(TRUE)
           }, error = function(e) {
-            jsonlite::write_json(list(__error__ = as.character(e)), path_tmp, auto_unbox = TRUE)
+            # Write a simple error sentinel
+            jsonlite::write_json(list(error = as.character(e)), path_tmp, auto_unbox = TRUE)
             file.rename(path_tmp, path_final)
             FALSE
           })
         }
-        p_tmp   <- normalizePath("${tmpPath}",   winslash = "/", mustWork = FALSE)
-        p_final <- normalizePath("${filePath}",  winslash = "/", mustWork = FALSE)
+  
+        p_tmp   <- normalizePath("${tmpPath}",  winslash = "/", mustWork = FALSE)
+        p_final <- normalizePath("${filePath}", winslash = "/", mustWork = FALSE)
         write_list(p_tmp, p_final)
       `;
-
-      await api.runtime.executeCode('r', r, false, false, 'Interactive' as RuntimeCodeExecutionMode);
-
+  
+      // helpers you already added earlier:
+      //   writeTempR(context, filename, code)
+      //   sourceTempR(uri)
+      const scriptUri = await writeTempR(this.context, 'write-tutorials.R', rCode);
+      await sourceTempR(scriptUri);
+  
       // Wait up to 3s for the file to appear
       const deadline = Date.now() + 3000;
-      // eslint-disable-next-line no-constant-condition
       while (true) {
         try {
           await vscode.workspace.fs.stat(fileUri);
@@ -264,21 +294,23 @@ class TutorialsViewProvider implements vscode.WebviewViewProvider {
           await new Promise((r2) => setTimeout(r2, 100));
         }
       }
-
-      const buf = await vscode.workspace.fs.readFile(fileUri);
-      const text = new TextDecoder().decode(buf);
+  
+      const buf    = await vscode.workspace.fs.readFile(fileUri);
+      const text   = Buffer.from(buf).toString('utf8');
       const parsed = JSON.parse(text);
-
-      if (!Array.isArray(parsed) && parsed && parsed.__error__) {
-        return { rows: [], error: String(parsed.__error__) };
+  
+      // Adjusted to match the new sentinel shape
+      if (!Array.isArray(parsed) && parsed && (parsed as any).error) {
+        return { rows: [], error: String((parsed as any).error) };
       }
-
-      const rows = Array.isArray(parsed) ? parsed : (parsed.rows || []);
+  
+      const rows = Array.isArray(parsed) ? parsed : ((parsed as any).rows || []);
       return { rows };
     } catch (e: any) {
       return { rows: [], error: `Failed to read tutorials file: ${String(e?.message || e)}` };
     }
   }
+    
 
   private getHtml(): string {
     const nonce = String(Date.now());
@@ -352,50 +384,65 @@ class TutorialsViewProvider implements vscode.WebviewViewProvider {
     }
 
     window.addEventListener('message', (e) => {
-      const msg = e.data || {};
-      const statusEl = document.getElementById('status');
-      const errorEl  = document.getElementById('error');
-      const launchEl = document.getElementById('launch'); // make sure this exists in HTML
-
-      if (msg.type === 'status') {
-        statusEl.textContent = msg.message || '';
-        return;
+      const msg = (e && e.data) ? e.data : {};
+      let statusEl = document.getElementById('status');
+      if (!statusEl) {
+        statusEl = document.createElement('div');
+        statusEl.id = 'status';
+        document.body.prepend(statusEl);
+      }
+      let errorEl = document.getElementById('error');
+      if (!errorEl) {
+        errorEl = document.createElement('div');
+        errorEl.id = 'error';
+        document.body.prepend(errorEl);
+      }
+      let launchEl = document.getElementById('launch');
+      if (!launchEl) {
+        launchEl = document.createElement('div');
+        launchEl.id = 'launch';
+        document.body.insertBefore(launchEl, document.getElementById('table'));
       }
 
-      if (msg.type === 'data') {
-        statusEl.textContent = '';
-        errorEl.textContent = msg.error ? String(msg.error) : '';
-        rows = Array.isArray(msg.rows) ? msg.rows : [];
-        render();
-        return;
-      }
-
-      if (msg.type === 'launched' && msg.url) {
-        // Show a clickable URL for the running tutorial
-        launchEl.innerHTML = '';
-        const label = document.createElement('span');
-        label.textContent = 'Tutorial URL: ';
-        const a = document.createElement('a');
-        a.href = msg.url;
-        a.textContent = msg.url;
-        a.target = '_blank';
-        a.rel = 'noreferrer noopener';
-        launchEl.appendChild(label);
-        launchEl.appendChild(a);
-
-        statusEl.textContent = '';
-        errorEl.textContent = '';
-        return;
-      }
-
-      if (msg.type === 'error' && msg.message) {
-        statusEl.textContent = '';
-        errorEl.textContent = String(msg.message);
+      switch (msg.type) {
+        case 'status': {
+          statusEl.textContent = msg.message || '';
+          return;
+        }
+        case 'data': {
+          statusEl.textContent = '';
+          errorEl.textContent = msg.error ? String(msg.error) : '';
+          rows = Array.isArray(msg.rows) ? msg.rows : [];
+          render();
+          return;
+        }
+        case 'launched': {
+          if (msg.url) {
+            launchEl.innerHTML = '';
+            const label = document.createElement('span');
+            label.textContent = 'Tutorial URL: ';
+            const a = document.createElement('a');
+            a.href = msg.url;
+            a.textContent = msg.url;
+            a.target = '_blank';
+            a.rel = 'noreferrer noopener';
+            launchEl.appendChild(label);
+            launchEl.appendChild(a);
+          }
+          statusEl.textContent = '';
+          errorEl.textContent = '';
+          return;
+        }
+        case 'error': {
+          statusEl.textContent = '';
+          errorEl.textContent = String(msg.message || 'Unknown error');
+          return;
+        }
+        default:
+          return;
       }
     });
 
-
-    // initial load
     vscode.postMessage({ type: 'ready' });
   </script>
 </body>
@@ -438,6 +485,4 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate() {}
-
-
 

@@ -3,21 +3,10 @@
   "displayName": "Positron Tutorial Helpers",
   "description": "Insert tutorial exercises in Positron using the tutorial.helpers R package and browse/run installed learnr tutorials",
   "version": "0.1.0",
-  "publisher": "anishtalla27",
-  "engines": {
-    "vscode": ">=1.99.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "keywords": [
-    "r",
-    "positron",
-    "tutorial",
-    "exercise",
-    "rmarkdown",
-    "learnr"
-  ],
+  "publisher": "anishtalla",
+  "engines": { "vscode": ">=1.99.0" },
+  "categories": ["Other"],
+  "keywords": ["r", "positron", "tutorial", "exercise", "rmarkdown", "learnr"],
   "repository": {
     "type": "git",
     "url": "https://github.com/anishtalla27/tutorial.helpers"
@@ -27,9 +16,10 @@
   },
   "license": "MIT",
   "main": "./dist/extension.js",
+
   "activationEvents": [
     "onStartupFinished",
-    "onLanguage:r",
+    "onLanguage:r", 
     "onCommand:makeExercise.code",
     "onCommand:makeExercise.no",
     "onCommand:makeExercise.yes",
@@ -37,28 +27,14 @@
     "onView:tutorialHelpers.tutorialPane",
     "onCommand:tutorialHelpers.showPane"
   ],
+
   "contributes": {
     "commands": [
-      {
-        "command": "makeExercise.code",
-        "title": "Insert Exercise: code"
-      },
-      {
-        "command": "makeExercise.no",
-        "title": "Insert Exercise: no-answer"
-      },
-      {
-        "command": "makeExercise.yes",
-        "title": "Insert Exercise: yes-answer"
-      },
-      {
-        "command": "makeExercise.pick",
-        "title": "Insert Exercise (choose type)"
-      },
-      {
-        "command": "tutorialHelpers.showPane",
-        "title": "Tutorials: Show Pane"
-      }
+      { "command": "makeExercise.code", "title": "Insert Exercise: code" },
+      { "command": "makeExercise.no", "title": "Insert Exercise: no-answer" },
+      { "command": "makeExercise.yes", "title": "Insert Exercise: yes-answer" },
+      { "command": "makeExercise.pick", "title": "Insert Exercise (choose type)" },
+      { "command": "tutorialHelpers.showPane", "title": "Tutorials: Show Pane" }
     ],
     "viewsContainers": {
       "activitybar": [
@@ -79,8 +55,9 @@
       ]
     }
   },
+
   "scripts": {
-    "clean": "rimraf dist out",
+    "clean": "rimraf dist out", 
     "vscode:prepublish": "npm run package",
     "compile": "npm run check-types && npm run lint && node esbuild.js",
     "watch": "npm-run-all -p watch:*",
@@ -94,6 +71,7 @@
     "lint": "eslint src",
     "test": "vscode-test"
   },
+
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "^22.17.1",
@@ -102,15 +80,15 @@
     "@typescript-eslint/parser": "^8.39.0",
     "@vscode/test-cli": "^0.0.11",
     "@vscode/test-electron": "^2.5.2",
-    "@vscode/vsce": "^3.6.0",
     "esbuild": "^0.25.8",
     "eslint": "^9.32.0",
     "npm-run-all": "^4.1.5",
-    "ovsx": "^0.10.5",
-    "rimraf": "^6.0.1",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "rimraf": "^6.0.1" 
   },
+
   "dependencies": {
     "@posit-dev/positron": "^0.1.8"
   }
 }
+

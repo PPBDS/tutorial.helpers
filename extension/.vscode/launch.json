@@ -1,0 +1,23 @@
+// A launch configuration that compiles the extension and then opens it inside a new window
+// Use IntelliSense to learn about possible attributes.
+// Hover to view descriptions of existing attributes.
+// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+{
+	"version": "0.2.0",
+	"configurations": [
+	  {
+		"type": "extensionHost",
+		"request": "launch",
+		"name": "Run Extension (nested)",
+		"runtimeExecutable": "${execPath}",
+		"args": [
+		  "--extensionDevelopmentPath=${workspaceFolder}/positron-tutorial-helpers",
+		  "--extensions-dir=${workspaceFolder}/positron-tutorial-helpers/.dev-extensions",
+		  "--disable-workspace-trust"
+		],
+		"outFiles": ["${workspaceFolder}/positron-tutorial-helpers/dist/**/*.js"],
+		"preLaunchTask": "npm: compile (nested)"
+	  }
+	]
+  }
+
