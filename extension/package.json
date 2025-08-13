@@ -9,10 +9,10 @@
   "keywords": ["r", "positron", "tutorial", "exercise", "rmarkdown", "learnr"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/anishtalla27/tutorial.helpers"
+    "url": "https://github.com/PPBDS/tutorial.helpers"
   },
   "bugs": {
-    "url": "https://github.com/anishtalla27/tutorial.helpers/issues"
+    "url": "https://github.com/PPBDS/tutorial.helpers/issues"
   },
   "license": "MIT",
   "main": "./dist/extension.js",

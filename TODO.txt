@@ -1,6 +1,5 @@
 ## Anish
 
-* Goal tomorrow is to have a version, your version, where Positron users can easily find it and install it.
 
 * Update README.md. Special focus on the process of updating things. Make the README as good as you can. So good that I don't feel the need to bother you!
 

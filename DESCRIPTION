@@ -21,6 +21,7 @@ VignetteBuilder: quarto
 Suggests:
     googledrive,
     httr,
+    jsonlite,
     knitr,
     quarto,
     remotes,
