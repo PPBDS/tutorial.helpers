@@ -25,6 +25,8 @@ vignette: >
 
 *Use our tools, especially functions like [`check_current_tutorial()`](https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.html) and [`make_exercise()`](https://ppbds.github.io/tutorial.helpers/reference/exercise_creation.html).*
 
+*Do not build code line-by-line. That is the AI's job.*
+
 ## Introduction
 
 This document describes the best way to write R tutorials using the [**learnr**](https://rstudio.github.io/learnr/) package. The most common use case is a tutorial which covers [the material in an assigned textbook](books.html), as with the [**r4ds.tutorials**](https://CRAN.R-project.org/package=r4ds.tutorials) package for [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund..
