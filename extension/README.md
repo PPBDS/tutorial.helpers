@@ -1,6 +1,6 @@
 # Positron Tutorial Helpers
 
-Author: **Anish Talla**
+Author: Anish Talla and Sharav Joshi
 
 A Visual Studio Code and Positron extension for R tutorial authors. It provides:
 
