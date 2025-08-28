@@ -1,6 +1,6 @@
 Package: tutorial.helpers
 Title: Helper Functions for Creating Tutorials
-Version: 0.5.0.9007
+Version: 0.5.0.9008
 Authors@R: 
     person(given = "David",
            family = "Kane",
@@ -21,7 +21,6 @@ VignetteBuilder: quarto
 Suggests:
     googledrive,
     httr,
-    jsonlite,
     knitr,
     quarto,
     remotes,
