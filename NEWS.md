@@ -1,7 +1,5 @@
 # tutorial.helpers (development version)
 
-* Edit "Instructions" vignette.
-
 * `title` argument to process_submissions() now accepts a vector.
 
 * Remove RStudio material, including addins.
@@ -17,6 +15,8 @@
 * Rename tutorial to "Getting Started."
 
 * Change check_tutorial_defaults() to make it more flexible.
+
+* Add "Introduction to R" tutorial.
 
 # tutorial.helpers 0.5.0
 
