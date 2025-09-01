@@ -9,8 +9,8 @@
 #' @param title A character vector of patterns to match against the file names.
 #'        Each pattern is processed separately and results are combined.
 #' @param keep_loc A character string specifying where to save downloaded files (only for Google Drive URLs). 
-#'        If NULL (default), files are downloaded to the system temporary directory and automatically 
-#'        deleted after processing. If specified, files are downloaded to this location and kept.
+#'        If NULL (default), files are downloaded to a temporary directory and deleted after processing.
+#'        If specified, files are downloaded to this location and kept.
 #' @param verbose A logical value (TRUE or FALSE) specifying verbosity level. 
 #'        If TRUE, reports files that are removed during processing.
 #'
@@ -19,10 +19,6 @@
 #' one of them automatically renamed by your browser. However, if you use the 
 #' Google Drive functionality in this function, the second file will overwrite 
 #' the first, potentially resulting in data loss.
-#' 
-#' When downloading from Google Drive with keep_loc = NULL, files are downloaded 
-#' to the system temporary directory (e.g., /tmp on Unix systems) and automatically 
-#' cleaned up after processing, ensuring no interference with your working directory.
 #'
 #' @return A named list of tibbles, where each tibble contains the data from one HTML/XML file
 #'         that matches any of the specified patterns and has valid table structure.
@@ -35,7 +31,7 @@
 #' 
 #' tibble_list <- gather_submissions(path = path, title = "stop", verbose = TRUE)
 #'
-#' # Find submissions from Google Drive folder (temporary download, auto-cleanup)
+#' # Find submissions from Google Drive folder (temporary download)
 #' drive_url <- "https://drive.google.com/drive/folders/your_folder_id"
 #' tibble_list <- gather_submissions(
 #'   path = drive_url, 
@@ -100,9 +96,16 @@ gather_submissions <- function(path, title, keep_loc = NULL, verbose = FALSE) {
   
   # Cleanup temporary directory if needed
   if (!is.null(temp_dir_to_cleanup) && dir.exists(temp_dir_to_cleanup)) {
-    unlink(temp_dir_to_cleanup, recursive = TRUE)
-    if (verbose) {
-      message("Cleaned up temporary directory: ", temp_dir_to_cleanup)
+    # Safety check: only delete directories that match our expected pattern
+    if (grepl("gdrive_download_\\d{4}-\\d{2}-\\d{2}$", temp_dir_to_cleanup)) {
+      unlink(temp_dir_to_cleanup, recursive = TRUE)
+      if (verbose) {
+        message("Cleaned up temporary directory: ", temp_dir_to_cleanup)
+      }
+    } else {
+      if (verbose) {
+        warning("Skipping cleanup of unexpected directory format: ", temp_dir_to_cleanup)
+      }
     }
   }
   
@@ -134,17 +137,24 @@ handle_google_drive_url <- function(path, title, keep_loc, verbose) {
   
   # Determine download location
   if (!is.null(keep_loc)) {
-    # Use specified location - no cleanup needed
+    # Use specified location - download_google_drive will create a subdirectory there
     download_base_path <- keep_loc
     temp_dir_to_cleanup <- NULL
   } else {
-    # Create temporary directory in system temp location
-    temp_dir_to_cleanup <- tempdir(check = TRUE)
-    download_base_path <- temp_dir_to_cleanup
+    # Use temporary directory - download_google_drive will create a subdirectory there
+    download_base_path <- tempdir()
+    # We'll need to clean up the subdirectory that download_google_drive creates
+    temp_dir_to_cleanup <- NULL  # Will be set after download
   }
   
-  # Use the existing download_google_drive function
-  downloaded_path <- download_google_drive(url = path, path = download_base_path, title = title)
+  # Capture output to suppress the cat() messages if not verbose
+  if (!verbose) {
+    invisible(utils::capture.output({
+      downloaded_path <- download_google_drive(url = path, path = download_base_path, title = title)
+    }))
+  } else {
+    downloaded_path <- download_google_drive(url = path, path = download_base_path, title = title)
+  }
   
   # Validate that the download was successful
   if (is.null(downloaded_path) || !dir.exists(downloaded_path)) {
@@ -153,6 +163,13 @@ handle_google_drive_url <- function(path, title, keep_loc, verbose) {
   
   if (verbose) {
     message("Google Drive folder successfully downloaded to: ", downloaded_path)
+  }
+  
+  # Set temp directory for cleanup if using temporary location
+  if (is.null(keep_loc)) {
+    # The downloaded_path is the full path to the created subdirectory (e.g., /tmp/gdrive_download_2025-08-31)
+    # This is what we want to clean up, not its parent
+    temp_dir_to_cleanup <- downloaded_path
   }
   
   return(list(path = downloaded_path, temp_dir = temp_dir_to_cleanup))

@@ -14,8 +14,8 @@ If it's a Google Drive URL, the function will download the entire folder to a te
 Each pattern is processed separately and results are combined.}
 
 \item{keep_loc}{A character string specifying where to save downloaded files (only for Google Drive URLs).
-If NULL (default), files are downloaded to the system temporary directory and automatically
-deleted after processing. If specified, files are downloaded to this location and kept.}
+If NULL (default), files are downloaded to a temporary directory and deleted after processing.
+If specified, files are downloaded to this location and kept.}
 
 \item{verbose}{A logical value (TRUE or FALSE) specifying verbosity level.
 If TRUE, reports files that are removed during processing.}
@@ -35,10 +35,6 @@ If you download files manually ("by hand"), you will get both files but with
 one of them automatically renamed by your browser. However, if you use the
 Google Drive functionality in this function, the second file will overwrite
 the first, potentially resulting in data loss.
-
-When downloading from Google Drive with keep_loc = NULL, files are downloaded
-to the system temporary directory (e.g., /tmp on Unix systems) and automatically
-cleaned up after processing, ensuring no interference with your working directory.
 }
 \examples{
 \dontrun{
@@ -48,7 +44,7 @@ path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/ans
 
 tibble_list <- gather_submissions(path = path, title = "stop", verbose = TRUE)
 
-# Find submissions from Google Drive folder (temporary download, auto-cleanup)
+# Find submissions from Google Drive folder (temporary download)
 drive_url <- "https://drive.google.com/drive/folders/your_folder_id"
 tibble_list <- gather_submissions(
   path = drive_url, 
