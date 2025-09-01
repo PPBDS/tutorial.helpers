@@ -96,16 +96,9 @@ gather_submissions <- function(path, title, keep_loc = NULL, verbose = FALSE) {
   
   # Cleanup temporary directory if needed
   if (!is.null(temp_dir_to_cleanup) && dir.exists(temp_dir_to_cleanup)) {
-    # Safety check: only delete directories that match our expected pattern
-    if (grepl("gdrive_download_\\d{4}-\\d{2}-\\d{2}$", temp_dir_to_cleanup)) {
-      unlink(temp_dir_to_cleanup, recursive = TRUE)
-      if (verbose) {
-        message("Cleaned up temporary directory: ", temp_dir_to_cleanup)
-      }
-    } else {
-      if (verbose) {
-        warning("Skipping cleanup of unexpected directory format: ", temp_dir_to_cleanup)
-      }
+    unlink(temp_dir_to_cleanup, recursive = TRUE)
+    if (verbose) {
+      message("Cleaned up temporary directory: ", temp_dir_to_cleanup)
     }
   }
   
