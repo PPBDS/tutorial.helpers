@@ -20,7 +20,7 @@ When students complete the tutorial, they will first be asked how long the tutor
 
 So, for example, a tutorial with an `id` equal to `getting-started` will generate a file called `getting-started_answers.html`.
 
-The package provides the function `process_submissions()` to work with a collection of students answers. See `?process_submissions` for details.
+The package provides functions like `gather_submissions()`, `submissions_answers()`, and  `submissions_summary()` to work with a collection of students answers. 
 
 
 

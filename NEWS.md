@@ -1,16 +1,8 @@
 # tutorial.helpers (development version)
 
-* `title` argument to process_submissions() now accepts a vector.
+* Replace process_submissions() with gather_submissions(), submissions_answers(), and  submissions_summary().
 
 * Remove RStudio material, including addins.
-
-* Create find_submissions().
-
-* changed `pattern` argument to `title`.
-
-* `emails` argument added to process_submissions().
-
-* `path` can take and access public google drive links.
 
 * Rename tutorial to "Getting Started."
 
