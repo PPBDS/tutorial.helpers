@@ -2,21 +2,30 @@
 % Please edit documentation in R/download_google_drive.R
 \name{download_google_drive}
 \alias{download_google_drive}
-\title{Download Files from Google Drive Folder}
+\title{Download Files from a Google Drive Folder}
 \usage{
-download_google_drive(url, path = NULL, title = NULL)
+download_google_drive(
+  url,
+  path = NULL,
+  title = NULL,
+  overwrite = TRUE,
+  verbose = TRUE
+)
 }
 \arguments{
-\item{url}{Character string. The Google Drive folder URL from which to download files.
-The function will extract the folder ID from standard Google Drive folder URLs.}
+\item{url}{Character string. The Google Drive folder URL or ID. Supports standard folder URLs
+(e.g., "https://drive.google.com/drive/folders/\if{html}{\out{<ID>}}") or direct folder IDs.}
 
-\item{path}{Character string or NULL. The local directory path where files should be downloaded.
-If NULL (default), files are downloaded to the current working directory.
-The function will create the directory if it doesn't exist.}
+\item{path}{Character string or NULL. The local directory path for downloads.
+If NULL (default), uses the current working directory. If the directory doesn't exist, it will be created.}
 
 \item{title}{Character vector or NULL. Patterns to match against file names for filtering.
-If provided, only files whose names contain any of these patterns will be downloaded.
-Pattern matching is case-insensitive. If NULL (default), all files are downloaded.}
+If provided, only files whose names contain any of these patterns (case-insensitive) are downloaded.
+If NULL (default), all files are downloaded.}
+
+\item{overwrite}{Logical. If TRUE (default), overwrites existing files. If FALSE, skips files that already exist.}
+
+\item{verbose}{Logical. If TRUE (default), prints detailed progress messages.}
 }
 \value{
 Character string. The path to the directory where files were downloaded.
@@ -26,26 +35,15 @@ Downloads all files or filtered files from a public Google Drive folder to a loc
 }
 \examples{
 \dontrun{
-# Download all files from a Google Drive folder to current directory
+# Download all files to current directory
 download_google_drive("https://drive.google.com/drive/folders/1Rgxfiw")
 
-# Download to a specific directory
+# Download to a specific directory with filtering
 download_google_drive(
-  url = "https://drive.google.com/drive/folders/1Rgxfiw",
-  path = "/home/user/downloads"
-)
-
-# Download only files matching specific patterns
-download_google_drive(
-  url = "https://drive.google.com/drive/folders/1Rgxfiw",
-  title = c("report", "data", ".csv")
-)
-
-# Download filtered files to specific directory
-result_path <- download_google_drive(
   url = "https://drive.google.com/drive/folders/1Rgxfiw",
   path = "./my_data",
-  title = c("analysis", "results")
+  title = c("report", ".csv"),
+  overwrite = FALSE
 )
 }
 

@@ -8,7 +8,7 @@ submissions_summary(
   path,
   title = ".",
   return_value = "Summary",
-  key_vars = NULL,
+  vars = NULL,
   verbose = FALSE,
   keep_file_name = NULL,
   emails = NULL
@@ -23,7 +23,7 @@ Each pattern is processed separately and results are combined.}
 
 \item{return_value}{The type of value to return. Allowed values are "Summary" (default) or "All".}
 
-\item{key_vars}{A character vector of key variables to extract from the "id" column (default: NULL).}
+\item{vars}{A character vector of key variables to extract from the "id" column (default: NULL).}
 
 \item{verbose}{A logical value (TRUE or FALSE) specifying verbosity level.
 If TRUE, reports files that are removed during processing.}
@@ -33,7 +33,7 @@ If TRUE, reports files that are removed during processing.}
 \item{emails}{A character vector of email addresses to filter results by, "*" to include all emails, or NULL to skip email filtering (default: NULL).}
 }
 \value{
-If \code{return_value} is "Summary", returns a tibble with one row for each file, columns corresponding to the \code{key_vars},
+If \code{return_value} is "Summary", returns a tibble with one row for each file, columns corresponding to the \code{vars},
 and an additional "answers" column indicating the number of rows in each tibble.
 If \code{return_value} is "All", returns a tibble with all the data combined from all the files.
 }
@@ -48,7 +48,7 @@ and returns either a summary tibble or a combined tibble with all the data.
 path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
 
 result <- submissions_summary(path = path,
-                             key_vars = "email",
+                             vars = "email",
                              title = "stop")
 
 }

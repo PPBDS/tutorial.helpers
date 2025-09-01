@@ -10,12 +10,12 @@
 #'        Each pattern is processed separately and results are combined.
 #' @param emails A character vector of email addresses to filter results by, "*" to include all emails, or NULL to skip email filtering (default: NULL).
 #' @param return_value The type of value to return. Allowed values are "Summary" (default) or "All".
-#' @param key_vars A character vector of key variables to extract from the "id" column (default: NULL).
+#' @param vars A character vector of key variables to extract from the "id" column (default: NULL).
 #' @param verbose A logical value (TRUE or FALSE) specifying verbosity level.
 #'        If TRUE, reports files that are removed during processing.
 #' @param keep_file_name Specifies whether to keep the file name in the summary tibble. Allowed values are NULL (default), "All" (keep entire file name), "Space" (keep up to first space), or "Underscore" (keep up to first underscore). Only used when `return_value` is "Summary".
 #'
-#' @return If `return_value` is "Summary", returns a tibble with one row for each file, columns corresponding to the `key_vars`,
+#' @return If `return_value` is "Summary", returns a tibble with one row for each file, columns corresponding to the `vars`,
 #'         and an additional "answers" column indicating the number of rows in each tibble.
 #'         If `return_value` is "All", returns a tibble with all the data combined from all the files.
 #'
@@ -29,7 +29,7 @@
 #' path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
 #' 
 #' result <- submissions_summary(path = path,
-#'                              key_vars = "email",
+#'                              vars = "email",
 #'                              title = "stop")
 #' 
 #' }
@@ -37,7 +37,7 @@
 submissions_summary <- function(path, 
                                 title = ".", 
                                 return_value = "Summary", 
-                                key_vars = NULL, 
+                                vars = NULL, 
                                 verbose = FALSE, 
                                 keep_file_name = NULL,
                                 emails = NULL) {
@@ -57,9 +57,9 @@ submissions_summary <- function(path,
     stop("Invalid return_value. Allowed values are 'Summary' or 'All'.")
   }
   
-  # Check if key_vars is provided when return_value is "Summary"
-  if (return_value == "Summary" && is.null(key_vars)) {
-    stop("key_vars must be provided when return_value is 'Summary'.")
+  # Check if vars is provided when return_value is "Summary"
+  if (return_value == "Summary" && is.null(vars)) {
+    stop("vars must be provided when return_value is 'Summary'.")
   }
   
   if (!is.null(keep_file_name) && return_value != "Summary") {
@@ -92,12 +92,12 @@ submissions_summary <- function(path,
       if (!"id" %in% colnames(tibble_data)) {
         removed_files <- c(removed_files, file_name)
         removal_reasons <- c(removal_reasons, "no 'id' column")
-      } else if (!is.null(key_vars) && !all(key_vars %in% tibble_data$id)) {
-        missing_vars <- setdiff(key_vars, tibble_data$id)
+      } else if (!is.null(vars) && !all(vars %in% tibble_data$id)) {
+        missing_vars <- setdiff(vars, tibble_data$id)
         removed_files <- c(removed_files, file_name)
         removal_reasons <- c(removal_reasons, paste("missing key variables:", paste(missing_vars, collapse = ", ")))
       } else {
-        for (key_var in key_vars) {
+        for (key_var in vars) {
           key_var_value <- tibble_data$answer[tibble_data$id == key_var]
           tibble_data[[key_var]] <- key_var_value
         }
@@ -132,7 +132,7 @@ submissions_summary <- function(path,
           }
           
           summary_row <- dplyr::slice(tibble_data, 1) |>
-            dplyr::select(all_of(key_vars)) |>
+            dplyr::select(all_of(vars)) |>
             dplyr::mutate(answers = answers)
           
           if (!is.null(source_name)) {

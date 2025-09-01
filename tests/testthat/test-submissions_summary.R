@@ -14,13 +14,13 @@ test_that("submissions_summary returns the expected summary tibble", {
   actual_output <- submissions_summary(
     path = test_dir,
     title = "getting",
-    key_vars = c("information-name")
+    vars = c("information-name")
   )
   
   expect_equal(actual_output, expected_output)
 })
 
-test_that("submissions_summary returns the expected summary tibble with email key_var", {
+test_that("submissions_summary returns the expected summary tibble with email vars", {
   expected_output <- tibble::tibble(
     `information-email` = c("dave.kane@gmail.com", "areebatif2007@gmail.com", "gbhatia1@yahoo.com"),
     answers = c(6L, 11L, 11L)
@@ -29,13 +29,13 @@ test_that("submissions_summary returns the expected summary tibble with email ke
   actual_output <- submissions_summary(
     path = test_dir,
     title = "get",
-    key_vars = c("information-email")
+    vars = c("information-email")
   )
   
   expect_equal(actual_output, expected_output)
 })
 
-test_that("submissions_summary returns the expected summary tibble with name and email key_vars", {
+test_that("submissions_summary returns the expected summary tibble with name and email vars", {
   expected_output <- tibble::tibble(
     `information-name` = c("David Kane", "Areeb Atif", "Gitanjali Sheth"),
     `information-email` = c("dave.kane@gmail.com", "areebatif2007@gmail.com", "gbhatia1@yahoo.com"),
@@ -45,7 +45,7 @@ test_that("submissions_summary returns the expected summary tibble with name and
   actual_output <- submissions_summary(
     path = test_dir,
     title = "get",
-    key_vars = c("information-name", "information-email")
+    vars = c("information-name", "information-email")
   )
   
   expect_equal(actual_output, expected_output)
@@ -78,19 +78,19 @@ test_that("submissions_summary with one key_var", {
     path = test_dir,
     title = "get",
     return_value = "All",
-    key_vars = "information-name"
+    vars = "information-name"
   )
   
   expect_s3_class(actual_output, "tbl_df")
   expect_equal(dim(actual_output), c(28L, 4L))
 })
 
-test_that("submissions_summary with two key_vars", {
+test_that("submissions_summary with two vars", {
   actual_output <- submissions_summary(
     path = test_dir,
     title = "get",
     return_value = "All",
-    key_vars = c("information-name", "information-email")
+    vars = c("information-name", "information-email")
   )
   
   expect_s3_class(actual_output, "tbl_df")
@@ -99,14 +99,14 @@ test_that("submissions_summary with two key_vars", {
 
 # Tests which confirm various errors.
 
-test_that("submissions_summary stops with an error when return_value is 'Summary' and no key_vars are provided", {
+test_that("submissions_summary stops with an error when return_value is 'Summary' and no vars are provided", {
   expect_error(
     submissions_summary(
       path = test_dir,
       title = "get",
       return_value = "Summary"
     ),
-    "key_vars must be provided when return_value is 'Summary'."
+    "vars must be provided when return_value is 'Summary'."
   )
 })
 
@@ -139,7 +139,7 @@ test_that("submissions_summary stops with an error when an invalid keep_file_nam
     submissions_summary(
       path = test_dir,
       title = "getting",
-      key_vars = c("information-name"),
+      vars = c("information-name"),
       keep_file_name = "Hey"
     ),
     "Invalid keep_file_name. Allowed values are NULL, 'All', 'Space', or 'Underscore'."
@@ -176,7 +176,7 @@ test_that("submissions_summary returns the expected summary tibble with keep_fil
   actual_output <- submissions_summary(
     path = Sys.getenv("TEST_DIR"),
     title = "introduction",
-    key_vars = c("information-name"),
+    vars = c("information-name"),
     keep_file_name = "All"
   ) %>%
     dplyr::arrange(source)
@@ -200,7 +200,7 @@ test_that("submissions_summary returns the expected summary tibble with keep_fil
   actual_output <- submissions_summary(
     path = Sys.getenv("TEST_DIR"),
     title = "introduction",
-    key_vars = c("information-name"),
+    vars = c("information-name"),
     keep_file_name = "Space"
   ) %>%
     dplyr::arrange(`information-name`)
@@ -223,7 +223,7 @@ test_that("submissions_summary returns the expected summary tibble with keep_fil
   actual_output <- submissions_summary(
     path = Sys.getenv("TEST_DIR"),
     title = "introduction",
-    key_vars = c("information-name"),
+    vars = c("information-name"),
     keep_file_name = "Underscore"
   ) %>%
     dplyr::arrange(`information-name`)
@@ -242,7 +242,7 @@ test_that("submissions_summary returns the expected summary tibble", {
   actual_output <- submissions_summary(
     path = "fixtures/process_submissions_dir2/",
     title = "new-labels",
-    key_vars = c("name")
+    vars = c("name")
   )
   
   expect_equal(actual_output, expected_output)
@@ -259,7 +259,7 @@ test_that("submissions_summary returns the expected summary tibble", {
   actual_output <- submissions_summary(
     path = "fixtures/process_submissions_dir2/",
     title = "new-labels",
-    key_vars = c("name", "email", "minutes")
+    vars = c("name", "email", "minutes")
   )
   
   expect_equal(actual_output, expected_output)
@@ -288,7 +288,7 @@ test_that("submissions_summary works with non-overlapping titles", {
   actual_output <- submissions_summary(
     path = test_path("fixtures", "process_submissions_dir"),
     title = c("getting", "astrxr"),  # These should be non-overlapping
-    key_vars = c("information-name", "information-email")
+    vars = c("information-name", "information-email")
   )
   
   expect_equal(actual_output, expected_output)
@@ -299,7 +299,7 @@ test_that("submissions_summary works with empty title matches", {
   actual_output <- submissions_summary(
     path = test_path("fixtures", "process_submissions_dir"),
     title = c("email", "none"),
-    key_vars = c("information-name", "information-email")
+    vars = c("information-name", "information-email")
   )
   
   expect_s3_class(actual_output, "tbl_df")
@@ -311,7 +311,7 @@ test_that("submissions_summary works with mixed existing and non-existing titles
   actual_output <- submissions_summary(
     path = test_path("fixtures", "process_submissions_dir"),
     title = c("none", "none", "getting", "none", "none"),
-    key_vars = c("information-name", "information-email")
+    vars = c("information-name", "information-email")
   )
   
   expect_s3_class(actual_output, "tbl_df")
@@ -325,13 +325,13 @@ test_that("submissions_summary works with default emails parameter", {
   result_default <- submissions_summary(
     path = test_path("fixtures", "process_submissions_dir"),
     title = "get",
-    key_vars = c("information-email")
+    vars = c("information-email")
   )
   
   result_explicit <- submissions_summary(
     path = test_path("fixtures", "process_submissions_dir"),
     title = "get",
-    key_vars = c("information-email"),
+    vars = c("information-email"),
     emails = "*"
   )
   

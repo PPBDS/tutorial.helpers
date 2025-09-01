@@ -492,7 +492,7 @@ The `<pre><code>` serves the same purpose as the four backticks but it displays 
 
 ## Processing submissions
 
-Instructors have different needs and priorities when it comes to processing student answers. We provide the functions `gather_submissions()`, `submissions_answers()`, and  `submissions_summary()` to help them. 
+Instructors have different needs and priorities when it comes to processing student answers. We provide the functions `submissions_summary()` and `submissions_answers()` to help them. 
 
 ## Checks 
 
