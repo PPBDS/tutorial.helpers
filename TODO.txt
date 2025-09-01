@@ -24,18 +24,16 @@ test and discuss all new functions.
               
 ## Later Projects
 
-* Investigate where the R process is when testthat tests are running. I think it is located on tests/testthat directory. AT: The R process runs tests from the package root (not tests/testthat), so "fixtures/..." resolves to the top-level fixtures/ folder; our repo has both a root fixtures/ (used by most tests) and tests/testthat/fixtures/ (used by newer tests like write_answers), we don’t change the working directory in setup.R, so to reliably access tests/testthat/fixtures/ you should use testthat::test_path("fixtures", "file.ext") instead of hardcoding paths.
+* The R process runs tests from the package root (not tests/testthat), so "fixtures/..." resolves to the top-level fixtures/ folder; our repo has both a root fixtures/ (used by most tests) and tests/testthat/fixtures/ (used by newer tests like write_answers), we don’t change the working directory in setup.R, so to reliably access tests/testthat/fixtures/ you should use testthat::test_path("fixtures", "file.ext") instead of hardcoding paths.
 
 
-* Why doesn't devtools::test() work? AT: # devtools::test() passed because the wrong path ("tests/testthat/...") skipped the failing code, so adding correct "fixtures/..." paths or file.exists() checks prevents false passes.
+* Why doesn't devtools::test() work? 
+
+Error (test-return_tutorial_paths.R:6:3): Can find path for tutorial.helpers tutorial
+Error: No tutorials found for package: "tutorial.helpers"
 
 
-* Should we be using test_path() everywhere, rather than hard-coding stuff? AT: Yes, I took out the hardcoding from several files.
-AT: Use: "path <- testthat::test_path("fixtures", "answers_html")" Instead of: "path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")" in the top documentation part of some R files. 
-
-Three projects: Finishing make_exercises(). Cleaning up write_answers(). Positron Extension for make_exercises.
-
-* Fix the errors and warnings. The "global" stuff can often be solved by creating 
+* Use: "path <- testthat::test_path("fixtures", "answers_html")" Instead of: "path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")" in the top documentation part of some R files. 
 
 ### write_answers
 
