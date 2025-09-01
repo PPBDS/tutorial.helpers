@@ -1,10 +1,10 @@
 ## Before Next Release
 
-Note that process_submissions no longer exists. Remove it from everywhere it appears.
+gather_submissions() deletes everything in the directory from which it is called!
 
+test and discuss all new functions.
 
-## Anish
-
+## Extension
 
 * Update README.md. Special focus on the process of updating things. Make the README as good as you can. So good that I don't feel the need to bother you!
 
@@ -21,8 +21,7 @@ Note that process_submissions no longer exists. Remove it from everywhere it app
 
  
 
-               
-
+              
 ## Later Projects
 
 * Investigate where the R process is when testthat tests are running. I think it is located on tests/testthat directory. AT: The R process runs tests from the package root (not tests/testthat), so "fixtures/..." resolves to the top-level fixtures/ folder; our repo has both a root fixtures/ (used by most tests) and tests/testthat/fixtures/ (used by newer tests like write_answers), we don’t change the working directory in setup.R, so to reliably access tests/testthat/fixtures/ you should use testthat::test_path("fixtures", "file.ext") instead of hardcoding paths.
