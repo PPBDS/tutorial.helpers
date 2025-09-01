@@ -59,7 +59,7 @@ and returns either a summary tibble or a combined tibble with all the data.</p>
 <span>  <span class="va">path</span>,</span>
 <span>  title <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>  return_value <span class="op">=</span> <span class="st">"Summary"</span>,</span>
-<span>  key_vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  vars <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  keep_file_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  emails <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -84,7 +84,7 @@ Each pattern is processed separately and results are combined.</p></dd>
 <dd><p>The type of value to return. Allowed values are "Summary" (default) or "All".</p></dd>
 
 
-<dt id="arg-key-vars">key_vars<a class="anchor" aria-label="anchor" href="#arg-key-vars"></a></dt>
+<dt id="arg-vars">vars<a class="anchor" aria-label="anchor" href="#arg-vars"></a></dt>
 <dd><p>A character vector of key variables to extract from the "id" column (default: NULL).</p></dd>
 
 
@@ -103,7 +103,7 @@ If TRUE, reports files that are removed during processing.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>If <code>return_value</code> is "Summary", returns a tibble with one row for each file, columns corresponding to the <code>key_vars</code>,
+    <p>If <code>return_value</code> is "Summary", returns a tibble with one row for each file, columns corresponding to the <code>vars</code>,
 and an additional "answers" column indicating the number of rows in each tibble.
 If <code>return_value</code> is "All", returns a tibble with all the data combined from all the files.</p>
     </div>
@@ -115,7 +115,7 @@ If <code>return_value</code> is "All", returns a tibble with all the data combin
 <span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/find.package.html" class="external-link">find.package</a></span><span class="op">(</span><span class="st">"tutorial.helpers"</span><span class="op">)</span>, <span class="st">"tests/testthat/fixtures/answers_html"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">submissions_summary</span><span class="op">(</span>path <span class="op">=</span> <span class="va">path</span>,</span></span>
-<span class="r-in"><span>                             key_vars <span class="op">=</span> <span class="st">"email"</span>,</span></span>
+<span class="r-in"><span>                             vars <span class="op">=</span> <span class="st">"email"</span>,</span></span>
 <span class="r-in"><span>                             title <span class="op">=</span> <span class="st">"stop"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
