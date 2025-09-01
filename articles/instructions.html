@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9009</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9010</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -392,7 +392,7 @@
 <p>The <code>&lt;pre&gt;&lt;code&gt;</code> serves the same purpose as the four backticks but it displays R code chunks verbatim.</p>
 </section></section><section class="level2"><h2 id="processing-submissions">Processing submissions<a class="anchor" aria-label="anchor" href="#processing-submissions"></a>
 </h2>
-<p>Instructors have different needs and priorities when it comes to processing student answers. For now, we provide one function, <code>tutorial.helpers::process_submissions()</code> to help them. Read the help page: <code>?process_submissions</code>. There are many arguments and options.</p>
+<p>Instructors have different needs and priorities when it comes to processing student answers. We provide the functions <code><a href="../reference/gather_submissions.html">gather_submissions()</a></code>, <code><a href="../reference/submissions_answers.html">submissions_answers()</a></code>, and <code><a href="../reference/submissions_summary.html">submissions_summary()</a></code> to help them.</p>
 </section><section class="level2"><h2 id="checks">Checks<a class="anchor" aria-label="anchor" href="#checks"></a>
 </h2>
 <p>The simplest way to test the <code>tutorial.Rmd</code> with which you are working on is to run <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">rmarkdown::render()</a></code> on that file. This function takes your R Markdown document and transforms it into a single HTML file that you can open in a browser to see how your tutorial will appear to users.</p>
