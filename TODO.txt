@@ -1,6 +1,6 @@
 ## Before Next Release
 
-gather_submissions() deletes everything in the directory from which it is called!
+gather_submissions() deletes everything in the directory from which it is called! Now it doesn't (?) but it is broken again!
 
 test and discuss all new functions.
 

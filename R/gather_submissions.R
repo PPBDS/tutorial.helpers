@@ -149,7 +149,7 @@ handle_google_drive_url <- function(path, title, keep_loc, verbose) {
   
   # Capture output to suppress the cat() messages if not verbose
   if (!verbose) {
-    invisible(utils::capture.output({
+    invisible(capture.output({
       downloaded_path <- download_google_drive(url = path, path = download_base_path, title = title)
     }))
   } else {
