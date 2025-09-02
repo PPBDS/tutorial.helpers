@@ -45,17 +45,17 @@ path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/ans
 tibble_list <- gather_submissions(path = path, title = "stop", verbose = TRUE)
 
 # Find submissions from Google Drive folder (temporary download)
-drive_url <- "https://drive.google.com/drive/folders/your_folder_id"
+drive_url <- "https://drive.google.com/drive/folders/10do12t0fZsfrIrKePxwjpH8IqBNVO86N"
 tibble_list <- gather_submissions(
   path = drive_url, 
-  title = c("probability")
+  title = c("positron")
 )
 
 # Find submissions from Google Drive folder (keep files)
 tibble_list <- gather_submissions(
   path = drive_url, 
-  title = c("probability"),
-  keep_loc = "~/my_downloads/"
+  title = c("introduction"),
+  keep_loc = "temp_file"
 )
 }
 }

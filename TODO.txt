@@ -1,6 +1,11 @@
-## Before Next Release
+## Next time
 
-gather_submissions() deletes everything in the directory from which it is called! Now it doesn't (?) but it is broken again!
+I am most concerned about what happens when a student does not answer a question. The most common case is for `name` or `email`. But this can also arise for questions which ask for URLs. When this happens --- at least until we change write_answers() --- the resulting tibble will not have a row with that value for `id`. I don't think we handle this in any sort of consistent/sensible fashion.
+
+Some of the examples for *_submissions() functions ought to run, right? At least the ones which use directories which are installed with the package.
+
+
+## Before Next Release
 
 test and discuss all new functions.
 

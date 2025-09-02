@@ -65,5 +65,14 @@ result_all <- submissions_answers(
   vars = "*",
   verbose = TRUE
 )
+
+drive_url <- "https://drive.google.com/drive/folders/10do12t0fZsfrIrKePxwjpH8IqBNVO86N"
+x <- submissions_answers(
+  path = drive_url, 
+  title = c("introduction"),
+  key_var = "email",
+  membership = c("fmehmud325@gmail.com"),
+  vars = c("email", "name", "what-you-will-learn-15")
+)
 }
 }

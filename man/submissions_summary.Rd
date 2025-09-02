@@ -51,5 +51,13 @@ result <- submissions_summary(path = path,
                              vars = "email",
                              title = "stop")
 
+drive_url <- "https://drive.google.com/drive/folders/10do12t0fZsfrIrKePxwjpH8IqBNVO86N"
+x <- submissions_summary(
+  path = drive_url, 
+  title = c("positron"),
+  vars = c("email", "name")
+)
+
+
 }
 }
