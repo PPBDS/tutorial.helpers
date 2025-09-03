@@ -9,6 +9,8 @@ clean up Introduction to R tutorial
 update make_exercises
 
 
+
+
 ## set_positron_settings issues
 
 
@@ -115,7 +117,7 @@ Our code:
 
 * Read https://testthat.r-lib.org/articles/test-fixtures.html
 
-* test_path() does not work if the file is not in tests/testthat/. Might still be useful since it means we don't need to setwd() to play with testing interactively.
+
 
 * Explore tutorial testing: https://pkgs.rstudio.com/learnr/articles/exercises.html#test-code-or-cases
 
