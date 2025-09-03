@@ -18,9 +18,9 @@ inst/tutorials/*/rsconnect
 .DS_Store
 
 revdep
-/doc/
+doc
 /Meta/
 
 /.quarto/
 vignettes/.quarto
-docs
+

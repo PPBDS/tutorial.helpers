@@ -2,6 +2,13 @@
 
 test and discuss all new functions.
 
+clean up set_positron_settings and related Code
+
+clean up Introduction to R tutorial
+
+
+## set_positron_settings issues
+
 
 
 
