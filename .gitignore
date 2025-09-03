@@ -3,8 +3,6 @@
 .RData
 .Ruserdata
 
-*Rproj
-# docs Comment out until YAML working
 
 # Deal with this in a more sensible way.
 
@@ -19,8 +17,10 @@ inst/tutorials/*/rsconnect
 
 revdep
 doc
+docs
 /Meta/
 
 /.quarto/
 vignettes/.quarto
 
+/doc/

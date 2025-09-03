@@ -6,6 +6,8 @@ clean up set_positron_settings and related Code
 
 clean up Introduction to R tutorial
 
+update make_exercises
+
 
 ## set_positron_settings issues
 
