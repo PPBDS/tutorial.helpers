@@ -30,6 +30,8 @@ update make_exercises
 Error (test-return_tutorial_paths.R:6:3): Can find path for tutorial.helpers tutorial
 Error: No tutorials found for package: "tutorial.helpers"
 
+* Why does return_tutorial_paths("tutorial.helpers") fail when run inside the tutorial.helpers project but work outside of it?
+
 * Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version? 
 
 * Want to change the color of the OK box so that it is green when students enter
@@ -39,7 +41,7 @@ their email or other text. This seem relevant:  https://stackoverflow.com/questi
 
 * We need new options for make_exercises() which create the default questions for some of the new AI stuff.
 
-  + type = "introduction" gives you the first three questions in the Introduction of an ai.tutorial. (Note that make_exercises handles making the exercise number and chunk names for one question work automatically. Will it do that for three added questions.)
+  + type = "introduction" gives you the first three questions in the Introduction of an ai.tutorial. (Note that make_exercises handles making the exercise number and chunk names for one question work automatically. Will it do that for three added questions?)
 
   + type = "summary" gives you the 
 
@@ -90,8 +92,6 @@ Our code:
 
 ## check_current_tutorial(), meaning format_tutorial()
 
-* Figure out why check_current_tutorial() didn't work on Project 2 on second Github tutorial, at least on the last few questions. Issue probably connected to this comment from Positron and Code tutorial: "To Format the chunk labels you need to comment out the example comment line in Script 1. And there is at least one more example later." So, we really need to make  check_current_tutorial() more robust.
-
 * Change format_tutorial() so it looks to see if you have any chunk names in your file with reserved names (name, email, ID, minutes, answers), and then warns you about that fact.
 
 * It is annoying that R attempts to run `r scales::comma(x)` even when it is placed in a verbatim environment. That is annoying! But how can format_tutorial() prevent? It can't! This is a problem with learnr::run_tutorial().
@@ -103,22 +103,8 @@ Our code:
 * Advanced: Get Format Code Chunk Labels add-in to catch the case in which a non-question code chunk is duplicated.
 
 
-## show_file()
-
-* show_file() should fail if `chunk` is anything other than the allowed character strings, i.e., chunk = 1 should fail.
-
-* If `chunk` equals "YAML", then just return the YAML header, without the surrounding ----.
-
-* `show_file(test_file, start = 0)` should return the whole file.
-
-## Copy code buttons
-
-It is becoming clear that the copy code button is not really needed in modern tutorials because no longer spend much/any time building up code pipes line by line. And, even when we do, we can just use the __ trick to include the prior answers in the next exercise code chunk. 
-
-So, that would suggest that an author might not want to include the copy button in her tutorial. And that should be fine! But, right now, we encourage people to run check_tutorial_defaults(). That will fail if there is no copy code button. So, we need to add an argument to check_tutorial_defaults() which allows one to not require the copy code button.
-
-
 ## Points about testing
+
 
 
 * Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.

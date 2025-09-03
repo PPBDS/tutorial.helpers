@@ -1,0 +1,21 @@
+---
+title: "Test Document"
+author: "Test Author"
+date: "2024-01-01"
+---
+
+
+# Introduction
+
+This is a test R Markdown document.
+
+```{r setup}
+library(tidyverse)
+```
+
+Some text here.
+
+```{r analysis}
+x <- 1:10
+mean(x)
+```
