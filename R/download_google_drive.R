@@ -3,7 +3,7 @@
 #' Downloads all files or filtered files from a public Google Drive folder to a local directory.
 #'
 #' @param url Character string. The Google Drive folder URL or ID. Supports standard folder URLs
-#'   (e.g., "https://drive.google.com/drive/folders/<ID>") or direct folder IDs.
+#'   (e.g., \code{"https://drive.google.com/drive/folders/FOLDER_ID"}) or direct folder IDs.
 #' @param path Character string or NULL. The local directory path for downloads.
 #'   If NULL (default), uses the current working directory. If the directory doesn't exist, it will be created.
 #' @param title Character vector or NULL. Patterns to match against file names for filtering.

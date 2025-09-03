@@ -14,7 +14,7 @@ download_google_drive(
 }
 \arguments{
 \item{url}{Character string. The Google Drive folder URL or ID. Supports standard folder URLs
-(e.g., "https://drive.google.com/drive/folders/\if{html}{\out{<ID>}}") or direct folder IDs.}
+(e.g., \code{"https://drive.google.com/drive/folders/FOLDER_ID"}) or direct folder IDs.}
 
 \item{path}{Character string or NULL. The local directory path for downloads.
 If NULL (default), uses the current working directory. If the directory doesn't exist, it will be created.}

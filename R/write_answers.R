@@ -9,6 +9,7 @@
 #'   (as returned by get_submissions_from_learnr_session()).
 #' @returns NULL
 #' @export
+
 write_answers <- function(file, obj) {
   if (is.environment(obj)) {
     objs <- get_submissions_from_learnr_session(obj)

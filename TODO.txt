@@ -1,66 +1,30 @@
-## Next time
-
-I am most concerned about what happens when a student does not answer a question. The most common case is for `name` or `email`. But this can also arise for questions which ask for URLs. When this happens --- at least until we change write_answers() --- the resulting tibble will not have a row with that value for `id`. I don't think we handle this in any sort of consistent/sensible fashion.
-
-Some of the examples for *_submissions() functions ought to run, right? At least the ones which use directories which are installed with the package.
-
-
 ## Before Next Release
 
 test and discuss all new functions.
 
-## Extension
 
-* Update README.md. Special focus on the process of updating things. Make the README as good as you can. So good that I don't feel the need to bother you!
 
-* Make version number like 0.1.0
 
-* Make it so I know how (and do on Tuesday) start the submission process to the marketplace.
-
-* Provide Tutorial Pane functionality.
-  + Determine all installed R packages. 
-  + Determine all tutorials in those packages.
-  + Create table
-  + Allow user to search that table dynamically. So, I type "primer" and, instead of seeing all the packages/tutorials, I only see packages or tutorials which include "primer".
-  + In the results of the search bar, there is the package and tutorial name and a "Run" button which you can press to run the tutorial. Behind the scenes, that issues something like `learnr:run_tutorial("name", "package")`, presumably by copying the command to the live Console and then hitting return.
-
- 
-
-              
 ## Later Projects
 
-* The R process runs tests from the package root (not tests/testthat), so "fixtures/..." resolves to the top-level fixtures/ folder; our repo has both a root fixtures/ (used by most tests) and tests/testthat/fixtures/ (used by newer tests like write_answers), we don’t change the working directory in setup.R, so to reliably access tests/testthat/fixtures/ you should use testthat::test_path("fixtures", "file.ext") instead of hardcoding paths.
+* I am most concerned about what happens when a student does not answer a question. The most common case is for `name` or `email`. But this can also arise for questions which ask for URLs. When this happens --- at least until we change write_answers() --- the resulting tibble will not have a row with that value for `id`. I don't think we handle this in any sort of consistent/sensible fashion.
 
+* Some of the examples for submissions_* functions ought to run, right? At least the ones which use directories which are installed with the package. Why are they all "Don't Run"?
+
+* Need better documentation of using submissions_* functions. They are the ones that people might use.
+
+
+* The R process runs tests from the package root (not tests/testthat), so "fixtures/..." resolves to the top-level fixtures/ folder; our repo has both a root fixtures/ (used by most tests) and tests/testthat/fixtures/ (used by newer tests like write_answers), we don’t change the working directory in setup.R, so to reliably access tests/testthat/fixtures/ you should use testthat::test_path("fixtures", "file.ext") instead of hard-coding paths. Related point: Use: "path <- testthat::test_path("fixtures", "answers_html")" Instead of: "path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")" in the top documentation part of some R files. 
 
 * Why doesn't devtools::test() work? 
 
 Error (test-return_tutorial_paths.R:6:3): Can find path for tutorial.helpers tutorial
 Error: No tutorials found for package: "tutorial.helpers"
 
+* Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version? 
 
-* Use: "path <- testthat::test_path("fixtures", "answers_html")" Instead of: "path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")" in the top documentation part of some R files. 
-
-### write_answers
-
-* Read submission_functions.R
-
-* Read test-write_answers.R
-
-* Read write-answers.R
-
-* You are going to ask AI a lot of questions.
-
-* Learn a bit about debugging. I *think* that you need to stop the tutorial at the end, and enter debug mode. At that point, you are in a Shiny session. And you can issue a save session command (not sure on exact command) and then save it as a .rds object.
-
-* Add a new simple test case. Just a few answers to the getting-started tutorial in tutorial.helpers. Document the way in which you created it. Get rid of old test case. Looks like just putting browser() into submission_server() just before the download does the trick, along with write_rds(session, "some/path/session.rds"). Done
-
-* Change write_answers() to get rid of test mode since, with changes in exported learnr functions, this hack may no longer be necessary. Done
-
-* Clean up all old stupid documentation. Save interesting comments. In progress
-
-* Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version? Don't do anything.
-
-* Change write_answers() completely? See https://mastering-shiny.org/action-transfer.html#downloading-reports
+* Want to change the color of the OK box so that it is green when students enter
+their email or other text. This seem relevant:  https://stackoverflow.com/questions/33620133/change-the-color-of-action-button-in-shiny/35871042.
 
 ### make_exercises
 
@@ -105,19 +69,6 @@ Our code:
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-### Extension
-
-* Build a Positron Extension to make the use of make_exercises easier. How hard is this? How much do we care? Where does it go? For now, keep it in a repo in your personal GitHub account. But this is not the highest priority. It is fun!
-
-# Stepher
-
-* Leaves open: Is there a special function that the teacher might run which would gather overview data and in which we might calculate answers? Sure. But not today. DK: Think about what submission_summary() should be doing.
-
-* If vars = c("*"), give all questions.
-
-
-# This Summer
-
 * The determine_* functions are suspect. 
 
   + Should they really look into the active document if file_path equals NULL. I don't think so . . . 
@@ -126,13 +77,6 @@ Our code:
 
   + They need test cases!
 
-## process_submissions()
-
-* return_type = "All" in process_submissions() should not include submission_type column
-
-* process_submissions() test cases should not just spit out "Could not process file: getting-started_answers.pdf". Handle it better.
-
-* I don't like the way the test cases for process_submissions spit out the pdf files names that they are ignoring, even if it does not effect the tests passing. At least, we should add a new test case for this behavior. Perhaps reorganize the test files into a couple of different directories. Or make the pattern ignore the pdf files in the test cases. But I couldn't get that to work. (I am no longer sure what this comment means!) 
 
 
 ## check_current_tutorial(), meaning format_tutorial()
@@ -167,9 +111,6 @@ So, that would suggest that an author might not want to include the copy button 
 
 ## Points about testing
 
-* Figure out why devtools::check() is 0/0/0 but devtools::test() is 2 FAILs and 4 SKIPs.
-
-* Running devtools::check(remote = TRUE, manual = TRUE) produces some spurious documentation warnings. Produce a reprex for the devtools folks.
 
 * Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
 
@@ -314,13 +255,8 @@ No idea if this would work. And, if we start using it, we might need to update t
 
 * Which packages do we really need, either in Imports or in Suggests?
 
-* Check out all unit tests.
-
 * Related to the above is that the Github Actions files differ in that R CMD check uses renv and pkgdown.yml uses dependencies. The former ensures that the quarto package is available because it is in the renv.lock file. But with dependencies, I suspect that quarto must appear in the imports part of the DESCRIPTION file, but maybe Suggests would be enough?
 
-* Do a complete clean up of the Github Action files.
-
-* Vignette about Posit Workbench.
 
 * Might be nice if the email entry field at least attempted to note/warn if the submitted information was not a legitimate email. Perhaps at least check if there is an `@`.
 
@@ -355,8 +291,7 @@ Blanks are detected using regular expressions (since blanks may make the code un
 
 ## Other items
 
-* Want to change the color of the OK box so that it is green when students enter
-their email or other text. This seem relevant:  https://stackoverflow.com/questions/33620133/change-the-color-of-action-button-in-shiny/35871042.
+
 
 
 
@@ -401,3 +336,19 @@ tutorials/[^/]*/(?!(data|images|.*Rmd))
 ````
 
 This excludes everything in any subdirectory of the tutorials directory except an `images` directory (a file named images would also be included) or a `data` directory or a file suffixed with `.Rmd`.
+
+
+## Extension
+
+* Update README.md. Special focus on the process of updating things. Make the README as good as you can. So good that I don't feel the need to bother you!
+
+* Make version number like 0.1.0
+
+* Make it so I know how (and do on Tuesday) start the submission process to the marketplace.
+
+* Provide Tutorial Pane functionality.
+  + Determine all installed R packages. 
+  + Determine all tutorials in those packages.
+  + Create table
+  + Allow user to search that table dynamically. So, I type "primer" and, instead of seeing all the packages/tutorials, I only see packages or tutorials which include "primer".
+  + In the results of the search bar, there is the package and tutorial name and a "Run" button which you can press to run the tutorial. Behind the scenes, that issues something like `learnr:run_tutorial("name", "package")`, presumably by copying the command to the live Console and then hitting return.
