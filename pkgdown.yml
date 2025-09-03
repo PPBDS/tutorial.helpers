@@ -5,11 +5,10 @@ articles:
   addins: addins.html
   ai: ai.html
   books: books.html
-  cloud: cloud.html
   downloads: downloads.html
   instructions: instructions.html
   testing: testing.html
-last_built: 2025-09-03T12:11Z
+last_built: 2025-09-03T15:37Z
 urls:
   reference: https://ppbds.github.io/tutorial.helpers/reference
   article: https://ppbds.github.io/tutorial.helpers/articles
