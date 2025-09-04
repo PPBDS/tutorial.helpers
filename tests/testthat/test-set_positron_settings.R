@@ -31,19 +31,22 @@ create_settings_file <- function(file_path, settings_content = NULL) {
   }
 }
 
-test_that("set_positron_settings handles non-existent file with no changes", {
+test_that("set_positron_settings handles non-existent file with default settings", {
   temp_home <- tempdir()
   paths <- setup_temp_settings(temp_home)
   
-  # Run function with empty positron_settings (default)
-  set_positron_settings(home_dir = temp_home, set.binary = FALSE)
+  # Run function with default positron_settings
+  set_positron_settings(home_dir = temp_home, set.rprofile = FALSE)
   
   # Verify file was created
   expect_true(file.exists(paths$file))
   
-  # Verify file contains empty settings
+  # Verify file contains default settings
   settings <- jsonlite::read_json(paths$file, simplifyVector = TRUE)
-  expect_equal(length(settings), 0)
+  expect_equal(length(settings), 3)
+  expect_equal(settings[["terminal.integrated.defaultProfile.windows"]], "Git Bash")
+  expect_equal(settings[["git.enableSmartCommit"]], TRUE)
+  expect_equal(settings[["git.confirmSync"]], FALSE)
 })
 
 test_that("set_positron_settings handles non-existent file with one change", {
@@ -53,7 +56,7 @@ test_that("set_positron_settings handles non-existent file with one change", {
   # Run function with one setting
   set_positron_settings(
     home_dir = temp_home, 
-    set.binary = FALSE,
+    set.rprofile = FALSE,
     positron_settings = list("rstudio.keymap.enable" = TRUE)
   )
   
@@ -73,7 +76,7 @@ test_that("set_positron_settings handles non-existent file with two changes", {
   # Run function with two settings
   set_positron_settings(
     home_dir = temp_home, 
-    set.binary = FALSE,
+    set.rprofile = FALSE,
     positron_settings = list(
       "rstudio.keymap.enable" = TRUE,
       "editor.wordWrap" = "on"
@@ -90,22 +93,25 @@ test_that("set_positron_settings handles non-existent file with two changes", {
   expect_equal(settings[["editor.wordWrap"]], "on")
 })
 
-test_that("set_positron_settings handles empty file with no changes", {
+test_that("set_positron_settings handles empty file with default settings", {
   temp_home <- tempdir()
   paths <- setup_temp_settings(temp_home)
   
   # Create empty file
   create_settings_file(paths$file)
   
-  # Run function with empty settings
-  set_positron_settings(home_dir = temp_home, set.binary = FALSE)
+  # Run function with default settings
+  set_positron_settings(home_dir = temp_home, set.rprofile = FALSE)
   
   # Verify file still exists
   expect_true(file.exists(paths$file))
   
-  # Verify file contains empty settings
+  # Verify file contains default settings
   settings <- jsonlite::read_json(paths$file, simplifyVector = TRUE)
-  expect_equal(length(settings), 0)
+  expect_equal(length(settings), 3)
+  expect_equal(settings[["terminal.integrated.defaultProfile.windows"]], "Git Bash")
+  expect_equal(settings[["git.enableSmartCommit"]], TRUE)
+  expect_equal(settings[["git.confirmSync"]], FALSE)
 })
 
 test_that("set_positron_settings handles empty file with one change", {
@@ -118,7 +124,7 @@ test_that("set_positron_settings handles empty file with one change", {
   # Run function with one setting
   set_positron_settings(
     home_dir = temp_home, 
-    set.binary = FALSE,
+    set.rprofile = FALSE,
     positron_settings = list("rstudio.keymap.enable" = TRUE)
   )
   
@@ -138,7 +144,7 @@ test_that("set_positron_settings handles empty file with two changes", {
   # Run function with two settings
   set_positron_settings(
     home_dir = temp_home, 
-    set.binary = FALSE,
+    set.rprofile = FALSE,
     positron_settings = list(
       "rstudio.keymap.enable" = TRUE,
       "editor.wordWrap" = "on"
@@ -165,7 +171,7 @@ test_that("set_positron_settings handles existing file with irrelevant settings"
   # Run function with new settings
   set_positron_settings(
     home_dir = temp_home, 
-    set.binary = FALSE,
+    set.rprofile = FALSE,
     positron_settings = list(
       "rstudio.keymap.enable" = TRUE,
       "editor.wordWrap" = "on"
@@ -195,7 +201,7 @@ test_that("set_positron_settings handles mixed existing settings", {
   # Run function with settings that partially overlap
   set_positron_settings(
     home_dir = temp_home, 
-    set.binary = FALSE,
+    set.rprofile = FALSE,
     positron_settings = list(
       "rstudio.keymap.enable" = TRUE,  # This should change
       "editor.wordWrap" = "on"        # This should not change
@@ -217,7 +223,7 @@ test_that("set_positron_settings supports list of lists format", {
   # Run function with list of lists format
   set_positron_settings(
     home_dir = temp_home, 
-    set.binary = FALSE,
+    set.rprofile = FALSE,
     positron_settings = list(
       list("rstudio.keymap.enable", TRUE),
       list("editor.wordWrap", "on")
@@ -231,34 +237,33 @@ test_that("set_positron_settings supports list of lists format", {
   expect_equal(settings[["editor.wordWrap"]], "on")
 })
 
-test_that("set_binary parameter properly controls binary profile setting", {
+test_that("set.rprofile parameter properly controls R profile setting", {
   temp_home <- tempdir()
   paths <- setup_temp_settings(temp_home)
   
-  # Mock the binary function
-  binary_called <- FALSE
+  # Mock the set_rprofile_settings function
+  rprofile_called <- FALSE
   mock_func <- function() {
-    binary_called <<- TRUE
+    rprofile_called <<- TRUE
   }
   
   # Temporarily modify the function's environment
   orig_env <- environment(set_positron_settings)
   environment(set_positron_settings) <- list2env(
-    list(set_binary_only_in_r_profile = mock_func), 
+    list(set_rprofile_settings = mock_func), 
     parent = orig_env
   )
   
-  # Test with set.binary = TRUE
-  binary_called <- FALSE
-  set_positron_settings(home_dir = temp_home, set.binary = TRUE)
-  expect_true(binary_called)
+  # Test with set.rprofile = TRUE
+  rprofile_called <- FALSE
+  set_positron_settings(home_dir = temp_home, set.rprofile = TRUE)
+  expect_true(rprofile_called)
   
-  # Test with set.binary = FALSE
-  binary_called <- FALSE
-  set_positron_settings(home_dir = temp_home, set.binary = FALSE)
-  expect_false(binary_called)
+  # Test with set.rprofile = FALSE
+  rprofile_called <- FALSE
+  set_positron_settings(home_dir = temp_home, set.rprofile = FALSE)
+  expect_false(rprofile_called)
   
   # Restore original environment
   environment(set_positron_settings) <- orig_env
 })
-

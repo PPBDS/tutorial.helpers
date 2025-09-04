@@ -4,7 +4,10 @@
 #' Locates or creates the Positron `settings.json` file on Windows or macOS,
 #' then updates those settings based on the provided configuration list.
 #' Users can specify settings like RStudio keyboard shortcuts. The function can 
-#' also optionally configure binary package preferences in the `.Rprofile`.
+#' also optionally configure R profile settings including binary package 
+#' preferences and download timeout. Positron is an R-focused Integrated Development
+#' Environment (IDE) based on Visual Studio Code, designed to enhance the R programming
+#' experience with a modern interface and features.
 #'
 #' @details
 #' This function uses the `jsonlite` package to handle JSON operations and
@@ -12,7 +15,9 @@
 #' designed to work cross-platform by detecting the operating system and
 #' constructing the appropriate file path to Positron's user settings. The
 #' function applies the settings provided in the `positron_settings` parameter.
-#' By default, no settings are changed unless explicitly specified.
+#' If the `positron_settings` list is empty, no changes are made to the `settings.json` file.
+#' By default, three settings are applied unless overridden: setting Git Bash as the default
+#' terminal on Windows, enabling Git smart commit, and disabling Git sync confirmation dialogs.
 #' 
 #' Note: Windows file paths in settings should use forward slashes (/) or 
 #' escaped backslashes (\\\\). The function will automatically handle path
@@ -21,14 +26,17 @@
 #' @param home_dir Optional character string specifying the base directory to use
 #'   as the user's home directory. Defaults to `path.expand("~")`. Useful for
 #'   testing or custom setups.
-#' @param set.binary Logical, defaults to `TRUE`. If `TRUE`, runs
-#'   `set_binary_only_in_r_profile()` after applying settings to configure binary
-#'   options in the R profile.
+#' @param set.rprofile Logical, defaults to `TRUE`. If `TRUE`, runs
+#'   `set_rprofile_settings()` after applying settings to configure binary
+#'   package installation and download timeout in the R profile.
 #' @param positron_settings List of settings to apply. Can be structured as a list of 
 #'   lists where each sub-list contains a setting name and value (e.g., 
 #'   `list(list("rstudio.keymap.enable", TRUE))`), or as a named list 
-#'   (e.g., `list("rstudio.keymap.enable" = TRUE)`). Defaults to an empty list,
-#'   which means no settings will be changed.
+#'   (e.g., `list("rstudio.keymap.enable" = TRUE)`). Defaults to a named list
+#'   with three settings: `list("terminal.integrated.defaultProfile.windows" = "Git Bash",
+#'   "git.enableSmartCommit" = TRUE, "git.confirmSync" = FALSE)`, which sets Git Bash
+#'   as the default terminal on Windows, enables auto-staging of Git changes, and
+#'   disables confirmation dialogs for Git push/pull, respectively.
 #'
 #' @return Invisible `NULL`. The function's purpose is its side effect: modifying
 #'   or creating the `settings.json` file. It also prints messages to the console
@@ -36,7 +44,7 @@
 #'
 #' @examples
 #' \dontrun{
-#'   # Apply no settings changes, but ensure settings.json exists
+#'   # Apply default settings (Git Bash terminal, smart commit, no sync confirmation)
 #'   set_positron_settings()
 #'   
 #'   # Enable RStudio keyboard shortcuts using list of lists structure
@@ -64,20 +72,38 @@
 #'     )
 #'   )
 #'   
-#'   # Apply settings with a custom home directory and disable binary setting
+#'   # Apply settings without modifying .Rprofile
 #'   set_positron_settings(
-#'     home_dir = tempdir(), 
-#'     set.binary = FALSE,
+#'     set.rprofile = FALSE,
+#'     positron_settings = list("rstudio.keymap.enable" = TRUE)
+#'   )
+#'   
+#'   # Handle case where settings directory does not exist
+#'   set_positron_settings(
+#'     home_dir = tempfile(),  # Simulate a non-existent directory
+#'     positron_settings = list("rstudio.keymap.enable" = TRUE)
+#'   )
+#'   
+#'   # Handle case with invalid JSON file
+#'   # Create an invalid JSON file for testing
+#'   dir.create(file.path(tempdir(), "Positron", "User"), recursive = TRUE)
+#'   writeLines("invalid json", file.path(tempdir(), "Positron", "User", "settings.json"))
+#'   set_positron_settings(
+#'     home_dir = tempdir(),
 #'     positron_settings = list("rstudio.keymap.enable" = TRUE)
 #'   )
 #' }
 #'
-#' @importFrom jsonlite read_json write_json
+#' @importFrom jsonlite read_json write_json toJSON
 #' @export
 
 set_positron_settings <- function(home_dir = path.expand("~"), 
-                                  set.binary = TRUE, 
-                                  positron_settings = list()) {
+                                 set.rprofile = TRUE, 
+                                 positron_settings = list(
+                                   "terminal.integrated.defaultProfile.windows" = "Git Bash",
+                                   "git.enableSmartCommit" = TRUE,
+                                   "git.confirmSync" = FALSE
+                                 )) {
  
   # Use provided home_dir instead of calling path.expand("~") directly
   if (Sys.info()["sysname"] == "Windows") {
@@ -89,6 +115,9 @@ set_positron_settings <- function(home_dir = path.expand("~"),
   
   # Initialize settings as empty list
   settings <- list()
+  
+  # Display current settings first
+  cat("\n=== Current Positron Settings ===\n")
   
   # Create directory if it doesn't exist
   if (!dir.exists(settings_dir)) {
@@ -104,25 +133,83 @@ set_positron_settings <- function(home_dir = path.expand("~"),
       # First check if the file is empty
       file_info <- file.info(settings_file)
       if (file_info$size == 0) {
-        cat("Settings file exists but is empty. Will create new file.\n")
+        cat("Settings file exists but is empty.\n")
         file_exists <- FALSE
       } else {
-        settings <- jsonlite::read_json(settings_file, simplifyVector = FALSE)
-        cat("Found existing settings file:", settings_file, "\n")
+        # Read with simplifyVector = FALSE and simplifyDataFrame = FALSE to preserve structure
+        settings <- jsonlite::read_json(settings_file, simplifyVector = FALSE, simplifyDataFrame = FALSE)
         file_exists <- TRUE
       }
     }, error = function(e) {
       cat("Error reading settings file:", e$message, "\n")
-      cat("Will create a new settings file\n")
       file_exists <- FALSE
     })
   }
+  
+  # Helper function to format values for display
+  format_value_for_display <- function(value, indent = "  ") {
+    if (is.null(value)) {
+      return("null")
+    } else if (is.logical(value)) {
+      return(tolower(as.character(value)))
+    } else if (is.character(value) && length(value) == 1) {
+      return(paste0('"', value, '"'))
+    } else if (is.numeric(value) && length(value) == 1) {
+      return(as.character(value))
+    } else if (is.list(value)) {
+      # Handle nested objects
+      if (length(value) == 0) {
+        return("{}")
+      } else if (!is.null(names(value))) {
+        # It's a named list (object)
+        result <- "{\n"
+        items <- names(value)
+        for (i in seq_along(items)) {
+          key <- items[i]
+          val <- value[[key]]
+          result <- paste0(result, indent, "    \"", key, "\": ")
+          if (is.character(val)) {
+            result <- paste0(result, "\"", val, "\"")
+          } else {
+            result <- paste0(result, tolower(as.character(val)))
+          }
+          if (i < length(items)) {
+            result <- paste0(result, ",")
+          }
+          result <- paste0(result, "\n")
+        }
+        result <- paste0(result, indent, "  }")
+        return(result)
+      } else {
+        # It's an array
+        return(jsonlite::toJSON(value, auto_unbox = TRUE, pretty = FALSE))
+      }
+    } else {
+      return(as.character(value))
+    }
+  }
+  
+  # Display current settings
+  if (file_exists && length(settings) > 0) {
+    cat("Settings file:", settings_file, "\n\n")
+    for (setting_name in names(settings)) {
+      value <- settings[[setting_name]]
+      cat("  ", setting_name, ": ", format_value_for_display(value), "\n", sep = "")
+    }
+  } else if (!file.exists(settings_file)) {
+    cat("No settings file exists yet at:", settings_file, "\n")
+  } else {
+    cat("Settings file exists but is empty:", settings_file, "\n")
+  }
+  
+  cat("\n")
   
   # Create a new file with valid JSON if needed
   if (!file_exists) {
     tryCatch({
       jsonlite::write_json(list(), settings_file, pretty = TRUE, auto_unbox = TRUE)
-      cat("Created new empty settings.json at:", settings_file, "\n")
+      cat("=== Creating New Settings File ===\n")
+      cat("Created new empty settings.json at:", settings_file, "\n\n")
     }, error = function(e) {
       cat("Error creating settings file:", e$message, "\n")
       # If we can't create the file, we should stop
@@ -131,7 +218,7 @@ set_positron_settings <- function(home_dir = path.expand("~"),
     
     # Re-read the newly created file to make sure it's valid
     tryCatch({
-      settings <- jsonlite::read_json(settings_file, simplifyVector = FALSE)
+      settings <- jsonlite::read_json(settings_file, simplifyVector = FALSE, simplifyDataFrame = FALSE)
       file_exists <- TRUE
     }, error = function(e) {
       cat("Error reading newly created settings file:", e$message, "\n")
@@ -141,16 +228,20 @@ set_positron_settings <- function(home_dir = path.expand("~"),
   
   # Handle empty settings list
   if (length(positron_settings) == 0) {
-    cat("No settings provided. No changes made to", settings_file, "\n")
+    cat("=== No Changes Requested ===\n")
+    cat("No new Positron settings provided.\n")
     
-    # Apply binary settings if requested
-    if (isTRUE(set.binary)) {
-      cat("Running set_binary_only_in_r_profile() to configure binary options.\n")
-      set_binary_only_in_r_profile()
+    # Apply R profile settings if requested
+    if (isTRUE(set.rprofile)) {
+      cat("\nConfiguring R profile settings...\n")
+      set_rprofile_settings()
     }
     
     return(invisible(NULL))
   }
+  
+  # Report changes to be made
+  cat("=== Applying Settings Changes ===\n")
   
   # Helper function to normalize Windows paths for JSON
   normalize_path_for_json <- function(value) {
@@ -181,10 +272,20 @@ set_positron_settings <- function(home_dir = path.expand("~"),
         
         # Check if the setting needs to be updated
         if (is.null(settings[[setting]]) || !identical(settings[[setting]], value)) {
+          old_value <- settings[[setting]]
           settings[[setting]] <- value
           changes_made <- TRUE
-          cat("Setting", setting, "to", 
-              if (is.logical(value)) as.character(value) else paste0('"', value, '"'), "\n")
+          cat("  ", setting, ": ", sep = "")
+          
+          if (is.null(old_value)) {
+            cat("(new) ", format_value_for_display(value, ""), "\n", sep = "")
+          } else {
+            cat(format_value_for_display(old_value, ""), " -> ", 
+                format_value_for_display(value, ""), "\n", sep = "")
+          }
+        } else {
+          cat("  ", setting, ": already set to ", 
+              format_value_for_display(value, ""), " (no change)\n", sep = "")
         }
       } else {
         warning("Skipping invalid setting at position ", i, " - requires both name and value")
@@ -200,10 +301,20 @@ set_positron_settings <- function(home_dir = path.expand("~"),
       
       # Check if the setting needs to be updated
       if (is.null(settings[[setting]]) || !identical(settings[[setting]], value)) {
+        old_value <- settings[[setting]]
         settings[[setting]] <- value
         changes_made <- TRUE
-        cat("Setting", setting, "to", 
-            if (is.logical(value)) as.character(value) else paste0('"', value, '"'), "\n")
+        cat("  ", setting, ": ", sep = "")
+        
+        if (is.null(old_value)) {
+          cat("(new) ", format_value_for_display(value, ""), "\n", sep = "")
+        } else {
+          cat(format_value_for_display(old_value, ""), " -> ", 
+              format_value_for_display(value, ""), "\n", sep = "")
+        }
+      } else {
+        cat("  ", setting, ": already set to ", 
+            format_value_for_display(value, ""), " (no change)\n", sep = "")
       }
     }
   }
@@ -211,24 +322,25 @@ set_positron_settings <- function(home_dir = path.expand("~"),
   # Write to file if changes were made
   if (changes_made) {
     tryCatch({
+      cat("\n")
       jsonlite::write_json(settings, settings_file, pretty = TRUE, auto_unbox = TRUE)
-      cat("Updated settings in", settings_file, "\n")
+      cat("Successfully updated settings.json\n")
       
       # Verify the file was written correctly
-      test_read <- jsonlite::read_json(settings_file, simplifyVector = FALSE)
+      test_read <- jsonlite::read_json(settings_file, simplifyVector = FALSE, simplifyDataFrame = FALSE)
       
     }, error = function(e) {
       cat("Error writing settings file:", e$message, "\n")
       stop("Failed to write settings to file. Please check file permissions.")
     })
   } else {
-    cat("No settings changes needed in", settings_file, "\n")
+    cat("\nNo changes needed - all requested settings already have the correct values.\n")
   }
   
-  # Apply binary settings if requested
-  if (isTRUE(set.binary)) {
-    cat("Running set_binary_only_in_r_profile() to configure binary options.\n")
-    set_binary_only_in_r_profile()
+  # Apply R profile settings if requested
+  if (isTRUE(set.rprofile)) {
+    cat("\nConfiguring R profile settings...\n")
+    set_rprofile_settings()
   }
   
   invisible(NULL)

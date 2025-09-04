@@ -1,6 +1,6 @@
 # tutorial.helpers (development version)
 
-* Replace process_submissions() with gather_submissions(), submissions_answers(), and  submissions_summary().
+* Replace process_submissions() with submissions_summary().
 
 * Remove RStudio material, including addins.
 
@@ -9,6 +9,8 @@
 * Change check_tutorial_defaults() to make it more flexible.
 
 * Add "Introduction to R" tutorial.
+
+* Change set_binary_only_r() to set_rprofile_settings().
 
 # tutorial.helpers 0.5.0
 

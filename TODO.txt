@@ -21,16 +21,6 @@ update make_exercises
 
 * should report what settings it found and what, if any, settings it changed.
 
-* Maybe this should be placed in everyone's .Rprofile?
-
-  options(timeout = max(300, getOption("timeout")))
-
-  Or maybe set some other way? Can't hurt and often helps.
-
-* Without the double backslashes, this command fails on Windows because /U gets interpreted as hex. Please fix!
-
-tutorial.helpers::set_positron_settings(positron_settings = 
-   list("files.dialog.defaultPath" = "C://Users//dkane//projects"))
 
 * Maybe this can now be part of the default set_positron_settings() call:
 
@@ -77,6 +67,8 @@ that we should set for students in the Positron tutorial?
 
 
 ## Later Projects
+
+* Once new version is out, update this thread with our recent changes to set_positron_settings: https://github.com/r-lib/usethis/issues/2111
 
 * I am most concerned about what happens when a student does not answer a question. The most common case is for `name` or `email`. But this can also arise for questions which ask for URLs. When this happens --- at least until we change write_answers() --- the resulting tibble will not have a row with that value for `id`. I don't think we handle this in any sort of consistent/sensible fashion.
 
