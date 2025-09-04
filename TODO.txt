@@ -8,12 +8,72 @@ clean up Introduction to R tutorial
 
 update make_exercises
 
+### Tutorial
+
+* Set a projects directory in this tutorial.
+
+* Update the images now that the add a new Console button looks and behaves a little differently.
 
 
+### set_positron_settings issues
 
-## set_positron_settings issues
+* Move material about projects and other stuff from positron 01-code tutorial here.
+
+* should report what settings it found and what, if any, settings it changed.
+
+* Maybe this should be placed in everyone's .Rprofile?
+
+  options(timeout = max(300, getOption("timeout")))
+
+  Or maybe set some other way? Can't hurt and often helps.
+
+* Without the double backslashes, this command fails on Windows because /U gets interpreted as hex. Please fix!
+
+tutorial.helpers::set_positron_settings(positron_settings = 
+   list("files.dialog.defaultPath" = "C://Users//dkane//projects"))
+
+* Maybe this can now be part of the default set_positron_settings() call:
+
+ "terminal.integrated.defaultProfile.windows": "Git Bash"
+
+ Maybe they need to run this command to fix this one setting, after we ensure that they have installed Git for Windows. Anyway, the key material/images from https://ppbds.github.io/primer/getting-started-with-positron.html#the-terminal needs to be in the tutorial.
+
+* Perhaps I should add some default shortcut key creations to set_positron_settings(). 
+
+* How does line-wrapping work in Positron? And, whatever the answer, is this something 
+that we should set for students in the Positron tutorial?
+
+* Other items of interest:
+
+{
+  "editor.wordWrap": "on",
+  "files.defaultLanguage": "r",
+  "rewrap.wrappingColumn": 80,
+  "workbench.startupEditor": "newUntitledFile",
+  "files.hotExit": "onExitAndWindowClose",
+  "explorer.openEditors.dynamicHeight": true,
+  "workbench.editor.highlightModifiedTabs": true,
+  "files.insertFinalNewline": true,
+  "editor.renderFinalNewline": "dimmed",
+  "editor.renderWhitespace": "trailing",
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "diffEditor.ignoreTrimWhitespace": true,
+  "workbench.editor.enablePreview": false
+}
+
+* Also, seems like there is a keybindings.json file (in the same location), in which we can do stuff like:
+
+[]
+    {
+        "key": "cmd+d",
+        "command": "-editor.action.deleteLines",
+        "when": "config.rstudio.keymap.enable && editorTextFocus"
+    }
+]
 
 
+## Tutorials
 
 
 ## Later Projects
@@ -25,14 +85,9 @@ update make_exercises
 * Need better documentation of using submissions_* functions. They are the ones that people might use.
 
 
-* The R process runs tests from the package root (not tests/testthat), so "fixtures/..." resolves to the top-level fixtures/ folder; our repo has both a root fixtures/ (used by most tests) and tests/testthat/fixtures/ (used by newer tests like write_answers), we don’t change the working directory in setup.R, so to reliably access tests/testthat/fixtures/ you should use testthat::test_path("fixtures", "file.ext") instead of hard-coding paths. Related point: Use: "path <- testthat::test_path("fixtures", "answers_html")" Instead of: "path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")" in the top documentation part of some R files. 
+* Use: "path <- testthat::test_path("fixtures", "answers_html")" Instead of: "path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")" in the top documentation part of some R files. 
 
-* Why doesn't devtools::test() work? 
-
-Error (test-return_tutorial_paths.R:6:3): Can find path for tutorial.helpers tutorial
-Error: No tutorials found for package: "tutorial.helpers"
-
-* Why does return_tutorial_paths("tutorial.helpers") fail when run inside the tutorial.helpers project but work outside of it?
+* Why does return_tutorial_paths("tutorial.helpers") fail when run inside the tutorial.helpers project but work outside of it? I suspect that this is connected to the hoops that jump through (successfully?) in test-return_tutorial_paths.R.
 
 * Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version? 
 
@@ -107,82 +162,13 @@ Our code:
 
 ## Points about testing
 
-
-
 * Add a test case which ensures that downloading the answers actually works. I got caught with a bug on this when I stopped exporting write_answers(). That change caused the download buttons to fail, but I did not know it until someone reported it.
-
-* Understand https://r-pkgs.org/testing-basics.html#sec-snapshot-tests and other advanced testing stuff. I bet that "withr::local_options" will be valuable.
 
 * Use testing_package() rather than hard-coding the package name.
 
-* Read https://testthat.r-lib.org/articles/test-fixtures.html
-
-
-
 * Explore tutorial testing: https://pkgs.rstudio.com/learnr/articles/exercises.html#test-code-or-cases
 
-* Do something about test-return_tutorial_paths(). 
-
 * Maybe functions like testing_package() or skip_if_offline() would be useful. 
-
-## set_positron_settings() 
-
-* should report what settings it found and what, if any, settings it changed.
-
-* Maybe this should be placed in everyone's .Rprofile?
-
-  options(timeout = max(300, getOption("timeout")))
-
-  Or maybe set some other way? Can't hurt and often helps.
-
-* Without the double backslashes, this command fails on Windows because /U gets interpreted as hex. Please fix!
-
-tutorial.helpers::set_positron_settings(positron_settings = 
-   list("files.dialog.defaultPath" = "C://Users//dkane//projects"))
-
-* Maybe this can now be part of the default set_positron_settings() call:
-
- "terminal.integrated.defaultProfile.windows": "Git Bash"
-
- Maybe they need to run this command to fix this one setting, after we ensure that they have installed Git for Windows. Anyway, the key material/images from https://ppbds.github.io/primer/getting-started-with-positron.html#the-terminal needs to be in the tutorial.
-
-
-* Perhaps I should add some default shortcut key creations to set_positron_settings(). 
-
-* How does line-wrapping work in Positron? And, whatever the answer, is this something 
-that we should set for students in the Positron tutorial?
-
-* Other items of interest:
-
-{
-  "editor.wordWrap": "on",
-  "files.defaultLanguage": "r",
-  "rewrap.wrappingColumn": 80,
-  "workbench.startupEditor": "newUntitledFile",
-  "files.hotExit": "onExitAndWindowClose",
-  "explorer.openEditors.dynamicHeight": true,
-  "workbench.editor.highlightModifiedTabs": true,
-  "files.insertFinalNewline": true,
-  "editor.renderFinalNewline": "dimmed",
-  "editor.renderWhitespace": "trailing",
-  "files.trimFinalNewlines": true,
-  "files.trimTrailingWhitespace": true,
-  "diffEditor.ignoreTrimWhitespace": true,
-  "workbench.editor.enablePreview": false
-}
-
-* Also, seems like there is a keybindings.json file (in the same location), in which we can do stuff like:
-
-[]
-    {
-        "key": "cmd+d",
-        "command": "-editor.action.deleteLines",
-        "when": "config.rstudio.keymap.enable && editorTextFocus"
-    }
-]
-
-* Move over settings.json manipulations to this package. (??)
-
 
 
 
@@ -191,62 +177,10 @@ that we should set for students in the Positron tutorial?
 
 The below are projects that we probably won't get to this summer.
 
-### Tutorial
-
-* Should we set a projects directory in this tutorial as well? Not sure . . .
-
-* Update the images now that the add a new Console button looks and behaves a little differently?
-
-* How do we teach students to switch between Positron windows? I think:
-
-    + `^w` might be the best approach. Works on Mac (and Windows?). Only annoyance is that it does not switch Windows. Instead, it pulls up that set of open Positron windows for you to choose from. But, if there are only two, and you just hit enter, you switch to the other one, which is what you want.
-
-    + `Cmd + `` works, but only the Mac. It is what I use, but it is not a convenient shortcut key.
-
-    + `Alt + Tab` works on Windows? But it cycles through all Windows, including other applications that you might have open.
-
-    Maybe workbench.action.quickSwitchWindow is the key command, and we should set that to a specific command sequence for everyone. This would involve, I think, editing/creating the keybindings.json file. Maybe:
-
-{
-  "key": "ctrl+alt+w",
-  "command": "workbench.action.quickSwitchWindow"
-}
-
-    Or: 
-
-[
-  {
-    "key": "ctrl+alt+w",
-    "command": "workbench.action.quickSwitchWindow",
-    "when": "!isMac"
-  },
-  {
-    "key": "cmd+opt+w",
-    "command": "workbench.action.quickSwitchWindow",
-    "when": "isMac"
-  }
-]
-
 
 ### Other Stuff
 
 * Think harder about the changes that will be allowed once we have a new Tutorial Selector Extension for Positron available.  In essence, there are three things we care about. One: What order do tutorials appear in the selector? They will be sorted by package, obviously, but we want package authors to be able to order them as they see fit, with perhaps the default ordering being the ordering of directory names. Second, we need to display a name of the tutorial which students will see. Presumably, this will just be the title of the tutorial. Third, we have the file name of the saved answers. Presumably, this will just use the id variable.
-
-
-* I am still concerned about the Terminal for Windows users. Does installing RTools just magically make that work OK? No! Consider changing the JSON file so that Windows users will use bash. Ask Grok for details. Example:
-
-{
-  "terminal.integrated.profiles.windows": {
-    "RTools Bash": {
-      "path": "C:\\rtools45\\usr\\bin\\bash.exe",
-      "args": ["--login"]
-    }
-  },
-  "terminal.integrated.defaultProfile.windows": "RTools Bash"
-}
-
-No idea if this would work. And, if we start using it, we might need to update the Terminal tutorial.
-
 
 * I think that there is a bug (or at least a change) in how to handle links within a vignette. That is, within instructions.qmd, I want to link discussion of knowledge drops to the Knowledge Drops section. The old way of doing that in Rmd files still *seemed* to work, in the sense that the links worked in the result html, but R CMD check seemed to identify those links as have an Empty URL, generating a NOTE in R CMD check which led to CRAN rejection. 
 
@@ -285,11 +219,6 @@ The latest version of learnr seems to allow for ____ as a useful placeholder in 
 So, in addition to hints, we could have each code block pre-populated with the code we want them to start with. No need for copy-code from previous exercise! But some diligent students probably don't use the hint. (But they do use Copy from Previous question.) We don't want to force them to see too much before they try out the question.
 
 Blanks are detected using regular expressions (since blanks may make the code unparsable), and learnr’s default pattern is to detect three or more consecutive underscores. Authors can choose the pattern for detecting blanks with the exercise.blanks chunk option. Setting exercise.blanks = "[.]{2}[a-z]+[.]{2}", for example, would allow the author to use valid R syntax for blanks. The warning message shown to students calls out the blanks they need to fill in.
-
-## Other items
-
-
-
 
 
 # Add this material as a technical appendix in instructions.qmd.

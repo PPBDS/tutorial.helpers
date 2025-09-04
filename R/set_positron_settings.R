@@ -13,6 +13,10 @@
 #' constructing the appropriate file path to Positron's user settings. The
 #' function applies the settings provided in the `positron_settings` parameter.
 #' By default, no settings are changed unless explicitly specified.
+#' 
+#' Note: Windows file paths in settings should use forward slashes (/) or 
+#' escaped backslashes (\\\\). The function will automatically handle path
+#' normalization for Windows.
 #'
 #' @param home_dir Optional character string specifying the base directory to use
 #'   as the user's home directory. Defaults to `path.expand("~")`. Useful for
@@ -53,6 +57,13 @@
 #'     )
 #'   )
 #'   
+#'   # Set a Windows file path (use forward slashes)
+#'   set_positron_settings(
+#'     positron_settings = list(
+#'       "files.dialog.defaultPath" = "C:/Users/username/projects"
+#'     )
+#'   )
+#'   
 #'   # Apply settings with a custom home directory and disable binary setting
 #'   set_positron_settings(
 #'     home_dir = tempdir(), 
@@ -64,8 +75,9 @@
 #' @importFrom jsonlite read_json write_json
 #' @export
 
-set_positron_settings <- function(home_dir = path.expand("~"), set.binary = TRUE, 
-                                 positron_settings = list()) {
+set_positron_settings <- function(home_dir = path.expand("~"), 
+                                  set.binary = TRUE, 
+                                  positron_settings = list()) {
  
   # Use provided home_dir instead of calling path.expand("~") directly
   if (Sys.info()["sysname"] == "Windows") {
@@ -95,7 +107,7 @@ set_positron_settings <- function(home_dir = path.expand("~"), set.binary = TRUE
         cat("Settings file exists but is empty. Will create new file.\n")
         file_exists <- FALSE
       } else {
-        settings <- jsonlite::read_json(settings_file, simplifyVector = TRUE)
+        settings <- jsonlite::read_json(settings_file, simplifyVector = FALSE)
         cat("Found existing settings file:", settings_file, "\n")
         file_exists <- TRUE
       }
@@ -119,7 +131,7 @@ set_positron_settings <- function(home_dir = path.expand("~"), set.binary = TRUE
     
     # Re-read the newly created file to make sure it's valid
     tryCatch({
-      settings <- jsonlite::read_json(settings_file, simplifyVector = TRUE)
+      settings <- jsonlite::read_json(settings_file, simplifyVector = FALSE)
       file_exists <- TRUE
     }, error = function(e) {
       cat("Error reading newly created settings file:", e$message, "\n")
@@ -140,6 +152,19 @@ set_positron_settings <- function(home_dir = path.expand("~"), set.binary = TRUE
     return(invisible(NULL))
   }
   
+  # Helper function to normalize Windows paths for JSON
+  normalize_path_for_json <- function(value) {
+    if (is.character(value) && length(value) == 1) {
+      # Check if this looks like a Windows path
+      if (grepl("^[A-Za-z]:[/\\\\]", value)) {
+        # Convert backslashes to forward slashes for JSON compatibility
+        # This is the format Positron/VS Code expects
+        value <- gsub("\\\\", "/", value)
+      }
+    }
+    return(value)
+  }
+  
   # Apply settings
   changes_made <- FALSE
   
@@ -150,6 +175,9 @@ set_positron_settings <- function(home_dir = path.expand("~"), set.binary = TRUE
       if (length(positron_settings[[i]]) >= 2) {
         setting <- positron_settings[[i]][[1]]
         value <- positron_settings[[i]][[2]]
+        
+        # Normalize paths for Windows
+        value <- normalize_path_for_json(value)
         
         # Check if the setting needs to be updated
         if (is.null(settings[[setting]]) || !identical(settings[[setting]], value)) {
@@ -167,6 +195,9 @@ set_positron_settings <- function(home_dir = path.expand("~"), set.binary = TRUE
     for (setting in names(positron_settings)) {
       value <- positron_settings[[setting]]
       
+      # Normalize paths for Windows
+      value <- normalize_path_for_json(value)
+      
       # Check if the setting needs to be updated
       if (is.null(settings[[setting]]) || !identical(settings[[setting]], value)) {
         settings[[setting]] <- value
@@ -182,6 +213,10 @@ set_positron_settings <- function(home_dir = path.expand("~"), set.binary = TRUE
     tryCatch({
       jsonlite::write_json(settings, settings_file, pretty = TRUE, auto_unbox = TRUE)
       cat("Updated settings in", settings_file, "\n")
+      
+      # Verify the file was written correctly
+      test_read <- jsonlite::read_json(settings_file, simplifyVector = FALSE)
+      
     }, error = function(e) {
       cat("Error writing settings file:", e$message, "\n")
       stop("Failed to write settings to file. Please check file permissions.")

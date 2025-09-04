@@ -43,6 +43,10 @@ designed to work cross-platform by detecting the operating system and
 constructing the appropriate file path to Positron's user settings. The
 function applies the settings provided in the \code{positron_settings} parameter.
 By default, no settings are changed unless explicitly specified.
+
+Note: Windows file paths in settings should use forward slashes (/) or
+escaped backslashes (\\\\). The function will automatically handle path
+normalization for Windows.
 }
 \examples{
 \dontrun{
@@ -64,6 +68,13 @@ By default, no settings are changed unless explicitly specified.
     positron_settings = list(
       "rstudio.keymap.enable" = TRUE,
       "editor.wordWrap" = "on"
+    )
+  )
+  
+  # Set a Windows file path (use forward slashes)
+  set_positron_settings(
+    positron_settings = list(
+      "files.dialog.defaultPath" = "C:/Users/username/projects"
     )
   )
   
