@@ -41,9 +41,10 @@ test_that("set_positron_settings handles non-existent file with default settings
   # Verify file was created
   expect_true(file.exists(paths$file))
   
-  # Verify file contains default settings
+  # Verify file contains default settings (now includes wordWrap)
   settings <- jsonlite::read_json(paths$file, simplifyVector = TRUE)
-  expect_equal(length(settings), 3)
+  expect_equal(length(settings), 4)
+  expect_equal(settings[["editor.wordWrap"]], "on")
   expect_equal(settings[["terminal.integrated.defaultProfile.windows"]], "Git Bash")
   expect_equal(settings[["git.enableSmartCommit"]], TRUE)
   expect_equal(settings[["git.confirmSync"]], FALSE)
@@ -106,9 +107,10 @@ test_that("set_positron_settings handles empty file with default settings", {
   # Verify file still exists
   expect_true(file.exists(paths$file))
   
-  # Verify file contains default settings
+  # Verify file contains default settings (now includes wordWrap)
   settings <- jsonlite::read_json(paths$file, simplifyVector = TRUE)
-  expect_equal(length(settings), 3)
+  expect_equal(length(settings), 4)
+  expect_equal(settings[["editor.wordWrap"]], "on")
   expect_equal(settings[["terminal.integrated.defaultProfile.windows"]], "Git Bash")
   expect_equal(settings[["git.enableSmartCommit"]], TRUE)
   expect_equal(settings[["git.confirmSync"]], FALSE)
@@ -235,6 +237,52 @@ test_that("set_positron_settings supports list of lists format", {
   expect_equal(length(settings), 2)
   expect_equal(settings[["rstudio.keymap.enable"]], TRUE)
   expect_equal(settings[["editor.wordWrap"]], "on")
+})
+
+test_that("set_positron_settings handles existing settings with all defaults already present", {
+  temp_home <- tempdir()
+  paths <- setup_temp_settings(temp_home)
+  
+  # Create settings file with all default settings already present
+  create_settings_file(paths$file, list(
+    "editor.wordWrap" = "on",
+    "terminal.integrated.defaultProfile.windows" = "Git Bash",
+    "git.enableSmartCommit" = TRUE,
+    "git.confirmSync" = FALSE
+  ))
+  
+  # Run function with default settings (should detect no changes needed)
+  set_positron_settings(home_dir = temp_home, set.rprofile = FALSE)
+  
+  # Verify settings are still correct
+  settings <- jsonlite::read_json(paths$file, simplifyVector = TRUE)
+  expect_equal(length(settings), 4)
+  expect_equal(settings[["editor.wordWrap"]], "on")
+  expect_equal(settings[["terminal.integrated.defaultProfile.windows"]], "Git Bash")
+  expect_equal(settings[["git.enableSmartCommit"]], TRUE)
+  expect_equal(settings[["git.confirmSync"]], FALSE)
+})
+
+test_that("set_positron_settings handles partial default settings already present", {
+  temp_home <- tempdir()
+  paths <- setup_temp_settings(temp_home)
+  
+  # Create settings file with only some default settings
+  create_settings_file(paths$file, list(
+    "editor.wordWrap" = "on",
+    "git.enableSmartCommit" = TRUE
+  ))
+  
+  # Run function with default settings (should add missing ones)
+  set_positron_settings(home_dir = temp_home, set.rprofile = FALSE)
+  
+  # Verify all default settings are now present
+  settings <- jsonlite::read_json(paths$file, simplifyVector = TRUE)
+  expect_equal(length(settings), 4)
+  expect_equal(settings[["editor.wordWrap"]], "on")
+  expect_equal(settings[["terminal.integrated.defaultProfile.windows"]], "Git Bash")
+  expect_equal(settings[["git.enableSmartCommit"]], TRUE)
+  expect_equal(settings[["git.confirmSync"]], FALSE)
 })
 
 test_that("set.rprofile parameter properly controls R profile setting", {

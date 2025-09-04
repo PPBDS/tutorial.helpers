@@ -7,8 +7,9 @@
 set_positron_settings(
   home_dir = path.expand("~"),
   set.rprofile = TRUE,
-  positron_settings = list(terminal.integrated.defaultProfile.windows = "Git Bash",
-    git.enableSmartCommit = TRUE, git.confirmSync = FALSE)
+  positron_settings = list(editor.wordWrap = "on",
+    terminal.integrated.defaultProfile.windows = "Git Bash", git.enableSmartCommit =
+    TRUE, git.confirmSync = FALSE)
 )
 }
 \arguments{
@@ -24,9 +25,10 @@ package installation and download timeout in the R profile.}
 lists where each sub-list contains a setting name and value (e.g.,
 \code{list(list("rstudio.keymap.enable", TRUE))}), or as a named list
 (e.g., \code{list("rstudio.keymap.enable" = TRUE)}). Defaults to a named list
-with three settings: \code{list("terminal.integrated.defaultProfile.windows" = "Git Bash", "git.enableSmartCommit" = TRUE, "git.confirmSync" = FALSE)}, which sets Git Bash
-as the default terminal on Windows, enables auto-staging of Git changes, and
-disables confirmation dialogs for Git push/pull, respectively.}
+with four settings: \code{list("editor.wordWrap" = "on",  "terminal.integrated.defaultProfile.windows" = "Git Bash", "git.enableSmartCommit" = TRUE, "git.confirmSync" = FALSE)}, which enables
+word wrap for improved code readability, sets Git Bash as the default terminal
+on Windows, enables auto-staging of Git changes, and disables confirmation
+dialogs for Git push/pull, respectively.}
 }
 \value{
 Invisible \code{NULL}. The function's purpose is its side effect: modifying
@@ -49,8 +51,9 @@ designed to work cross-platform by detecting the operating system and
 constructing the appropriate file path to Positron's user settings. The
 function applies the settings provided in the \code{positron_settings} parameter.
 If the \code{positron_settings} list is empty, no changes are made to the \code{settings.json} file.
-By default, three settings are applied unless overridden: setting Git Bash as the default
-terminal on Windows, enabling Git smart commit, and disabling Git sync confirmation dialogs.
+By default, four settings are applied unless overridden: enabling word wrap for better
+code readability, setting Git Bash as the default terminal on Windows, enabling Git
+smart commit, and disabling Git sync confirmation dialogs.
 
 Note: Windows file paths in settings should use forward slashes (/) or
 escaped backslashes (\\\\). The function will automatically handle path
@@ -58,7 +61,7 @@ normalization for Windows.
 }
 \examples{
 \dontrun{
-  # Apply default settings (Git Bash terminal, smart commit, no sync confirmation)
+  # Apply default settings (word wrap, Git Bash terminal, smart commit, no sync confirmation)
   set_positron_settings()
   
   # Enable RStudio keyboard shortcuts using list of lists structure

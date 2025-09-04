@@ -14,29 +14,17 @@ update make_exercises
 
 * Update the images now that the add a new Console button looks and behaves a little differently.
 
+* Move material about projects and other stuff from positron 01-code tutorial here.
+
+* The key material/images from https://ppbds.github.io/primer/getting-started-with-positron.html#the-terminal needs to be in the tutorial.
 
 ### set_positron_settings issues
 
-* Move material about projects and other stuff from positron 01-code tutorial here.
 
-* should report what settings it found and what, if any, settings it changed.
-
-
-* Maybe this can now be part of the default set_positron_settings() call:
-
- "terminal.integrated.defaultProfile.windows": "Git Bash"
-
- Maybe they need to run this command to fix this one setting, after we ensure that they have installed Git for Windows. Anyway, the key material/images from https://ppbds.github.io/primer/getting-started-with-positron.html#the-terminal needs to be in the tutorial.
-
-* Perhaps I should add some default shortcut key creations to set_positron_settings(). 
-
-* How does line-wrapping work in Positron? And, whatever the answer, is this something 
-that we should set for students in the Positron tutorial?
 
 * Other items of interest:
 
 {
-  "editor.wordWrap": "on",
   "files.defaultLanguage": "r",
   "rewrap.wrappingColumn": 80,
   "workbench.startupEditor": "newUntitledFile",
@@ -52,18 +40,6 @@ that we should set for students in the Positron tutorial?
   "workbench.editor.enablePreview": false
 }
 
-* Also, seems like there is a keybindings.json file (in the same location), in which we can do stuff like:
-
-[]
-    {
-        "key": "cmd+d",
-        "command": "-editor.action.deleteLines",
-        "when": "config.rstudio.keymap.enable && editorTextFocus"
-    }
-]
-
-
-## Tutorials
 
 
 ## Later Projects
