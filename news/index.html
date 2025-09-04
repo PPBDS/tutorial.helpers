@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0.9013</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,11 +43,12 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="tutorialhelpers-development-version">tutorial.helpers (development version)<a class="anchor" aria-label="anchor" href="#tutorialhelpers-development-version"></a></h2>
-<ul><li><p>Replace process_submissions() with gather_submissions(), submissions_answers(), and submissions_summary().</p></li>
+<ul><li><p>Replace process_submissions() with submissions_summary().</p></li>
 <li><p>Remove RStudio material, including addins.</p></li>
 <li><p>Rename tutorial to “Getting Started.”</p></li>
 <li><p>Change check_tutorial_defaults() to make it more flexible.</p></li>
 <li><p>Add “Introduction to R” tutorial.</p></li>
+<li><p>Change set_binary_only_r() to set_rprofile_settings().</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.0" id="tutorialhelpers-050">tutorial.helpers 0.5.0<a class="anchor" aria-label="anchor" href="#tutorialhelpers-050"></a></h2><p class="text-muted">CRAN release: 2025-05-11</p>
@@ -79,7 +80,7 @@
 <li><p>Setting rmd_viewer_type to “pane” within <code>set_rstudio_settings()</code>, per suggestion from Jade Cao.</p></li>
 <li><p>Add “ID” field to default information page.</p></li>
 <li><p>Change tutorial title to “Getting Started with Tutorials.”</p></li>
-<li><p>Give <code>set_rstudio_settings()</code> a set.binary argument which is set to TRUE by default, causing the function to run <code><a href="../reference/set_binary_only_in_r_profile.html">set_binary_only_in_r_profile()</a></code> at the end. This is handy for the “Getting Started with Tutorials”” tutorial.</p></li>
+<li><p>Give <code>set_rstudio_settings()</code> a set.binary argument which is set to TRUE by default, causing the function to run <code>set_binary_only_in_r_profile()</code> at the end. This is handy for the “Getting Started with Tutorials”” tutorial.</p></li>
 <li><p>Remove “Getting Started with Tutorials” from shinyapps.io.</p></li>
 </ul></div>
     <div class="section level2">
