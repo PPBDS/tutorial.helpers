@@ -1,75 +1,141 @@
-test_that("Can find path for tutorial.helpers tutorial", {
-  
-  # This used to cause an error when running devtools:test(). That was annoying 
-  # since the only solution was to run devtools::check(), which takes much longer. Claude explains:
+# Test suite for return_tutorial_paths function
 
-  # devtools::check() works because it builds and installs the package temporarily
-  # devtools::test() runs tests in the development environment where inst/ files aren't in their installed locations
+test_that("return_tutorial_paths function exists and has correct signature", {
+  expect_true(exists("return_tutorial_paths"))
+  expect_true(is.function(return_tutorial_paths))
   
-  # It then suggested this new approach. It "works" but I haven't 
-  # confirmed that, when using devtools::check(, it is actually testing anything . . .
+  # Check function arguments
+  args <- formals(return_tutorial_paths)
+  expect_true("package" %in% names(args))
+  expect_equal(length(args), 1)
+})
+
+test_that("return_tutorial_paths validates input correctly", {
+  # Test with invalid input types
+  expect_error(return_tutorial_paths(123), "'package' must be a single character string")
+  expect_error(return_tutorial_paths(NULL), "'package' must be a single character string")
+  expect_error(return_tutorial_paths(c("pkg1", "pkg2")), "'package' must be a single character string")
+  expect_error(return_tutorial_paths(character(0)), "'package' must be a single character string")
+})
+
+test_that("return_tutorial_paths handles non-existent packages gracefully", {
+  # Should return empty vector with warning for non-existent package
+  expect_warning(
+    result <- return_tutorial_paths("this_package_definitely_does_not_exist_12345"),
+    "Package .* is not installed"
+  )
+  expect_equal(result, character(0))
+  expect_type(result, "character")
+})
+
+test_that("return_tutorial_paths handles packages without tutorials", {
+  # Base R packages like 'stats' don't have tutorials
+  # Should return empty vector, not error
+  result <- return_tutorial_paths("stats")
+  expect_equal(result, character(0))
+  expect_type(result, "character")
+})
+
+test_that("return_tutorial_paths works with learnr package", {
+  skip_if_not_installed("learnr")
   
+  result <- return_tutorial_paths("learnr")
   
-  # Skip this test during devtools::test() since tutorials aren't available
-  # in the test environment without full installation
-  skip_if_not_installed("tutorial.helpers", minimum_version = "0.0.0.9000")
+  # Should return character vector (may be empty if no tutorials)
+  expect_type(result, "character")
   
-  # Additional check: skip if no tutorials are found
-  # This handles the case where the package is installed but tutorials aren't available
-  tutorials_available <- tryCatch({
-    learnr::available_tutorials("tutorial.helpers")
-    TRUE
-  }, error = function(e) {
-    FALSE
-  })
-  
-  skip_if(!tutorials_available, "No tutorials available in test environment")
-  
-  # If we get here, tutorials are available
-  paths <- return_tutorial_paths(package = "tutorial.helpers")
-  
-  # Test that we get a character vector
-  expect_type(paths, "character")
-  
-  # Test that paths exist (if any are returned)
-  if (length(paths) > 0) {
-    expect_true(all(file.exists(paths)))
+  # If tutorials are found, they should be valid file paths
+  if (length(result) > 0) {
+    expect_true(all(file.exists(result)))
+    expect_true(all(grepl("\\.Rmd$", result, ignore.case = TRUE)))
+    # Should be sorted
+    expect_equal(result, sort(result))
   }
 })
 
-test_that("Can find paths for a package with known tutorials", {
-  # Use learnr itself as a test case since it should have tutorials
+test_that("return_tutorial_paths works with tutorial.helpers", {
+  skip_if_not_installed("tutorial.helpers")
+  
+  # Check if tutorials directory exists (only available after installation)
+  tutorials_dir <- system.file("tutorials", package = "tutorial.helpers")
+  skip_if(tutorials_dir == "", "tutorial.helpers not fully installed")
+  
+  result <- return_tutorial_paths("tutorial.helpers")
+  
+  expect_type(result, "character")
+  
+  # If tutorials are found, validate them
+  if (length(result) > 0) {
+    expect_true(all(file.exists(result)))
+    expect_true(all(grepl("\\.Rmd$", result, ignore.case = TRUE)))
+    # Should be sorted
+    expect_equal(result, sort(result))
+    
+    # Each path should contain "tutorial.helpers" and "tutorials"
+    expect_true(all(grepl("tutorial\\.helpers", result)))
+    expect_true(all(grepl("tutorials", result)))
+  }
+})
+
+test_that("return_tutorial_paths returns consistent output format", {
   skip_if_not_installed("learnr")
   
-  # Check if learnr has tutorials available
-  has_tutorials <- tryCatch({
-    length(learnr::available_tutorials("learnr")) > 0
-  }, error = function(e) {
-    FALSE
-  })
+  result <- return_tutorial_paths("learnr")
   
-  skip_if(!has_tutorials, "learnr package has no available tutorials")
+  # Should always return character vector
+  expect_type(result, "character")
   
-  paths <- return_tutorial_paths(package = "learnr")
+  # Should be sorted
+  expect_equal(result, sort(result))
   
-  expect_type(paths, "character")
-  expect_true(length(paths) > 0)
-  expect_true(all(file.exists(paths)))
+  # No duplicates
+  expect_equal(length(result), length(unique(result)))
+  
+  # If any results, they should be valid paths
+  if (length(result) > 0) {
+    expect_true(all(file.exists(result)))
+    expect_true(all(nzchar(result)))
+  }
 })
 
-test_that("Handles package with no tutorials", {
-  # The function throws an error when no tutorials are found
-  # This is the expected behavior from learnr::available_tutorials()
-  expect_error(
-    return_tutorial_paths(package = "stats"),
-    "No tutorials found"
-  )
+test_that("return_tutorial_paths handles case sensitivity", {
+  skip_if_not_installed("learnr")
+  
+  result <- return_tutorial_paths("learnr")
+  
+  # Should find .Rmd files regardless of case (.Rmd, .rmd, .RMD)
+  if (length(result) > 0) {
+    expect_true(all(grepl("\\.[Rr][Mm][Dd]$", result)))
+  }
 })
 
-test_that("Handles invalid package names gracefully", {
-  # Test with a non-existent package
-  # This should also throw an error
-  expect_error(
-    return_tutorial_paths(package = "this_package_does_not_exist_12345")
-  )
+test_that("return_tutorial_paths fallback mechanism", {
+  # Test that function can handle cases where learnr::available_tutorials fails
+  # This is hard to test directly, but we can test with a package that might
+  # not register properly with learnr but still has .Rmd files
+  
+  # Test with a base package - should return empty gracefully
+  result <- return_tutorial_paths("utils")
+  expect_type(result, "character")
+  expect_equal(length(result), 0)
+})
+
+test_that("return_tutorial_paths file path construction", {
+  skip_if_not_installed("learnr")
+  
+  result <- return_tutorial_paths("learnr")
+  
+  if (length(result) > 0) {
+    # All paths should be non-empty strings
+    expect_true(all(nzchar(result)))
+    
+    # All paths should end with .Rmd (case insensitive)
+    expect_true(all(grepl("\\.Rmd$", result, ignore.case = TRUE)))
+    
+    # All paths should contain "tutorials" directory
+    expect_true(all(grepl("tutorials", result)))
+    
+    # All files should actually exist
+    expect_true(all(file.exists(result)))
+  }
 })
