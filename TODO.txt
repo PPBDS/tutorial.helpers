@@ -18,15 +18,16 @@ update make_exercises
 
 * The key material/images from https://ppbds.github.io/primer/getting-started-with-positron.html#the-terminal needs to be in the tutorial.
 
+
+
+
+
+
+
+
+## Later Projects
+
 ### set_positron_settings issues
-
-"workbench.startupEditor" = "none"
-"files.defaultLanguage": "r"
-"workbench.editor.enablePreview": false
-
-HIGHLY RECOMMENDED - This disables the confusing "preview mode" where single-clicking a file replaces the current tab instead of opening a new one GitHubStack Overflow. Many users find the default preview behavior counter-intuitive and request this chang
-
-
 
 Here is what .vscode/settings.json might look like for someone who wants their R code formatted on save, in both R scripts and Quarto documents:
 
@@ -43,13 +44,6 @@ Here is what .vscode/settings.json might look like for someone who wants their R
 
 The most upvoted feature request in this release is a new keybinding to execute the current statement in your Python or R Console without advancing to the next one. You can now use Alt+Enter to execute your current statement without moving the cursor. (The existing keybinding Ctrl/Cmd+Enter executes the current statement and does advance your cursor.)
 
-* Other items of interest:
-
-
-
-
-
-## Later Projects
 
 * https://forum.posit.co/t/teaching-option-for-positron-on-ipad-and-or-in-the-cloud/206817/3 for teaching and Positron workbench.
 
