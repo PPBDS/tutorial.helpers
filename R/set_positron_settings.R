@@ -16,9 +16,11 @@
 #' constructing the appropriate file path to Positron's user settings. The
 #' function applies the settings provided in the `positron_settings` parameter.
 #' If the `positron_settings` list is empty, no changes are made to the `settings.json` file.
-#' By default, four settings are applied unless overridden: enabling word wrap for better
-#' code readability, setting Git Bash as the default terminal on Windows, enabling Git 
-#' smart commit, and disabling Git sync confirmation dialogs.
+#' By default, seven settings are applied unless overridden: enabling word wrap for better
+#' code readability, disabling startup editor for a clean interface, setting R as the 
+#' default language for new files, disabling preview mode for predictable tab behavior,
+#' setting Git Bash as the default terminal on Windows, enabling Git smart commit, 
+#' and disabling Git sync confirmation dialogs.
 #' 
 #' Note: Windows file paths in settings should use forward slashes (/) or 
 #' escaped backslashes (\\\\). The function will automatically handle path
@@ -34,12 +36,16 @@
 #'   lists where each sub-list contains a setting name and value (e.g., 
 #'   `list(list("rstudio.keymap.enable", TRUE))`), or as a named list 
 #'   (e.g., `list("rstudio.keymap.enable" = TRUE)`). Defaults to a named list
-#'   with four settings: `list("editor.wordWrap" = "on", 
+#'   with seven settings: `list("editor.wordWrap" = "on", 
+#'   "workbench.startupEditor" = "none", "files.defaultLanguage" = "r",
+#'   "workbench.editor.enablePreview" = FALSE, 
 #'   "terminal.integrated.defaultProfile.windows" = "Git Bash",
 #'   "git.enableSmartCommit" = TRUE, "git.confirmSync" = FALSE)`, which enables
-#'   word wrap for improved code readability, sets Git Bash as the default terminal 
-#'   on Windows, enables auto-staging of Git changes, and disables confirmation 
-#'   dialogs for Git push/pull, respectively.
+#'   word wrap for improved code readability, disables startup editor for a clean 
+#'   interface, sets R as the default language for new files, disables preview mode 
+#'   for predictable tab behavior, sets Git Bash as the default terminal on Windows, 
+#'   enables auto-staging of Git changes, and disables confirmation dialogs for 
+#'   Git push/pull, respectively.
 #'
 #' @return Invisible `NULL`. The function's purpose is its side effect: modifying
 #'   or creating the `settings.json` file. It also prints messages to the console
@@ -47,7 +53,8 @@
 #'
 #' @examples
 #' \dontrun{
-#'   # Apply default settings (word wrap, Git Bash terminal, smart commit, no sync confirmation)
+#'   # Apply default settings (word wrap, clean startup, R language, 
+#'   # no preview, Git Bash terminal, smart commit, no sync confirmation)
 #'   set_positron_settings()
 #'   
 #'   # Enable RStudio keyboard shortcuts using list of lists structure
@@ -104,6 +111,9 @@ set_positron_settings <- function(home_dir = path.expand("~"),
                                  set.rprofile = TRUE, 
                                  positron_settings = list(
                                    "editor.wordWrap" = "on",
+                                   "workbench.startupEditor" = "none",
+                                   "files.defaultLanguage" = "r",
+                                   "workbench.editor.enablePreview" = FALSE,
                                    "terminal.integrated.defaultProfile.windows" = "Git Bash",
                                    "git.enableSmartCommit" = TRUE,
                                    "git.confirmSync" = FALSE

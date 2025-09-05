@@ -20,29 +20,40 @@ update make_exercises
 
 ### set_positron_settings issues
 
+"workbench.startupEditor" = "none"
+"files.defaultLanguage": "r"
+"workbench.editor.enablePreview": false
 
+HIGHLY RECOMMENDED - This disables the confusing "preview mode" where single-clicking a file replaces the current tab instead of opening a new one GitHubStack Overflow. Many users find the default preview behavior counter-intuitive and request this chang
+
+
+
+Here is what .vscode/settings.json might look like for someone who wants their R code formatted on save, in both R scripts and Quarto documents:
+
+{
+    "[r]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "Posit.air-vscode"
+    },
+    "[quarto]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "quarto.quarto"
+    }
+}
+
+The most upvoted feature request in this release is a new keybinding to execute the current statement in your Python or R Console without advancing to the next one. You can now use Alt+Enter to execute your current statement without moving the cursor. (The existing keybinding Ctrl/Cmd+Enter executes the current statement and does advance your cursor.)
 
 * Other items of interest:
 
-{
-  "files.defaultLanguage": "r",
-  "rewrap.wrappingColumn": 80,
-  "workbench.startupEditor": "newUntitledFile",
-  "files.hotExit": "onExitAndWindowClose",
-  "explorer.openEditors.dynamicHeight": true,
-  "workbench.editor.highlightModifiedTabs": true,
-  "files.insertFinalNewline": true,
-  "editor.renderFinalNewline": "dimmed",
-  "editor.renderWhitespace": "trailing",
-  "files.trimFinalNewlines": true,
-  "files.trimTrailingWhitespace": true,
-  "diffEditor.ignoreTrimWhitespace": true,
-  "workbench.editor.enablePreview": false
-}
+
 
 
 
 ## Later Projects
+
+* https://forum.posit.co/t/teaching-option-for-positron-on-ipad-and-or-in-the-cloud/206817/3 for teaching and Positron workbench.
+
+On using Air for formatting: https://github.com/r-lib/usethis/pull/2109
 
 * Once new version is out, update this thread with our recent changes to set_positron_settings: https://github.com/r-lib/usethis/issues/2111
 
