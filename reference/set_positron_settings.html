@@ -69,7 +69,8 @@ experience with a modern interface and features.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">set_positron_settings</span><span class="op">(</span></span>
 <span>  home_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/path.expand.html" class="external-link">path.expand</a></span><span class="op">(</span><span class="st">"~"</span><span class="op">)</span>,</span>
 <span>  set.rprofile <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  positron_settings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>editor.wordWrap <span class="op">=</span> <span class="st">"on"</span>,</span>
+<span>  positron_settings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>editor.wordWrap <span class="op">=</span> <span class="st">"on"</span>, workbench.startupEditor <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>    files.defaultLanguage <span class="op">=</span> <span class="st">"r"</span>, workbench.editor.enablePreview <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>    terminal.integrated.defaultProfile.windows <span class="op">=</span> <span class="st">"Git Bash"</span>, git.enableSmartCommit <span class="op">=</span></span>
 <span>    <span class="cn">TRUE</span>, git.confirmSync <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -96,10 +97,12 @@ package installation and download timeout in the R profile.</p></dd>
 lists where each sub-list contains a setting name and value (e.g.,
 <code>list(list("rstudio.keymap.enable", TRUE))</code>), or as a named list
 (e.g., <code>list("rstudio.keymap.enable" = TRUE)</code>). Defaults to a named list
-with four settings: <code>list("editor.wordWrap" = "on",  "terminal.integrated.defaultProfile.windows" = "Git Bash", "git.enableSmartCommit" = TRUE, "git.confirmSync" = FALSE)</code>, which enables
-word wrap for improved code readability, sets Git Bash as the default terminal
-on Windows, enables auto-staging of Git changes, and disables confirmation
-dialogs for Git push/pull, respectively.</p></dd>
+with seven settings: <code>list("editor.wordWrap" = "on",  "workbench.startupEditor" = "none", "files.defaultLanguage" = "r", "workbench.editor.enablePreview" = FALSE,  "terminal.integrated.defaultProfile.windows" = "Git Bash", "git.enableSmartCommit" = TRUE, "git.confirmSync" = FALSE)</code>, which enables
+word wrap for improved code readability, disables startup editor for a clean
+interface, sets R as the default language for new files, disables preview mode
+for predictable tab behavior, sets Git Bash as the default terminal on Windows,
+enables auto-staging of Git changes, and disables confirmation dialogs for
+Git push/pull, respectively.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -116,9 +119,11 @@ designed to work cross-platform by detecting the operating system and
 constructing the appropriate file path to Positron's user settings. The
 function applies the settings provided in the <code>positron_settings</code> parameter.
 If the <code>positron_settings</code> list is empty, no changes are made to the <code>settings.json</code> file.
-By default, four settings are applied unless overridden: enabling word wrap for better
-code readability, setting Git Bash as the default terminal on Windows, enabling Git
-smart commit, and disabling Git sync confirmation dialogs.</p>
+By default, seven settings are applied unless overridden: enabling word wrap for better
+code readability, disabling startup editor for a clean interface, setting R as the
+default language for new files, disabling preview mode for predictable tab behavior,
+setting Git Bash as the default terminal on Windows, enabling Git smart commit,
+and disabling Git sync confirmation dialogs.</p>
 <p>Note: Windows file paths in settings should use forward slashes (/) or
 escaped backslashes (\\). The function will automatically handle path
 normalization for Windows.</p>
@@ -127,7 +132,8 @@ normalization for Windows.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span>  <span class="co"># Apply default settings (word wrap, Git Bash terminal, smart commit, no sync confirmation)</span></span></span>
+<span class="r-in"><span>  <span class="co"># Apply default settings (word wrap, clean startup, R language, </span></span></span>
+<span class="r-in"><span>  <span class="co"># no preview, Git Bash terminal, smart commit, no sync confirmation)</span></span></span>
 <span class="r-in"><span>  <span class="fu">set_positron_settings</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co"># Enable RStudio keyboard shortcuts using list of lists structure</span></span></span>
