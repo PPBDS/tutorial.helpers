@@ -3,8 +3,8 @@
 #' @description We define "testing" a tutorial as (successfully) running
 #'   `render()` on it. This function renders all the tutorials provided in
 #'   `tutorial_paths`. There is no check to see if the rendered file looks OK.
-#'   If a tutorial fails to render, then (we assume!) an error will be generated
-#'   which will then filter up to our testing rig.
+#'   If a tutorial fails to render, then an error will be generated which will
+#'   propagate to the caller.
 #'
 #' @param tutorial_paths Character vector of the paths to the tutorials to be
 #'   knitted.
@@ -49,13 +49,17 @@ knit_tutorials <- function(tutorial_paths){
   # fine?)
 
   for(i in tutorial_paths){
-     testthat::test_that(paste("Rendering", i), {
-        rmarkdown::render(input = i, 
-                          output_dir = tempdir(),
-                          intermediates_dir = tempdir())
+    message("Rendering: ", i)
+    tryCatch({
+      rmarkdown::render(input = i, 
+                        output_dir = tempdir(),
+                        intermediates_dir = tempdir())
+      message("Successfully rendered: ", i)
+    }, error = function(e) {
+      stop("Failed to render ", i, ": ", e$message, call. = FALSE)
     })
   }
   
-  NULL
+  message("Successfully rendered ", length(tutorial_paths), " tutorial(s)")
+  invisible(NULL)
 }
-
