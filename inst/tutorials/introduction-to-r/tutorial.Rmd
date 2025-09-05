@@ -41,8 +41,6 @@ scat_p <- ggplot(data = mpg,
 
 <!-- Make this tutorial better. Make sure there are no mistakes. Make sure it is clear.  Do some reminding of stuff from Getting Started from tutorial.helpers. -->
 
-<!-- Switch questions to using the Console, at least much of the time, instead of the exercise block? -->
-
 ## Introduction
 ### 
 
@@ -54,7 +52,7 @@ This tutorial assumes that you have already completed the "Getting Started" tuto
 
 ### 
 
-Start a new window with `File -> New Window`. This new window is the location in which you will do all the work for the tutorial, including the creation of new projects. The current window, the one in which you are reading these words, is just used to run this tutorial. 
+Start a new window with `File -> New Window`. This new window is the location in which you will do all the work for the tutorial. The current window, the one in which you are reading these words, is just used to run this tutorial. 
 
 ## Working with data
 ### 
@@ -63,7 +61,7 @@ Learn how to explore a data set using functions like `summary()`, `glimpse()`, a
 
 ### Exercise 1
 
-The steps of a typical data science project looks something like this:
+The steps of a typical data science project:
 
 ```{r}
 knitr::include_graphics("images/base.png")
@@ -71,7 +69,7 @@ knitr::include_graphics("images/base.png")
 
 ### 
 
-Looking at the graphic above, the first step in a data science project is to import your data into R. This typically means that you take data stored in a file, database, or web application programming interface (API) and load it into a data frame in R. If you can’t get your data into R, you can’t do data science on it!
+The first step in a data science project is to import your data into R. This typically means that you take data stored in a file, database, or web application programming interface (API) and load it into a data frame in R. If you can’t get your data into R, you can’t do data science on it!
 
 ###
 
@@ -97,7 +95,7 @@ The check mark which has appeared next to "Exercise 1" above indicates that you 
 
 ### Exercise 2
 
-In this tutorial, you will mostly be entering code into the exercise blocks, as you did above. But we will sometimes ask you to run code from the Console. (You will do this in the other Positron window, since the Console in this window is currently busy running the tutorial.) Example:
+In this tutorial, you will sometimes enter code into the exercise blocks, as you did above. But we will generally ask you to run code in the Console. (You will do this in the other Positron window, since the Console in this window is currently busy running this tutorial.) Example:
 
 In the Console, run `library(tidyverse)`.
 
@@ -117,59 +115,63 @@ question_text(NULL,
 
 Your answer should look like:
 
-````
-> library(tidyverse)
-── Attaching core tidyverse packages ──────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.2.1
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.0.4     
-── Conflicts ────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package to force all conflicts to become errors
-> 
-````
+```{r working-with-data-2-test, echo = TRUE}
+library(tidyverse)
+```
 
 Your answer never needs to match ours perfectly. Our goal is just to ensure that you are actually following the instructions.
 
-
 ### Exercise 3
 
-Data frames, also referred to as "tibbles", are spreadsheet-type data sets. Type `diamonds` in the line below.
+Data frames, also referred to as "tibbles," are spreadsheet-type data sets. 
 
-```{r working-with-data-3, exercise = TRUE}
+In the Console, run `diamonds`.
 
+CP/CR.
+
+```{r working-with-data-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
 ```
 
-```{r working-with-data-3-hint-1, eval = FALSE}
+###
+
+```{r working-with-data-3-test, echo = TRUE}
 diamonds
 ```
 
-```{r working-with-data-3-test, include = FALSE}
-diamonds
-```
-
-### 
+Whenever we show outputs like this after a question, then we are showing our answer to the previous question, even if we do not label it as such.
 
 After importing your data, it is a good idea to **tidy** it. Tidying your data means storing it in a consistent form that matches the semantics of the dataset with how it is stored. 
 
 ### Exercise 4
 
-Run `summary()` on `diamonds`. This function provides a quick statistics overview of each variable in the data set. 
+In the Console, run `summary()` on `diamonds`.
 
-```{r working-with-data-4, exercise = TRUE}
+CP/CR.
 
+```{r working-with-data-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
 ```
 
-```{r working-with-data-4-hint-1, eval = FALSE}
-summary(...)
-```
+###
 
-```{r working-with-data-4-test, include = FALSE}
+```{r working-with-data-4-test, echo = TRUE}
 summary(diamonds)
 ```
+
+###
+
+This function provides a quick statistics overview of each variable in the data set. 
 
 ### 
 
@@ -177,87 +179,110 @@ When your data is tidy, each column is a variable and each row is an observation
 
 ### Exercise 5
 
-Run `slice_sample()` on `diamonds`. This selects a random row from the data set.
+In the Console, run `slice_sample()` on `diamonds`. This selects a random row from the data set.
 
-```{r working-with-data-5, exercise = TRUE}
+CP/CR.
 
+```{r working-with-data-5}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
 ```
 
-```{r working-with-data-5-hint-1, eval = FALSE}
-slice_sample(...)
+###
+
+```{r working-with-data-5-test, echo = TRUE}
+slice_sample((diamonds))
 ```
 
-```{r working-with-data-5-test, include = FALSE}
-slice_sample(diamonds)
-```
+###
+
+Your answer will differ from this answer because of the inherent randomness in functions like `slice_sample()`.
 
 Once you have tidy data, a common next step is to **transform** it. Transformation includes narrowing in on observations of interest (like all the people in one city or all the data from the last year), creating new variables that are functions of existing variables (like computing speed from distance and time), and calculating a set of summary statistics (like counts or means). 
 
+
 ### Exercise 6
 
-Copy/paste the code above, but add the argument `n = 10` to `slice_sample()`. This will return 10 random rows from the `diamonds` data set.
+In the Console, hit the Up Arrow to retrieve the previous command. Edit it to add the argument `n = 10` to `slice_sample(diamonds)`. This will return 10 random rows from the `diamonds` data set.
 
-```{r working-with-data-6, exercise = TRUE}
+CP/CR.
 
+```{r working-with-data-6}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
 ```
 
-<button onclick = "transfer_code(this)">Copy previous code</button>
+###
 
-```{r working-with-data-6-hint-1, eval = FALSE}
-slice_sample(..., n = 10)
-```
-
-```{r working-with-data-6-test, include = FALSE}
+```{r working-with-data-6-test, echo = TRUE}
 slice_sample(diamonds, n = 10)
 ```
 
-### 
+###
 
 Together, tidying and transforming are called **wrangling** because getting your data in a form that’s natural to work with often feels like a fight! 
 
 ### Exercise 7
 
-Run `print()` on `diamonds`. This returns the same result as typing `diamonds` in the exercise block. 
+In the Console, run `print()` on `diamonds`. This returns the same result as typing `diamonds`.
 
-```{r working-with-data-7, exercise = TRUE}
+CP/CR.
 
+```{r working-with-data-7}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
 ```
 
-```{r working-with-data-7-hint-1, eval = FALSE}
-...(diamonds)
-```
+###
 
-```{r working-with-data-7-test, include = FALSE}
+```{r working-with-data-7-test, echo = TRUE}
 print(diamonds)
 ```
 
-### 
+###
 
 You can choose how many rows to display by using the `n` argument in the `print()` function, and how many columns to display by using the `width` argument.
 
 ### Exercise 8
 
-Run `print()` on `diamonds` with the argument `n = 3`. This returns the first 3 rows of the `diamonds` data set.
+In the Console, run `print()` on `diamonds` with the argument `n = 3`. This returns the first 3 rows of the `diamonds` data set.
 
-```{r working-with-data-8, exercise = TRUE}
+CP/CR.
 
+```{r working-with-data-8}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
 ```
 
-```{r working-with-data-8-hint-1, eval = FALSE}
-print(..., n = 3)
-```
+###
 
-```{r working-with-data-8-test, include = FALSE}
+```{r working-with-data-8-test, echo = TRUE}
 print(diamonds, n = 3)
 ```
 
-### 
+###
 
 The `diamonds` data set contains 53,940 rows and 10 columns. Each row represents a single diamond, and each column represents a different characteristic of that diamond. 
 
 ### Exercise 9
 
-At the Console, run `?diamonds`.
+In the Console, run `?diamonds`.
 
 This will look up the help page for the `diamonds` tibble from the **ggplot2** package, which is one of the core packages in the *[Tidyverse](https://www.tidyverse.org/)*. The help page will appear on the right-side of your Positron window, in the Secondary Activity Bar, which you might need to activate in order to see. 
 
@@ -277,17 +302,20 @@ You can find help about an entire package with `help(package = "ggplot2")`. It i
 
 ### Exercise 10
 
-Run `glimpse()` on `diamonds`. 
+In the Console, run `glimpse()` on `diamonds`.  CP/CR.
 
-```{r working-with-data-10, exercise = TRUE}
-
+```{r working-with-data-10}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
 ```
 
-```{r working-with-data-10-hint-1, eval = FALSE}
-...(diamonds)
-```
+###
 
-```{r working-with-data-10-test, include = FALSE}
+```{r working-with-data-10-test, echo = TRUE}
 glimpse(diamonds)
 ```
 
@@ -299,7 +327,13 @@ glimpse(diamonds)
 
 ### Exercise 11
 
-If you are ever stuck while coding, R has *help pages*. Let's say we want to know what the function `sqrt()` does. Open the help page for `sqrt()` by typing `?sqrt` in the Console. Copy/paste the Description below:
+In the Console, run:
+
+```
+x <- sqrt(144)
+```
+
+CP/CR.
 
 ```{r working-with-data-11}
 question_text(NULL,
@@ -310,32 +344,17 @@ question_text(NULL,
 	rows = 5)
 ```
 
-### 
+###
 
-<!-- DK: -->
-
-### Exercise 12
-
-In the Console, run:
-
-````
+```{r working-with-data-11-test, echo = TRUE}
 x <- sqrt(144)
-````
-
-CP/CR.
-
-```{r working-with-data-12}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
 ```
 
 ###
 
 The symbol `<-` is the assignment operator. In this case, we are *assigning* the value of `sqrt(144)` to the variable `x`.
+
+<!-- DK: Look at x in the other pane. Run x to show it was saved.c -->
 
 
 ## Creating a graphic

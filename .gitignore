@@ -11,6 +11,9 @@ tests/testthat/fixtures/tutorial_examples/*html
 inst/tutorials/*/*html
 inst/tutorials/*/rsconnect
 
+tutorial_files
+tutorial.html
+
 # The simple name of a file ignores that file wherever it might appear.
 
 .DS_Store

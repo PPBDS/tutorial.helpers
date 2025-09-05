@@ -1,10 +1,12 @@
 ## Before Next Release
 
+In the old days, putting a cursor any place in a pipe, and then hitting `Cmd/Ctrl + Enter` caused the entire pipe to be executed. Now, it just executes the one line, which is never what we want. Figure this out.
+
 test and discuss all new functions.
 
-clean up set_positron_settings and related Code
-
 clean up Introduction to R tutorial
+
+clean up Getting Started tutorial
 
 update make_exercises
 
@@ -18,6 +20,7 @@ update make_exercises
 
 * The key material/images from https://ppbds.github.io/primer/getting-started-with-positron.html#the-terminal needs to be in the tutorial.
 
+* Also the cool image from the Positron Docs.
 
 
 
@@ -59,8 +62,6 @@ On using Air for formatting: https://github.com/r-lib/usethis/pull/2109
 
 
 * Use: "path <- testthat::test_path("fixtures", "answers_html")" Instead of: "path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")" in the top documentation part of some R files. 
-
-* Why does return_tutorial_paths("tutorial.helpers") fail when run inside the tutorial.helpers project but work outside of it? I suspect that this is connected to the hoops that jump through (successfully?) in test-return_tutorial_paths.R.
 
 * Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version? 
 
