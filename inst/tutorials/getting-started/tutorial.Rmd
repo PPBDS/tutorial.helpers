@@ -26,9 +26,10 @@ options(tutorial.exercise.timelimit = 60,
 ```
 
 <!-- Install Git -->
-<!-- Creeate a project -->
-<!-- Change settings to specify Git Bash and the default location of your projects. -->
 <!-- Explain `return/enter`. Change to `Enter`. -->
+<!-- Change settings to specify Git Bash and the default location of your projects. See 01-code, especially all the fs.home() stuff.  -->
+<!-- Creeate a project -->
+<!-- Find the Positron window naming page from the Posit docs. -->
 
 ## Introduction
 ### 
