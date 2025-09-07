@@ -1,7 +1,5 @@
 ^renv$
 ^renv\.lock$
-^tutorial\.helpers\.Rproj$
-^\.Rproj\.user$
 ^LICENSE\.md$
 ^_pkgdown\.yml$
 ^doc$
@@ -20,3 +18,4 @@
 ^Meta$
 ^vignettes/.quarto$
 ^extension$
+/tutorial_files/
