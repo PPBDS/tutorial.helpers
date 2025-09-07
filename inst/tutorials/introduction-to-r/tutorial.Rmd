@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: Introduction to R
 author: David Kane
 tutorial:
   id: introduction-to-r

@@ -23,12 +23,27 @@ update make_exercises
 * Also the cool image from the Positron Docs.
 
 
+# Satvika
 
+Read: https://ppbds.github.io/primer/getting-started.html (think about what installation instructions we give; think about Mac versus Windows).
 
+Complete latest version of Getting Started. Send me the html answers. Submit a PR with fixes and comments.
+
+Start working on Introduction to Python tutorial. 
 
 
 
 ## Later Projects
+
+### check_current_tutorial
+
+Handles this case very poorly. 
+
+```
+tutorial.helpers::set_positron_settings()
+````
+
+Note the mismatched backticks. This may happen for other combinations besides this one. The problem, obviously, is that check_* has trouble in this case, but provides no warning. Need to add a warning for two cases: unmatched backtick combinations that are never resolved or backtick environments that include more than 20 lines of code, which should rarely happen. Probably the former, with the warning noting the lines around which the unmatching starts. Maybe there is a verbose option to which reports all matched sections.
 
 ### set_positron_settings issues
 
