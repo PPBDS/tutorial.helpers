@@ -2,11 +2,7 @@
 
 Make a decision about the welcome screen, and adjust set_positron_settings() accordingly. And then adjust images.
 
-test and discuss all new functions.
-
 clean up Introduction to R tutorial
-
-clean up Getting Started tutorial
 
 update make_exercises
 
@@ -71,6 +67,7 @@ On using Air for formatting: https://github.com/r-lib/usethis/pull/2109
 
 * Need better documentation of using submissions_* functions. They are the ones that people might use.
 
+* Would be cool if, instead of showing “Run Code”, we could show, in the tutorials, the actual blue Run Code button, just as it appears. 
 
 * Use: "path <- testthat::test_path("fixtures", "answers_html")" Instead of: "path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")" in the top documentation part of some R files. 
 
@@ -78,6 +75,8 @@ On using Air for formatting: https://github.com/r-lib/usethis/pull/2109
 
 * Want to change the color of the OK box so that it is green when students enter
 their email or other text. This seem relevant:  https://stackoverflow.com/questions/33620133/change-the-color-of-action-button-in-shiny/35871042.
+
+* Add a touch of Python to Getting Started?
 
 ### make_exercises
 

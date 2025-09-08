@@ -31,22 +31,18 @@ options(tutorial.exercise.timelimit = 60,
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- DK: Once you are done, delete the related questions from the 01-code tutorial. -->
 
-<!-- DK: Might need to add a touch of Python at some point. -->
-
-<!-- Change settings to specify the default location of your projects. See 01-code, especially all the fs.home() stuff.  -->
-<!-- Create a project? -->
 <!-- Find the Positron window naming page from the Posit docs. Use that image. -->
+
 <!-- Update all images. Should the images, especially the first one, look like those after you run set_positron_settings() or not?  -->
 
-<!-- DK: Revist the initial instructions once you can use Positron in the cloud. Perhaps add a new vignette discussing Posit Workbench. -->
+<!-- Revist the initial instructions once you can use Positron in the cloud. Perhaps add a new vignette discussing Posit Workbench. -->
 
-<!-- DK: Could drop Start Over discussion since students never (?) use it. -->
+<!-- Could drop Start Over discussion since students never (?) use it. -->
 
-<!-- DK: Only use second Positron window as opposed to starting a second R sessions? -->
+<!-- Only use new Positron window as opposed to starting a second R sessions? Who ever uses the latter? -->
 
-<!-- Would be cool if, instead of showing “Run Code”, we could show, in the tutorial, the actual blue Run Code button, just as it appears. Same with the "Hint" button. -->
+
 
 ## Introduction
 ### 

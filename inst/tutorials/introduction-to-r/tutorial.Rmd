@@ -21,16 +21,6 @@ knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(out.width = '90%')
 options(tutorial.exercise.timelimit = 60, 
         tutorial.storage = "local") 
-
-scat_p <- ggplot(data = mpg, 
-                 mapping = aes(x = displ, 
-                               y = hwy)) +
-  geom_point(alpha = 0.5, color = "steelblue") +
-  labs(title = "Measurements for Engine Displacement and Highway Fuel Efficiency of Select Car Models",
-       subtitle = "Cars with greater engineer displacement are less fuel efficient",
-        x = "Engine Displacement (L)",
-        y = "Highway Efficiency (mpg)", 
-       caption = "EPA (2008)")
 ```
 
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
@@ -39,12 +29,12 @@ scat_p <- ggplot(data = mpg,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- Make this tutorial better. Make sure there are no mistakes. Make sure it is clear.  Do some reminding of stuff from Getting Started from tutorial.helpers. -->
+<!-- Make this tutorial better. The plot is fairly ugly and would benefit from either jitttering or an alpha call. -->
 
 ## Introduction
 ### 
 
-This tutorial will introduce you to the R language. Our approach is inspired by [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. You will learn how to work with data sets using the **[tidyverse](https://tidyverse.tidyverse.org/)** package. You will learn how to direct the result of one function to another using the pipe -- `|>` --- and how to make a plot using the `ggplot()` function.
+This tutorial introduces you to the R language. Our approach is inspired by [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. You will learn how to work with data sets using the **[tidyverse](https://tidyverse.tidyverse.org/)** package. You will learn how to direct the result of one function to another using the pipe -- `|>` --- and how to make a plot using the `ggplot()` function.
 
 ### 
 
@@ -52,7 +42,7 @@ This tutorial assumes that you have already completed the "Getting Started" tuto
 
 ### 
 
-Start a new window with `File -> New Window`. This new window is the location in which you will do all the work for the tutorial. The current window, the one in which you are reading these words, is just used to run this tutorial. 
+From the main Positron menu, start a new window with `File -> New Window`. This new window is the location in which you will do all the work for the tutorial. The current window, the one in which you are reading these words, is just used to run this tutorial. 
 
 ## Working with data
 ### 
@@ -60,18 +50,6 @@ Start a new window with `File -> New Window`. This new window is the location in
 Learn how to explore a data set using functions like `summary()`, `glimpse()`, and `slice_sample()`. 
 
 ### Exercise 1
-
-The steps of a typical data science project:
-
-```{r}
-knitr::include_graphics("images/base.png")
-```
-
-### 
-
-The first step in a data science project is to import your data into R. This typically means that you take data stored in a file, database, or web application programming interface (API) and load it into a data frame in R. If you can’t get your data into R, you can’t do data science on it!
-
-###
 
 Before you start doing data science, you must load the packages you are going to use. Use the function `library()` to load the **tidyverse** package.
 
@@ -95,11 +73,11 @@ The check mark which has appeared next to "Exercise 1" above indicates that you 
 
 ### Exercise 2
 
-In this tutorial, you will sometimes enter code into the exercise blocks, as you did above. But we will generally ask you to run code in the Console. (You will do this in the other Positron window, since the Console in this window is currently busy running this tutorial.) Example:
+In this tutorial, you will sometimes enter code into the exercise blocks, as you did above. But we will also ask you to run code in the Console. (You will do this in the other Positron window, since the Console in this window is currently busy running this tutorial.) Example:
 
 In the Console, run `library(tidyverse)`.
 
-With Console questions, we will usually ask you to **c**opy/**p**aste the **c**ommand/**r**esponse into an answer block, like the one below. We usually shorten those instructions as CP/CR. Do that now.
+With Console questions, we will usually ask you to **C**opy/**P**aste the **C**ommand/**R**esponse into an answer block, like the one below. We usually shorten those instructions as CP/CR. Do that now.
 
 
 ```{r working-with-data-2}
@@ -146,7 +124,6 @@ diamonds
 
 Whenever we show outputs like this after a question, then we are showing our answer to the previous question, even if we do not label it as such.
 
-After importing your data, it is a good idea to **tidy** it. Tidying your data means storing it in a consistent form that matches the semantics of the dataset with how it is stored. 
 
 ### Exercise 4
 
@@ -173,10 +150,6 @@ summary(diamonds)
 
 This function provides a quick statistics overview of each variable in the data set. 
 
-### 
-
-When your data is tidy, each column is a variable and each row is an observation. Tidy data is important because the consistent structure lets you focus your efforts on answering questions about the data, not fighting to get the data into the right form for different functions. 
-
 ### Exercise 5
 
 In the Console, run `slice_sample()` on `diamonds`. This selects a random row from the data set.
@@ -202,9 +175,6 @@ slice_sample((diamonds))
 
 Your answer will differ from this answer because of the inherent randomness in functions like `slice_sample()`.
 
-Once you have tidy data, a common next step is to **transform** it. Transformation includes narrowing in on observations of interest (like all the people in one city or all the data from the last year), creating new variables that are functions of existing variables (like computing speed from distance and time), and calculating a set of summary statistics (like counts or means). 
-
-
 ### Exercise 6
 
 In the Console, hit the Up Arrow to retrieve the previous command. Edit it to add the argument `n = 10` to `slice_sample(diamonds)`. This will return 10 random rows from the `diamonds` data set.
@@ -228,7 +198,8 @@ slice_sample(diamonds, n = 10)
 
 ###
 
-Together, tidying and transforming are called **wrangling** because getting your data in a form that’s natural to work with often feels like a fight! 
+Editing code directly in the Console quickly becomes annoying. See the **[positron.tutorials](https://ppbds.github.io/positron.tutorials/)** package for tutorials about using Positron to write and organize your code.
+ 
 
 ### Exercise 7
 
@@ -323,7 +294,7 @@ glimpse(diamonds)
 
 `glimpse()` displays columns running down the page and the data running across across. Note how the "type" of each variable is listed next to the variable name. For example, `price` is listed as `<int>`, meaning that it is an integer variable. To learn more about the `glimpse()` function, run `?glimpse`.
 
-`view()` is another useful function, but, just because it is interactive, we should not use it within a tutorial. 
+`view()` is another useful function, but, because it is interactive, we should not use it within a tutorial. 
 
 ### Exercise 11
 
@@ -354,12 +325,91 @@ x <- sqrt(144)
 
 The symbol `<-` is the assignment operator. In this case, we are *assigning* the value of `sqrt(144)` to the variable `x`.
 
-<!-- DK: Look at x in the other pane. Run x to show it was saved.c -->
+<!-- DK: Look at x in the other pane. Run x to show it was saved. -->
+
+### Exercise 12
+
+In the Console, run `sqrt(144)`.
+
+CP/CR.
+
+```{r working-with-data-12}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```{r working-with-data-12-test, echo = TRUE}
+sqrt(144)
+```
+
+###
+
+The square root function is one of many built-in functions in R. Most return their result, which R then, by default, prints out.
+
+### Exercise 13
+
+In the Console, run `x <- sqrt(144)`.
+
+CP/CR.
+
+```{r working-with-data-13}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```{r working-with-data-13-test, echo = TRUE}
+x <- sqrt(144)
+```
+
+###
+
+The symbol `<-` is the assignment operator. In this case, we are *assigning* the value of `sqrt(144)` to the variable `x`. Nothing is printed out because of that assignment.
+
+Also, you can see `x` in the "Variables" tab under the "Session" pane in the Secondary Activity Bar on the right-hand side of the Positron window.
+
+
+### Exercise 14
+
+In the Console, run `x`.
+
+CP/CR.
+
+```{r working-with-data-14}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```{r working-with-data-14-test, echo = TRUE}
+x
+```
+
+###
+
+Now that `x` has been defined in the Console, it is available for your use. Above, we just print it out. But we could also use it in other calculations, i.e., `x + 5`.
+
 
 ## Pipes and plots
 ### 
 
-Although the *Tidyverse* includes hundreds of commands, the most important are `filter()`, `select()`, `arrange()`, `mutate()`, and `summarize()`. Whenever you face a new problem, try to think about which one of these commands might be a good way to start.
+Although the *Tidyverse* includes hundreds of commands for data manipulation, the most important are `filter()`, `select()`, `arrange()`, `mutate()`, and `summarize()`. Whenever you face a new problem, try to think about which one of these commands might be a good way to start.
 
 ### Exercise 1
 
@@ -436,9 +486,11 @@ gss_cat |>
 
 Note the number of rows in the tibble after `drop_na()`. Since `drop_na()` removes rows with missing values, the number of rows in the tibble will be less than the original number of rows.
 
+We could achieve the same result by running `drop_na(gss_cat)`. The symbol `|>` just "pipes" `gss_cat` into `drop_na()` as its first argument.
+
 ### Exercise 4
 
-Pipe `gss_cat` to `filter()`.  Within `filter()`, use the argument `age > 88`. 
+Pipe `gss_cat` to `filter()`.  Within `filter()`, use the argument `year == 2014`. 
 
 ```{r pipes-and-plots-4, exercise = TRUE}
 
@@ -446,24 +498,23 @@ Pipe `gss_cat` to `filter()`.  Within `filter()`, use the argument `age > 88`.
 
 ```{r pipes-and-plots-4-hint-1, eval = FALSE}
 gss_cat |> 
-  ...(age > 88)
+  ...(year == 2014)
 ```
 
 ```{r pipes-and-plots-4-test, include = FALSE}
 gss_cat |> 
-  filter(age > 88)
+  filter(year == 2014)
 ```
 
 ### 
 
 This workflow --- in which we pipe a tibble to a function, which then outputs another tibble, which we can then pipe to another function, and so on --- is very common in R programming.
 
-The resulting tibble has the same number of columns --- `filter()` only affects the rows --- as `gss_cat` but many fewer rows, because there are only 150 people in the data older than 88.
+The resulting tibble has the same number of columns as `gss_cat` because `filter()` only affects the rows. But there are many fewer rows.
 
 ### Exercise 5
 
 Continue the code and pipe with `select()`, using the argument `age, marital, race, relig, tvhours`. Note that you do not need to retype the code from the last exercise. You can just click the "Copy Code" button.
-
 
 ```{r pipes-and-plots-5, exercise = TRUE}
 
@@ -478,7 +529,7 @@ Continue the code and pipe with `select()`, using the argument `age, marital, ra
 
 ```{r pipes-and-plots-5-test, include = FALSE}
 gss_cat |> 
-  filter(age > 88) |> 
+  filter(year == 2014) |> 
   select(age, marital, race, relig, tvhours)
 ```
 
@@ -503,7 +554,7 @@ Copy previous code. Continue the pipe with `summary()`
 
 ```{r pipes-and-plots-6-test, include = FALSE}
 gss_cat |> 
-  filter(age > 88) |> 
+  filter(year == 2014) |> 
   select(age, marital, race, relig, tvhours) |>
   summary()
 ```
@@ -529,14 +580,14 @@ Copy previous code. Replace the `summary()` with `drop_na()`.
 
 ```{r pipes-and-plots-7-test, include = FALSE}
 gss_cat |> 
-  filter(age > 88) |> 
+  filter(year == 2014) |> 
   select(age, marital, race, relig, tvhours) |>
   drop_na()
 ```
 
 ### 
 
-Note that the number of rows has decreased as we removed rows with missing values.
+The number of rows has decreased because we removed rows with missing values. `drop_na()` remove all rows which have a missing value for any of the variables. If we wanted yo just remove the rows which have are missing `tvhours`, we would use `drop_na(tvhours)`.
 
 ### Exercise 8
 
@@ -555,7 +606,7 @@ Continue the pipe with `arrange()`, using `tvhours` as the argument.
 
 ```{r pipes-and-plots-8-test, include = FALSE}
 gss_cat |> 
-  filter(age > 88) |> 
+  filter(year == 2014) |> 
   select(age, marital, race, relig, tvhours) |>
   drop_na() |>
   arrange(tvhours)
@@ -582,7 +633,7 @@ Copy the previous code. Put `desc()` around `tvhours` to sort in descending orde
 
 ```{r pipes-and-plots-9-test, include = FALSE}
 gss_cat |> 
-  filter(age > 88) |> 
+  filter(year == 2014) |> 
   select(age, marital, race, relig, tvhours) |>
   drop_na() |>
   arrange(desc(tvhours))
@@ -590,11 +641,11 @@ gss_cat |>
 
 ### 
 
-Got to respect someone who watches TV 18 hours a day!
+Got to respect someone who watches TV 24 hours a day!
 
 ### Exercise 10
 
-Let's make a plot. Copy the previous code, and pipe to `ggplot()`. Set `aes(x = tvhours, y = age)`.
+Let's make a plot. Copy the previous code, and pipe to `ggplot()`. Set `aes(x = age, y = tvhours)`.
 
 ```{r pipes-and-plots-10, exercise = TRUE}
 
@@ -609,20 +660,20 @@ Let's make a plot. Copy the previous code, and pipe to `ggplot()`. Set `aes(x = 
 
 ```{r pipes-and-plots-10-test, include = FALSE}
 gss_cat |> 
-  filter(age > 88) |> 
+  filter(year == 2014) |> 
   select(age, marital, race, relig, tvhours) |>
   drop_na() |>
   arrange(desc(tvhours)) |>
-  ggplot(aes(x = tvhours, y = age))
+  ggplot(aes(x = age, y = tvhours))
 ```
 
 ### 
 
-Note that this will return a plain graph as we have not mapped any data to the graph yet.
+This will return a plain graph as we have not mapped any data to specific "aesthetics" yet.
 
 ### Exercise 11
 
-Add another layer with `geom_point()` using the `+` sign. The big difference with plotting code in the **ggplot2** package is that we use `+`, not `->`, to connect different commands together. This difference comes from the fact that **ggplot2** was written 10+ years before the pipe was invented.
+Add another layer with `geom_point()` using the `+` sign. Plotting code in the **ggplot2** package uses `+`, not `->`, to connect different commands together. This difference comes from the fact that **ggplot2** was written 10+ years before the pipe was invented.
 
 ```{r pipes-and-plots-11, exercise = TRUE}
 
@@ -637,12 +688,12 @@ Add another layer with `geom_point()` using the `+` sign. The big difference wit
 
 ```{r pipes-and-plots-11-test, include = FALSE}
 gss_cat |> 
-  filter(age > 88) |> 
+  filter(year == 2014) |> 
   select(age, marital, race, relig, tvhours) |>
   drop_na() |>
   arrange(desc(tvhours)) |>
-  ggplot(aes(x = tvhours, y = age)) + 
-  geom_point()
+  ggplot(aes(x = age, y = tvhours)) + 
+    geom_point()
 ```
 
 ### 
@@ -651,7 +702,23 @@ This is a scatterplot of `tvhours` versus `age`. The x-axis is the number of hou
 
 ### Exercise 12
 
-Let's rescale the `y` axes. Add `scale_y_continuous(breaks = c(89), limits = c(89, 89))` to the code. 
+Finally, add a title, subtitle, labels for x and y axes using `labs()`. The subtitle should be the one sentence of information about the graph with which you would hope a reader walks away. What is the most important fact demonstrated in the graphic? 
+
+Remember this is what your graph should look like.
+
+```{r}
+gss_cat |> 
+  filter(year == 2014) |> 
+  select(age, marital, race, relig, tvhours) |>
+  drop_na() |>
+  arrange(desc(tvhours)) |>
+  ggplot(aes(x = age, y = tvhours)) + 
+  geom_point() + 
+  labs(title = "TV Hours Watched by Age", 
+       subtitle = "Got to respect someone who watches TV 24 hours a day!", 
+       x = "Age", 
+       y = "TV Hours")
+```
 
 ```{r pipes-and-plots-12, exercise = TRUE}
 
@@ -660,52 +727,6 @@ Let's rescale the `y` axes. Add `scale_y_continuous(breaks = c(89), limits = c(8
 <button onclick = "transfer_code(this)">Copy previous code</button>
 
 ```{r pipes-and-plots-12-hint-1, eval = FALSE}
-
-```
-
-```{r pipes-and-plots-12-test, include = FALSE}
-gss_cat |> 
-  filter(age > 88) |> 
-  select(age, marital, race, relig, tvhours) |>
-  drop_na() |>
-  arrange(desc(tvhours)) |>
-  ggplot(aes(x = tvhours, y = age)) + 
-  geom_point() + 
-  scale_y_continuous(breaks = c(89), limits = c(89, 89))
-```
-
-### 
-
-By looking at the graph, we can see that most people watch TV for less than 10 hours a day. However, there is one person who watches TV for 18 hours a day.
-
-### Exercise 13
-
-Finally, add a title, subtitle, labels for x and y axes using `labs()`. The subtitle should be the one sentence of information about the graph with which you would hope a reader walks away. What is the most important fact demonstrated in the graphic? 
-
-Remember this is what your graph should look like.
-
-```{r}
-gss_cat |> 
-  filter(age > 88) |> 
-  select(age, marital, race, relig, tvhours) |>
-  drop_na() |>
-  arrange(desc(tvhours)) |>
-  ggplot(aes(x = tvhours, y = age)) + 
-  geom_point() + 
-  scale_y_continuous(breaks = c(89), limits = c(89, 89)) +
-  labs(title = "TV Hours Watched by Age", 
-       subtitle = "Got to respect someone who watches TV 18 hours a day!", 
-       x = "TV Hours", 
-       y = "Age")
-```
-
-```{r pipes-and-plots-13, exercise = TRUE}
-
-```
-
-<button onclick = "transfer_code(this)">Copy previous code</button>
-
-```{r pipes-and-plots-13-hint-1, eval = FALSE}
 ... + 
   labs(title = "...", 
        subtitle = "...", 
@@ -713,19 +734,18 @@ gss_cat |>
        y = "...")
 ```
 
-```{r pipes-and-plots-13-test, include = FALSE}
+```{r pipes-and-plots-12-test, include = FALSE}
 gss_cat |> 
-  filter(age > 88) |> 
+  filter(year == 2014) |> 
   select(age, marital, race, relig, tvhours) |>
   drop_na() |>
   arrange(desc(tvhours)) |>
-  ggplot(aes(x = tvhours, y = age)) + 
+  ggplot(aes(x = age, y = tvhours)) + 
   geom_point() + 
-  scale_y_continuous(breaks = c(89), limits = c(89, 89)) +
   labs(title = "TV Hours Watched by Age", 
-       subtitle = "Got to respect someone who watches TV 18 hours a day!", 
-       x = "TV Hours", 
-       y = "Age")
+       subtitle = "Got to respect someone who watches TV 24 hours a day!", 
+       x = "Age", 
+       y = "TV Hours")
 ```
 
 ### 
