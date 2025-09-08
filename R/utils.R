@@ -1,12 +1,12 @@
-#' Check Quarto Availability
+# R/utils.R
+#' Package build dependencies
 #' 
-#' This function ensures quarto is available if needed for rendering.
-#' @export
-ensure_quarto <- function() {
+#' This function ensures renv detects quarto as a dependency
+#' while keeping it in Suggests rather than Imports.
+#' @keywords internal
+.check_quarto <- function() {
   if (requireNamespace("quarto", quietly = TRUE)) {
-    # Minimal call to satisfy R CMD check and renv
-    invisible(quarto::quarto_version())
-  } else {
-    message("quarto is not installed. Install it with install.packages('quarto') if needed.")
+    return(TRUE)
   }
+  return(FALSE)
 }

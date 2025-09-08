@@ -1,6 +1,6 @@
 ## Before Next Release
 
-In the old days, putting a cursor any place in a pipe, and then hitting `Cmd/Ctrl + Enter` caused the entire pipe to be executed. Now, it just executes the one line, which is never what we want. Figure this out.
+Make a decision about the welcome screen, and adjust set_positron_settings() accordingly. And then adjust images.
 
 test and discuss all new functions.
 
@@ -10,15 +10,11 @@ clean up Getting Started tutorial
 
 update make_exercises
 
+Remove intro to python tutorial before release
+
 ### Tutorial
 
-* Set a projects directory in this tutorial.
-
 * Update the images now that the add a new Console button looks and behaves a little differently.
-
-* Move material about projects and other stuff from positron 01-code tutorial here.
-
-* The key material/images from https://ppbds.github.io/primer/getting-started-with-positron.html#the-terminal needs to be in the tutorial.
 
 * Also the cool image from the Positron Docs.
 

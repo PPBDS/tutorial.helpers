@@ -16,6 +16,12 @@ library(learnr)
 library(tutorial.helpers)
 library(knitr)
 
+# Needed because fs::path_home() seems to be the best thing to use to identify the core home
+# directory on Windows, and it works on the Mac as well. ?fs::path_home gives lots of details
+# and discussion.
+
+library(fs)
+
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(out.width = '90%')
 options(tutorial.exercise.timelimit = 60, 
@@ -27,9 +33,10 @@ options(tutorial.exercise.timelimit = 60,
 
 <!-- DK: Once you are done, delete the related questions from the 01-code tutorial. -->
 
+<!-- DK: Might need to add a touch of Python at some point. -->
 
 <!-- Change settings to specify the default location of your projects. See 01-code, especially all the fs.home() stuff.  -->
-<!-- Creeate a project? -->
+<!-- Create a project? -->
 <!-- Find the Positron window naming page from the Posit docs. Use that image. -->
 <!-- Update all images. Should the images, especially the first one, look like those after you run set_positron_settings() or not?  -->
 
@@ -37,14 +44,16 @@ options(tutorial.exercise.timelimit = 60,
 
 <!-- DK: Could drop Start Over discussion since students never (?) use it. -->
 
-<!-- DK: Only use second Positron window as opposed to starting new R sessions? -->
+<!-- DK: Only use second Positron window as opposed to starting a second R sessions? -->
+
+<!-- Would be cool if, instead of showing “Run Code”, we could show, in the tutorial, the actual blue Run Code button, just as it appears. Same with the "Hint" button. -->
 
 ## Introduction
 ### 
 
 This tutorial is an introduction, for students using [Positron](https://positron.posit.co/), to the general use of R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. It is meant for beginning students who have never completed a tutorial. 
 
-Most students come to this tutorial after having completed the set up steps outlined [here](https://ppbds.github.io/primer/getting-started.html#summary). If you fail to do so, some of these questions will be confusing.
+Most students come to this tutorial after having completed the set-up steps outlined [here](https://ppbds.github.io/primer/getting-started.html#summary). If you fail to do so, some of these questions will be confusing.
 
 ### 
 
@@ -120,7 +129,7 @@ include_graphics("images/positron-start-up-2.png")
 
 ### 
 
-Typing `4 + 5` and hitting `return` (if using Mac) or `enter` (if using Windows) produces the same result in the Console as it does in the exercise. To avoid having to type `return` or `enter` each time, we use the term `Enter` to specify hitting either the `return` or `enter` key, as appropriate.
+Typing `4 + 5` and hitting `return` (if using Mac) or `enter` (if using Windows) produces the same result in the Console as it does in the exercise. To avoid us having to type `return` or `enter` for each question we ask, we use the term `Enter` to specify hitting either the `return` or `enter` key, as appropriate.
 
 ###
 
@@ -186,9 +195,9 @@ Did you remember to hit the "Run Code" button above? Lots of people forget! You 
 
 <!-- DK: Seems like it should be possible to restart the R session. But the various buttons don't seem to work very well, at least when you are in a tutorial. Try this again in a month. In the meantime, this radical close-Positron approach is OK. -->
 
-Read all of the following instructions before continuing.
+Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
 
-* Quit and then restart Positron. (The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.)
+* Quit and then restart Positron.
 
 * Restart the tutorial. The most common approach is to run this command at the Console:
 
@@ -216,7 +225,7 @@ This brings up a new instance of Positron, completely independent of this one. T
 
 ###
 
-There are many ways to move between Positron windows. One approach is to hold down the Control key and hit the letter W. This is usually abbreviated as `Ctrl + w`. This pulls up a list of the open Positron windows. You then select the one you want and hit `Enter`. On the Mac, you can hold down the Command key and then hit the backtick key: `` ` ``, i.e., ``Cmd + ` ``. This "cycles through" the open Positron windows. `Alt + Tab` on Windows has a similar effect, although the cycle will include all open applications, not just Positron windows.
+There are many ways to move between Positron windows. One approach is to hold down the Control key and hit the letter "W." This is usually abbreviated as `Ctrl + w`. This pulls up a list of the open Positron windows. You then select the one you want and hit `Enter`. On the Mac, you can hold down the Command key and then hit the backtick key: `` ` ``, i.e., ``Cmd + ` ``. This "cycles through" the open Positron windows. `Alt + Tab` on Windows has a similar effect, although the cycle will include all open applications, not just Positron windows.
 
 <!-- 
 DK: Not sure on the best way to have students handle this. Right now, we report the facts above and leave it at that. But we could guide them through the creation of a shortcut key which would be the same (?) for both Mac and Windows. Maybe `workbench.action.quickSwitchWindow` is the key command, and we should set that to a specific command sequence for everyone. This would involve, I think, editing/creating the `keybindings.json` file. 
@@ -260,11 +269,13 @@ Your version of R may be more recent, but it should not be older. It is OK if yo
 
 ### 
 
-Tutorial workflow will often look like this. We tell you to run a command **in the Console**, always in your second Positron window. You run it. We then ask you to copy/paste, from the Console, both the command itself and the response returned. Because we ask you to **c**opy/**p**aste the **c**ommand/**r**esponse so often, we usually shorten this instruction to CP/CR.
+Tutorial workflow will often look like this. We tell you to run a command **in the Console**, always in your second Positron window. You run it. We then ask you to copy/paste, from the Console, both the command itself and the response returned. Because we ask you to **C**opy/**P**aste the **C**ommand/**R**esponse so often, we usually shorten this instruction to CP/CR.
 
 ### Exercise 6
 
 The Terminal tab is next to the Console tab within the Panel in the lower left portion of the Positron window. See the red oval below. Click on the word “Terminal” to access it. We use the Console tab to talk to R. We use the Terminal tab to talk directly with the computer.
+
+<!-- DK: Need new image without welcome screen. Or does our setting not really get rid of the welcome screen? -->
 
 ```{r}
 include_graphics("images/terminal-1.png")
@@ -346,6 +357,8 @@ If this works, you should be all set. If not, seek help. You need Git!
 
 ### Exercise 8
 
+<!-- DK: Figure out what Windows does and/or looks like and then clarify these instructions. -->
+
 The Console behaves almost identically regardless of the kind of computer you use. The Terminal, sadly, does not. Windows and Mac are very different. 
 
 ###
@@ -407,7 +420,7 @@ dkane@MacBookPro ~ % echo $0
 dkane@MacBookPro ~ % 
 ````
 
-This means that, in the Terminal, I am using [Z shell](https://en.wikipedia.org/wiki/Z_shell). On Windows, your answer will probably be something like `bash`, referring to the [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)), a different shell. Don't worry about the differences. 
+This means that, in the Terminal, I am using [Z shell](https://en.wikipedia.org/wiki/Z_shell). On Windows, your answer will probably be something like `bash`, referring to [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)), another UNIX-like shell. Don't worry about the differences between them. 
 
 The important thing is that, first, you now have Git installed and, second, if you are a Windows user, you now have a better shell than Powershell.
 
@@ -415,36 +428,11 @@ If this works, you should be all set. If not, seek help. You need a decent shell
 
 ### Exercise 9
 
-Now, let us try to figure out the current location of the folder in which we are in. Type this code at the Terminal `pwd`. Hit `Enter`.
-
-CP/CR.
-
-```{r exercises-9}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
-```
-
-###
-
-````
-dkane@MacBookPro ~ % pwd
-/Users/dkane
-dkane@MacBookPro ~ % 
-````
-
-The `~` indicates that I am currently located in my home directory, which is `/Users/dkane`.
-
-### Exercise 10
-
 Let us make the Terminal "sleep" by typing the command `sleep 5` at the Terminal. Hit `Enter`. The `sleep 5` command at the Terminal pauses execution for 5 seconds. 
 
 CP/CR. 
 
-```{r exercises-10}
+```{r exercises-9}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -464,13 +452,15 @@ dkane@MacBookPro ~ %
 
 We can change the duration of the sleep using this format `sleep [number]`. The number you put in is the duration (in seconds) for which the Terminal goes to sleep. 
 
-### Exercise 11
+### Exercise 10
 
-Type `sleep 60` at the Terminal. The command makes the Terminal go to sleep for 60 seconds which is a long wait. To cancel the running `sleep` command at the Terminal press `Ctrl + C` in your keyboard. When you press `Ctrl + C` while sleep is running, it immediately terminates the sleep command and returns you to the command prompt.
+Type `sleep 60` at the Terminal. The command makes the Terminal go to sleep for 60 seconds. To cancel the running `sleep` command at the Terminal press `Ctrl + C` in your keyboard. Do so now, before `sleep 60` finishes.
+
+When you press `Ctrl + C` while sleep is running, it immediately terminates the sleep command and returns you to the command prompt.
 
 CP/CR.
 
-```{r exercises-11}
+```{r exercises-10}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -491,7 +481,7 @@ dkane@MacBookPro ~ %
 
 `Ctrl + C` can stop any process from the Terminal. This is often necessary.
 
-### Exercise 12
+### Exercise 11
 
 Positron and your R installation have some default settings which are not good for new users. Run this command at the Console to change them:
 
@@ -501,7 +491,7 @@ tutorial.helpers::set_positron_settings()
 
 CP/CR.
 
-```{r exercises-12}
+```{r exercises-11}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -518,13 +508,13 @@ The output from this function will report the changes, if any, which were made. 
 
 You can generally call functions by just giving their name along with the ending parentheses, as with `set_positron_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_positron_settings()` is in the **tutorial.helpers** package, we can call it using the double colon notation: `tutorial.helpers::set_positron_settings()`, as we do above.
 
-### Exercise 13
+### Exercise 12
 
-Shortly, we will create a new "project" for you to work in. Before we do this, it might be useful to understand where you are right now.
+It is useful to understand where you are right now.
 
 In the Console, run `getwd()`. CP/CR.
 
-```{r exercises-13}
+```{r exercises-12}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -557,13 +547,13 @@ If I were on Windows, then the home directory would be something like `C:\Users\
 
 * `OneDrive`, like many cloud-backup systems, does not play particularly well with Git, the program almost everyone uses to keep track of changes in your code. **Do not put your data science projects in a folder which is backed up with OneDrive.**
 
-### Exercise 14
+### Exercise 13
 
-In the Console, run `fs::path_home()`. If this fails, then you probably need to install the **fs** package. Please do so and try again. 
+In the Console, run `fs::path_home()`. If this fails, then you probably need to install the **[fs](https://fs.r-lib.org/)** package. Please do so and try again. 
 
 CP/CR.
 
-```{r exercises-14}
+```{r exercises-13}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -591,14 +581,14 @@ C:\Users\dkane
 
 Because it is Windows, the path begins with `C:` and the slashes are backwards slashes. 
 
-The important point is that, in almost all non-pathological set ups, you will have a home directory. It is important to know where that is.
+The important point is that, in almost all non-pathological set-ups, you will have a home directory. It is important to know where that is.
 
 
-### Exercise 15
+### Exercise 14
 
 Let's take a look at the directories in your home directory. From the Console, run `list.files(fs::path_home())`. CP/CR.
 
-```{r exercises-15}
+```{r exercises-14}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -623,7 +613,7 @@ If you are on a Mac, then the `Desktop` directory is a handy location in which t
 
 **Avoid doing data science in any directory which is backed up by OneDrive or any other cloud backup service.**
 
-### Exercise 16
+### Exercise 15
 
 Whenever you start a new project, you will want to store it in a location which you can easily find. Right now, you are likely in an arbitrary location on your computer. It would be much more useful to have a location dedicated to your projects.
 
@@ -631,7 +621,7 @@ From the Console, run `file.exists(file.path(fs::path_home(), "Desktop"))`.
 
 CP/CR.
 
-```{r exercises-16}
+```{r exercises-15}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -642,6 +632,8 @@ question_text(NULL,
 
 ### 
 
+For me:
+
 ```
 > file.exists(file.path(fs::path_home(), "Desktop"))
 [1] TRUE
@@ -649,8 +641,7 @@ question_text(NULL,
 
 For almost all Mac users and many Windows users, this should return `TRUE` because there is a `Desktop` directory. For some Windows users, it will return `FALSE` because their `Desktop` directory is within a `OneDrive` directory which is automatically backed up to the cloud.
 
-
-### Exercise 17
+### Exercise 16
 
 Let's make a folder, and call it `projects`. If `file.exists(file.path(fs::path_home(), "Desktop"))` returned `TRUE`, then run this at the Console:
 
@@ -670,7 +661,7 @@ That will also create a `projects` directory, but in your home directory.
 
 CP/CR. 
 
-```{r exercises-17}
+```{r exercises-16}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -701,7 +692,7 @@ C:/Users/dkane/projects/
 
 Again, you can place your `projects` directory where you want, as long as you keep track of where it is.
 
-### Exercise 18
+### Exercise 17
 
 It is handy for Positron to know where your `projects` directory is so that it can offer that directory as a default when you start a new project, as you will in the next section. To do so, from the Console, run this command after replacing "PUT YOUR PROJECT PATH HERE" with your project path.
 
@@ -728,7 +719,7 @@ But you should not run either of those! Those only work for me. You need to run 
 
 CP/CR.
 
-```{r exercises-18}
+```{r exercises-17}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -739,59 +730,15 @@ question_text(NULL,
 
 ###
 
-You can examine the `settings.json` file in which these settings are recorded. Ask AI where this file is located on your computer and how to access it.
-
-### Exercise 19
-
-From the Terminal, run this command:
-
-````
-cat ~/AppData/Roaming/Positron/User/settings.json 2>/dev/null || cat ~/Library/Application\ Support/Positron/User/settings.json 2>/dev/null || echo "Settings file not found"
-````
-
-CP/CR.
-
-```{r exercises-19}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
-```
-
-###
-
-This command is experimental and might not work. No worries if so. But, for me on a Mac, I see:
-
-````
-dkane@macbook positron.tutorials % cat ~/AppData/Roaming/Positron/User/settings.json 2>/dev/null || cat ~/Library/Application\ Support/Positron/User/settings.json 2>/dev/null || echo "Settings file not found"
-{
-  "files.dialog.defaultPath": "/Users/dkane/Desktop/projects",
-  "terminal.integrated.defaultProfile.windows": "Git Bash"
-}
-dkane@macbook positron.tutorials % 
-````
-
-Which is what I expect. I have two settings, the first is what we just created. The second, which does not effect me since I use the Mac and not Windows, was created when I went through "[Getting Started with Positron](https://ppbds.github.io/primer/getting-started-with-positron.html)."
-
-If you are a Windows user who does not see the second setting, please run this command from the Console:
-
-````
-tutorial.helpers::set_positron_settings(positron_settings = 
-   list("terminal.integrated.defaultProfile.windows" = "Git Bash"))
-````
-
-You want "Git Bash" to be the default value for "terminal.integrated.defaultProfile.windows".
-
-
-### Exercise 20
+Look at the output from `set_positron_settings()` to confirm that this worked. Don't worry if it did not.
+ 
+### Exercise 18
 
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are just copies of the R commands and their results. Other times, we will ask you to write one or more sentences of prose. 
 
 Copy and paste everything from the Exercise header above through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
-```{r exercises-20}
+```{r exercises-18}
 question_text(NULL,
     message = "We will sometimes provide an answer to written questions, as we do here. Other times, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",          
     answer(NULL, 
@@ -801,7 +748,7 @@ question_text(NULL,
     rows = 6)
 ```
 
-### Exercise 21
+### Exercise 19
 
 `show_file()` is a commonly-used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file which you have edited. 
 
@@ -813,7 +760,7 @@ tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 
 CP/CR.
 
-```{r exercises-21}
+```{r exercises-19}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -822,7 +769,7 @@ question_text(NULL,
 	rows = 10)
 ```
 
-```{r exercises-21-test, include = FALSE}
+```{r exercises-19-test, include = FALSE}
 tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 ```
 
@@ -846,17 +793,17 @@ Your answer should look something like this:
 
 For now, don't worry about what `R.home()` and `file.path()` are doing, although you can read about them by running `?R.home` and `?file.path` at the Console. Those details are less important than seeing the intended usage of `show_file()`. 
 
-### Exercise 22
+### Exercise 20
 
-We frequently ask that you `copy` content from the HTML. Don't worry if what you copy appears messy or has lost its formatting - that's perfectly fine. Our main concern is ensuring that your HTML contains roughly the correct information it's supposed to have.
+We frequently ask that you `copy` content from an HTML file like a webpage. Don't worry if what you copy appears messy or has lost its formatting - that's perfectly fine. Our main concern is ensuring that your HTML contains roughly the correct information it's supposed to have.
 
 ###
 
-Go to [the homepage](https://ppbds.github.io/tutorial.helpers/) of the **tutorials.package** and `copy` everything in the browser window from 'tutorial.helpers' in the upper left corner through the end of `About this package`.
+Go to [the homepage](https://ppbds.github.io/tutorial.helpers/) of the **tutorials.package** and `copy` everything in the browser window from 'tutorial.helpers' in the upper left corner through the end of the `About this package` section.
 
 CP/CR.
 
-```{r exercises-22}
+```{r exercises-20}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -879,7 +826,7 @@ About this package
 tutorial.helpers provides functions and RStudio Addins to help you write R tutorials, especially if you follow my advice about the best way to do so. This approach is currently used in several packages, including r4ds.tutorials and positron.tutorials.
 ````
 
-Your answer may appear differently and it's totally fine. 
+Again, your answer never needs to match our exactly. 
 
 ## Your answers
 ### 
