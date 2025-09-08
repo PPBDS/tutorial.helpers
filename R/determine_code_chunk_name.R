@@ -40,7 +40,7 @@ determine_code_chunk_name <- function(file_path = NULL){
   for (l in cut_content){
     # Find the latest section
 
-    if (stringr::str_detect(l, "^## ")){
+    if (grepl("^## ", l)){
 
       # Remove the pattern "{#...}" and non-alphanumeric characters except
       # spaces and slashes

@@ -31,17 +31,17 @@ determine_exercise_number <- function(file_path = NULL){
 
     # Find the latest exercise and make sure we have not already set the exercise number
 
-    if (stringr::str_detect(l, "### Exercise") & !stringr::str_detect(l, "str_detect")){
+    if (grepl("### Exercise", l) & !grepl("str_detect", l)){
 
       # Set the exercise number to 1 + the latest exercise number
 
-      exercise_number <- strtoi(readr::parse_integer(gsub("[^0-9]", "", l)) + 1)
+      exercise_number <- as.integer(gsub("[^0-9]", "", l)) + 1
       return(exercise_number)
     }
 
     # Find the latest section
 
-    if (stringr::str_detect(l, "^## ")){
+    if (grepl("^## ", l)){
 
       # After finding a section, stop looping immediately
 
