@@ -31,18 +31,11 @@ options(tutorial.exercise.timelimit = 60,
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
 
-
-<!-- Find the Positron window naming page from the Posit docs. Use that image. -->
-
-<!-- Update all images. Should the images, especially the first one, look like those after you run set_positron_settings() or not?  -->
+<!-- Find the Positron window naming page from the Posit docs. Use that image: positron-interface.jpeg  -->
 
 <!-- Revist the initial instructions once you can use Positron in the cloud. Perhaps add a new vignette discussing Posit Workbench. -->
 
-<!-- Could drop Start Over discussion since students never (?) use it. -->
-
-<!-- Only use new Positron window as opposed to starting a second R sessions? Who ever uses the latter? -->
-
-
+<!-- Get a Windows machine and show Windows versions of all images. -->
 
 ## Introduction
 ### 
@@ -88,16 +81,6 @@ If you are completing this tutorial as part of a class, you should use the same 
 ### 
 
 Each tutorial includes exercises for you to complete. For non-coding questions, you write your answer and then hit the "Submit Answer" button, as you did above for your name and email address. 
-
-### 
-
-Clicking **"Start Over"** --- look for small letters at the bottom of the left-hand side menu --- deletes all your work and allows you to begin the entire tutorial again. 
-
-If you are working on your tutorial in the Viewer in the Secondary Side Bar, the screen might not be wide enough to show the left-hand side menu. If so, just click on the name of the tutorial. This brings up the section menu of the tutorial with "Start Over" on the bottom.
-
-```{r}
-include_graphics("images/start-over.png")
-```
 
 ### Exercise 1
 
@@ -305,9 +288,7 @@ Either means that Git is not installed on your computer.
 
 ### Exercise 7
 
-If you got an error in the previous question, follow [these instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install Git, if it was not installed automatically. If asked, you should allow "Git BASH" to be installed. This is a much better shell than the Powershell which comes with Windows.
-
-<!-- DK: Git Bash or Git BASH? -->
+If you got an error in the previous question, follow [these instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install Git, if it was not installed automatically. If asked, you should allow "Git BASH" to be installed. You will sometimes see "BASH" or "Bash" or "bash," but all refer to the same shell, a program which is much better than the Powershell which comes with Windows.
 
 Next, quit Positron using the menu commands: `Positron -> Quit Positron`. This is the safest way to ensure that Positron "discovers" your new Git installation.
 
@@ -362,7 +343,7 @@ See the red arrow above.
 
 ###
 
-If you are using Windows, you should see an option for “Git Bash” (or maybe just “bash”). I don't, because I am not using Windows. But it doesn't matter, because I already have a Unix-like shell.
+If you are using Windows, you should see an option for “Git Bash” (or maybe just “bash”). I don't, because I am not using Windows. But it doesn't matter, because I already have a Unix-like shell, `zsh`
 
 ###
 
@@ -382,7 +363,7 @@ Click the `+` button (see red arrow below) to start a second Terminal and see if
 include_graphics("images/terminal-4.png")
 ```
 
-The red rectangle highlights that we are now running two Terminals, which we can switch back-and-forth between. In fact, we can have multiple Terminals and multiple Consoles in one Positron window just by using the `+` button. Instead of using a second Positron window, some people prefer this approach.
+The red rectangle highlights that we are now running two Terminals, which we can switch back-and-forth between. In fact, we can have multiple Terminals and multiple Consoles in one Positron window just by using the `+` button. Instead of using a second Positron window to have an open Console for use while working on a tutorial, some people prefer this approach.
 
 ###
 
@@ -443,7 +424,7 @@ We can change the duration of the sleep using this format: `sleep [number]`. The
 
 ### Exercise 10
 
-Type `sleep 60` at the Terminal. The command makes the Terminal go to sleep for 60 seconds. To cancel the running `sleep` command at the Terminal press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
+Run `sleep 60` at the Terminal. (Again, "run" means to type the command and then hit the `Enter` key.) The command makes the Terminal go to sleep for 60 seconds. To cancel the running `sleep` command at the Terminal press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
 
 When you press `Ctrl + C` while sleep is running, it immediately terminates the sleep command and returns you to the command prompt.
 
@@ -465,8 +446,6 @@ dkane@MacBookPro ~ % sleep 60
 ^C
 dkane@MacBookPro ~ % 
 ````
-
-###
 
 `Ctrl + C` can stop any process from the Terminal. This is often necessary.
 
@@ -675,15 +654,17 @@ For example, this is a reasonable location for R projects if you are using a Mac
 
 And if you are using Windows . . .
 
-````
+```
 C:/Users/dkane/projects/
-````
+```
 
 Again, you can place your `projects` directory where you want, as long as you keep track of where it is.
 
 ### Exercise 17
 
-It is handy for Positron to know where your `projects` directory is so that it can offer that directory as a default when you start a new project, as you will in the next section. To do so, from the Console, run this command after replacing "PUT YOUR PROJECT PATH HERE" with your project path.
+<!-- DK: Is this necessary, or will Positron by default use the last directory you did stuff from, which will be `projects`, when it gives you a choice. So, changing the default behavior is not necessary. -->
+
+It is handy for Positron to know where your `projects` directory is so that it can offer that directory as a default when you start a new project. To do so, from the Console, run this command after replacing "PUT YOUR PROJECT PATH HERE" with your project path.
 
 ````
 tutorial.helpers::set_positron_settings(positron_settings = 
@@ -697,11 +678,11 @@ tutorial.helpers::set_positron_settings(positron_settings =
    list("files.dialog.defaultPath" = "/Users/dkane/Desktop/projects"))
 ````
 
-If you are using Windows, you should have double backslashes. Something like:
+If I were using Windows:
 
 ````
 tutorial.helpers::set_positron_settings(positron_settings = 
-   list("files.dialog.defaultPath" = "C://Users//dkane//projects"))
+   list("files.dialog.defaultPath" = "C:/Users/dkane/projects"))
 ````
 
 But you should not run either of those! Those only work for me. You need to run the command with your `projects` path.
@@ -758,27 +739,11 @@ question_text(NULL,
 	rows = 10)
 ```
 
+###
+
 ```{r exercises-19-test, include = FALSE}
 tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 ```
-
-### 
-
-Your answer should look something like this:
-
-````
-> tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
-		    GNU GENERAL PUBLIC LICENSE
-		       Version 2, June 1991
-
- Copyright (C) 1989, 1991 Free Software Foundation, Inc.
-                       51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- Everyone is permitted to copy and distribute verbatim copies
- of this license document, but changing it is not allowed.
-> 
-````
-
-### 
 
 For now, don't worry about what `R.home()` and `file.path()` are doing, although you can read about them by running `?R.home` and `?file.path` at the Console. Those details are less important than seeing the intended usage of `show_file()`. 
 
@@ -788,7 +753,7 @@ We frequently ask that you `copy` content from an HTML file like a webpage. Don'
 
 ###
 
-Go to [the homepage](https://ppbds.github.io/tutorial.helpers/) of the **tutorials.package** and `copy` everything in the browser window from 'tutorial.helpers' in the upper left corner through the end of the `About this package` section.
+Go to [the homepage](https://ppbds.github.io/tutorial.helpers/) of the **tutorials.package** and copy everything in the browser window from 'tutorial.helpers' in the upper left corner through the end of the `About this package` section.
 
 CP/CR.
 
@@ -815,12 +780,12 @@ About this package
 tutorial.helpers provides functions and RStudio Addins to help you write R tutorials, especially if you follow my advice about the best way to do so. This approach is currently used in several packages, including r4ds.tutorials and positron.tutorials.
 ````
 
-Again, your answer never needs to match our exactly. 
+Again, your answer never needs to match ours exactly. 
 
 ## Your answers
 ### 
 
-At the end of every tutorial, you will save your work (and submit it, at the discretion of your instructor). We will do this in the next topic, labeled "Download answers." Follow the instructions there. 
+At the end of every tutorial, you will save your work -- and submit it, at the discretion of your instructor. We will do this in the next topic, labeled "Download answers." Follow the instructions there. 
 
 Make sure to answer the question about how many **minutes** you spent on the tutorial and to click "Submit Answer."
 
