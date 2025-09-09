@@ -2,11 +2,9 @@
 
 Make a decision about the welcome screen, and adjust set_positron_settings() accordingly. And then adjust images.
 
-clean up Introduction to R tutorial
-
 update make_exercises
 
-Remove intro to python tutorial before release
+
 
 ### Tutorial
 
