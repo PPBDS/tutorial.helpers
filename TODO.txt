@@ -1,17 +1,8 @@
 ## Before Next Release
 
-Make a decision about the welcome screen, and adjust set_positron_settings() accordingly. And then adjust images.
+positron-interface.jpeg?
 
 update make_exercises
-
-
-
-### Tutorial
-
-* Update the images now that the add a new Console button looks and behaves a little differently.
-
-* Also the cool image from the Positron Docs.
-
 
 # Satvika
 

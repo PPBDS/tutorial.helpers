@@ -87,7 +87,7 @@ If you are completing this tutorial as part of a class, you should use the same 
 ## Exercises
 ### 
 
-In each tutorial, there will be a set of exercises for you to complete. For non-coding questions, you write your answer and then hit the "Submit Answer" button, as you did above. 
+Each tutorial includes exercises for you to complete. For non-coding questions, you write your answer and then hit the "Submit Answer" button, as you did above for your name and email address. 
 
 ### 
 
@@ -114,18 +114,6 @@ Let's practice some simple math. Type `4 + 5` into the box below. Hit **"Run Cod
 ### 
 
 Once you click "Run Code," the answer `[1] 9` should appear below the code you entered. This is the same behavior you would see if you ran this code in the Console, which is where R is run.
-
-###
-
-The problem right now is that we can't check that claim since the Console is currently busy with the tutorial. To confirm the claim, you will need a second Console. Create it by pressing the "Start a New Session" button: the `+` sign, as indicated by the red arrow. Choose the R option, if you are asked. After you do so, the Console should look like:
-
-```{r}
-include_graphics("images/positron-start-up-2.png")
-```
-
-### 
-
-Typing `4 + 5` and hitting `return` (if using Mac) or `enter` (if using Windows) produces the same result in the Console as it does in the exercise. To avoid us having to type `return` or `enter` for each question we ask, we use the term `Enter` to specify hitting either the `return` or `enter` key, as appropriate.
 
 ###
 
@@ -211,7 +199,7 @@ Note how all your answers to previous questions have been saved. It is not a pro
 
 ### Exercise 5
 
-Instead of creating a new Console, as we did before, click `File -> New Window` in the Positron menu.
+Click `File -> New Window` in the Positron menu.
 
 ```{r}
 include_graphics("images/new-window.png")
@@ -236,7 +224,8 @@ But need to worry about how this might interact, eventually, with doing Positron
 
 ###
 
-In the Console in the new window, type `version[['version.string']]` and hit `Enter`.
+In the Console in the new Positron window, type `version[['version.string']]`, hitting `return` (if using Mac) or `enter` (if using Windows). To avoid us having to type `return` or `enter` for each question we ask, we use the term `Enter` to specify hitting either the `return` or `enter` key, as appropriate.
+
 
 **Do not just type the command into the answer box!** You must paste the command into the Console and then execute the command.
 
@@ -255,11 +244,9 @@ question_text(NULL,
 
 We typically provide example answers (like the answer below) after you submit your own response. Don't be concerned if your submitted answer differs from the example answer we show.
 
-````
-> version[['version.string']]
-[1] "R version 4.5.0 (2025-04-11)"
->
-````
+```{r exercises-5-test, echo = TRUE}
+version[['version.string']]
+```
 
 Your version of R may be more recent, but it should not be older. It is OK if your formatting differs from ours. Exactness does not matter. What matters is that you prove that you have executed the command as instructed.
 
@@ -269,9 +256,7 @@ Tutorial workflow will often look like this. We tell you to run a command **in t
 
 ### Exercise 6
 
-The Terminal tab is next to the Console tab within the Panel in the lower left portion of the Positron window. See the red oval below. Click on the word “Terminal” to access it. We use the Console tab to talk to R. We use the Terminal tab to talk directly with the computer.
-
-<!-- DK: Need new image without welcome screen. Or does our setting not really get rid of the welcome screen? -->
+The Terminal tab is next to the Console tab within the Panel portion the Positron window. Click on the word “Terminal” to access it. We use the Console tab to talk to R. We use the Terminal tab to talk directly with the computer.
 
 ```{r}
 include_graphics("images/terminal-1.png")
@@ -332,7 +317,7 @@ Start Positron again. This tutorial will have been closed when you quit Positron
 learnr::run_tutorial("getting-started", "tutorial.helpers")
 ```
 
-You will, probably, need to `File -> New Window` again to have a new Console to work with.
+You will need to `File -> New Window` again to have an empty Console to work with.
 
 At the Terminal, type `git --version`. Hit `Enter`. 
 
@@ -363,19 +348,21 @@ Every Terminal runs a “shell,” the program which serves as the interface bet
 
 ###
 
-On a Mac, the default shell is referred to as "[Unix-like](https://en.wikipedia.org/wiki/Unix-like)" since it acts very much like the tradition UNIX command line. In Windows, the default shell is [PowerShell](https://en.wikipedia.org/wiki/PowerShell), which is an older technology. 
+On a Mac, the default shell is referred to as "[Unix-like](https://en.wikipedia.org/wiki/Unix-like)" since it acts very much like the tradition Unix command line. In Windows, the default shell is [PowerShell](https://en.wikipedia.org/wiki/PowerShell), which is an older technology. 
 
 ###
+
+To start a new Terminal with a specific shell, press the downward arrow next to the `+` sign. 
 
 ```{r}
-include_graphics("images/terminal-1.png")
+include_graphics("images/terminal-2.png")
 ```
 
-To start a new Terminal with a specific shell, press the downward arrow next to the `+` sign. See the red arrow above.
+See the red arrow above.
 
 ###
 
-If you are using Windows, you should see an option for “Git Bash” (or maybe just “bash”).
+If you are using Windows, you should see an option for “Git Bash” (or maybe just “bash”). I don't, because I am not using Windows. But it doesn't matter, because I already have a Unix-like shell.
 
 ###
 
@@ -389,7 +376,13 @@ Again, this feature is specifically for Windows users only. They might need to c
 
 ###
 
-Click the `+` button to start a second Terminal and see if it works!
+Click the `+` button (see red arrow below) to start a second Terminal and see if it works!
+
+```{r}
+include_graphics("images/terminal-4.png")
+```
+
+The red rectangle highlights that we are now running two Terminals, which we can switch back-and-forth between. In fact, we can have multiple Terminals and multiple Consoles in one Positron window just by using the `+` button. Instead of using a second Positron window, some people prefer this approach.
 
 ###
 
@@ -416,7 +409,7 @@ dkane@MacBookPro ~ % echo $0
 dkane@MacBookPro ~ % 
 ````
 
-This means that, in the Terminal, I am using [Z shell](https://en.wikipedia.org/wiki/Z_shell). On Windows, your answer will probably be something like `bash`, referring to [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)), another UNIX-like shell. Don't worry about the differences between them. 
+This means that, in the Terminal, I am using [Z shell](https://en.wikipedia.org/wiki/Z_shell). On Windows, your answer will probably be something like `bash`, referring to [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)), another Unix-like shell. Don't worry about the differences between them. 
 
 The important thing is that, first, you now have Git installed and, second, if you are a Windows user, you now have a better shell than Powershell.
 
@@ -446,11 +439,11 @@ dkane@MacBookPro ~ %
 
 ###
 
-We can change the duration of the sleep using this format `sleep [number]`. The number you put in is the duration (in seconds) for which the Terminal goes to sleep. 
+We can change the duration of the sleep using this format: `sleep [number]`. The number you put in is the duration (in seconds) for which the Terminal goes to sleep. 
 
 ### Exercise 10
 
-Type `sleep 60` at the Terminal. The command makes the Terminal go to sleep for 60 seconds. To cancel the running `sleep` command at the Terminal press `Ctrl + C` in your keyboard. Do so now, before `sleep 60` finishes.
+Type `sleep 60` at the Terminal. The command makes the Terminal go to sleep for 60 seconds. To cancel the running `sleep` command at the Terminal press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
 
 When you press `Ctrl + C` while sleep is running, it immediately terminates the sleep command and returns you to the command prompt.
 
@@ -502,7 +495,7 @@ The output from this function will report the changes, if any, which were made. 
 
 ### 
 
-You can generally call functions by just giving their name along with the ending parentheses, as with `set_positron_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_positron_settings()` is in the **tutorial.helpers** package, we can call it using the double colon notation: `tutorial.helpers::set_positron_settings()`, as we do above.
+You can generally call functions by just giving their name along with the ending parentheses, as with `set_positron_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_positron_settings()` is in the **tutorial.helpers** package, we can call it using this double colon notation: `tutorial.helpers::set_positron_settings()`, as we did above.
 
 ### Exercise 12
 
