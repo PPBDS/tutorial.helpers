@@ -1,6 +1,6 @@
 Package: tutorial.helpers
 Title: Helper Functions for Creating Tutorials
-Version: 0.5.0.9016
+Version: 0.6.0
 Authors@R: 
     person(given = "David",
            family = "Kane",
