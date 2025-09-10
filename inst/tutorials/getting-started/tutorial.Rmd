@@ -329,7 +329,7 @@ Every Terminal runs a “shell,” the program which serves as the interface bet
 
 ###
 
-On a Mac, the default shell is referred to as "[Unix-like](https://en.wikipedia.org/wiki/Unix-like)" since it acts very much like the tradition Unix command line. In Windows, the default shell is [PowerShell](https://en.wikipedia.org/wiki/PowerShell), which is an older technology. 
+On a Mac, the default shell is referred to as "[Unix-like](https://en.wikipedia.org/wiki/Unix-like)" since it acts very much like the traditional Unix command line. In Windows, the default shell is [PowerShell](https://en.wikipedia.org/wiki/PowerShell), which is an older technology. 
 
 ###
 
@@ -347,13 +347,13 @@ If you are using Windows, you should see an option for “Git Bash” (or maybe 
 
 ###
 
-If everything goes well, Git Bash should automatically be your default terminal when you open Terminal on Windows. However, if it doesn't default to Git Bash, you'll need to manually choose it. You can set it as the default option by using the "Select Default Profile" feature: 
+If everything goes well, Git Bash should automatically be your default shell when you open the Terminal on Windows. However, if it doesn't default to Git Bash, you'll need to manually choose it. You can set it as the default option by using the "Select Default Profile" feature: 
 
 ```{r}
 include_graphics("images/terminal-3.png")
 ```
 
-Again, this feature is specifically for Windows users only. They might need to click on that tool and choose the option labeled "Git Bash" or "bash." Once selected, this will make it the default terminal for future sessions.
+Again, this discussion is specifically for Windows users only. They might need to click on that tool and choose the option labeled "Git Bash" or "bash." Once selected, this will make it the default terminal for future sessions.
 
 ###
 
@@ -363,7 +363,7 @@ Click the `+` button (see red arrow below) to start a second Terminal and see if
 include_graphics("images/terminal-4.png")
 ```
 
-The red rectangle highlights that we are now running two Terminals, which we can switch back-and-forth between. In fact, we can have multiple Terminals and multiple Consoles in one Positron window just by using the `+` button. Instead of using a second Positron window to have an open Console for use while working on a tutorial, some people prefer this approach.
+The red rectangle highlights that we are now running two Terminals, between which we can switch back-and-forth. In fact, we can have multiple Terminals and multiple Consoles in one Positron window just by using the `+` button. Some people prefer this approach. We still recommend using a second Positron window to have an open Console for use while working on a tutorial.
 
 ###
 
@@ -418,15 +418,13 @@ dkane@MacBookPro ~ % sleep 5
 dkane@MacBookPro ~ % 
 ```
 
-###
-
 We can change the duration of the sleep using this format: `sleep [number]`. The number you put in is the duration (in seconds) for which the Terminal goes to sleep. 
 
 ### Exercise 10
 
 Run `sleep 60` at the Terminal. (Again, "run" means to type the command and then hit the `Enter` key.) The command makes the Terminal go to sleep for 60 seconds. To cancel the running `sleep` command at the Terminal press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
 
-When you press `Ctrl + C` while sleep is running, it immediately terminates the sleep command and returns you to the command prompt.
+When you press `Ctrl + C` while `sleep` is running, it immediately terminates the `sleep` command and returns you to the command prompt.
 
 CP/CR.
 
@@ -465,7 +463,7 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 8)
+	rows = 12)
 ```
 
 ### 
@@ -474,13 +472,15 @@ The output from this function will report the changes, if any, which were made. 
 
 ### 
 
-You can generally call functions by just giving their name along with the ending parentheses, as with `set_positron_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_positron_settings()` is in the **tutorial.helpers** package, we can call it using this double colon notation: `tutorial.helpers::set_positron_settings()`, as we did above.
+You can generally call a function by just giving its name along with the ending parentheses, as with `set_positron_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_positron_settings()` is in the **tutorial.helpers** package, we can call it using this "double colon" notation: `tutorial.helpers::set_positron_settings()`, as we did above.
 
 ### Exercise 12
 
-It is useful to understand where you are right now.
+It is useful to understand where the R process is currently executing on your computer.
 
-In the Console, run `getwd()`. CP/CR.
+In the Console, run `getwd()`. This function is **get** **w**orking **d**irectory, meaning we want to know the directory in which the R process is located.
+
+CP/CR.
 
 ```{r exercises-12}
 question_text(NULL,
@@ -505,7 +505,7 @@ This is especially true if you are new to Positron. If you have used Positron be
 
 ###
 
-If I were on Windows, then the home directory would be something like `C:\Users\dkane\Documents` or even  `C:\Users\dkane\OneDrive\Documents` or even one of these with`\\` instead of `\` to separate out the directories. Note that on Windows:
+If I were on Windows, then the home directory would be something like `C:\Users\dkane\Documents` or even  `C:\Users\dkane\OneDrive\Documents` or even one of these with `\\` instead of `\` to separate out the directories. Note that on Windows:
 
 * The file system starts on the `C:` drive.
 
@@ -517,7 +517,7 @@ If I were on Windows, then the home directory would be something like `C:\Users\
 
 ### Exercise 13
 
-In the Console, run `fs::path_home()`. If this fails, then you probably need to install the **[fs](https://fs.r-lib.org/)** package. Please do so and try again. 
+In the Console, run `fs::path_home()`. 
 
 CP/CR.
 
@@ -537,7 +537,7 @@ question_text(NULL,
 /Users/dkane
 ````
 
-This function returns the "path" to your home directory. A path is simply the information which allows you to reach a location on your computer. In this case, if you wanted to find the folder from which R is running, you would use `getwd()` to **get** the **w**orking **d**irectory.
+This function returns the "path" to your home directory such that the Windows answer is more like the Mac answer. A path is simply the information which allows you to reach a location on your computer. 
 
 More info on paths can be found [here](https://people.ischool.berkeley.edu/~kevin/unix-tutorial/section3.html).
 
@@ -700,7 +700,7 @@ question_text(NULL,
 
 ###
 
-Look at the output from `set_positron_settings()` to confirm that this worked. Don't worry if it did not.
+Look at the output from `tutorial.helpers::set_positron_settings()` to confirm that this worked. Don't worry if it did not.
  
 ### Exercise 18
 
@@ -789,7 +789,7 @@ At the end of every tutorial, you will save your work -- and submit it, at the d
 
 Make sure to answer the question about how many **minutes** you spent on the tutorial and to click "Submit Answer."
 
-After hitting the "Download" button, you will be prompted to save a file named `getting-started_answers.html`. This file should be saved in the default Downloads folder on your computer. 
+After hitting the "Download" button, you will be prompted to save a file named `getting-started_answers.html`. This file will, by default, be saved in the `Downloads` folder on your computer. 
 
 Unless told otherwise by your instructor, you should use the default file name, which will usually be of the form `short-name-of-tutorial` + `_answers` + `.html`. 
 

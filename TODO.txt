@@ -10,6 +10,8 @@ Start working on Introduction to Python tutorial.
 
 ## Later Projects
 
+* set_positron_settings() could also call a new function, make_projects_directory(), which follows the logic of the Getting Started tutorial and creates a project directory and then specifies that location in settings.json.
+
 * Make use of positron-interface.jpeg? Perhaps we have a couple of questions which make a script, use positron-interface.jpeg, use AI to make a cool plot, and the source the script?
 
 update make_exercises
