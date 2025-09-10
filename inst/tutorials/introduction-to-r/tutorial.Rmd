@@ -18,6 +18,9 @@ library(tutorial.helpers)
 library(knitr)
 library(tidyverse)
 
+# The df_print: default above is the incantation which shows tibbles normally,
+# without the fancy formatting associated with the pillar package.
+
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(out.width = '90%')
 options(tutorial.exercise.timelimit = 60, 
@@ -30,7 +33,6 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- Make this tutorial better. The plot is fairly ugly and would benefit from either jitttering or an alpha call. -->
 
 ## Introduction
 ### 
@@ -69,8 +71,6 @@ library(tidyverse)
 ### 
 
 "Library" and "package" mean the same thing in R. We have different words for historical reasons. However, only the `library()` command will load a package/library, giving us access to the functions and data which it contains.
-
-
 
 ### Exercise 2
 
@@ -299,8 +299,10 @@ question_text(NULL,
 
 ###
 
-```{r working-with-data-10-test, echo = TRUE}
-glimpse(diamonds)
+<!-- We cheat a bit so that the display looks better, adding width = 60 and not echo'ing the code. -->
+
+```{r working-with-data-10-test}
+glimpse(diamonds, width = 60)
 ```
 
 ### 
@@ -391,7 +393,7 @@ Now that `x` has been defined in the Console, it is available for your use. Abov
 ## Pipes and plots
 ### 
 
-Although the *Tidyverse* includes hundreds of commands for data manipulation, the most important are `filter()`, `select()`, `arrange()`, `mutate()`, and `summarize()`. Whenever you face a new problem, try to think about which one of these commands might be a good way to start.
+Although the *Tidyverse* includes hundreds of commands for data manipulation, the most important are `filter()`, `select()`, `arrange()`, `mutate()`, and `summarize()`. 
 
 ### Exercise 1
 
@@ -563,7 +565,7 @@ gss_cat |>
 
 ### 
 
-The number of rows has decreased because we removed rows with missing values. `drop_na()` remove all rows which have a missing value for any of the variables. If we wanted yo just remove the rows which have are missing `tvhours`, we would use `drop_na(tvhours)`.
+The number of rows has decreased because we removed rows with missing values. `drop_na()` removes all rows which have a missing value for any of the variables. If we wanted to just remove the rows which are missing `tvhours`, we would use `drop_na(tvhours)`.
 
 ### Exercise 8
 
@@ -631,7 +633,7 @@ Let's make a plot. Copy the previous code, and pipe to `ggplot()`. Set `aes(x = 
 
 ```{r pipes-and-plots-10-hint-1, eval = FALSE}
 ... |> 
-  ggplot(mapping = aes(x = ..., y = ...))
+  ggplot(aes(x = ..., y = ...))
 ```
 
 ```{r pipes-and-plots-10-test, include = FALSE}
@@ -649,7 +651,7 @@ This will return a plain graph as we have not mapped any data to specific "aesth
 
 ### Exercise 11
 
-Add another layer with `geom_point()` using the `+` sign. Plotting code in the **ggplot2** package uses `+`, not `->`, to connect different commands together. This difference comes from the fact that **ggplot2** was written 10+ years before the pipe was invented.
+Add another layer with `geom_jitter()` using the `+` sign. Plotting code in the **ggplot2** package uses `+`, not `|>`, to connect different commands together. This difference comes from the fact that **ggplot2** was written 10+ years before the pipe was invented.
 
 ```{r pipes-and-plots-11, exercise = TRUE}
 
@@ -659,7 +661,7 @@ Add another layer with `geom_point()` using the `+` sign. Plotting code in the *
 
 ```{r pipes-and-plots-11-hint-1, eval = FALSE}
 ... + 
-  geom_point()
+  geom_jitter()
 ```
 
 ```{r pipes-and-plots-11-test, include = FALSE}
@@ -669,18 +671,18 @@ gss_cat |>
   drop_na() |>
   arrange(desc(tvhours)) |>
   ggplot(aes(x = age, y = tvhours)) + 
-    geom_point()
+    geom_jitter()
 ```
 
 ### 
 
-This is a scatterplot of `tvhours` versus `age`. The x-axis is the number of hours of TV watched per day, and the y-axis is the age of the person.
+This is a scatterplot of `age` versus `tvhours`. The x-axis is age, and the y-axis is the number of hours of TV watched per day.
 
 ### Exercise 12
 
 Finally, add a title, subtitle, labels for x and y axes using `labs()`. The subtitle should be the one sentence of information about the graph with which you would hope a reader walks away. What is the most important fact demonstrated in the graphic? 
 
-Remember this is what your graph should look like.
+Consider this example graph:
 
 ```{r}
 gss_cat |> 
@@ -689,12 +691,14 @@ gss_cat |>
   drop_na() |>
   arrange(desc(tvhours)) |>
   ggplot(aes(x = age, y = tvhours)) + 
-  geom_point() + 
+  geom_jitter() + 
   labs(title = "TV Hours Watched by Age", 
        subtitle = "Got to respect someone who watches TV 24 hours a day!", 
        x = "Age", 
        y = "TV Hours")
 ```
+
+You can make yours look like ours, if you like.
 
 ```{r pipes-and-plots-12, exercise = TRUE}
 
@@ -717,7 +721,7 @@ gss_cat |>
   drop_na() |>
   arrange(desc(tvhours)) |>
   ggplot(aes(x = age, y = tvhours)) + 
-  geom_point() + 
+  geom_jitter() + 
   labs(title = "TV Hours Watched by Age", 
        subtitle = "Got to respect someone who watches TV 24 hours a day!", 
        x = "Age", 
