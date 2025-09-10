@@ -298,7 +298,7 @@ Start Positron again. This tutorial will have been closed when you quit Positron
 learnr::run_tutorial("getting-started", "tutorial.helpers")
 ```
 
-You will need to `File -> New Window` again to have an empty Console to work with.
+You will need to `File -> New Window` again to have an empty Console to work in.
 
 At the Terminal, type `git --version`. Hit `Enter`. 
 

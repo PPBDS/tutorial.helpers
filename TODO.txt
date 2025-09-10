@@ -1,6 +1,6 @@
 ## Before Next Release
 
-positron-interface.jpeg?
+
 
 
 
@@ -15,6 +15,8 @@ Start working on Introduction to Python tutorial.
 
 
 ## Later Projects
+
+* Make use of positron-interface.jpeg? Perhaps we have a couple of questions which make a script, use positron-interface.jpeg, use AI to make a cool plot, and the source the script?
 
 update make_exercises
 

@@ -34,7 +34,7 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ### 
 
-This tutorial introduces you to the R language. Our approach is inspired by [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. You will learn how to work with data sets using the **[tidyverse](https://tidyverse.tidyverse.org/)** package. You will learn how to direct the result of one function to another using the pipe -- `|>` --- and how to make a plot using the `ggplot()` function.
+This tutorial introduces you to the R language. Our approach is inspired by [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. You will learn how to work with data sets using the **[tidyverse](https://tidyverse.tidyverse.org/)** meta-package. You will learn how to direct the result of one function to another using the pipe -- `|>` --- and how to make a plot using the `ggplot()` function.
 
 ### 
 
@@ -756,7 +756,7 @@ Note that the code in the exercise block is not saved. If you want to save the c
 ## Summary
 ### 
 
-This tutorial introduced you to the R language. Our approach was inspired by [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. You learned how to work with data sets using the **[tidyverse](https://tidyverse.tidyverse.org/)** package. You learned how to direct the result of one function to another using the pipe -- `|>` --- and how to make a plot using the `ggplot()` function.
+This tutorial introduced you to the R language. Our approach was inspired by [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund. You learned how to work with data sets using the **[tidyverse](https://tidyverse.tidyverse.org/)** meta-package. You learned how to direct the result of one function to another using the pipe -- `|>` --- and how to make a plot using the `ggplot()` function.
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
