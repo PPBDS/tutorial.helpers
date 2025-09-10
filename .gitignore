@@ -9,7 +9,6 @@
 tests/testthat/fixtures/tutorial_examples/*html
 
 inst/tutorials/*/*html
-inst/tutorials/*/rsconnect
 
 tutorial_files
 tutorial.html

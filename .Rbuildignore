@@ -8,7 +8,6 @@
 ^\.github$
 ^README\.Rmd$
 ^TODO\.txt$
-^inst/tutorials/getting-started/rsconnect$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 ^tests/testthat/test-write_answers\.R$

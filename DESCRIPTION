@@ -24,8 +24,6 @@ Suggests:
     httr,
     knitr,
     quarto,
-    remotes,
-    rsconnect,
     roxygen2,
     testthat (>= 3.0.0),
     tidyverse

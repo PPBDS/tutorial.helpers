@@ -1,9 +1,3 @@
-## Before Next Release
-
-
-
-
-
 # Satvika
 
 Read: https://ppbds.github.io/primer/getting-started.html (think about what installation instructions we give; think about Mac versus Windows).
