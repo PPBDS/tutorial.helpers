@@ -1,5 +1,5 @@
 
-<!-- README.md is generated from README.Rmd. Edit ONLY this file if you need to make a change in README.md. But, after you edit it, you NEED TO KNIT IT BY HAND in order to create the new README.md, which is the thing which is actually used. -->
+<!-- README.md is generated from README.Rmd. Edit ONLY this file if you need to make a change in README.md. But, after you edit it, you need to run devtools::build_readme() in order to create the new README.md, which is the thing which is actually used. -->
 
 # Tutorial Helper Functions
 

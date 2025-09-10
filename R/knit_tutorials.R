@@ -12,7 +12,9 @@
 #' @returns No return value, called for side effects.
 #'
 #' @examples
+#' \dontrun{
 #'   knit_tutorials(tutorial_paths = return_tutorial_paths("tutorial.helpers"))
+#' }
 #'
 #' @export
 

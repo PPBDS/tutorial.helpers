@@ -21,6 +21,8 @@ If a tutorial fails to render, then an error will be generated which will
 propagate to the caller.
 }
 \examples{
+\dontrun{
   knit_tutorials(tutorial_paths = return_tutorial_paths("tutorial.helpers"))
+}
 
 }
