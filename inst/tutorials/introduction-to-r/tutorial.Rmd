@@ -5,6 +5,7 @@ tutorial:
   id: introduction-to-r
 output:
   learnr::tutorial:
+    df_print: default
     progressive: yes
     allow_skip: yes
 runtime: shiny_prerendered
@@ -51,7 +52,7 @@ Learn how to explore a data set using functions like `summary()`, `glimpse()`, a
 
 ### Exercise 1
 
-Before you start doing data science, you must load the packages you are going to use. Use the function `library()` to load the **tidyverse** package.
+Before you start doing data science, you must load the packages you are going to use. Use the function `library()` to load the **tidyverse** package. Click "Run Code." The check mark which appears next to "Exercise 1" above indicates that you have submitted your answer. It doesn't verify that you have answered the question correctly.
 
 ```{r working-with-data-1, exercise = TRUE}
 
@@ -69,7 +70,7 @@ library(tidyverse)
 
 "Library" and "package" mean the same thing in R. We have different words for historical reasons. However, only the `library()` command will load a package/library, giving us access to the functions and data which it contains.
 
-The check mark which has appeared next to "Exercise 1" above indicates that you have submitted your answer. It doesn't verify that you have answered the question correctly.
+
 
 ### Exercise 2
 
@@ -86,15 +87,26 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 8)
+	rows = 15)
 ```
 
 ###
 
 Your answer should look like:
 
-```{r working-with-data-2-test, echo = TRUE}
-library(tidyverse)
+```
+> library(tidyverse)
+── Attaching core tidyverse packages ─────────────────────────────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.1.0     
+── Conflicts ───────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package to force all conflicts to become errors
+>
 ```
 
 Your answer never needs to match ours perfectly. Our goal is just to ensure that you are actually following the instructions.
@@ -113,7 +125,7 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 5)
+	rows = 15)
 ```
 
 ###
@@ -122,8 +134,7 @@ question_text(NULL,
 diamonds
 ```
 
-Whenever we show outputs like this after a question, then we are showing our answer to the previous question, even if we do not label it as such.
-
+Whenever we show outputs like this after a question, then we are showing our answer to the previous question, even if we do not label it as such. 
 
 ### Exercise 4
 
@@ -148,7 +159,7 @@ summary(diamonds)
 
 ###
 
-This function provides a quick statistics overview of each variable in the data set. 
+This function provides a quick statistics overview of each variable in the data set. In some cases, as here, the tutorial displays the same object differently from what you were able to copy/paste. And that is OK! Your answer does not need to match our answer.
 
 ### Exercise 5
 
@@ -162,13 +173,13 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 5)
+	rows = 7)
 ```
 
 ###
 
 ```{r working-with-data-5-test, echo = TRUE}
-slice_sample((diamonds))
+slice_sample(diamonds)
 ```
 
 ###
@@ -177,7 +188,7 @@ Your answer will differ from this answer because of the inherent randomness in f
 
 ### Exercise 6
 
-In the Console, hit the Up Arrow to retrieve the previous command. Edit it to add the argument `n = 10` to `slice_sample(diamonds)`. This will return 10 random rows from the `diamonds` data set.
+In the Console, hit the Up Arrow to retrieve the previous command. Edit it to add the argument `n = 4` to `slice_sample(diamonds)`. This will return 10 random rows from the `diamonds` data set.
 
 CP/CR.
 
@@ -187,13 +198,13 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 5)
+	rows = 8)
 ```
 
 ###
 
 ```{r working-with-data-6-test, echo = TRUE}
-slice_sample(diamonds, n = 10)
+slice_sample(diamonds, n = 4)
 ```
 
 ###
@@ -249,7 +260,9 @@ print(diamonds, n = 3)
 
 ###
 
-The `diamonds` data set contains 53,940 rows and 10 columns. Each row represents a single diamond, and each column represents a different characteristic of that diamond. 
+`print()`, by default, gives the top of the tibble, so your answer should match our answer. `slice_sample()`, on the other hand, picks random rows to return. But, in both cases, the result is a tibble. 
+
+A central organizing principal of the *[Tidyverse](https://www.tidyverse.org/)* is that most functions take a tibble as their first and return a tibble. This allows us to "chain" commands together, one after the other.
 
 ### Exercise 9
 
@@ -298,11 +311,7 @@ glimpse(diamonds)
 
 ### Exercise 11
 
-In the Console, run:
-
-```
-x <- sqrt(144)
-```
+In the Console, run `sqrt(144)`.
 
 CP/CR.
 
@@ -318,18 +327,16 @@ question_text(NULL,
 ###
 
 ```{r working-with-data-11-test, echo = TRUE}
-x <- sqrt(144)
+sqrt(144)
 ```
 
 ###
 
-The symbol `<-` is the assignment operator. In this case, we are *assigning* the value of `sqrt(144)` to the variable `x`.
-
-<!-- DK: Look at x in the other pane. Run x to show it was saved. -->
+The square root function is one of many built-in functions in R. Most return their result, which R then, by default, prints out.
 
 ### Exercise 12
 
-In the Console, run `sqrt(144)`.
+In the Console, run `x <- sqrt(144)`.
 
 CP/CR.
 
@@ -345,16 +352,19 @@ question_text(NULL,
 ###
 
 ```{r working-with-data-12-test, echo = TRUE}
-sqrt(144)
+x <- sqrt(144)
 ```
 
 ###
 
-The square root function is one of many built-in functions in R. Most return their result, which R then, by default, prints out.
+The symbol `<-` is the assignment operator. In this case, we are *assigning* the value of `sqrt(144)` to the variable `x`. Nothing is printed out because of that assignment.
+
+Also, you can see `x` in the "Variables" tab under the "Session" pane in the Secondary Activity Bar on the right-hand side of the Positron window.
+
 
 ### Exercise 13
 
-In the Console, run `x <- sqrt(144)`.
+In the Console, run `x`.
 
 CP/CR.
 
@@ -370,34 +380,6 @@ question_text(NULL,
 ###
 
 ```{r working-with-data-13-test, echo = TRUE}
-x <- sqrt(144)
-```
-
-###
-
-The symbol `<-` is the assignment operator. In this case, we are *assigning* the value of `sqrt(144)` to the variable `x`. Nothing is printed out because of that assignment.
-
-Also, you can see `x` in the "Variables" tab under the "Session" pane in the Secondary Activity Bar on the right-hand side of the Positron window.
-
-
-### Exercise 14
-
-In the Console, run `x`.
-
-CP/CR.
-
-```{r working-with-data-14}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
-```
-
-###
-
-```{r working-with-data-14-test, echo = TRUE}
 x
 ```
 
@@ -431,13 +413,7 @@ gss_cat
 
 ### 
 
-Whenever we print a tibble, the number of rows and columns is displayed at the top:
-
-````
-A tibble: 21,483 × 9
-````
-
-You can also see the variable type under each of the column names.
+As the help page notes, `gss_cat` is a "sample of categorical variables from the [General Social Survey](https://gss.norc.org/)."
 
 ### Exercise 2
 

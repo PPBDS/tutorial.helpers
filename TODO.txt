@@ -14,6 +14,10 @@ Start working on Introduction to Python tutorial.
 
 * Make use of positron-interface.jpeg? Perhaps we have a couple of questions which make a script, use positron-interface.jpeg, use AI to make a cool plot, and the source the script?
 
+* It is annoying that, in Introduction to R, the tutorial shows tibbles differently than what students see in the Console or what they would see with the same code in an R code chunk in a Quarto document. An example is pretending that a big tibble only has 1,000 rows when, in fact, it has much more. Is there a way to just have the output of code in a tutorial display like it would in a quarto document? Example:
+
+
+
 update make_exercises
 
 ### check_current_tutorial
