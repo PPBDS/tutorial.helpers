@@ -1,3 +1,5 @@
+# tutorial.helpers (development version)
+
 # tutorial.helpers 0.6.0
 
 * Replace process_submissions() with submissions_summary().
