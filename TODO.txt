@@ -6,7 +6,7 @@ Complete latest version of Getting Started. Send me the html answers. Submit a P
 
 Complete latest version of Introduction to R. Send me the html answers. Submit a PR with fixes and comments. 
 
-Start working on Introduction to Python tutorial. 
+Start working on Introduction to Python tutorial. Think about the best advice for Python. Just worry about Windows.
 
 
 
