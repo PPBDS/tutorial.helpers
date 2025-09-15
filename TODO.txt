@@ -1,8 +1,10 @@
 # Satvika
 
-Read: https://ppbds.github.io/primer/getting-started.html (think about what installation instructions we give; think about Mac versus Windows).
+install.packages("tutorial.helpers")
 
-Complete latest version of Getting Started. Send me the html answers. Submit a PR with fixes and comments.
+Complete latest version of Getting Started. Send me the html answers. Submit a PR with fixes and comments. Keep an eye on all the stuff meant to help Windows users.
+
+Complete latest version of Introduction to R. Send me the html answers. Submit a PR with fixes and comments. 
 
 Start working on Introduction to Python tutorial. 
 
