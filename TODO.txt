@@ -10,13 +10,15 @@ Start working on Introduction to Python tutorial.
 
 ## Later Projects
 
+* set_positron_settings() should turn on (all?) Positron Assistant options. 
+
 * set_positron_settings() could also call a new function, make_projects_directory(), which follows the logic of the Getting Started tutorial and creates a project directory and then specifies that location in settings.json.
 
 * Once the above is done, we would free up several questions which could then be used to a) start a project, b) start a .R file and c) ask AI to make a cool plot for the .R file. After we did that, could use positron-interface.jpeg to name all the parts of the Positron window.
 
 * It is annoying that, in Introduction to R, the tutorial shows tibbles differently than what students see in the Console or what they would see with the same code in an R code chunk in a Quarto document. An example is pretending that a big tibble only has 1,000 rows when, in fact, it has much more. Is there a way to just have the output of code in a tutorial display like it would in a quarto document? Example:
 
-
+* If you have a symbol like <td> in the text of a tutorial, it will still knit. But that symbol (or maybe anything with brackets) causes the side menu (and the download screen) not to appear. The solution is to use `<td>` in place of just <td>. To Do: Come up with some testing that prevents this scenario from happening in the future.
 
 update make_exercises
 
