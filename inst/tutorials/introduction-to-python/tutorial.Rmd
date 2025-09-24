@@ -1,6 +1,6 @@
 ---
 title: Introduction to Python
-author:
+author: Satvika Upperla
 tutorial:
   id: introduction-to-python
 output:
@@ -29,7 +29,26 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
+### Introduction
+##
 
+This is tutorial introduces you to Python from a data science standpoint. We will explore Polars, a python data fram for data processing, that is more fast and efficient at handling large datasets over Pandas and Numpy two other pYthon data frames.
+
+
+### Setting up Python on Your Console
+##
+
+Even if you already have python installed on you setup, its recommended you still follow this, unless you have access python striaght from your console pane in positron.
+
+1. Run Python in Terminal, this will pull up Microsfot Store's version of Python 3.17.3 or later. Install. Once the File downloads, run the .exe file and complete setup. **Remember to note the file path it installs Python in**
+
+2. Click the icon in the lower left corner of Positron (Settings) and go to settings. Press Interpreter in the little arrow bar menu. Scroll down to Python. 
+
+3. In the Python section there are two spots you need to edit. One is the Default interpreter path. The other is Interpreters include: where you can press an add button to set you own interepreter.
+
+4. Add the path to your python installation in default interpreter path. Here is an example `C:\Users\USatv\AppData\Local\Programs\Python\Python311\python.exe`. Add this same path to the other section as well (Interpreter include:) using the add button. In general, your path will always be "C:Users\" and then whatever user file your laptop will have made for your person, and then "\AppData\Local\Programs\Python\Python311\python.exe". The Python311 may differ if you have any later version of Python past the 3.13 line.
+
+5. Restart the Positron window. This can be done by searching up `> Developer: Reload Window` in the search bar up above.
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```

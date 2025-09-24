@@ -18,3 +18,5 @@
 ^vignettes/.quarto$
 ^extension$
 /tutorial_files/
+^tutorial\.helpers\.Rproj$
+^\.Rproj\.user$
