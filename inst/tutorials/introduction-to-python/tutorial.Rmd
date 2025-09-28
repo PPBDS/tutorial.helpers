@@ -29,10 +29,17 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
+
+<!-- DK: List resources you found useful. -->
+
 ### Introduction
 ##
 
-This is tutorial introduces you to Python from a data science standpoint. We will explore Polars, a python data fram for data processing, that is more fast and efficient at handling large datasets over Pandas and Numpy two other pYthon data frames.
+<!-- DK: This is bad. -->
+
+This is tutorial introduces you to Python from a data science standpoint. We will explore Polars, a python data frame for data processing, that is more fast and efficient at handling large datasets over Pandas and Numpy two other python data frames.
+
+<!-- DK: Also, start by explaining, in one sentence, what Python is, along with a link or two. -->
 
 
 ### Setting up Python on Your Console
