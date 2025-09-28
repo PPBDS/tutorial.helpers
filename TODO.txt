@@ -12,6 +12,8 @@ Start working on Introduction to Python tutorial. Think about the best advice fo
 
 ## Later Projects
 
+* There are some subtle issues with regard to return_tutorial_paths() when working in a renv environment. (I think.) If I am working on a tutorial package, I can run devtools::install() to install the latest changes. Running learnr::run_tutorial() gets the version which was just installed. But running devtools::test(), which calls return_tutorial_paths() when it is rendering the tutorials in order to test them, does not get the latest version installed by install(). Instead, it gets (?) whatever version of the package is installed in the renv environment itself. And, often enough, there is no package installed in the renv environment since this is the package we are working on. One way to confirm this issue, just within tutorial.helpers, is to run renv::remove("tutorial.helpers"). Then, run devtools::install(). Then, learnr::run_tutorial will work for getting-started but return_tutorial_paths("tutorial.helpers") will return nothing. At least, I think that that is what will happen . . . But, when I tried this sequence, I could not replicate the issue. Arrgh! Key point is that everything works as expected with check(), so, just use that to be sure things are working.
+
 * set_positron_settings() should turn on (all?) Positron Assistant options. 
 
 * set_positron_settings() could also call a new function, make_projects_directory(), which follows the logic of the Getting Started tutorial and creates a project directory and then specifies that location in settings.json.

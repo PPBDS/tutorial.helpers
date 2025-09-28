@@ -6,7 +6,6 @@ tutorial_paths <- tutorial.helpers::return_tutorial_paths(package = "tutorial.he
 
 tutorial.helpers::knit_tutorials(tutorial_paths)
 
-# Second, ensure that all the tutorials have the default components: copy-code button,
-# information/download pages.
+# Second, ensure that all the tutorials have the default components.
 
 tutorial.helpers::check_tutorial_defaults(tutorial_paths)
