@@ -5,6 +5,7 @@ tutorial:
   id: "XX ADD ID, which should be the same as the directory in which this tutorial is located"
 output: 
   learnr::tutorial:
+    df_print: default
     progressive: true
     allow_skip: true
 runtime: shiny_prerendered
@@ -15,7 +16,10 @@ description: "XX ADD DESCRIPTION (a single sentence)"
 library(learnr)
 library(tutorial.helpers)
 
-# XX: Add other packages you use. Such packages should also be added to the student QMD.
+# XX: Add other packages you use. Such packages should also be added
+# to the student QMD. Note that `df_print: default` above causes tibbles
+# in the tutorial to appear as they would in the Console rather than as
+# pretty html tables.
 
 knitr::opts_chunk$set(echo = FALSE)
 options(tutorial.exercise.timelimit = 60, 
@@ -85,6 +89,8 @@ execute:
   echo: false
 ```
 
+Using `Cmd/Ctrl + Shift + K`, render the file again. Only the title and author should appear in the HTML.
+
 In the Console, run:
 
 ```         
@@ -134,9 +140,9 @@ question_text(NULL,
 
 From the Console, run these three commands:
 
-`getwd()`
-`dir.create("data")`
-`list.files()`
+`getwd()`  
+`dir.create("data")`  
+`list.files()`  
 
 This will create a `data` directory in your project. This is a good place to store any data that you are working with.
 
@@ -160,11 +166,9 @@ You answer should look something like, although your path will be different.
 [1] "/Users/dkane/Desktop/projects/XX"
 > dir.create("data")
 > list.files()
- [1] "analysis.qmd"        "data"    "README.md"
+ [1] "analysis_files" "analysis.html"  "analysis.qmd"   "data"           "README.md"  
 >
 ````
-
-
 
 <!-- XX: You will probably have two or three Sections, in between the Introduction and Summary. We provide on example below. Before editing it, you may want to copy/paste it to create the skeleton for Second section. Any tutorial which both uses a lot of AI and is supposed to take an hour or so will probably only have two Sections.  -->
 
