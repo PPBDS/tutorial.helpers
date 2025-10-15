@@ -45,7 +45,7 @@ options(tutorial.exercise.timelimit = 60,
 
 ### Exercise 1
 
-Create a Github repo called `XX`. Make sure to click the "Add a README file" check box.
+Create a Github repo called `XX`. Set the "Add a README file" toggle box to "On."
 
 Connect the repo to a project on your computer using `File -> New Folder from Git ...`.  Make sure to select the "Open in a new window" box. 
 
