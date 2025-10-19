@@ -1,6 +1,6 @@
 ---
 title: Introduction to Python
-author: Your Name
+author: Satvika Upperla
 tutorial:
   id: introduction-to-python
 output:
