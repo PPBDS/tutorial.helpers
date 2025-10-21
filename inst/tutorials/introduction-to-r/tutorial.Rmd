@@ -732,6 +732,163 @@ gss_cat |>
 
 Note that the code in the exercise block is not saved. If you want to save the code, you can copy/paste it into an R script file.
 
+## Generative AI
+###
+
+Gneerative AI --- tools like [ChatGPT](https://chat.openai.com/), [Grok](https://x.ai/), [Claude](https://claude.ai/), [DeepSeek](https://www.deepseek.com/en) and so on
+--- are the future, of data science and everything else. The more you use these tools, the better off you will be. Unfortunately, the tools are changing so much that it is hard for a tutorial like this to stay up-to-date. This section provides some general advice and practice exercises.
+
+### Exercise 1
+
+Using any AI you like, ask it to write a one-sentence summary about the R programming language. Copy the answer below.
+
+```{r generative-ai-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+Our answer:
+
+```
+R is a free, open-source programming language and software environment designed specifically for statistical computing, data analysis, and creating data visualizations.
+```
+
+If you do not want to pay for an AI service, then you will probably need to have free accounts with several different services. That way, if one service cuts you off for the day, you can switch to another.
+
+### Exercise 2
+
+Type `diamonds` in the Console. Hit `Enter`. Copy/paste the command and the first few lines of the tibble.
+
+```{r generative-ai-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 7)
+```
+
+###
+
+```{r generative-ai-2-test, echo = TRUE}
+diamonds
+```
+
+When working with AI, you often need to tell it about the data set. The easiest way to do that is often to just copy/paste over the first few lines. That shows the AI what the variable names and types are, which is the key information it needs for creating plots and pipes.
+
+### Exercise 3
+
+Copy/paste the top of the `diamonds` tibble into your AI interface and ask it to create a pipe which calculates the average value of `carat` for all combinations of `cut` and `color`. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
+
+CP/CR.
+
+```{r generative-ai-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+Claude gave us this answer:
+
+```{r generative-ai-3-test, echo = TRUE}
+diamonds %>%
+  group_by(cut, color) %>%
+  summarise(avg_carat = mean(carat), .groups = "drop")
+```
+
+###
+
+But we don't like this answer! First, it uses `%>%`, an older version of the pipe symbol, instead of `|>`. Second, it uses `group_by()`, which necessitates the addition of the confusing `.groups` argument. We would have preferred:
+
+```{r}
+diamonds |>
+  summarise(avg_carat = mean(carat), .by = c(cut, color))
+```
+
+Using AI is good! But intelligent use --- use in which you understand what the AI has done and try to improve/clarify its answer --- is even better.
+
+### Exercise 4
+
+Ask AI to create a beautiful plot using `diamonds` and the **tidyverse** package. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
+
+
+```{r generative-ai-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 15)
+```
+
+###
+
+DeepSeek provides this code:
+
+```{r generative-ai-4-test, echo = TRUE}
+library(tidyverse)
+
+# Create a sophisticated diamond price analysis plot
+diamonds %>%
+  sample_frac(0.3) %>% # Sample 30% for better performance
+  mutate(price_per_carat = price / carat) %>%
+  ggplot(aes(x = carat, y = price, color = cut)) +
+  geom_point(alpha = 0.6, size = 1.5, position = position_jitter(width = 0.02)) +
+  geom_smooth(formula = 'y ~ x', method = "loess", se = FALSE, linewidth = 1) +
+  scale_y_continuous(labels = scales::dollar_format()) +
+  scale_color_manual(
+    values = c("Ideal" = "#E69F00", 
+               "Premium" = "#56B4E9", 
+               "Very Good" = "#009E73", 
+               "Good" = "#F0E442", 
+               "Fair" = "#0072B2")
+  ) +
+  facet_wrap(~color, labeller = labeller(color = ~paste("Color", .))) +
+  labs(
+    title = "Diamond Price Analysis: Carat vs Price by Cut Quality and Color",
+    subtitle = "Relationship between diamond characteristics and market pricing",
+    x = "Carat Weight",
+    y = "Price (USD)",
+    color = "Cut Quality",
+    caption = "Data: ggplot2 diamonds dataset | Visualization: Tidyverse"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
+    plot.subtitle = element_text(size = 12, hjust = 0.5, color = "gray40"),
+    legend.position = "bottom",
+    strip.background = element_rect(fill = "gray95", color = NA),
+    strip.text = element_text(face = "bold"),
+    panel.grid.minor = element_blank(),
+    plot.caption = element_text(color = "gray50", size = 9),
+    legend.key.size = unit(0.8, "lines")
+  )
+```
+
+###
+
+Note:
+
+* DeepSeek provided the `library(tidyverse)` even though that is not necessary. We have already loaded the **tidyverse** package. Loading it again is sloppy. It is up to you to keep track of which libraries are loaded.
+
+* DeepSeek first provided code that used `library(ggtheme)`. This is a nice package which we have not loaded. But we also haven't installed it yet. Again, AI is good at generating code that will work if all its dependencies have been installed. You need to keep track. It is also useful to tell the AI which packages to use, and which to not use.
+
+* AI tends to generate too much code. For example, our question does not require or suggest the use of `theme()`, much less all the specific settings which DeepSeek has provided. So, we often tell the AI to be "concise."
+
+* AI will often make mistakes. The first version which DeepSeek provided used `size` instead of `linewidth` as an argument to `geom_smooth()` because that was the correct usage two years ago. DeepSeek also forgot the `formula = 'y ~ x'` argument. It is your job to read, understand and fix any messages/warnings/errors generated by your code.
+
+The key is practice. Use AI every day!
 
 ## Summary
 ### 

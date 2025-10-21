@@ -86,8 +86,16 @@ knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 
 
-## Introduction
-###
+<!-- DK: List resources you found useful. -->
+
+### Introduction
+##
+
+<!-- DK: This is bad. -->
+
+This is tutorial introduces you to Python from a data science standpoint. We will explore Polars, a python data frame for data processing, that is more fast and efficient at handling large datasets over Pandas and Numpy two other python data frames.
+
+<!-- DK: Also, start by explaining, in one sentence, what Python is, along with a link or two. -->
 
 This tutorial introduces you to the Python language. Our approach is inspired by the data science workflow commonly used with Python's data analysis libraries. You will learn how to work with data sets using **polars**, a blazingly fast DataFrame library that uses a syntax similar to R's tidyverse. You will learn how to chain operations using method chaining with pipes, and how to make plots using **plotnine**, which implements the grammar of graphics just like ggplot2 in R.
 
