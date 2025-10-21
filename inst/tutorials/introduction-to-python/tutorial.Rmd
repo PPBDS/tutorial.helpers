@@ -12,6 +12,17 @@ runtime: shiny_prerendered
 description: Tutorial for introducing students to the Python language.
 ---
 
+<!-- normalizePath(".venv/Scripts/python.exe", winslash = "/", mustWork = TRUE) fails on mac. Maybe only do on Windows? -->
+
+<!-- Get rid of install if not there. Make like other tutorials. -->
+
+<!-- Get rid of gradethis. Don't care if check shows up. -->
+
+<!-- Do the test cases need to have all the Python commands? Or does the tutorial magically know that import polars . . . has already been run? -->
+
+<!-- Learn about reticulate. -->
+
+
 ```{r early-env, include=FALSE}
 # Stop auto-probing Windows Store python
 Sys.setenv(RETICULATE_AUTOCONFIGURE = "FALSE")
@@ -248,7 +259,7 @@ Your answer will differ from this answer because of the inherent randomness in m
 
 ### Exercise 6
 
-In the Console, hit the Up Arrow to retrieve the previous command. Edit it to add the argument `n=4` to `iris.sample()`. This will return 4 random rows from the `iris` dataset.
+In the Console, hit the Up Arrow to retrieve the previous command. Edit it to add the argument `n = 4` to `iris.sample()`. This will return 4 random rows from the `iris` dataset.
 
 CP/CR.
 
@@ -266,7 +277,7 @@ rows = 10)
 ```{python working-with-data-6-test, echo = TRUE}
 import polars as pl
 iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
-iris.sample(n=4)
+iris.sample(n = 4)
 ```
 
 ###
