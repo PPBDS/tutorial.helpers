@@ -78,6 +78,8 @@ question_text(NULL,
 
 <!-- XX: Insert a knowledge drop related to this project. -->
 
+<!-- XX: By default, the next two questions just mention tidyverse. If there is more than one required library, you can just add those libraries to these steps, adjusting the grammar as needed. Or, you might have separate questions for each library, thereby providing more room for knowledge drops. -->
+
 ### Exercise 2
 
 In your QMD, put `library(tidyverse)` in a new code chunk. Render the file using `Cmd/Ctrl + Shift + K`.
@@ -136,7 +138,7 @@ question_text(NULL,
 
 ### Exercise 4
 
-<!-- XX: Delete this question if you do not make use of the `data` directory in this tutorial. -->
+<!-- XX: Delete this question if you do not make use of the `data` directory in this tutorial. Note the extra spaces after the command. These are needed to ensure separate lines for each command. -->
 
 From the Console, run these three commands:
 
