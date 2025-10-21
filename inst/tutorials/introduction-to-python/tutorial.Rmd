@@ -5,23 +5,79 @@ tutorial:
   id: introduction-to-python
 output:
   learnr::tutorial:
+    df_print: default
     progressive: yes
     allow_skip: yes
 runtime: shiny_prerendered
 description: Tutorial for introducing students to the Python language.
 ---
 
-```{r setup, include = FALSE}
+```{r early-env, include=FALSE}
+# Stop auto-probing Windows Store python
+Sys.setenv(RETICULATE_AUTOCONFIGURE = "FALSE")
+# Point directly at your venv
+Sys.setenv(
+  RETICULATE_PYTHON = normalizePath(".venv/Scripts/python.exe", winslash = "/", mustWork = TRUE)
+)
+```
+
+```{r setup, include=FALSE}
+# -------- R packages: auto-install --------
+needed <- c("learnr","gradethis","tutorial.helpers","knitr","reticulate")
+to_install <- setdiff(needed, rownames(installed.packages()))
+if (length(to_install)) install.packages(to_install, quiet = TRUE)
+
 library(learnr)
+library(gradethis)
 library(tutorial.helpers)
 library(knitr)
-library(tidyverse)
+library(reticulate)
 
-knitr::opts_chunk$set(echo = FALSE)
-knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60, 
-        tutorial.storage = "local") 
+gradethis_setup(
+  fail = gradethis::gradethis_demo_check_fail(),
+  pass = gradethis::gradethis_demo_check_pass()
+)
+
+knitr::opts_chunk$set(echo = FALSE, out.width = "90%")
+learnr::tutorial_options(
+  exercise.timelimit = 60,
+  exercise.checker = gradethis::grade_learnr,
+  exercise.startover = TRUE
+)
+
+# -------- uv + venv bootstrap (NO py_config() before we set env) --------
+venv <- ".venv"
+uv <- Sys.which("uv")
+
+run_cmd <- function(cmd, args) {
+  message(sprintf(">> %s %s", cmd, paste(args, collapse = " ")))
+  status <- system2(cmd, args, stdout = TRUE, stderr = TRUE)
+  invisible(status)
+}
+
+# Create venv with a known-good Python (3.12) using uv
+if (!nzchar(uv)) stop("uv not found on PATH. Install uv and retry.")
+if (!dir.exists(venv)) {
+  # Ensure uv has a 3.12 interpreter available; uv will fetch if needed
+  run_cmd(uv, c("venv", "--python", "3.12", "--seed", venv))
+}
+
+# Set RETICULATE_PYTHON *before* any reticulate Python initialization
+is_windows <- identical(.Platform$OS.type, "windows")
+py_bin <- if (is_windows) file.path(venv, "Scripts", "python.exe") else file.path(venv, "bin", "python")
+Sys.setenv(RETICULATE_PYTHON = py_bin)
+
+# Install Python deps inside the venv via uv pip (fast)
+py_pkgs <- c("polars","pandas","matplotlib","seaborn","plotnine")
+run_cmd(uv, c("pip", "install", "--python", venv, "--upgrade", py_pkgs))
+
+# Now tell reticulate to use the venv (safe because env var already set)
+reticulate::use_virtualenv(venv, required = TRUE)
+
+# Enable Python engine for knitr
+knitr::knit_engines$set(python = reticulate::eng_python)
 ```
+
 
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
@@ -41,21 +97,891 @@ This is tutorial introduces you to Python from a data science standpoint. We wil
 
 <!-- DK: Also, start by explaining, in one sentence, what Python is, along with a link or two. -->
 
+This tutorial introduces you to the Python language. Our approach is inspired by the data science workflow commonly used with Python's data analysis libraries. You will learn how to work with data sets using **polars**, a blazingly fast DataFrame library that uses a syntax similar to R's tidyverse. You will learn how to chain operations using method chaining with pipes, and how to make plots using **plotnine**, which implements the grammar of graphics just like ggplot2 in R.
 
-### Setting up Python on Your Console
-##
+###
 
-Even if you already have python installed on you setup, its recommended you still follow this, unless you have access python striaght from your console pane in positron.
+This tutorial assumes that you have already completed the "Getting Started" tutorial in the [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package. If you haven't, do so now. It is quick!
 
-1. Run Python in Terminal, this will pull up Microsfot Store's version of Python 3.17.3 or later. Install. Once the File downloads, run the .exe file and complete setup. **Remember to note the file path it installs Python in**
+###
 
-2. Click the icon in the lower left corner of Positron (Settings) and go to settings. Press Interpreter in the little arrow bar menu. Scroll down to Python. 
+From the main Positron menu, start a new window with `File -> New Window`. This new window is the location in which you will do all the work for the tutorial. The current window, the one in which you are reading these words, is just used to run this tutorial.
 
-3. In the Python section there are two spots you need to edit. One is the Default interpreter path. The other is Interpreters include: where you can press an add button to set you own interepreter.
+## Working with data
+###
 
-4. Add the path to your python installation in default interpreter path. Here is an example `C:\Users\USatv\AppData\Local\Programs\Python\Python311\python.exe`. Add this same path to the other section as well (Interpreter include:) using the add button. In general, your path will always be "C:Users\" and then whatever user file your laptop will have made for your person, and then "\AppData\Local\Programs\Python\Python311\python.exe". The Python311 may differ if you have any later version of Python past the 3.13 line.
+Learn how to explore a data set using functions like `describe()`, `info()`, and `sample()`.
 
-5. Restart the Positron window. This can be done by searching up `> Developer: Reload Window` in the search bar up above.
+### Exercise 1
+
+Before you start doing data science, you must import the libraries you are going to use. Use the `import` statement to load the **polars** library with the alias `pl`. This is the standard convention in Python. Click "Run Code." The check mark which appears next to "Exercise 1" above indicates that you have submitted your answer.
+
+```{python working-with-data-1, exercise = TRUE}
+
+```
+
+```{python working-with-data-1-hint-1, eval = FALSE}
+import ... as pl
+```
+
+```{python working-with-data-1-test, include = FALSE}
+import polars as pl
+```
+
+###
+
+In Python, we import libraries to access their functions and data. The `import` statement makes the library available, and using `as pl` creates a short alias so we can type `pl` instead of `polars` every time.
+
+### Exercise 2
+
+In this tutorial, you will sometimes enter code into the exercise blocks, as you did above. But we will also ask you to run code in the Python Console. (You will do this in the other Positron window, since the Console in this window is currently running this tutorial.) Example:
+
+In the Python Console, run `import polars as pl`.
+
+With Console questions, we will usually ask you to **C**opy/**P**aste the **C**ommand/**R**esponse into an answer block, like the one below. We usually shorten those instructions as CP/CR. Do that now.
+
+```{r working-with-data-2}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 5)
+```
+
+###
+
+Your answer should look like:
+
+```
+>>> import polars as pl
+>>>
+```
+
+Your answer never needs to match ours perfectly. Our goal is just to ensure that you are actually following the instructions.
+
+### Exercise 3
+
+DataFrames are spreadsheet-like data structures in Polars. Let's load the famous iris dataset. We'll read it from a URL.
+
+In the Console, run:
+```
+import polars as pl
+iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+iris
+```
+
+CP/CR.
+
+```{r working-with-data-3}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 15)
+```
+
+###
+
+```{python working-with-data-3-test, echo = TRUE}
+import polars as pl
+iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+iris
+```
+
+Whenever we show outputs like this after a question, then we are showing our answer to the previous question, even if we do not label it as such.
+
+### Exercise 4
+
+In the Console, run `iris.describe()`. This provides summary statistics for numerical columns.
+
+CP/CR.
+
+```{r working-with-data-4}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 10)
+```
+
+###
+
+```{python working-with-data-4-test, echo = TRUE}
+import polars as pl
+iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+iris.describe()
+```
+
+###
+
+This method provides a quick statistical overview of each numerical variable in the dataset. In some cases, the tutorial displays the same object differently from what you were able to copy/paste. And that is OK! Your answer does not need to match our answer.
+
+### Exercise 5
+
+In the Console, run `iris.sample()`. This selects a random row from the dataset.
+
+CP/CR.
+
+```{r working-with-data-5}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 7)
+```
+
+###
+
+```{python working-with-data-5-test, echo = TRUE}
+import polars as pl
+iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+iris.sample()
+```
+
+###
+
+Your answer will differ from this answer because of the inherent randomness in methods like `sample()`.
+
+### Exercise 6
+
+In the Console, hit the Up Arrow to retrieve the previous command. Edit it to add the argument `n=4` to `iris.sample()`. This will return 4 random rows from the `iris` dataset.
+
+CP/CR.
+
+```{r working-with-data-6}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 10)
+```
+
+###
+
+```{python working-with-data-6-test, echo = TRUE}
+import polars as pl
+iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+iris.sample(n=4)
+```
+
+###
+
+Editing code directly in the Console quickly becomes annoying. See the **[positron.tutorials](https://ppbds.github.io/positron.tutorials/)** package for tutorials about using Positron to write and organize your code.
+
+### Exercise 7
+
+In the Console, run `print(iris)`. This returns the same result as typing `iris`.
+
+CP/CR.
+
+```{r working-with-data-7}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 10)
+```
+
+###
+
+```{python working-with-data-7-test, echo = TRUE}
+import seaborn as sns
+import pandas as pd
+iris = sns.load_dataset('iris')
+print(iris)
+```
+
+###
+
+You can control how many rows to display using `iris.head(n)` for the first n rows or `iris.tail(n)` for the last n rows.
+
+### Exercise 8
+
+In the Console, run `iris.head(3)`. This returns the first 3 rows of the `iris` dataset.
+
+CP/CR.
+
+```{r working-with-data-8}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 8)
+```
+
+###
+
+```{python working-with-data-8-test, echo = TRUE}
+import polars as pl
+iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+iris.head(3)
+```
+
+###
+
+`head()` by default gives the top of the DataFrame, so your answer should match our answer. `sample()`, on the other hand, picks random rows to return. But, in both cases, the result is a DataFrame.
+
+A central organizing principle of Polars is that most methods take a DataFrame and return a DataFrame. This allows us to "chain" commands together, one after the other, creating a pipeline very similar to R's pipe operator `|>`.
+
+### Exercise 9
+
+In the Console, run `help(iris)` or `iris.info()`.
+
+The `info()` method will show you information about the DataFrame including column names, data types, and memory usage.
+
+Copy/paste the output of `iris.info()` below.
+
+```{r working-with-data-9}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 10)
+```
+
+###
+
+You can find help about pandas functions with `help(function_name)` or by visiting the pandas documentation at https://pandas.pydata.org/.
+
+### Exercise 10
+
+In the Console, run `iris.schema`. This shows the column names and data types. CP/CR.
+
+```{r working-with-data-10}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 10)
+```
+
+###
+
+```{python working-with-data-10-test, echo = TRUE}
+import polars as pl
+iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+iris.schema
+```
+
+###
+
+The `schema` attribute displays information about the DataFrame's structure including the data types of each column. For example, `sepal_length` is listed as `Float64`, meaning it's a 64-bit floating-point number. You can also use `iris.dtypes` to see just the data types, or `iris.columns` to see just the column names.
+
+### Exercise 11
+
+In the Console, run `import math` then `math.sqrt(144)`.
+
+CP/CR.
+
+```{r working-with-data-11}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 5)
+```
+
+###
+
+```{python working-with-data-11-test, echo = TRUE}
+import math
+math.sqrt(144)
+```
+
+###
+
+The square root function is one of many built-in functions in Python's math module. Most return their result, which Python then, by default, prints out.
+
+### Exercise 12
+
+In the Console, run `x = math.sqrt(144)`.
+
+CP/CR.
+
+```{r working-with-data-12}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 3)
+```
+
+###
+
+```{python working-with-data-12-test, echo = TRUE}
+import math
+x = math.sqrt(144)
+```
+
+###
+
+The `=` symbol is the assignment operator in Python. In this case, we are *assigning* the value of `math.sqrt(144)` to the variable `x`. Nothing is printed out because of that assignment.
+
+### Exercise 13
+
+In the Console, run `x` or `print(x)`.
+
+CP/CR.
+
+```{r working-with-data-13}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 3)
+```
+
+###
+
+```{python working-with-data-13-test, echo = TRUE}
+import math
+x = math.sqrt(144)
+x
+```
+
+###
+
+Now that `x` has been defined in the Console, it is available for your use. Above, we just print it out. But we could also use it in other calculations, e.g., `x + 5`.
+
+
+## Method chaining and plots
+###
+
+Although Polars includes hundreds of methods for data manipulation, the most important are `filter()`, `select()`, `sort()`, `with_columns()`, and `group_by()` with `agg()`. These work very similarly to their R tidyverse equivalents!
+
+### Exercise 1
+
+Let's warm up by examining the `tips` dataset. Type the following and hit "Run Code":
+
+```
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips
+```
+
+```{python pipes-and-plots-1, exercise = TRUE}
+
+```
+
+```{python pipes-and-plots-1-hint-1, eval = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+...
+```
+
+```{python pipes-and-plots-1-test, include = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips
+```
+
+###
+
+The `tips` dataset contains information about restaurant tips, including total bill, tip amount, and other variables.
+
+### Exercise 2
+
+Run `tips.describe()` to see summary statistics.
+
+```{python pipes-and-plots-2, exercise = TRUE}
+
+```
+
+```{python pipes-and-plots-2-hint-1, eval = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips.describe()
+```
+
+```{python pipes-and-plots-2-test, include = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips.describe()
+```
+
+###
+
+Note that this gives us statistics for the numerical columns in the dataset.
+
+### Exercise 3
+
+Use `.drop_nulls()` to remove rows with missing values. In Polars, we pipe operations by calling methods one after another, just like in R! Try:
+
+```
+tips.drop_nulls()
+```
+
+```{python pipes-and-plots-3, exercise = TRUE}
+
+```
+
+```{python pipes-and-plots-3-hint-1, eval = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips.drop_nulls()
+```
+
+```{python pipes-and-plots-3-test, include = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips.drop_nulls()
+```
+
+###
+
+Note the number of rows in the DataFrame after `drop_nulls()`. This dataset actually has no missing values, so all rows remain.
+
+We can chain methods by writing `tips.drop_nulls().head()` to first drop NA values and then show the first few rows.
+
+### Exercise 4
+
+Chain `.filter()` to filter rows. Use `pl.col("time") == "Dinner"` as the argument. This is very similar to R's `filter()`!
+
+```{python pipes-and-plots-4, exercise = TRUE}
+
+```
+
+```{python pipes-and-plots-4-hint-1, eval = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips.filter(pl.col("time") == "Dinner")
+```
+
+```{python pipes-and-plots-4-test, include = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips.filter(pl.col("time") == "Dinner")
+```
+
+###
+
+This workflow --- in which we chain DataFrame methods together --- is very common in Polars and very similar to R's pipe workflow.
+
+The resulting DataFrame has the same number of columns as `tips` because `filter()` only affects the rows. But there are fewer rows now.
+
+### Exercise 5
+
+Continue the chain with `.select()` to choose specific columns. Use `["total_bill", "tip", "sex", "day"]` as the argument. You can use the "Copy Code" button to avoid retyping.
+
+```{python pipes-and-plots-5, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{python pipes-and-plots-5-hint-1, eval = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"])
+```
+
+```{python pipes-and-plots-5-test, include = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"])
+```
+
+###
+
+Because `select()` doesn't affect rows, we have the same number as after `filter()`. But we only have 4 columns now. This is just like R's `select()` function!
+
+### Exercise 6
+
+Copy previous code. Continue the chain with `.describe()`.
+
+```{python pipes-and-plots-6, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{python pipes-and-plots-6-hint-1, eval = FALSE}
+tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).describe()
+```
+
+```{python pipes-and-plots-6-test, include = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).describe()
+```
+
+###
+
+This gives us summary statistics for our filtered and selected data.
+
+### Exercise 7
+
+Copy previous code. Replace `.describe()` with `.drop_nulls()`.
+
+```{python pipes-and-plots-7, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{python pipes-and-plots-7-hint-1, eval = FALSE}
+tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).drop_nulls()
+```
+
+```{python pipes-and-plots-7-test, include = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).drop_nulls()
+```
+
+###
+
+The number of rows stays the same because there are no missing values in this subset.
+
+### Exercise 8
+
+Continue the chain with `.sort("tip")` to sort by the tip column.
+
+```{python pipes-and-plots-8, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{python pipes-and-plots-8-hint-1, eval = FALSE}
+tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).drop_nulls().sort("tip")
+```
+
+```{python pipes-and-plots-8-test, include = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).drop_nulls().sort("tip")
+```
+
+###
+
+The `sort()` method sorts the rows of a DataFrame. By default, it sorts in ascending order. This is just like R's `arrange()` function!
+
+### Exercise 9
+
+Copy the previous code. Add `descending=True` as an argument to `sort()` to sort in descending order. This is like using `desc()` in R!
+
+```{python pipes-and-plots-9, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{python pipes-and-plots-9-hint-1, eval = FALSE}
+.sort("tip", descending=True)
+```
+
+```{python pipes-and-plots-9-test, include = FALSE}
+import polars as pl
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).drop_nulls().sort("tip", descending=True)
+```
+
+###
+
+Got to respect someone who tips $10!
+
+### Exercise 10
+
+Let's make a plot! For plotting, we'll use plotnine, which works exactly like ggplot2 in R. Copy the previous code, but remove the `.sort()` line. Instead, save the result to a variable called `tips_dinner`, then convert it to pandas with `.to_pandas()` (plotnine works with pandas DataFrames), and create a plot using `ggplot()`.
+
+Here's the pattern:
+```
+import polars as pl
+from plotnine import ggplot, aes, geom_point
+
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+
+tips_dinner = (tips
+  .filter(pl.col("time") == "Dinner")
+  .select(["total_bill", "tip", "sex", "day"])
+  .drop_nulls()
+  .to_pandas())
+
+ggplot(tips_dinner, aes(x='total_bill', y='tip')) + geom_point()
+```
+
+```{python pipes-and-plots-10, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{python pipes-and-plots-10-hint-1, eval = FALSE}
+from plotnine import ggplot, aes, geom_point
+
+tips_dinner = (tips
+  .filter(pl.col("time") == "Dinner")
+  .select([...])
+  .drop_nulls()
+  .to_pandas())
+
+ggplot(tips_dinner, aes(x='...', y='...')) + geom_point()
+```
+
+```{python pipes-and-plots-10-test, include = FALSE}
+import polars as pl
+from plotnine import ggplot, aes, geom_point
+
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+
+tips_dinner = (tips
+  .filter(pl.col("time") == "Dinner")
+  .select(["total_bill", "tip", "sex", "day"])
+  .drop_nulls()
+  .to_pandas())
+
+ggplot(tips_dinner, aes(x='total_bill', y='tip')) + geom_point()
+```
+
+###
+
+This creates a scatter plot showing the relationship between total bill and tip amount. Notice how similar this is to ggplot2 in R! We use `ggplot()`, `aes()`, and `geom_point()` just like in R.
+
+### Exercise 11
+
+Copy previous code. Now let's add jitter to see overlapping points better, just like in R! Change `geom_point()` to `geom_jitter()`.
+
+```{python pipes-and-plots-11, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{python pipes-and-plots-11-hint-1, eval = FALSE}
+from plotnine import ggplot, aes, geom_jitter
+
+ggplot(tips_dinner, aes(x='total_bill', y='tip')) + geom_jitter()
+```
+
+```{python pipes-and-plots-11-test, include = FALSE}
+import polars as pl
+from plotnine import ggplot, aes, geom_jitter
+
+tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+
+tips_dinner = (tips
+  .filter(pl.col("time") == "Dinner")
+  .select(["total_bill", "tip", "sex", "day"])
+  .drop_nulls()
+  .to_pandas())
+
+ggplot(tips_dinner, aes(x='total_bill', y='tip')) + geom_jitter()
+```
+
+###
+
+This is exactly like using `geom_jitter()` in R's ggplot2! The jitter adds a small amount of random noise to help us see overlapping points.
+
+### Exercise 12
+
+Finally, add a title and labels using `plt.title()`, `plt.xlabel()`, and `plt.ylabel()`. Consider this example:
+
+```
+import matplotlib.pyplot as plt
+import seaborn as sns
+tips = sns.load_dataset('tips')
+
+tips_dinner = (tips
+               .query('time == "Dinner"')
+               [['total_bill', 'tip', 'sex', 'day']]
+               .dropna())
+
+sns.scatterplot(data=tips_dinner, x='total_bill', y='tip', alpha=0.6)
+plt.title('Dinner Tips vs Total Bill')
+plt.xlabel('Total Bill ($)')
+plt.ylabel('Tip ($)')
+plt.show()
+```
+
+You can make yours look like this, or create your own title and labels.
+
+```{python pipes-and-plots-12, exercise = TRUE}
+
+```
+
+<button onclick = "transfer_code(this)">Copy previous code</button>
+
+```{python pipes-and-plots-12-hint-1, eval = FALSE}
+plt.title('...')
+plt.xlabel('...')
+plt.ylabel('...')
+plt.show()
+```
+
+```{python pipes-and-plots-12-test, include = FALSE}
+import matplotlib.pyplot as plt
+import seaborn as sns
+tips = sns.load_dataset('tips')
+
+tips_dinner = (tips
+               .query('time == "Dinner"')
+               [['total_bill', 'tip', 'sex', 'day']]
+               .dropna())
+
+sns.scatterplot(data=tips_dinner, x='total_bill', y='tip', alpha=0.6)
+plt.title('Dinner Tips vs Total Bill')
+plt.xlabel('Total Bill ($)')
+plt.ylabel('Tip ($)')
+plt.show()
+```
+
+###
+
+Note that the code in the exercise block is not saved. If you want to save the code, you can copy/paste it into a Python script file (.py).
+
+## Generative AI
+###
+
+Generative AI --- tools like [ChatGPT](https://chat.openai.com/), [Grok](https://x.ai/), [Claude](https://claude.ai/), [DeepSeek](https://www.deepseek.com/en) and so on --- are the future, of data science and everything else. The more you use these tools, the better off you will be. Unfortunately, the tools are changing so much that it is hard for a tutorial like this to stay up-to-date. This section provides some general advice and practice exercises.
+
+### Exercise 1
+
+Using any AI you like, ask it to write a one-sentence summary about the Python programming language. Copy the answer below.
+
+```{r generative-ai-1}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 5)
+```
+
+###
+
+Example answer:
+
+```
+Python is a high-level, interpreted programming language known for its simplicity, readability, and versatility, widely used for web development, data analysis, artificial intelligence, and scientific computing.
+```
+
+If you do not want to pay for an AI service, then you will probably need to have free accounts with several different services. That way, if one service cuts you off for the day, you can switch to another.
+
+### Exercise 2
+
+Type this in the Python Console and hit Enter:
+```
+import polars as pl
+iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+iris.head()
+```
+
+Copy/paste the command and the first few lines of output.
+
+```{r generative-ai-2}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 10)
+```
+
+###
+
+```{python generative-ai-2-test, echo = TRUE}
+import polars as pl
+iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+iris.head()
+```
+
+When working with AI, you often need to tell it about the dataset. The easiest way to do that is often to just copy/paste the first few rows. That shows the AI what the column names and types are, which is key information for creating plots and data pipelines.
+
+### Exercise 3
+
+Copy/paste the top of the `iris` DataFrame into your AI interface and ask it to create a chain of methods using Polars that calculates the average `sepal_length` for each `species`. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
+
+CP/CR.
+
+```{r generative-ai-3}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 10)
+```
+
+###
+
+Claude gave us this answer:
+
+```{python generative-ai-3-test, echo = TRUE}
+import polars as pl
+iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+iris.group_by("species").agg(pl.col("sepal_length").mean())
+```
+
+###
+
+This is a great answer! It uses `group_by()` just like R's tidyverse, and then `agg()` (short for aggregate) with `pl.col()` to specify which column to calculate the mean for. Notice how similar this is to R:
+
+R version: `iris |> group_by(species) |> summarize(mean_sepal_length = mean(sepal_length))`
+
+Polars version: `iris.group_by("species").agg(pl.col("sepal_length").mean())`
+
+Using AI is good! But intelligent use --- use in which you understand what the AI has done and try to improve/clarify its answer --- is even better.
+
+### Exercise 4
+
+Ask AI to create a beautiful plot using the `iris` dataset and the pandas/matplotlib/seaborn libraries. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
+
+```{r generative-ai-4}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 20)
+```
+
+###
+
+Example code from DeepSeek:
+
+```{python generative-ai-4-test, echo = TRUE}
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+iris = sns.load_dataset('iris')
+
+# Create a pairplot with hue based on species
+sns.pairplot(iris, hue='species', palette='Set2',
+             diag_kind='kde', plot_kws={'alpha': 0.6})
+plt.suptitle('Iris Dataset - Pairwise Relationships', y=1.02)
+plt.show()
+```
+
+###
+
+Note:
+
+* AI tools are great at generating visualizations, but you should understand the code they provide
+* Different AI tools may suggest different approaches - compare and learn from them
+* Always test the code and make sure you understand what each line does
+* You can ask the AI to explain any part of the code you don't understand
+
+The key is practice. Use AI every day!
+
+## Summary
+###
+
+This tutorial introduced you to the Python language for data science. You learned how to work with datasets using **Polars**, a fast DataFrame library with syntax very similar to R's tidyverse. You learned how to chain operations using method chaining (just like R's pipe operator `|>`), and how to make plots using **matplotlib** and **seaborn**.
+
+The key advantage of Polars is that it feels familiar to R users while providing the speed and ecosystem of Python. Functions like `filter()`, `select()`, `sort()`, and `group_by()` work almost identically to their R counterparts!
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
