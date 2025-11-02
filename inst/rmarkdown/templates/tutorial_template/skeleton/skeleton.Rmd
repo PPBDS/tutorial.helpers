@@ -5,6 +5,7 @@ tutorial:
   id: "XX ADD ID, which should be the same as the directory in which this tutorial is located"
 output: 
   learnr::tutorial:
+    df_print: default
     progressive: true
     allow_skip: true
 runtime: shiny_prerendered
@@ -15,6 +16,10 @@ description: "XX ADD DESCRIPTION (a single sentence)"
 library(learnr)
 library(tutorial.helpers)
 
+# XX: Add other packages you use. Such packages should also be added
+# to the student QMD. Note that `df_print: default` above causes tibbles
+# in the tutorial to appear as they would in the Console rather than as
+# pretty html tables.
 
 knitr::opts_chunk$set(echo = FALSE)
 options(tutorial.exercise.timelimit = 60, 
@@ -28,9 +33,9 @@ options(tutorial.exercise.timelimit = 60,
 <!-- * If you need to use the copy code button, you must load the relevant child document. -->
 <!-- * Use check_current_tutorial() and make_exercise(). Very helpful! -->
 <!-- * Edit yaml at the top of this file -->
-<!-- * Save the file as "tutorial.Rmd" in the correct directory under inst/tutorials/. -->
+<!-- * Save the file as "tutorial.Rmd" in the correct directory under inst/tutorials/XX/, where XX is the same as the tutorial id. -->
 <!-- * Load any necessary libraries for the tutorial in the first code chunk -->
-<!-- * Anytime to have a student `Cmd/Ctrl + Enter`, you ask for CP/CR and then provide your code. -->
+<!-- * Anytime you have a student `Cmd/Ctrl + Shift + Enter`, you ask for CP/CR and then provide your code. -->
 <!-- * Delete this and the other commented instructions below. -->
 
 ## Introduction
@@ -40,13 +45,13 @@ options(tutorial.exercise.timelimit = 60,
 
 ### Exercise 1
 
-Create a Github repo called `XX`. Make sure to click the "Add a README file" check box.
+Create a Github repo called `XX`. Set the "Add a README file" toggle box to "On."
 
 Connect the repo to a project on your computer using `File -> New Folder from Git ...`.  Make sure to select the "Open in a new window" box. 
 
 You need two Positon windows: this one for running the tutorial and the one you just created for writing your code and interacting with the Console.
 
-In the new window, select `File -> New File -> Quarto Document ...`. Provide a title -- `"XX"` -- and an author (you). Render the document and save it as `analysis.qmd`.
+In the new window, select `File -> New File -> Quarto Document ...`. Provide a title -- `"XX"` -- and an author (you). Save the file as `analysis.qmd`. Render the document. 
 
 Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.
 
@@ -73,6 +78,8 @@ question_text(NULL,
 
 <!-- XX: Insert a knowledge drop related to this project. -->
 
+<!-- XX: By default, the next two questions just mention tidyverse. If there is more than one required library, you can just add those libraries to these steps, adjusting the grammar as needed. Or, you might have separate questions for each library, thereby providing more room for knowledge drops. -->
+
 ### Exercise 2
 
 In your QMD, put `library(tidyverse)` in a new code chunk. Render the file using `Cmd/Ctrl + Shift + K`.
@@ -83,6 +90,8 @@ Notice that the file does not look good because the code is visible and there ar
 execute: 
   echo: false
 ```
+
+Using `Cmd/Ctrl + Shift + K`, render the file again. Only the title and author should appear in the HTML.
 
 In the Console, run:
 
@@ -107,9 +116,9 @@ question_text(NULL,
 
 ### Exercise 3
 
-Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Enter` to execute that line.
+Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Shift + Enter` to execute that line.
 
-Note that this causes `library(tidyverse)` to be copied down to the Console and then executed. 
+Note how this command causes `library(tidyverse)` to be copied down to the Console and then executed. 
 
 CP/CR.
 
@@ -129,13 +138,13 @@ question_text(NULL,
 
 ### Exercise 4
 
-<!-- XX: Delete this question if you do not make use of the `data` directory in this tutorial. -->
+<!-- XX: Delete this question if you do not make use of the `data` directory in this tutorial. Note the extra spaces after the command. These are needed to ensure separate lines for each command. -->
 
 From the Console, run these three commands:
 
-`getwd()`
-`dir.create("data")`
-`list.files()`
+`getwd()`  
+`dir.create("data")`  
+`list.files()`  
 
 This will create a `data` directory in your project. This is a good place to store any data that you are working with.
 
@@ -159,13 +168,11 @@ You answer should look something like, although your path will be different.
 [1] "/Users/dkane/Desktop/projects/XX"
 > dir.create("data")
 > list.files()
- [1] "analysis.qmd"        "data"    "README.md"
+ [1] "analysis_files" "analysis.html"  "analysis.qmd"   "data"           "README.md"  
 >
 ````
 
-
-
-<!-- XX: You will probably have two or three Sections, in between the Introduction and Summary. We provide on example below. Before editing it, you may want to copy/paste it to create the skeleton for Second section. Any tutorial which both uses a lot of AI and is supppsed to take an hour or so will probably only have two Sections.  -->
+<!-- XX: You will probably have two or three Sections, in between the Introduction and Summary. We provide on example below. Before editing it, you may want to copy/paste it to create the skeleton for Second section. Any tutorial which both uses a lot of AI and is supposed to take an hour or so will probably only have two Sections.  -->
 
 ## XX: First section (use sentence case)
 ###
@@ -174,7 +181,27 @@ You answer should look something like, although your path will be different.
 
 ### Exercise 1
 
-<!-- XX: The first Exercise or two are in a Section often involved in getting the data for the tutorial. You must download the data into the `data` directory, obviously.  -->
+We begin by downloading XX directly from GitHub to the `data` directory using `download.file()`. 
+
+In the Console, run:
+
+```         
+download.file(
+  "https://github.com/PPBDS/ai.tutorials/raw/refs/heads/main/inst/tutorials/r4ds-2/data/cheeses.xlsx",
+  destfile = "data/XX"
+)
+```
+
+CP/CR.
+
+```{r cheese-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
 
 
 ### Exercise 2
@@ -217,7 +244,7 @@ Within the latest code chunk, add the option: `#| cache: true`. Assign the resul
 
 If you have not done so already, you should add `analysis_cache` to the `.gitginore`. The content of the cache file does not belong on GitHub.
 
-Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Enter`, thus ensuring that the workspace also includes a copy of `x`.
+Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Shift + Enter`, thus ensuring that the workspace also includes a copy of `x`.
 
 CP/CR.
 
@@ -340,7 +367,7 @@ question_text(NULL,
 Publish your rendered QMD to GitHub Pages. In the Terminal --- not the Console! --- run:
 
 ````
-quarto publish gh-pages XX.qmd
+quarto publish gh-pages analysis.qmd
 ````
 
 Copy/paste the resulting URL below.
