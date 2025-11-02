@@ -47,6 +47,9 @@ jobs:
 
       - uses: r-lib/actions/setup-renv@v2
 
+      - name: Install reticulate
+        run: Rscript -e "install.packages('reticulate')"
+
       - name: Install rcmdcheck
         shell: Rscript {0}
         run: renv::install("rcmdcheck")
