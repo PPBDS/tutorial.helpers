@@ -1,4 +1,4 @@
-# Satvika
+## Items
 
 * Should "Save and push" in the standard template be something more like "Save, commit and push?" Or should it be something shorter? Or maybe the words should be different, perhaps matching the Positron verbiage, like the use if "Sync?"
 
