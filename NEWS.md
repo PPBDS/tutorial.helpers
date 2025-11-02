@@ -2,6 +2,8 @@
 
 * Add "Generative AI" section to "Introduction to R" tutorial.
 
+* Add "Introduction to Python" tutorial.
+
 # tutorial.helpers 0.6.0
 
 * Replace process_submissions() with submissions_summary().

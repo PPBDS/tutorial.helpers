@@ -14,10 +14,6 @@ description: Tutorial for introducing students to the Python language.
 
 <!-- normalizePath(".venv/Scripts/python.exe", winslash = "/", mustWork = TRUE) fails on mac. Maybe only do on Windows? -->
 
-<!-- Get rid of install if not there. Make like other tutorials. -->
-
-<!-- Get rid of gradethis. Don't care if check shows up. -->
-
 <!-- Do the test cases need to have all the Python commands? Or does the tutorial magically know that import polars . . . has already been run? -->
 
 <!-- Learn about reticulate. -->
