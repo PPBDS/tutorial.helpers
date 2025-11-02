@@ -1,5 +1,25 @@
 # Satvika
 
+* Should "Save and push" in the standard template be something more like "Save, commit and push?" Or should it be something shorter? Or maybe the words should be different, perhaps matching the Positron verbiage, like the use if "Sync?"
+
+* Should "in this setup chunk" in the standard template be different? In particular, should "setup" be enclosed in `backticks`? Probably would be better of "setup" were linked to a page which explains why we use this terminology and any weird effects it might have.
+
+* Should we explain why we can turn off echos in the YAML header but need to use a code chunk option for message?
+
+* Maybe we need a new essay which includes a dozen or so sections, each of which explains a specific item/complexity. Then, we can just link to the relevant section from the relevant sentence/phrase from the standard template. Every once in a while, we can urge the student to check a link and learn about some of the details.
+
+* If we did the above, then we could get rid of some of the default knowledge drops, like the warning about ending `analysis.qmd` with a blank line. This is worth discussing in our `details.qmd` essay as discussed above. It is not worth repeating in every single tutorial.
+
+* Should really be able to use `Cmd/Ctrl + Enter` in place of `Cmd/Ctrl + Shift + Enter`. Has the bug been fixed or does the former still fail to execute all the lines in a pipe?
+
+* Stuff like this is wordy:
+
+Copy and paste this code to continue the previous code and save the file. Place your cursor on the first line of code and run `Cmd/Ctrl + Shift + Enter`.
+
+Explain in the tutorial how the command "Ask AI and run the code." implicitly includes all the necessary steps. Maybe:
+
+> Going forward, you may assume that, whenever we tell you to "Ask AI," we always want you to then use the new code in the QMD, to execute that code with `Cmd/Ctrl + Shift + Enter`, and then **C**opy/**P**aste the **C**ode/**R**esponse as your answer. Recall that `Cmd/Ctrl + Shift + Enter` makes this easy because it takes the code from the QMD, copies it into the Console, and then hits `Enter`.
+
 
 
 ## Later Projects

@@ -24,6 +24,7 @@ Suggests:
     httr,
     knitr,
     quarto,
+    reticulate,
     roxygen2,
     testthat (>= 3.0.0),
     tidyverse
