@@ -46,10 +46,9 @@ jobs:
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-renv@v2
-      - name: Ensure reticulate is installed
-        shell: Rscript {0}
-        run: renv::install("reticulate")
 
+      - name: Install reticulate
+        run: Rscript -e "install.packages('reticulate')"
 
       - name: Install rcmdcheck
         shell: Rscript {0}
