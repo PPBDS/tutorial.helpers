@@ -27,10 +27,15 @@ if (file.exists(py_guess)) {
 ```
 
 ```{r setup, include=FALSE}
-# -------- R packages: auto-install (quiet) --------
+# ---- Safe CRAN mirror + interactive-only installs ----
+if (is.null(getOption("repos")["CRAN"]) || !nzchar(getOption("repos")["CRAN"])) {
+  options(repos = c(CRAN = "https://cloud.r-project.org"))
+}
 needed <- c("learnr","tutorial.helpers","knitr","reticulate")
 to_install <- setdiff(needed, rownames(installed.packages()))
-if (length(to_install)) install.packages(to_install, quiet = TRUE)
+if (interactive() && length(to_install)) {
+  install.packages(to_install, quiet = TRUE)
+}
 
 library(learnr)
 library(tutorial.helpers)
@@ -40,70 +45,34 @@ library(reticulate)
 knitr::opts_chunk$set(echo = FALSE, out.width = "90%")
 learnr::tutorial_options(
   exercise.timelimit = 60,
-  # No gradethis checker:
-  # exercise.checker = NULL (default)
   exercise.startover = TRUE
 )
 
-# -------- Environment flags --------
+# ---- Environment flags ----
 is_windows <- identical(.Platform$OS.type, "windows")
 in_ci <- !interactive() || identical(tolower(Sys.getenv("CI")), "true")
 
-venv <- ".venv"
-uv <- Sys.which("uv")
-
+# ---- Python/reticulate behavior ----
 if (in_ci) {
-  # In CI, render code but never execute Python
+  # Don’t execute Python in CI (render code only)
   knitr::knit_engines$set(
     python = function(options) {
-      knitr::engine_output(
-        options,
-        code = options$code,
-        out = "\n<!-- python execution skipped in CI -->\n"
-      )
+      knitr::engine_output(options, code = options$code,
+                           out = "\n<!-- python execution skipped in CI -->\n")
     }
   )
 } else {
-  # Local/interactive bootstrap
-  run_cmd <- function(cmd, args) {
-    message(sprintf(">> %s %s", cmd, paste(args, collapse = " ")))
-    status <- system2(cmd, args, stdout = TRUE, stderr = TRUE)
-    invisible(status)
-  }
-
-  if (!nzchar(uv)) {
-    message("`uv` not found; install from https://docs.astral.sh/uv/ or continue with reticulate fallback.")
-  }
-
-  # Create venv if missing
-  if (!dir.exists(venv)) {
-    if (nzchar(uv)) {
-      try(run_cmd(uv, c("venv", "--python", "3.12", "--seed", venv)), silent = TRUE)
-    } else {
-      try(reticulate::virtualenv_create(envname = venv), silent = TRUE)
-    }
-  }
-
-  # OS-appropriate python path
+  # Use local venv if present; do not install anything here
+  venv <- ".venv"
   py_bin <- if (is_windows) file.path(venv, "Scripts", "python.exe") else file.path(venv, "bin", "python")
-
-  # Point reticulate at the venv if it exists
   if (file.exists(py_bin)) {
     Sys.setenv(RETICULATE_PYTHON = normalizePath(py_bin, winslash = "/", mustWork = FALSE))
+    reticulate::use_virtualenv(venv, required = FALSE)
   }
-
-  # Install Python deps (local only)
-  py_pkgs <- c("polars","pandas","matplotlib","seaborn","plotnine")
-  if (nzchar(uv)) {
-    try(run_cmd(uv, c("pip", "install", "--python", venv, "--upgrade", py_pkgs)), silent = TRUE)
-  } else if (file.exists(py_bin)) {
-    try(system2(py_bin, c("-m", "pip", "install", "--upgrade", py_pkgs)), silent = TRUE)
-  }
-
-  # Activate venv for reticulate and enable python engine
-  if (dir.exists(venv)) reticulate::use_virtualenv(venv, required = FALSE)
+  # Enable Python engine (reticulate)
   knitr::knit_engines$set(python = reticulate::eng_python)
 }
+
 
 ```
 
