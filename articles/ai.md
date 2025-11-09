@@ -5,29 +5,17 @@
 AI changes everything.
 
 This document describes the best way to write R tutorials which embrace
-AI usage by students. Prior to the rise of AI, [this
-was](https://ppbds.github.io/tutorial.helpers/articles/instructions.md)
-the best way to write tutorials, especially those which cover [the
-material in an assigned
-textbook](https://ppbds.github.io/tutorial.helpers/articles/books.md).
-This document assumes that you already know how to [construct
-tutorials](https://ppbds.github.io/tutorial.helpers/articles/instructions.md)
-using the [**learnr**](https://rstudio.github.io/learnr/) package, and
-with the help of the
-[**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers)
-package. Students need some background in order to complete these sorts
-of tutorials, some familiarity with R, GitHub and so on. Students should
-have completed the “Getting Started” and “Introduction to R” tutorials
-in the
-[**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers)
-package. They should also complete the first four tutorials (i.e.,
-through “Positron and GitHub Introduction”) from
-[**positron.tutorials**](https://ppbds.github.io/positron.tutorials/).
-
-The rise of AI leads to a new kind of tutorial. Our purpose is no longer
-to teach students how to code.
+the student use of AI. Prior to the rise of AI,
+[this](https://web.archive.org/web/20251008195459/https://ppbds.github.io/tutorial.helpers/articles/instructions.html)
+[was](https://web.archive.org/web/20251008195807/https://ppbds.github.io/tutorial.helpers/articles/books.html)
+the best way to write tutorials. Our purpose is no longer to teach
+students how to code.
 
 > *Our purpose is to teach students how to use AI to create.*
+
+The \[**tutorial.helpers**}() package
+
+### Overview
 
 Students always need more practice working in a Quarto document (the
 QMD) and the Console at the same time. Good data scientists go back and
@@ -35,16 +23,16 @@ forth between these two modes, writing something in the QMD, executing
 it in the Console, editing the QMD, executing again, and so on. We need
 to force students to do that more often.
 
-AI tutorials begin with an Introduction which provides a summary of the
-key packages/functions which the tutorial will cover. The Introduction
-continues with a series of exercises which set up the repo/project/QMD
-in which most of the tutorial will be completed.
+AI tutorials begin with an *Introduction* which provides a summary of
+the key packages/functions which the tutorial will cover. The
+Introduction continues with a series of exercises which set up the
+repo/project/QMD in which most of the tutorial will be completed.
 
-After the Introduction, there are 2 to 4 sections — the official
+After the Introduction, there are 1 to 3 sections — the official
 **learnr** nomenclature is “Topics” — which are the meat of the
 tutorial.
 
-The last section is the Summary. It starts with the same overview with
+The last section is the *Summary*. It starts with the same overview with
 which the Introduction began, but in the past tense. It then has a
 couple exercises which finish up the tutorial by using
 `quarto publish gh-pages analysis.qmd` to create a webpage featuring the
@@ -62,7 +50,16 @@ easier. Either way, you will need to do some edits. Any time you see
 `XX` in an example exercise, you need to replace it with something
 sensible.
 
-### Introduction
+### Tutorial Introduction
+
+Students need some background in order to complete these sorts of
+tutorials, some familiarity with R, GitHub and so on. Students should
+have completed the “Getting Started” and “Introduction to R” tutorials
+in the
+[**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers)
+package. They should also complete the first four tutorials (i.e.,
+through “Positron and GitHub Introduction”) from
+[**positron.tutorials**](https://ppbds.github.io/positron.tutorials/).
 
 Always begin by having students set up a repo and Quarto document to
 work in. Again, you must replace `XX` with something sensible and
