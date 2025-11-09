@@ -1,0 +1,134 @@
+# Configure Positron Settings
+
+Locates or creates the Positron `settings.json` file on Windows or
+macOS, then updates those settings based on the provided configuration
+list. Users can specify settings like RStudio keyboard shortcuts. The
+function can also optionally configure R profile settings including
+binary package preferences and download timeout. Positron is an
+R-focused Integrated Development Environment (IDE) based on Visual
+Studio Code, designed to enhance the R programming experience with a
+modern interface and features.
+
+## Usage
+
+``` r
+set_positron_settings(
+  home_dir = path.expand("~"),
+  set.rprofile = TRUE,
+  positron_settings = list(editor.wordWrap = "on", workbench.startupEditor = "none",
+    files.defaultLanguage = "r", workbench.editor.enablePreview = FALSE,
+    terminal.integrated.defaultProfile.windows = "Git Bash", git.enableSmartCommit =
+    TRUE, git.confirmSync = FALSE)
+)
+```
+
+## Arguments
+
+- home_dir:
+
+  Optional character string specifying the base directory to use as the
+  user's home directory. Defaults to `path.expand("~")`. Useful for
+  testing or custom setups.
+
+- set.rprofile:
+
+  Logical, defaults to `TRUE`. If `TRUE`, runs
+  [`set_rprofile_settings()`](https://ppbds.github.io/tutorial.helpers/reference/set_rprofile_settings.md)
+  after applying settings to configure binary package installation and
+  download timeout in the R profile.
+
+- positron_settings:
+
+  List of settings to apply. Can be structured as a list of lists where
+  each sub-list contains a setting name and value (e.g.,
+  `list(list("rstudio.keymap.enable", TRUE))`), or as a named list
+  (e.g., `list("rstudio.keymap.enable" = TRUE)`). Defaults to a named
+  list with seven settings:
+  `list("editor.wordWrap" = "on", "workbench.startupEditor" = "none", "files.defaultLanguage" = "r", "workbench.editor.enablePreview" = FALSE, "terminal.integrated.defaultProfile.windows" = "Git Bash", "git.enableSmartCommit" = TRUE, "git.confirmSync" = FALSE)`,
+  which enables word wrap for improved code readability, disables
+  startup editor for a clean interface, sets R as the default language
+  for new files, disables preview mode for predictable tab behavior,
+  sets Git Bash as the default terminal on Windows, enables auto-staging
+  of Git changes, and disables confirmation dialogs for Git push/pull,
+  respectively.
+
+## Value
+
+Invisible `NULL`. The function's purpose is its side effect: modifying
+or creating the `settings.json` file. It also prints messages to the
+console indicating actions taken.
+
+## Details
+
+This function uses the `jsonlite` package to handle JSON operations and
+creates the necessary directory structure if it doesn't exist. It is
+designed to work cross-platform by detecting the operating system and
+constructing the appropriate file path to Positron's user settings. The
+function applies the settings provided in the `positron_settings`
+parameter. If the `positron_settings` list is empty, no changes are made
+to the `settings.json` file. By default, seven settings are applied
+unless overridden: enabling word wrap for better code readability,
+disabling startup editor for a clean interface, setting R as the default
+language for new files, disabling preview mode for predictable tab
+behavior, setting Git Bash as the default terminal on Windows, enabling
+Git smart commit, and disabling Git sync confirmation dialogs.
+
+Note: Windows file paths in settings should use forward slashes (/) or
+escaped backslashes (\\). The function will automatically handle path
+normalization for Windows.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+  # Apply default settings (word wrap, clean startup, R language, 
+  # no preview, Git Bash terminal, smart commit, no sync confirmation)
+  set_positron_settings()
+  
+  # Enable RStudio keyboard shortcuts using list of lists structure
+  set_positron_settings(
+    positron_settings = list(list("rstudio.keymap.enable", TRUE))
+  )
+  
+  # Enable RStudio keyboard shortcuts using named list structure
+  set_positron_settings(
+    positron_settings = list("rstudio.keymap.enable" = TRUE)
+  )
+  
+  # Apply multiple settings using named list
+  set_positron_settings(
+    positron_settings = list(
+      "rstudio.keymap.enable" = TRUE,
+      "editor.wordWrap" = "on"
+    )
+  )
+  
+  # Set a Windows file path (use forward slashes)
+  set_positron_settings(
+    positron_settings = list(
+      "files.dialog.defaultPath" = "C:/Users/username/projects"
+    )
+  )
+  
+  # Apply settings without modifying .Rprofile
+  set_positron_settings(
+    set.rprofile = FALSE,
+    positron_settings = list("rstudio.keymap.enable" = TRUE)
+  )
+  
+  # Handle case where settings directory does not exist
+  set_positron_settings(
+    home_dir = tempfile(),  # Simulate a non-existent directory
+    positron_settings = list("rstudio.keymap.enable" = TRUE)
+  )
+  
+  # Handle case with invalid JSON file
+  # Create an invalid JSON file for testing
+  dir.create(file.path(tempdir(), "Positron", "User"), recursive = TRUE)
+  writeLines("invalid json", file.path(tempdir(), "Positron", "User", "settings.json"))
+  set_positron_settings(
+    home_dir = tempdir(),
+    positron_settings = list("rstudio.keymap.enable" = TRUE)
+  )
+} # }
+```

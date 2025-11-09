@@ -1,0 +1,498 @@
+# Tutorials in the Age of AI
+
+### Introduction
+
+AI changes everything.
+
+This document describes the best way to write R tutorials which embrace
+AI usage by students. Prior to the rise of AI, [this
+was](https://ppbds.github.io/tutorial.helpers/articles/instructions.md)
+the best way to write tutorials, especially those which cover [the
+material in an assigned
+textbook](https://ppbds.github.io/tutorial.helpers/articles/books.md).
+This document assumes that you already know how to [construct
+tutorials](https://ppbds.github.io/tutorial.helpers/articles/instructions.md)
+using the [**learnr**](https://rstudio.github.io/learnr/) package, and
+with the help of the
+[**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers)
+package. Students need some background in order to complete these sorts
+of tutorials, some familiarity with R, GitHub and so on. Students should
+have completed the “Getting Started” and “Introduction to R” tutorials
+in the
+[**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers)
+package. They should also complete the first four tutorials (i.e.,
+through “Positron and GitHub Introduction”) from
+[**positron.tutorials**](https://ppbds.github.io/positron.tutorials/).
+
+The rise of AI leads to a new kind of tutorial. Our purpose is no longer
+to teach students how to code.
+
+> *Our purpose is to teach students how to use AI to create.*
+
+Students always need more practice working in a Quarto document (the
+QMD) and the Console at the same time. Good data scientists go back and
+forth between these two modes, writing something in the QMD, executing
+it in the Console, editing the QMD, executing again, and so on. We need
+to force students to do that more often.
+
+AI tutorials begin with an Introduction which provides a summary of the
+key packages/functions which the tutorial will cover. The Introduction
+continues with a series of exercises which set up the repo/project/QMD
+in which most of the tutorial will be completed.
+
+After the Introduction, there are 2 to 4 sections — the official
+**learnr** nomenclature is “Topics” — which are the meat of the
+tutorial.
+
+The last section is the Summary. It starts with the same overview with
+which the Introduction began, but in the past tense. It then has a
+couple exercises which finish up the tutorial by using
+`quarto publish gh-pages analysis.qmd` to create a webpage featuring the
+cool plots which the student has created. The URL for this new webpage
+is usually the answer to the last exercise in Summary, thereby
+completing the tutorial.
+
+Anytime you ask a student to execute something in the Console, you
+confirm that they have done so with CP/CR, the abbreviation to
+**C**opy/**P**aste the **C**ommand/**R**esponse.
+
+Feel free to use any of the example exercises from this document. Soon,
+we will add options to `tutorial.helpers::make_exercises()` to make this
+easier. Either way, you will need to do some edits. Any time you see
+`XX` in an example exercise, you need to replace it with something
+sensible.
+
+### Introduction
+
+Always begin by having students set up a repo and Quarto document to
+work in. Again, you must replace `XX` with something sensible and
+usually different from the other `XX`’s. So, in the below example, the
+name of the repo and the title of the QMD will be different even though
+we hold their places with `XX` in both cases.
+
+```` default
+### Exercise 1
+
+Create a Github repo called `XX`. Make sure to click the "Add a README file" check box.
+
+Connect the repo to a project on your computer using `File -> New Folder from Git ...`.  Make sure to select the "Open in a new window" box. 
+
+You need two Positon windows: this one for running the tutorial and the one you just created for writing your code and interacting with the Console.
+
+In the new window, select `File -> New File -> Quarto Document ...`. Provide a title -- `"XX"` -- and an author (you). Render the document and save it as `analysis.qmd`.
+
+Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.
+
+In the Console, run:
+
+```         
+show_file(".gitignore")
+```
+
+If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the Console.
+
+CP/CR.
+
+```{r introduction-1}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 3)
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+Feel free to copy/paste this question as-is, but replacing `XX` with
+whatever makes sense for your assignment. That is, you need to provide
+your own repo name, Quarto document title and so on. The repo name
+should be descriptive and also not likely to have conflicts with other
+repos in the students GitHub account, i.e., `golf-scores` not
+`project-1`.
+
+You do not need to use `analysis.qmd` as the name of the QMD file which
+the student creates. But using the same name doesn’t hurt anything and
+is convenient since it decreases the number of things which the tutorial
+author needs to change.
+
+You are, obviously, responsible for adding a knowledge drop which
+teaches the students something about the larger topic.
+
+The second question in the Introduction is often:
+
+```` default
+### Exercise 2
+
+In your QMD, put `library(tidyverse)` in a new code chunk. Render the file using `Cmd/Ctrl + Shift + K`.
+
+Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| message: false` to remove all the messages in this `setup` chunk. Also, add the following to the YAML header to remove all code echos from the HTML:
+
+```         
+execute: 
+  echo: false
+```
+
+In the Console, run:
+
+```         
+show_file("analysis.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r introduction-2}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 6)
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+The third question generally loads the **tidyverse** library into the
+Console:
+
+```` default
+### Exercise 3
+
+Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Shift + Enter` to execute that line.
+
+Note that this causes `library(tidyverse)` to be copied down to the Console and then executed. 
+
+CP/CR.
+
+```{r introduction-3}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 8)
+```
+
+###
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+If the target audience for the tutorial is more experienced, you can be
+less didactic, leaving out several of these instructions. You could also
+add more steps, like loading more libraries at once.
+
+I recommend offering these explicit instructions in every tutorial.
+First, students need lots of practice. Second, each time you tell them
+to add something to the QMD, you give yourself an opportunity for a
+knowledge drop. The same applies when you tell students to execute, in
+the Console, a new addition to the QMD.
+
+Consider an example of creating an object in the QMD:
+
+```` default
+### Exercise 12
+
+Create a new code chunk in your QMD. Add a code chunk option: `#| cache: true`. Copy/paste the R code for the final model into the code chunk, assigning the result to `fit_XX`. 
+
+`Cmd/Ctrl + Shift + K`. It may take some time to render your QMD, depending on how complex your model is. But, by including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.
+
+At the Console, run:
+
+```
+tutorial.helpers::show_file("XX.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r courage-12}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 8)
+```
+
+### 
+
+To confirm, `Cmd/Ctrl + Shift + K` again. It should be quick.
+````
+
+Once we have create the object in the QMD, we can execute the same code
+in the Console:
+
+```` default
+### Exercise 13
+
+Place your cursor in the QMD file on the `fit_XX` line. Use `Cmd/Ctrl + Shift + Enter` to execute that line. 
+
+At the Console, run `ls()`. CP/CR.
+
+```{r courage-13}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 8)
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+Of course, you can combine these last two questions together, but you
+probably shouldn’t. We want easier questions, not harder. Splitting up
+questions makes them simpler. Perhaps more importantly, more questions
+provide more opportunities for knowledge drops.
+
+### Walking the path
+
+To teach students about topic X, we first need to decide the final
+destination. What do we want students to be able to do on their own
+after completing the tutorial? For us, this will almost always be a
+plot, and often several plots. Having envisioned this goal, we need to
+create a “path” which students can use to reach that goal, first under
+our supervision and, second, on their own. The path will consist of
+several stepping stones, or stops along the way.
+
+### Providing Answers
+
+To ensure that students are on the right path with their code, we need
+to provide them with our code that is verified to be correct. Although
+we should not tell students to replace their code with ours at every
+step, if a student is lost, they should be able to refer to our code to
+get back on track. Also, when we are editing the tutorials, we want to
+easily run the code in the Console or render it. With this goal in mind,
+we will add R chunks to provide our code to students.
+
+```` default
+### Exercise 6
+
+Using your favorite AI, prompt it to generate R code that ... Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Shift + Enter`.
+
+In the Console, run:
+
+```         
+show_file("analysis.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r something-1}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 4)
+```
+
+###
+
+```{r, echo = TRUE}
+
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+The R chunk with `echo = TRUE` allows the students to see the code we
+have written within it. This makes it easy for the students to copy and
+paste our code if they need to.
+
+Since `eval = TRUE` is the default argument in an R chunk, the code
+within will automatically be run as well. Students will be able to see
+any output from the code, which can be helpful if the code plots a
+graph. If it is inappropriate or unnecessary to include the output of
+the code, just set `eval = FALSE` explicitly.
+
+In that case, the answer chunk would look like:
+
+```` default
+```{r, echo = TRUE, eval = FALSE}
+
+```
+````
+
+### Plotting Questions
+
+Plotting exercises are generally handled with a sequence of four
+questions. Prior to these, the tutorial will probably have the student
+practice gathering, organizing, and cleaning the data.
+
+The first of the three prior questions tells the student to replace the
+current pipe which they have in the QMD with our code. We check that
+they have done so with
+[`show_file()`](https://ppbds.github.io/tutorial.helpers/reference/show_file.md).
+The purpose of this question is to ensure that the student’s data will
+match our data.
+
+```` default
+### Exercise 8
+
+Before creating a plot, we need to ensure that your data matches our data. In the QMD, replace your code from the previous exercise with our code.
+
+In the Console, run:
+
+```         
+show_file("analysis.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r ai-usage-8}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 6)
+```
+
+###
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+Note that the numbering of theses questions is arbitrary. Just run
+[`check_current_tutorial()`](https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.md)
+to fix it.
+
+The second question tells the student to, in the QMD, assign the result
+of the pipe to a new variable, often `x`. We then tell the student to
+`Cmd/Ctrl + Shift + Enter` this code so that the workspace includes a
+copy of `x`.
+
+```` default
+### Exercise 9
+
+Within the latest code chunk, add the option: `#| cache: true`. Assign the result of the pipe to `x`. 
+
+`Cmd/Ctrl + Shift + K`. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.
+
+If you have not done so already, you should add `analysis_cache` to the `.gitginore`. The content of the cache file does not belong on GitHub.
+
+Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Shift + Enter`, thus ensuring that the workspace also includes a copy of `x`.
+
+CP/CR.
+
+```{r ai-usage-9}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 8)
+```
+
+###
+
+Our code:
+
+```{r, echo = TRUE}
+x <- ...
+```
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+Note that we need `x` to be created in the QMD, not just in the Console,
+because later chunks will use `x` to create the plot.
+
+The third question tells the student to type `x` in the Console,
+followed by “CP/CR.” The purpose is both to have the student look at the
+tibble and also to set the stage for the actual graphics question. In
+defining `x`, you should probably require that the students keep only a
+reasonable number of variables.
+
+```` default
+### Exercise 10
+
+Within the Console, type `x`, which we previously assigned to a pipe and ran in the Console. Hit `Enter`.
+
+CP/CR.
+
+```{r ai-usage-10}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 8)
+```
+
+###
+
+Our code:
+
+```{r, echo=TRUE}
+x
+...
+```
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+Could all four of these questions be combined into one? Probably. But
+spreading things has two advantages. First, it ensures that even the
+weaker students do not get lost. Second, it provides us with four
+opportunities to drop some knowledge.
+
+Now, we can move on to the plotting question. In the age of AI, students
+will have AI write code for their plot. They will do that while
+specifying that their data is `x` from earlier. The student will add
+their new code to a new code cell, and we check that they have done so
+with
+[`show_file()`](https://ppbds.github.io/tutorial.helpers/reference/show_file.md).
+The purpose of this question is to ensure that the student has generated
+their own code, albeit with AI help.
+
+```` default
+### Exercise 11
+
+Ask AI to generate R code that uses `x` to plot a basic graph showing XX... Mention you want to use the data from `x` and copy/paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
+
+Within `labs()`, edit or add a proper title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `Cmd/Ctrl + Shift + K` to ensure that everything works. Make your plot look nice.
+
+In the Console, run:
+
+```         
+show_file("analysis.qmd", chunk = "Last")
+```
+
+CP/CR.
+
+```{r ai-usage-11}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 12)
+```
+
+###
+
+Our code:
+
+```{r, echo=TRUE}
+  ...
+```
+
+###
+
+<!-- XX: Make sure your plotting code is good! This will take some time. You had better have a subtitle which provides the take-away message of the plot. AI sometimes gives you too much code, lots of `theme()` stuff and so on. This is no good! In most cases, we are happy with concise, straightforward code. Insert a knowledge drop related to this project. -->
+````
+
+More to come . . .

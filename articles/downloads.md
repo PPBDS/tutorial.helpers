@@ -1,0 +1,29 @@
+# Enable Students to Download Their Tutorial Answers
+
+The most common use of the **tutorial.helpers** package is to allow
+students to download their answers after they complete a tutorial. To
+enable this functionality, you need to, first, include
+[`library(tutorial.helpers)`](https://ppbds.github.io/tutorial.helpers/)
+within the initial setup R code chunk and, second, add this line at the
+end of the tutorial:
+
+```` default
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
+````
+
+When students complete the tutorial, they will first be asked how long
+the tutorial took them to complete, in minutes. They will then be
+presented with the option to download a copy of their answers, in html
+format, to their Downloads folder. By default, the name of the
+downloaded file will be the `id` of the tutorial with `_answers.html`
+appended.
+
+So, for example, a tutorial with an `id` equal to `getting-started` will
+generate a file called `getting-started_answers.html`.
+
+The package provides functions like
+[`submissions_summary()`](https://ppbds.github.io/tutorial.helpers/reference/submissions_summary.md)
+and
+[`submissions_answers()`](https://ppbds.github.io/tutorial.helpers/reference/submissions_answers.md)
+to work with a collection of students answers.
