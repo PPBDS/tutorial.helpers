@@ -738,30 +738,19 @@ ggplot(tips_dinner, aes(x='...', y='...')) + geom_point()
 
 ```{python pipes-and-plots-10-test, include = FALSE}
 import polars as pl
-import numpy as np
 
-# Load with Polars
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+assert 'tips' in globals(), "'tips' DataFrame not found. Run Exercise 1 first."
+print("tips columns:", tips.columns)
 
-# Same pipeline as the plot, but stay in Polars (no pandas/plotnine)
-tips_dinner = (
-    tips
-    .filter(pl.col("time") == "Dinner")
-    .select(["total_bill", "tip", "sex", "day"])
-    .drop_nulls()
-)
+tips_dinner_head = (tips
+.filter(pl.col("time") == "Dinner")
+.select(["total_bill", "tip", "sex", "day"])
+.drop_nulls()
+.to_pandas()
+.head(5))
 
-# Show a small sample of the (x, y) pairs we would plot
-print("Sample (total_bill, tip):")
-print(tips_dinner.select(["total_bill", "tip"]).head(8))
-
-# Simple numeric check of relationship to "validate" the would-be plot
-xy = tips_dinner.select(["total_bill", "tip"]).to_numpy()
-if xy.shape[0] >= 2:
-    r = np.corrcoef(xy[:, 0], xy[:, 1])[0, 1]
-    print(f"\nCorrelation(total_bill, tip) ≈ {r:.3f}")
-else:
-    print("\nNot enough rows to compute correlation.")
+print("Dinner rows preview (first 5):")
+print(tips_dinner_head)
 
 ```
 
@@ -786,11 +775,13 @@ ggplot(tips_dinner, aes(x='total_bill', y='tip')) + geom_jitter()
 ```
 
 ```{python pipes-and-plots-11-test, include = FALSE}
-# Add tiny random noise ("jitter") and recompute correlation
-rng = np.random.default_rng(0)
-xy = tips_dinner.select(["total_bill","tip"]).to_numpy()
-jxy = xy + rng.normal(scale=[0.25, 0.10], size=xy.shape)
-np.corrcoef(jxy[:,0], jxy[:,1])[0,1]
+tips_xy = (tips
+.filter(pl.col("time") == "Dinner")
+.select(["total_bill", "tip"])
+.drop_nulls()
+.head(8))
+
+print(tips_xy)
 
 ```
 
@@ -835,25 +826,15 @@ plt.show()
 ```
 
 ```{python pipes-and-plots-12-test, include = FALSE}
-import polars as pl
-import numpy as np
+tips_dinner_pd = (tips
+.filter(pl.col("time") == "Dinner")
+.select(["total_bill", "tip", "sex", "day"])
+.drop_nulls()
+.to_pandas())
 
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+print("tips_dinner shape:", tips_dinner_pd.shape)
+print("columns:", list(tips_dinner_pd.columns))
 
-tips_dinner = (tips
-  .filter(pl.col("time") == "Dinner")
-  .select(["total_bill", "tip", "sex", "day"])
-  .drop_nulls())
-
-xy = tips_dinner.select(["total_bill","tip"]).to_numpy()
-
-if xy.shape[0] >= 2:
-    m, b = np.polyfit(xy[:,0], xy[:,1], deg=1)
-    pred_50 = m*50 + b
-    print(f"slope = {m:.4f}, intercept = {b:.4f}")
-    print(f"Predicted tip for $50 bill ≈ {pred_50:.2f}")
-else:
-    print("Not enough rows to fit a line.")
 ```
 
 ###
@@ -955,7 +936,7 @@ Using AI is good! But intelligent use --- use in which you understand what the A
 
 ### Exercise 4
 
-Ask AI to create a beautiful plot using the `iris` dataset and the pandas/matplotlib/seaborn libraries. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
+Ask AI to create a beautiful plot using the `iris` dataset and the plotnine/seaborn libraries. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
 
 ```{r generative-ai-4}
 question_text(NULL,
@@ -971,7 +952,29 @@ rows = 20)
 Example code from DeepSeek:
 
 ```{python generative-ai-4-test, echo = TRUE}
-#fix later
+from plotnine import (
+    ggplot, aes, geom_point, geom_smooth,
+    facet_wrap, labs, theme_minimal
+)
+import polars as pl
+
+# Load iris with Polars, then convert to pandas for plotnine
+iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv").to_pandas()
+
+(
+    ggplot(iris, aes(x="sepal_length", y="sepal_width", color="species")) +
+    geom_point(size=3, alpha=0.7) +
+    geom_smooth(method="loess", se=False, span=0.9) +
+    facet_wrap("~ species") +
+    labs(
+        title="Sepal Shape Variation Across Iris Species",
+        x="Sepal Length (cm)",
+        y="Sepal Width (cm)",
+        color="Species"
+    ) +
+    theme_minimal()
+)
+
 ```
 
 ###
