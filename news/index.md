@@ -6,7 +6,7 @@
 
 - Add “Introduction to Python” tutorial.
 
-- Change make_exercise() default to “no-answer”.
+- Fix make_exercise(). Change the default to “no-answer”.
 
 ## tutorial.helpers 0.6.0
 
