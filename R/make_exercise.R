@@ -23,57 +23,89 @@
 
 make_exercise <- function(type = "no-answer", file_path = NULL) {
   
-  # Determine the actual file path to use
+  # --- Step 1: Determine the Content Context ---
+  
+  # We need to determine what "text" we are analyzing to generate the numbers.
+  # If file_path is provided, we use that file (Testing mode).
+  # If file_path is NULL, we use the Active Document (Interactive mode).
+  
+  # Variable to track if we created a temp file that needs deletion
+  temp_file_created <- NULL
   
   if (is.null(file_path)) {
     
-    # Get the active document context to find its path
-    
+    # Get the active document context
     ctx <- rstudioapi::getActiveDocumentContext()
+    
     if (is.null(ctx)) {
       stop("No active document. Please open an Rmd file.")
     }
     
-    # Get the path of the active document
+    # --- THE TRICK ---
+    # Instead of using the file path on disk (which includes the WHOLE file),
+    # we grab the content from the editor buffer and slice it at the cursor.
+    # This ensures we only count exercises *before* the insertion point.
     
-    active_doc_path <- ctx$path
-    if (is.null(active_doc_path) || active_doc_path == "") {
-      stop("Active document has not been saved. Please save the document first.")
+    # 1. Get all lines from the buffer
+    all_contents <- ctx$contents
+    
+    # 2. Identify the cursor row (start of the selection range)
+    if (length(ctx$selection) > 0 && !is.null(ctx$selection[[1]])) {
+      cursor_row <- ctx$selection[[1]]$range$start["row"]
+    } else {
+      cursor_row <- length(all_contents) # Fallback to end if no cursor found
     }
     
-    working_path <- active_doc_path
+    # 3. Slice content: Keep only lines 1 up to the cursor
+    # We ensure we take at least one line to avoid errors
+    if (cursor_row < 1) cursor_row <- 1
+    preceding_content <- all_contents[1:cursor_row]
+    
+    # 4. Write this partial content to a temporary file.
+    # We do this because determine_exercise_number() expects a file path argument.
+    temp_file <- tempfile(fileext = ".Rmd")
+    writeLines(preceding_content, temp_file)
+    
+    # Set the working path to this temp file for the calculation steps
+    working_path <- temp_file
+    temp_file_created <- temp_file
+    
   } else {
+    # Testing mode: Use the provided file path exactly as is
     working_path <- file_path
   }
   
   
-  # Now we can properly determine exercise number and section ID from the actual document
+  # --- Step 2: Calculate Numbers and IDs ---
+  
+  # Now we determine exercise number and section ID using the working path
+  # (which is either the full test file or the partial temp file)
   
   exercise_number <- determine_exercise_number(working_path)
   section_id <- determine_code_chunk_name(working_path)
   
+  # Clean up the temp file if we made one
+  if (!is.null(temp_file_created) && file.exists(temp_file_created)) {
+    unlink(temp_file_created)
+  }
+  
+  
+  # --- Step 3: Handle Defaults and Validation ---
   
   # Handle empty section_id - use a default if it's empty
-  
   if (is.null(section_id) || section_id == "" || is.na(section_id)) {
     section_id <- "exercise"
   }
   
-  
   # Ensure exercise_number is valid
-  
   if (is.null(exercise_number) || is.na(exercise_number)) {
     exercise_number <- 1
   }
   
-  
   # Allow abbreviated type inputs (e.g., "no" for "no-answer", "ye" for "yes-answer")
-  
   allowed_types <- c("no-answer", "yes-answer", "code")
   
-  
   # Expand abbreviations
-  
   if (!type %in% allowed_types) {
     match_idx <- pmatch(type, allowed_types)
     if (is.na(match_idx)) stop("Invalid type argument.")
@@ -81,7 +113,7 @@ make_exercise <- function(type = "no-answer", file_path = NULL) {
   }
   
   
-  # Compose the exercise skeleton
+  # --- Step 4: Compose the Exercise Skeleton ---
   
   new_exercise <- switch(type,
     "no-answer" = sprintf(
@@ -112,22 +144,21 @@ make_exercise <- function(type = "no-answer", file_path = NULL) {
   )
   
   
-  # --- Insertion logic ---
-  # If file_path is NULL, we are in Positron/RStudio and want to insert into the active document
+  # --- Step 5: Insertion Logic ---
   
   if (is.null(file_path)) {
     
-    # Get the current cursor position/selection
+    # Interactive Mode: Insert into the active document
+    
+    # Recalculate context to be safe (though usually unchanged)
+    ctx <- rstudioapi::getActiveDocumentContext()
     
     if (length(ctx$selection) > 0 && !is.null(ctx$selection[[1]])) {
       
       # Extract the range from the current selection
-      
       cursor_range <- ctx$selection[[1]]$range
       
-      
       # Insert the text at the cursor position
-      
       rstudioapi::insertText(location = cursor_range, text = new_exercise)
       
     } else {
@@ -136,8 +167,7 @@ make_exercise <- function(type = "no-answer", file_path = NULL) {
     
   } else {
     
-    # If file_path is provided (for testing): write or append to file
-    
+    # Test Mode: Write or append to the provided file path
     cat(new_exercise, file = file_path, append = TRUE)
     invisible(new_exercise)
   }
