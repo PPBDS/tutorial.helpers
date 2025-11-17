@@ -13,9 +13,20 @@ students how to code.
 
 > *Our purpose is to teach students how to use AI to create.*
 
-The \[**tutorial.helpers**}() package
+The \[**tutorial.helpers**}(https://ppbds.github.io/tutorial.helpers/)
+package will help you to create good tutorials. Make sure that you are
+using the latest development version. Run
+[`library(tutorial.helpers)`](https://ppbds.github.io/tutorial.helpers/)
 
 ### Overview
+
+To create a new tutorial, you first need a new directory, located in the
+`inst/tutorials` directory of your package. Once you create
+
+    > rmarkdown::draft("tutorial.Rmd",
+                      template = "tutorial_template",
+                      package = "tutorial.helpers",
+                      edit = TRUE)
 
 Students always need more practice working in a Quarto document (the
 QMD) and the Console at the same time. Good data scientists go back and
@@ -44,11 +55,20 @@ Anytime you ask a student to execute something in the Console, you
 confirm that they have done so with CP/CR, the abbreviation to
 **C**opy/**P**aste the **C**ommand/**R**esponse.
 
-Feel free to use any of the example exercises from this document. Soon,
-we will add options to `tutorial.helpers::make_exercises()` to make this
-easier. Either way, you will need to do some edits. Any time you see
-`XX` in an example exercise, you need to replace it with something
-sensible.
+The \[**tutorial.helpers**}() package will help you to create good
+tutorials. Make sure that you are using the latest development version.
+The package includes two important functions:
+[`make_exercise()`](https://ppbds.github.io/tutorial.helpers/reference/exercise_creation.md)
+and
+[`check_current_tutorial()`](https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.md).
+Use
+[`make_exercise()`](https://ppbds.github.io/tutorial.helpers/reference/exercise_creation.md)
+to add a new exercise to the current tutorial. It will number the
+exercise, and the code chunk labels, automatically. Use
+[`check_current_tutorial()`](https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.md)
+to renumber all the exercises and relabel the code chunks. This is
+especially useful if you add or delete an exercise in the middle of a
+section.
 
 ### Tutorial Introduction
 
