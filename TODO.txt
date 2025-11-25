@@ -1,5 +1,7 @@
 ## Items
 
+Render README.Rmd.
+
 * Do we still need `Cmd/Ctrl + Shift + Enter` instead of `Cmd/Ctrl + Enter`? Check latest Positron. 
 
 * Finish AI turtorial.
