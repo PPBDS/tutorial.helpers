@@ -84,44 +84,52 @@ if (in_ci) {
 ```
 
 ```{r bootstrap-python-venv, include=FALSE}
-# --- Cross-platform .venv setup for this tutorial ---
-# Creates a .venv in the tutorial folder (if not already there)
-# and installs all required Python modules.
+# --- Robust, cross-platform venv bootstrap (works locally, safe on CI) ---
 
 is_windows <- identical(.Platform$OS.type, "windows")
 venv <- ".venv"
 py_bin <- if (is_windows) file.path(venv, "Scripts", "python.exe") else file.path(venv, "bin", "python")
 
-# 1) Choose a Python interpreter
-python_exe <- Sys.which(if (is_windows) "python" else "python3")
-if (!nzchar(python_exe)) {
-  python_exe <- reticulate::py_discover_config()$python
+# Detect CI / R CMD check: don't try to build a venv or run Python then.
+in_ci <- identical(tolower(Sys.getenv("CI")), "true") ||
+         identical(tolower(Sys.getenv("R_CMD_CHECK")), "true") ||
+         !interactive()
+
+if (in_ci) {
+  # Render-only: don't execute Python, don't create venv
+  knitr::knit_engines$set(
+    python = function(options) {
+      knitr::engine_output(options, code = options$code,
+                           out = "\n<!-- python execution skipped in CI / R CMD check -->\n")
+    }
+  )
+} else {
+  # 1) Pick a system Python
+  python_exe <- Sys.which(if (is_windows) "python" else "python3")
+  if (!nzchar(python_exe)) python_exe <- reticulate::py_discover_config()$python
+  if (!nzchar(python_exe)) stop("No usable system Python found to create .venv.")
+
+  # 2) Create .venv if missing
+  if (!dir.exists(venv)) {
+    message("Creating .venv with: ", python_exe)
+    reticulate::virtualenv_create(envname = venv, python = python_exe)
+  }
+
+  # 3) Point reticulate at this venv
+  Sys.setenv(RETICULATE_PYTHON = normalizePath(py_bin, winslash = "/", mustWork = FALSE))
+  reticulate::use_virtualenv(venv, required = TRUE)
+
+  # 4) Upgrade pip tooling (use python -m pip to avoid OS-specific pip paths)
+  system2(py_bin, c("-m", "pip", "install", "--upgrade", "pip", "setuptools", "wheel"),
+         stdout = TRUE, stderr = TRUE)
+
+  # 5) Install required packages (again via python -m pip)
+  req <- c("polars", "pandas", "numpy", "plotnine", "matplotlib", "seaborn")
+  system2(py_bin, c("-m", "pip", "install", req), stdout = TRUE, stderr = TRUE)
+
+  # 6) Ensure knitr uses reticulate's Python engine
+  knitr::knit_engines$set(python = reticulate::eng_python)
 }
-if (!nzchar(python_exe)) stop("No usable Python found on this system.")
-
-# 2) Create the venv if it doesn’t exist yet
-if (!dir.exists(venv)) {
-  message("Creating .venv for this tutorial using Python at: ", python_exe)
-  reticulate::virtualenv_create(envname = venv, python = python_exe)
-}
-
-# 3) Point reticulate to this environment
-Sys.setenv(RETICULATE_PYTHON = normalizePath(py_bin, winslash = "/", mustWork = FALSE))
-reticulate::use_virtualenv(venv, required = TRUE)
-
-# 4) Upgrade pip and install required modules
-pip_path <- if (is_windows) file.path(venv, "Scripts", "pip.exe") else file.path(venv, "bin", "pip")
-system2(pip_path, c("install", "--upgrade", "pip", "setuptools", "wheel"), stdout = TRUE, stderr = TRUE)
-
-reticulate::py_install(
-  c("polars", "pandas", "numpy", "plotnine", "matplotlib", "seaborn"),
-  envname = venv, pip = TRUE
-)
-
-# 5) Register reticulate's Python engine for learnr
-knitr::knit_engines$set(python = reticulate::eng_python)
-
-message("✅ .venv ready with all required Python packages.")
 ```
 
 
