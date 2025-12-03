@@ -24,9 +24,16 @@ description: Tutorial for introducing students to the Python language.
 Sys.setenv(RETICULATE_AUTOCONFIGURE = "FALSE")
 
 # ---- Safe CRAN mirror + interactive-only installs ----
+# DK: Why the if clause here?
+
 if (is.null(getOption("repos")["CRAN"]) || !nzchar(getOption("repos")["CRAN"])) {
   options(repos = c(CRAN = "https://cloud.r-project.org"))
 }
+
+# DK: What happens if all the packages are installed?
+
+# Does interactive produce false here? And therefore no installs are ever done? Need to test that this works by removing some of the packages and running it. Do we need this section at all?
+
 needed <- c("learnr", "tutorial.helpers", "knitr", "reticulate")
 to_install <- setdiff(needed, rownames(installed.packages()))
 if (interactive() && length(to_install)) {
@@ -46,6 +53,9 @@ learnr::tutorial_options(
 
 # ---- Environment flags ----
 is_windows <- identical(.Platform$OS.type, "windows")
+
+# Do we need in_ci? What does it mean?
+
 in_ci <- identical(tolower(Sys.getenv("CI")), "true") ||
          identical(tolower(Sys.getenv("R_CMD_CHECK")), "true") ||
          !interactive()
