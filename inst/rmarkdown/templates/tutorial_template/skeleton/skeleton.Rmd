@@ -83,7 +83,7 @@ question_text(NULL,
 
 In your QMD, put `library(tidyverse)` in a new code chunk. Render the file using `Cmd/Ctrl + Shift + K`.
 
-Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| message: false` to remove all the messages in this `setup` chunk. Also, add the following to the YAML header to remove all code echos from the HTML:
+Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| message: false` to remove all the messages in this `setup` chunk. Also, add the following to the YAML header to remove all code echoes from the HTML:
 
 ```         
 execute: 
