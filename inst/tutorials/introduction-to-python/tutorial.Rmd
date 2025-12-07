@@ -12,8 +12,6 @@ runtime: shiny_prerendered
 description: Tutorial for introducing students to the Python language.
 ---
 
-<!-- normalizePath(".venv/Scripts/python.exe", winslash = "/", mustWork = TRUE) fails on mac. Maybe only do on Windows? -->
-
 <!-- Do the test cases need to have all the Python commands? Or does the tutorial magically know that import polars . . . has already been run? -->
 
 <!-- Learn about reticulate. -->
@@ -45,6 +43,9 @@ learnr::tutorial_options(
 ## CI stuff to check if the tutorial is being run in github actions and R CMD Check, because then the check wil fail because it cant run python packages or modify the env, like the venv
 # ---- Environment flags ----
 is_windows <- identical(.Platform$OS.type, "windows")
+
+# Do we need in_ci? What does it mean?
+
 in_ci <- identical(tolower(Sys.getenv("CI")), "true") ||
          identical(tolower(Sys.getenv("R_CMD_CHECK")), "true")
 
@@ -119,7 +120,7 @@ if (in_ci) {
 ### Introduction
 ##
 
-<!-- DK: This is bad. -->
+<!-- DK: Clean up. -->
 
 This is tutorial introduces you to Python from a data science standpoint. We will explore Polars, a python data frame for data processing, that is more fast and efficient at handling large datasets over Pandas and Numpy two other python data frames.
 
