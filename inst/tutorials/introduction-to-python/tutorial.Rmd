@@ -25,16 +25,13 @@ description: Tutorial for introducing students to the Python language.
 # Don't let reticulate auto-pick some random Python
 Sys.setenv(RETICULATE_AUTOCONFIGURE = "FALSE")
 
-# ---- Safe CRAN mirror + interactive-only installs ----
-if (is.null(getOption("repos")["CRAN"]) || !nzchar(getOption("repos")["CRAN"])) {
-  options(repos = c(CRAN = "https://cloud.r-project.org"))
-}
+# ---- interactive-only installs ----   
 needed <- c("learnr", "tutorial.helpers", "knitr", "reticulate")
 to_install <- setdiff(needed, rownames(installed.packages()))
 if (interactive() && length(to_install)) {
   install.packages(to_install, quiet = TRUE)
 }
-
+# SU: for the above im thinking of just taking it out and moving knitr and reticulate out of suggests and into imports in the description file to, which presumably do the same thing as above
 library(learnr)
 library(tutorial.helpers)
 library(knitr)
@@ -45,12 +42,12 @@ learnr::tutorial_options(
   exercise.timelimit = 60,
   exercise.startover = TRUE
 )
-
+## CI stuff to check if the tutorial is being run in github actions and R CMD Check, because then the check wil fail because it cant run python packages or modify the env, like the venv
 # ---- Environment flags ----
 is_windows <- identical(.Platform$OS.type, "windows")
 in_ci <- identical(tolower(Sys.getenv("CI")), "true") ||
-         identical(tolower(Sys.getenv("R_CMD_CHECK")), "true") ||
-         !interactive()
+         identical(tolower(Sys.getenv("R_CMD_CHECK")), "true")
+
 
 venv <- ".venv"
 py_bin <- if (is_windows) file.path(venv, "Scripts", "python.exe") else file.path(venv, "bin", "python")
