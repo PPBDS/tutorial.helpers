@@ -23,13 +23,6 @@ description: Tutorial for introducing students to the Python language.
 # Don't let reticulate auto-pick some random Python
 Sys.setenv(RETICULATE_AUTOCONFIGURE = "FALSE")
 
-# ---- interactive-only installs ----   
-needed <- c("learnr", "tutorial.helpers", "knitr", "reticulate")
-to_install <- setdiff(needed, rownames(installed.packages()))
-if (interactive() && length(to_install)) {
-  install.packages(to_install, quiet = TRUE)
-}
-# SU: for the above im thinking of just taking it out and moving knitr and reticulate out of suggests and into imports in the description file to, which presumably do the same thing as above
 library(learnr)
 library(tutorial.helpers)
 library(knitr)
