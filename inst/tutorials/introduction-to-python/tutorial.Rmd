@@ -12,7 +12,9 @@ runtime: shiny_prerendered
 description: Tutorial for introducing students to the Python language.
 ---
 
-<!-- Do the test cases need to have all the Python commands? Or does the tutorial magically know that import polars . . . has already been run? -->
+<!-- We need to expand the R-CMD-check.yaml file to include a Python set up, as well as installing necessary python packages. Perhaps we should have a requirements.txt file? Perhaps places in the inst/ directory? -->
+
+<!-- Then, get rid of the ci check. The Python commands should work on GitHub, just as they do locally. -->
 
 <!-- Learn about reticulate. -->
 ```{r setup, include=FALSE}
