@@ -45,7 +45,6 @@ No return value, called for side effects.
   check_tutorial_defaults(
     tutorial_paths = return_tutorial_paths("tutorial.helpers")
   )
-#> Warning: incomplete final line found on '/home/runner/.cache/R/renv/library/tutorial.helpers-cdd4ef10/linux-ubuntu-noble/R-4.5/x86_64-pc-linux-gnu/tutorial.helpers/tutorials/introduction-to-python/tutorial.Rmd'
   
   # Check for specific libraries only
   check_tutorial_defaults(
@@ -53,5 +52,4 @@ No return value, called for side effects.
     libraries = c("learnr", "knitr"),
     children = c("copy_button")
   )
-#> Warning: incomplete final line found on '/home/runner/.cache/R/renv/library/tutorial.helpers-cdd4ef10/linux-ubuntu-noble/R-4.5/x86_64-pc-linux-gnu/tutorial.helpers/tutorials/introduction-to-python/tutorial.Rmd'
 ```
