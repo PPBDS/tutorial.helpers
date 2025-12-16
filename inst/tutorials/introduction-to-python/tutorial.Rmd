@@ -1,6 +1,6 @@
 ---
 title: Introduction to Python
-author: Satvika Upperla
+author: Satvika Upperla and David Kane
 tutorial:
   id: introduction-to-python
 output:
@@ -12,95 +12,16 @@ runtime: shiny_prerendered
 description: Tutorial for introducing students to the Python language.
 ---
 
-<!-- We need to expand the R-CMD-check.yaml file to include a Python set up, as well as installing necessary python packages. Perhaps we should have a requirements.txt file? Perhaps places in the inst/ directory? -->
 
-<!-- Then, get rid of the ci check. The Python commands should work on GitHub, just as they do locally. -->
-
-<!-- Learn about reticulate. -->
 ```{r setup, include=FALSE}
-# -------------------------------------------------------------------
-# Global setup: R packages + Python virtualenv for the tutorial
-# -------------------------------------------------------------------
-
-# Don't let reticulate auto-pick some random Python
-Sys.setenv(RETICULATE_AUTOCONFIGURE = "FALSE")
-
 library(learnr)
 library(tutorial.helpers)
 library(knitr)
-library(reticulate)
 
-knitr::opts_chunk$set(echo = FALSE, out.width = "90%")
-learnr::tutorial_options(
-  exercise.timelimit = 60,
-  exercise.startover = TRUE
-)
-## CI stuff to check if the tutorial is being run in github actions and R CMD Check, because then the check wil fail because it cant run python packages or modify the env, like the venv
-# ---- Environment flags ----
-is_windows <- identical(.Platform$OS.type, "windows")
-
-# Do we need in_ci? What does it mean?
-
-in_ci <- identical(tolower(Sys.getenv("CI")), "true") ||
-         identical(tolower(Sys.getenv("R_CMD_CHECK")), "true")
-
-
-venv <- ".venv"
-py_bin <- if (is_windows) file.path(venv, "Scripts", "python.exe") else file.path(venv, "bin", "python")
-
-if (in_ci) {
-  # -----------------------------------------------------------------
-  # CI / R CMD check: render-only, no Python execution or venv setup
-  # -----------------------------------------------------------------
-  knitr::knit_engines$set(
-    python = function(options) {
-      knitr::engine_output(
-        options,
-        code = options$code,
-        out  = "\n<!-- python execution skipped in CI / R CMD check -->\n"
-      )
-    }
-  )
-
-} else {
-  # -----------------------------------------------------------------
-  # Local use: create/activate .venv in this tutorial directory
-  # -----------------------------------------------------------------
-
-  # 1) Find a system Python
-  python_exe <- Sys.which(if (is_windows) "python" else "python3")
-  if (!nzchar(python_exe)) {
-    python_exe <- reticulate::py_discover_config()$python
-  }
-  if (!nzchar(python_exe)) {
-    stop("No usable system Python found to create .venv.")
-  }
-
-  # 2) Create .venv if missing (do NOT delete if it already exists)
-  if (!dir.exists(venv)) {
-    message("Creating .venv with: ", python_exe)
-    reticulate::virtualenv_create(envname = venv, python = python_exe)
-  }
-
-  # 3) Point reticulate at this venv
-  Sys.setenv(RETICULATE_PYTHON = normalizePath(py_bin, winslash = "/", mustWork = FALSE))
-  reticulate::use_virtualenv(venv, required = TRUE)
-
-  # 4) Upgrade pip tooling via `python -m pip` (portable, no pip.exe assumption)
-  system2(
-    py_bin,
-    c("-m", "pip", "install", "--upgrade", "pip", "setuptools", "wheel"),
-    stdout = TRUE,
-    stderr = TRUE
-  )
-
-  # 5) Install required Python packages into this .venv
-  req <- c("polars", "pandas", "numpy", "plotnine", "matplotlib", "seaborn")
-  system2(py_bin, c("-m", "pip", "install", req), stdout = TRUE, stderr = TRUE)
-
-  # 6) Tell knitr to use reticulate's Python engine
-  knitr::knit_engines$set(python = reticulate::eng_python)
-}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(out.width = '90%')
+options(tutorial.exercise.timelimit = 60, 
+        tutorial.storage = "local") 
 ```
 
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
@@ -115,9 +36,14 @@ if (in_ci) {
 ### Introduction
 ##
 
+This is tutorial introduces you to Python from a data science standpoint.
+
+ROUGH DRAFT! NOT CURRENTLY WORKING!
+
+
 <!-- DK: Clean up. -->
 
-This is tutorial introduces you to Python from a data science standpoint. We will explore Polars, a python data frame for data processing, that is more fast and efficient at handling large datasets over Pandas and Numpy two other python data frames.
+ We will explore Polars, a python data frame for data processing, that is more fast and efficient at handling large datasets over Pandas and Numpy two other python data frames.
 
 <!-- DK: Also, start by explaining, in one sentence, what Python is, along with a link or two. -->
 
@@ -127,9 +53,16 @@ This tutorial introduces you to the Python language. Our approach is inspired by
 
 This tutorial assumes that you have already completed the "Getting Started" tutorial in the [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package. If you haven't, do so now. It is quick!
 
+
+## GitHub Codespaces
 ###
 
-From the main Positron menu, start a new window with `File -> New Window`. This new window is the location in which you will do all the work for the tutorial. The current window, the one in which you are reading these words, is just used to run this tutorial.
+Installing Python on your machine is sometimes a complex process. Feel free to do so but, for this tutorial, we will work with Python in the cloud using [GitHub Codespaces](https://github.com/codespaces). 
+
+Sign up for GitHub.
+
+<!-- See the terminal. See the Python browser. Quit Python.  -->
+
 
 ## Working with data
 ###
@@ -146,10 +79,6 @@ Before you start doing data science, you must import the libraries you are going
 
 ```{python working-with-data-1-hint-1, eval = FALSE}
 import ... as pl
-```
-
-```{python working-with-data-1-test, include = FALSE}
-import polars as pl
 ```
 
 ###
@@ -208,7 +137,7 @@ rows = 15)
 
 ###
 
-```{python working-with-data-3-test, echo = TRUE}
+```
 import polars as pl
 iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
 iris
@@ -233,7 +162,7 @@ rows = 10)
 
 ###
 
-```{python working-with-data-4-test, echo = TRUE}
+```
 import polars as pl
 iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
 iris.describe()
@@ -260,7 +189,7 @@ rows = 7)
 
 ###
 
-```{python working-with-data-5-test, echo = TRUE}
+```
 import polars as pl
 iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
 iris.sample()
@@ -287,7 +216,7 @@ rows = 10)
 
 ###
 
-```{python working-with-data-6-test, echo = TRUE}
+```
 import polars as pl
 iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
 iris.sample(n = 4)
@@ -314,11 +243,10 @@ rows = 10)
 
 ###
 
-```{python working-with-data-7-test, echo = TRUE}
+```
 import polars as pl
 iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
 print(iris)
-
 ```
 
 ###
@@ -342,7 +270,7 @@ rows = 8)
 
 ###
 
-```{python working-with-data-8-test, echo = TRUE}
+```
 import polars as pl
 iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
 iris.head(3)
@@ -390,7 +318,7 @@ rows = 10)
 
 ###
 
-```{python working-with-data-10-test, echo = TRUE}
+```
 import polars as pl
 iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
 iris.schema
@@ -417,7 +345,7 @@ rows = 5)
 
 ###
 
-```{python working-with-data-11-test, echo = TRUE}
+```
 import math
 math.sqrt(144)
 ```
@@ -443,7 +371,7 @@ rows = 3)
 
 ###
 
-```{python working-with-data-12-test, echo = TRUE}
+```
 import math
 x = math.sqrt(144)
 ```
@@ -469,7 +397,7 @@ rows = 3)
 
 ###
 
-```{python working-with-data-13-test, echo = TRUE}
+```
 import math
 x = math.sqrt(144)
 x
@@ -505,12 +433,6 @@ tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/maste
 ...
 ```
 
-```{python pipes-and-plots-1-test, include = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
-tips
-```
-
 ###
 
 The `tips` dataset contains information about restaurant tips, including total bill, tip amount, and other variables.
@@ -524,12 +446,6 @@ Run `tips.describe()` to see summary statistics.
 ```
 
 ```{python pipes-and-plots-2-hint-1, eval = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
-tips.describe()
-```
-
-```{python pipes-and-plots-2-test, include = FALSE}
 import polars as pl
 tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
 tips.describe()
@@ -557,12 +473,6 @@ tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/maste
 tips.drop_nulls()
 ```
 
-```{python pipes-and-plots-3-test, include = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
-tips.drop_nulls()
-```
-
 ###
 
 Note the number of rows in the DataFrame after `drop_nulls()`. This dataset actually has no missing values, so all rows remain.
@@ -578,12 +488,6 @@ Chain `.filter()` to filter rows. Use `pl.col("time") == "Dinner"` as the argume
 ```
 
 ```{python pipes-and-plots-4-hint-1, eval = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
-tips.filter(pl.col("time") == "Dinner")
-```
-
-```{python pipes-and-plots-4-test, include = FALSE}
 import polars as pl
 tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
 tips.filter(pl.col("time") == "Dinner")
@@ -611,12 +515,6 @@ tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/maste
 tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"])
 ```
 
-```{python pipes-and-plots-5-test, include = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
-tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"])
-```
-
 ###
 
 Because `select()` doesn't affect rows, we have the same number as after `filter()`. But we only have 4 columns now. This is just like R's `select()` function!
@@ -632,12 +530,6 @@ Copy previous code. Continue the chain with `.describe()`.
 <button onclick = "transfer_code(this)">Copy previous code</button>
 
 ```{python pipes-and-plots-6-hint-1, eval = FALSE}
-tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).describe()
-```
-
-```{python pipes-and-plots-6-test, include = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
 tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).describe()
 ```
 
@@ -659,12 +551,6 @@ Copy previous code. Replace `.describe()` with `.drop_nulls()`.
 tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).drop_nulls()
 ```
 
-```{python pipes-and-plots-7-test, include = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
-tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).drop_nulls()
-```
-
 ###
 
 The number of rows stays the same because there are no missing values in this subset.
@@ -680,12 +566,6 @@ Continue the chain with `.sort("tip")` to sort by the tip column.
 <button onclick = "transfer_code(this)">Copy previous code</button>
 
 ```{python pipes-and-plots-8-hint-1, eval = FALSE}
-tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).drop_nulls().sort("tip")
-```
-
-```{python pipes-and-plots-8-test, include = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
 tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).drop_nulls().sort("tip")
 ```
 
@@ -705,12 +585,6 @@ Copy the previous code. Add `descending=True` as an argument to `sort()` to sort
 
 ```{python pipes-and-plots-9-hint-1, eval = FALSE}
 .sort("tip", descending=True)
-```
-
-```{python pipes-and-plots-9-test, include = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
-tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).drop_nulls().sort("tip", descending=True)
 ```
 
 ###
@@ -755,24 +629,6 @@ tips_dinner = (tips
 ggplot(tips_dinner, aes(x='...', y='...')) + geom_point()
 ```
 
-```{python pipes-and-plots-10-test, include = FALSE}
-import polars as pl
-
-assert 'tips' in globals(), "'tips' DataFrame not found. Run Exercise 1 first."
-print("tips columns:", tips.columns)
-
-tips_dinner_head = (tips
-.filter(pl.col("time") == "Dinner")
-.select(["total_bill", "tip", "sex", "day"])
-.drop_nulls()
-.to_pandas()
-.head(5))
-
-print("Dinner rows preview (first 5):")
-print(tips_dinner_head)
-
-```
-
 ###
 
 This creates a scatter plot showing the relationship between total bill and tip amount. Notice how similar this is to ggplot2 in R! We use `ggplot()`, `aes()`, and `geom_point()` just like in R.
@@ -791,17 +647,6 @@ Copy previous code. Now let's add jitter to see overlapping points better, just 
 from plotnine import ggplot, aes, geom_jitter
 
 ggplot(tips_dinner, aes(x='total_bill', y='tip')) + geom_jitter()
-```
-
-```{python pipes-and-plots-11-test, include = FALSE}
-tips_xy = (tips
-.filter(pl.col("time") == "Dinner")
-.select(["total_bill", "tip"])
-.drop_nulls()
-.head(8))
-
-print(tips_xy)
-
 ```
 
 ###
@@ -842,18 +687,6 @@ plt.title('...')
 plt.xlabel('...')
 plt.ylabel('...')
 plt.show()
-```
-
-```{python pipes-and-plots-12-test, include = FALSE}
-tips_dinner_pd = (tips
-.filter(pl.col("time") == "Dinner")
-.select(["total_bill", "tip", "sex", "day"])
-.drop_nulls()
-.to_pandas())
-
-print("tips_dinner shape:", tips_dinner_pd.shape)
-print("columns:", list(tips_dinner_pd.columns))
-
 ```
 
 ###
@@ -910,7 +743,7 @@ rows = 10)
 
 ###
 
-```{python generative-ai-2-test, echo = TRUE}
+```
 import polars as pl
 iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
 iris.head()
@@ -937,7 +770,7 @@ rows = 10)
 
 Claude gave us this answer:
 
-```{python generative-ai-3-test, echo = TRUE}
+```
 import polars as pl
 iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
 iris.group_by("species").agg(pl.col("sepal_length").mean())
@@ -970,7 +803,7 @@ rows = 20)
 
 Example code from DeepSeek:
 
-```{python generative-ai-4-test, echo = TRUE}
+```
 from plotnine import (
     ggplot, aes, geom_point, geom_smooth,
     facet_wrap, labs, theme_minimal
@@ -993,7 +826,6 @@ iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/maste
     ) +
     theme_minimal()
 )
-
 ```
 
 ###
