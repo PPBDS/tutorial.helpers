@@ -37,6 +37,8 @@ options(tutorial.exercise.timelimit = 60,
 
 <!-- Get a Windows machine and show Windows versions of all images. -->
 
+<!-- Add in that, instead of using `return/enter`, we just use `enter`. -->
+
 ## Introduction
 ### 
 

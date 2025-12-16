@@ -31,37 +31,166 @@ options(tutorial.exercise.timelimit = 60,
 ```
 
 
-<!-- DK: List resources you found useful. -->
 
 ### Introduction
 ##
 
-This is tutorial introduces you to Python from a data science standpoint.
-
 ROUGH DRAFT! NOT CURRENTLY WORKING!
 
-
-<!-- DK: Clean up. -->
-
- We will explore Polars, a python data frame for data processing, that is more fast and efficient at handling large datasets over Pandas and Numpy two other python data frames.
-
-<!-- DK: Also, start by explaining, in one sentence, what Python is, along with a link or two. -->
-
-This tutorial introduces you to the Python language. Our approach is inspired by the data science workflow commonly used with Python's data analysis libraries. You will learn how to work with data sets using **polars**, a blazingly fast DataFrame library that uses a syntax similar to R's tidyverse. You will learn how to chain operations using method chaining with pipes, and how to make plots using **plotnine**, which implements the grammar of graphics just like ggplot2 in R.
+This is tutorial introduces you to using [Python](https://www.python.org/) for data science. You will learn how to work with data sets using **polars**, a DataFrame library that uses a syntax similar to R's **tidyverse**. You will learn how to chain operations using method chaining with pipes, and how to make plots using **plotnine**, which implements the grammar of graphics just like **ggplot2** in R.
 
 ###
 
 This tutorial assumes that you have already completed the "Getting Started" tutorial in the [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package. If you haven't, do so now. It is quick!
 
+###
+
+To complete this tutorial, you must either install Python on your local machine or work with [GitHub Codespaces](https://github.com/codespaces) in the cloud. Because Python installation is a tricky, finicky process, we do not provide any guidance. We recommend you use GitHub Codespaces instead. But all our instructions should work just as well on your machine.
+
 
 ## GitHub Codespaces
 ###
 
-Installing Python on your machine is sometimes a complex process. Feel free to do so but, for this tutorial, we will work with Python in the cloud using [GitHub Codespaces](https://github.com/codespaces). 
+Professionals store their work on GitHub, or a similar *source control* tool. If your computer blows up, you don't want to lose your work. GitHub is like Google Drive --- both live in the cloud --- but for your computational work rather than your documents.
 
-Sign up for GitHub.
+### Exercise 1
 
-<!-- See the terminal. See the Python browser. Quit Python.  -->
+Create a GitHub account by following the instructions at the [GitHub homepage](https://github.com/). 
+
+**Follow [this advice](https://happygitwithr.com/github-acct.html#username-advice) when choosing your username.** 
+
+We recommend using a permanent email address for this account, not one which you lose access to when, for example, you change schools or jobs.
+
+Copy your GitHub account URL in the field below.
+
+```{r github-codespaces-1}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 2)
+```
+
+### 
+
+Your answer should look like this:
+
+```         
+https://github.com/your-username
+```
+
+[Git](https://en.wikipedia.org/wiki/Git) is "software for tracking changes in any set of files, usually used for coordinating work among programmers collaboratively developing source code during software development."
+
+### Exercise 2
+
+Once you are logged in to GitHub, go to https://github.com/codespaces. (This is also accessible via the lefthand-side pull-down menu.)
+
+```{r}
+include_graphics("images/codespaces-1.png")
+```
+
+Press the "Use this template" button for the "Blank" template. This will create a new Codespace which looks like this:
+
+```{r}
+include_graphics("images/codespaces-2.png")
+```
+
+Copy/paste the URL for your Codespace
+
+```{r github-codespaces-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+A new URL is created for each Codespace. Ours was:
+
+```
+https://congenial-computing-machine-65ppr9j7wrhqq9.github.dev/
+```
+
+Yours will look similar.
+
+### Exercise 3
+
+Place your cursor in the Terminal, type `pwd` and hit `return/enter`. Copy/paste the command and return, an instruction which we will henceforth abbreviate as CP/CR.
+
+```{r github-codespaces-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```
+@davidkane9 ➜ /workspaces/codespaces-blank $ pwd
+/workspaces/codespaces-blank
+@davidkane9 ➜ /workspaces/codespaces-blank $ 
+```
+
+Your answer should look similar, except with your GitHub ID in place of mine, which is `davidkane9`. In this tutorial, we will just work at the Terminal because our goal is to learn from Python, not learn about Codespaces. We just use Codespaces as a handy, free location to use Python.
+
+
+### Exercise 4
+
+Type `python` at the Terminal and hit `enter/return`.
+
+CP/CR.
+
+```{r github-codespaces-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```
+@davidkane9 ➜ /workspaces/codespaces-blank $ python
+Python 3.12.1 (main, Nov 27 2025, 10:47:52) [GCC 13.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+```
+
+This is the Python "shell" or "interpreter" or "console." It allows us to work with Python interactively. We will use the term "Console" and capitalize it for clarity.
+
+### Exercise 5
+
+At the Console,  type `2 + 2` and hit `enter/return`.
+
+CP/CR.
+
+```{r github-codespaces-5}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```
+>>> 2 + 2
+4
+>>> 
+```
+
+You can exit the Console by typing `exit()`. Make sure to quit a codespace when you stop using it so that you don't use up your free credits.
 
 
 ## Working with data
@@ -71,62 +200,123 @@ Learn how to explore a data set using functions like `describe()`, `info()`, and
 
 ### Exercise 1
 
-Before you start doing data science, you must import the libraries you are going to use. Use the `import` statement to load the **polars** library with the alias `pl`. This is the standard convention in Python. Click "Run Code." The check mark which appears next to "Exercise 1" above indicates that you have submitted your answer.
+Before you start doing data science, you must import the libraries you are going to use. Let's start with the **polars** library. At the Console, type:
 
-```{python working-with-data-1, exercise = TRUE}
+`import polars as pl`
 
-```
+Going forward, we won't remind you to hit `return/enter` after every command.
 
-```{python working-with-data-1-hint-1, eval = FALSE}
-import ... as pl
-```
+CP/CR.
 
-###
-
-In Python, we import libraries to access their functions and data. The `import` statement makes the library available, and using `as pl` creates a short alias so we can type `pl` instead of `polars` every time.
-
-### Exercise 2
-
-In this tutorial, you will sometimes enter code into the exercise blocks, as you did above. But we will also ask you to run code in the Python Console. (You will do this in the other Positron window, since the Console in this window is currently running this tutorial.) Example:
-
-In the Python Console, run `import polars as pl`.
-
-With Console questions, we will usually ask you to **C**opy/**P**aste the **C**ommand/**R**esponse into an answer block, like the one below. We usually shorten those instructions as CP/CR. Do that now.
-
-```{r working-with-data-2}
+```{r working-with-data-1}
 question_text(NULL,
-answer(NULL, correct = TRUE),
-allow_retry = TRUE,
-try_again_button = "Edit Answer",
-incorrect = NULL,
-rows = 5)
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
 ```
 
 ###
 
-Your answer should look like:
+You will probably get an error which looks like this:
 
 ```
 >>> import polars as pl
->>>
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'polars'
+>>> 
 ```
 
-Your answer never needs to match ours perfectly. Our goal is just to ensure that you are actually following the instructions.
+###
+
+The **polars** library is not installed by default in Codespaces. So we need to install it, and the **plotnines** library ourselves. Note that, in Python, the terms "library," "package," and "module" are used (mostly) interchangeably. 
+
+
+### Exercise 2
+
+Run `exit()` at the Console. This ends your Python session and dumps you back into the shell. Run:
+
+`pip install polars plotnine`
+
+Note that the command "run" means to type the provided command and then hit the `return/enter` key.
+
+CP/CR. (But just the first few lines.)
+
+
+```{r working-with-data-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```
+>>> exit()
+@davidkane9 ➜ /workspaces/codespaces-blank $ pip install polars plotnine
+Collecting polars
+  Downloading polars-1.36.1-py3-none-any.whl.metadata (10 kB)
+Collecting plotnine
+  Downloading plotnine-0.15.2-py3-none-any.whl.metadata (9.5 kB)
+Collecting polars-runtime-32==1.36.1 (from polars)
+  Downloading polars_runtime_32-1.36.1-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.5 kB)
+...
+```
+
+One the of the most important parts of data science is keeping track of all the packages which you need and ensuring that they are installed when you need them.
 
 ### Exercise 3
 
-DataFrames are spreadsheet-like data structures in Polars. Let's load the famous iris dataset. We'll read it from a URL.
+Run `python` at the Terminal. This starts the Python Console again. At the Console, type:
+
+`import polars as pl`
+
+Going forward, we won't remind you to hit `return/enter` after every command.
+
+CP/CR.
+
+```{r working-with-data-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```
+@davidkane9 ➜ /workspaces/codespaces-blank $ python
+Python 3.12.1 (main, Nov 27 2025, 10:47:52) [GCC 13.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import polars as pl
+>>> 
+```
+
+In Python, we import libraries to access their functions and data. The `import` statement makes the library available, and using `as pl` creates a short alias so we can type `pl` instead of `polars` every time we use a function from the **polars** library.
+
+Your answer never needs to match ours perfectly. Our goal is just to ensure that you are actually following the instructions.
+
+### Exercise 4
+
+DataFrames are spreadsheet-like data structures in **polars**. Let's load the famous iris dataset. We'll read it from a URL.
 
 In the Console, run:
+
 ```
-import polars as pl
 iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
 iris
 ```
 
 CP/CR.
 
-```{r working-with-data-3}
+```{r working-with-data-4}
 question_text(NULL,
 answer(NULL, correct = TRUE),
 allow_retry = TRUE,
@@ -138,20 +328,38 @@ rows = 15)
 ###
 
 ```
-import polars as pl
-iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
-iris
+>>> iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+>>> iris
+shape: (150, 5)
+┌──────────────┬─────────────┬──────────────┬─────────────┬───────────┐
+│ sepal_length ┆ sepal_width ┆ petal_length ┆ petal_width ┆ species   │
+│ ---          ┆ ---         ┆ ---          ┆ ---         ┆ ---       │
+│ f64          ┆ f64         ┆ f64          ┆ f64         ┆ str       │
+╞══════════════╪═════════════╪══════════════╪═════════════╪═══════════╡
+│ 5.1          ┆ 3.5         ┆ 1.4          ┆ 0.2         ┆ setosa    │
+│ 4.9          ┆ 3.0         ┆ 1.4          ┆ 0.2         ┆ setosa    │
+│ 4.7          ┆ 3.2         ┆ 1.3          ┆ 0.2         ┆ setosa    │
+│ 4.6          ┆ 3.1         ┆ 1.5          ┆ 0.2         ┆ setosa    │
+│ 5.0          ┆ 3.6         ┆ 1.4          ┆ 0.2         ┆ setosa    │
+│ …            ┆ …           ┆ …            ┆ …           ┆ …         │
+│ 6.7          ┆ 3.0         ┆ 5.2          ┆ 2.3         ┆ virginica │
+│ 6.3          ┆ 2.5         ┆ 5.0          ┆ 1.9         ┆ virginica │
+│ 6.5          ┆ 3.0         ┆ 5.2          ┆ 2.0         ┆ virginica │
+│ 6.2          ┆ 3.4         ┆ 5.4          ┆ 2.3         ┆ virginica │
+│ 5.9          ┆ 3.0         ┆ 5.1          ┆ 1.8         ┆ virginica │
+└──────────────┴─────────────┴──────────────┴─────────────┴───────────┘
+>>> 
 ```
 
 Whenever we show outputs like this after a question, then we are showing our answer to the previous question, even if we do not label it as such.
 
-### Exercise 4
+### Exercise 5
 
 In the Console, run `iris.describe()`. This provides summary statistics for numerical columns.
 
 CP/CR.
 
-```{r working-with-data-4}
+```{r working-with-data-5}
 question_text(NULL,
 answer(NULL, correct = TRUE),
 allow_retry = TRUE,
@@ -163,22 +371,37 @@ rows = 10)
 ###
 
 ```
-import polars as pl
-iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
-iris.describe()
+>>> iris.describe()
+shape: (9, 6)
+┌────────────┬──────────────┬─────────────┬──────────────┬─────────────┬───────────┐
+│ statistic  ┆ sepal_length ┆ sepal_width ┆ petal_length ┆ petal_width ┆ species   │
+│ ---        ┆ ---          ┆ ---         ┆ ---          ┆ ---         ┆ ---       │
+│ str        ┆ f64          ┆ f64         ┆ f64          ┆ f64         ┆ str       │
+╞════════════╪══════════════╪═════════════╪══════════════╪═════════════╪═══════════╡
+│ count      ┆ 150.0        ┆ 150.0       ┆ 150.0        ┆ 150.0       ┆ 150       │
+│ null_count ┆ 0.0          ┆ 0.0         ┆ 0.0          ┆ 0.0         ┆ 0         │
+│ mean       ┆ 5.843333     ┆ 3.057333    ┆ 3.758        ┆ 1.199333    ┆ null      │
+│ std        ┆ 0.828066     ┆ 0.435866    ┆ 1.765298     ┆ 0.762238    ┆ null      │
+│ min        ┆ 4.3          ┆ 2.0         ┆ 1.0          ┆ 0.1         ┆ setosa    │
+│ 25%        ┆ 5.1          ┆ 2.8         ┆ 1.6          ┆ 0.3         ┆ null      │
+│ 50%        ┆ 5.8          ┆ 3.0         ┆ 4.4          ┆ 1.3         ┆ null      │
+│ 75%        ┆ 6.4          ┆ 3.3         ┆ 5.1          ┆ 1.8         ┆ null      │
+│ max        ┆ 7.9          ┆ 4.4         ┆ 6.9          ┆ 2.5         ┆ virginica │
+└────────────┴──────────────┴─────────────┴──────────────┴─────────────┴───────────┘
+>>> 
 ```
 
 ###
 
 This method provides a quick statistical overview of each numerical variable in the dataset. In some cases, the tutorial displays the same object differently from what you were able to copy/paste. And that is OK! Your answer does not need to match our answer.
 
-### Exercise 5
+### Exercise 6
 
 In the Console, run `iris.sample()`. This selects a random row from the dataset.
 
 CP/CR.
 
-```{r working-with-data-5}
+```{r working-with-data-6}
 question_text(NULL,
 answer(NULL, correct = TRUE),
 allow_retry = TRUE,
@@ -190,45 +413,23 @@ rows = 7)
 ###
 
 ```
-import polars as pl
-iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
-iris.sample()
+>>> iris.sample()
+shape: (1, 5)
+┌──────────────┬─────────────┬──────────────┬─────────────┬───────────┐
+│ sepal_length ┆ sepal_width ┆ petal_length ┆ petal_width ┆ species   │
+│ ---          ┆ ---         ┆ ---          ┆ ---         ┆ ---       │
+│ f64          ┆ f64         ┆ f64          ┆ f64         ┆ str       │
+╞══════════════╪═════════════╪══════════════╪═════════════╪═══════════╡
+│ 6.3          ┆ 2.8         ┆ 5.1          ┆ 1.5         ┆ virginica │
+└──────────────┴─────────────┴──────────────┴─────────────┴───────────┘
+>>> 
 ```
-
-###
 
 Your answer will differ from this answer because of the inherent randomness in methods like `sample()`.
 
-### Exercise 6
-
-In the Console, hit the Up Arrow to retrieve the previous command. Edit it to add the argument `n = 4` to `iris.sample()`. This will return 4 random rows from the `iris` dataset.
-
-CP/CR.
-
-```{r working-with-data-6}
-question_text(NULL,
-answer(NULL, correct = TRUE),
-allow_retry = TRUE,
-try_again_button = "Edit Answer",
-incorrect = NULL,
-rows = 10)
-```
-
-###
-
-```
-import polars as pl
-iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
-iris.sample(n = 4)
-```
-
-###
-
-Editing code directly in the Console quickly becomes annoying. See the **[positron.tutorials](https://ppbds.github.io/positron.tutorials/)** package for tutorials about using Positron to write and organize your code.
-
 ### Exercise 7
 
-In the Console, run `print(iris)`. This returns the same result as typing `iris`.
+In the Console, hit the Up Arrow to retrieve the previous command. Edit it to add the argument `n = 4` to `iris.sample()`. This will return 4 random rows from the `iris` dataset.
 
 CP/CR.
 
@@ -244,22 +445,74 @@ rows = 10)
 ###
 
 ```
-import polars as pl
-iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
-print(iris)
+>>> iris.sample(n = 4)
+shape: (4, 5)
+┌──────────────┬─────────────┬──────────────┬─────────────┬───────────┐
+│ sepal_length ┆ sepal_width ┆ petal_length ┆ petal_width ┆ species   │
+│ ---          ┆ ---         ┆ ---          ┆ ---         ┆ ---       │
+│ f64          ┆ f64         ┆ f64          ┆ f64         ┆ str       │
+╞══════════════╪═════════════╪══════════════╪═════════════╪═══════════╡
+│ 5.0          ┆ 3.3         ┆ 1.4          ┆ 0.2         ┆ setosa    │
+│ 6.3          ┆ 2.9         ┆ 5.6          ┆ 1.8         ┆ virginica │
+│ 5.6          ┆ 2.8         ┆ 4.9          ┆ 2.0         ┆ virginica │
+│ 5.2          ┆ 3.4         ┆ 1.4          ┆ 0.2         ┆ setosa    │
+└──────────────┴─────────────┴──────────────┴─────────────┴───────────┘
+>>> 
 ```
 
 ###
 
-You can control how many rows to display using `iris.head(n)` for the first n rows or `iris.tail(n)` for the last n rows.
+Editing code directly in the Console quickly becomes annoying. See the **[positron.tutorials](https://ppbds.github.io/positron.tutorials/)** package for tutorials about using the Positron IDE to write and organize your code.
 
 ### Exercise 8
+
+In the Console, run `print(iris)`. This returns the same result as typing `iris`.
+
+CP/CR.
+
+```{r working-with-data-8}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 10)
+```
+
+###
+
+```
+>>> print(iris)
+shape: (150, 5)
+┌──────────────┬─────────────┬──────────────┬─────────────┬───────────┐
+│ sepal_length ┆ sepal_width ┆ petal_length ┆ petal_width ┆ species   │
+│ ---          ┆ ---         ┆ ---          ┆ ---         ┆ ---       │
+│ f64          ┆ f64         ┆ f64          ┆ f64         ┆ str       │
+╞══════════════╪═════════════╪══════════════╪═════════════╪═══════════╡
+│ 5.1          ┆ 3.5         ┆ 1.4          ┆ 0.2         ┆ setosa    │
+│ 4.9          ┆ 3.0         ┆ 1.4          ┆ 0.2         ┆ setosa    │
+│ 4.7          ┆ 3.2         ┆ 1.3          ┆ 0.2         ┆ setosa    │
+│ 4.6          ┆ 3.1         ┆ 1.5          ┆ 0.2         ┆ setosa    │
+│ 5.0          ┆ 3.6         ┆ 1.4          ┆ 0.2         ┆ setosa    │
+│ …            ┆ …           ┆ …            ┆ …           ┆ …         │
+│ 6.7          ┆ 3.0         ┆ 5.2          ┆ 2.3         ┆ virginica │
+│ 6.3          ┆ 2.5         ┆ 5.0          ┆ 1.9         ┆ virginica │
+│ 6.5          ┆ 3.0         ┆ 5.2          ┆ 2.0         ┆ virginica │
+│ 6.2          ┆ 3.4         ┆ 5.4          ┆ 2.3         ┆ virginica │
+│ 5.9          ┆ 3.0         ┆ 5.1          ┆ 1.8         ┆ virginica │
+└──────────────┴─────────────┴──────────────┴─────────────┴───────────┘
+>>> 
+```
+
+You can control how many rows to display using `iris.head(n)` for the first n rows or `iris.tail(n)` for the last n rows.
+
+### Exercise 9
 
 In the Console, run `iris.head(3)`. This returns the first 3 rows of the `iris` dataset.
 
 CP/CR.
 
-```{r working-with-data-8}
+```{r working-with-data-9}
 question_text(NULL,
 answer(NULL, correct = TRUE),
 allow_retry = TRUE,
@@ -271,41 +524,30 @@ rows = 8)
 ###
 
 ```
-import polars as pl
-iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
-iris.head(3)
+>>> iris.head(3)
+shape: (3, 5)
+┌──────────────┬─────────────┬──────────────┬─────────────┬─────────┐
+│ sepal_length ┆ sepal_width ┆ petal_length ┆ petal_width ┆ species │
+│ ---          ┆ ---         ┆ ---          ┆ ---         ┆ ---     │
+│ f64          ┆ f64         ┆ f64          ┆ f64         ┆ str     │
+╞══════════════╪═════════════╪══════════════╪═════════════╪═════════╡
+│ 5.1          ┆ 3.5         ┆ 1.4          ┆ 0.2         ┆ setosa  │
+│ 4.9          ┆ 3.0         ┆ 1.4          ┆ 0.2         ┆ setosa  │
+│ 4.7          ┆ 3.2         ┆ 1.3          ┆ 0.2         ┆ setosa  │
+└──────────────┴─────────────┴──────────────┴─────────────┴─────────┘
+>>> 
 ```
 
 ###
 
 `head()` by default gives the top of the DataFrame, so your answer should match our answer. `sample()`, on the other hand, picks random rows to return. But, in both cases, the result is a DataFrame.
 
-A central organizing principle of Polars is that most methods take a DataFrame and return a DataFrame. This allows us to "chain" commands together, one after the other, creating a pipeline very similar to R's pipe operator `|>`.
-
-### Exercise 9
-
-In the Console, run `help(iris)` or `iris.info()`.
-
-The `info()` method will show you information about the DataFrame including column names, data types, and memory usage.
-
-Copy/paste the output of `iris.info()` below.
-
-```{r working-with-data-9}
-question_text(NULL,
-answer(NULL, correct = TRUE),
-allow_retry = TRUE,
-try_again_button = "Edit Answer",
-incorrect = NULL,
-rows = 10)
-```
-
-###
-
-You can find help about pandas functions with `help(function_name)` or by visiting the pandas documentation at https://pandas.pydata.org/.
+A central organizing principle of **polars** is that most methods take a DataFrame and return a DataFrame. This allows us to "chain" commands together, one after the other, creating a pipeline very similar to R's pipe operator `|>`.
 
 ### Exercise 10
 
-In the Console, run `iris.schema`. This shows the column names and data types. CP/CR.
+In the Console, run `help(iris)`. CP/CR (but just the first few rows).
+
 
 ```{r working-with-data-10}
 question_text(NULL,
@@ -319,22 +561,47 @@ rows = 10)
 ###
 
 ```
-import polars as pl
-iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
-iris.schema
+Help on DataFrame in module polars.dataframe.frame object:
+
+class DataFrame(builtins.object)
+ |  DataFrame(data: 'FrameInitTypes | None' = None, schema: 'SchemaDefinition | None' = None, *, schema_overrides: 'SchemaDict | N
+one' = None, strict: 'bool' = True, orient: 'Orientation | None' = None, infer_schema_length: 'int | None' = 100, nan_to_null: 'bo
+ol' = False) -> 'None'
+...
+```
+
+To exit from the help interface, type `q` and hit `return/enter`.
+
+### Exercise 11
+
+In the Console, run `iris.schema`. This shows the column names and data types. CP/CR.
+
+```{r working-with-data-11}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 10)
 ```
 
 ###
 
+```
+>>> iris.schema
+Schema({'sepal_length': Float64, 'sepal_width': Float64, 'petal_length': Float64, 'petal_width': Float64, 'species': String})
+>>> 
+```
+
 The `schema` attribute displays information about the DataFrame's structure including the data types of each column. For example, `sepal_length` is listed as `Float64`, meaning it's a 64-bit floating-point number. You can also use `iris.dtypes` to see just the data types, or `iris.columns` to see just the column names.
 
-### Exercise 11
+### Exercise 12
 
 In the Console, run `import math` then `math.sqrt(144)`.
 
 CP/CR.
 
-```{r working-with-data-11}
+```{r working-with-data-12}
 question_text(NULL,
 answer(NULL, correct = TRUE),
 allow_retry = TRUE,
@@ -346,43 +613,17 @@ rows = 5)
 ###
 
 ```
-import math
-math.sqrt(144)
+>>> import math
+>>> math.sqrt(144)
+12.0
+>>> 
 ```
 
-###
-
-The square root function is one of many built-in functions in Python's math module. Most return their result, which Python then, by default, prints out.
-
-### Exercise 12
-
-In the Console, run `x = math.sqrt(144)`.
-
-CP/CR.
-
-```{r working-with-data-12}
-question_text(NULL,
-answer(NULL, correct = TRUE),
-allow_retry = TRUE,
-try_again_button = "Edit Answer",
-incorrect = NULL,
-rows = 3)
-```
-
-###
-
-```
-import math
-x = math.sqrt(144)
-```
-
-###
-
-The `=` symbol is the assignment operator in Python. In this case, we are *assigning* the value of `math.sqrt(144)` to the variable `x`. Nothing is printed out because of that assignment.
+The square root function is one of many built-in functions in Python's **math** package. Most return their result, which Python then, by default, prints out. We did not need to use `pip` to install the math module because it is part of the base Python installation.
 
 ### Exercise 13
 
-In the Console, run `x` or `print(x)`.
+In the Console, run `x = math.sqrt(144)`.
 
 CP/CR.
 
@@ -398,12 +639,35 @@ rows = 3)
 ###
 
 ```
-import math
 x = math.sqrt(144)
-x
 ```
 
 ###
+
+The `=` symbol is the assignment operator in Python. In this case, we are *assigning* the value of `math.sqrt(144)` to the variable `x`. Nothing is printed out because of that assignment.
+
+### Exercise 14
+
+In the Console, run `x` or `print(x)`.
+
+CP/CR.
+
+```{r working-with-data-14}
+question_text(NULL,
+answer(NULL, correct = TRUE),
+allow_retry = TRUE,
+try_again_button = "Edit Answer",
+incorrect = NULL,
+rows = 3)
+```
+
+###
+
+```
+>>> x
+12.0
+>>> 
+```
 
 Now that `x` has been defined in the Console, it is available for your use. Above, we just print it out. But we could also use it in other calculations, e.g., `x + 5`.
 
@@ -411,29 +675,53 @@ Now that `x` has been defined in the Console, it is available for your use. Abov
 ## Method chaining and plots
 ###
 
-Although Polars includes hundreds of methods for data manipulation, the most important are `filter()`, `select()`, `sort()`, `with_columns()`, and `group_by()` with `agg()`. These work very similarly to their R tidyverse equivalents!
+Although **polars** includes hundreds of methods for data manipulation, the most important are `filter()`, `select()`, `sort()`, `with_columns()`, and `group_by()` with `agg()`. These work very similarly to their R tidyverse equivalents.
 
 ### Exercise 1
 
-Let's warm up by examining the `tips` dataset. Type the following and hit "Run Code":
+Let's warm up by examining the `tips` dataset. Run:
 
 ```
-import polars as pl
 tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
 tips
 ```
 
-```{python pipes-and-plots-1, exercise = TRUE}
+CP/CR.
 
-```
-
-```{python pipes-and-plots-1-hint-1, eval = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
-...
+```{r method-chaining-and-plots-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 20)
 ```
 
 ###
+
+```
+>>> tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
+>>> tips
+shape: (244, 7)
+┌────────────┬──────┬────────┬────────┬──────┬────────┬──────┐
+│ total_bill ┆ tip  ┆ sex    ┆ smoker ┆ day  ┆ time   ┆ size │
+│ ---        ┆ ---  ┆ ---    ┆ ---    ┆ ---  ┆ ---    ┆ ---  │
+│ f64        ┆ f64  ┆ str    ┆ str    ┆ str  ┆ str    ┆ i64  │
+╞════════════╪══════╪════════╪════════╪══════╪════════╪══════╡
+│ 16.99      ┆ 1.01 ┆ Female ┆ No     ┆ Sun  ┆ Dinner ┆ 2    │
+│ 10.34      ┆ 1.66 ┆ Male   ┆ No     ┆ Sun  ┆ Dinner ┆ 3    │
+│ 21.01      ┆ 3.5  ┆ Male   ┆ No     ┆ Sun  ┆ Dinner ┆ 3    │
+│ 23.68      ┆ 3.31 ┆ Male   ┆ No     ┆ Sun  ┆ Dinner ┆ 2    │
+│ 24.59      ┆ 3.61 ┆ Female ┆ No     ┆ Sun  ┆ Dinner ┆ 4    │
+│ …          ┆ …    ┆ …      ┆ …      ┆ …    ┆ …      ┆ …    │
+│ 29.03      ┆ 5.92 ┆ Male   ┆ No     ┆ Sat  ┆ Dinner ┆ 3    │
+│ 27.18      ┆ 2.0  ┆ Female ┆ Yes    ┆ Sat  ┆ Dinner ┆ 2    │
+│ 22.67      ┆ 2.0  ┆ Male   ┆ Yes    ┆ Sat  ┆ Dinner ┆ 2    │
+│ 17.82      ┆ 1.75 ┆ Male   ┆ No     ┆ Sat  ┆ Dinner ┆ 2    │
+│ 18.78      ┆ 3.0  ┆ Female ┆ No     ┆ Thur ┆ Dinner ┆ 2    │
+└────────────┴──────┴────────┴────────┴──────┴────────┴──────┘
+>>> 
+```
 
 The `tips` dataset contains information about restaurant tips, including total bill, tip amount, and other variables.
 
@@ -457,7 +745,7 @@ Note that this gives us statistics for the numerical columns in the dataset.
 
 ### Exercise 3
 
-Use `.drop_nulls()` to remove rows with missing values. In Polars, we pipe operations by calling methods one after another, just like in R! Try:
+Use `.drop_nulls()` to remove rows with missing values. In **polars**, we pipe operations by calling methods one after another, just like in R! Try:
 
 ```
 tips.drop_nulls()
@@ -495,7 +783,7 @@ tips.filter(pl.col("time") == "Dinner")
 
 ###
 
-This workflow --- in which we chain DataFrame methods together --- is very common in Polars and very similar to R's pipe workflow.
+This workflow --- in which we chain DataFrame methods together --- is very common in **polars** and very similar to R's pipe workflow.
 
 The resulting DataFrame has the same number of columns as `tips` because `filter()` only affects the rows. But there are fewer rows now.
 
@@ -753,7 +1041,7 @@ When working with AI, you often need to tell it about the dataset. The easiest w
 
 ### Exercise 3
 
-Copy/paste the top of the `iris` DataFrame into your AI interface and ask it to create a chain of methods using Polars that calculates the average `sepal_length` for each `species`. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
+Copy/paste the top of the `iris` DataFrame into your AI interface and ask it to create a chain of methods using **polars** that calculates the average `sepal_length` for each `species`. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
 
 CP/CR.
 
@@ -782,7 +1070,7 @@ This is a great answer! It uses `group_by()` just like R's tidyverse, and then `
 
 R version: `iris |> group_by(species) |> summarize(mean_sepal_length = mean(sepal_length))`
 
-Polars version: `iris.group_by("species").agg(pl.col("sepal_length").mean())`
+**polars** version: `iris.group_by("species").agg(pl.col("sepal_length").mean())`
 
 Using AI is good! But intelligent use --- use in which you understand what the AI has done and try to improve/clarify its answer --- is even better.
 
@@ -842,9 +1130,9 @@ The key is practice. Use AI every day!
 ## Summary
 ###
 
-This tutorial introduced you to the Python language for data science. You learned how to work with datasets using **Polars**, a fast DataFrame library with syntax very similar to R's tidyverse. You learned how to chain operations using method chaining (just like R's pipe operator `|>`), and how to make plots using **matplotlib** and **seaborn**.
+This tutorial introduced you to the Python language for data science. You learned how to work with datasets using **polars**, a fast DataFrame library with syntax very similar to R's tidyverse. You learned how to chain operations using method chaining (just like R's pipe operator `|>`), and how to make plots using **matplotlib** and **seaborn**.
 
-The key advantage of Polars is that it feels familiar to R users while providing the speed and ecosystem of Python. Functions like `filter()`, `select()`, `sort()`, and `group_by()` work almost identically to their R counterparts!
+The key advantage of **polars** is that it feels familiar to R users while providing the speed and ecosystem of Python. Functions like `filter()`, `select()`, `sort()`, and `group_by()` work almost identically to their R counterparts!
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
