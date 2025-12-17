@@ -231,14 +231,14 @@ ModuleNotFoundError: No module named 'polars'
 
 ###
 
-The **polars** library is not installed by default in Codespaces. So we need to install it, and the **plotnines** library ourselves. Note that, in Python, the terms "library," "package," and "module" are used (mostly) interchangeably. 
+The **polars** library is not installed by default in Codespaces. So we need to install it, along with the **plotnines** and **pyarrow** libraries ourselves. Note that, in Python, the terms "library," "package," and "module" are used (mostly) interchangeably. 
 
 
 ### Exercise 2
 
 Run `exit()` at the Console. This ends your Python session and dumps you back into the shell. Run:
 
-`pip install polars plotnine`
+`pip install polars plotnine pyarrow`
 
 Note that the command "run" means to type the provided command and then hit the `return/enter` key.
 
@@ -675,7 +675,7 @@ Now that `x` has been defined in the Console, it is available for your use. Abov
 ## Method chaining and plots
 ###
 
-Although **polars** includes hundreds of methods for data manipulation, the most important are `filter()`, `select()`, `sort()`, `with_columns()`, and `group_by()` with `agg()`. These work very similarly to their R tidyverse equivalents.
+Although **polars** includes hundreds of methods for data manipulation, the most important are `filter()`, `select()`, `sort()`, `with_columns()`, and `group_by()` with `agg()`. These work very similarly to their R **tidyverse** equivalents.
 
 ### Exercise 1
 
@@ -729,39 +729,84 @@ The `tips` dataset contains information about restaurant tips, including total b
 
 Run `tips.describe()` to see summary statistics.
 
-```{python pipes-and-plots-2, exercise = TRUE}
 
-```
-
-```{python pipes-and-plots-2-hint-1, eval = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
-tips.describe()
+```{r method-chaining-and-plots-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
 ```
 
 ###
+
+```
+>>> tips.describe()
+shape: (9, 8)
+┌────────────┬────────────┬──────────┬────────┬────────┬──────┬────────┬──────────┐
+│ statistic  ┆ total_bill ┆ tip      ┆ sex    ┆ smoker ┆ day  ┆ time   ┆ size     │
+│ ---        ┆ ---        ┆ ---      ┆ ---    ┆ ---    ┆ ---  ┆ ---    ┆ ---      │
+│ str        ┆ f64        ┆ f64      ┆ str    ┆ str    ┆ str  ┆ str    ┆ f64      │
+╞════════════╪════════════╪══════════╪════════╪════════╪══════╪════════╪══════════╡
+│ count      ┆ 244.0      ┆ 244.0    ┆ 244    ┆ 244    ┆ 244  ┆ 244    ┆ 244.0    │
+│ null_count ┆ 0.0        ┆ 0.0      ┆ 0      ┆ 0      ┆ 0    ┆ 0      ┆ 0.0      │
+│ mean       ┆ 19.785943  ┆ 2.998279 ┆ null   ┆ null   ┆ null ┆ null   ┆ 2.569672 │
+│ std        ┆ 8.902412   ┆ 1.383638 ┆ null   ┆ null   ┆ null ┆ null   ┆ 0.9511   │
+│ min        ┆ 3.07       ┆ 1.0      ┆ Female ┆ No     ┆ Fri  ┆ Dinner ┆ 1.0      │
+│ 25%        ┆ 13.37      ┆ 2.0      ┆ null   ┆ null   ┆ null ┆ null   ┆ 2.0      │
+│ 50%        ┆ 17.81      ┆ 2.92     ┆ null   ┆ null   ┆ null ┆ null   ┆ 2.0      │
+│ 75%        ┆ 24.08      ┆ 3.55     ┆ null   ┆ null   ┆ null ┆ null   ┆ 3.0      │
+│ max        ┆ 50.81      ┆ 10.0     ┆ Male   ┆ Yes    ┆ Thur ┆ Lunch  ┆ 6.0      │
+└────────────┴────────────┴──────────┴────────┴────────┴──────┴────────┴──────────┘
+>>> 
+```
 
 Note that this gives us statistics for the numerical columns in the dataset.
 
 ### Exercise 3
 
-Use `.drop_nulls()` to remove rows with missing values. In **polars**, we pipe operations by calling methods one after another, just like in R! Try:
+Use `.drop_nulls()` to remove rows with missing values. In **polars**, we pipe operations by calling methods one after another, just like in R. Try:
 
 ```
 tips.drop_nulls()
 ```
 
-```{python pipes-and-plots-3, exercise = TRUE}
+CP/CR.
 
-```
-
-```{python pipes-and-plots-3-hint-1, eval = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
-tips.drop_nulls()
+```{r method-chaining-and-plots-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
 ```
 
 ###
+
+```
+>>> tips.drop_nulls()
+shape: (244, 7)
+┌────────────┬──────┬────────┬────────┬──────┬────────┬──────┐
+│ total_bill ┆ tip  ┆ sex    ┆ smoker ┆ day  ┆ time   ┆ size │
+│ ---        ┆ ---  ┆ ---    ┆ ---    ┆ ---  ┆ ---    ┆ ---  │
+│ f64        ┆ f64  ┆ str    ┆ str    ┆ str  ┆ str    ┆ i64  │
+╞════════════╪══════╪════════╪════════╪══════╪════════╪══════╡
+│ 16.99      ┆ 1.01 ┆ Female ┆ No     ┆ Sun  ┆ Dinner ┆ 2    │
+│ 10.34      ┆ 1.66 ┆ Male   ┆ No     ┆ Sun  ┆ Dinner ┆ 3    │
+│ 21.01      ┆ 3.5  ┆ Male   ┆ No     ┆ Sun  ┆ Dinner ┆ 3    │
+│ 23.68      ┆ 3.31 ┆ Male   ┆ No     ┆ Sun  ┆ Dinner ┆ 2    │
+│ 24.59      ┆ 3.61 ┆ Female ┆ No     ┆ Sun  ┆ Dinner ┆ 4    │
+│ …          ┆ …    ┆ …      ┆ …      ┆ …    ┆ …      ┆ …    │
+│ 29.03      ┆ 5.92 ┆ Male   ┆ No     ┆ Sat  ┆ Dinner ┆ 3    │
+│ 27.18      ┆ 2.0  ┆ Female ┆ Yes    ┆ Sat  ┆ Dinner ┆ 2    │
+│ 22.67      ┆ 2.0  ┆ Male   ┆ Yes    ┆ Sat  ┆ Dinner ┆ 2    │
+│ 17.82      ┆ 1.75 ┆ Male   ┆ No     ┆ Sat  ┆ Dinner ┆ 2    │
+│ 18.78      ┆ 3.0  ┆ Female ┆ No     ┆ Thur ┆ Dinner ┆ 2    │
+└────────────┴──────┴────────┴────────┴──────┴────────┴──────┘
+>>> 
+```
 
 Note the number of rows in the DataFrame after `drop_nulls()`. This dataset actually has no missing values, so all rows remain.
 
@@ -769,19 +814,45 @@ We can chain methods by writing `tips.drop_nulls().head()` to first drop NA valu
 
 ### Exercise 4
 
-Chain `.filter()` to filter rows. Use `pl.col("time") == "Dinner"` as the argument. This is very similar to R's `filter()`!
-
-```{python pipes-and-plots-4, exercise = TRUE}
+Chain `.filter()` to filter rows. Use `pl.col("time") == "Dinner"` as the argument. This is very similar to R's `filter()`. In other words, run:
 
 ```
-
-```{python pipes-and-plots-4-hint-1, eval = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
 tips.filter(pl.col("time") == "Dinner")
 ```
 
+```{r method-chaining-and-plots-4}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
 ###
+
+```
+>>> tips.filter(pl.col("time") == "Dinner")
+shape: (176, 7)
+┌────────────┬──────┬────────┬────────┬──────┬────────┬──────┐
+│ total_bill ┆ tip  ┆ sex    ┆ smoker ┆ day  ┆ time   ┆ size │
+│ ---        ┆ ---  ┆ ---    ┆ ---    ┆ ---  ┆ ---    ┆ ---  │
+│ f64        ┆ f64  ┆ str    ┆ str    ┆ str  ┆ str    ┆ i64  │
+╞════════════╪══════╪════════╪════════╪══════╪════════╪══════╡
+│ 16.99      ┆ 1.01 ┆ Female ┆ No     ┆ Sun  ┆ Dinner ┆ 2    │
+│ 10.34      ┆ 1.66 ┆ Male   ┆ No     ┆ Sun  ┆ Dinner ┆ 3    │
+│ 21.01      ┆ 3.5  ┆ Male   ┆ No     ┆ Sun  ┆ Dinner ┆ 3    │
+│ 23.68      ┆ 3.31 ┆ Male   ┆ No     ┆ Sun  ┆ Dinner ┆ 2    │
+│ 24.59      ┆ 3.61 ┆ Female ┆ No     ┆ Sun  ┆ Dinner ┆ 4    │
+│ …          ┆ …    ┆ …      ┆ …      ┆ …    ┆ …      ┆ …    │
+│ 29.03      ┆ 5.92 ┆ Male   ┆ No     ┆ Sat  ┆ Dinner ┆ 3    │
+│ 27.18      ┆ 2.0  ┆ Female ┆ Yes    ┆ Sat  ┆ Dinner ┆ 2    │
+│ 22.67      ┆ 2.0  ┆ Male   ┆ Yes    ┆ Sat  ┆ Dinner ┆ 2    │
+│ 17.82      ┆ 1.75 ┆ Male   ┆ No     ┆ Sat  ┆ Dinner ┆ 2    │
+│ 18.78      ┆ 3.0  ┆ Female ┆ No     ┆ Thur ┆ Dinner ┆ 2    │
+└────────────┴──────┴────────┴────────┴──────┴────────┴──────┘
+>>> 
+```
 
 This workflow --- in which we chain DataFrame methods together --- is very common in **polars** and very similar to R's pipe workflow.
 
@@ -789,197 +860,131 @@ The resulting DataFrame has the same number of columns as `tips` because `filter
 
 ### Exercise 5
 
-Continue the chain with `.select()` to choose specific columns. Use `["total_bill", "tip", "sex", "day"]` as the argument. You can use the "Copy Code" button to avoid retyping.
-
-```{python pipes-and-plots-5, exercise = TRUE}
+Use the "Up" arrow to retrieve the command from the previous question in the Console. (We will do this for most exercises in this section.) Continue the chain with `.select()` to choose specific columns. Use `["total_bill", "tip", "sex", "day"]` as the argument. That is, run:
 
 ```
-
-<button onclick = "transfer_code(this)">Copy previous code</button>
-
-```{python pipes-and-plots-5-hint-1, eval = FALSE}
-import polars as pl
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
 tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"])
 ```
 
+```{r method-chaining-and-plots-5}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
 ###
 
-Because `select()` doesn't affect rows, we have the same number as after `filter()`. But we only have 4 columns now. This is just like R's `select()` function!
+```
+>>> tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"])
+shape: (176, 4)
+┌────────────┬──────┬────────┬──────┐
+│ total_bill ┆ tip  ┆ sex    ┆ day  │
+│ ---        ┆ ---  ┆ ---    ┆ ---  │
+│ f64        ┆ f64  ┆ str    ┆ str  │
+╞════════════╪══════╪════════╪══════╡
+│ 16.99      ┆ 1.01 ┆ Female ┆ Sun  │
+│ 10.34      ┆ 1.66 ┆ Male   ┆ Sun  │
+│ 21.01      ┆ 3.5  ┆ Male   ┆ Sun  │
+│ 23.68      ┆ 3.31 ┆ Male   ┆ Sun  │
+│ 24.59      ┆ 3.61 ┆ Female ┆ Sun  │
+│ …          ┆ …    ┆ …      ┆ …    │
+│ 29.03      ┆ 5.92 ┆ Male   ┆ Sat  │
+│ 27.18      ┆ 2.0  ┆ Female ┆ Sat  │
+│ 22.67      ┆ 2.0  ┆ Male   ┆ Sat  │
+│ 17.82      ┆ 1.75 ┆ Male   ┆ Sat  │
+│ 18.78      ┆ 3.0  ┆ Female ┆ Thur │
+└────────────┴──────┴────────┴──────┘
+>>> 
+```
+
+Because `select()` doesn't affect rows, we have the same number as after `filter()`. But we only have 4 columns now. 
 
 ### Exercise 6
 
-Copy previous code. Continue the chain with `.describe()`.
+Use the "Up" arrow to get the previous code. Continue the chain with `.describe()`.
 
-```{python pipes-and-plots-6, exercise = TRUE}
-
-```
-
-<button onclick = "transfer_code(this)">Copy previous code</button>
-
-```{python pipes-and-plots-6-hint-1, eval = FALSE}
-tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).describe()
+```{r method-chaining-and-plots-6}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
 ```
 
 ###
+
+```
+>>> tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).describe()
+shape: (9, 5)
+┌────────────┬────────────┬──────────┬────────┬──────┐
+│ statistic  ┆ total_bill ┆ tip      ┆ sex    ┆ day  │
+│ ---        ┆ ---        ┆ ---      ┆ ---    ┆ ---  │
+│ str        ┆ f64        ┆ f64      ┆ str    ┆ str  │
+╞════════════╪════════════╪══════════╪════════╪══════╡
+│ count      ┆ 176.0      ┆ 176.0    ┆ 176    ┆ 176  │
+│ null_count ┆ 0.0        ┆ 0.0      ┆ 0      ┆ 0    │
+│ mean       ┆ 20.797159  ┆ 3.10267  ┆ null   ┆ null │
+│ std        ┆ 9.142029   ┆ 1.436243 ┆ null   ┆ null │
+│ min        ┆ 3.07       ┆ 1.0      ┆ Female ┆ Fri  │
+│ 25%        ┆ 14.48      ┆ 2.0      ┆ null   ┆ null │
+│ 50%        ┆ 18.43      ┆ 3.0      ┆ null   ┆ null │
+│ 75%        ┆ 25.28      ┆ 3.68     ┆ null   ┆ null │
+│ max        ┆ 50.81      ┆ 10.0     ┆ Male   ┆ Thur │
+└────────────┴────────────┴──────────┴────────┴──────┘
+>>> 
+```
 
 This gives us summary statistics for our filtered and selected data.
 
+
+
 ### Exercise 7
-
-Copy previous code. Replace `.describe()` with `.drop_nulls()`.
-
-```{python pipes-and-plots-7, exercise = TRUE}
-
-```
-
-<button onclick = "transfer_code(this)">Copy previous code</button>
-
-```{python pipes-and-plots-7-hint-1, eval = FALSE}
-tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).drop_nulls()
-```
-
-###
-
-The number of rows stays the same because there are no missing values in this subset.
-
-### Exercise 8
 
 Continue the chain with `.sort("tip")` to sort by the tip column.
 
-```{python pipes-and-plots-8, exercise = TRUE}
-
-```
-
-<button onclick = "transfer_code(this)">Copy previous code</button>
-
-```{python pipes-and-plots-8-hint-1, eval = FALSE}
-tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).drop_nulls().sort("tip")
-```
-
-###
-
-The `sort()` method sorts the rows of a DataFrame. By default, it sorts in ascending order. This is just like R's `arrange()` function!
-
-### Exercise 9
-
-Copy the previous code. Add `descending=True` as an argument to `sort()` to sort in descending order. This is like using `desc()` in R!
-
-```{python pipes-and-plots-9, exercise = TRUE}
-
-```
-
-<button onclick = "transfer_code(this)">Copy previous code</button>
-
-```{python pipes-and-plots-9-hint-1, eval = FALSE}
-.sort("tip", descending=True)
+```{r method-chaining-and-plots-7}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
 ```
 
 ###
 
-Got to respect someone who tips $10!
-
-### Exercise 10
-
-Let's make a plot! For plotting, we'll use plotnine, which works exactly like ggplot2 in R. Copy the previous code, but remove the `.sort()` line. Instead, save the result to a variable called `tips_dinner`, then convert it to pandas with `.to_pandas()` (plotnine works with pandas DataFrames), and create a plot using `ggplot()`.
-
-Here's the pattern:
 ```
-import polars as pl
-from plotnine import ggplot, aes, geom_point
-
-tips = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv")
-
-tips_dinner = (tips
-  .filter(pl.col("time") == "Dinner")
-  .select(["total_bill", "tip", "sex", "day"])
-  .drop_nulls()
-  .to_pandas())
-
-ggplot(tips_dinner, aes(x='total_bill', y='tip')) + geom_point()
-```
-
-```{python pipes-and-plots-10, exercise = TRUE}
-
+>>> tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).sort("tip")
+shape: (176, 4)
+┌────────────┬──────┬────────┬─────┐
+│ total_bill ┆ tip  ┆ sex    ┆ day │
+│ ---        ┆ ---  ┆ ---    ┆ --- │
+│ f64        ┆ f64  ┆ str    ┆ str │
+╞════════════╪══════╪════════╪═════╡
+│ 3.07       ┆ 1.0  ┆ Female ┆ Sat │
+│ 5.75       ┆ 1.0  ┆ Female ┆ Fri │
+│ 7.25       ┆ 1.0  ┆ Female ┆ Sat │
+│ 12.6       ┆ 1.0  ┆ Male   ┆ Sat │
+│ 16.99      ┆ 1.01 ┆ Female ┆ Sun │
+│ …          ┆ …    ┆ …      ┆ …   │
+│ 28.17      ┆ 6.5  ┆ Female ┆ Sat │
+│ 48.27      ┆ 6.73 ┆ Male   ┆ Sat │
+│ 39.42      ┆ 7.58 ┆ Male   ┆ Sat │
+│ 48.33      ┆ 9.0  ┆ Male   ┆ Sat │
+│ 50.81      ┆ 10.0 ┆ Male   ┆ Sat │
+└────────────┴──────┴────────┴─────┘
+>>> 
 ```
 
-<button onclick = "transfer_code(this)">Copy previous code</button>
 
-```{python pipes-and-plots-10-hint-1, eval = FALSE}
-from plotnine import ggplot, aes, geom_point
+The `sort()` method sorts the rows of a DataFrame. By default, it sorts in ascending order. 
 
-tips_dinner = (tips
-  .filter(pl.col("time") == "Dinner")
-  .select([...])
-  .drop_nulls()
-  .to_pandas())
+<!-- DK: Add a plot here. Need to import plotnine obviously, (and pyarrow?). Maybe create very simple plot. Initial code does not display. Retrieve the code with up arrow and add an assignment to p. Then call p.show() or whatever.  -->
 
-ggplot(tips_dinner, aes(x='...', y='...')) + geom_point()
-```
-
-###
-
-This creates a scatter plot showing the relationship between total bill and tip amount. Notice how similar this is to ggplot2 in R! We use `ggplot()`, `aes()`, and `geom_point()` just like in R.
-
-### Exercise 11
-
-Copy previous code. Now let's add jitter to see overlapping points better, just like in R! Change `geom_point()` to `geom_jitter()`.
-
-```{python pipes-and-plots-11, exercise = TRUE}
-
-```
-
-<button onclick = "transfer_code(this)">Copy previous code</button>
-
-```{python pipes-and-plots-11-hint-1, eval = FALSE}
-from plotnine import ggplot, aes, geom_jitter
-
-ggplot(tips_dinner, aes(x='total_bill', y='tip')) + geom_jitter()
-```
-
-###
-
-This is exactly like using `geom_jitter()` in R's ggplot2! The jitter adds a small amount of random noise to help us see overlapping points.
-
-### Exercise 12
-
-Finally, add a title and labels using `plt.title()`, `plt.xlabel()`, and `plt.ylabel()`. Consider this example:
-
-```
-import matplotlib.pyplot as plt
-import seaborn as sns
-tips = sns.load_dataset('tips')
-
-tips_dinner = (tips
-               .query('time == "Dinner"')
-               [['total_bill', 'tip', 'sex', 'day']]
-               .dropna())
-
-sns.scatterplot(data=tips_dinner, x='total_bill', y='tip', alpha=0.6)
-plt.title('Dinner Tips vs Total Bill')
-plt.xlabel('Total Bill ($)')
-plt.ylabel('Tip ($)')
-plt.show()
-```
-
-You can make yours look like this, or create your own title and labels.
-
-```{python pipes-and-plots-12, exercise = TRUE}
-
-```
-
-<button onclick = "transfer_code(this)">Copy previous code</button>
-
-```{python pipes-and-plots-12-hint-1, eval = FALSE}
-plt.title('...')
-plt.xlabel('...')
-plt.ylabel('...')
-plt.show()
-```
-
-###
-
-Note that the code in the exercise block is not saved. If you want to save the code, you can copy/paste it into a Python script file (.py).
 
 ## Generative AI
 ###
@@ -1011,14 +1016,13 @@ If you do not want to pay for an AI service, then you will probably need to have
 
 ### Exercise 2
 
-Type this in the Python Console and hit Enter:
+Run this in the Python Console:
+
 ```
-import polars as pl
-iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
-iris.head()
+tips.head()
 ```
 
-Copy/paste the command and the first few lines of output.
+CP/CR.
 
 ```{r generative-ai-2}
 question_text(NULL,
@@ -1032,16 +1036,27 @@ rows = 10)
 ###
 
 ```
-import polars as pl
-iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
-iris.head()
+>>> tips.head()
+shape: (5, 7)
+┌────────────┬──────┬────────┬────────┬─────┬────────┬──────┐
+│ total_bill ┆ tip  ┆ sex    ┆ smoker ┆ day ┆ time   ┆ size │
+│ ---        ┆ ---  ┆ ---    ┆ ---    ┆ --- ┆ ---    ┆ ---  │
+│ f64        ┆ f64  ┆ str    ┆ str    ┆ str ┆ str    ┆ i64  │
+╞════════════╪══════╪════════╪════════╪═════╪════════╪══════╡
+│ 16.99      ┆ 1.01 ┆ Female ┆ No     ┆ Sun ┆ Dinner ┆ 2    │
+│ 10.34      ┆ 1.66 ┆ Male   ┆ No     ┆ Sun ┆ Dinner ┆ 3    │
+│ 21.01      ┆ 3.5  ┆ Male   ┆ No     ┆ Sun ┆ Dinner ┆ 3    │
+│ 23.68      ┆ 3.31 ┆ Male   ┆ No     ┆ Sun ┆ Dinner ┆ 2    │
+│ 24.59      ┆ 3.61 ┆ Female ┆ No     ┆ Sun ┆ Dinner ┆ 4    │
+└────────────┴──────┴────────┴────────┴─────┴────────┴──────┘
+>>> 
 ```
 
 When working with AI, you often need to tell it about the dataset. The easiest way to do that is often to just copy/paste the first few rows. That shows the AI what the column names and types are, which is key information for creating plots and data pipelines.
 
 ### Exercise 3
 
-Copy/paste the top of the `iris` DataFrame into your AI interface and ask it to create a chain of methods using **polars** that calculates the average `sepal_length` for each `species`. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
+Copy/paste the top of the `tips` DataFrame into your AI interface and ask it to create a chain of methods using **polars** that calculates the average `tip` for each `sex`. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
 
 CP/CR.
 
@@ -1059,24 +1074,34 @@ rows = 10)
 Claude gave us this answer:
 
 ```
-import polars as pl
-iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
-iris.group_by("species").agg(pl.col("sepal_length").mean())
+>>> (
+    tips
+    .group_by("sex")
+    .agg(pl.col("tip").mean())
+)
+shape: (2, 2)
+┌────────┬──────────┐
+│ sex    ┆ tip      │
+│ ---    ┆ ---      │
+│ str    ┆ f64      │
+╞════════╪══════════╡
+│ Male   ┆ 3.089618 │
+│ Female ┆ 2.833448 │
+└────────┴──────────┘
+>>> 
 ```
+
+There are two differences between this code and the code we have been writing. First, the entire statement is within parantheses. Second, the methods are placed on separate lines, which makes readability easier. Using parantheses allows us to place methods on separate lines.
 
 ###
 
-This is a great answer! It uses `group_by()` just like R's tidyverse, and then `agg()` (short for aggregate) with `pl.col()` to specify which column to calculate the mean for. Notice how similar this is to R:
+This is a great answer! It uses `group_by()` just like R's tidyverse, and then `agg()` (short for aggregate) with `pl.col()` to specify which column to calculate the mean for. 
 
-R version: `iris |> group_by(species) |> summarize(mean_sepal_length = mean(sepal_length))`
-
-**polars** version: `iris.group_by("species").agg(pl.col("sepal_length").mean())`
-
-Using AI is good! But intelligent use --- use in which you understand what the AI has done and try to improve/clarify its answer --- is even better.
+Using AI is good. But intelligent use --- use in which you understand what the AI has done and try to improve/clarify its answer --- is even better.
 
 ### Exercise 4
 
-Ask AI to create a beautiful plot using the `iris` dataset and the plotnine/seaborn libraries. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
+Ask AI to create a beautiful plot using the `tips` dataset and the **plotnine** library. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
 
 ```{r generative-ai-4}
 question_text(NULL,
@@ -1089,31 +1114,31 @@ rows = 20)
 
 ###
 
-Example code from DeepSeek:
+Example code from Claude:
 
 ```
-from plotnine import (
-    ggplot, aes, geom_point, geom_smooth,
-    facet_wrap, labs, theme_minimal
-)
-import polars as pl
+from plotnine import *
 
-# Load iris with Polars, then convert to pandas for plotnine
-iris = pl.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv").to_pandas()
-
-(
-    ggplot(iris, aes(x="sepal_length", y="sepal_width", color="species")) +
-    geom_point(size=3, alpha=0.7) +
-    geom_smooth(method="loess", se=False, span=0.9) +
-    facet_wrap("~ species") +
+p = (
+    ggplot(tips, aes(x="total_bill", y="tip", color="sex")) +
+    geom_point(alpha=0.7, size=3) +
+    geom_smooth(method="lm", se=False) +
+    facet_wrap("~time") +
     labs(
-        title="Sepal Shape Variation Across Iris Species",
-        x="Sepal Length (cm)",
-        y="Sepal Width (cm)",
-        color="Species"
+        title="Tipping Patterns by Total Bill",
+        subtitle="Comparing lunch and dinner service",
+        x="Total Bill ($)",
+        y="Tip ($)",
+        color="Sex"
     ) +
-    theme_minimal()
+    theme_minimal() +
+    theme(
+        figure_size=(10, 5),
+        plot_title=element_text(size=14, weight="bold"),
+        plot_subtitle=element_text(size=10, color="gray")
+    )
 )
+p.display()
 ```
 
 ###
