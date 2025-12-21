@@ -30,12 +30,8 @@ options(tutorial.exercise.timelimit = 60,
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
-
-
 ### Introduction
 ##
-
-ROUGH DRAFT! NOT CURRENTLY WORKING!
 
 This is tutorial introduces you to using [Python](https://www.python.org/) for data science. You will learn how to work with data sets using **polars**, a DataFrame library that uses a syntax similar to R's **tidyverse**. You will learn how to chain operations using method chaining with pipes, and how to make plots using **plotnine**, which implements the grammar of graphics just like **ggplot2** in R.
 
@@ -143,7 +139,7 @@ Your answer should look similar, except with your GitHub ID in place of mine, wh
 
 ### Exercise 4
 
-Type `python` at the Terminal and hit `enter/return`.
+Type `python` at the Terminal and hit `return/enter`.
 
 CP/CR.
 
@@ -1241,6 +1237,8 @@ The plot is now displayed. In VS Code or Codespaces, this will typically open in
 ## Generative AI
 ###
 
+<!-- DK: The latter half of this needs a rewrite, mainly because plots don't just appear. What should we say to the AI? -->
+
 Generative AI --- tools like [ChatGPT](https://chat.openai.com/), [Grok](https://x.ai/), [Claude](https://claude.ai/), [DeepSeek](https://www.deepseek.com/en) and so on --- are the future, of data science and everything else. The more you use these tools, the better off you will be. Unfortunately, the tools are changing so much that it is hard for a tutorial like this to stay up-to-date. This section provides some general advice and practice exercises.
 
 ### Exercise 1
@@ -1390,19 +1388,21 @@ p = (
         plot_subtitle=element_text(size=10, color="gray")
     )
 )
-p.display()
+p.save("output_plot.png")
 ```
 
 ###
 
-Note:
+<!-- DK: Explain how, by using the same name, the object is replaced and also magically pops in the view. Maybe this should be a couple of questions. Or maybe not. -->
 
-* AI tools are great at generating code and visualizations, but you should always own your work and understand everything in it
+<!-- DK: Below comments seems like garbage . . . Or maybe OK. I don't know! How much do students read . . . -->
+
+AI tools are great at generating code and visualizations, but you should always own your work and understand everything in it
 
 ## Summary
 ###
 
-This tutorial introduced you to the Python language for data science. You learned how to work with datasets using **polars**, a fast DataFrame library with syntax very similar to R's tidyverse. You learned how to chain operations using method chaining (just like R's pipe operator `|>`), and how to make plots using **matplotlib** and **seaborn**.
+This tutorial introduced you to the Python language for data science. You learned how to work with datasets using **polars**, a fast DataFrame library with syntax very similar to R's tidyverse. You learned how to chain operations using method chaining (just like R's pipe operator `|>`), and how to make plots using **plotnine**.
 
 The key advantage of **polars** is that it feels familiar to R users while providing the speed and ecosystem of Python. Functions like `filter()`, `select()`, `sort()`, and `group_by()` work almost identically to their R counterparts!
 
