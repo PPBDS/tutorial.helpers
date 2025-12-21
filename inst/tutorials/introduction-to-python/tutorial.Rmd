@@ -165,7 +165,7 @@ This is the Python "shell" or "interpreter" or "console." It allows us to work w
 
 ### Exercise 5
 
-At the Console,  type `2 + 2` and hit `return/enter`.
+At the Console,  type `2 + 2` and hit `enter/return`. Remember, the Console is just the Python shell opened up in the terminal after typing "Python" in.
 
 CP/CR.
 
@@ -975,12 +975,264 @@ shape: (176, 4)
 └────────────┴──────┴────────┴─────┘
 >>> 
 ```
-
-
 The `sort()` method sorts the rows of a DataFrame. By default, it sorts in ascending order. 
 
-<!-- DK: Add a plot here. Need to import plotnine obviously. Maybe create very simple plot. Initial code does not display. Retrieve the code with up arrow and add an assignment to p. Then save the object. Show an image of it appearing on our screen.  -->
+### Exercise 8
 
+Before we can create plots, we need to import the plotnine library. Run: `from plotnine import ggplot, aes, geom_point, labs, theme_minimal, ggsave`
+
+```{r method-chaining-and-plots-8}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+
+**plotnine** is Python's implementation of the Grammar of Graphics, similar to R's **ggplot2**. We import the specific functions we'll need for creating and customizing our plot.
+
+### Exercise 9
+
+First, let's create our filtered dataset and assign it to a variable called `dinner_data`. Use the chain from Exercise 7. Run:`dinner_data = tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).sort("tip")`
+
+```{r method-chaining-and-plots-9}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+>>> dinner_data = tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).sort("tip")
+>>> dinner_data
+shape: (176, 4)
+┌────────────┬──────┬────────┬─────┐
+│ total_bill ┆ tip  ┆ sex    ┆ day │
+│ ---        ┆ ---  ┆ ---    ┆ --- │
+│ f64        ┆ f64  ┆ str    ┆ str │
+╞════════════╪══════╪════════╪═════╡
+│ 3.07       ┆ 1.0  ┆ Female ┆ Sat │
+│ 5.75       ┆ 1.0  ┆ Female ┆ Fri │
+│ 7.25       ┆ 1.0  ┆ Female ┆ Sat │
+│ 12.6       ┆ 1.0  ┆ Male   ┆ Sat │
+│ 16.99      ┆ 1.01 ┆ Female ┆ Sun │
+│ …          ┆ …    ┆ …      ┆ …   │
+│ 28.17      ┆ 6.5  ┆ Female ┆ Sat │
+│ 48.27      ┆ 6.73 ┆ Male   ┆ Sat │
+│ 39.42      ┆ 7.58 ┆ Male   ┆ Sat │
+│ 48.33      ┆ 9.0  ┆ Male   ┆ Sat │
+│ 50.81      ┆ 10.0 ┆ Male   ┆ Sat │
+└────────────┴──────┴────────┴─────┘
+>>> Assigning our filtered data to a variable makes it easier to reuse and keeps our plotting code cleaner.
+
+### Exercise 10
+
+Now let's start building our plot. The basic structure uses `ggplot()` with the data and `aes()` (aesthetics) to map variables to visual properties. Run:`ggplot(dinner_data, aes(x="total_bill", y="tip"))`
+
+```{r method-chaining-and-plots-10}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+```
+>>> ggplot(dinner_data, aes(x="total_bill", y="tip"))
+<Figure Size: (640 x 480)>
+>>> 
+```
+This creates a blank plot with axes set up. We've told **plotnine** that `total_bill` should be on the x-axis and `tip` on the y-axis, but we haven't added any geometric objects (points, lines, etc.) yet.
+
+### Exercise 11
+
+Use the up arrow to retrieve to previous code.
+Add a geometry layer to actually display the data points. Use the `+` operator to add `geom_point()`. Run:
+`ggplot(dinner_data, aes(x="total_bill", y="tip")) + geom_point()`
+
+```{r method-chaining-and-plots-11}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+```
+>>> ggplot(dinner_data, aes(x="total_bill", y="tip")) + geom_point()
+<Figure Size: (640 x 480)>
+>>> 
+```
+
+Now you should see a scatter plot showing the relationship between total bill and tip amounts. The plot shows a general positive correlation.
+
+### Exercise 12
+
+Let's add color to distinguish between male and female customers. Add `color="sex"` inside the `aes()` function. Run:
+`ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point()`
+
+```{r method-chaining-and-plots-12}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+```
+>>> ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point()
+<Figure Size: (640 x 480)>
+>>> 
+```
+
+The points are now colored by sex, with a legend automatically added.
+
+### Exercise 13
+
+Let's customize the appearance of the points. Add `size=3` and `alpha=0.6` as arguments to `geom_point()`. Run:
+`ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6)`
+
+```{r method-chaining-and-plots-13}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+###
+
+```
+>>> ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6)
+<Figure Size: (640 x 480)>
+>>> 
+```
+
+The `size` parameter makes the points bigger, and `alpha` controls transparency (0.6 means 60% opaque), which helps when points overlap.
+
+### Exercise 14
+
+Add labels to make the plot more informative. Add `labs()` with a title and axis labels. Run:
+`ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6) + labs(title="Tips vs Total Bill for Dinner", x="Total Bill ($)", y="Tip ($)", color="Sex")`
+
+```{r method-chaining-and-plots-14}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+```
+>>> ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6) + labs(title="Tips vs Total Bill for Dinner", x="Total Bill ($)", y="Tip ($)", color="Sex")
+<Figure Size: (640 x 480)>
+>>> 
+```
+
+The `labs()` function adds a title and customizes the axis labels and legend title.
+
+### Exercise 15
+
+Apply a cleaner theme to the plot. Add `theme_minimal()` to the chain. Run:
+`ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6) + labs(title="Tips vs Total Bill for Dinner", x="Total Bill ($)", y="Tip ($)", color="Sex") + theme_minimal()`
+
+```{r method-chaining-and-plots-15}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+```
+>>> ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6) + labs(title="Tips vs Total Bill for Dinner", x="Total Bill ($)", y="Tip ($)", color="Sex") + theme_minimal()
+<Figure Size: (640 x 480)>
+>>> 
+```
+
+The minimal theme removes the gray background and gives the plot a cleaner, more modern look.
+
+### Exercise 16
+
+Now let's save our plot to a variable so we can reuse it. Assign the entire plot to a variable called `plot`. Run:
+`plot = ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6) + labs(title="Tips vs Total Bill for Dinner", x="Total Bill ($)", y="Tip ($)", color="Sex") + theme_minimal()`
+
+```{r method-chaining-and-plots-16}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+```
+>>> plot = ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6) + labs(title="Tips vs Total Bill for Dinner", x="Total Bill ($)", y="Tip ($)", color="Sex") + theme_minimal()
+>>> 
+```
+
+The plot is now stored in the `plot` variable. Nothing displays yet because we haven't printed it.
+
+### Exercise 17
+
+Save the plot to a file using `ggsave()`. This function takes the plot object, filename, and optional parameters for resolution and size. Run:
+`ggsave(plot, "dinner_tips.png", dpi=300, width=8, height=6)`
+
+```{r method-chaining-and-plots-17}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+```
+>>> ggsave(plot, "dinner_tips.png", dpi=300, width=8, height=6)
+<Figure Size: (2400 x 1800)>
+>>> 
+```
+
+The plot has been saved as "dinner_tips.png" in your current working directory. The `dpi=300` ensures high resolution, and `width=8, height=6` sets the dimensions in inches.
+
+### Exercise 18
+
+Finally, display the plot in the console by using `print()`. Run:
+`print(plot)`
+
+```{r method-chaining-and-plots-18}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+```
+>>> print(plot)
+<Figure Size: (640 x 480)>
+>>>
+The plot is now displayed. In VS Code or Codespaces, this will typically open in a plot viewer window. You can now view the saved image file by clicking on "dinner_tips.png" in your file explorer.
+```
 
 ## Generative AI
 ###
@@ -1145,14 +1397,7 @@ p.save("output_plot.png")
 
 <!-- DK: Below comments seems like garbage . . . Or maybe OK. I don't know! How much do students read . . . -->
 
-Note:
-
-* AI tools are great at generating visualizations, but you should understand the code they provide.
-* Different AI tools may suggest different approaches - compare and learn from them.
-* Always test the code and make sure you understand what each line does.
-* You can ask the AI to explain any part of the code you don't understand.
-
-The key is practice. Use AI every day!
+AI tools are great at generating code and visualizations, but you should always own your work and understand everything in it
 
 ## Summary
 ###
