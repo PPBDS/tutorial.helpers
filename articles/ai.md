@@ -181,7 +181,7 @@ Console:
 ```` default
 ### Exercise 3
 
-Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Shift + Enter` to execute that line.
+Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Enter` to execute that line.
 
 Note that this causes `library(tidyverse)` to be copied down to the Console and then executed. 
 
@@ -248,7 +248,7 @@ in the Console:
 ```` default
 ### Exercise 13
 
-Place your cursor in the QMD file on the `fit_XX` line. Use `Cmd/Ctrl + Shift + Enter` to execute that line. 
+Place your cursor in the QMD file on the `fit_XX` line. Use `Cmd/Ctrl + Enter` to execute that line. 
 
 At the Console, run `ls()`. CP/CR.
 
@@ -294,7 +294,7 @@ we will add R chunks to provide our code to students.
 ```` default
 ### Exercise 6
 
-Using your favorite AI, prompt it to generate R code that ... Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Shift + Enter`.
+Using your favorite AI, prompt it to generate R code that ... Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
 
 In the Console, run:
 
@@ -388,8 +388,8 @@ to fix it.
 
 The second question tells the student to, in the QMD, assign the result
 of the pipe to a new variable, often `x`. We then tell the student to
-`Cmd/Ctrl + Shift + Enter` this code so that the workspace includes a
-copy of `x`.
+`Cmd/Ctrl + Enter` this code so that the workspace includes a copy of
+`x`.
 
 ```` default
 ### Exercise 9
@@ -400,7 +400,7 @@ Within the latest code chunk, add the option: `#| cache: true`. Assign the resul
 
 If you have not done so already, you should add `analysis_cache` to the `.gitginore`. The content of the cache file does not belong on GitHub.
 
-Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Shift + Enter`, thus ensuring that the workspace also includes a copy of `x`.
+Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Enter`, thus ensuring that the workspace also includes a copy of `x`.
 
 CP/CR.
 

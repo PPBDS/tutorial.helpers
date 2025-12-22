@@ -51,7 +51,7 @@ question. They give you an answer. What would you say to them next? What
 do you want to teach them, given that context?
 
 We are building a “[pit of
-success](https://ricomariani.medium.com/the-pit-of-success-cfefc6cb64c8).”
+success](https://blog.codinghorror.com/falling-into-the-pit-of-success/).”
 Generally, students don’t do the assigned reading, at least in a large
 class. However, they will complete required work. They will do the
 assigned tutorials. *Our promise: If you complete the tutorials, you
@@ -679,7 +679,7 @@ doing. Teach them something real!
     as you can.
   - Anything associated with [Posit](https://posit.co/) is high quality.
     Examples include sites associated with
-    [Tidyverse](https://www.tidyverse.org/) and
+    [Tidyverse](https://tidyverse.org/) and
     [Tidymodels](https://www.tidymodels.org/).
 
 - Avoid links to low quality sites like `https://rdrr.io/` ,
