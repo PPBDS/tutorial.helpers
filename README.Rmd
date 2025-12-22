@@ -68,7 +68,7 @@ The package includes three tutorials: "Getting Started," "Introduction to R," an
 learnr::run_tutorial(getting-started", package = "tutorial.helpers")
 ````
 
-This will teach them enough about how tutorials work to be able to complete the tutorials you write. If you are also teaching R, we strongly recommend the "Introduction to R" tutorial. The Python tutorial still needs work.
+This will teach them enough about how tutorials work to be able to complete the tutorials you write. If you are also teaching R, we strongly recommend the "Introduction to R" tutorial. 
 
 #### Download answers
 
@@ -90,22 +90,7 @@ We recommend including this child document at the start of each tutorial:
 ```
 ````
 
-This will insert (optional) questions asking for the student's name, email and id.
-
-We also recommend including this at the beginning of your tutorial:
-
-````{verbatim}
-```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
-```
-````
-
-This allows you to place a button in an exercise which will allow students to copy over all the code from the previous exercise. Use:
-
-````
-<button onclick = "transfer_code(this)">Copy previous code</button>
-````
-
-This is handy for students when a series of exercises requires them to build up a long pipe, line-by-line. 
+This will insert (optional) questions asking for the student's name, email and id. 
 
 We recommend ending the tutorial with the download-answers child document, as discussed above.
 
@@ -113,5 +98,3 @@ We recommend ending the tutorial with the download-answers child document, as di
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
 ````
-
-

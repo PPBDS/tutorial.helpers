@@ -12,7 +12,6 @@ runtime: shiny_prerendered
 description: Tutorial for introducing students to the Python language.
 ---
 
-
 ```{r setup, include=FALSE}
 library(learnr)
 library(tutorial.helpers)
@@ -975,11 +974,14 @@ shape: (176, 4)
 └────────────┴──────┴────────┴─────┘
 >>> 
 ```
+
 The `sort()` method sorts the rows of a DataFrame. By default, it sorts in ascending order. 
 
 ### Exercise 8
 
-Before we can create plots, we need to import the plotnine library. Run: `from plotnine import ggplot, aes, geom_point, labs, theme_minimal, ggsave`
+Before we can create plots, we need to import the **plotnine** library. Run: `from plotnine import *`
+
+CP/CR.
 
 ```{r method-chaining-and-plots-8}
 question_text(NULL,
@@ -992,11 +994,18 @@ question_text(NULL,
 
 ###
 
-**plotnine** is Python's implementation of the Grammar of Graphics, similar to R's **ggplot2**. We import the specific functions we'll need for creating and customizing our plot.
+```
+>>> from plotnine import *
+>>> 
+```
+
+**plotnine** is Python's implementation of the Grammar of Graphics, similar to R's **ggplot2**. 
+
+Note that this import invocation is different from the one we used with **polars**: `import polars as pl`. That invocation requires us to use `pl` as a suffix whenever we call a function from **polars**. Using `import *` allows as to just call the functions directly. The danger comes if we have two or more packages with functions which have the same name. The `as` invocation is very common because it forces us to specify the function we want. However, doing so can get annoying! So, we will be "lazy" for this plot.
 
 ### Exercise 9
 
-First, let's create our filtered dataset and assign it to a variable called `dinner_data`. Use the chain from Exercise 7. Run:`dinner_data = tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).sort("tip")`
+Let's create our filtered dataset and assign it to a variable called `dinner_data`. Use the chain from Exercise 7. Run:`dinner_data = tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).sort("tip")`. After doing so, just print out `data_dinner` to confirm that it looks correct.
 
 ```{r method-chaining-and-plots-9}
 question_text(NULL,
@@ -1008,6 +1017,8 @@ question_text(NULL,
 ```
 
 ###
+
+```
 >>> dinner_data = tips.filter(pl.col("time") == "Dinner").select(["total_bill", "tip", "sex", "day"]).sort("tip")
 >>> dinner_data
 shape: (176, 4)
@@ -1028,11 +1039,14 @@ shape: (176, 4)
 │ 48.33      ┆ 9.0  ┆ Male   ┆ Sat │
 │ 50.81      ┆ 10.0 ┆ Male   ┆ Sat │
 └────────────┴──────┴────────┴─────┘
->>> Assigning our filtered data to a variable makes it easier to reuse and keeps our plotting code cleaner.
+>>> 
+```
+
+Assigning our filtered data to a variable makes it easier to reuse and keeps our plotting code cleaner.
 
 ### Exercise 10
 
-Now let's start building our plot. The basic structure uses `ggplot()` with the data and `aes()` (aesthetics) to map variables to visual properties. Run:`ggplot(dinner_data, aes(x="total_bill", y="tip"))`
+Show AI the `dinner_data` DataFrame and ask it to use the **plotnine** package to create a simple but nice looking plot and to save that plot as `myplot.png`. Run that code at the Console using copy/paste. If it fails, show AI the error and try again until it works. Double-click on `myplot.png`.
 
 ```{r method-chaining-and-plots-10}
 question_text(NULL,
@@ -1040,204 +1054,39 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 10)
+	rows = 5)
 ```
 
 ###
-```
->>> ggplot(dinner_data, aes(x="total_bill", y="tip"))
-<Figure Size: (640 x 480)>
->>> 
-```
-This creates a blank plot with axes set up. We've told **plotnine** that `total_bill` should be on the x-axis and `tip` on the y-axis, but we haven't added any geometric objects (points, lines, etc.) yet.
 
-### Exercise 11
+Your screen should look something like this:
 
-Use the up arrow to retrieve to previous code.
-Add a geometry layer to actually display the data points. Use the `+` operator to add `geom_point()`. Run:
-`ggplot(dinner_data, aes(x="total_bill", y="tip")) + geom_point()`
+###
 
-```{r method-chaining-and-plots-11}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
+```{r}
+include_graphics("images/plot-1.png")
 ```
 
 ###
-```
->>> ggplot(dinner_data, aes(x="total_bill", y="tip")) + geom_point()
-<Figure Size: (640 x 480)>
->>> 
-```
 
-Now you should see a scatter plot showing the relationship between total bill and tip amounts. The plot shows a general positive correlation.
-
-### Exercise 12
-
-Let's add color to distinguish between male and female customers. Add `color="sex"` inside the `aes()` function. Run:
-`ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point()`
-
-```{r method-chaining-and-plots-12}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
-```
-
-###
-```
->>> ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point()
-<Figure Size: (640 x 480)>
->>> 
-```
-
-The points are now colored by sex, with a legend automatically added.
-
-### Exercise 13
-
-Let's customize the appearance of the points. Add `size=3` and `alpha=0.6` as arguments to `geom_point()`. Run:
-`ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6)`
-
-```{r method-chaining-and-plots-13}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
-```
-###
+Our code:
 
 ```
->>> ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6)
-<Figure Size: (640 x 480)>
->>> 
+p = (
+    ggplot(dinner_data, aes(x = 'total_bill', y = 'tip', color = 'sex')) +
+      geom_point() +
+      theme_minimal() +
+      labs(x= 'Total Bill', y= 'Tip', color = 'Sex')
+)
+
+p.save('myplot.png')
 ```
 
-The `size` parameter makes the points bigger, and `alpha` controls transparency (0.6 means 60% opaque), which helps when points overlap.
+You code is probably different. And that is OK! The important skill is how to use AI to create beautiful graphics.
 
-### Exercise 14
-
-Add labels to make the plot more informative. Add `labs()` with a title and axis labels. Run:
-`ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6) + labs(title="Tips vs Total Bill for Dinner", x="Total Bill ($)", y="Tip ($)", color="Sex")`
-
-```{r method-chaining-and-plots-14}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
-```
-
-###
-```
->>> ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6) + labs(title="Tips vs Total Bill for Dinner", x="Total Bill ($)", y="Tip ($)", color="Sex")
-<Figure Size: (640 x 480)>
->>> 
-```
-
-The `labs()` function adds a title and customizes the axis labels and legend title.
-
-### Exercise 15
-
-Apply a cleaner theme to the plot. Add `theme_minimal()` to the chain. Run:
-`ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6) + labs(title="Tips vs Total Bill for Dinner", x="Total Bill ($)", y="Tip ($)", color="Sex") + theme_minimal()`
-
-```{r method-chaining-and-plots-15}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
-```
-
-###
-```
->>> ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6) + labs(title="Tips vs Total Bill for Dinner", x="Total Bill ($)", y="Tip ($)", color="Sex") + theme_minimal()
-<Figure Size: (640 x 480)>
->>> 
-```
-
-The minimal theme removes the gray background and gives the plot a cleaner, more modern look.
-
-### Exercise 16
-
-Now let's save our plot to a variable so we can reuse it. Assign the entire plot to a variable called `plot`. Run:
-`plot = ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6) + labs(title="Tips vs Total Bill for Dinner", x="Total Bill ($)", y="Tip ($)", color="Sex") + theme_minimal()`
-
-```{r method-chaining-and-plots-16}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
-```
-
-###
-```
->>> plot = ggplot(dinner_data, aes(x="total_bill", y="tip", color="sex")) + geom_point(size=3, alpha=0.6) + labs(title="Tips vs Total Bill for Dinner", x="Total Bill ($)", y="Tip ($)", color="Sex") + theme_minimal()
->>> 
-```
-
-The plot is now stored in the `plot` variable. Nothing displays yet because we haven't printed it.
-
-### Exercise 17
-
-Save the plot to a file using `ggsave()`. This function takes the plot object, filename, and optional parameters for resolution and size. Run:
-`ggsave(plot, "dinner_tips.png", dpi=300, width=8, height=6)`
-
-```{r method-chaining-and-plots-17}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
-```
-
-###
-```
->>> ggsave(plot, "dinner_tips.png", dpi=300, width=8, height=6)
-<Figure Size: (2400 x 1800)>
->>> 
-```
-
-The plot has been saved as "dinner_tips.png" in your current working directory. The `dpi=300` ensures high resolution, and `width=8, height=6` sets the dimensions in inches.
-
-### Exercise 18
-
-Finally, display the plot in the console by using `print()`. Run:
-`print(plot)`
-
-```{r method-chaining-and-plots-18}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 10)
-```
-
-###
-```
->>> print(plot)
-<Figure Size: (640 x 480)>
->>>
-The plot is now displayed. In VS Code or Codespaces, this will typically open in a plot viewer window. You can now view the saved image file by clicking on "dinner_tips.png" in your file explorer.
-```
 
 ## Generative AI
 ###
-
-<!-- DK: The latter half of this needs a rewrite, mainly because plots don't just appear. What should we say to the AI? -->
 
 Generative AI --- tools like [ChatGPT](https://chat.openai.com/), [Grok](https://x.ai/), [Claude](https://claude.ai/), [DeepSeek](https://www.deepseek.com/en) and so on --- are the future, of data science and everything else. The more you use these tools, the better off you will be. Unfortunately, the tools are changing so much that it is hard for a tutorial like this to stay up-to-date. This section provides some general advice and practice exercises.
 
@@ -1351,7 +1200,9 @@ Using AI is good. But intelligent use --- use in which you understand what the A
 
 ### Exercise 4
 
-Ask AI to create a beautiful plot using the `tips` dataset and the **plotnine** library. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
+Ask AI to create a beautiful plot using the `tips` dataset and the **plotnine** library and to save the resulting plot as `myplot.png`. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
+
+CP/CR.
 
 ```{r generative-ai-4}
 question_text(NULL,
@@ -1367,8 +1218,6 @@ rows = 20)
 Example code from Claude:
 
 ```
-from plotnine import *
-
 p = (
     ggplot(tips, aes(x="total_bill", y="tip", color="sex")) +
     geom_point(alpha=0.7, size=3) +
@@ -1391,13 +1240,8 @@ p = (
 p.save("output_plot.png")
 ```
 
-###
+It is convenient to have the new plot saved as the same name as the plot which is already open. In this case, the new plot will just replace the old plot without you having to double-click anything. Of course, you can't use that trick if you want to save both plots.
 
-<!-- DK: Explain how, by using the same name, the object is replaced and also magically pops in the view. Maybe this should be a couple of questions. Or maybe not. -->
-
-<!-- DK: Below comments seems like garbage . . . Or maybe OK. I don't know! How much do students read . . . -->
-
-AI tools are great at generating code and visualizations, but you should always own your work and understand everything in it
 
 ## Summary
 ###

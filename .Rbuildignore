@@ -7,6 +7,7 @@
 ^pkgdown$
 ^\.github$
 ^README\.Rmd$
+^README\.html$
 ^TODO\.txt$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$

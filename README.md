@@ -36,6 +36,51 @@ remotes::install_github("PPBDS/tutorial.helpers")
 
 ## Useful tools
 
+#### Tutorial template
+
+To create a new tutorial, you first need a new directory, located in the
+`inst/tutorials` directory of your package. Once you create that
+directory, make sure that your R session is located within it. Then,
+issue this command:
+
+    > rmarkdown::draft("tutorial.Rmd", 
+                       template = "tutorial_template", 
+                       package = "tutorial.helpers",
+                       edit = TRUE)
+
+This will create a new file, `tutorial.Rmd` in the current directory.
+This highly opinionated template provides [a framework for teaching
+students how to use AI to do data
+science](https://ppbds.github.io/tutorial.helpers/articles/ai.html).
+
+#### Testing
+
+The package includes two important functions: `make_exercise()` and
+`check_current_tutorial()`. Use `make_exercise()` to add a new exercise
+to the current tutorial. It will number the exercise, and the code chunk
+labels, automatically. Use `check_current_tutorial()` to renumber all
+the exercises and relabel all the code chunks. This is especially useful
+if you add or delete an exercise in the middle of a section.
+
+There are three exported functions for checking the tutorials in your
+package. See the [testing
+vignette](https://ppbds.github.io/tutorial.helpers/articles/testing.html)
+for details on their use.
+
+#### Tutorials
+
+The package includes three tutorials: “Getting Started,” “Introduction
+to R,” and “Introduction to Python.” You should require your students to
+complete the “Getting Started” tutorial if you are creating your own
+tutorials with **tutorial.helpers** package. For example, in Positron,
+have students run:
+
+    learnr::run_tutorial(getting-started", package = "tutorial.helpers")
+
+This will teach them enough about how tutorials work to be able to
+complete the tutorials you write. If you are also teaching R, we
+strongly recommend the “Introduction to R” tutorial.
+
 #### Download answers
 
 The most useful tool is the [download answers
@@ -54,13 +99,6 @@ the student’s answers in html format. Students submit these files to
 their instructors, who can then confirm that the work was completed and
 look for any patterns in student (mis)understandings.
 
-#### Testing
-
-There are three exported functions for checking the tutorials in your
-package. See the [testing
-vignette](https://ppbds.github.io/tutorial.helpers/articles/testing.html)
-for details on their use.
-
 #### Recommended components
 
 We recommend including this child document at the start of each
@@ -74,21 +112,6 @@ tutorial:
 This will insert (optional) questions asking for the student’s name,
 email and id.
 
-We also recommend including this at the beginning of your tutorial:
-
-```` default
-```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
-```
-````
-
-This allows you to place a button in an exercise which will allow
-students to copy over all the code from the previous exercise. Use:
-
-    <button onclick = "transfer_code(this)">Copy previous code</button>
-
-This is handy for students when a series of exercises requires them to
-build up a long pipe, line-by-line.
-
 We recommend ending the tutorial with the download-answers child
 document, as discussed above.
 
@@ -96,13 +119,3 @@ document, as discussed above.
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
 ````
-
-#### Tutorials
-
-The package includes a tutorial: “Tutorials in Positron.” This provides
-an introduction to tutorials for beginning students. You should require
-your students to complete the tutorial if you are creating your own
-tutorials with **tutorial.helpers** package. For example, in Positron,
-have students run:
-
-    learnr::run_tutorial("positron", package = "tutorial.helpers")
