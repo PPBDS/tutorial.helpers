@@ -40,7 +40,7 @@ Almost all exercises feature a knowledge drop, a bit of information, rarely more
 Assume that you are giving the student a private lesson. You ask them a question. They give you an answer. What would you say to them next? What do you want to teach them, given that context?
 
 
-We are building a "[pit of success](https://ricomariani.medium.com/the-pit-of-success-cfefc6cb64c8)." Generally, students don't do the assigned reading, at least in a large class. However, they will complete required work. They will do the assigned tutorials. *Our promise: If you complete the tutorials, you will learn the material. There is simply no way not to.*
+We are building a "[pit of success](https://blog.codinghorror.com/falling-into-the-pit-of-success/)." Generally, students don't do the assigned reading, at least in a large class. However, they will complete required work. They will do the assigned tutorials. *Our promise: If you complete the tutorials, you will learn the material. There is simply no way not to.*
 
 
 ## Set Up
@@ -370,7 +370,7 @@ A knowledge drop should not be a road sign. Example: "In the next section we wil
   
 * Use high quality links. 
   * The second edition of [*R for Data Science*](https://r4ds.hadley.nz/) is amazing. Link to it as often as you can.
-  * Anything associated with [Posit](https://posit.co/) is high quality. Examples include sites associated with [Tidyverse](https://www.tidyverse.org/) and [Tidymodels](https://www.tidymodels.org/).
+  * Anything associated with [Posit](https://posit.co/) is high quality. Examples include sites associated with [Tidyverse](https://tidyverse.org/) and [Tidymodels](https://www.tidymodels.org/).
 
 * Avoid links to low quality sites like `https://rdrr.io/` , `https://www.rdocumentation.org/`, and `https://www.datamentor.io/`. Any site which uses ads should be avoided.
 
