@@ -1,7 +1,5 @@
 ## Items
 
-* Do we still need `Cmd/Ctrl + Shift + Enter` instead of `Cmd/Ctrl + Enter`? Check latest Positron. 
-
 * Finish AI tutorial.
 
 * Should "Save and push" in the standard template be something more like "Save, commit and push?" Or should it be something shorter? Or maybe the words should be different, perhaps matching the Positron verbiage, like the use of "Sync?"
@@ -14,15 +12,15 @@
 
 * If we did the above, then we could get rid of some of the default knowledge drops, like the warning about ending `analysis.qmd` with a blank line. This is worth discussing in our `details.qmd` essay as discussed above. It is not worth repeating in every single tutorial.
 
-* Should really be able to use `Cmd/Ctrl + Enter` in place of `Cmd/Ctrl + Shift + Enter`. Has the bug been fixed or does the former still fail to execute all the lines in a pipe?
+* Should really be able to use `Cmd/Ctrl + Enter` in place of `Cmd/Ctrl + Enter`. Has the bug been fixed or does the former still fail to execute all the lines in a pipe?
 
 * Stuff like this is wordy:
 
-Copy and paste this code to continue the previous code and save the file. Place your cursor on the first line of code and run `Cmd/Ctrl + Shift + Enter`.
+Copy and paste this code to continue the previous code and save the file. Place your cursor on the first line of code and run `Cmd/Ctrl + Enter`.
 
 Explain in the tutorial how the command "Ask AI and run the code." implicitly includes all the necessary steps. Maybe:
 
-> Going forward, you may assume that, whenever we tell you to "Ask AI," we always want you to then use the new code in the QMD, to execute that code with `Cmd/Ctrl + Shift + Enter`, and then **C**opy/**P**aste the **C**ode/**R**esponse as your answer. Recall that `Cmd/Ctrl + Shift + Enter` makes this easy because it takes the code from the QMD, copies it into the Console, and then hits `Enter`.
+> Going forward, you may assume that, whenever we tell you to "Ask AI," we always want you to then use the new code in the QMD, to execute that code with `Cmd/Ctrl + Enter`, and then **C**opy/**P**aste the **C**ode/**R**esponse as your answer. Recall that `Cmd/Ctrl + Enter` makes this easy because it takes the code from the QMD, copies it into the Console, and then hits `Enter`.
 
 
 

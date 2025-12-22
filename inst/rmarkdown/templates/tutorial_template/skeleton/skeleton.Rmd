@@ -33,7 +33,7 @@ options(tutorial.exercise.timelimit = 60,
 <!-- * Edit yaml at the top of this file -->
 <!-- * Save the file as "tutorial.Rmd" in the correct directory under inst/tutorials/xx/, where xx is the same as the tutorial id. -->
 <!-- * Load any necessary libraries for the tutorial in the first code chunk -->
-<!-- * Anytime you have a student `Cmd/Ctrl + Shift + Enter`, you ask for CP/CR and then provide your code as the test code chunk -->
+<!-- * Anytime you have a student `Cmd/Ctrl + Enter`, you ask for CP/CR and then provide your code as the test code chunk -->
 <!-- * Delete this and the other commented instructions below. -->
 <!-- Search for, read/replace, and then delete all `XX:` entries -->
 
@@ -115,7 +115,7 @@ question_text(NULL,
 
 ### Exercise 3
 
-Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Shift + Enter` to execute that line.
+Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Enter` to execute that line.
 
 Note how this command causes `library(tidyverse)` to be copied down to the Console and then executed. 
 
@@ -241,7 +241,7 @@ Within the latest code chunk, add the option: `#| cache: true`. Assign the resul
 
 If you have not done so already, you should add `analysis_cache` to the `.gitginore`. The content of the cache file does not belong on GitHub.
 
-Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Shift + Enter`, thus ensuring that the workspace also includes a copy of `x`.
+Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Enter`, thus ensuring that the workspace also includes a copy of `x`.
 
 CP/CR.
 
