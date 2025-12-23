@@ -1,6 +1,8 @@
 # Changelog
 
-## tutorial.helpers (development version)
+## tutorial.helpers 0.6.1
+
+CRAN release: 2025-12-23
 
 - Add “Generative AI” section to “Introduction to R” tutorial.
 
