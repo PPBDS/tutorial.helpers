@@ -1,3 +1,5 @@
+# tutorial.helpers (development version)
+
 # tutorial.helpers 0.6.1
 
 * Add "Generative AI" section to "Introduction to R" tutorial.
