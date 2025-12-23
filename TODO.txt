@@ -1,5 +1,11 @@
 ## Items
 
+* Git autorefresh does not work. Annoying! Maybe adding these will help:
+
+"git.autoRefresh": true,
+"git.autoRepositoryDetection": true,
+"files.watcherExclude": {}
+
 * Finish AI tutorial.
 
 * Should "Save and push" in the standard template be something more like "Save, commit and push?" Or should it be something shorter? Or maybe the words should be different, perhaps matching the Positron verbiage, like the use of "Sync?"
@@ -11,8 +17,6 @@
 * Maybe we need a new essay which includes a dozen or so sections, each of which explains a specific item/complexity. Then, we can just link to the relevant section from the relevant sentence/phrase from the standard template. Every once in a while, we can urge the student to check a link and learn about some of the details.
 
 * If we did the above, then we could get rid of some of the default knowledge drops, like the warning about ending `analysis.qmd` with a blank line. This is worth discussing in our `details.qmd` essay as discussed above. It is not worth repeating in every single tutorial.
-
-* Should really be able to use `Cmd/Ctrl + Enter` in place of `Cmd/Ctrl + Enter`. Has the bug been fixed or does the former still fail to execute all the lines in a pipe?
 
 * Stuff like this is wordy:
 
