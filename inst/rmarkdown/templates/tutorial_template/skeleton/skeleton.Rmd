@@ -2,7 +2,7 @@
 title: "XX: Title"
 author: "XX: Your Name"
 tutorial:
-  id: "XX: all lowercase id. It is the directory in which this tutorial is located"
+  id: "XX: all lowercase id. It is the directory in which this tutorial is located. You may want to start the id with a number since tutorials are sorted by id when displayed."
 output: 
   learnr::tutorial:
     df_print: default       # Cause printed tibbles to look the same as they do in the Console.

@@ -456,7 +456,7 @@ Because students will complete the tutorials using screens of very different wid
 
 ### Complex text
 
-You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which R markdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. The plain three or four backtick environments create a plain code block and content inside is displayed as-is. No syntax highlighting or execution is applied, and they show example code or text exactly as typed. Four backtick environments allow three backticks to be written within the block. This works often, but not always. Comments characters like `#` are especially problematic. We also use the [**parsermd**](https://rundel.github.io/parsermd/) package behind the scenes. It does not work as well as one might like.
+You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which R markdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. The plain three or four backtick environments create a plain code block and content inside is displayed as-is. No syntax highlighting or execution is applied, and they show example code or text exactly as typed. Four backtick environments allow three backticks to be written within the block. This works often, but not always. Comment characters like `#` are especially problematic. We also use the [**parsermd**](https://rundel.github.io/parsermd/) package behind the scenes. It does not work as well as one might like.
 
 Further complexity arises because tutorials are R markdown whereas all our other work is in Quarto. In Quarto documents (like this vignette), you can use an environment started by four backticks along with `{verbatim}` and then ended with four more backticks. This won't work in R markdown.
 
@@ -510,13 +510,13 @@ This assumes that you are located in the main directory of **your.package**, as 
 
 Once you are done editing a tutorial, you need to make sure it works before you submit a pull request to the package maintainer. There are several ways to do checks:
 
-1. Type `rmarkdown::render("file_path")` in the console. This will give you a file with the same file name and a `.html` extension. Right click the file and select `Open in Browser`. This open up a webpage and you can check the tutorial for some errors. It is smart to use `rmarkdown::render("file_path")` regularly since it identify syntax errors quickly. A good practice is to render after completing each exercise. 
+1. Type `rmarkdown::render("file_path")` in the console. This will give you a file with the same file name and a `.html` extension. Right click the file and select `Open in Browser`. This open up a webpage and you can check the tutorial for some errors. It is smart to use `rmarkdown::render("file_path")` regularly since it will identify syntax errors quickly. A good practice is to render after completing each exercise. 
 
-2. Do a full test, which means running `devtools::check()`. This is the equivalent of `R CMD check` which validates package structure, documentation, tests, and compliance with CRAN standards. A good result would be `0 errors ✓ | 0 warnings ✓ `.
+2. Do a full test, which means running `devtools::check()`. This is the equivalent of `R CMD check` which validates package structure, documentation, tests, and compliance with CRAN standards. A good result would be `0 errors ✔ | 0 warnings ✔ | 0 notes ✔`.
 
 ### What to do if `devtools::check()` fails
 
-1. Read the error message carefully. You always want to see `0 errors ✓ | 0 warnings ✓` under the `R CMD check results`. If not, there is a problem. The error message will often provide a clue as to where in your code the error occurred.
+1. Read the error message carefully. You always want to see `0 errors ✔ | 0 warnings ✔ | 0 notes ✔` under the `R CMD check results`. If not, there is a problem. The error message will often provide a clue as to where in your code the error occurred.
 
 2. If that error message is not detailed enough, go to the `your.package.rcheck` folder, which should be located in the same directory as `your.package` on your computer. This is a folder created by the `R CMD check` process, and it will be automatically deleted if the check process succeeds. If the process fails, the `your.package.rcheck` folder stays around so that you can examine it. The key file is `testthat.Rout.fail`, which should be in the `tests` directory. It has more details on what went wrong.
 
