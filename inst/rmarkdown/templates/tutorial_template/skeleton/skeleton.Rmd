@@ -2,22 +2,24 @@
 title: "XX: Title"
 author: "XX: Your Name"
 tutorial:
-  id: "XX: all lowercase id is the directory in which this tutorial is located"
+  id: "XX: all lowercase id. It is the directory in which this tutorial is located"
 output: 
   learnr::tutorial:
     df_print: default
     progressive: true
     allow_skip: true
 runtime: shiny_prerendered
-description: "XX ADD DESCRIPTION (a single sentence)"
+description: "XX: Add description (a single sentence"
 ---
 
 ```{r setup, include = FALSE}
 library(learnr)
 library(tutorial.helpers)
 
-# XX: Add other packages you use. Such packages should also be added
-# to the student QMD. 
+# XX: Add other packages you use. Add question which instruct students to add these
+# packages to their QMDs. 
+
+# Create any tibbles which your code will need.
 
 knitr::opts_chunk$set(echo = FALSE)
 options(tutorial.exercise.timelimit = 60, 
@@ -28,14 +30,14 @@ options(tutorial.exercise.timelimit = 60,
 ```
 
 <!-- XX: CHECKLIST BEFORE STARTING: -->
-<!-- * If you need to use the copy code button, you must load the relevant child document. -->
 <!-- * Use check_current_tutorial() and make_exercise("no-answer"). Very helpful! -->
-<!-- * Edit yaml at the top of this file -->
+<!-- * Make sure you have installed the development version of tutorial.helpers. You want the latest version! -->
+<!-- * Place any data needed for the tutorial in the data/ directory of the package. Have the student download it by hand. -->
 <!-- * Save the file as "tutorial.Rmd" in the correct directory under inst/tutorials/xx/, where xx is the same as the tutorial id. -->
 <!-- * Load any necessary libraries for the tutorial in the first code chunk -->
-<!-- * Anytime you have a student `Cmd/Ctrl + Enter`, you ask for CP/CR and then provide your code as the test code chunk -->
+<!-- * Anytime you have a student `Cmd/Ctrl + Enter`, you ask for CP/CR and then provide your code as the test code chunk. -->
 <!-- * Delete this and the other commented instructions below. -->
-<!-- Search for, read/replace, and then delete all `XX:` entries -->
+<!-- * Search for, read/replace, and then delete all `XX:` entries -->
 
 ## Introduction
 ###
@@ -48,7 +50,7 @@ Create a Github repo called `XX`. Set the "Add a README file" toggle box to "On.
 
 Connect the repo to a project on your computer using `File -> New Folder from Git ...`.  Make sure to select the "Open in a new window" box. 
 
-You need two Positon windows: this one for running the tutorial and the one you just created for writing your code and interacting with the Console.
+You need two Positron windows: this one for running the tutorial and the one you just created for writing your code and interacting with the Console.
 
 In the new window, select `File -> New File -> Quarto Document ...`. Provide a title -- `"XX"` -- and an author (you). Save the file as `analysis.qmd`. Render the document. 
 
@@ -170,16 +172,18 @@ You answer should look something like this, although your path will be different
 >
 ````
 
-<!-- XX: You will probably have one or two Sections, in between the Introduction and Summary. We provide on example below. Before editing it, you may want to copy/paste it to create the skeleton for a second section. Any tutorial which both uses a lot of AI and is supposed to take an hour or so will probably only have two sections.  -->
+<!-- XX: If you have downloaded some data, then you might want to create the tibbles that you will use here. (Of course, you also need to create those tibbles in the setup chunk so that any test code which create will run.) -->
 
-## XX: First section (use sentence case)
+<!-- XX: You will probably have one or two Topics, in between the Introduction and Summary. We provide an example below. Before editing it, you may want to copy/paste it to create the skeleton for a second section. Any tutorial which both uses a lot of AI and is supposed to take an hour or so will probably only have two Topics.  -->
+
+## XX: First topic (use sentence case)
 ###
 
-<!-- XX: Mention the packages/functions which you plan on covering in this Section. Not everything mentioned here is used in the Introduction/Summary, but everything in Introduction/Summary is referenced in one of these Section intro parts, the space before Exercise 1 in each section. -->
+<!-- XX: Mention the packages/functions which you plan on covering in this Topic. Not everything mentioned here is specified in the Introduction/Summary, but everything in Introduction/Summary is referenced in one of these topic introductions, the space before Exercise 1 in each topic. -->
 
 ### Exercise 1
 
-<!-- XX: In this question, "XX" is the full name of the file, like "cars.xls". -->
+<!-- XX: In this question, "XX" is the full name of the file, like "cheeses.xlsx". -->
 
 We begin by downloading XX directly from GitHub to the `data` directory using `download.file()`. 
 
@@ -203,10 +207,13 @@ question_text(NULL,
 	rows = 8)
 ```
 
+###
+
+<!-- XX: Insert a knowledge drop related to this project. -->
 
 ### Exercise 2
 
-<!-- XX: The meat of a Section generally involves asking AI to create a pipe which accomplishes some goal. The end of a Section always finishes up with a plot. These four questions set up and then guide the student to creating that plot. If you want the student to mimic a plot, you can place it in the `images` subdirectory and then use knitr::include_graphics("images/plot.png") to show it to students. -->
+<!-- XX: The meat of a Topic generally involves asking AI to create a pipe which accomplishes some goal. The end of a Topic always finishes up with a plot. The last four questions set up and then guide the student to creating that plot. If you want the student to mimic a plot, you can place it in the `images` subdirectory and then use `knitr::include_graphics("images/plot.png")` to show it to students. -->
 
 ### Exercise 3
 
@@ -283,7 +290,6 @@ question_text(NULL,
 
 ###
 
-
 Our code:
 
 ```{r, echo=TRUE}
@@ -341,7 +347,7 @@ Our code:
 At the Console, run:
 
 ```
-tutorial.helpers::show_file("analysis.qmd")
+show_file("analysis.qmd")
 ```
 
 CP/CR.
@@ -361,13 +367,7 @@ question_text(NULL,
 
 ### Exercise 2
 
-Publish your rendered QMD to GitHub Pages. In the Terminal --- not the Console! --- run:
-
-````
-quarto publish gh-pages analysis.qmd
-````
-
-Copy/paste the resulting URL below.
+Commit and push all your files. Copy/paste the URL to your Github repo.
 
 ```{r summary-2}
 question_text(NULL,
@@ -375,7 +375,7 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 1)
+	rows = 3)
 ```
 
 ### 
@@ -384,7 +384,13 @@ question_text(NULL,
 
 ### Exercise 3
 
-Commit and push all your files. Copy/paste the URL to your Github repo.
+Publish your rendered QMD to GitHub Pages. In the Terminal --- not the Console! --- run:
+
+```
+quarto publish gh-pages analysis.qmd
+```
+
+Copy/paste the resulting URL below.
 
 ```{r summary-3}
 question_text(NULL,
@@ -392,7 +398,7 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 3)
+	rows = 1)
 ```
 
 ### 

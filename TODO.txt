@@ -1,11 +1,5 @@
 ## Items
 
-* Git autorefresh does not work. Annoying! Maybe adding these will help:
-
-"git.autoRefresh": true,
-"git.autoRepositoryDetection": true,
-"files.watcherExclude": {}
-
 * Finish AI tutorial.
 
 * Should "Save and push" in the standard template be something more like "Save, commit and push?" Or should it be something shorter? Or maybe the words should be different, perhaps matching the Positron verbiage, like the use of "Sync?"

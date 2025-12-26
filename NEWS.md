@@ -1,5 +1,7 @@
 # tutorial.helpers (development version)
 
+* Finalize "Tutorials in the Age of AI" vignette.
+
 # tutorial.helpers 0.6.1
 
 * Add "Generative AI" section to "Introduction to R" tutorial.
