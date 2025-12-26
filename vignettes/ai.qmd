@@ -1,17 +1,6 @@
-
 ---
 title: "Tutorials in the Age of AI"
 author: David Kane
-format:
-  html:
-    include-in-header:
-      text: |
-        <style>
-        pre, pre code {
-          white-space: pre-wrap !important;
-          word-wrap: break-word !important;
-        }
-        </style>
 vignette: >
   %\VignetteEngine{quarto::html}
   %\VignetteIndexEntry{Tutorials in the Age of AI}
