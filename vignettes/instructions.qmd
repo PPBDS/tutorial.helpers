@@ -352,7 +352,7 @@ You then build up the graphic, line by line, over a series of exercises, providi
 
 ### Knowledge Drops
 
-The most difficult part of tutorial creation is writing the "knowledge drops," the snippets of wisdom (and the associated links) which are used at the end of each exercise. These generally come in two categories: details about R functions/packages/websites and background information about the substative data science problem at hand. 
+The most difficult part of tutorial creation is writing the "knowledge drops," the snippets of wisdom (and the associated links) which are used at the end of each exercise. These generally come in two categories: details about R functions/packages/websites and background information about the substantive data science problem at hand. 
 
 Do not expect this to be easy! Good knowledge drops are hard. Make them short. Students will not read more than a sentence or two.
 
@@ -404,7 +404,7 @@ If you need for an R object to be accessible in an exercise code chunk, create i
 
 Be wary of code which downloads data from the web. This won't work if the student does not have an internet connection when she creates the tutorial. Instead, save the code which downloaded the data and then place that object in an RDS file in the `data` directory. Here is an example from the "Wrangling Census data with Tidyverse tools" tutorial from the [**tidycensus.tutorials**](https://ppbds.github.io/tidycensus.tutorials/) package.
 
-```
+````
 median_age <- get_acs(geography = "county",
                       variables = "B01002_001",
                       year = 2020)

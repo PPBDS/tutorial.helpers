@@ -2,27 +2,33 @@
 ---
 title: "Tutorials in the Age of AI"
 author: David Kane
-format: html
+format:
+  html:
+    include-in-header:
+      text: |
+        <style>
+        pre, pre code {
+          white-space: pre-wrap !important;
+          word-wrap: break-word !important;
+        }
+        </style>
 vignette: >
   %\VignetteEngine{quarto::html}
   %\VignetteIndexEntry{Tutorials in the Age of AI}
   %\VignetteEncoding{UTF-8}
 ---
 
-
-<!-- DK: Update the quoted tutorial exercises with the latest versions from the skeleton.qmd. -->
-
-### Introduction
+## Introduction
 
 AI changes everything.
 
-This document describes the best way to write R tutorials which embrace the student use of AI. Prior to the rise of AI, [this](https://web.archive.org/web/20251008195459/https://ppbds.github.io/tutorial.helpers/articles/instructions.html) [was](https://web.archive.org/web/20251008195807/https://ppbds.github.io/tutorial.helpers/articles/books.html) the best way to write tutorials. Our purpose is no longer to teach students how to code. 
+This document describes the best way to write R tutorials using the [**learnr**](https://rstudio.github.io/learnr/) package. Prior to the rise of AI, [this](https://web.archive.org/web/20251008195459/https://ppbds.github.io/tutorial.helpers/articles/instructions.html) [was](https://web.archive.org/web/20251008195807/https://ppbds.github.io/tutorial.helpers/articles/books.html) the best way to write tutorials. Our purpose is no longer to teach students how to code. 
 
 > *Our purpose is to teach students how to use AI to create.* 
 
 The [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package will help you to create good tutorials. Make sure that you are using the latest development version. Install it with `pak::pak(PPBDS/tutorial.helpers)`.
 
-### Overview
+## Overview
 
 To create a new tutorial, you first need a new directory, located in the `inst/tutorials` directory of your package. Create that directory and then move to it with `setwd()`. Then, run:
 
@@ -32,6 +38,14 @@ To create a new tutorial, you first need a new directory, located in the `inst/t
                   package = "tutorial.helpers",
                   edit = TRUE)
 ```
+
+The template, which is actually `inst/rmarkdown/templates/tutoral_template/skeleton.Rmd` in the **tutorial.helpers** package, starts with the `copy-code-chunk`, some default code which records a student's name, email and (otionally) id. The template ends with the `download-answers` code chunk which provides students with instructions on how to download a copy of their answers.
+
+There is a `setup` code chunk at the top of a tutorial. You must have `library(learnr)` and, if you use our tools, `library(tutorial.helpers)` in this chunk. If your tutorials are part of an R package, then you should ensure that **tutorial.helpers** is included under Imports in the DESCRIPTION file and that any library loaded in a tutorial is, at least, included under Suggests.
+
+Anything typed at the keyboard belongs in \`backticks\` (not "quotation marks"), except for package names, which are always **bolded**. Function names always include the parentheses: `read_csv()`, not `read_csv`. Example: the `+` sign is used to connect `ggplot()` components when using the **ggplot2** library.
+
+Note that tutorials must be [R Markdown](https://rmarkdown.rstudio.com/) documents, meaning that their suffix is `.Rmd`. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the `{}`. Don't worry about this detail. 
 
 AI tutorials begin with an *Introduction* which provides a summary of the key packages/functions which the tutorial will cover. The Introduction continues with a series of exercises which set up the repo/project/QMD in which most of the tutorial will be completed.
 
@@ -45,7 +59,143 @@ Anytime you ask a student to execute something in the Console, you confirm that 
 
 Students always need more practice working in a Quarto document (the QMD) and the Console at the same time. Good data scientists go back and forth between these two modes, writing something in the QMD, executing it in the Console, editing the QMD, executing again, and so on. We need to force students to do that more often.
 
-### Tutorial Introduction
+Tutorials are divided into *Topics* that appear on the side panel. To create these topics, we include a double hash (##) before the text for it to show up as a side panel. This is also called the *topic title*.  Use [sentence case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case). On the line after the topic title, put three hashes. This ensures that students will see the introductory text before they see the first exercise.
+
+### Questions
+
+There are two types of text questions: 1) those that provide the students with the correct answer, after they have submitted their own answer, and, 2) those that do not provide an answer.  Examples:
+
+````{verbatim}
+### Exercise 6
+
+Explain potential outcomes in about two sentences.
+
+```{r definitions-6}
+question_text(NULL,
+    message = "This is where we place the correct answer. It will appear only after 
+    students have submitted their own answers. Note that we do not need to wrap the 
+    answer text by hand.",          
+    answer(NULL, 
+           correct = TRUE),
+    allow_retry = FALSE,
+    incorrect = NULL,
+    rows = 6)
+``` 
+````
+
+For the `message` argument, you should provide an **excellent** answer. We want to allow students to check for themselves that they got, more or less, the correct answer. Note how we set `allow_retry` to FALSE. This means that, after they see our answer, students can't modify their answer. The `rows` argument decides how many rows the empty text input will have.
+
+Always specify (approximately) how much you want students to write. Reasonable units are: one sentence, two sentences and a paragraph. Pick one of these three unless you have a good reason not to. But be wary of asking for more than a sentence, unless you just want an AI answer. The ideal question is easier for a student to just answer than to ask AI.
+
+For paragraph questions, you should mention specific words or phrases which the students should include in their answers. If your suggested answer includes the word "validity," for example, then tell the students to include (and define) validity as part of their answer. 
+
+You can insert a text question which provides an answer by placing your cursor in the desired location and running `tutorial.helpers::make_exercise(type = "yes-answer")`.
+
+However, for many written questions, we don't provide an answer, so we don't mind if students resubmit. This format is most commonly used for "process" questions in which we have told students to do something and then confirm that they have done it by copying/pasting the result from a command. To create a template for these questions, we run `tutorial.helpers::make_exercise()`, since the default value for `type` is `"no-answer"`. Doing so produces an outline which looks like this:
+
+````{verbatim}
+### Exercise 7
+
+
+```{r exercise-7}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```{r exercise-7-test, echo = TRUE}
+
+```
+
+###
+
+````
+
+The question will almost always instruct the student to "CP/CR," often after running `show_fle(chunk = "Last")`. Adjust the value of `rows` to match the expected length of the pasted output. If the question asks student to run some R code, we will generally include a reasonable answer in the `test` chunk. This serves two purposes. First, because `echo = TRUE`, we show the student that code (and its output) in the tutorial. This code should be excellent. We want students to learn from our example. Second, the code will be run when we test the tutorial, so we can be sure that this code (and, we hope, code like it) will work for the student.
+
+### Knowledge drops
+
+The most difficult part of tutorial creation is writing the "knowledge drops," the snippets of wisdom (and the associated links) which are used at the end of each exercise. These generally come in two categories: details about R functions/packages/websites and background information about the substantive data science problem at hand. 
+
+Do not expect this to be easy! Good knowledge drops are hard. Make them short. Students will not read more than a sentence or two.
+
+Perhaps the best place for a knowledge drop, especially for written questions, is at the start of the exercise. That is, instead of just asking the question immediately, provide a sentence or two of knowledge even if this information is not really needed to answer the question. Students tend to read those sentences closely since they might be relevant to the question they need to answer.
+
+Rhetorical questions (almost) always work poorly for knowledge drops.
+
+A knowledge drop should not be a road sign. Example: "In the next section we will explore the data further." Don't waste time telling students what you expect to do next, or what you have just completed doing. Teach them something real!
+
+The most important knowledge drops mention packages and functions which we want students to be aware of, packages/functions which they might want to mention to the AI explicitly, given the topic under consideration.
+
+### Inputs
+
+In addition to `tutorial.Rmd`, a tutorial will often use other inputs. The two most common locations for storing these inputs are `data` and `images` directories at the same level as the `tutorial.Rmd` file. Any file in `data` or `images` will be available at run time. (Note that the directories must have these names. Something like `my_data` will not work.) 
+
+#### Data
+
+If you need for an R object to be accessible in an exercise code chunk, create it in the initial global `setup` code chunk at the top of the tutorial.
+
+<!-- Objects created in a code chunk which is then referenced by using the exercise.setup code chunk option in any exercise which needs access to these objects. -->
+
+Be wary of code which downloads data from the web. This won't work if the student does not have an internet connection when she creates the tutorial. Instead, save the code which downloaded the data and then place that object in an RDS file in the `data` directory. Here is an example from the "Wrangling Census data with Tidyverse tools" tutorial from the [**tidycensus.tutorials**](https://ppbds.github.io/tidycensus.tutorials/) package.
+
+````{verbatim}
+median_age <- get_acs(geography = "county",
+                      variables = "B01002_001",
+                      year = 2020)
+write_rds(median_age, "data/median_age.rds")
+
+median_age <- read_rds("data/median_age.rds")
+````
+
+The first two commands download data and save it to an RDS file in the `data` directory. 
+
+This code assumes that you are located in the same directory as the `tutorial.Rmd` file. You only run those commands once, and then you comment them out because you don't want them re-run each time the tutorial is created. The `read_rds()` call is never commented out because we always need the `median_age` object.
+
+When designing tutorials which use objects like `median_age`, we generally write two exercise code chunks. The first has the student run the same code as that which we used to create the object ourselves. This won't work if the student is not connected to the web but, with luck, in that case they will get a sensible error message. The second question informs the students that we have, behind the scenes, assigned the result of the function to an R object. We then ask the student to just print out that object. We don't have them do the assignment themselves, not least because we don't like questions which don't generate any output. 
+
+We use a similar approach with models which can take awhile to fit. Example:
+
+````{verbatim}
+fit_gauss <- brm(formula = biden ~ 1,
+                data = poll_data,
+                refresh = 0,
+                silent = 2,
+                seed = 9)
+write_rds(fit_gauss, "data/fit_gauss.rds")
+
+fit_gauss <- read_rds("data/fit_gauss.rds")
+````
+
+Again, this code only works if you are in the tutorial directory, not in the higher directory of the R project itself. Also, the first two commands are commented out, unless you are running them by hand to create the object.
+
+What happens if the data is too large? See the "Arrow" tutorial in the [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) for an example. First, we generally switch away from code exercises and use written exercises. Students run the required commands and then copy/paste the command/response. Big downloads don't work well in exercise code chunks. Second, we create small versions of this big data in the global `setup` chunk. This allows us to create test code chunks for most of the exercises which follow. These tests will run much more quickly with this smaller data. Also, for any package on CRAN, we need to keep the overall size of the package as small as possible.
+
+There are two main uses for files in `data`. First, they can be used at "compile time" (when the `tutorial.Rmd` is knit to HTML) for making plots or doing anything else. Second, and more importantly, they are available to students in the exercise code blocks during "run time" (when students are doing the tutorial).
+
+#### Images
+
+To add images to a tutorial, first make a directory called `images` in the folder that contains `tutorial.Rmd`. Store all images for that tutorial there. You can work with those files in all the usual ways.
+
+Use `include_graphics()` to add the image into the document. Include this code in its own chunk, in the place where you want the image to appear in the tutorial. 
+
+````{verbatim}
+```{r}
+include_graphics("images/example.png")
+```
+````
+
+`include_graphics()` is part of the `knitr` package, so you need `library(knitr)` in the setup code chunk. Note that you do not need to name these code chunks.
+
+Because students will complete the tutorials using screens of very different widths, it is a good idea to put `knitr::opts_chunk$set(out.width = '90%')` in your `setup` code chunk. In this way, images will appear at a sensible size regardless of whether students are using a phone screen or a big monitor.
+
+
+## Tutorial Introduction
 
 Students need some background in order to complete these sorts of tutorials, some familiarity with R, GitHub and so on. Students should have completed the "Getting Started" and "Introduction to R" tutorials from the [**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers) package. They should also complete the first four Positron tutorials (i.e., through "Positron and GitHub Introduction") from [**positron.tutorials**](https://ppbds.github.io/positron.tutorials/).
 
@@ -191,19 +341,19 @@ question_text(NULL,
 
 You answer should look something like this, although your path will be different.
 
-````
-> getwd()
-[1] "/Users/dkane/Desktop/projects/xx"
-> dir.create("data")
-> list.files()
- [1] "analysis_files" "analysis.html"  "analysis.qmd"   "data"           "README.md"  
->
-````
+```
+> getwd()  
+[1] "/Users/dkane/Desktop/projects/xx"  
+> dir.create("data")  
+> list.files()  
+ [1] "analysis_files" "analysis.html"  "analysis.qmd"   "data"           "README.md"    
+>  
+```
 
 <!-- XX: If you have downloaded some data, then you might want to create the tibbles that you will use here. (Of course, you also need to create those tibbles in the setup chunk so that any test code which create will run.) -->
 ````
 
-### Tutorial Topics
+## Tutorial Topics
 
 You will probably have one or two Topics, in between the Introduction and Summary. Any tutorial which both uses a lot of AI and is supposed to take an hour or so will only have, at most, two Topics. 
 
@@ -308,7 +458,7 @@ In that case, the answer chunk would look like:
 
 
 
-### Plotting Questions
+## Plotting Questions
 
 Plotting exercises are generally handled with a sequence of four questions. Prior to these, the tutorial will probably have the student practice gathering, organizing, and cleaning the data. 
 
@@ -456,7 +606,7 @@ Our code:
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-### Tutorial Summary
+## Tutorial Summary
 
 Once you have completed one or two Topics, it is time for the Summary section.
 
