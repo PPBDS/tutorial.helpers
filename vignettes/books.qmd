@@ -9,7 +9,7 @@ vignette: >
 ---
 
 
-This vignette assumes that you have already read [our advice](instructions.html) about writing good tutorials.
+This vignette assumes that you have already read [our advice](ai.html) about writing good tutorials.
 
 A common use case for this package is to write a collection of tutorials for a book. Consider the [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) package which is a companion to [*R for Data Science (2e)*](https://r4ds.hadley.nz/) by Hadley Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
 

@@ -389,7 +389,7 @@ Note how we concisely provide both the command which brings up the help page and
 
 ### Functions for Working with Tutorials
 
-The **tutorial.helpers** package provides a collection of functions which facilitate the creation and testing of tutorial packages. Read about them in the “[Functions for Working with Tutorial](https://ppbds.github.io/tutorial.helpers/articles/instructions.html)” vignette. Three of the vignettes create new tutorial exercises. A [fourth](https://ppbds.github.io/tutorial.helpers/articles/testing.html) demonstrates how to test the tutorials in your package. Highly recommended!
+The **tutorial.helpers** package provides a collection of functions which facilitate the creation and testing of tutorial packages. Read about them in the “[Functions for Working with Tutorial](https://ppbds.github.io/tutorial.helpers/articles/addins.html)” vignette. Three of the vignettes create new tutorial exercises. A [fourth](https://ppbds.github.io/tutorial.helpers/articles/testing.html) demonstrates how to test the tutorials in your package. Highly recommended!
 
 
 ## Inputs

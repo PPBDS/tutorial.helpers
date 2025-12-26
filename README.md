@@ -13,10 +13,9 @@ status](https://github.com/PPBDS/tutorial.helpers/workflows/R-CMD-check/badge.sv
 
 **tutorial.helpers** provides functions to help you write R tutorials,
 especially if you follow [my
-advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html)
-about the best way to do so. This approach is currently used in several
-packages, including
-[**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) and
+advice](https://ppbds.github.io/tutorial.helpers/articles/ai.html) about
+the best way to do so. This approach is currently used in several
+packages,
 [**positron.tutorials**](https://ppbds.github.io/positron.tutorials/).
 
 ## Installation
