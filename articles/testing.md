@@ -4,9 +4,10 @@ This vignette demonstrates how to use the **tutorial.helpers** package
 to “test” the tutorials in your package. I place “test” in quotes
 because the testing is not very extensive. We are merely ensuring that
 your tutorials can be knitted without error. I *think* that this
-guarantees that the tutorials will run when students press the “Start
-Tutorial” button, but I am not certain. This testing certainly does
-nothing to ensure that the substance of your tutorials is correct.
+guarantees that the tutorials will run when students run
+[`learnr::run_tutorial()`](https://pkgs.rstudio.com/learnr/reference/run_tutorial.html),
+but I am not certain. This testing certainly does nothing to ensure that
+the substance of your tutorial is correct.
 
 If you are using the [**testthat**](https://testthat.r-lib.org/)
 framework for testing, the `tests` directory would have a file called
@@ -54,11 +55,11 @@ this. If a tutorial does not knit, an error is generated and the test
 fails.
 
 The third step is only relevant for tutorial creators who follow [our
-advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.md)
+advice](https://ppbds.github.io/tutorial.helpers/articles/ai.md)
 concerning tutorial construction. In particular,
 [`check_tutorial_defaults()`](https://ppbds.github.io/tutorial.helpers/reference/check_tutorial_defaults.md)
 ensures that, somewhere in each tutorial, you have included the same key
-components as exist in the “Helpers Tutorial” R Markdown template.
+components as exist in the “Tutorial Helpers” R Markdown template.
 
 [`check_tutorial_defaults()`](https://ppbds.github.io/tutorial.helpers/reference/check_tutorial_defaults.md)
 also fails if you do not have

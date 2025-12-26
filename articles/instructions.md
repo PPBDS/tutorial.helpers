@@ -634,7 +634,7 @@ The most difficult part of tutorial creation is writing the “knowledge
 drops,” the snippets of wisdom (and the associated links) which are used
 at the end of each exercise. These generally come in two categories:
 details about R functions/packages/websites and background information
-about the substative data science problem at hand.
+about the substantive data science problem at hand.
 
 Do not expect this to be easy! Good knowledge drops are hard. Make them
 short. Students will not read more than a sentence or two.

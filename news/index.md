@@ -2,6 +2,8 @@
 
 ## tutorial.helpers (development version)
 
+- Finalize “Tutorials in the Age of AI” vignette.
+
 ## tutorial.helpers 0.6.1
 
 CRAN release: 2025-12-23
