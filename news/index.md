@@ -6,6 +6,8 @@
 
 - Fix word wrapping for verbatim sections in vignettes.
 
+- Remove two vignettes.
+
 ## tutorial.helpers 0.6.1
 
 CRAN release: 2025-12-23

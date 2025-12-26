@@ -9,49 +9,36 @@ and
 The first creates a new exercise in the open RMD at the current location
 of your cursor. The key argument of
 [`make_exercise()`](https://ppbds.github.io/tutorial.helpers/reference/exercise_creation.md)
-is `type`, which is `"code"` by default and produces a coding exercise.
-The other allowed values of `type` are `"yes-answer"` and `"no-answer"`.
+is `type`, which is `"no-answer"` by default. The other allowed values
+of `type` are `"yes-answer"` and `"code"`. The latter is rarely used.
 [`check_current_tutorial()`](https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.md)
 reformats the entire open tutorial, mainly ordering exercises correctly
 and ensuring that chunk labels are correct.
 
-When using RStudio, we have mapped variations of these functions to four
-RStudio addins: “Tutorial Code Exercise”, “Tutorial Written Exercise (no
-Answer)”, “Tutorial Written Exercise (with Answer)” and “Format Tutorial
-Chunk Labels.” The first three each insert the skeleton for the next
-exercise in a tutorial, featuring all the key component parts. We even
-take a guess at the correct exercise number. The “Format Tutorial Chunk
-Labels” addin is the most useful. Always run it before testing your
-tutorial. It ensures that all the exercises are sequentially numbered
-and that all the code chunk names are correct and unique.
-
-You can find the addins in the “Addins” tab on the top Rstudio toolbar.
-Make sure that your cursor is located at the point in your Rmd at which
-you want to insert the new exercise.
-
 Make sure that your cursor is located in the correct location.
 
-### Tutorial Code Exercise
+### Tutorial Written Exercise (without and with answers)
 
 [`make_exercise()`](https://ppbds.github.io/tutorial.helpers/reference/exercise_creation.md),
-by default, it produces a new code exercise skeleton with an exercise
-title and with auto-generated code chunk labels. The Topic, of which
-this Exercise is a part, is titled “Plotting”.
+by default, it produces a new exercise skeleton with an exercise title
+and with auto-generated code chunk labels. The Topic, of which this
+Exercise is a part, is titled “Plotting”.
 
 ```` default
 ### Exercise 7
 
-```{r plotting-7, exercise = TRUE}
-
+```{r plotting-7}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 5)
 ```
 
-<button onclick = "transfer_code(this)">Copy previous code</button>
+###
 
-```{r plotting-7-hint, eval = FALSE}
-
-```
-
-```{r plotting-7-test, include = FALSE}
+```{r plotting-7-test, echo = TRUE}
 
 ```
 
@@ -65,21 +52,6 @@ type their answers. The hint code chunk will be displayed to students
 when they click on the Hint button. The test code chunk should include
 the correct answer, so that you can be sure it will work for students
 when they enter it in the exercise code chunk.
-
-See [our
-advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html#exercises)
-about writing good tutorial code exercises. First, start with the
-correct answer, the code you want students to submit. Place that code in
-the test chunk at the end. Our test process will ensure that this code
-will work for the students. Second, copy/paste the correct answer into
-the hint chunk in the middle. Then replace one or more of the key words
-or function arguments or argument values with `...`. Third, add your
-actual question to the top of the skeleton. What instructions will cause
-students to enter the correct answer in the exercise chunk? Fourth, drop
-some knowledge after the `###` at the end. Each exercise is an
-opportunity to teach. Make use of it!
-
-### Tutorial Written Exercise (without and with answers)
 
 Both create similar exercise structures with an auto-generated code
 chunk id and an exercise number. The difference is that the
@@ -104,11 +76,6 @@ question_text(NULL,
 
 ###
 ````
-
-The “no Answer” Exercises are usually used for confirmation that a
-student has completed a specified task. In that case, there is no need
-for us to supply a correct answer. And we can allow students to edit
-their submissions.
 
 #### Written Exercise (with Answer):
 
@@ -147,10 +114,7 @@ submitting simple code as their answer, it can make sense to have a test
 chunk which executes the same R code which you are asking them to run,
 just to ensure that it will work for them.
 
-### Format Tutorial Chunk Labels
-
-[`check_current_tutorial()`](https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.md)
-is the R function to run, if you are using Positron.
+### Format exercise numbers and chunk labels
 
 We often need to add a new exercise in the middle of a collection of
 other exercises. Or, we want to delete one exercise from the middle of
@@ -159,12 +123,12 @@ We either have two Exercise 5’s or we go straight from Exercise 4 to
 Exercise 6. We want to renumber all the remaining exercises so that
 there are no duplicates or missing numbers.
 
-The “Format Tutorial Chunk Labels” addin accomplishes this renumbering.
-But it also does more, changing all the code chunk names to be
-consistent with the new exercise numbers. Finally, it ensures that all
-code chunk labels follow our standard: begin with (up to 30 characters
-from) the topic title, remove special characters, replace spaces with
-dashes, and make all letters lowercase.
+[`check_current_tutorial()`](https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.md)
+accomplishes this renumbering. But it also does more, changing all the
+code chunk names to be consistent with the new exercise numbers.
+Finally, it ensures that all code chunk labels follow our standard:
+begin with (up to 30 characters from) the topic title, remove special
+characters, replace spaces with dashes, and make all letters lowercase.
 
 Since the code chunk labels (derived from the title of the topic in
 which the exercise resides) have a hard cutoff at 30 characters, try to

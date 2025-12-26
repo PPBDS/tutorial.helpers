@@ -343,6 +343,61 @@ different widths, it is a good idea to put
 In this way, images will appear at a sensible size regardless of whether
 students are using a phone screen or a big monitor.
 
+#### Complex text
+
+You sometimes want to include “complex” text in a tutorial. This is most
+common when trying to teach students how to use R code chunks and other
+strings which R markdown wants to process in certain ways. You can
+sometimes get away by placing such text in environments surrounded by
+three, or even four, backticks. The plain three or four backtick
+environments create a plain code block and content inside is displayed
+as-is. No syntax highlighting or execution is applied, and they show
+example code or text exactly as typed. Four backtick environments allow
+three backticks to be written within the block. This works often, but
+not always. Comment characters like `#` are especially problematic. We
+also use the [**parsermd**](https://rundel.github.io/parsermd/) package
+behind the scenes. It does not work as well as one might like.
+
+Further complexity arises because tutorials are R markdown whereas all
+our other work is in Quarto. In Quarto documents (like this vignette),
+you can use an environment started by four backticks along with
+`{verbatim}` and then ended with four more backticks. This won’t work in
+R markdown.
+
+The `<pre><code>` trick solves this problem. You add this before and
+after a code chunk to a tutorial.
+
+``` default
+<pre><code>```{r}
+1 + 1
+```</code></pre>
+```
+
+If you want to display an R code chunk nested inside a four backticks
+environment, you can replace the four backticks with `<pre><code>` like
+this
+
+``` default
+<pre><code>
+> tutorial.helpers::show_file("quarto-1.qmd")
+---
+title: "Quarto 1"
+author: David Kane
+format: html
+execute: 
+  echo: false
+---
+<pre><code>```{r}
+suppressPackageStartupMessages(library(tidyverse))
+library(palmerpenguins)
+```</code></pre>
+>
+</code></pre>
+```
+
+The `<pre><code>` serves the same purpose as the four backticks but it
+displays R code chunks verbatim.
+
 ## Tutorial Introduction
 
 Students need some background in order to complete these sorts of
@@ -841,6 +896,8 @@ section.
 <!-- XX: The exact same two to four sentences about the main packages/functions used in the Introduction, but written here in the past tense. You made a promise and you kept it.  -->
 ```
 
+The last three questions are fairly self-explanatory.
+
 ```` default
 ### Exercise 1
 
@@ -915,3 +972,89 @@ question_text(NULL,
 In the age of AI, the purpose of a tutorial is to teach students how to
 create with AI. We do that by forcing them to practice, and by providing
 intelligent advice along the way.
+
+## Appendix: Checking a tutorial
+
+Once you are done editing a tutorial, you need to make sure it works,
+either on your own behalf or before you submit a pull request to the
+package maintainer. There are three ways to check:
+
+1.  Type `rmarkdown::render("file_path/tutorial.Rmd")` in the Console.
+    This produces `tutorial.html` in the tutorial directory. Right click
+    the file and select `Open in Browser`. It is smart to use
+    `rmarkdown::render("file_path")` regularly since it will identify
+    syntax errors quickly.
+
+2.  Do a full test, which means running `devtools::check()`, the
+    shortcut key for which is `Cmd/Ctrl + Shoft + E`. This is the
+    equivalent of `R CMD check`. It validates package structure,
+    documentation, tests, and compliance with CRAN standards. A good
+    result would be `0 errors ✔ | 0 warnings ✔ | 0 notes ✔`, but don’t
+    worry too much about NOTES.
+
+3.  Test your tutorial from a student’s perspective after completing
+    package checks by following this local testing workflow. You can do
+    this without the hassle of needing to push changes to the main
+    repository and re-download the package. Install your local package
+    using `devtools::install()` and when prompted about updating
+    packages, choose to update everything to ensure all dependencies are
+    current. Once installation is complete, run your tutorial with
+    `learnr::run_tutorial("tutorial_name", "package_name")`, replacing
+    the placeholder names with your actual tutorial and package names.
+    This allows you to test the tutorial in a clean environment similar
+    to what students will experience, checking that all code chunks run
+    without errors, instructions are clear, and there’s no dependence on
+    objects from your development environment.
+
+The most important check is `devtools::check()`, which you *must* do
+before submitting a pull request.
+
+### If `devtools::check()` fails
+
+1.  Read the error message carefully. It will often provide a clue as to
+    where in your code the error occurred.
+
+2.  If that error message is not detailed enough, go to the
+    `your.package.rcheck` folder, which should be located in the same
+    directory as `your.package` is on your computer. This is a folder
+    created by the `R CMD check` process, and it will be automatically
+    deleted if the check process succeeds. If the process fails, the
+    `your.package.rcheck` folder stays around so that you can examine
+    it. The key file is `testthat.Rout.fail`, which should be in the
+    `tests` directory. It has more details on what went wrong.
+
+### Difficult bugs
+
+- Note that `devtools::check()` does not seem to catch cases in which
+  you [`library()`](https://rdrr.io/r/base/library.html) a package in a
+  tutorial but that package is not in DESCRIPTION. But such a
+  discrepancy will cause an error on Github Actions because, there, you
+  only have access to packages that have been installed as part of that
+  test.
+
+- `devtools::check()`, if you use our recommended test functions from
+  **tutorial.helpers**, will test that all tutorials have the default
+  code chunks exactly as they are in the `tutorial_template` template.
+  So, use the template when you first create your tutorial. If either
+  the “Information” or “Download answers” chunks are missing,
+  `devtools::check()` will return something like “Missing a component
+  part from file /path/to/your/tutorial/tutorial.Rmd”.
+
+- Be careful of the way that Github is sloppy in how it deals with
+  capitalization changes, especially when you change the name of a file.
+  For example, you might first commit a file named `Quarto.png`. Later,
+  you decide to change all file names for images to all lower case. So,
+  you change the name of the file to `quarto.png`. Commit and push.
+  Everything is great, right? No! Even if Github shows you the new file
+  name, it might still have that file as `Quarto.png` internally, with
+  the capital “Q.” This will cause errors when your run your checks on
+  Github:
+
+&nbsp;
+
+    Error: Cannot find the file(s): "images/quarto.png"
+
+But the file is there! You can see it! The tests work on your local
+machine. The easiest solution is to delete the file (and commit that
+change). And then change the name of the file to something else and use
+it.

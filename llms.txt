@@ -4,10 +4,9 @@
 
 **tutorial.helpers** provides functions to help you write R tutorials,
 especially if you follow [my
-advice](https://ppbds.github.io/tutorial.helpers/articles/instructions.html)
-about the best way to do so. This approach is currently used in several
-packages, including
-[**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) and
+advice](https://ppbds.github.io/tutorial.helpers/articles/ai.html) about
+the best way to do so. This approach is currently used in several
+packages,
 [**positron.tutorials**](https://ppbds.github.io/positron.tutorials/).
 
 ## Installation
@@ -179,10 +178,6 @@ document, as discussed above.
 
 - [Enable Students to Download Their Tutorial
   Answers](https://ppbds.github.io/tutorial.helpers/articles/downloads.md):
-- [Instructions for Writing R
-  Tutorials](https://ppbds.github.io/tutorial.helpers/articles/instructions.md):
-- [Tutorials for
-  Books](https://ppbds.github.io/tutorial.helpers/articles/books.md):
 - [Tutorials in the Age of
   AI](https://ppbds.github.io/tutorial.helpers/articles/ai.md):
 - [Functions for Working with
