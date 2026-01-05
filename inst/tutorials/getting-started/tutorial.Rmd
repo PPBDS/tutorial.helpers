@@ -706,7 +706,7 @@ Look at the output from `tutorial.helpers::set_positron_settings()` to confirm t
 
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are just copies of the R commands and their results. Other times, we will ask you to write one or more sentences of prose. 
 
-Copy and paste everything from the Exercise header above through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
+Copy and paste everything from the Exercise header (i.e., from "Exercise 18") above through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
 ```{r exercises-18}
 question_text(NULL,
@@ -753,7 +753,7 @@ We frequently ask that you `copy` content from an HTML file like a webpage. Don'
 
 ###
 
-Go to [the homepage](https://ppbds.github.io/tutorial.helpers/) of the **tutorials.package** and copy everything in the browser window from 'tutorial.helpers' in the upper left corner through the end of the `About this package` section.
+Go to [the homepage](https://ppbds.github.io/tutorial.helpers/) of the **tutorial.helpers** package and copy everything in the browser window from 'tutorial.helpers' in the upper left corner through the end of the `About this package` section.
 
 CP/CR.
 

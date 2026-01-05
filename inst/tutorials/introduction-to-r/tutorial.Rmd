@@ -188,7 +188,7 @@ Your answer will differ from this answer because of the inherent randomness in f
 
 ### Exercise 6
 
-In the Console, hit the Up Arrow to retrieve the previous command. Edit it to add the argument `n = 4` to `slice_sample(diamonds)`. This will return 10 random rows from the `diamonds` data set.
+In the Console, hit the Up Arrow to retrieve the previous command. Edit it to add the argument `n = 4` to `slice_sample(diamonds)`. That is, you want `slice_sample(diamonds, n = 4)`. This will return 4 random rows from the `diamonds` data set.
 
 CP/CR.
 
