@@ -4,6 +4,8 @@
 
 * Fix word wrapping for verbatim sections in vignettes.
 
+* Remove VS Code extension material.
+
 * Remove two vignettes.
 
 # tutorial.helpers 0.6.1

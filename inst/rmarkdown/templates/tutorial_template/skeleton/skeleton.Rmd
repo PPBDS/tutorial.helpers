@@ -9,7 +9,7 @@ output:
     progressive: true
     allow_skip: true
 runtime: shiny_prerendered
-description: "XX: Add description (a single sentence"
+description: "XX: Add description (a single sentence)"
 ---
 
 ```{r setup, include = FALSE}
@@ -35,7 +35,7 @@ options(tutorial.exercise.timelimit = 60,
 <!-- * Place any data needed for the tutorial in the data/ directory of the package. Have the student download it by hand. -->
 <!-- * Save the file as "tutorial.Rmd" in the correct directory under inst/tutorials/xx/, where xx is the same as the tutorial id. -->
 <!-- * Load any necessary libraries for the tutorial in the first code chunk -->
-<!-- * Anytime you have a student `Cmd/Ctrl + Enter`, you ask for CP/CR and then provide your code as the test code chunk. -->
+<!-- * Any time you ask a student to execute some code with `Cmd/Ctrl + Enter`, you tell her to CP/CR. Then, in general, provide your code as the test code chunk. -->
 <!-- * Delete this and the other commented instructions below. -->
 <!-- * Search for, read/replace, and then delete all `XX:` entries -->
 
@@ -246,7 +246,7 @@ Within the latest code chunk, add the option: `#| cache: true`. Assign the resul
 
 `Cmd/Ctrl + Shift + K`. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.
 
-If you have not done so already, you should add `analysis_cache` to the `.gitginore`. The content of the cache file does not belong on GitHub.
+If you have not done so already, you should add `analysis_cache` to the `.gitignore`. The content of the cache file does not belong on GitHub.
 
 Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Enter`, thus ensuring that the workspace also includes a copy of `x`.
 
@@ -293,7 +293,7 @@ question_text(NULL,
 Our code:
 
 ```{r, echo=TRUE}
-# x
+# x (Remove the hash mark and this comment. Leave just `x`.)
 ```
 
 ###
