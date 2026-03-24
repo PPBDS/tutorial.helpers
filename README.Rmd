@@ -62,7 +62,7 @@ There are three exported functions for checking the tutorials in your package. S
 
 #### Tutorials
 
-The package includes three tutorials: "Getting Started," "Introduction to R," and "Introduction to Python." You should require your students to complete the "Getting Started" tutorial if you are creating your own tutorials with **tutorial.helpers** package. For example, in Positron, have students run:
+The package includes three tutorials: "Getting Started," "Getting Started: Codespaces," "Introduction to R," and "Introduction to Python." You should require your students to complete one of the "Getting Started" tutorials if you are creating your own tutorials with **tutorial.helpers** package. For example, for Positron, have students run:
 
 ````
 learnr::run_tutorial(getting-started", package = "tutorial.helpers")
