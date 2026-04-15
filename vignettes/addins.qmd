@@ -17,7 +17,7 @@ Make sure that your cursor is located in the correct location.
 
 ### Tutorial Written Exercise (without and with answers)
 
-`make_exercise()`, by default, it produces a new exercise skeleton with an exercise title and with auto-generated code chunk labels. The Topic, of which this Exercise is a part, is titled "Plotting".
+`make_exercise()`, by default, sets `type` to `"no-answer"`. It produces a new exercise skeleton with an exercise title and with auto-generated code chunk labels. The Topic, of which this Exercise is a part, is titled "Plotting" so the code chunk id is `plotting`.
 
 
 ````{verbatim}
@@ -42,38 +42,11 @@ question_text(NULL,
 ###
 ````
 
-There are three code chunks included by default: exercise, hint and test. You do not need to include all three, although in most cases you should. The exercise code chunk is the location in which students will type their answers. The hint code chunk will be displayed to students when they click on the Hint button. The test code chunk should include the correct answer, so that you can be sure it will work for students when they enter it in the exercise code chunk.
-
-
-
-
+There are two code chunks included by default: question and test. You do not need to include the test, although in most cases you should. The question code chunk is the location in which students will type or paste their answers. The test code chunk should include the correct answer, so that you can be sure it will work for students when they enter it in the question code chunk.
 
 Both create similar exercise structures with an auto-generated code chunk id and an exercise number. The difference is that the `question_text()` options are filled in differently.
 
-#### Written Exercise (no Answer):
-
-`make_exercise(type = 'no-answer')` is the R function to run, if you are using Positron.
-
-````{verbatim}
-### Exercise 9
-
-```{r plotting-9}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
-```
-
-###
-````
-
-
-
-#### Written Exercise (with Answer):
-
-`make_exercise(type = 'yes-answer')` is the R function to run, if you are using Positron.
+Using `make_exercise(type = 'yes-answer')` creates:
 
 ````{verbatim}
 ### Exercise 8
@@ -90,9 +63,11 @@ question_text(NULL,
 ###
 ````
 
-The "with Answer" Exercises require the tutorial author to provide an (excellent!) answer to the question. This is harder than it looks, especially for questions without a single "right" answer. But it is also a rare opportunity since students will usually study the supplied answer quite closely. They want to check that their answer matches. We can't allow students to edit their answers to these questions since they might (misuse) that option to just copy/paste/modify our supplied answer.
+The "yes-answer" exercises require the tutorial author to provide an (excellent!) answer to the question. This is harder than it looks, especially for questions without a single "right" answer. But it is also a rare opportunity since students will usually study the supplied answer quite closely. They want to check that their answer matches. We can't allow students to edit their answers to these questions since they might (misuse) that option to just copy/paste/modify our supplied answer.
 
-The **learnr** package does not allow for hints to written exercises. We could add a test chunk, but that rarely makes sense for a written exercise. The main counter-example is a question which asks students to run an R command from the Console and then copy the command and the result of the command as their answer. Even though they are not submitting simple code as their answer, it can make sense to have a test chunk which executes the same R code which you are asking them to run, just to ensure that it will work for them.
+The **learnr** package does not allow for hints to written exercises. We could add a test chunk, but that rarely makes sense for a written exercise. 
+
+`make_exercise(type = "exercise")` is not used very often, at least by tutorial authors who believe that teaching students to use AI is of utmost importance.
 
 ### Format exercise numbers and chunk labels
 
