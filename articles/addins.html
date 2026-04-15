@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.9006</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +78,7 @@
 <p>Make sure that your cursor is located in the correct location.</p>
 <section class="level3"><h3 id="tutorial-written-exercise-without-and-with-answers">Tutorial Written Exercise (without and with answers)<a class="anchor" aria-label="anchor" href="#tutorial-written-exercise-without-and-with-answers"></a>
 </h3>
-<p><code><a href="../reference/exercise_creation.html">make_exercise()</a></code>, by default, it produces a new exercise skeleton with an exercise title and with auto-generated code chunk labels. The Topic, of which this Exercise is a part, is titled “Plotting”.</p>
+<p><code><a href="../reference/exercise_creation.html">make_exercise()</a></code>, by default, sets <code>type</code> to <code>"no-answer"</code>. It produces a new exercise skeleton with an exercise title and with auto-generated code chunk labels. The Topic, of which this Exercise is a part, is titled “Plotting” so the code chunk id is <code>plotting</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>### Exercise 7</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>```{r plotting-7}</span>
@@ -97,41 +97,25 @@
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>```</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>###</span></code></pre></div>
-<p>There are three code chunks included by default: exercise, hint and test. You do not need to include all three, although in most cases you should. The exercise code chunk is the location in which students will type their answers. The hint code chunk will be displayed to students when they click on the Hint button. The test code chunk should include the correct answer, so that you can be sure it will work for students when they enter it in the exercise code chunk.</p>
+<p>There are two code chunks included by default: question and test. You do not need to include the test, although in most cases you should. The question code chunk is the location in which students will type or paste their answers. The test code chunk should include the correct answer, so that you can be sure it will work for students when they enter it in the question code chunk.</p>
 <p>Both create similar exercise structures with an auto-generated code chunk id and an exercise number. The difference is that the <code>question_text()</code> options are filled in differently.</p>
-<section class="level4"><h4 id="written-exercise-no-answer">Written Exercise (no Answer):<a class="anchor" aria-label="anchor" href="#written-exercise-no-answer"></a>
-</h4>
-<p><code>make_exercise(type = 'no-answer')</code> is the R function to run, if you are using Positron.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>### Exercise 9</span>
+<p>Using <code>make_exercise(type = 'yes-answer')</code> creates:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>### Exercise 8</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>```{r plotting-9}</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>```{r plotting-8}</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    message = "Place correct answer here.",</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    allow_retry = FALSE,</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    rows = 3)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    rows = 6)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>```</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>###</span></code></pre></div>
-</section><section class="level4"><h4 id="written-exercise-with-answer">Written Exercise (with Answer):<a class="anchor" aria-label="anchor" href="#written-exercise-with-answer"></a>
-</h4>
-<p><code>make_exercise(type = 'yes-answer')</code> is the R function to run, if you are using Positron.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>### Exercise 8</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>```{r plotting-8}</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    message = "Place correct answer here.",</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    allow_retry = FALSE,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    rows = 6)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>###</span></code></pre></div>
-<p>The “with Answer” Exercises require the tutorial author to provide an (excellent!) answer to the question. This is harder than it looks, especially for questions without a single “right” answer. But it is also a rare opportunity since students will usually study the supplied answer quite closely. They want to check that their answer matches. We can’t allow students to edit their answers to these questions since they might (misuse) that option to just copy/paste/modify our supplied answer.</p>
-<p>The <strong>learnr</strong> package does not allow for hints to written exercises. We could add a test chunk, but that rarely makes sense for a written exercise. The main counter-example is a question which asks students to run an R command from the Console and then copy the command and the result of the command as their answer. Even though they are not submitting simple code as their answer, it can make sense to have a test chunk which executes the same R code which you are asking them to run, just to ensure that it will work for them.</p>
-</section></section><section class="level3"><h3 id="format-exercise-numbers-and-chunk-labels">Format exercise numbers and chunk labels<a class="anchor" aria-label="anchor" href="#format-exercise-numbers-and-chunk-labels"></a>
+<p>The “yes-answer” exercises require the tutorial author to provide an (excellent!) answer to the question. This is harder than it looks, especially for questions without a single “right” answer. But it is also a rare opportunity since students will usually study the supplied answer quite closely. They want to check that their answer matches. We can’t allow students to edit their answers to these questions since they might (misuse) that option to just copy/paste/modify our supplied answer.</p>
+<p>The <strong>learnr</strong> package does not allow for hints to written exercises. We could add a test chunk, but that rarely makes sense for a written exercise.</p>
+<p><code>make_exercise(type = "exercise")</code> is not used very often, at least by tutorial authors who believe that teaching students to use AI is of utmost importance.</p>
+</section><section class="level3"><h3 id="format-exercise-numbers-and-chunk-labels">Format exercise numbers and chunk labels<a class="anchor" aria-label="anchor" href="#format-exercise-numbers-and-chunk-labels"></a>
 </h3>
 <p>We often need to add a new exercise in the middle of a collection of other exercises. Or, we want to delete one exercise from the middle of the collection. In either scenario, our exercises are now mis-numbered. We either have two Exercise 5’s or we go straight from Exercise 4 to Exercise 6. We want to renumber all the remaining exercises so that there are no duplicates or missing numbers.</p>
 <p><code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code> accomplishes this renumbering. But it also does more, changing all the code chunk names to be consistent with the new exercise numbers. Finally, it ensures that all code chunk labels follow our standard: begin with (up to 30 characters from) the topic title, remove special characters, replace spaces with dashes, and make all letters lowercase.</p>
