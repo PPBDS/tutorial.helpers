@@ -8,6 +8,10 @@
 
 - Remove VS Code extension material.
 
+- Move current Getting Started to Getting Started with Positron.
+
+- Create new Getting Started which uses VS Code on GitHub Codespaces.
+
 - Remove two vignettes.
 
 ## tutorial.helpers 0.6.1
