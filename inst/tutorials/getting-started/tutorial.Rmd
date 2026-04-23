@@ -239,13 +239,13 @@ git version 2.43.0
 @ptweeet ➜ /workspaces/my-repo (main) $ 
 ```
 
-### Exercise 8 
+### Exercise 7
 
 From the terminal, run `echo $0`. (To "run" a command at the Terminal or the Console means to type the command and then click the `Enter` key.)
 
 CP/CR.
 
-```{r exercises-8}
+```{r exercises-7}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -268,13 +268,13 @@ This means that, in the Terminal, I am using [Bash shell](https://en.wikipedia.o
 
 By running the previous commands, we confirmed that we have a bash shell running and that we have [git](https://git-scm.com/), a version control software, installed.
 
-### Exercise 9
+### Exercise 8
 
 Let us make the Terminal "sleep" by typing the command `sleep 5` at the Terminal. Hit `Enter`. The `sleep 5` command at the Terminal pauses execution for 5 seconds. 
 
 CP/CR. 
 
-```{r exercises-9}
+```{r exercises-8}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -292,7 +292,7 @@ question_text(NULL,
 
 We can change the duration of the sleep using this format: `sleep [number]`. The number you put in is the duration (in seconds) for which the Terminal goes to sleep.
 
-### Exercise 10
+### Exercise 9
 
 Run `sleep 60` at the Terminal. (Again, "run" means to type the command and then hit the `Enter` key.) The command makes the Terminal go to sleep for 60 seconds. To cancel the running `sleep` command at the Terminal press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
 
@@ -300,7 +300,7 @@ When you press `Ctrl + C` while `sleep` is running, it immediately terminates th
 
 CP/CR.
 
-```{r exercises-10}
+```{r exercises-9}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -320,7 +320,7 @@ question_text(NULL,
 `Ctrl + C` can stop any process from the Terminal. This is often necessary.
 
 
-### Exercise 12
+### Exercise 10
 
 It is useful to understand where the R process is currently executing on your computer.
 
@@ -328,7 +328,7 @@ In the R terminal not running your tutorial, run `getwd()`. This function is **g
 
 CP/CR.
 
-```{r exercises-12}
+```{r exercises-10}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -349,189 +349,16 @@ R 4.5.3>
 
 In an R terminal running inside GitHub Codespaces, `getwd()` prints the current working directory—here showing that R is operating inside your project folder at `/workspaces/my-repo`.
 
-### Exercise 13
 
-In the R terminal, run `fs::path_home()`.
-
-You can generally call a function by just giving its name along with the ending parentheses, as with `getwd()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `path_home()` is in the **fs** package, we can call it using this "double colon" notation: `fs::path_home()`.
-
-CP/CR.
-
-```{r exercises-13}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
-```
-
-###
-
-````
-R 4.5.3> fs::path_home()
-/home/rstudio
-R 4.5.3> 
-````
-
-
-### Exercise 14
-
-Let's take a look at the directories in your home directory. From the Console, run `list.files(fs::path_home())`. CP/CR.
-
-```{r exercises-14}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
-```
-
-### 
-
-My answer:
-
-```
-> list.files(fs::path_home())
- [1] "AppData"      "Applications" "Desktop"      "Documents"   
- [5] "Downloads"    "Library"      "miniconda3"   "Movies"      
- [9] "Music"        "Pictures"     "Public"       "temp"        
->           
-```
-
-If you are on a Mac, then the `Desktop` directory is a handy location in which to store all your coding projects.  If you are on Windows, then the `Desktop` directory might be less convenient because it is often, but not always, backed up on OneDrive.
-
-**Avoid doing data science in any directory which is backed up by OneDrive or any other cloud backup service.**
-
-### Exercise 15
-
-Whenever you start a new project, you will want to store it in a location which you can easily find. Right now, you are likely in an arbitrary location on your computer. It would be much more useful to have a location dedicated to your projects.
-
-From the Console, run `file.exists(file.path(fs::path_home(), "Desktop"))`. 
-
-CP/CR.
-
-```{r exercises-15}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
-```
-
-### 
-
-For me:
-
-```
-> file.exists(file.path(fs::path_home(), "Desktop"))
-[1] TRUE
-```
-
-For almost all Mac users and many Windows users, this should return `TRUE` because there is a `Desktop` directory. For some Windows users, it will return `FALSE` because their `Desktop` directory is within a `OneDrive` directory which is automatically backed up to the cloud.
-
-### Exercise 16
-
-Let's make a folder, and call it `projects`. If `file.exists(file.path(fs::path_home(), "Desktop"))` returned `TRUE`, then run this at the Console:
-
-```
-dir.create(file.path(fs::path_home(), "Desktop", "projects"))
-```
-
-That should put your `projects` directory in your `Desktop` directory. (Note that "folder" and "directory" mean the same thing.) If you get a warning message, here or below, that this directory "already exists," then you are all set.
-
-If `file.exists(file.path(fs::path_home(), "Desktop"))` returned `FALSE`, then run this at the Console:
-
-```
-dir.create(file.path(fs::path_home(), "projects"))
-```
-
-That will also create a `projects` directory, but in your home directory. 
-
-CP/CR. 
-
-```{r exercises-16}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
-```
-
-### 
-
-If that command works, you are all set. (If you get a message that the directory already exists, then you are also all set.) If not, you will need to create a `projects` directory by hand. Helpful resources can be found [here](https://support.microsoft.com/en-us/office/create-a-new-folder-cbbfb6f5-59dd-4e5d-95f6-a12577952e17) for Windows, and [here](https://support.apple.com/guide/mac-help/organize-files-using-folders-mh26885/mac) for macOS.
-
-### 
-
-**The path to your data science projects should not include any folders with spaces (or other weird characters) in their names.** 
-
-For example, this is a reasonable location for R projects if you are using a Mac:
-
-```
-/Users/dkane/Desktop/projects/
-```
-
-And if you are using Windows . . .
-
-```
-C:/Users/dkane/projects/
-```
-
-Again, you can place your `projects` directory where you want, as long as you keep track of where it is.
-
-### Exercise 17
-
-<!-- DK: Is this necessary, or will Positron by default use the last directory you did stuff from, which will be `projects`, when it gives you a choice. So, changing the default behavior is not necessary. -->
-
-It is handy for Positron to know where your `projects` directory is so that it can offer that directory as a default when you start a new project. To do so, from the Console, run this command after replacing "PUT YOUR PROJECT PATH HERE" with your project path.
-
-````
-tutorial.helpers::set_positron_settings(positron_settings = 
-   list("files.dialog.defaultPath" = "PUT YOUR PROJECT PATH HERE"))
-````
-
-So, for example, I would run:
-
-````
-tutorial.helpers::set_positron_settings(positron_settings = 
-   list("files.dialog.defaultPath" = "/Users/dkane/Desktop/projects"))
-````
-
-If I were using Windows:
-
-````
-tutorial.helpers::set_positron_settings(positron_settings = 
-   list("files.dialog.defaultPath" = "C:/Users/dkane/projects"))
-````
-
-But you should not run either of those! Those only work for me. You need to run the command with your `projects` path.
-
-CP/CR.
-
-```{r exercises-17}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
-```
-
-###
-
-Look at the output from `tutorial.helpers::set_positron_settings()` to confirm that this worked. Don't worry if it did not.
- 
-### Exercise 18
+### Exercise 11
 
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are just copies of the R commands and their results. Other times, we will ask you to write one or more sentences of prose. 
 
-Copy and paste everything from the Exercise header (i.e., from "Exercise 18") above through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
+<!--AR: Need to renumber below when done with edits -->
 
-```{r exercises-18}
+Copy and paste everything from the Exercise header (i.e., from "Exercise 10") above through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
+
+```{r exercises-11}
 question_text(NULL,
     message = "We will sometimes provide an answer to written questions, as we do here. Other times, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",          
     answer(NULL, 
@@ -541,9 +368,11 @@ question_text(NULL,
     rows = 6)
 ```
 
-### Exercise 19
+### Exercise 12
 
 `show_file()` is a commonly-used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file which you have edited. 
+
+You can generally call a function by just giving its name along with the ending parentheses, as with `getwd()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `show_file()` is in the **tutorial.helpers** package, we can call it using this "double colon" notation: `tutorial.helpers::show_file()`.
 
 From the Console, run this command:
 
@@ -553,7 +382,7 @@ tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 
 CP/CR.
 
-```{r exercises-19}
+```{r exercises-12}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -564,13 +393,13 @@ question_text(NULL,
 
 ###
 
-```{r exercises-19-test, include = FALSE}
+```{r exercises-12-test, include = FALSE}
 tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 ```
 
 For now, don't worry about what `R.home()` and `file.path()` are doing, although you can read about them by running `?R.home` and `?file.path` at the Console. Those details are less important than seeing the intended usage of `show_file()`. 
 
-### Exercise 20
+### Exercise 13
 
 We frequently ask that you `copy` content from an HTML file like a webpage. Don't worry if what you copy appears messy or has lost its formatting - that's perfectly fine. Our main concern is ensuring that your HTML contains roughly the correct information it's supposed to have.
 
@@ -580,7 +409,7 @@ Go to [the homepage](https://ppbds.github.io/tutorial.helpers/) of the **tutoria
 
 CP/CR.
 
-```{r exercises-20}
+```{r exercises-13}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
