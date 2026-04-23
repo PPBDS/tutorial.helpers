@@ -209,7 +209,7 @@ Tutorial workflow will often look like this. We tell you to run a command **in t
 
 ### Exercise 6
 
-Now, simply press the plus button in the bottom right. This opens a new bash terminal. A bash terminal is a text-based interface where you type commands to tell your computer what to do, like navigating files, running programs, or managing projects.
+Now, simply press the plus button in the bottom right. This opens a new Bash terminal. A Bash terminal is a text-based interface where you type commands to tell your computer what to do, like navigating files, running programs, or managing projects.
 
 ```{r}
 include_graphics("images/cs-open-bash.png")
@@ -239,59 +239,9 @@ git version 2.43.0
 @ptweeet ➜ /workspaces/my-repo (main) $ 
 ```
 
-Again, the exact git version may not match, but as long as you have "git version" and no error, you're good to go.
+### Exercise 8 
 
-### Exercise 8
-
-<!-- DK: Figure out what Windows does and/or looks like and then clarify these instructions. -->
-
-The Console behaves almost identically regardless of the kind of computer you use. The Terminal, sadly, does not. Windows and Mac are very different. 
-
-###
-
-Every Terminal runs a “shell,” the program which serves as the interface between you and the computer.
-
-###
-
-On a Mac, the default shell is referred to as "[Unix-like](https://en.wikipedia.org/wiki/Unix-like)" since it acts very much like the traditional Unix command line. In Windows, the default shell is [PowerShell](https://en.wikipedia.org/wiki/PowerShell), which is an older technology. 
-
-###
-
-To start a new Terminal with a specific shell, press the downward arrow next to the `+` sign. 
-
-```{r}
-include_graphics("images/terminal-2.png")
-```
-
-See the red arrow above.
-
-###
-
-If you are using Windows, you should see an option for “Git Bash” (or maybe just “bash”). I don't, because I am not using Windows. But it doesn't matter, because I already have a Unix-like shell, `zsh`
-
-###
-
-If everything goes well, Git Bash should automatically be your default shell when you open the Terminal on Windows. However, if it doesn't default to Git Bash, you'll need to manually choose it. You can set it as the default option by using the "Select Default Profile" feature: 
-
-```{r}
-include_graphics("images/terminal-3.png")
-```
-
-Again, this discussion is specifically for Windows users only. They might need to click on that tool and choose the option labeled "Git Bash" or "bash." Once selected, this will make it the default terminal for future sessions.
-
-###
-
-Click the `+` button (see red arrow below) to start a second Terminal and see if it works!
-
-```{r}
-include_graphics("images/terminal-4.png")
-```
-
-The red rectangle highlights that we are now running two Terminals, between which we can switch back-and-forth. In fact, we can have multiple Terminals and multiple Consoles in one Positron window just by using the `+` button. Some people prefer this approach. We still recommend using a second Positron window to have an open Console for use while working on a tutorial.
-
-###
-
-From the Terminal, run `echo $0`. (To "run" a command at the Terminal or the Console means to type the command and then click the `Enter` key.)
+From the terminal, run `echo $0`. (To "run" a command at the Terminal or the Console means to type the command and then click the `Enter` key.)
 
 CP/CR.
 
@@ -306,19 +256,17 @@ question_text(NULL,
 
 ###
 
-On a Mac, I get:
+I get:
 
 ````
-dkane@MacBookPro ~ % echo $0 
-/bin/zsh
-dkane@MacBookPro ~ % 
+@ptweeet ➜ /workspaces/my-repo (main) $ echo $0
+/bin/bash
+@ptweeet ➜ /workspaces/my-repo (main) $
 ````
 
-This means that, in the Terminal, I am using [Z shell](https://en.wikipedia.org/wiki/Z_shell). On Windows, your answer will probably be something like `bash`, referring to [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)), another Unix-like shell. Don't worry about the differences between them. 
+This means that, in the Terminal, I am using [Bash shell](https://en.wikipedia.org/wiki/Bash_(Unix_shell)), a Unix-like shell.
 
-The important thing is that, first, you now have Git installed and, second, if you are a Windows user, you now have a better shell than Powershell.
-
-If this works, you should be all set. If not, seek help. You need a decent shell in the Terminal.
+By running the previous commands, we confirmed that we have a bash shell running and that we have [git](https://git-scm.com/), a version control software, installed.
 
 ### Exercise 9
 
@@ -338,11 +286,11 @@ question_text(NULL,
 ###
 
 ```
-dkane@MacBookPro ~ % sleep 5
-dkane@MacBookPro ~ % 
+@ptweeet ➜ /workspaces/my-repo (main) $ sleep 5
+@ptweeet ➜ /workspaces/my-repo (main) $ 
 ```
 
-We can change the duration of the sleep using this format: `sleep [number]`. The number you put in is the duration (in seconds) for which the Terminal goes to sleep. 
+We can change the duration of the sleep using this format: `sleep [number]`. The number you put in is the duration (in seconds) for which the Terminal goes to sleep.
 
 ### Exercise 10
 
@@ -364,45 +312,19 @@ question_text(NULL,
 ### 
 
 ````
-dkane@MacBookPro ~ % sleep 60
+@ptweeet ➜ /workspaces/my-repo (main) $ sleep 60
 ^C
-dkane@MacBookPro ~ % 
+@ptweeet ➜ /workspaces/my-repo (main) $ 
 ````
 
 `Ctrl + C` can stop any process from the Terminal. This is often necessary.
 
-### Exercise 11
-
-Positron and your R installation have some default settings which are not good for new users. Run this command at the Console to change them:
-
-```
-tutorial.helpers::set_positron_settings()
-```
-
-CP/CR.
-
-```{r exercises-11}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 12)
-```
-
-### 
-
-The output from this function will report the changes, if any, which were made. To learn more, look up the help page by running `?tutorial.helpers::set_positron_settings` at the Console.
-
-### 
-
-You can generally call a function by just giving its name along with the ending parentheses, as with `set_positron_settings()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `set_positron_settings()` is in the **tutorial.helpers** package, we can call it using this "double colon" notation: `tutorial.helpers::set_positron_settings()`, as we did above.
 
 ### Exercise 12
 
 It is useful to understand where the R process is currently executing on your computer.
 
-In the Console, run `getwd()`. This function is **get** **w**orking **d**irectory, meaning we want to know the directory in which the R process is located.
+In the R terminal not running your tutorial, run `getwd()`. This function is **get** **w**orking **d**irectory, meaning we want to know the directory in which the R process is located.
 
 CP/CR.
 
@@ -417,31 +339,21 @@ question_text(NULL,
 
 ### 
 
-If you are on a Mac, you answer probably looks like:
+Your answer should look something like:
 
 ````
-> getwd()
-[1] "/Users/dkane"
->
+R 4.5.3> getwd()
+[1] "/workspaces/my-repo"
+R 4.5.3> 
 ````
 
-This is especially true if you are new to Positron. If you have used Positron before, then it might start out in the last directory in which you were working. Otherwise, it defaults to your "home" directory.
-
-###
-
-If I were on Windows, then the home directory would be something like `C:\Users\dkane\Documents` or even  `C:\Users\dkane\OneDrive\Documents` or even one of these with `\\` instead of `\` to separate out the directories. Note that on Windows:
-
-* The file system starts on the `C:` drive.
-
-* The directories are separated with backward slashes, instead of the forward slashes which we see on the Mac.
-
-* The notion of a "home" directory is tricky, both in general and when compared with a Mac. On the Mac, the "home" directory is almost always something like `/Users/dkane`. On Windows, the "home" directory generally refers to a user's `Documents` folder, which is sometimes housed on `OneDrive`.
-
-* `OneDrive`, like many cloud-backup systems, does not play particularly well with Git, the program almost everyone uses to keep track of changes in your code. **Do not put your data science projects in a folder which is backed up with OneDrive.**
+In an R terminal running inside GitHub Codespaces, `getwd()` prints the current working directory—here showing that R is operating inside your project folder at `/workspaces/my-repo`.
 
 ### Exercise 13
 
-In the Console, run `fs::path_home()`. 
+In the R terminal, run `fs::path_home()`.
+
+You can generally call a function by just giving its name along with the ending parentheses, as with `getwd()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `path_home()` is in the **fs** package, we can call it using this "double colon" notation: `fs::path_home()`.
 
 CP/CR.
 
@@ -457,23 +369,10 @@ question_text(NULL,
 ###
 
 ````
-> fs::path_home()
-/Users/dkane
+R 4.5.3> fs::path_home()
+/home/rstudio
+R 4.5.3> 
 ````
-
-This function returns the "path" to your home directory such that the Windows answer is more like the Mac answer. A path is simply the information which allows you to reach a location on your computer. 
-
-More info on paths can be found [here](https://people.ischool.berkeley.edu/~kevin/unix-tutorial/section3.html).
-
-If you are on Windows, you should have gotten a similar answer, something like:
-
-````
-C:\Users\dkane
-````
-
-Because it is Windows, the path begins with `C:` and the slashes are backwards slashes. 
-
-The important point is that, in almost all non-pathological set-ups, you will have a home directory. It is important to know where that is.
 
 
 ### Exercise 14
