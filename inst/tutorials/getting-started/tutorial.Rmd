@@ -452,3 +452,7 @@ Unless your instructor tells you otherwise, you should use the default file name
 ### 
 
 You now understand how tutorials work and how to download a copy of your answers. Good luck with your data science journey!
+
+<p>
+  <img src="images/neo-cs.gif" alt="Neo learns codespaces" width="320">
+</p>
