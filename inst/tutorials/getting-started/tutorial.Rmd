@@ -34,9 +34,9 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ### 
 
-This tutorial is an introduction, for students using [Github Codespaces](https://github.com/features/codespaces), to the general use of R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. It is meant for beginning students who have never completed a tutorial. 
+This tutorial introduces students using [GitHub Codespaces](https://github.com/features/codespaces) to R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. It is intended for beginning students who have never completed a tutorial.
 
-Most students come to this tutorial after having completed the set-up steps outlined [here](https://ppbds.github.io/primer/getting-started.html#summary). If you fail to do so, some of these questions will be confusing.
+Most students begin this tutorial after completing the setup steps outlined [here](https://ppbds.github.io/primer/getting-started.html#summary). If you have not done that, some of these questions may be confusing.
 
 ### 
 
@@ -46,17 +46,17 @@ After starting the tutorial, your Codespace looks something like this:
 include_graphics("images/cs-start-tutorial.png")
 ```
 
-By pressing the play button next to the "getting-started" tutorial, a new terminal titled "R Tutorial" was opened and the command `Rscript -e "learnr:: run_tutorial'getting-started', package = 'tutorial.helpers' )"` was run. This created an `html` ouput file that was forwarded to the port located at the URL at the bottom. In this image the URL is `http://127.0.0.1:7361`. If the file has not already been opened,`cmd` click the URL to open the tutorial. Notice that the `R Tutorial` terminal is busy, however, other terminal windows remain free to run commands.
+When you press the play button next to the "getting-started" tutorial, a new terminal titled "R Tutorial" opens and runs the command `Rscript -e "learnr::run_tutorial('getting-started', package = 'tutorial.helpers')"`. This creates an HTML output file and forwards it to the port shown in the URL at the bottom. In this image, the URL is `http://127.0.0.1:7361`. If the file has not already opened, `Cmd`-click the URL to open the tutorial. Notice that the `R Tutorial` terminal is busy; other terminal windows remain available for commands.
 
 ###
 
-Complete the tutorial in your Codespace. At the end, there's a button you will press to download a copy of your answers to the `Downloads` folder on your computer. Finally, submit your answers to your instructor and/or keep a copy for yourself.
+Complete the tutorial in your Codespace. At the end, you will press a button to download a copy of your answers to the `Downloads` folder on your computer. Finally, submit your answers to your instructor and/or keep a copy for yourself.
 
 ### 
 
-Most tutorials begin by asking for your name and email. (Your instructor might also request that you fill in the "ID" field so that your work can be matched to a grading database. If not, leave the "ID" field blank.) Click "Continue" and then fill in your name and email. Click the **"Submit Answer"** button each time. If you make a mistake, you can click **"Try Again"** and, uh, try again.
+Most tutorials begin by asking for your name and email. Your instructor might also ask you to fill in the "ID" field so that your work can be matched to a grading database. If not, leave the "ID" field blank. Click "Continue," then enter your name and email. Click the **"Submit Answer"** button each time. If you make a mistake, click **"Try Again"** and submit a new answer.
 
-If you are completing this tutorial as part of a class, you should use the same email address for every tutorial. It is best to use your "permanent" email address, one that you will always have access to. Do not use an email address associated with your current school or employer since you are likely to lose that email address some day.
+If you are completing this tutorial as part of a class, use the same email address for every tutorial. It is best to use a "permanent" email address that you will always be able to access. Do not use an email address associated with your current school or employer, since you may lose access to it someday.
 
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
@@ -64,11 +64,11 @@ If you are completing this tutorial as part of a class, you should use the same 
 ## Exercises
 ### 
 
-Each tutorial includes exercises for you to complete. For non-coding questions, you write your answer and then hit the "Submit Answer" button, as you did above for your name and email address. 
+Each tutorial includes exercises for you to complete. For non-coding questions, write your answer and then click the "Submit Answer" button, as you did above for your name and email address.
 
 ### Exercise 1
 
-Let's practice some simple math. Type `4 + 5` into the box below. Hit **"Run Code"** to see your results. Clicking **"Hint"** gives you a hint about what to type. 
+Let's practice some simple math. Type `4 + 5` into the box below. Click **"Run Code"** to see the result. Clicking **"Hint"** gives you a hint about what to type.
 
 ```{r exercises-1, exercise = TRUE}
 
@@ -80,15 +80,15 @@ Let's practice some simple math. Type `4 + 5` into the box below. Hit **"Run Cod
 
 ### 
 
-Once you click "Run Code," the answer `[1] 9` should appear below the code you entered. This is the same behavior you would see if you ran this code in the Console, which is where R is run.
+Once you click "Run Code," the answer `[1] 9` should appear below the code you entered. This is the same behavior you would see if you ran the code in the Console, where R code is executed.
 
 ###
 
-There are two types of answers for tutorial questions: prose and code. With prose answers, you will use the "Submit Answer" button, as you did with your name and email. With code answers, you use the "Run Code" button, as you did for this question.
+There are two types of answers in tutorial questions: prose and code. For prose answers, you use the "Submit Answer" button, as you did with your name and email. For code answers, you use the "Run Code" button, as you did here.
 
 ### Exercise 2
 
-Let's use variables to perform the same calculation. Below, we have already assigned 5 to `x` and 4 to `y`. On the line below those two provided lines of code, add the two variables by typing `x + y`. Hit "Run Code" to see your results. 
+Let's use variables to perform the same calculation. Below, we have already assigned 5 to `x` and 4 to `y`. On the line below those two provided lines of code, add the two variables by typing `x + y`. Click "Run Code" to see the result.
 
 ```{r exercises-2, exercise = TRUE}
 x <- 5
@@ -104,15 +104,15 @@ x + y
 
 ### 
 
-Once you click "Run Code", the answer `[1] 9` should appear below the code you entered. 
+Once you click "Run Code," the answer `[1] 9` should appear below the code you entered.
 
 ### 
 
-If you don't "Run Code" (or "Submit Answer") your response, nothing is recorded.
+If you do not click "Run Code" or "Submit Answer," your response is not recorded.
 
 ### Exercise 3
 
-We will often need to copy code from the previous exercise to continue working on a multi-step problem. To make this easier, we provide a "Copy previous code" button. Below the following box, click on the "Copy previous code" button. 
+You will often need to copy code from the previous exercise to continue working on a multi-step problem. To make this easier, we provide a "Copy previous code" button. Below the following box, click the "Copy previous code" button.
 
 ```{r exercises-3, exercise = TRUE}
 
@@ -128,15 +128,15 @@ x + ...
 
 ### 
 
-This should paste all work from the previous exercise into the above exercise code area. Note that this will only copy code which has already been run in the previous exercise.
+This should paste all of your work from the previous exercise into the code area above. Note that it only copies code that has already been run in the previous exercise.
 
 ### 
 
-Change the values to `x <- 6` and `y <- 10`. Hit "Run Code." You should get the answer `[1] 16`.
+Change the values to `x <- 6` and `y <- 10`. Click "Run Code." You should get the answer `[1] 16`.
 
 ### 
 
-Note that the assignment symbol, `<-`, is a less-than-sign followed by a dash. We often pronounce this symbol as "gets." So, we might say, when reading this code, that "x gets 6."
+Note that the assignment symbol, `<-`, is a less-than sign followed by a dash. We often pronounce this symbol as "gets." So we might read this code aloud as "x gets 6."
 
 ### 
 
@@ -146,19 +146,19 @@ Did you remember to hit the "Run Code" button above? Lots of people forget! You 
 
 Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
 
-* Return to you're Codespace and click on the "R Tutorial" terminal window.
+* Return to your Codespace and click the "R Tutorial" terminal window.
 
-* Stop running the tutorial. To do this, type `Ctrl + C` in the terminal. This is a very useful as it can be used to interrupt any terminal process. There should be a new line where you can enter a new command.
+* Stop the tutorial by pressing `Ctrl + C` in the terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
 
-* Return to the browser window containing the tutorial. The tutorial is now greyed out, indicating that it is no longer connected to the process running it. Close this window.
+* Return to the browser window containing the tutorial. The tutorial should now be grayed out, indicating that it is no longer connected to the running process. Close this window.
 
-* To restart the tutorial, you can either press the play button next to the "getting-started" tutorial in the sidebar, or you can copy the following code into the terminal and press `enter`:
+* To restart the tutorial, either press the play button next to the "getting-started" tutorial in the sidebar or copy the following command into the terminal and press `Enter`:
 
 ```
-Rscript -e "learnr:: run_tutorial'getting-started', package = 'tutorial.helpers' )
+Rscript -e "learnr::run_tutorial('getting-started', package = 'tutorial.helpers')"
 ```
 
-* This tells the terminal to execute the Rscript which is a single function called `run_tutorial` from the `learnr` package.
+* This command tells the terminal to run `Rscript`, which calls the `run_tutorial()` function from the `learnr` package.
 
 * Finally, open the tutorial.
 
@@ -167,22 +167,22 @@ Now that you have read all the instructions, go ahead and follow them.
 
 ### 
 
-Note how all your answers to previous questions have been saved. It is not a problem to quit a tutorial. In fact, if you ignore a tutorial, it will eventually quit automatically.
+Notice that all of your answers to previous questions have been saved. It is not a problem to quit a tutorial. In fact, if you leave a tutorial idle, it will eventually quit automatically.
 
 ### Exercise 5
 
-Back in your Codespace, create a new R terminal by pressing the down arrow next to the plus button in the bottom right and select "New R terminal."
+Back in your Codespace, create a new R terminal by pressing the down arrow next to the plus button in the bottom right and selecting "New R terminal."
 
 ```{r}
 include_graphics("images/cs-new-R-terminal.png")
 ```
 
- In the new terminal, type `version[['version.string']]`, hitting `return` (if using Mac) or `enter` (if using Windows). To avoid us having to type `return` or `enter` for each question we ask, we use the term `Enter` to specify hitting either the `return` or `enter` key, as appropriate.
+In the new terminal, type `version[['version.string']]` and press `Return` (on Mac) or `Enter` (on Windows). To avoid repeating both terms in every question, we use `Enter` to mean either the `Return` or `Enter` key, as appropriate.
 
 
 **Do not just type the command into the answer box!** You must paste the command into the terminal and then execute the command.
 
-Copy/paste the command **and** the return value into this box.
+Copy and paste both the command **and** the returned value into this box.
 
 ```{r exercises-5}
 question_text(NULL,
@@ -195,21 +195,21 @@ question_text(NULL,
 
 ### 
 
-We typically provide example answers (like the answer below) after you submit your own response. Don't be concerned if your submitted answer differs from the example answer we show.
+We typically provide example answers, like the one below, after you submit your own response. Do not be concerned if your answer differs from the example we show.
 
 ```{r exercises-5-test, echo = TRUE}
 version[['version.string']]
 ```
 
-Your version of R may be more recent, but it should not be older. It is OK if your formatting differs from ours. Exactness does not matter. What matters is that you prove that you have executed the command as instructed.
+Your version of R may be more recent, but it should not be older. It is OK if your formatting differs from ours. Exact formatting does not matter. What matters is that you show that you executed the command as instructed.
 
 ### 
 
-Tutorial workflow will often look like this. We tell you to run a command **in the Terminal**. You run it. We then ask you to copy/paste both the command itself and the response returned. Because we ask you to **C**opy/**P**aste the **C**ommand/**R**esponse so often, we usually shorten this instruction to CP/CR.
+Tutorial workflow will often look like this: we tell you to run a command **in the Terminal**, you run it, and then we ask you to copy and paste both the command itself and the response it returns. Because we ask you to **C**opy/**P**aste the **C**ommand/**R**esponse so often, we usually shorten this instruction to CP/CR.
 
 ### Exercise 6
 
-Now, simply press the plus button in the bottom right. This opens a new Bash terminal. A Bash terminal is a text-based interface where you type commands to tell your computer what to do, like navigating files, running programs, or managing projects.
+Now press the plus button in the bottom right. This opens a new bash terminal. A bash terminal is a text-based interface where you type commands to tell your computer what to do, such as navigating files, running programs, or managing projects.
 
 ```{r}
 include_graphics("images/cs-open-bash.png")
@@ -241,7 +241,7 @@ git version 2.43.0
 
 ### Exercise 7
 
-From the terminal, run `echo $0`. (To "run" a command at the Terminal or the Console means to type the command and then click the `Enter` key.)
+From the terminal, run `echo $0`. (To "run" a command in the Terminal or the Console means to type the command and then press `Enter`.)
 
 CP/CR.
 
@@ -264,13 +264,13 @@ I get:
 @ptweeet ➜ /workspaces/my-repo (main) $
 ````
 
-This means that, in the Terminal, I am using [Bash shell](https://en.wikipedia.org/wiki/Bash_(Unix_shell)), a Unix-like shell.
+This means that, in the Terminal, I am using the [Bash shell](https://en.wikipedia.org/wiki/Bash_(Unix_shell)), a Unix-like shell.
 
-By running the previous commands, we confirmed that we have a bash shell running and that we have [git](https://git-scm.com/), a version control software, installed.
+By running the previous commands, we confirmed that we have a bash shell running and that [git](https://git-scm.com/), a version-control system, is installed.
 
 ### Exercise 8
 
-Let us make the Terminal "sleep" by typing the command `sleep 5` at the Terminal. Hit `Enter`. The `sleep 5` command at the Terminal pauses execution for 5 seconds. 
+Let us make the Terminal "sleep" by typing the command `sleep 5` in the Terminal. Hit `Enter`. The `sleep 5` command pauses execution for 5 seconds.
 
 CP/CR. 
 
@@ -290,11 +290,11 @@ question_text(NULL,
 @ptweeet ➜ /workspaces/my-repo (main) $ 
 ```
 
-We can change the duration of the sleep using this format: `sleep [number]`. The number you put in is the duration (in seconds) for which the Terminal goes to sleep.
+We can change the sleep duration using this format: `sleep [number]`. The number you enter is the number of seconds for which the Terminal pauses.
 
 ### Exercise 9
 
-Run `sleep 60` at the Terminal. (Again, "run" means to type the command and then hit the `Enter` key.) The command makes the Terminal go to sleep for 60 seconds. To cancel the running `sleep` command at the Terminal press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
+Run `sleep 60` in the Terminal. (Again, "run" means to type the command and then press the `Enter` key.) This command makes the Terminal sleep for 60 seconds. To cancel the running `sleep` command, press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
 
 When you press `Ctrl + C` while `sleep` is running, it immediately terminates the `sleep` command and returns you to the command prompt.
 
@@ -317,14 +317,14 @@ question_text(NULL,
 @ptweeet ➜ /workspaces/my-repo (main) $ 
 ````
 
-`Ctrl + C` can stop any process from the Terminal. This is often necessary.
+`Ctrl + C` can stop any process running in the Terminal. This is often necessary.
 
 
 ### Exercise 10
 
-It is useful to understand where the R process is currently executing on your computer.
+It is useful to understand where the R process is currently running on your computer.
 
-In the R terminal not running your tutorial, run `getwd()`. This function is **get** **w**orking **d**irectory, meaning we want to know the directory in which the R process is located.
+In the R terminal that is not running your tutorial, run `getwd()`. This stands for **get** **w**orking **d**irectory, meaning that we want to know the directory in which the R process is currently located.
 
 CP/CR.
 
@@ -352,11 +352,11 @@ In an R terminal running inside GitHub Codespaces, `getwd()` prints the current 
 
 ### Exercise 11
 
-Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are just copies of the R commands and their results. Other times, we will ask you to write one or more sentences of prose. 
+Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are simply copies of R commands and their results. Other times, we will ask you to write one or more sentences of prose.
 
 <!--AR: Need to renumber below when done with edits -->
 
-Copy and paste everything from the Exercise header (i.e., from "Exercise 10") above through the end of this sentence into the answer box below. That is, you are copying from this tutorial, not from the Console. Press "Submit Answer."
+Copy and paste everything from the exercise header above, beginning with "Exercise 10," through the end of this sentence into the answer box below. In other words, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
 ```{r exercises-11}
 question_text(NULL,
@@ -370,9 +370,9 @@ question_text(NULL,
 
 ### Exercise 12
 
-`show_file()` is a commonly-used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file which you have edited. 
+`show_file()` is a commonly used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file that you have edited.
 
-You can generally call a function by just giving its name along with the ending parentheses, as with `getwd()`. However, it can be safer to preface the function name with the name of the package in which the function is found, separated by two colons. Since `show_file()` is in the **tutorial.helpers** package, we can call it using this "double colon" notation: `tutorial.helpers::show_file()`.
+You can generally call a function by giving its name followed by parentheses, as with `getwd()`. However, it can be safer to prefix the function name with the name of the package in which the function is found, separated by two colons. Since `show_file()` is in the **tutorial.helpers** package, we can call it using this "double-colon" notation: `tutorial.helpers::show_file()`.
 
 From the Console, run this command:
 
@@ -401,11 +401,11 @@ For now, don't worry about what `R.home()` and `file.path()` are doing, although
 
 ### Exercise 13
 
-We frequently ask that you `copy` content from an HTML file like a webpage. Don't worry if what you copy appears messy or has lost its formatting - that's perfectly fine. Our main concern is ensuring that your HTML contains roughly the correct information it's supposed to have.
+We frequently ask you to `copy` content from an HTML file such as a webpage. Do not worry if what you copy appears messy or loses its formatting; that is perfectly fine. Our main concern is that what you paste contains roughly the information it is supposed to contain.
 
 ###
 
-Go to [the homepage](https://ppbds.github.io/tutorial.helpers/) of the **tutorial.helpers** package and copy everything in the browser window from 'tutorial.helpers' in the upper left corner through the end of the `About this package` section.
+Go to [the homepage](https://ppbds.github.io/tutorial.helpers/) of the **tutorial.helpers** package and copy everything in the browser window from "tutorial.helpers" in the upper-left corner through the end of the `About this package` section.
 
 CP/CR.
 
@@ -437,13 +437,13 @@ Again, your answer never needs to match ours exactly.
 ## Your answers
 ### 
 
-At the end of every tutorial, you will save your work -- and submit it, at the discretion of your instructor. We will do this in the next topic, labeled "Download answers." Follow the instructions there. 
+At the end of every tutorial, you will save your work and, if your instructor requests it, submit it. We will do this in the next topic, labeled "Download answers." Follow the instructions there.
 
 Make sure to answer the question about how many **minutes** you spent on the tutorial and to click "Submit Answer."
 
-After hitting the "Download" button, you will be prompted to save a file named `getting-started_answers.html`. This file will, by default, be saved in the `Downloads` folder on your computer. 
+After clicking the "Download" button, you will be prompted to save a file named `getting-started_answers.html`. By default, this file will be saved in the `Downloads` folder on your computer.
 
-Unless told otherwise by your instructor, you should use the default file name, which will usually be of the form `short-name-of-tutorial` + `_answers` + `.html`. 
+Unless your instructor tells you otherwise, you should use the default file name, which will usually be of the form `short-name-of-tutorial` + `_answers` + `.html`.
 
 ```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
@@ -451,4 +451,4 @@ Unless told otherwise by your instructor, you should use the default file name, 
 ## Summary
 ### 
 
-You now understand how tutorials function and how to download a copy of your answers. Good luck with your data science journey!
+You now understand how tutorials work and how to download a copy of your answers. Good luck with your data science journey!
