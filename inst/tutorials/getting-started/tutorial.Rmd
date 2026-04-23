@@ -144,19 +144,24 @@ Did you remember to hit the "Run Code" button above? Lots of people forget! You 
 
 ### Exercise 4
 
-<!-- DK: Seems like it should be possible to restart the R session. But the various buttons don't seem to work very well, at least when you are in a tutorial. Try this again in a month. In the meantime, this radical close-Positron approach is OK. -->
-
 Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
 
-* Quit and then restart Positron.
+* Return to you're Codespace and click on the "R Tutorial" terminal window.
 
-* Restart the tutorial. The most common approach is to run this command at the Console:
+* Stop running the tutorial. To do this, type `Ctrl + C` in the terminal. This is a very useful as it can be used to interrupt any terminal process. There should be a new line where you can enter a new command.
 
-````
-learnr::run_tutorial("getting-started", package = "tutorial.helpers")
-````
+* Return to the browser window containing the tutorial. The tutorial is now greyed out, indicating that it is no longer connected to the process running it. Close this window.
 
-* Copy the above code now so that you can easily paste it into the Console after you restart Positron.
+* To restart the tutorial, you can either press the play button next to the "getting-started" tutorial in the sidebar, or you can copy the following code into the terminal and press `enter`:
+
+```
+Rscript -e "learnr:: run_tutorial'getting-started', package = 'tutorial.helpers' )
+```
+
+* This tells the terminal to execute the Rscript which is a single function called `run_tutorial` from the `learnr` package.
+
+* Finally, open the tutorial.
+
 
 Now that you have read all the instructions, go ahead and follow them.
 
