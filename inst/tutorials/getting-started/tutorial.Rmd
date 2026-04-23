@@ -171,35 +171,16 @@ Note how all your answers to previous questions have been saved. It is not a pro
 
 ### Exercise 5
 
-Click `File -> New Window` in the Positron menu.
+Back in your Codespace, create a new R terminal by pressing the down arrow next to the plus button in the bottom right and select "New R terminal."
 
 ```{r}
-include_graphics("images/new-window.png")
+include_graphics("images/cs-new-R-terminal.png")
 ```
 
-This brings up a new instance of Positron, completely independent of this one. This is the most common set up when working on tutorials. One Positron window, this one, runs the tutorial, but we don't do any work in it. We generally don't even bother to create a second Console. The second Positron window is where we do the work which the tutorial requires.
-
-###
-
-There are many ways to move between Positron windows. One approach is to hold down the Control key and hit the letter "W." This is usually abbreviated as `Ctrl + w`. This pulls up a list of the open Positron windows. You then select the one you want and hit `Enter`. On the Mac, you can hold down the Command key and then hit the backtick key: `` ` ``, i.e., ``Cmd + ` ``. This "cycles through" the open Positron windows. `Alt + Tab` on Windows has a similar effect, although the cycle will include all open applications, not just Positron windows.
-
-<!-- 
-DK: Not sure on the best way to have students handle this. Right now, we report the facts above and leave it at that. But we could guide them through the creation of a shortcut key which would be the same (?) for both Mac and Windows. Maybe `workbench.action.quickSwitchWindow` is the key command, and we should set that to a specific command sequence for everyone. This would involve, I think, editing/creating the `keybindings.json` file. 
-
-{
-  "key": "ctrl+alt+w",
-  "command": "workbench.action.quickSwitchWindow"
-}
-
-But need to worry about how this might interact, eventually, with doing Positron in the cloud. Would need to pick a sequence which is not pre-empted by hr browser.
--->
-
-###
-
-In the Console in the new Positron window, type `version[['version.string']]`, hitting `return` (if using Mac) or `enter` (if using Windows). To avoid us having to type `return` or `enter` for each question we ask, we use the term `Enter` to specify hitting either the `return` or `enter` key, as appropriate.
+ In the new terminal, type `version[['version.string']]`, hitting `return` (if using Mac) or `enter` (if using Windows). To avoid us having to type `return` or `enter` for each question we ask, we use the term `Enter` to specify hitting either the `return` or `enter` key, as appropriate.
 
 
-**Do not just type the command into the answer box!** You must paste the command into the Console and then execute the command.
+**Do not just type the command into the answer box!** You must paste the command into the terminal and then execute the command.
 
 Copy/paste the command **and** the return value into this box.
 
@@ -224,7 +205,7 @@ Your version of R may be more recent, but it should not be older. It is OK if yo
 
 ### 
 
-Tutorial workflow will often look like this. We tell you to run a command **in the Console**, always in your second Positron window. You run it. We then ask you to copy/paste, from the Console, both the command itself and the response returned. Because we ask you to **C**opy/**P**aste the **C**ommand/**R**esponse so often, we usually shorten this instruction to CP/CR.
+Tutorial workflow will often look like this. We tell you to run a command **in the Terminal**. You run it. We then ask you to copy/paste both the command itself and the response returned. Because we ask you to **C**opy/**P**aste the **C**ommand/**R**esponse so often, we usually shorten this instruction to CP/CR.
 
 ### Exercise 6
 
