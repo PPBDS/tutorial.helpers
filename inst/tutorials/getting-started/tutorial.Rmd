@@ -241,37 +241,6 @@ git version 2.43.0
 
 Again, the exact git version may not match, but as long as you have "git version" and no error, you're good to go.
 
-### Exercise 7
-
-If you got an error in the previous question, follow [these instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) to install Git, if it was not installed automatically. If asked, you should allow "Git BASH" to be installed. You will sometimes see "BASH" or "Bash" or "bash," but all refer to the same shell, a program which is much better than the Powershell which comes with Windows.
-
-Next, quit Positron using the menu commands: `Positron -> Quit Positron`. This is the safest way to ensure that Positron "discovers" your new Git installation.
-
-Start Positron again. This tutorial will have been closed when you quit Positron. Restart the tutorial with:
-
-```
-learnr::run_tutorial("getting-started", "tutorial.helpers")
-```
-
-You will need to `File -> New Window` again to have an empty Console to work in.
-
-At the Terminal, type `git --version`. Hit `Enter`. 
-
-CP/CR.
-
-```{r exercises-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
-```
-
-###
-
-If this works, you should be all set. If not, seek help. You need Git!
-
 ### Exercise 8
 
 <!-- DK: Figure out what Windows does and/or looks like and then clarify these instructions. -->
