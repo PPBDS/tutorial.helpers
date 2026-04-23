@@ -31,12 +31,6 @@ options(tutorial.exercise.timelimit = 60,
 ```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
 ```
 
-<!-- Find the Positron window naming page from the Posit docs. Use that image: positron-interface.jpeg  -->
-
-<!-- Revist the initial instructions once you can use Positron in the cloud. Perhaps add a new vignette discussing Posit Workbench. -->
-
-<!-- Get a Windows machine and show Windows versions of all images. -->
-
 ## Introduction
 ### 
 
