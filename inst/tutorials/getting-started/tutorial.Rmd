@@ -34,33 +34,23 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ### 
 
-This tutorial is an introduction, for students using [Positron](https://positron.posit.co/), to the general use of R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. It is meant for beginning students who have never completed a tutorial. 
+This tutorial is an introduction, for students using [Github Codespaces](https://github.com/features/codespaces), to the general use of R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. It is meant for beginning students who have never completed a tutorial. 
 
 Most students come to this tutorial after having completed the set-up steps outlined [here](https://ppbds.github.io/primer/getting-started.html#summary). If you fail to do so, some of these questions will be confusing.
 
 ### 
 
-After you started the tutorial, your Positron window looked something like this:
+After starting the tutorial, your Codespace looks something like this:
 
 ```{r}
-include_graphics("images/run-tutorial.png")
+include_graphics("images/cs-start-tutorial.png")
 ```
 
-Note the red square at the top of the Console menu. This indicates that the Console is "busy." You can't do anything with this Console unless you stop running the tutorial. You can complete the tutorial in the Viewer pane in the Secondary Side Bar. 
+By pressing the play button next to the "getting-started" tutorial, a new terminal titled "R Tutorial" was opened and the command `Rscript -e "learnr:: run_tutorial'getting-started', package = 'tutorial.helpers' )"` was run. This created an `html` ouput file that was forwarded to the port located at the URL at the bottom. In this image the URL is `http://127.0.0.1:7361`. If the file has not already been opened,`cmd` click the URL to open the tutorial. Notice that the `R Tutorial` terminal is busy, however, other terminal windows remain free to run commands.
 
 ###
 
-Or you can "pop" a tutorial up into your browser by pressing the "Open the current URL in the default browser" button --- the item in the Viewer menu just to the right of the circular arrow. It looks like a rectangle containing an arrow pointing up and to the right.
-
-```{r}
-include_graphics("images/send-tutorial-to-browser.png")
-```
-
-You can go back and forth between the Viewer tab and the browser. The tutorial is easier to read in the browser, but many students prefer to just keep everything inside of the Positron window.
-
-###
-
-You complete a tutorial on your computer. You download a copy of your answers to the `Downloads` folder on your computer. Then, you submit your answers to your instructor and/or keep a copy for yourself.
+Complete the tutorial in your Codespace. At the end, there's a button you will press to download a copy of your answers to the `Downloads` folder on your computer. Finally, submit your answers to your instructor and/or keep a copy for yourself.
 
 ### 
 
