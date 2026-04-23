@@ -209,7 +209,7 @@ Tutorial workflow will often look like this. We tell you to run a command **in t
 
 ### Exercise 6
 
-Now, simply press the plus button in the bottom right. This opens a new bash terminal.
+Now, simply press the plus button in the bottom right. This opens a new bash terminal. A bash terminal is a text-based interface where you type commands to tell your computer what to do, like navigating files, running programs, or managing projects.
 
 ```{r}
 include_graphics("images/cs-open-bash.png")
