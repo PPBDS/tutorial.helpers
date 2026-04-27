@@ -1,5 +1,3 @@
-^renv$
-^renv\.lock$
 ^LICENSE\.md$
 ^_pkgdown\.yml$
 ^doc$
