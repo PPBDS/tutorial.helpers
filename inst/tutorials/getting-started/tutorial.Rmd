@@ -136,7 +136,7 @@ Note that the assignment symbol, `<-`, is a less-than sign followed by a dash. W
 
 Did you remember to hit the "Run Code" button above? Lots of people forget! You must hit the button for your answer to be recorded.
 
-### Exercise 5
+### Exercise 4
 
 Create a new R terminal by pressing the down arrow next to the plus button in the right side of the Panel Toolbar and selecting "New R terminal."
 
@@ -154,7 +154,7 @@ In the new terminal, type `version[['version.string']]` and press `return` (on M
 
 **C**opy and **P**aste both the **C**ommand *and* the **R**esponse from the terminal into this box. We will abbreviate this instruction in the future as **CP**/**CR**.
 
-```{r exercises-5}
+```{r exercises-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -178,7 +178,7 @@ Your version of R may be more recent, but it should not be older. It is OK if yo
 
 Tutorial workflow will often look like this: we tell you to run a command **in the Terminal**, you run it, and then we ask you to copy and paste both the command itself and the response it returns. Because we ask you to **C**opy/**P**aste the **C**ommand/**R**esponse so often, we usually shorten this instruction to CP/CR.
 
-### Exercise 6
+### Exercise 5
 
 Now press the plus button in the bottom right. This opens a new bash terminal. A bash terminal is a text-based interface where you type commands to tell your Codespace what to do.
 
@@ -192,7 +192,7 @@ From the terminal, run `echo $0`. (To "run" a command in the Terminal or the Con
 
 CP/CR.
 
-```{r exercises-6}
+```{r exercises-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -213,13 +213,13 @@ I get:
 
 This means that, in the Terminal, I am using the [Bash shell](https://en.wikipedia.org/wiki/Bash_(Unix_shell)), a Unix-like shell.
 
-### Exercise 7
+### Exercise 6
 
 Let us make the Terminal "sleep" by typing the command `sleep 5` in the Terminal. Hit `enter`. The `sleep 5` command pauses execution for 5 seconds.
 
 CP/CR. 
 
-```{r exercises-7}
+```{r exercises-6}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -237,7 +237,7 @@ question_text(NULL,
 
 We can change the sleep duration using this format: `sleep [number]`. The number you enter is the number of seconds for which the Terminal pauses.
 
-### Exercise 8
+### Exercise 7
 
 Run `sleep 60` in the Terminal. (Again, "run" means to type the command and then press the `enter` key.) This command makes the Terminal sleep for 60 seconds. To cancel the running `sleep` command, press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
 
@@ -245,7 +245,7 @@ When you press `Ctrl + C` while `sleep` is running, it immediately terminates th
 
 CP/CR.
 
-```{r exercises-8}
+```{r exercises-7}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -265,7 +265,7 @@ question_text(NULL,
 `Ctrl + C` can stop any process running in the Terminal.
 
 
-### Exercise 9
+### Exercise 8
 
 <!-- DK: Not on your computer. AR: fixed.-->
 It is useful to understand where the R process is currently running in your Codespace.
@@ -274,7 +274,7 @@ In the R terminal that is not running your tutorial, run `getwd()`. This stands 
 
 CP/CR.
 
-```{r exercises-9}
+```{r exercises-8}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -296,13 +296,13 @@ R 4.5.3>
 In an R terminal running inside GitHub Codespaces, `getwd()` prints the current working directory—here showing that R is operating inside your Codespace at `/workspaces/codespace-starter`.
 
 
-### Exercise 10
+### Exercise 9
 
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are simply copies of R commands and their results. Other times, we will ask you to write one or more sentences of prose.
 
 Copy and paste everything from the exercise header above, beginning with "Exercise 10," through the end of this sentence into the answer box below. In other words, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
-```{r exercises-10}
+```{r exercises-9}
 question_text(NULL,
     message = "We will sometimes provide an answer to written questions, as we do here. Other times, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",          
     answer(NULL, 
@@ -312,7 +312,7 @@ question_text(NULL,
     rows = 6)
 ```
 
-### Exercise 11
+### Exercise 10
 
 `show_file()` is a commonly used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file that you have edited.
 
@@ -326,7 +326,7 @@ tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 
 CP/CR.
 
-```{r exercises-11}
+```{r exercises-10}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -337,13 +337,13 @@ question_text(NULL,
 
 ###
 
-```{r exercises-11-test, include = FALSE}
+```{r exercises-10-test, include = FALSE}
 tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 ```
 
 For now, don't worry about what `R.home()` and `file.path()` are doing, although you can read about them by running `?R.home` and `?file.path` at the R prompt. Those details are less important than seeing the intended usage of `show_file()`. 
 
-### Exercise 12
+### Exercise 11
 
 We frequently ask you to `copy` content from an HTML file such as a webpage. Do not worry if what you copy appears messy or loses its formatting; that is perfectly fine. Our main concern is that what you paste contains roughly the information it is supposed to contain.
 
@@ -353,7 +353,7 @@ Go to [the homepage](https://ppbds.github.io/tutorial.helpers/) of the **tutoria
 
 CP/CR.
 
-```{r exercises-12}
+```{r exercises-11}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -378,7 +378,7 @@ tutorial.helpers provides functions and RStudio Addins to help you write R tutor
 
 Again, your answer never needs to match ours exactly.
 
-### Exercise 4
+### Exercise 12
 
 Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
 
@@ -422,7 +422,7 @@ After clicking the "Download" button, you will be prompted to save a file named 
 
 Unless your instructor tells you otherwise, you should use the default file name, which will usually be of the form `short-name-of-tutorial` + `_answers` + `.html`.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```{r your-answers-0, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
 
 ## Summary
