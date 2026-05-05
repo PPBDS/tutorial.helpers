@@ -1,5 +1,7 @@
 # tutorial.helpers (development version)
 
+* `show_file()` now prints "File is empty." for empty files (or files containing only blank lines) instead of erroring.
+
 * Finalize "Tutorials in the Age of AI" vignette.
 
 * Fix word wrapping for verbatim sections in vignettes.

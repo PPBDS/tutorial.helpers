@@ -139,4 +139,11 @@ test_that("show_file function works correctly", {
   
   # Test case 15: No rows matching the pattern
   expect_equal(paste(capture.output(show_file(test_file, pattern = "nomatch")), collapse = "\n"), "")
+
+  # Test case 16: Empty file prints "File is empty."
+  empty_file <- tempfile()
+  file.create(empty_file)
+  on.exit(unlink(empty_file), add = TRUE)
+  expect_equal(paste(capture.output(show_file(empty_file)), collapse = "\n"),
+               "File is empty.")
 })

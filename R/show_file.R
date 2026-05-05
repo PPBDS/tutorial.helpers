@@ -71,7 +71,12 @@ show_file <- function(path, start = 1, end = NULL, pattern = NULL, chunk = "None
   while (length(contents) > 0 && contents[length(contents)] == "") {
     contents <- contents[-length(contents)]
   }
-  
+
+  if (length(contents) == 0) {
+    cat("File is empty.\n")
+    return(invisible(NULL))
+  }
+
   # If chunk is "YAML", extract and return the YAML header
   if (chunk == "YAML") {
     if (length(contents) == 0 || !grepl("^---\\s*$", contents[1])) {
