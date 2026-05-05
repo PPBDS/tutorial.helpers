@@ -136,42 +136,9 @@ Note that the assignment symbol, `<-`, is a less-than sign followed by a dash. W
 
 Did you remember to hit the "Run Code" button above? Lots of people forget! You must hit the button for your answer to be recorded.
 
-### Exercise 4
-
-Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
-
-<!-- DK: Is --- “R Tutorial” terminal window --- the correct terminology. Either way, add a picture. AR: Done-->
-
-<!-- Move this till later so that they know about `Ctrl - C` and are familiar with other parts of the panel. -->
-
-* Return to your Codespace and click the tab titled "R Tutorial" in the Panel.
-
-```{r}
-include_graphics("images/r-tutorial-terminal.png")
-```
-
-* Stop the tutorial by pressing `Ctrl + C` in the terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
-
-<!-- DK: Delete this step. AR: done.-->
-
-* To restart the tutorial, either press the play button next to the "getting-started" tutorial.
-
-<!-- DK: Just the button. AR: fixed. -->
-
-* This command tells the terminal to run `Rscript`, which calls the `run_tutorial()` function from the `learnr` package.
-
-* Finally, open the tutorial.
-
-
-Now that you have read all the instructions, go ahead and follow them.
-
-### 
-
-Notice that all of your answers to previous questions have been saved. It is not a problem to quit a tutorial. In fact, if you leave a tutorial idle, it will eventually quit automatically.
-
 ### Exercise 5
 
-Back in your Codespace, create a new R terminal by pressing the down arrow next to the plus button in the bottom right and selecting "New R terminal."
+Create a new R terminal by pressing the down arrow next to the plus button in the right side of the Panel Toolbar and selecting "New R terminal."
 
 ```{r}
 include_graphics("images/cs-new-R-terminal.png")
@@ -409,7 +376,40 @@ About this package
 tutorial.helpers provides functions and RStudio Addins to help you write R tutorials, especially if you follow my advice about the best way to do so. This approach is currently used in several packages, including r4ds.tutorials and positron.tutorials.
 ````
 
-Again, your answer never needs to match ours exactly. 
+Again, your answer never needs to match ours exactly.
+
+### Exercise 4
+
+Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
+
+<!-- DK: Is --- “R Tutorial” terminal window --- the correct terminology. Either way, add a picture. AR: Done-->
+
+<!-- Move this till later so that they know about `Ctrl - C` and are familiar with other parts of the panel. -->
+
+* Return to your Codespace and click the tab titled "R Tutorial" in the Panel.
+
+```{r}
+include_graphics("images/r-tutorial-terminal.png")
+```
+
+* Stop the tutorial by pressing `Ctrl + C` in the terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
+
+<!-- DK: Delete this step. AR: done.-->
+
+* To restart the tutorial, either press the play button next to the "getting-started" tutorial.
+
+<!-- DK: Just the button. AR: fixed. -->
+
+* This command tells the terminal to run `Rscript`, which calls the `run_tutorial()` function from the `learnr` package.
+
+* Finally, open the tutorial.
+
+
+Now that you have read all the instructions, go ahead and follow them.
+
+### 
+
+Notice that all of your answers to previous questions have been saved. It is not a problem to quit a tutorial. In fact, if you leave a tutorial idle, it will eventually quit automatically.
 
 ## Your answers
 ### 
