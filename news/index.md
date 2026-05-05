@@ -2,6 +2,10 @@
 
 ## tutorial.helpers (development version)
 
+- [`show_file()`](https://ppbds.github.io/tutorial.helpers/reference/show_file.md)
+  now prints “File is empty.” for empty files (or files containing only
+  blank lines) instead of erroring.
+
 - Finalize “Tutorials in the Age of AI” vignette.
 
 - Fix word wrapping for verbatim sections in vignettes.

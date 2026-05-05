@@ -14,6 +14,7 @@ packages,
 To install the package from CRAN:
 
 ``` r
+
 install.packages("tutorial.helpers")
 ```
 
@@ -21,6 +22,7 @@ You can install the development version from
 [GitHub](https://github.com/) with:
 
 ``` r
+
 remotes::install_github("PPBDS/tutorial.helpers")
 ```
 
