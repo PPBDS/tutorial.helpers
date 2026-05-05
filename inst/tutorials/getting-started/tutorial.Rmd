@@ -40,9 +40,7 @@ After starting the tutorial, your Codespace looks something like this:
 include_graphics("images/cs-start-tutorial.png")
 ```
 
-<!-- DK: Too complex? Student already got the tutorial running, which is why they are here! Put a full discussion im getting started.  -->
-
-Running a tutorial by pressing the arrow next to its name creates an HTML output file and forwards it to the port shown in the URL at the bottom. In this image, the URL is `http://127.0.0.1:7361`. If the file has not already opened, `Cmd`-click the URL to open the tutorial. Notice that the `R Tutorial` terminal is busy; other terminal windows remain available for commands.
+<!-- DK: Too complex? Student already got the tutorial running, which is why they are here! Put a full discussion im getting started.  AR: removed. -->
 
 ###
 
@@ -142,25 +140,23 @@ Did you remember to hit the "Run Code" button above? Lots of people forget! You 
 
 Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
 
-<!-- DK: Is --- “R Tutorial” terminal window --- the correct terminology. Either way, add a picture. -->
+<!-- DK: Is --- “R Tutorial” terminal window --- the correct terminology. Either way, add a picture. AR: Done-->
 
 <!-- Move this till later so that they know about `Ctrl - C` and are familiar with other parts of the panel. -->
 
-* Return to your Codespace and click the "R Tutorial" terminal window.
+* Return to your Codespace and click the tab titled "R Tutorial" in the Panel.
+
+```{r}
+include_graphics("images/r-tutorial-terminal.png")
+```
 
 * Stop the tutorial by pressing `Ctrl + C` in the terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
 
-<!-- DK: Delete this step. -->
+<!-- DK: Delete this step. AR: done.-->
 
-* Return to the browser window containing the tutorial. The tutorial should now be grayed out, indicating that it is no longer connected to the running process. Close this window.
+* To restart the tutorial, either press the play button next to the "getting-started" tutorial.
 
-* To restart the tutorial, either press the play button next to the "getting-started" tutorial in the sidebar or copy the following command into the terminal and press `Enter`:
-
-<!-- DK: Just the button. -->
-
-```
-Rscript -e "learnr::run_tutorial('getting-started', package = 'tutorial.helpers')"
-```
+<!-- DK: Just the button. AR: fixed. -->
 
 * This command tells the terminal to run `Rscript`, which calls the `run_tutorial()` function from the `learnr` package.
 
@@ -181,15 +177,15 @@ Back in your Codespace, create a new R terminal by pressing the down arrow next 
 include_graphics("images/cs-new-R-terminal.png")
 ```
 
-In the new terminal, type `version[['version.string']]` and press `Return` (on Mac) or `Enter` (on Windows). To avoid repeating both terms in every question, we use `Enter` to mean either the `Return` or `Enter` key, as appropriate.
+In the new terminal, type `version[['version.string']]` and press `return` (on Mac) or `enter` (on Windows). To avoid repeating both terms in every question, we use `enter` to mean either the `return` or `enter` key, as appropriate.
 
-<!-- DK: Lower case for `return` and `enter`. -->
+<!-- DK: Lower case for `return` and `enter`. AR: done.-->
 
 **Do not just type the command into the answer box!** You must paste the command into the terminal and then execute the command.
 
-<!-- DK: This is not a great description. No mention of CP/CR. And it stands for copy/paste the command/response. -->
+<!-- DK: This is not a great description. No mention of CP/CR. And it stands for copy/paste the command/response. AR: done. -->
 
-Copy and paste both the command **and** the returned value into this box.
+**C**opy and **P**aste both the **C**ommand *and* the **R**esponse from the terminal into this box. We will abbreviate this instruction in the future as **CP**/**CR**.
 
 ```{r exercises-5}
 question_text(NULL,
@@ -225,7 +221,7 @@ include_graphics("images/cs-open-bash.png")
 
 ###
 
-From the terminal, run `echo $0`. (To "run" a command in the Terminal or the Console means to type the command and then press `Enter`.)
+From the terminal, run `echo $0`. (To "run" a command in the Terminal or the Console means to type the command and then press `enter`.)
 
 CP/CR.
 
@@ -252,7 +248,7 @@ This means that, in the Terminal, I am using the [Bash shell](https://en.wikiped
 
 ### Exercise 7
 
-Let us make the Terminal "sleep" by typing the command `sleep 5` in the Terminal. Hit `Enter`. The `sleep 5` command pauses execution for 5 seconds.
+Let us make the Terminal "sleep" by typing the command `sleep 5` in the Terminal. Hit `enter`. The `sleep 5` command pauses execution for 5 seconds.
 
 CP/CR. 
 
@@ -276,7 +272,7 @@ We can change the sleep duration using this format: `sleep [number]`. The number
 
 ### Exercise 8
 
-Run `sleep 60` in the Terminal. (Again, "run" means to type the command and then press the `Enter` key.) This command makes the Terminal sleep for 60 seconds. To cancel the running `sleep` command, press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
+Run `sleep 60` in the Terminal. (Again, "run" means to type the command and then press the `enter` key.) This command makes the Terminal sleep for 60 seconds. To cancel the running `sleep` command, press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
 
 When you press `Ctrl + C` while `sleep` is running, it immediately terminates the `sleep` command and returns you to the command prompt.
 
