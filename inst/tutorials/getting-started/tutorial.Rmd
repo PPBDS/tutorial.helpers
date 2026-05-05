@@ -217,7 +217,7 @@ Tutorial workflow will often look like this: we tell you to run a command **in t
 
 ### Exercise 6
 
-Now press the plus button in the bottom right. This opens a new bash terminal. A bash terminal is a text-based interface where you type commands to tell your computer what to do.
+Now press the plus button in the bottom right. This opens a new bash terminal. A bash terminal is a text-based interface where you type commands to tell your Codespace what to do.
 
 ```{r}
 include_graphics("images/cs-open-bash.png")
@@ -304,9 +304,8 @@ question_text(NULL,
 
 ### Exercise 9
 
-<!-- DK: Not on your computer. -->
-
-It is useful to understand where the R process is currently running on your computer.
+<!-- DK: Not on your computer. AR: fixed.-->
+It is useful to understand where the R process is currently running in your Codespace.
 
 In the R terminal that is not running your tutorial, run `getwd()`. This stands for **get** **w**orking **d**irectory, meaning that we want to know the directory in which the R process is currently located.
 
