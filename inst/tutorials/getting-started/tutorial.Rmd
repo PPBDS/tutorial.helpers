@@ -243,9 +243,9 @@ question_text(NULL,
 I get:
 
 ````
-@ptweeet ➜ /workspaces/my-repo (main) $ echo $0
+@ppbds-student ➜ /workspaces/codespace-starter $ echo $0
 /bin/bash
-@ptweeet ➜ /workspaces/my-repo (main) $
+@ppbds-student ➜ /workspaces/codespace-starter $
 ````
 
 This means that, in the Terminal, I am using the [Bash shell](https://en.wikipedia.org/wiki/Bash_(Unix_shell)), a Unix-like shell.
@@ -268,8 +268,8 @@ question_text(NULL,
 ###
 
 ```
-@ptweeet ➜ /workspaces/my-repo (main) $ sleep 5
-@ptweeet ➜ /workspaces/my-repo (main) $ 
+@ppbds-student ➜ /workspaces/codespace-starter $ sleep 5
+@ppbds-student ➜ /workspaces/codespace-starter $
 ```
 
 We can change the sleep duration using this format: `sleep [number]`. The number you enter is the number of seconds for which the Terminal pauses.
@@ -294,9 +294,9 @@ question_text(NULL,
 ### 
 
 ````
-@ptweeet ➜ /workspaces/my-repo (main) $ sleep 60
+@ppbds-student ➜ /workspaces/codespace-starter $ sleep 60
 ^C
-@ptweeet ➜ /workspaces/my-repo (main) $ 
+@ppbds-student ➜ /workspaces/codespace-starter $
 ````
 
 `Ctrl + C` can stop any process running in the Terminal.
@@ -327,11 +327,11 @@ Your answer should look something like:
 
 ````
 R 4.5.3> getwd()
-[1] "/workspaces/my-repo"
-R 4.5.3> 
+[1] "/workspaces/codespace-starter"
+R 4.5.3>
 ````
 
-In an R terminal running inside GitHub Codespaces, `getwd()` prints the current working directory—here showing that R is operating inside your project folder at `/workspaces/my-repo`.
+In an R terminal running inside GitHub Codespaces, `getwd()` prints the current working directory—here showing that R is operating inside your Codespace at `/workspaces/codespace-starter`.
 
 
 ### Exercise 10
