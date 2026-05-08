@@ -212,44 +212,42 @@
 <p>The <code>&lt;pre&gt;&lt;code&gt;</code> serves the same purpose as the four backticks but it displays R code chunks verbatim.</p>
 </section></section></section><section class="level2"><h2 id="tutorial-introduction">Tutorial Introduction<a class="anchor" aria-label="anchor" href="#tutorial-introduction"></a>
 </h2>
-<p>Students need some background in order to complete these sorts of tutorials, some familiarity with R, GitHub and so on. Students should have completed the “Getting Started” and “Introduction to R” tutorials from the <a href="https://CRAN.R-project.org/package=tutorial.helpers" class="external-link"><strong>tutorial.helpers</strong></a> package. They should also complete the first four Positron tutorials (i.e., through “Positron and GitHub Introduction”) from <a href="https://ppbds.github.io/positron.tutorials/" class="external-link"><strong>positron.tutorials</strong></a>.</p>
+<p>Students need some background in order to complete these sorts of tutorials, some familiarity with R, GitHub and so on. Students should have completed the “Getting Started” and “Introduction to R” tutorials from the <a href="https://CRAN.R-project.org/package=tutorial.helpers" class="external-link"><strong>tutorial.helpers</strong></a> package. They should also complete the first four VS Code tutorials (i.e., through “VS Code and GitHub Introduction”) from <a href="https://ppbds.github.io/vscode.tutorials/" class="external-link"><strong>vscode.tutorials</strong></a>.</p>
 <p>Always begin by having students set up a repo and a Quarto document to work in. Again, you must replace <code>XX</code> with something sensible and usually different from the other <code>XX</code>’s. So, in the below example, the name of the repo and the title of the QMD will be different even though we hold their places with <code>XX</code> in both cases.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>### Exercise 1</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>Create a Github repo called `XX`. Set the "Add a README file" toggle box to "On."</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>You should already be in a repo named `XX`. If not, create a that repo on GitHub and connect to wherever you are working. </span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>Connect the repo to a project on your computer using `File -&gt; New Folder from Git ...`.  Make sure to select the "Open in a new window" box. </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>You need two R Terminals: this one for running the tutorial and one for writing your code and interacting with R.</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>You need two Positron windows: this one for running the tutorial and the one you just created for writing your code and interacting with the Console.</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Create a new Quarto document. Provide a title -- `"XX"` -- and an author (you). Save the file as `analysis.qmd`. Render the document. </span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>In the new window, select `File -&gt; New File -&gt; Quarto Document ...`. Provide a title -- `"XX"` -- and an author (you). Save the file as `analysis.qmd`. Render the document. </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>In the Console, run:</span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>In the Console, run:</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>```         </span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>show_file(".gitignore")</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>```         </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>show_file(".gitignore")</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the Console.</span>
 <span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the Console.</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>```{r introduction-1}</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    rows = 3)</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>```{r introduction-1}</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    rows = 3)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>### </span>
 <span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>### </span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span>
 <span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: By default, the next two questions just mention tidyverse. If there is more than one required library, you can just add those libraries to these steps, adjusting the grammar as needed. Or, you might have separate questions for each library, thereby providing more room for knowledge drops. --&gt;</span></code></pre></div>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: By default, the next two questions just mention tidyverse. If there is more than one required library, you can just add those libraries to these steps, adjusting the grammar as needed. Or, you might have separate questions for each library, thereby providing more room for knowledge drops. --&gt;</span></code></pre></div>
 <p>Feel free to copy/paste this question as-is, replacing <code>XX</code> with whatever makes sense for your assignment. That is, you need to provide your own repo name, Quarto document title and so on. The repo name should be descriptive and also not likely to have conflicts with other repos in the students GitHub account, i.e., <code>golf-scores</code> not <code>project-1</code>.</p>
 <p>You do not need to use <code>analysis.qmd</code> as the name of the QMD file which the student creates. But using the same name doesn’t hurt anything and is convenient since it decreases the number of things which the tutorial author needs to change.</p>
 <p>You are, obviously, responsible for adding a knowledge drop which teaches the students something about the larger topic. The most important things to mention are useful packages and functions.</p>

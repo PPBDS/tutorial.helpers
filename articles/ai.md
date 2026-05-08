@@ -405,9 +405,9 @@ tutorials, some familiarity with R, GitHub and so on. Students should
 have completed the “Getting Started” and “Introduction to R” tutorials
 from the
 [**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers)
-package. They should also complete the first four Positron tutorials
-(i.e., through “Positron and GitHub Introduction”) from
-[**positron.tutorials**](https://ppbds.github.io/positron.tutorials/).
+package. They should also complete the first four VS Code tutorials
+(i.e., through “VS Code and GitHub Introduction”) from
+[**vscode.tutorials**](https://ppbds.github.io/vscode.tutorials/).
 
 Always begin by having students set up a repo and a Quarto document to
 work in. Again, you must replace `XX` with something sensible and
@@ -418,13 +418,11 @@ we hold their places with `XX` in both cases.
 ```` default
 ### Exercise 1
 
-Create a Github repo called `XX`. Set the "Add a README file" toggle box to "On."
+You should already be in a repo named `XX`. If not, create a that repo on GitHub and connect to wherever you are working. 
 
-Connect the repo to a project on your computer using `File -> New Folder from Git ...`.  Make sure to select the "Open in a new window" box. 
+You need two R Terminals: this one for running the tutorial and one for writing your code and interacting with R.
 
-You need two Positron windows: this one for running the tutorial and the one you just created for writing your code and interacting with the Console.
-
-In the new window, select `File -> New File -> Quarto Document ...`. Provide a title -- `"XX"` -- and an author (you). Save the file as `analysis.qmd`. Render the document. 
+Create a new Quarto document. Provide a title -- `"XX"` -- and an author (you). Save the file as `analysis.qmd`. Render the document. 
 
 Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.
 
