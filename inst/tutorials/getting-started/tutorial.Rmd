@@ -40,8 +40,6 @@ After starting the tutorial, your Codespace looks something like this:
 include_graphics("images/cs-start-tutorial.png")
 ```
 
-<!-- DK: Too complex? Student already got the tutorial running, which is why they are here! Put a full discussion im getting started.  AR: removed. -->
-
 ###
 
 Complete the tutorial in your Codespace. At the end, you will press a button to download a copy of your answers to the `Downloads` folder on your computer. Finally, submit your answers to your instructor and/or keep a copy for yourself.
@@ -146,11 +144,7 @@ include_graphics("images/cs-new-R-terminal.png")
 
 In the new terminal, type `version[['version.string']]` and press `return` (on Mac) or `enter` (on Windows). To avoid repeating both terms in every question, we use `enter` to mean either the `return` or `enter` key, as appropriate.
 
-<!-- DK: Lower case for `return` and `enter`. AR: done.-->
-
 **Do not just type the command into the answer box!** You must paste the command into the terminal and then execute the command.
-
-<!-- DK: This is not a great description. No mention of CP/CR. And it stands for copy/paste the command/response. AR: done. -->
 
 **C**opy and **P**aste both the **C**ommand *and* the **R**esponse from the terminal into this box. We will abbreviate this instruction in the future as **CP**/**CR**.
 
@@ -267,7 +261,6 @@ question_text(NULL,
 
 ### Exercise 8
 
-<!-- DK: Not on your computer. AR: fixed.-->
 It is useful to understand where the R process is currently running in your Codespace.
 
 In the R terminal that is not running your tutorial, run `getwd()`. This stands for **get** **w**orking **d**irectory, meaning that we want to know the directory in which the R process is currently located.
@@ -382,8 +375,6 @@ Again, your answer never needs to match ours exactly.
 
 Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
 
-<!-- DK: Is --- “R Tutorial” terminal window --- the correct terminology. Either way, add a picture. AR: Done-->
-
 <!-- Move this till later so that they know about `Ctrl - C` and are familiar with other parts of the panel. -->
 
 * Return to your Codespace and click the tab titled "R Tutorial" in the Panel.
@@ -394,11 +385,7 @@ include_graphics("images/r-tutorial-terminal.png")
 
 * Stop the tutorial by pressing `Ctrl + C` in the terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
 
-<!-- DK: Delete this step. AR: done.-->
-
 * To restart the tutorial, either press the play button next to the "getting-started" tutorial.
-
-<!-- DK: Just the button. AR: fixed. -->
 
 * This command tells the terminal to run `Rscript`, which calls the `run_tutorial()` function from the `learnr` package.
 
