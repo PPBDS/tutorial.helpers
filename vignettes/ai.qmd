@@ -36,9 +36,13 @@ Anything typed at the keyboard belongs in \`backticks\` (not "quotation marks"),
 
 Note that tutorials must be [R Markdown](https://rmarkdown.rstudio.com/) documents, meaning that their suffix is `.Rmd`. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the `{}`. Don't worry about this detail. 
 
+<!-- AR: I feel like set up often occurs within topics in vs code tutorials. -->
+
 AI tutorials begin with an *Introduction* which provides a summary of the key packages/functions which the tutorial will cover. The Introduction continues with a series of exercises which set up the repo/project/QMD in which most of the tutorial will be completed.
 
 After the Introduction, there are 1 or 2 sections --- the official **learnr** nomenclature is *Topics* --- which are the meat of the tutorial. 
+
+<!-- AR: often, publish steps occur within topics and not in summary -->
 
 The last section is the *Summary*. It starts with the same overview with which the Introduction began, but in the past tense. It then has a couple exercises which finish up the tutorial by using `quarto publish gh-pages analysis.qmd` to create a webpage featuring the cool plots which the student has created. The URL for this new webpage is usually the answer to the last exercise in Summary, thereby completing the tutorial.
 
@@ -47,6 +51,8 @@ Anytime you ask a student to execute something in the Console, you confirm that 
 [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) includes two particularly helpful functions: `make_exercise()` and `check_current_tutorial()`. Use `make_exercise()` to add a new exercise to the current tutorial. It will number the exercise, and the code chunk labels, automatically. Use `check_current_tutorial()` to renumber all the exercises and relabel the code chunks. This is especially useful if you add or delete an exercise in the middle of a section.
 
 Students always need more practice working in a Quarto document (the QMD) and the Console at the same time. Good data scientists go back and forth between these two modes, writing something in the QMD, executing it in the Console, editing the QMD, executing again, and so on. We need to force students to do that more often.
+
+<!-- AR: Does introductory prose go in between the topic title and the first "###" ? -->
 
 Tutorials are divided into *Topics* that appear on the side panel. To create these topics, we include a double hash (##) before the text for it to show up as a side panel. This is also called the *topic title*.  Use [sentence case](https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case). On the line after the topic title, put three hashes. This ensures that students will see the introductory text before they see the first exercise.
 
@@ -107,6 +113,8 @@ question_text(NULL,
 
 The question will almost always instruct the student to "CP/CR," often after running `show_fle(chunk = "Last")`. Adjust the value of `rows` to match the expected length of the pasted output. If the question asks student to run some R code, we will generally include a reasonable answer in the `test` chunk. This serves two purposes. First, because `echo = TRUE`, we show the student that code (and its output) in the tutorial. This code should be excellent. We want students to learn from our example. Second, the code will be run when we test the tutorial, so we can be sure that this code (and, we hope, code like it) will work for the student.
 
+<!-- AR: Don't we often show examples of what the answer should look like for these questions? Any guidance on this? Where does this go in relation to knowledge drops and the reponse input? -->
+
 ### Knowledge drops
 
 The most difficult part of tutorial creation is writing the "knowledge drops," the snippets of wisdom (and the associated links) which are used at the end of each exercise. These generally come in two categories: details about R functions/packages/websites and background information about the substantive data science problem at hand. 
@@ -144,6 +152,8 @@ The first two commands download data and save it to an RDS file in the `data` di
 
 This code assumes that you are located in the same directory as the `tutorial.Rmd` file. You only run those commands once, and then you comment them out because you don't want them re-run each time the tutorial is created. The `read_rds()` call is never commented out because we always need the `median_age` object.
 
+<!-- AR: By "two exercise code chunks" does this mean that there are two answer submissions within one exercise or two separate exercises? Are these the answer fields that can execute code? How do we set this up? -->
+
 When designing tutorials which use objects like `median_age`, we generally write two exercise code chunks. The first has the student run the same code as that which we used to create the object ourselves. This won't work if the student is not connected to the web but, with luck, in that case they will get a sensible error message. The second question informs the students that we have, behind the scenes, assigned the result of the function to an R object. We then ask the student to just print out that object. We don't have them do the assignment themselves, not least because we don't like questions which don't generate any output. 
 
 We use a similar approach with models which can take awhile to fit. Example:
@@ -160,6 +170,9 @@ fit_gauss <- read_rds("data/fit_gauss.rds")
 ````
 
 Again, this code only works if you are in the tutorial directory, not in the higher directory of the R project itself. Also, the first two commands are commented out, unless you are running them by hand to create the object.
+
+<!-- AR: Will the Arrow tutorial change? This may need to be updated in the future. -->
+<!-- AR: How do we balance approach 1 (to have written exercises while running commands outside the tutorial) with approach 2 (code chunks in tutorial run on a smaller version of the data sets)  -->
 
 What happens if the data is too large? See the "Arrow" tutorial in the [**r4ds.tutorials**](https://ppbds.github.io/r4ds.tutorials/) for an example. First, we generally switch away from code exercises and use written exercises. Students run the required commands and then copy/paste the command/response. Big downloads don't work well in exercise code chunks. Second, we create small versions of this big data in the global `setup` chunk. This allows us to create test code chunks for most of the exercises which follow. These tests will run much more quickly with this smaller data. Also, for any package on CRAN, we need to keep the overall size of the package as small as possible.
 
@@ -182,6 +195,8 @@ include_graphics("images/example.png")
 Because students will complete the tutorials using screens of very different widths, it is a good idea to put `knitr::opts_chunk$set(out.width = '90%')` in your `setup` code chunk. In this way, images will appear at a sensible size regardless of whether students are using a phone screen or a big monitor.
 
 #### Complex text
+
+<!-- AR: I find this section quite confusing! Is there any way to simplify? -->
 
 You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which R markdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. The plain three or four backtick environments create a plain code block and content inside is displayed as-is. No syntax highlighting or execution is applied, and they show example code or text exactly as typed. Four backtick environments allow three backticks to be written within the block. This works often, but not always. Comment characters like `#` are especially problematic. We also use the [**parsermd**](https://rundel.github.io/parsermd/) package behind the scenes. It does not work as well as one might like.
 
@@ -268,12 +283,14 @@ You are, obviously, responsible for adding a knowledge drop which teaches the st
 
 The second question in the Introduction is usually:
 
+<!-- AR: Should we specify more explicitly that this first chunk should have a "setup" label? -->
+
 ````{verbatim}
 ### Exercise 2
 
 In your QMD, put `library(tidyverse)` in a new code chunk. Render the file using `Cmd/Ctrl + Shift + K`.
 
-Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| message: false` to remove all the messages in this `setup` chunk. Also, add the following to the YAML header to remove all code echoes from the HTML:
+Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| echo: false` to remove all the messages in this `setup` chunk. Also, add the following to the YAML header to remove all code echoes from the HTML:
 
 ```         
 execute: 
@@ -333,6 +350,8 @@ If the target audience for the tutorial is more experienced, you can be less did
 
 I recommend offering these explicit instructions in every tutorial. First, students need lots of practice. Second, each time you tell them to add something to the QMD, you give yourself an opportunity for a knowledge drop. The same applies when you tell students to execute, in the Console, a new addition to the QMD. 
 
+<!-- AR: where does a knowledge drop fit in in this type of question? after another "###"? None at all? -->
+
 ````{verbatim}
 ### Exercise 4
 
@@ -370,13 +389,14 @@ You answer should look something like this, although your path will be different
 >  
 ```
 
-<!-- XX: If you have downloaded some data, then you might want to create the tibbles that you will use here. (Of course, you also need to create those tibbles in the setup chunk so that any test code which create will run.) -->
+<!-- XX: If you have downloaded some data, then you might want to create the tibbles that you will use here. (Of course, you also need to create those tibbles in the setup chunk so that any test code will run.) -->
 ````
 
 ## Tutorial Topics
 
-You will probably have one or two Topics, in between the Introduction and Summary. Any tutorial which both uses a lot of AI and is supposed to take an hour or so will only have, at most, two Topics. 
+<!-- AR: There are lots of tutorials with more than 2 topics! -->
 
+You will probably have one or two Topics, in between the Introduction and Summary. Any tutorial which both uses a lot of AI and is supposed to take an hour or so will only have, at most, two Topics. 
 
 ````{verbatim}
 ## XX: First topic (use sentence case)
@@ -386,6 +406,8 @@ You will probably have one or two Topics, in between the Introduction and Summar
 ````
 
 If you are downloading some data, the natural place to do so is in the first exercise of a Section.
+
+<!-- AR: do we prefer using R to something like curl in bash? Do both? -->
 
 ````{verbatim}
 ### Exercise 1
@@ -419,13 +441,13 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-
 The meat of a Topic generally involves asking AI to create a pipe which accomplishes some goal. The end of a Topic always finishes up with a plot. The last four questions set up and then guide the student to creating that plot. If you want the student to mimic a plot, you can place it in the `images` subdirectory and then use `knitr::include_graphics("images/plot.png")` to show it to students.
-
 
 To teach students about topic X, we first need to decide the final destination. What do we want students to be able to do on their own after completing the tutorial? For us, this will almost always be a plot. Having envisioned this goal, we need to create a "path" which students can use to reach that goal, first under our supervision and, second, on their own. The path will consist of several stepping stones, or stops along the way.
 
 <!-- DK: We should insert some discussion about creating a bunch of different pipes. The below is an OK start for this discussion. Add a code example . . . -->
+
+<!-- AR: Below, what is meant by "show students" ?-->
 
 To ensure that students are on the right path with their code, we need to provide them with our code that is verified to be correct. Although we should not tell students to replace their code with ours at every step, if a student is lost, they should be able to refer to our code to get back on track. We also want to include our code in test chunks, both to show students and to confirm that it works. 
 
@@ -476,13 +498,13 @@ In that case, the answer chunk would look like:
 ```
 ````
 
-
-
 ## Plotting Questions
 
 Plotting exercises are generally handled with a sequence of four questions. Prior to these, the tutorial will probably have the student practice gathering, organizing, and cleaning the data. 
 
 The first of the three prior questions tells the student to replace the current pipe which they have in the QMD with our code. We check that they have done so with `show_file()`. The purpose of this question is to ensure that the student's data will match our data.
+
+<!-- AR: How does the student know what they submit is correct for this exercise? -->
 
 ````{verbatim}
 ### Exercise 3
@@ -720,7 +742,7 @@ Once you are done editing a tutorial, you need to make sure it works, either on 
 
 1. Type `rmarkdown::render("file_path/tutorial.Rmd")` in the Console. This produces `tutorial.html` in the tutorial directory. Right click the file and select `Open in Browser`. It is smart to use `rmarkdown::render("file_path")` regularly since it will identify syntax errors quickly. 
 
-2. Do a full test, which means running `devtools::check()`, the shortcut key for which is `Cmd/Ctrl + Shoft + E`. This is the equivalent of `R CMD check`. It validates package structure, documentation, tests, and compliance with CRAN standards. A good result would be `0 errors ✔ | 0 warnings ✔ | 0 notes ✔`, but don't worry too much about NOTES.
+2. Do a full test, which means running `devtools::check()`, the shortcut key for which is `Cmd/Ctrl + Shift + E`. This is the equivalent of `R CMD check`. It validates package structure, documentation, tests, and compliance with CRAN standards. A good result would be `0 errors ✔ | 0 warnings ✔ | 0 notes ✔`, but don't worry too much about NOTES.
 
 3. Test your tutorial from a student's perspective after completing package checks by following this local testing workflow. You can do this without the hassle of needing to push changes to the main repository and re-download the package. Install your local package using `devtools::install()` and when prompted about updating packages, choose to update everything to ensure all dependencies are current. Once installation is complete, run your tutorial with `learnr::run_tutorial("tutorial_name", "package_name")`, replacing the placeholder names with your actual tutorial and package names. This allows you to test the tutorial in a clean environment similar to what students will experience, checking that all code chunks run without errors, instructions are clear, and there's no dependence on objects from your development environment. 
 
