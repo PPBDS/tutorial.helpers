@@ -40,9 +40,7 @@ After starting the tutorial, your Codespace looks something like this:
 include_graphics("images/cs-start-tutorial.png")
 ```
 
-<!-- DK: Too complex? Student already got the tutorial running, which is why they are here! Put a full discussion im getting started.  -->
-
-Running a tutorial by pressing the arrow next to its name creates an HTML output file and forwards it to the port shown in the URL at the bottom. In this image, the URL is `http://127.0.0.1:7361`. If the file has not already opened, `Cmd`-click the URL to open the tutorial. Notice that the `R Tutorial` terminal is busy; other terminal windows remain available for commands.
+<!-- DK: Too complex? Student already got the tutorial running, which is why they are here! Put a full discussion im getting started.  AR: removed. -->
 
 ###
 
@@ -140,58 +138,23 @@ Did you remember to hit the "Run Code" button above? Lots of people forget! You 
 
 ### Exercise 4
 
-Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
-
-<!-- DK: Is --- “R Tutorial” terminal window --- the correct terminology. Either way, add a picture. -->
-
-<!-- Move this till later so that they know about `Ctrl - C` and are familiar with other parts of the panel. -->
-
-* Return to your Codespace and click the "R Tutorial" terminal window.
-
-* Stop the tutorial by pressing `Ctrl + C` in the terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
-
-<!-- DK: Delete this step. -->
-
-* Return to the browser window containing the tutorial. The tutorial should now be grayed out, indicating that it is no longer connected to the running process. Close this window.
-
-* To restart the tutorial, either press the play button next to the "getting-started" tutorial in the sidebar or copy the following command into the terminal and press `Enter`:
-
-<!-- DK: Just the button. -->
-
-```
-Rscript -e "learnr::run_tutorial('getting-started', package = 'tutorial.helpers')"
-```
-
-* This command tells the terminal to run `Rscript`, which calls the `run_tutorial()` function from the `learnr` package.
-
-* Finally, open the tutorial.
-
-
-Now that you have read all the instructions, go ahead and follow them.
-
-### 
-
-Notice that all of your answers to previous questions have been saved. It is not a problem to quit a tutorial. In fact, if you leave a tutorial idle, it will eventually quit automatically.
-
-### Exercise 5
-
-Back in your Codespace, create a new R terminal by pressing the down arrow next to the plus button in the bottom right and selecting "New R terminal."
+Create a new R terminal by pressing the down arrow next to the plus button in the right side of the Panel Toolbar and selecting "New R terminal."
 
 ```{r}
 include_graphics("images/cs-new-R-terminal.png")
 ```
 
-In the new terminal, type `version[['version.string']]` and press `Return` (on Mac) or `Enter` (on Windows). To avoid repeating both terms in every question, we use `Enter` to mean either the `Return` or `Enter` key, as appropriate.
+In the new terminal, type `version[['version.string']]` and press `return` (on Mac) or `enter` (on Windows). To avoid repeating both terms in every question, we use `enter` to mean either the `return` or `enter` key, as appropriate.
 
-<!-- DK: Lower case for `return` and `enter`. -->
+<!-- DK: Lower case for `return` and `enter`. AR: done.-->
 
 **Do not just type the command into the answer box!** You must paste the command into the terminal and then execute the command.
 
-<!-- DK: This is not a great description. No mention of CP/CR. And it stands for copy/paste the command/response. -->
+<!-- DK: This is not a great description. No mention of CP/CR. And it stands for copy/paste the command/response. AR: done. -->
 
-Copy and paste both the command **and** the returned value into this box.
+**C**opy and **P**aste both the **C**ommand *and* the **R**esponse from the terminal into this box. We will abbreviate this instruction in the future as **CP**/**CR**.
 
-```{r exercises-5}
+```{r exercises-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -215,9 +178,9 @@ Your version of R may be more recent, but it should not be older. It is OK if yo
 
 Tutorial workflow will often look like this: we tell you to run a command **in the Terminal**, you run it, and then we ask you to copy and paste both the command itself and the response it returns. Because we ask you to **C**opy/**P**aste the **C**ommand/**R**esponse so often, we usually shorten this instruction to CP/CR.
 
-### Exercise 6
+### Exercise 5
 
-Now press the plus button in the bottom right. This opens a new bash terminal. A bash terminal is a text-based interface where you type commands to tell your computer what to do.
+Now press the plus button in the bottom right. This opens a new bash terminal. A bash terminal is a text-based interface where you type commands to tell your Codespace what to do.
 
 ```{r}
 include_graphics("images/cs-open-bash.png")
@@ -225,11 +188,11 @@ include_graphics("images/cs-open-bash.png")
 
 ###
 
-From the terminal, run `echo $0`. (To "run" a command in the Terminal or the Console means to type the command and then press `Enter`.)
+From the terminal, run `echo $0`. (To "run" a command in the Terminal or the Console means to type the command and then press `enter`.)
 
 CP/CR.
 
-```{r exercises-6}
+```{r exercises-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -243,20 +206,20 @@ question_text(NULL,
 I get:
 
 ````
-@ptweeet ➜ /workspaces/my-repo (main) $ echo $0
+@ppbds-student ➜ /workspaces/codespace-starter $ echo $0
 /bin/bash
-@ptweeet ➜ /workspaces/my-repo (main) $
+@ppbds-student ➜ /workspaces/codespace-starter $
 ````
 
 This means that, in the Terminal, I am using the [Bash shell](https://en.wikipedia.org/wiki/Bash_(Unix_shell)), a Unix-like shell.
 
-### Exercise 7
+### Exercise 6
 
-Let us make the Terminal "sleep" by typing the command `sleep 5` in the Terminal. Hit `Enter`. The `sleep 5` command pauses execution for 5 seconds.
+Let us make the Terminal "sleep" by typing the command `sleep 5` in the Terminal. Hit `enter`. The `sleep 5` command pauses execution for 5 seconds.
 
 CP/CR. 
 
-```{r exercises-7}
+```{r exercises-6}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -268,21 +231,21 @@ question_text(NULL,
 ###
 
 ```
-@ptweeet ➜ /workspaces/my-repo (main) $ sleep 5
-@ptweeet ➜ /workspaces/my-repo (main) $ 
+@ppbds-student ➜ /workspaces/codespace-starter $ sleep 5
+@ppbds-student ➜ /workspaces/codespace-starter $
 ```
 
 We can change the sleep duration using this format: `sleep [number]`. The number you enter is the number of seconds for which the Terminal pauses.
 
-### Exercise 8
+### Exercise 7
 
-Run `sleep 60` in the Terminal. (Again, "run" means to type the command and then press the `Enter` key.) This command makes the Terminal sleep for 60 seconds. To cancel the running `sleep` command, press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
+Run `sleep 60` in the Terminal. (Again, "run" means to type the command and then press the `enter` key.) This command makes the Terminal sleep for 60 seconds. To cancel the running `sleep` command, press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
 
 When you press `Ctrl + C` while `sleep` is running, it immediately terminates the `sleep` command and returns you to the command prompt.
 
 CP/CR.
 
-```{r exercises-8}
+```{r exercises-7}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -294,25 +257,24 @@ question_text(NULL,
 ### 
 
 ````
-@ptweeet ➜ /workspaces/my-repo (main) $ sleep 60
+@ppbds-student ➜ /workspaces/codespace-starter $ sleep 60
 ^C
-@ptweeet ➜ /workspaces/my-repo (main) $ 
+@ppbds-student ➜ /workspaces/codespace-starter $
 ````
 
 `Ctrl + C` can stop any process running in the Terminal.
 
 
-### Exercise 9
+### Exercise 8
 
-<!-- DK: Not on your computer. -->
-
-It is useful to understand where the R process is currently running on your computer.
+<!-- DK: Not on your computer. AR: fixed.-->
+It is useful to understand where the R process is currently running in your Codespace.
 
 In the R terminal that is not running your tutorial, run `getwd()`. This stands for **get** **w**orking **d**irectory, meaning that we want to know the directory in which the R process is currently located.
 
 CP/CR.
 
-```{r exercises-9}
+```{r exercises-8}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -327,20 +289,20 @@ Your answer should look something like:
 
 ````
 R 4.5.3> getwd()
-[1] "/workspaces/my-repo"
-R 4.5.3> 
+[1] "/workspaces/codespace-starter"
+R 4.5.3>
 ````
 
-In an R terminal running inside GitHub Codespaces, `getwd()` prints the current working directory—here showing that R is operating inside your project folder at `/workspaces/my-repo`.
+In an R terminal running inside GitHub Codespaces, `getwd()` prints the current working directory—here showing that R is operating inside your Codespace at `/workspaces/codespace-starter`.
 
 
-### Exercise 10
+### Exercise 9
 
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are simply copies of R commands and their results. Other times, we will ask you to write one or more sentences of prose.
 
 Copy and paste everything from the exercise header above, beginning with "Exercise 10," through the end of this sentence into the answer box below. In other words, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
-```{r exercises-10}
+```{r exercises-9}
 question_text(NULL,
     message = "We will sometimes provide an answer to written questions, as we do here. Other times, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",          
     answer(NULL, 
@@ -350,7 +312,7 @@ question_text(NULL,
     rows = 6)
 ```
 
-### Exercise 11
+### Exercise 10
 
 `show_file()` is a commonly used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file that you have edited.
 
@@ -364,7 +326,7 @@ tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 
 CP/CR.
 
-```{r exercises-11}
+```{r exercises-10}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -375,13 +337,13 @@ question_text(NULL,
 
 ###
 
-```{r exercises-11-test, include = FALSE}
+```{r exercises-10-test, include = FALSE}
 tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 ```
 
 For now, don't worry about what `R.home()` and `file.path()` are doing, although you can read about them by running `?R.home` and `?file.path` at the R prompt. Those details are less important than seeing the intended usage of `show_file()`. 
 
-### Exercise 12
+### Exercise 11
 
 We frequently ask you to `copy` content from an HTML file such as a webpage. Do not worry if what you copy appears messy or loses its formatting; that is perfectly fine. Our main concern is that what you paste contains roughly the information it is supposed to contain.
 
@@ -391,7 +353,7 @@ Go to [the homepage](https://ppbds.github.io/tutorial.helpers/) of the **tutoria
 
 CP/CR.
 
-```{r exercises-12}
+```{r exercises-11}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -414,7 +376,40 @@ About this package
 tutorial.helpers provides functions and RStudio Addins to help you write R tutorials, especially if you follow my advice about the best way to do so. This approach is currently used in several packages, including r4ds.tutorials and positron.tutorials.
 ````
 
-Again, your answer never needs to match ours exactly. 
+Again, your answer never needs to match ours exactly.
+
+### Exercise 12
+
+Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
+
+<!-- DK: Is --- “R Tutorial” terminal window --- the correct terminology. Either way, add a picture. AR: Done-->
+
+<!-- Move this till later so that they know about `Ctrl - C` and are familiar with other parts of the panel. -->
+
+* Return to your Codespace and click the tab titled "R Tutorial" in the Panel.
+
+```{r}
+include_graphics("images/r-tutorial-terminal.png")
+```
+
+* Stop the tutorial by pressing `Ctrl + C` in the terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
+
+<!-- DK: Delete this step. AR: done.-->
+
+* To restart the tutorial, either press the play button next to the "getting-started" tutorial.
+
+<!-- DK: Just the button. AR: fixed. -->
+
+* This command tells the terminal to run `Rscript`, which calls the `run_tutorial()` function from the `learnr` package.
+
+* Finally, open the tutorial.
+
+
+Now that you have read all the instructions, go ahead and follow them.
+
+### 
+
+Notice that all of your answers to previous questions have been saved. It is not a problem to quit a tutorial. In fact, if you leave a tutorial idle, it will eventually quit automatically.
 
 ## Your answers
 ### 
@@ -427,7 +422,7 @@ After clicking the "Download" button, you will be prompted to save a file named 
 
 Unless your instructor tells you otherwise, you should use the default file name, which will usually be of the form `short-name-of-tutorial` + `_answers` + `.html`.
 
-```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```{r your-answers-0, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
 ```
 
 ## Summary
