@@ -475,7 +475,7 @@ The second question in the Introduction is usually:
 
 In your QMD, put `library(tidyverse)` in a new code chunk. Render the file using `Cmd/Ctrl + Shift + K`.
 
-Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| message: false` to remove all the messages in this `setup` chunk. Also, add the following to the YAML header to remove all code echoes from the HTML:
+Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| echo: false` to remove all the messages in this `setup` chunk. Also, add the following to the YAML header to remove all code echoes from the HTML:
 
 ```         
 execute: 
@@ -579,7 +579,7 @@ You answer should look something like this, although your path will be different
 >  
 ```
 
-<!-- XX: If you have downloaded some data, then you might want to create the tibbles that you will use here. (Of course, you also need to create those tibbles in the setup chunk so that any test code which create will run.) -->
+<!-- XX: If you have downloaded some data, then you might want to create the tibbles that you will use here. (Of course, you also need to create those tibbles in the setup chunk so that any test code will run.) -->
 ````
 
 ## Tutorial Topics
@@ -984,7 +984,7 @@ package maintainer. There are three ways to check:
     syntax errors quickly.
 
 2.  Do a full test, which means running `devtools::check()`, the
-    shortcut key for which is `Cmd/Ctrl + Shoft + E`. This is the
+    shortcut key for which is `Cmd/Ctrl + Shift + E`. This is the
     equivalent of `R CMD check`. It validates package structure,
     documentation, tests, and compliance with CRAN standards. A good
     result would be `0 errors ✔ | 0 warnings ✔ | 0 notes ✔`, but don’t
