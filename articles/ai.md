@@ -271,15 +271,14 @@ tutorial is created. The `read_rds()` call is never commented out
 because we always need the `median_age` object.
 
 When designing tutorials which use objects like `median_age`, we
-generally write two exercise code chunks. The first has the student run
-the same code as that which we used to create the object ourselves. This
-won’t work if the student is not connected to the web but, with luck, in
-that case they will get a sensible error message. The second question
-informs the students that we have, behind the scenes, assigned the
-result of the function to an R object. We then ask the student to just
-print out that object. We don’t have them do the assignment themselves,
-not least because we don’t like questions which don’t generate any
-output.
+generally write two code chunks. The first has the student run the same
+code as that which we used to create the object ourselves. This won’t
+work if the student is not connected to the web but, with luck, in that
+case they will get a sensible error message. The second question informs
+the students that we have, behind the scenes, assigned the result of the
+function to an R object. We then ask the student to just print out that
+object. We don’t have them do the assignment themselves, not least
+because we don’t like questions which don’t generate any output.
 
 We use a similar approach with models which can take awhile to fit.
 Example:
@@ -475,7 +474,7 @@ The second question in the Introduction is usually:
 
 In your QMD, put `library(tidyverse)` in a new code chunk. Render the file using `Cmd/Ctrl + Shift + K`.
 
-Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| echo: false` to remove all the messages in this `setup` chunk. Also, add the following to the YAML header to remove all code echoes from the HTML:
+Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| echo: false` to remove all the messages in this setup chunk. Also, add the following to the YAML header to remove all code echoes from the HTML:
 
 ```         
 execute: 
@@ -578,6 +577,8 @@ You answer should look something like this, although your path will be different
  [1] "analysis_files" "analysis.html"  "analysis.qmd"   "data"           "README.md"    
 >  
 ```
+
+###
 
 <!-- XX: If you have downloaded some data, then you might want to create the tibbles that you will use here. (Of course, you also need to create those tibbles in the setup chunk so that any test code will run.) -->
 ````
