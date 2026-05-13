@@ -6,11 +6,11 @@ AI changes everything.
 
 This document describes the best way to write R tutorials using the
 [**learnr**](https://rstudio.github.io/learnr/) package. Prior to the
-rise of AI,
-[this](https://web.archive.org/web/20251008195459/https://ppbds.github.io/tutorial.helpers/articles/instructions.html)
-[was](https://web.archive.org/web/20251008195807/https://ppbds.github.io/tutorial.helpers/articles/books.html)
-the best way to write tutorials. Our purpose is no longer to teach
-students how to code.
+rise of AI, this was the best way to write
+[tutorials](https://web.archive.org/web/20251008195459/https://ppbds.github.io/tutorial.helpers/articles/instructions.html)
+and
+[books](https://web.archive.org/web/20251008195807/https://ppbds.github.io/tutorial.helpers/articles/books.html).
+Our purpose is no longer to teach students how to code.
 
 > *Our purpose is to teach students how to use AI to create.*
 
@@ -180,7 +180,7 @@ question_text(NULL,
 
 ###
 
-```{r exercise-7-test, echo = TRUE}
+```{r exercise-7-test}
 
 ```
 
@@ -188,15 +188,14 @@ question_text(NULL,
 ````
 
 The question will almost always instruct the student to “CP/CR,” often
-after running `show_fle(chunk = "Last")`. Adjust the value of `rows` to
-match the expected length of the pasted output. If the question asks
-student to run some R code, we will generally include a reasonable
-answer in the `test` chunk. This serves two purposes. First, because
-`echo = TRUE`, we show the student that code (and its output) in the
-tutorial. This code should be excellent. We want students to learn from
-our example. Second, the code will be run when we test the tutorial, so
-we can be sure that this code (and, we hope, code like it) will work for
-the student.
+after running `show_file(chunk = "Last")`. Adjust the value of `rows` to
+match the expected length of the pasted output. If the question asks the
+student to run some R code, include that code in the `test` chunk. It
+runs when we test the tutorial, ensuring correctness. Its output — a
+printed tibble, summary statistics, or plot — is shown to students after
+they click Continue, giving them something concrete to check their work
+against. We do not use `echo = TRUE` because, in the age of AI, we
+rarely want to show students code.
 
 ### Knowledge drops
 
@@ -271,14 +270,13 @@ tutorial is created. The `read_rds()` call is never commented out
 because we always need the `median_age` object.
 
 When designing tutorials which use objects like `median_age`, we
-generally write two code chunks. The first has the student run the same
-code as that which we used to create the object ourselves. This won’t
-work if the student is not connected to the web but, with luck, in that
-case they will get a sensible error message. The second question informs
-the students that we have, behind the scenes, assigned the result of the
-function to an R object. We then ask the student to just print out that
-object. We don’t have them do the assignment themselves, not least
-because we don’t like questions which don’t generate any output.
+generally write two questions. The first has the student run the
+download code themselves. The second informs students that we have,
+behind the scenes, already assigned the result to an R object, and asks
+them to print that object. We don’t have them do the assignment
+themselves, since we prefer questions that generate visible output. The
+test chunk then shows that printed output — not the code — so students
+can check their result against ours.
 
 We use a similar approach with models which can take awhile to fit.
 Example:
@@ -646,12 +644,10 @@ students can use to reach that goal, first under our supervision and,
 second, on their own. The path will consist of several stepping stones,
 or stops along the way.
 
-To ensure that students are on the right path with their code, we need
-to provide them with our code that is verified to be correct. Although
-we should not tell students to replace their code with ours at every
-step, if a student is lost, they should be able to refer to our code to
-get back on track. We also want to include our code in test chunks, both
-to show students and to confirm that it works.
+We don’t show students our code because, in the age of AI, professionals
+don’t look at code very often. Instead, we show students the *result* —
+a plot or summary statistics — produced by our correct code. This gives
+students something concrete to check their AI-generated work against.
 
 Consider this example:
 
@@ -679,8 +675,8 @@ question_text(NULL,
 
 ###
 
-```{r, echo = TRUE}
-XX: Insert our excellent code, probably made with the help of AI but also "cleaned up" so that it is concise and provides an excellent example for students to mimic.
+```{r}
+# XX: Insert code that produces the correct result — a plot, summary statistics, or printed tibble. With echo = FALSE (the default), students see only the output, not this code.
 ```
 
 ### 
@@ -688,23 +684,10 @@ XX: Insert our excellent code, probably made with the help of AI but also "clean
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-The R chunk with `echo = TRUE` allows the students to see the code we
-have written within it. This makes it easy for the students to copy and
-paste our code if they need to.
-
-Since `eval = TRUE` is the default argument in an R chunk, the code
-within will automatically be run as well. Students will be able to see
-any output from the code, which can be helpful if the code plots a
-graph. If it is inappropriate or unnecessary to include the output of
-the code, just set `eval = FALSE` explicitly.
-
-In that case, the answer chunk would look like:
-
-```` default
-```{r, echo = TRUE, eval = FALSE}
-
-```
-````
+With `echo = FALSE` (the default), students see only the output of the
+chunk — a plot, printed tibble, or other result — not the code itself.
+If there is no meaningful output to show, omit the test chunk or set
+`eval = FALSE` explicitly.
 
 ## Plotting Questions
 
@@ -712,21 +695,20 @@ Plotting exercises are generally handled with a sequence of four
 questions. Prior to these, the tutorial will probably have the student
 practice gathering, organizing, and cleaning the data.
 
-The first of the three prior questions tells the student to replace the
-current pipe which they have in the QMD with our code. We check that
-they have done so with
+The first of the three prior questions ensures that the student’s data
+matches ours. We show our result — the printed code that produces our
+tibble — in a test chunk, and ask students to copy and paste their own
+pipe and compare. We check their code with
 [`show_file()`](https://ppbds.github.io/tutorial.helpers/reference/show_file.md).
-The purpose of this question is to ensure that the student’s data will
-match our data.
 
 ```` default
 ### Exercise 3
 
-Before creating a plot, we need to ensure that your data matches our data. In the QMD, replace your code from the previous exercise with our code.
+Before creating a plot, we need to ensure that your data matches ours. Run your pipe in the Console and compare your output to the result shown below.
 
 In the Console, run:
 
-```         
+```
 show_file("analysis.qmd", chunk = "Last")
 ```
 
@@ -739,6 +721,12 @@ question_text(NULL,
     try_again_button = "Edit Answer",
     incorrect = NULL,
     rows = 6)
+```
+
+###
+
+```{r xx-first-section-use-sentence-case-3-test}
+# XX: Insert code that prints the tibble students should have at this stage.
 ```
 
 ###
@@ -777,13 +765,7 @@ question_text(NULL,
     rows = 8)
 ```
 
-###
-
-Our code:
-
-```{r, echo = TRUE}
-# x <- ... where the ellipsis are replaced with the code which creates x.
-```
+<!-- AR: In previous question, show table output. Is there anything else to test here? -->
 
 ###
 
@@ -817,9 +799,9 @@ question_text(NULL,
 
 ###
 
-Our code:
+Our result:
 
-```{r, echo=TRUE}
+```{r}
 # x
 ```
 
@@ -849,9 +831,9 @@ their own code, albeit with AI help.
 ```` default
 ### Exercise 6
 
-Ask AI to generate R code that uses `x` to plot a basic graph showing XX ... Mention you want to use the data from `x` and copy/paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
+Ask AI to generate R code that uses `x` to plot a basic graph or calculate and present summary statistics showing XX ... Mention you want to use the data from `x` and copy/paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
 
-Within `labs()`, edit or add a proper title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `Cmd/Ctrl + Shift + K` to ensure that everything works. Make your plot look nice.
+Consider adding a title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `Cmd/Ctrl + Shift + K` to ensure that everything works. Make your plot look nice.
 
 In the Console, run:
 
@@ -872,10 +854,10 @@ question_text(NULL,
 
 ###
 
-Our code:
+Our result:
 
-```{r, echo=TRUE}
-# XX: Make sure your plotting code is good! This will take some time. You had better have a subtitle which provides the take-away message of the plot. AI sometimes gives you too much code, lots of `theme()` stuff and so on. This is no good! In most cases, we are happy with concise, straightforward code. 
+```{r}
+# XX: Insert plotting code. With echo = FALSE (the default), students see only the plot, not this code. Make sure the plot has a subtitle that states the take-away message and uses clean, concise code.
 ```
 
 ###
