@@ -765,7 +765,7 @@ question_text(NULL,
     rows = 8)
 ```
 
-<!-- AR: In previous question, show table output. Is there anything else to test here? -->
+<!-- XX: Show x here. -->
 
 ###
 

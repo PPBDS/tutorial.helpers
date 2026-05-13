@@ -82,9 +82,7 @@ And, after they hit Continue, show (calculate on the fly) the summary statistics
 
 No need for nearly as much testing.
 
---><!-- AR: When it comes to creating summary statistics and plots should we motivate this with something? Questions, for example: What's the relationship between these two variables? What's the distribution of values of some variable across different categories of another.
-
-In a lot of r4ds tutorials, we have a data set that we're from which we create a visualization. I feel like providing some more framing or motivation helps with giving students more of a sense of how / what to check. --><section class="level2"><h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+--><section class="level2"><h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>AI changes everything.</p>
 <p>This document describes the best way to write R tutorials using the <a href="https://rstudio.github.io/learnr/" class="external-link"><strong>learnr</strong></a> package. Prior to the rise of AI, this was the best way to write <a href="https://web.archive.org/web/20251008195459/https://ppbds.github.io/tutorial.helpers/articles/instructions.html">tutorials</a> and <a href="https://web.archive.org/web/20251008195807/https://ppbds.github.io/tutorial.helpers/articles/books.html">books</a>. Our purpose is no longer to teach students how to code.</p>
@@ -175,7 +173,6 @@ In a lot of r4ds tutorials, we have a data set that we're from which we create a
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>median_age &lt;- read_rds("data/median_age.rds")</span></code></pre></div>
 <p>The first two commands download data and save it to an RDS file in the <code>data</code> directory.</p>
 <p>This code assumes that you are located in the same directory as the <code>tutorial.Rmd</code> file. You only run those commands once, and then you comment them out because you don’t want them re-run each time the tutorial is created. The <code>read_rds()</code> call is never commented out because we always need the <code>median_age</code> object.</p>
-<!-- DK: Now, we don't show the "testing" code. We just show the result. AR: Done. -->
 <p>When designing tutorials which use objects like <code>median_age</code>, we generally write two questions. The first has the student run the download code themselves. The second informs students that we have, behind the scenes, already assigned the result to an R object, and asks them to print that object. We don’t have them do the assignment themselves, since we prefer questions that generate visible output. The test chunk then shows that printed output — not the code — so students can check their result against ours.</p>
 <p>We use a similar approach with models which can take awhile to fit. Example:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit_gauss &lt;- brm(formula = biden ~ 1,</span>
@@ -397,22 +394,11 @@ In a lot of r4ds tutorials, we have a data set that we're from which we create a
 <span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>###</span>
 <span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
-<!-- AR: How do we set a goal for a topic?
-
-In many tutorials it seems like we highlight skills to learn, like downloading data and using parquet, in the first paragraph. Here, the data set is also introduced. In the next paragraph, we highlight certain functions to be used / learned.
-
-Should the goal be to answer some sort of question, using these skills? Seems more motivating to me.
-
- -->
 <p>The meat of a Topic generally involves asking AI to create a pipe which accomplishes some goal. The end of a Topic always finishes up with a plot. The last four questions set up and then guide the student to creating that plot. If you want the student to mimic a plot, you can place it in the <code>images</code> subdirectory and then use <code>knitr::include_graphics("images/plot.png")</code> to show it to students.</p>
 <p>To teach students about topic X, we first need to decide the final destination. What do we want students to be able to do on their own after completing the tutorial? For us, this will almost always be a plot. Having envisioned this goal, we need to create a “path” which students can use to reach that goal, first under our supervision and, second, on their own. The path will consist of several stepping stones, or stops along the way.</p>
 <!-- DK: We should insert some discussion about creating a bunch of different pipes. The below is an OK start for this discussion. Add a code example . . . -->
-<!-- AR: Below, what is meant by "show students"? DK: Delete the below. Replace with: We don't show students our code because, in the age of AI, professionals don't look at code very often.
-
-AR: No longer showing code to create outputs, just the outputs. -->
 <p>We don’t show students our code because, in the age of AI, professionals don’t look at code very often. Instead, we show students the <em>result</em> — a plot or summary statistics — produced by our correct code. This gives students something concrete to check their AI-generated work against.</p>
 <p>Consider this example:</p>
-<!-- AR: Would it be helpful to include text after the plot / summary statistic output but before the knowledge drop, that highlights certain checks a student should do to make sure that their output is good enough and that they should continue the conversation with AI to get a better result? -->
 <div class="sourceCode" id="cb15"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>### Exercise 6</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>Using your favorite AI, prompt it to generate R code that ... Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.</span>
@@ -508,7 +494,7 @@ How do we check to make sure their data manipulation is correct? Look at code? T
 <span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    rows = 8)</span>
 <span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>```</span>
 <span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>&lt;!-- AR: In previous question, show table output. Is there anything else to test here? --&gt;</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Show x here. --&gt;</span>
 <span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>###</span>
 <span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a></span>
