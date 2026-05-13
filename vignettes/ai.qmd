@@ -506,13 +506,16 @@ With `echo = FALSE` (the default), students see only the output of the chunk —
 
 <!-- AR: Should the cleaned data be checked once per topic, or every time before each plotting / summary stats questions? 
 
-If once per topic, then move this into the Topics section? -->
+If once per topic, then move this into the Topics section? 
+
+How do we check to make sure their data manipulation is correct? Look at code? Table? Plots? Need to do that here?
+-->
 
 <!-- AR: How many plotting / summary stats questions to ask?  -->
 
 Plotting exercises are generally handled with a sequence of four questions. Prior to these, the tutorial will probably have the student practice gathering, organizing, and cleaning the data. 
 
-The first of the three prior questions ensures that the student's data matches ours. We show our result — the printed tibble — in a test chunk, and ask students to run their own pipe and compare. We check their code with `show_file()`.
+The first of the three prior questions ensures that the student's data matches ours. We show our result — the printed code that produces our tibble — in a test chunk, and ask students to copy and paste their own pipe and compare. We check their code with `show_file()`.
 
 
 ````{verbatim}
