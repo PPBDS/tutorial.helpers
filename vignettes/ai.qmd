@@ -20,11 +20,6 @@ No need for nearly as much testing.
 
 -->
 
-<!-- AR: When it comes to creating summary statistics and plots should we motivate this with something? Questions, for example: What's the relationship between these two variables? What's the distribution of values of some variable across different categories of another. 
-
-In a lot of r4ds tutorials, we have a data set that we're from which we create a visualization. I feel like providing some more framing or motivation helps with giving students more of a sense of how / what to check. -->
-
-
 
 ## Introduction
 
@@ -162,8 +157,6 @@ median_age <- read_rds("data/median_age.rds")
 The first two commands download data and save it to an RDS file in the `data` directory. 
 
 This code assumes that you are located in the same directory as the `tutorial.Rmd` file. You only run those commands once, and then you comment them out because you don't want them re-run each time the tutorial is created. The `read_rds()` call is never commented out because we always need the `median_age` object.
-
-<!-- DK: Now, we don't show the "testing" code. We just show the result. AR: Done. -->
 
 When designing tutorials which use objects like `median_age`, we generally write two questions. The first has the student run the download code themselves. The second informs students that we have, behind the scenes, already assigned the result to an R object, and asks them to print that object. We don't have them do the assignment themselves, since we prefer questions that generate visible output. The test chunk then shows that printed output — not the code — so students can check their result against ours.
 
@@ -442,30 +435,15 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-<!-- AR: How do we set a goal for a topic?
-
-In many tutorials it seems like we highlight skills to learn, like downloading data and using parquet, in the first paragraph. Here, the data set is also introduced. In the next paragraph, we highlight certain functions to be used / learned.
-
-Should the goal be to answer some sort of question, using these skills? Seems more motivating to me.
-
- -->
-
 The meat of a Topic generally involves asking AI to create a pipe which accomplishes some goal. The end of a Topic always finishes up with a plot. The last four questions set up and then guide the student to creating that plot. If you want the student to mimic a plot, you can place it in the `images` subdirectory and then use `knitr::include_graphics("images/plot.png")` to show it to students.
 
 To teach students about topic X, we first need to decide the final destination. What do we want students to be able to do on their own after completing the tutorial? For us, this will almost always be a plot. Having envisioned this goal, we need to create a "path" which students can use to reach that goal, first under our supervision and, second, on their own. The path will consist of several stepping stones, or stops along the way.
 
 <!-- DK: We should insert some discussion about creating a bunch of different pipes. The below is an OK start for this discussion. Add a code example . . . -->
 
-<!-- AR: Below, what is meant by "show students"? DK: Delete the below. Replace with: We don't show students our code because, in the age of AI, professionals don't look at code very often. 
-
-AR: No longer showing code to create outputs, just the outputs. -->
-
 We don't show students our code because, in the age of AI, professionals don't look at code very often. Instead, we show students the *result* — a plot or summary statistics — produced by our correct code. This gives students something concrete to check their AI-generated work against.
 
 Consider this example:
-
-<!-- AR: Would it be helpful to include text after the plot / summary statistic output but before the knowledge drop, that highlights certain checks a student should do to make sure that their output is good enough and that they should continue the conversation with AI to get a better result? -->
-
 
 ````{verbatim}
 ### Exercise 6
@@ -577,7 +555,7 @@ question_text(NULL,
     rows = 8)
 ```
 
-<!-- AR: In previous question, show table output. Is there anything else to test here? -->
+<!-- XX: Show x here. -->
 
 ###
 
