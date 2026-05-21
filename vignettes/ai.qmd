@@ -237,24 +237,28 @@ Students need some background in order to complete these sorts of tutorials, som
 
 Always begin by having students set up a repo and a Quarto document to work in. Again, you must replace `XX` with something sensible and usually different from the other `XX`'s. So, in the below example, the name of the repo and the title of the QMD will be different even though we hold their places with `XX` in both cases.
 
+<!-- AR: Update render flow using Live Server and `quarto render` instead of preview? -->
+
 ````{verbatim}
 ### Exercise 1
 
-You should already be in a repo named `XX`. If not, create a that repo on GitHub and connect to wherever you are working. 
+Create a new repo using `codespace-starter` as a template and name it `r4ds-1`.
 
-You need two R Terminals: this one for running the tutorial and one for writing your code and interacting with R.
+If you haven't already, open the `r4ds-1` repo on GitHub and create a Codespace from it.
 
-Create a new Quarto document. Provide a title -- `"XX"` -- and an author (you). Save the file as `analysis.qmd`. Render the document. 
+You need two R Terminals: one for running this tutorial and one for your exercises.
+
+Create a new Quarto Document and save it as `analysis.qmd`. Add a YAML header at the top with a title (`"Analyzing the Billboard 100"`) and your name as author. Render the document using `Cmd/Ctrl + Shift + K`.
 
 Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file(".gitignore")
 ```
 
-If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the Console.
+If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the R Terminal.
 
 CP/CR.
 
@@ -287,7 +291,7 @@ The second question in the Introduction is usually:
 
 In your QMD, put `library(tidyverse)` in a new code chunk. Render the file using `Cmd/Ctrl + Shift + K`.
 
-Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| echo: false` to remove all the messages in this setup chunk. Also, add the following to the YAML header to remove all code echoes from the HTML:
+Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| message: false` to remove all the messages in this setup chunk. Also, add the following to the YAML header to remove all code echoes from the HTML:
 
 ```         
 execute: 
@@ -596,10 +600,6 @@ Our result:
 ````
 
 This also reminds students that they will often need to tell AI the variables in `x`, most easily by just copy/pasting the top of `x` into the AI interface.
-
-<!-- AR: Combine questions 4 (cache tibble and save to `x`) and 5 (view `x`, compare with that in tutorial) below maybe also with 3 (compare working tibble to one in tutorial) above? Fewer knowledge drops, but then it's a single, verifiable question: Did you make the correct tibble and assign it to x? The test is whether x is the correct tibble.
-
-Replace with more plots and summary stats questions? Could create twice as many plots in the same number of questions. -->
 
 Could these questions be combined into one? Probably. But spreading things has two advantages. First, it ensures that even the weaker students do not get lost. Second, it provides us with more opportunities to drop some knowledge. 
 
