@@ -239,8 +239,6 @@ Students need some background in order to complete these sorts of tutorials, som
 
 Always begin by having students set up a repo and a Quarto document to work in. Again, you must replace `XX` with something sensible and usually different from the other `XX`'s. So, in the below example, the name of the repo and the title of the QMD will be different even though we hold their places with `XX` in both cases.
 
-<!-- AR: Update render flow using Live Server and `quarto render` instead of preview? -->
-
 ````{verbatim}
 ### Exercise 1
 
@@ -250,7 +248,9 @@ If you haven't already, open the `r4ds-1` repo on GitHub and create a Codespace 
 
 You need two R Terminals: one for running this tutorial and one for your exercises.
 
-Create a new Quarto Document and save it as `analysis.qmd`. Add a YAML header at the top with a title (`"Analyzing the Billboard 100"`) and your name as author. Render the document using `Cmd/Ctrl + Shift + K`.
+Create a new Quarto Document and save it as `analysis.qmd`. Add a YAML header at the top with a title (`"Analyzing the Billboard 100"`) and your name as author. 
+
+Render the document by running `quarto render` in the bash Terminal. Open the rendered `analysis.html` file in a new tab by right clicking it in the File Explorer and selecting "Open with Live Server". When you run `quarto render` from now on that tab will be updated with the newly rendered file.
 
 Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.
 
@@ -291,7 +291,7 @@ The second question in the Introduction is usually:
 ````{verbatim}
 ### Exercise 2
 
-In your QMD, put `library(tidyverse)` in a new code chunk. Render the file using `Cmd/Ctrl + Shift + K`.
+In your QMD, put `library(tidyverse)` in a new code chunk. Render the file by running `quarto render` in the bash Terminal.
 
 Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| message: false` to remove all the messages in this setup chunk. Also, add the following to the YAML header to remove all code echoes from the HTML:
 
@@ -300,7 +300,7 @@ execute:
   echo: false
 ```
 
-Using `Cmd/Ctrl + Shift + K`, render the file again. Only the title and author should appear in the HTML.
+Render the file again, using `quarto render`. Only the title and author should appear in the HTML.
 
 In the Console, run:
 
@@ -540,7 +540,7 @@ The second question tells the student to, in the QMD, assign the result of the p
 
 Within the latest code chunk, add the option: `#| cache: true`. Assign the result of the pipe to `x`. 
 
-`Cmd/Ctrl + Shift + K`. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.
+Run `quarto render` in the bash Terminal. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.
 
 If you have not done so already, you should add `analysis_cache` to the `.gitginore`. The content of the cache file does not belong on GitHub.
 
@@ -610,7 +610,7 @@ Now, we can move on to the plotting question. In the age of AI, students will ha
 
 Ask AI to generate R code that uses `x` to plot a basic graph or calculate and present summary statistics showing XX ... Mention you want to use the data from `x`. If using a chat interface copy/paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
 
-Consider adding a title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `Cmd/Ctrl + Shift + K` to ensure that everything works. Make your plot look nice.
+Consider adding a title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `quarto render` to ensure that everything works. Make your plot look nice.
 
 In the Console, run:
 
@@ -660,7 +660,7 @@ The last three questions are fairly self-explanatory.
 ````{verbatim}
 ### Exercise 1
 
-`Cmd/Ctrl + Shift + K` to ensure that everything works.  The resulting HTML page should be attractive, showing clean versions of your plot(s).
+Run `quarto render` to ensure that everything works.  The resulting HTML page should be attractive, showing clean versions of your plot(s).
 
 At the Console, run:
 
