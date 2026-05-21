@@ -688,26 +688,6 @@ question_text(NULL,
 ````{verbatim}
 ### Exercise 2
 
-Commit and push all your files. Copy/paste the URL to your Github repo.
-
-```{r summary-2}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
-```
-
-### 
-
-<!-- XX: Insert a knowledge drop related to this project. -->
-````
-
-
-````{verbatim}
-### Exercise 3
-
 Publish your rendered QMD to GitHub Pages. In the Terminal --- not the Console! --- run:
 
 ```
@@ -716,13 +696,34 @@ quarto publish gh-pages analysis.qmd
 
 Copy/paste the resulting URL below.
 
-```{r summary-3}
+```{r summary-2}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
 	rows = 1)
+```
+
+### 
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+
+````
+
+
+````{verbatim}
+### Exercise 3
+
+Commit and push all your files. Copy/paste the URL to your Github repo.
+
+```{r summary-3}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
 ```
 
 ### 
