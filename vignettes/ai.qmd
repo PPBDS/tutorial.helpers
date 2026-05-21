@@ -20,6 +20,8 @@ No need for nearly as much testing.
 
 -->
 
+<!-- AR: How should we expect students to be using AI for these tutorials? Chat, CLI, Agents? Should this doc just be tool agnostic? -->
+
 
 ## Introduction
 
@@ -443,7 +445,10 @@ The meat of a Topic generally involves asking AI to create a pipe which accompli
 
 To teach students about topic X, we first need to decide the final destination. What do we want students to be able to do on their own after completing the tutorial? For us, this will almost always be a plot. Having envisioned this goal, we need to create a "path" which students can use to reach that goal, first under our supervision and, second, on their own. The path will consist of several stepping stones, or stops along the way.
 
-<!-- DK: We should insert some discussion about creating a bunch of different pipes. The below is an OK start for this discussion. Add a code example . . . -->
+<!-- DK: We should insert some discussion about creating a bunch of different pipes. The below is an OK start for this discussion. Add a code example . . . 
+
+AR: I'm not sure what is meant by this comment.
+-->
 
 We don't show students our code because, in the age of AI, professionals don't look at code very often. Instead, we show students the *result* — a plot or summary statistics — produced by our correct code. This gives students something concrete to check their AI-generated work against.
 
@@ -452,7 +457,7 @@ Consider this example:
 ````{verbatim}
 ### Exercise 6
 
-Using your favorite AI, prompt it to generate R code that ... Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
+Prompt AI to generate R code that ... Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
 
 In the Console, run:
 
@@ -486,16 +491,9 @@ With `echo = FALSE` (the default), students see only the output of the chunk —
 
 ## Plotting Questions
 
-<!-- AR: Should the cleaned data be checked once per topic, or every time before each plotting / summary stats questions? 
-
-If once per topic, then move this into the Topics section? 
-
-How do we check to make sure their data manipulation is correct? Look at code? Table? Plots? Need to do that here?
--->
-
-<!-- AR: How many plotting / summary stats questions to ask?  -->
-
 Plotting exercises are generally handled with a sequence of four questions. Prior to these, the tutorial will probably have the student practice gathering, organizing, and cleaning the data. 
+
+<!-- AR: This seems like a reasonable place to keep code. So students can be totally sure and copy and paste if lost. -->
 
 The first of the three prior questions ensures that the student's data matches ours. We show our result — the printed code that produces our tibble — in a test chunk, and ask students to copy and paste their own pipe and compare. We check their code with `show_file()`.
 
@@ -599,16 +597,18 @@ Our result:
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-This also reminds students that they will often need to tell AI the variables in `x`, most easily by just copy/pasting the top of `x` into the AI interface.
+<!-- AR: How relevant is this below paragraph given how students are using AI? -->
+
+This also reminds students that they will often need to tell AI the variables in `x`, if they are using a chat interface, most easily by just copy/pasting the top of `x`.
 
 Could these questions be combined into one? Probably. But spreading things has two advantages. First, it ensures that even the weaker students do not get lost. Second, it provides us with more opportunities to drop some knowledge. 
 
-Now, we can move on to the plotting question. In the age of AI, students will have AI write code for their plot. They will do that while specifying that their data is `x` from earlier. The student will add their new code to a new code cell, and we check that they have done so with `show_file()`. The purpose of this question is to ensure that the student has generated their own code, albeit with AI help.
+Now, we can move on to the plotting question. In the age of AI, students will have AI write code for their plot. They will do that while specifying that their data is `x` from earlier. The student will add their new code to a new code cell, and we check that they have done so with `show_file()`. The purpose of this question is to ensure that the student has generated their own code.
 
 ````{verbatim}
 ### Exercise 6
 
-Ask AI to generate R code that uses `x` to plot a basic graph or calculate and present summary statistics showing XX ... Mention you want to use the data from `x` and copy/paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
+Ask AI to generate R code that uses `x` to plot a basic graph or calculate and present summary statistics showing XX ... Mention you want to use the data from `x`. If using a chat interface copy/paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
 
 Consider adding a title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `Cmd/Ctrl + Shift + K` to ensure that everything works. Make your plot look nice.
 
