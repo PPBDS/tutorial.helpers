@@ -642,6 +642,8 @@ Our result:
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
+Create a few exercises where students iteratively improve a plot. Perhaps adding features and themes. Since students are using AI to generate plots, they can make more of them. They need lots of practice evaluating and improving AI outputs.
+
 ## Tutorial Summary
 
 Once you have completed one or two Topics, it is time for the Summary section.
