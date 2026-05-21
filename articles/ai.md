@@ -415,21 +415,25 @@ we hold their places with `XX` in both cases.
 ```` default
 ### Exercise 1
 
-You should already be in a repo named `XX`. If not, create a that repo on GitHub and connect to wherever you are working. 
+Create a new repo using `codespace-starter` as a template and name it `r4ds-1`.
 
-You need two R Terminals: this one for running the tutorial and one for writing your code and interacting with R.
+If you haven't already, open the `r4ds-1` repo on GitHub and create a Codespace from it.
 
-Create a new Quarto document. Provide a title -- `"XX"` -- and an author (you). Save the file as `analysis.qmd`. Render the document. 
+You need two R Terminals: one for running this tutorial and one for your exercises.
+
+Create a new Quarto Document and save it as `analysis.qmd`. Add a YAML header at the top with a title (`"Analyzing the Billboard 100"`) and your name as author. 
+
+Render the document by running `quarto render` in the bash Terminal. Open the rendered `analysis.html` file in a new tab by right clicking it in the File Explorer and selecting "Open with Live Server". When you run `quarto render` from now on that tab will be updated with the newly rendered file.
 
 Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file(".gitignore")
 ```
 
-If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the Console.
+If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the R Terminal.
 
 CP/CR.
 
@@ -470,16 +474,16 @@ The second question in the Introduction is usually:
 ```` default
 ### Exercise 2
 
-In your QMD, put `library(tidyverse)` in a new code chunk. Render the file using `Cmd/Ctrl + Shift + K`.
+In your QMD, put `library(tidyverse)` in a new code chunk. Render the file by running `quarto render` in the bash Terminal.
 
-Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| echo: false` to remove all the messages in this setup chunk. Also, add the following to the YAML header to remove all code echoes from the HTML:
+Notice that the file does not look good because the code is visible and there are annoying messages. To take care of this, add `#| message: false` to remove all the messages in this setup chunk. Also, add the following to the YAML header to remove all code echoes from the HTML:
 
 ```         
 execute: 
   echo: false
 ```
 
-Using `Cmd/Ctrl + Shift + K`, render the file again. Only the title and author should appear in the HTML.
+Render the file again, using `quarto render`. Only the title and author should appear in the HTML.
 
 In the Console, run:
 
@@ -654,7 +658,7 @@ Consider this example:
 ```` default
 ### Exercise 6
 
-Using your favorite AI, prompt it to generate R code that ... Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
+Prompt AI to generate R code that ... Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
 
 In the Console, run:
 
@@ -748,7 +752,7 @@ of the pipe to a new variable, often `x`. We then tell the student to
 
 Within the latest code chunk, add the option: `#| cache: true`. Assign the result of the pipe to `x`. 
 
-`Cmd/Ctrl + Shift + K`. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.
+Run `quarto render` in the bash Terminal. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.
 
 If you have not done so already, you should add `analysis_cache` to the `.gitginore`. The content of the cache file does not belong on GitHub.
 
@@ -811,8 +815,8 @@ Our result:
 ````
 
 This also reminds students that they will often need to tell AI the
-variables in `x`, most easily by just copy/pasting the top of `x` into
-the AI interface.
+variables in `x`, if they are using a chat interface, most easily by
+just copy/pasting the top of `x`.
 
 Could these questions be combined into one? Probably. But spreading
 things has two advantages. First, it ensures that even the weaker
@@ -826,14 +830,14 @@ their new code to a new code cell, and we check that they have done so
 with
 [`show_file()`](https://ppbds.github.io/tutorial.helpers/reference/show_file.md).
 The purpose of this question is to ensure that the student has generated
-their own code, albeit with AI help.
+their own code.
 
 ```` default
 ### Exercise 6
 
-Ask AI to generate R code that uses `x` to plot a basic graph or calculate and present summary statistics showing XX ... Mention you want to use the data from `x` and copy/paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
+Ask AI to generate R code that uses `x` to plot a basic graph or calculate and present summary statistics showing XX ... Mention you want to use the data from `x`. If using a chat interface copy/paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
 
-Consider adding a title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `Cmd/Ctrl + Shift + K` to ensure that everything works. Make your plot look nice.
+Consider adding a title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `quarto render` to ensure that everything works. Make your plot look nice.
 
 In the Console, run:
 
@@ -865,6 +869,11 @@ Our result:
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
+Create a few exercises where students iteratively improve a plot.
+Perhaps adding features and themes. Since students are using AI to
+generate plots, they can make more of them. They need lots of practice
+evaluating and improving AI outputs.
+
 ## Tutorial Summary
 
 Once you have completed one or two Topics, it is time for the Summary
@@ -882,7 +891,7 @@ The last three questions are fairly self-explanatory.
 ```` default
 ### Exercise 1
 
-`Cmd/Ctrl + Shift + K` to ensure that everything works.  The resulting HTML page should be attractive, showing clean versions of your plot(s).
+Run `quarto render` to ensure that everything works.  The resulting HTML page should be attractive, showing clean versions of your plot(s).
 
 At the Console, run:
 
@@ -909,7 +918,13 @@ question_text(NULL,
 ```` default
 ### Exercise 2
 
-Commit and push all your files. Copy/paste the URL to your Github repo.
+Publish your rendered QMD to GitHub Pages. In the Terminal --- not the Console! --- run:
+
+```
+quarto publish gh-pages analysis.qmd
+```
+
+Copy/paste the resulting URL below.
 
 ```{r summary-2}
 question_text(NULL,
@@ -917,7 +932,7 @@ question_text(NULL,
     allow_retry = TRUE,
     try_again_button = "Edit Answer",
     incorrect = NULL,
-    rows = 3)
+    rows = 1)
 ```
 
 ### 
@@ -928,13 +943,7 @@ question_text(NULL,
 ```` default
 ### Exercise 3
 
-Publish your rendered QMD to GitHub Pages. In the Terminal --- not the Console! --- run:
-
-```
-quarto publish gh-pages analysis.qmd
-```
-
-Copy/paste the resulting URL below.
+Commit and push all your files. Copy/paste the URL to your Github repo.
 
 ```{r summary-3}
 question_text(NULL,
@@ -942,7 +951,7 @@ question_text(NULL,
     allow_retry = TRUE,
     try_again_button = "Edit Answer",
     incorrect = NULL,
-    rows = 1)
+    rows = 3)
 ```
 
 ### 
