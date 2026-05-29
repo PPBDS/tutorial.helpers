@@ -148,6 +148,7 @@ In the new terminal, type `version[['version.string']]` and press `return` (on M
 
 **C**opy and **P**aste both the **C**ommand *and* the **R**esponse from the terminal into this box. We will abbreviate this instruction in the future as **CP**/**CR**.
 
+<!-- HK: Exercise 4 says the R version "should not be older" than the example, but the standard codespace may have an older R version -->
 ```{r exercises-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
@@ -295,6 +296,7 @@ Tutorials can include written responses. You have already seen several examples.
 
 Copy and paste everything from the exercise header above, beginning with "Exercise 10," through the end of this sentence into the answer box below. In other words, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
+<!-- HK: Exercise 9 says to copy "Exercise 10" header but the instructions say "above" when Exercise 10 is actually below -->
 ```{r exercises-9}
 question_text(NULL,
     message = "We will sometimes provide an answer to written questions, as we do here. Other times, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",          

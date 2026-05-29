@@ -399,7 +399,7 @@ Although the *Tidyverse* includes hundreds of commands for data manipulation, th
 
 Let's warm up by examining the `gss_cat` tibble from the **forcats** package. Since **forcats** is a core **tidyverse** package, you have already loaded it. Type `gss_cat` and hit "Run Code."
 
-Instead of using the Console, we will be doing the exercises in this section using excercise blocks.
+Instead of using the Console, we will be doing the exercises in this section using exercise blocks.
 
 ```{r pipes-and-plots-1, exercise = TRUE}
 
@@ -439,7 +439,7 @@ Note that there are missing values in some columns. The word `NA` stands for "No
 
 ### Exercise 3
 
-Pipe `gss_cat` to `drop_na()`. This function removes rows with missing values.  The pipe symbol --- `->` --- allows us to chain R commands together, one after the other, with each one connected to the next with the pipe symbol. In this case, we want:
+Pipe `gss_cat` to `drop_na()`. This function removes rows with missing values.  The pipe symbol --- `|>` --- allows us to chain R commands together, one after the other, with each one connected to the next with the pipe symbol. In this case, we want:
 
 ```
 gss_cat |> 
@@ -625,6 +625,7 @@ Got to respect someone who watches TV 24 hours a day!
 
 Let's make a plot. Copy the previous code, and pipe to `ggplot()`. Set `aes(x = age, y = tvhours)`.
 
+<!-- HK: Exercises 10, 11, and 12 hit the time limit error when running the full pipe chain. Consider breaking into smaller steps or increasing the time limit -->
 ```{r pipes-and-plots-10, exercise = TRUE}
 
 ```
@@ -735,7 +736,7 @@ Note that the code in the exercise block is not saved. If you want to save the c
 ## Generative AI
 ###
 
-Gneerative AI --- tools like [ChatGPT](https://chat.openai.com/), [Grok](https://x.ai/), [Claude](https://claude.ai/), [DeepSeek](https://www.deepseek.com/en) and so on
+Generative AI --- tools like [ChatGPT](https://chat.openai.com/), [Grok](https://x.ai/), [Claude](https://claude.ai/), [DeepSeek](https://www.deepseek.com/en) and so on
 --- are the future, of data science and everything else. The more you use these tools, the better off you will be. Unfortunately, the tools are changing so much that it is hard for a tutorial like this to stay up-to-date. This section provides some general advice and practice exercises.
 
 ### Exercise 1
