@@ -366,7 +366,7 @@ x
 Now that `x` has been defined in the R Terminal, it is available for your use. Above, we just print it out. But we could also use it in other calculations, i.e., `x + 5`.
 
 
-## Pipes and plots
+## Pipes
 ### 
 
 Although the *Tidyverse* includes hundreds of commands for data manipulation, the most important are `filter()`, `select()`, `arrange()`, `mutate()`, and `summarize()`. 
@@ -377,15 +377,15 @@ Let's warm up by examining the `gss_cat` tibble from the **forcats** package. Si
 
 Instead of using the R Terminal, we will be doing the exercises in this section using exercise blocks.
 
-```{r pipes-and-plots-1, exercise = TRUE}
+```{r pipes-1, exercise = TRUE}
 
 ```
 
-```{r pipes-and-plots-1-hint-1, eval = FALSE}
+```{r pipes-1-hint-1, eval = FALSE}
 ...
 ```
 
-```{r pipes-and-plots-1-test, include = FALSE}
+```{r pipes-1-test, include = FALSE}
 gss_cat
 ```
 
@@ -397,15 +397,15 @@ As the help page notes, `gss_cat` is a "sample of categorical variables from the
 
 Run `summary()` on `gss_cat`. 
 
-```{r pipes-and-plots-2, exercise = TRUE}
+```{r pipes-2, exercise = TRUE}
 
 ```
 
-```{r pipes-and-plots-2-hint-1, eval = FALSE}
+```{r pipes-2-hint-1, eval = FALSE}
 summary(...)
 ```
 
-```{r pipes-and-plots-2-test, include = FALSE}
+```{r pipes-2-test, include = FALSE}
 summary(gss_cat)
 ```
 
@@ -422,16 +422,16 @@ gss_cat |>
   drop_na()
 ```
 
-```{r pipes-and-plots-3, exercise = TRUE}
+```{r pipes-3, exercise = TRUE}
 
 ```
 
-```{r pipes-and-plots-3-hint-1, eval = FALSE}
+```{r pipes-3-hint-1, eval = FALSE}
 ... |> 
   drop_na()
 ```
 
-```{r pipes-and-plots-3-test, include = FALSE}
+```{r pipes-3-test, include = FALSE}
 gss_cat |> 
   drop_na()
 ```
@@ -446,16 +446,16 @@ We could achieve the same result by running `drop_na(gss_cat)`. The symbol `|>` 
 
 Pipe `gss_cat` to `filter()`.  Within `filter()`, use the argument `year == 2014`. 
 
-```{r pipes-and-plots-4, exercise = TRUE}
+```{r pipes-4, exercise = TRUE}
 
 ```
 
-```{r pipes-and-plots-4-hint-1, eval = FALSE}
+```{r pipes-4-hint-1, eval = FALSE}
 gss_cat |> 
   ...(year == 2014)
 ```
 
-```{r pipes-and-plots-4-test, include = FALSE}
+```{r pipes-4-test, include = FALSE}
 gss_cat |> 
   filter(year == 2014)
 ```
@@ -470,18 +470,18 @@ The resulting tibble has the same number of columns as `gss_cat` because `filter
 
 Continue the code and pipe with `select()`, using the argument `age, marital, race, relig, tvhours`. Note that you do not need to retype the code from the last exercise. You can just click the "Copy Code" button.
 
-```{r pipes-and-plots-5, exercise = TRUE}
+```{r pipes-5, exercise = TRUE}
 
 ```
 
 <button onclick = "transfer_code(this)">Copy previous code</button>
 
-```{r pipes-and-plots-5-hint-1, eval = FALSE}
+```{r pipes-5-hint-1, eval = FALSE}
 ... |> 
   select(age, ..., race, ..., tvhours)
 ```
 
-```{r pipes-and-plots-5-test, include = FALSE}
+```{r pipes-5-test, include = FALSE}
 gss_cat |> 
   filter(year == 2014) |> 
   select(age, marital, race, relig, tvhours)
@@ -495,18 +495,18 @@ Note how the Hint only gives the most recent line of the pipe. Because `select()
 
 Copy previous code. Continue the pipe with `summary()`
 
-```{r pipes-and-plots-6, exercise = TRUE}
+```{r pipes-6, exercise = TRUE}
 
 ```
 
 <button onclick = "transfer_code(this)">Copy previous code</button>
 
-```{r pipes-and-plots-6-hint-1, eval = FALSE}
+```{r pipes-6-hint-1, eval = FALSE}
 ... |> 
   summary()
 ```
 
-```{r pipes-and-plots-6-test, include = FALSE}
+```{r pipes-6-test, include = FALSE}
 gss_cat |> 
   filter(year == 2014) |> 
   select(age, marital, race, relig, tvhours) |>
@@ -521,18 +521,18 @@ Note that there are missing values in the `tvhours` column. Let's remove them.
 
 Copy previous code. Replace the `summary()` with `drop_na()`.
 
-```{r pipes-and-plots-7, exercise = TRUE}
+```{r pipes-7, exercise = TRUE}
 
 ```
 
 <button onclick = "transfer_code(this)">Copy previous code</button>
 
-```{r pipes-and-plots-7-hint-1, eval = FALSE}
+```{r pipes-7-hint-1, eval = FALSE}
 ... |> 
   drop_na()
 ```
 
-```{r pipes-and-plots-7-test, include = FALSE}
+```{r pipes-7-test, include = FALSE}
 gss_cat |> 
   filter(year == 2014) |> 
   select(age, marital, race, relig, tvhours) |>
@@ -547,18 +547,18 @@ The number of rows has decreased because we removed rows with missing values. `d
 
 Continue the pipe with `arrange()`, using `tvhours` as the argument.
 
-```{r pipes-and-plots-8, exercise = TRUE}
+```{r pipes-8, exercise = TRUE}
 
 ```
 
 <button onclick = "transfer_code(this)">Copy previous code</button>
 
-```{r pipes-and-plots-8-hint-1, eval = FALSE}
+```{r pipes-8-hint-1, eval = FALSE}
 ... |> 
   arrange(...)
 ```
 
-```{r pipes-and-plots-8-test, include = FALSE}
+```{r pipes-8-test, include = FALSE}
 gss_cat |> 
   filter(year == 2014) |> 
   select(age, marital, race, relig, tvhours) |>
@@ -574,18 +574,18 @@ The `arrange()` function sorts the rows of a tibble. By default, it sorts in asc
 
 Copy the previous code. Put `desc()` around `tvhours` to sort in descending order.
 
-```{r pipes-and-plots-9, exercise = TRUE}
+```{r pipes-9, exercise = TRUE}
 
 ```
 
 <button onclick = "transfer_code(this)">Copy previous code</button>
 
-```{r pipes-and-plots-9-hint-1, eval = FALSE}
+```{r pipes-9-hint-1, eval = FALSE}
 ... |> 
   arrange(desc(...))
 ```
 
-```{r pipes-and-plots-9-test, include = FALSE}
+```{r pipes-9-test, include = FALSE}
 gss_cat |> 
   filter(year == 2014) |> 
   select(age, marital, race, relig, tvhours) |>
@@ -596,117 +596,6 @@ gss_cat |>
 ### 
 
 Got to respect someone who watches TV 24 hours a day!
-
-### Exercise 10
-
-Let's make a plot. Copy the previous code, and pipe to `ggplot()`. Set `aes(x = age, y = tvhours)`.
-
-```{r pipes-and-plots-10, exercise = TRUE}
-
-```
-
-<button onclick = "transfer_code(this)">Copy previous code</button>
-
-```{r pipes-and-plots-10-hint-1, eval = FALSE}
-... |> 
-  ggplot(aes(x = ..., y = ...))
-```
-
-```{r pipes-and-plots-10-test, include = FALSE}
-gss_cat |> 
-  filter(year == 2014) |> 
-  select(age, marital, race, relig, tvhours) |>
-  drop_na() |>
-  arrange(desc(tvhours)) |>
-  ggplot(aes(x = age, y = tvhours))
-```
-
-### 
-
-This will return a plain graph as we have not mapped any data to specific "aesthetics" yet.
-
-### Exercise 11
-
-Add another layer with `geom_jitter()` using the `+` sign. Plotting code in the **ggplot2** package uses `+`, not `|>`, to connect different commands together. This difference comes from the fact that **ggplot2** was written 10+ years before the pipe was invented.
-
-```{r pipes-and-plots-11, exercise = TRUE}
-
-```
-
-<button onclick = "transfer_code(this)">Copy previous code</button>
-
-```{r pipes-and-plots-11-hint-1, eval = FALSE}
-... + 
-  geom_jitter()
-```
-
-```{r pipes-and-plots-11-test, include = FALSE}
-gss_cat |> 
-  filter(year == 2014) |> 
-  select(age, marital, race, relig, tvhours) |>
-  drop_na() |>
-  arrange(desc(tvhours)) |>
-  ggplot(aes(x = age, y = tvhours)) + 
-    geom_jitter()
-```
-
-### 
-
-This is a scatterplot of `age` versus `tvhours`. The x-axis is age, and the y-axis is the number of hours of TV watched per day.
-
-### Exercise 12
-
-Finally, add a title, subtitle, labels for x and y axes using `labs()`. The subtitle should be the one sentence of information about the graph with which you would hope a reader walks away. What is the most important fact demonstrated in the graphic? 
-
-Consider this example graph:
-
-```{r}
-gss_cat |> 
-  filter(year == 2014) |> 
-  select(age, marital, race, relig, tvhours) |>
-  drop_na() |>
-  arrange(desc(tvhours)) |>
-  ggplot(aes(x = age, y = tvhours)) + 
-  geom_jitter() + 
-  labs(title = "TV Hours Watched by Age", 
-       subtitle = "Got to respect someone who watches TV 24 hours a day!", 
-       x = "Age", 
-       y = "TV Hours")
-```
-
-You can make yours look like ours, if you like.
-
-```{r pipes-and-plots-12, exercise = TRUE}
-
-```
-
-<button onclick = "transfer_code(this)">Copy previous code</button>
-
-```{r pipes-and-plots-12-hint-1, eval = FALSE}
-... + 
-  labs(title = "...", 
-       subtitle = "...", 
-       x = "...", 
-       y = "...")
-```
-
-```{r pipes-and-plots-12-test, include = FALSE}
-gss_cat |> 
-  filter(year == 2014) |> 
-  select(age, marital, race, relig, tvhours) |>
-  drop_na() |>
-  arrange(desc(tvhours)) |>
-  ggplot(aes(x = age, y = tvhours)) + 
-  geom_jitter() + 
-  labs(title = "TV Hours Watched by Age", 
-       subtitle = "Got to respect someone who watches TV 24 hours a day!", 
-       x = "Age", 
-       y = "TV Hours")
-```
-
-### 
-
-Note that the code in the exercise block is not saved. If you want to save the code, you can copy/paste it into an R script file.
 
 ## Generative AI
 ###
@@ -857,6 +746,8 @@ diamonds %>%
 Note:
 
 * DeepSeek provided the `library(tidyverse)` even though that is not necessary. We have already loaded the **tidyverse** package. Loading it again is sloppy. It is up to you to keep track of which libraries are loaded.
+
+* AI often uses code that we don't like. For example, the built-in pipe -- `|>` -- is preferred over the old pipe -- `%>%`. When that happens, just tell the AI and ask for new code.
 
 * DeepSeek first provided code that used `library(ggtheme)`. This is a nice package which we have not loaded. But we also haven't installed it yet. Again, AI is good at generating code that will work if all its dependencies have been installed. You need to keep track. It is also useful to tell the AI which packages to use, and which to not use.
 
