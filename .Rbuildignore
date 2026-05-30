@@ -17,3 +17,4 @@
 ^vignettes/.quarto$
 ^extension$
 /tutorial_files/
+^.claude$

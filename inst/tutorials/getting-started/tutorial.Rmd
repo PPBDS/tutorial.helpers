@@ -136,7 +136,7 @@ Did you remember to hit the "Run Code" button above? Lots of people forget! You 
 
 ### Exercise 4
 
-Create a new R terminal by pressing the down arrow next to the plus button in the right side of the Panel Toolbar and selecting "New R terminal."
+Create a new R Terminal by pressing the down arrow next to the plus button in the right side of the Panel Toolbar and selecting "New R Terminal."
 
 ```{r}
 include_graphics("images/cs-new-R-terminal.png")
@@ -263,7 +263,7 @@ question_text(NULL,
 
 It is useful to understand where the R process is currently running in your Codespace.
 
-In the R terminal that is not running your tutorial, run `getwd()`. This stands for **get** **w**orking **d**irectory, meaning that we want to know the directory in which the R process is currently located.
+In the R Terminal that is not running your tutorial, run `getwd()`. This stands for **get** **w**orking **d**irectory, meaning that we want to know the directory in which the R process is currently located.
 
 CP/CR.
 
@@ -286,14 +286,14 @@ R 4.5.3> getwd()
 R 4.5.3>
 ````
 
-In an R terminal running inside GitHub Codespaces, `getwd()` prints the current working directory—here showing that R is operating inside your Codespace at `/workspaces/codespace-starter`.
+In an R Terminal running inside GitHub Codespaces, `getwd()` prints the current working directory—here showing that R is operating inside your Codespace at `/workspaces/codespace-starter`.
 
 
 ### Exercise 9
 
 Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are simply copies of R commands and their results. Other times, we will ask you to write one or more sentences of prose.
 
-Copy and paste everything from the exercise header above, beginning with "Exercise 10," through the end of this sentence into the answer box below. In other words, you are copying from this tutorial, not from the Console. Press "Submit Answer."
+Copy and paste everything from the exercise header above, beginning with "Exercise 9," through the end of this sentence into the answer box below. In other words, you are copying from this tutorial, not from the Console. Press "Submit Answer."
 
 ```{r exercises-9}
 question_text(NULL,
@@ -385,7 +385,7 @@ include_graphics("images/r-tutorial-terminal.png")
 
 * Stop the tutorial by pressing `Ctrl + C` in the terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
 
-* To restart the tutorial, either press the play button next to the "getting-started" tutorial.
+* To restart the tutorial, press the play button next to the "getting-started" tutorial.
 
 * This command tells the terminal to run `Rscript`, which calls the `run_tutorial()` function from the `learnr` package.
 

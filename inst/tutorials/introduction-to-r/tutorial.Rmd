@@ -45,7 +45,7 @@ This tutorial assumes that you have already completed the "Getting Started" tuto
 
 ### 
 
-From the main Positron menu, start a new window with `File -> New Window`. This new window is the location in which you will do all the work for the tutorial. The current window, the one in which you are reading these words, is just used to run this tutorial. 
+Create a new R Terminal by pressing the down arrow next to the plus button on the right side of the Panel Toolbar and selecting "New R Terminal." This R Terminal is where you will do all the work for the tutorial. The R session running this tutorial (labeled "R Tutorial") is busy, so you need a separate R Terminal in which to run code.
 
 ## Working with data
 ### 
@@ -74,11 +74,11 @@ library(tidyverse)
 
 ### Exercise 2
 
-In this tutorial, you will sometimes enter code into the exercise blocks, as you did above. But we will also ask you to run code in the Console. (You will do this in the other Positron window, since the Console in this window is currently busy running this tutorial.) Example:
+In this tutorial, you will sometimes enter code into the exercise blocks, as you did above. But we will also ask you to run code in the R Terminal. (You will do this in the R Terminal you created earlier, since the R session running this tutorial is currently busy.) Example:
 
-In the Console, run `library(tidyverse)`.
+In the R Terminal, run `library(tidyverse)`.
 
-With Console questions, we will usually ask you to **C**opy/**P**aste the **C**ommand/**R**esponse into an answer block, like the one below. We usually shorten those instructions as CP/CR. Do that now.
+With R Terminal questions, we will usually ask you to **C**opy/**P**aste the **C**ommand/**R**esponse into an answer block, like the one below. We usually shorten those instructions as CP/CR. Do that now.
 
 
 ```{r working-with-data-2}
@@ -115,7 +115,7 @@ Your answer never needs to match ours perfectly. Our goal is just to ensure that
 
 Data frames, also referred to as "tibbles," are spreadsheet-type data sets. 
 
-In the Console, run `diamonds`.
+In the R Terminal, run `diamonds`.
 
 CP/CR.
 
@@ -138,7 +138,7 @@ Whenever we show outputs like this after a question, then we are showing our ans
 
 ### Exercise 4
 
-In the Console, run `summary()` on `diamonds`.
+In the R Terminal, run `summary()` on `diamonds`.
 
 CP/CR.
 
@@ -163,7 +163,7 @@ This function provides a quick statistics overview of each variable in the data 
 
 ### Exercise 5
 
-In the Console, run `slice_sample()` on `diamonds`. This selects a random row from the data set.
+In the R Terminal, run `slice_sample()` on `diamonds`. This selects a random row from the data set.
 
 CP/CR.
 
@@ -188,7 +188,7 @@ Your answer will differ from this answer because of the inherent randomness in f
 
 ### Exercise 6
 
-In the Console, hit the Up Arrow to retrieve the previous command. Edit it to add the argument `n = 4` to `slice_sample(diamonds)`. That is, you want `slice_sample(diamonds, n = 4)`. This will return 4 random rows from the `diamonds` data set.
+In the R Terminal, hit the Up Arrow to retrieve the previous command. Edit it to add the argument `n = 4` to `slice_sample(diamonds)`. That is, you want `slice_sample(diamonds, n = 4)`. This will return 4 random rows from the `diamonds` data set.
 
 CP/CR.
 
@@ -209,12 +209,11 @@ slice_sample(diamonds, n = 4)
 
 ###
 
-Editing code directly in the Console quickly becomes annoying. See the **[positron.tutorials](https://ppbds.github.io/positron.tutorials/)** package for tutorials about using Positron to write and organize your code.
- 
+Editing code directly in the R Terminal quickly becomes annoying. Later tutorials will teach you how to write and organize your code in files.
 
 ### Exercise 7
 
-In the Console, run `print()` on `diamonds`. This returns the same result as typing `diamonds`.
+In the R Terminal, run `print()` on `diamonds`. This returns the same result as typing `diamonds`.
 
 CP/CR.
 
@@ -239,7 +238,7 @@ You can choose how many rows to display by using the `n` argument in the `print(
 
 ### Exercise 8
 
-In the Console, run `print()` on `diamonds` with the argument `n = 3`. This returns the first 3 rows of the `diamonds` data set.
+In the R Terminal, run `print()` on `diamonds` with the argument `n = 3`. This returns the first 3 rows of the `diamonds` data set.
 
 CP/CR.
 
@@ -262,33 +261,13 @@ print(diamonds, n = 3)
 
 `print()`, by default, gives the top of the tibble, so your answer should match our answer. `slice_sample()`, on the other hand, picks random rows to return. But, in both cases, the result is a tibble. 
 
-A central organizing principal of the *[Tidyverse](https://www.tidyverse.org/)* is that most functions take a tibble as their first and return a tibble. This allows us to "chain" commands together, one after the other.
+A central organizing principal of the *[Tidyverse](https://www.tidyverse.org/)* is that most functions take a tibble as their first argument and return a tibble. This allows us to "chain" commands together, one after the other.
 
 ### Exercise 9
 
-In the Console, run `?diamonds`.
-
-This will look up the help page for the `diamonds` tibble from the **ggplot2** package, which is one of the core packages in the *[Tidyverse](https://www.tidyverse.org/)*. The help page will appear on the right-side of your Positron window, in the Secondary Activity Bar, which you might need to activate in order to see. 
-
-Copy/paste the Description section of the help page below.
+In the R Terminal, run `glimpse()` on `diamonds`.  CP/CR.
 
 ```{r working-with-data-9}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
-```
-### 
-
-You can find help about an entire package with `help(package = "ggplot2")`. It is confusing, but unavoidable, that package names are sometimes unquoted, as in `library(ggplot2)`, and sometimes quoted, as in `help(package = "ggplot2")`. If one does not work, try the other.
-
-### Exercise 10
-
-In the Console, run `glimpse()` on `diamonds`.  CP/CR.
-
-```{r working-with-data-10}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -301,19 +280,44 @@ question_text(NULL,
 
 <!-- We cheat a bit so that the display looks better, adding width = 60 and not echo'ing the code. -->
 
-```{r working-with-data-10-test}
+```{r working-with-data-9-test}
 glimpse(diamonds, width = 60)
 ```
 
 ### 
 
-`glimpse()` displays columns running down the page and the data running across across. Note how the "type" of each variable is listed next to the variable name. For example, `price` is listed as `<int>`, meaning that it is an integer variable. To learn more about the `glimpse()` function, run `?glimpse`.
+`glimpse()` displays columns running down the page and the data running across. Note how the "type" of each variable is listed next to the variable name. For example, `price` is listed as `<int>`, meaning that it is an integer variable. To learn more about the `glimpse()` function, run `?glimpse`.
 
 `view()` is another useful function, but, because it is interactive, we should not use it within a tutorial. 
 
+### Exercise 10
+
+In the R Terminal, run `sqrt(144)`.
+
+CP/CR.
+
+```{r working-with-data-10}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 5)
+```
+
+###
+
+```{r working-with-data-10-test, echo = TRUE}
+sqrt(144)
+```
+
+###
+
+The square root function is one of many built-in functions in R. Most return their result, which R then, by default, prints out.
+
 ### Exercise 11
 
-In the Console, run `sqrt(144)`.
+In the R Terminal, run `x <- sqrt(144)`.
 
 CP/CR.
 
@@ -329,16 +333,16 @@ question_text(NULL,
 ###
 
 ```{r working-with-data-11-test, echo = TRUE}
-sqrt(144)
+x <- sqrt(144)
 ```
 
 ###
 
-The square root function is one of many built-in functions in R. Most return their result, which R then, by default, prints out.
+The symbol `<-` is the assignment operator. In this case, we are *assigning* the value of `sqrt(144)` to the variable `x`. Nothing is printed out because of that assignment.
 
 ### Exercise 12
 
-In the Console, run `x <- sqrt(144)`.
+In the R Terminal, run `x`.
 
 CP/CR.
 
@@ -354,40 +358,12 @@ question_text(NULL,
 ###
 
 ```{r working-with-data-12-test, echo = TRUE}
-x <- sqrt(144)
-```
-
-###
-
-The symbol `<-` is the assignment operator. In this case, we are *assigning* the value of `sqrt(144)` to the variable `x`. Nothing is printed out because of that assignment.
-
-Also, you can see `x` in the "Variables" tab under the "Session" pane in the Secondary Activity Bar on the right-hand side of the Positron window.
-
-
-### Exercise 13
-
-In the Console, run `x`.
-
-CP/CR.
-
-```{r working-with-data-13}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
-```
-
-###
-
-```{r working-with-data-13-test, echo = TRUE}
 x
 ```
 
 ###
 
-Now that `x` has been defined in the Console, it is available for your use. Above, we just print it out. But we could also use it in other calculations, i.e., `x + 5`.
+Now that `x` has been defined in the R Terminal, it is available for your use. Above, we just print it out. But we could also use it in other calculations, i.e., `x + 5`.
 
 
 ## Pipes and plots
@@ -399,7 +375,7 @@ Although the *Tidyverse* includes hundreds of commands for data manipulation, th
 
 Let's warm up by examining the `gss_cat` tibble from the **forcats** package. Since **forcats** is a core **tidyverse** package, you have already loaded it. Type `gss_cat` and hit "Run Code."
 
-Instead of using the Console, we will be doing the exercises in this section using excercise blocks.
+Instead of using the R Terminal, we will be doing the exercises in this section using exercise blocks.
 
 ```{r pipes-and-plots-1, exercise = TRUE}
 
@@ -439,7 +415,7 @@ Note that there are missing values in some columns. The word `NA` stands for "No
 
 ### Exercise 3
 
-Pipe `gss_cat` to `drop_na()`. This function removes rows with missing values.  The pipe symbol --- `->` --- allows us to chain R commands together, one after the other, with each one connected to the next with the pipe symbol. In this case, we want:
+Pipe `gss_cat` to `drop_na()`. This function removes rows with missing values.  The pipe symbol --- `|>` --- allows us to chain R commands together, one after the other, with each one connected to the next with the pipe symbol. In this case, we want:
 
 ```
 gss_cat |> 
@@ -735,7 +711,7 @@ Note that the code in the exercise block is not saved. If you want to save the c
 ## Generative AI
 ###
 
-Gneerative AI --- tools like [ChatGPT](https://chat.openai.com/), [Grok](https://x.ai/), [Claude](https://claude.ai/), [DeepSeek](https://www.deepseek.com/en) and so on
+Generative AI --- tools like [ChatGPT](https://chat.openai.com/), [Grok](https://x.ai/), [Claude](https://claude.ai/), [DeepSeek](https://www.deepseek.com/en) and so on
 --- are the future, of data science and everything else. The more you use these tools, the better off you will be. Unfortunately, the tools are changing so much that it is hard for a tutorial like this to stay up-to-date. This section provides some general advice and practice exercises.
 
 ### Exercise 1
@@ -763,7 +739,7 @@ If you do not want to pay for an AI service, then you will probably need to have
 
 ### Exercise 2
 
-Type `diamonds` in the Console. Hit `Enter`. Copy/paste the command and the first few lines of the tibble.
+Type `diamonds` in the R Terminal. Hit `enter`. Copy/paste the command and the first few lines of the tibble.
 
 ```{r generative-ai-2}
 question_text(NULL,
@@ -784,7 +760,7 @@ When working with AI, you often need to tell it about the data set. The easiest 
 
 ### Exercise 3
 
-Copy/paste the top of the `diamonds` tibble into your AI interface and ask it to create a pipe which calculates the average value of `carat` for all combinations of `cut` and `color`. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
+Copy/paste the top of the `diamonds` tibble into your AI interface and ask it to create a pipe which calculates the average value of `carat` for all combinations of `cut` and `color`. Run the provided code in the R Terminal. If it fails, show the AI the error and ask for better code.
 
 CP/CR.
 
@@ -820,7 +796,7 @@ Using AI is good! But intelligent use --- use in which you understand what the A
 
 ### Exercise 4
 
-Ask AI to create a beautiful plot using `diamonds` and the **tidyverse** package. Run the provided code in the Console. If it fails, show the AI the error and ask for better code.
+Ask AI to create a beautiful plot using `diamonds` and the **tidyverse** package. Run the provided code in the R Terminal. If it fails, show the AI the error and ask for better code.
 
 
 ```{r generative-ai-4}

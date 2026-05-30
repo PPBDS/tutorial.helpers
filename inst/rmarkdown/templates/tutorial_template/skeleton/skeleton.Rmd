@@ -32,10 +32,9 @@ options(tutorial.exercise.timelimit = 60,
 <!-- XX: CHECKLIST BEFORE STARTING: -->
 <!-- * Use check_current_tutorial() and make_exercise("no-answer"). Very helpful! -->
 <!-- * Make sure you have installed the development version of tutorial.helpers. You want the latest version! -->
-<!-- * Place any data needed for the tutorial in the data/ directory of the package. Have the student download it by hand. -->
+<!-- * Place any data needed for the tutorial in the data/ directory of the directory in which the tutorial is located. Have the student download it by hand. -->
 <!-- * Save the file as "tutorial.Rmd" in the correct directory under inst/tutorials/xx/, where xx is the same as the tutorial id. -->
 <!-- * Load any necessary libraries for the tutorial in the first code chunk -->
-<!-- * Any time you ask a student to execute some code with `Cmd/Ctrl + Enter`, you tell her to CP/CR. Then, in general, provide your code as the test code chunk. -->
 <!-- * Delete this and the other commented instructions below. -->
 <!-- * Search for, read/replace, and then delete all `XX:` entries -->
 
