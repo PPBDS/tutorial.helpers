@@ -33,8 +33,8 @@ Then, run:
 
 The template, which is actually
 `inst/rmarkdown/templates/tutoral_template/skeleton.Rmd` in the
-**tutorial.helpers** package, starts with the `copy-code-chunk`, some
-default code which records a student’s name, email and (otionally) id.
+**tutorial.helpers** package, starts with the `info_section`, some
+default code which records a student’s name, email and (optionally) id.
 The template ends with the `download-answers` code chunk which provides
 students with instructions on how to download a copy of their answers.
 
@@ -96,11 +96,21 @@ to renumber all the exercises and relabel the code chunks. This is
 especially useful if you add or delete an exercise in the middle of a
 section.
 
-Students always need more practice working in a Quarto document (the
-QMD) and the Console at the same time. Good data scientists go back and
-forth between these two modes, writing something in the QMD, executing
-it in the Console, editing the QMD, executing again, and so on. We need
-to force students to do that more often.
+In olden days, students always needed more practice working in a Quarto
+document (the QMD) and the R Console at the same time. Good data
+scientists used to go back and forth between these two modes, writing
+something in the QMD, executing it in the R Console, editing the QMD,
+executing again, and so on. We used to force students to do that
+repeatedly.
+
+But that was the pre-AI world. With AI, we rarely edit our Quarto
+documents directly. Instead, we tell the AI what we want and it edits
+and then renders the Quarto document, usually showing us the result as
+an HTML file, viewable in the browser. Our purpose is no longer to teach
+students how to code. The AI codes. Our purpose is to teach students how
+to ensure that the results produced by the AI are correct.
+
+> *Students no longer code. They check.*
 
 Tutorials are divided into *Topics* that appear on the side panel. To
 create these topics, we include a double hash (##) before the text for
@@ -147,6 +157,12 @@ Reasonable units are: one sentence, two sentences and a paragraph. Pick
 one of these three unless you have a good reason not to. But be wary of
 asking for more than a sentence, unless you just want an AI answer. The
 ideal question is easier for a student to just answer than to ask AI.
+
+The purpose of these questions is to ensure that students understand
+concepts.
+
+> *You can’t check the AI’s work if you don’t understand the underlying
+> concepts which the code is implementing.*
 
 For paragraph questions, you should mention specific words or phrases
 which the students should include in their answers. If your suggested
@@ -232,7 +248,7 @@ consideration.
 In addition to `tutorial.Rmd`, a tutorial will often use other inputs.
 The two most common locations for storing these inputs are `data` and
 `images` directories at the same level as the `tutorial.Rmd` file. Any
-file in `data` or `images` will be available at run time. (Note that the
+file in `data` or `images` will be available at run time. (The
 directories must have these names. Something like `my_data` will not
 work.)
 
@@ -313,6 +329,11 @@ There are two main uses for files in `data`. First, they can be used at
 plots or doing anything else. Second, and more importantly, they are
 available to students in the exercise code blocks during “run time”
 (when students are doing the tutorial).
+
+However, in the age of AI, we are making less and less use of exercise
+code chunks. Instead, we have students use AI to edit the Quarto
+documents directly. Any data or R objects which they need must be
+created by them, which is probably better anyway.
 
 #### Images
 
@@ -573,7 +594,7 @@ You answer should look something like this, although your path will be different
 
 ```
 > getwd()  
-[1] "/Users/dkane/Desktop/projects/xx"  
+[1] "/Users/dkane/Desktop/projects/XX"  
 > dir.create("data")  
 > list.files()  
  [1] "analysis_files" "analysis.html"  "analysis.qmd"   "data"           "README.md"    
@@ -639,14 +660,6 @@ plot. The last four questions set up and then guide the student to
 creating that plot. If you want the student to mimic a plot, you can
 place it in the `images` subdirectory and then use
 `knitr::include_graphics("images/plot.png")` to show it to students.
-
-To teach students about topic X, we first need to decide the final
-destination. What do we want students to be able to do on their own
-after completing the tutorial? For us, this will almost always be a
-plot. Having envisioned this goal, we need to create a “path” which
-students can use to reach that goal, first under our supervision and,
-second, on their own. The path will consist of several stepping stones,
-or stops along the way.
 
 We don’t show students our code because, in the age of AI, professionals
 don’t look at code very often. Instead, we show students the *result* —

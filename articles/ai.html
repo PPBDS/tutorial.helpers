@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.1.9009</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,7 +97,7 @@ No need for nearly as much testing.
                   template = "tutorial_template",
                   package = "tutorial.helpers",
                   edit = TRUE)</code></pre>
-<p>The template, which is actually <code>inst/rmarkdown/templates/tutoral_template/skeleton.Rmd</code> in the <strong>tutorial.helpers</strong> package, starts with the <code>copy-code-chunk</code>, some default code which records a student’s name, email and (otionally) id. The template ends with the <code>download-answers</code> code chunk which provides students with instructions on how to download a copy of their answers.</p>
+<p>The template, which is actually <code>inst/rmarkdown/templates/tutoral_template/skeleton.Rmd</code> in the <strong>tutorial.helpers</strong> package, starts with the <code>info_section</code>, some default code which records a student’s name, email and (optionally) id. The template ends with the <code>download-answers</code> code chunk which provides students with instructions on how to download a copy of their answers.</p>
 <p>There is a <code>setup</code> code chunk at the top of a tutorial. You must have <code><a href="https://rstudio.github.io/learnr/" class="external-link">library(learnr)</a></code> and, if you use our tools, <code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code> in this chunk. If your tutorials are part of an R package, then you should ensure that <strong>tutorial.helpers</strong> is included under Imports in the DESCRIPTION file and that any library loaded in a tutorial is, at least, included under Suggests.</p>
 <p>Anything typed at the keyboard belongs in `backticks` (not “quotation marks”), except for package names, which are always <strong>bolded</strong>. Function names always include the parentheses: <code>read_csv()</code>, not <code>read_csv</code>. Example: the <code>+</code> sign is used to connect <code>ggplot()</code> components when using the <strong>ggplot2</strong> library.</p>
 <p>Note that tutorials must be <a href="https://rmarkdown.rstudio.com/" class="external-link">R Markdown</a> documents, meaning that their suffix is <code>.Rmd</code>. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the <code><a href="https://rdrr.io/r/base/Paren.html" class="external-link">{}</a></code>. Don’t worry about this detail.</p>
@@ -106,7 +106,11 @@ No need for nearly as much testing.
 <p>The last section is the <em>Summary</em>. It starts with the same overview with which the Introduction began, but in the past tense. It then has a couple exercises which finish up the tutorial by using <code>quarto publish gh-pages analysis.qmd</code> to create a webpage featuring the cool plots which the student has created. The URL for this new webpage is usually the answer to the last exercise in Summary, thereby completing the tutorial.</p>
 <p>Anytime you ask a student to execute something in the Console, you confirm that they have done so with CP/CR, the abbreviation for <strong>C</strong>opy/<strong>P</strong>aste the <strong>C</strong>ommand/<strong>R</strong>esponse.</p>
 <p><a href="https://ppbds.github.io/tutorial.helpers/"><strong>tutorial.helpers</strong></a> includes two particularly helpful functions: <code><a href="../reference/exercise_creation.html">make_exercise()</a></code> and <code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code>. Use <code><a href="../reference/exercise_creation.html">make_exercise()</a></code> to add a new exercise to the current tutorial. It will number the exercise, and the code chunk labels, automatically. Use <code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code> to renumber all the exercises and relabel the code chunks. This is especially useful if you add or delete an exercise in the middle of a section.</p>
-<p>Students always need more practice working in a Quarto document (the QMD) and the Console at the same time. Good data scientists go back and forth between these two modes, writing something in the QMD, executing it in the Console, editing the QMD, executing again, and so on. We need to force students to do that more often.</p>
+<p>In olden days, students always needed more practice working in a Quarto document (the QMD) and the R Console at the same time. Good data scientists used to go back and forth between these two modes, writing something in the QMD, executing it in the R Console, editing the QMD, executing again, and so on. We used to force students to do that repeatedly.</p>
+<p>But that was the pre-AI world. With AI, we rarely edit our Quarto documents directly. Instead, we tell the AI what we want and it edits and then renders the Quarto document, usually showing us the result as an HTML file, viewable in the browser. Our purpose is no longer to teach students how to code. The AI codes. Our purpose is to teach students how to ensure that the results produced by the AI are correct.</p>
+<blockquote>
+<p><em>Students no longer code. They check.</em></p>
+</blockquote>
 <p>Tutorials are divided into <em>Topics</em> that appear on the side panel. To create these topics, we include a double hash (##) before the text for it to show up as a side panel. This is also called the <em>topic title</em>. Use <a href="https://apastyle.apa.org/style-grammar-guidelines/capitalization/sentence-case" class="external-link">sentence case</a>. On the line after the topic title, put three hashes. This ensures that students will see the introductory text before they see the first exercise.</p>
 <section class="level3"><h3 id="questions">Questions<a class="anchor" aria-label="anchor" href="#questions"></a>
 </h3>
@@ -128,6 +132,10 @@ No need for nearly as much testing.
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>``` </span></code></pre></div>
 <p>For the <code>message</code> argument, you should provide an <strong>excellent</strong> answer. We want to allow students to check for themselves that they got, more or less, the correct answer. Note how we set <code>allow_retry</code> to FALSE. This means that, after they see our answer, students can’t modify their answer. The <code>rows</code> argument decides how many rows the empty text input will have.</p>
 <p>Always specify (approximately) how much you want students to write. Reasonable units are: one sentence, two sentences and a paragraph. Pick one of these three unless you have a good reason not to. But be wary of asking for more than a sentence, unless you just want an AI answer. The ideal question is easier for a student to just answer than to ask AI.</p>
+<p>The purpose of these questions is to ensure that students understand concepts.</p>
+<blockquote>
+<p><em>You can’t check the AI’s work if you don’t understand the underlying concepts which the code is implementing.</em></p>
+</blockquote>
 <p>For paragraph questions, you should mention specific words or phrases which the students should include in their answers. If your suggested answer includes the word “validity,” for example, then tell the students to include (and define) validity as part of their answer.</p>
 <p>You can insert a text question which provides an answer by placing your cursor in the desired location and running <code>tutorial.helpers::make_exercise(type = "yes-answer")</code>.</p>
 <p>However, for many written questions, we don’t provide an answer, so we don’t mind if students resubmit. This format is most commonly used for “process” questions in which we have told students to do something and then confirm that they have done it by copying/pasting the result from a command. To create a template for these questions, we run <code><a href="../reference/exercise_creation.html">tutorial.helpers::make_exercise()</a></code>, since the default value for <code>type</code> is <code>"no-answer"</code>. Doing so produces an outline which looks like this:</p>
@@ -160,7 +168,7 @@ No need for nearly as much testing.
 <p>The most important knowledge drops mention packages and functions which we want students to be aware of, packages/functions which they might want to mention to the AI explicitly, given the topic under consideration.</p>
 </section><section class="level3"><h3 id="inputs">Inputs<a class="anchor" aria-label="anchor" href="#inputs"></a>
 </h3>
-<p>In addition to <code>tutorial.Rmd</code>, a tutorial will often use other inputs. The two most common locations for storing these inputs are <code>data</code> and <code>images</code> directories at the same level as the <code>tutorial.Rmd</code> file. Any file in <code>data</code> or <code>images</code> will be available at run time. (Note that the directories must have these names. Something like <code>my_data</code> will not work.)</p>
+<p>In addition to <code>tutorial.Rmd</code>, a tutorial will often use other inputs. The two most common locations for storing these inputs are <code>data</code> and <code>images</code> directories at the same level as the <code>tutorial.Rmd</code> file. Any file in <code>data</code> or <code>images</code> will be available at run time. (The directories must have these names. Something like <code>my_data</code> will not work.)</p>
 <section class="level4"><h4 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
 </h4>
 <p>If you need for an R object to be accessible in an exercise code chunk, create it in the initial global <code>setup</code> code chunk at the top of the tutorial.</p>
@@ -186,6 +194,7 @@ No need for nearly as much testing.
 <p>Again, this code only works if you are in the tutorial directory, not in the higher directory of the R project itself. Also, the first two commands are commented out, unless you are running them by hand to create the object.</p>
 <p>What happens if the data is too large? See the “Arrow” tutorial in the <a href="https://ppbds.github.io/r4ds.tutorials/" class="external-link"><strong>r4ds.tutorials</strong></a> for an example. First, we generally switch away from code exercises and use written exercises. Students run the required commands and then copy/paste the command/response. Big downloads don’t work well in exercise code chunks. Second, we create small versions of this big data in the global <code>setup</code> chunk. This allows us to create test code chunks for most of the exercises which follow. These tests will run much more quickly with this smaller data. Also, for any package on CRAN, we need to keep the overall size of the package as small as possible.</p>
 <p>There are two main uses for files in <code>data</code>. First, they can be used at “compile time” (when the <code>tutorial.Rmd</code> is knit to HTML) for making plots or doing anything else. Second, and more importantly, they are available to students in the exercise code blocks during “run time” (when students are doing the tutorial).</p>
+<p>However, in the age of AI, we are making less and less use of exercise code chunks. Instead, we have students use AI to edit the Quarto documents directly. Any data or R objects which they need must be created by them, which is probably better anyway.</p>
 </section><section class="level4"><h4 id="images">Images<a class="anchor" aria-label="anchor" href="#images"></a>
 </h4>
 <p>To add images to a tutorial, first make a directory called <code>images</code> in the folder that contains <code>tutorial.Rmd</code>. Store all images for that tutorial there. You can work with those files in all the usual ways.</p>
@@ -351,7 +360,7 @@ No need for nearly as much testing.
 <span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>```</span>
 <span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>&gt; getwd()  </span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>[1] "/Users/dkane/Desktop/projects/xx"  </span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>[1] "/Users/dkane/Desktop/projects/XX"  </span>
 <span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>&gt; dir.create("data")  </span>
 <span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>&gt; list.files()  </span>
 <span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a> [1] "analysis_files" "analysis.html"  "analysis.qmd"   "data"           "README.md"    </span>
@@ -399,11 +408,6 @@ No need for nearly as much testing.
 <span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
 <p>The meat of a Topic generally involves asking AI to create a pipe which accomplishes some goal. The end of a Topic always finishes up with a plot. The last four questions set up and then guide the student to creating that plot. If you want the student to mimic a plot, you can place it in the <code>images</code> subdirectory and then use <code>knitr::include_graphics("images/plot.png")</code> to show it to students.</p>
-<p>To teach students about topic X, we first need to decide the final destination. What do we want students to be able to do on their own after completing the tutorial? For us, this will almost always be a plot. Having envisioned this goal, we need to create a “path” which students can use to reach that goal, first under our supervision and, second, on their own. The path will consist of several stepping stones, or stops along the way.</p>
-<!-- DK: We should insert some discussion about creating a bunch of different pipes. The below is an OK start for this discussion. Add a code example . . .
-
-AR: I'm not sure what is meant by this comment.
--->
 <p>We don’t show students our code because, in the age of AI, professionals don’t look at code very often. Instead, we show students the <em>result</em> — a plot or summary statistics — produced by our correct code. This gives students something concrete to check their AI-generated work against.</p>
 <p>Consider this example:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>### Exercise 6</span>
