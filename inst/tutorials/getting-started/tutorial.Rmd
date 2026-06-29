@@ -18,21 +18,18 @@ library(knitr)
 
 knitr::opts_chunk$set(echo = FALSE)
 knitr::opts_chunk$set(out.width = '90%')
-options(tutorial.exercise.timelimit = 60, 
-        tutorial.storage = "local") 
-```
-
-```{r copy-code-chunk, child = system.file("child_documents/copy_button.Rmd", package = "tutorial.helpers")}
+options(tutorial.exercise.timelimit = 60,
+        tutorial.storage = "local")
 ```
 
 ## Introduction
-### 
+###
 
-This tutorial teaches students how to use [GitHub Codespaces](https://github.com/features/codespaces) to run R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. It is intended for beginning students who have never completed a tutorial.
+This tutorial, intended for beginners, teaches students how to use [GitHub Codespaces](https://github.com/features/codespaces) to run R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. We also introduce students to the use of the bash Terminal, the R Terminal, and GitHub Copilot within VS Code.
 
 Most students begin this tutorial after completing the setup steps outlined [here](https://ppbds.github.io/primer/getting-started.html). If you have not done that, some of these questions may be confusing.
 
-### 
+###
 
 After starting the tutorial, your Codespace looks something like this:
 
@@ -44,149 +41,37 @@ include_graphics("images/cs-start-tutorial.png")
 
 Complete the tutorial in your Codespace. At the end, you will press a button to download a copy of your answers to the `Downloads` folder on your computer. Finally, submit your answers to your instructor and/or keep a copy for yourself.
 
-### 
+###
 
 Most tutorials begin by asking for your name and email. Your instructor might also ask you to fill in the "ID" field so that your work can be matched to a grading database. If not, leave the "ID" field blank. Click "Continue," then enter your name and email. Click the **"Submit Answer"** button each time. If you make a mistake, click **"Try Again"** and submit a new answer.
 
-If you are completing this tutorial as part of a class, use the same email address for every tutorial. It is best to use a "permanent" email address that you will always be able to access. Do not use an email address associated with your current school or employer, since you may lose access to it someday.
+If you are completing this tutorial as part of a class, use the same email address for every tutorial.
 
 ```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
 ```
 
-## Exercises
-### 
-
-Each tutorial includes exercises for you to complete. For non-coding questions, write your answer and then click the "Submit Answer" button, as you did above for your name and email address.
-
-### Exercise 1
-
-Let's practice some simple math. Type `4 + 5` into the box below. Click **"Run Code"** to see the result. Clicking **"Hint"** gives you a hint about what to type.
-
-```{r exercises-1, exercise = TRUE}
-
-```
-
-```{r exercises-1-hint-1, eval = FALSE}
-4 + 5
-```
-
-### 
-
-Once you click "Run Code," the answer `[1] 9` should appear below the code you entered. This is the same behavior you would see if you ran the code in the Console, where R code is executed.
-
+## Bash Terminal
 ###
 
-There are two types of answers in tutorial questions: prose and code. For prose answers, you use the "Submit Answer" button, as you did with your name and email. For code answers, you use the "Run Code" button, as you did here.
+Each tutorial includes exercises for you to complete. Most exercises ask you to run a command in a terminal and then copy the result into the answer box. After writing your answer, click the "Submit Answer" button, as you did above for your name and email address.
 
-### Exercise 2
+The **bash** Terminal is a text-based interface where you type commands to tell your Codespace what to do. The pattern is always the same: you send a command, the Terminal executes it, and it gives you something back. In this section you will practice the most common bash commands. (In the next section you will see that the R Terminal works exactly the same way.)
 
-Let's use variables to perform the same calculation. Below, we have already assigned 5 to `x` and 4 to `y`. On the line below those two provided lines of code, add the two variables by typing `x + y`. Click "Run Code" to see the result.
-
-```{r exercises-2, exercise = TRUE}
-x <- 5
-y <- 4
-
-```
-
-```{r exercises-2-hint-1, eval = FALSE}
-x <- 5
-y <- 4
-x + y
-```
-
-### 
-
-Once you click "Run Code," the answer `[1] 9` should appear below the code you entered.
-
-### 
-
-**If you do not click "Run Code" or "Submit Answer," your response is not recorded.**
-
-### Exercise 3
-
-You will often need to copy code from the previous exercise to continue working on a multi-step problem. To make this easier, we provide a "Copy previous code" button. Below the following box, click the "Copy previous code" button.
-
-```{r exercises-3, exercise = TRUE}
-
-```
-
-<button onclick = "transfer_code(this)">Copy previous code</button>
-
-```{r exercises-3-hint-1, eval = FALSE}
-x <- ...
-y <- 10
-x + ...
-```
-
-### 
-
-This should paste all of your work from the previous exercise into the code area above. Note that it only copies code that has already been run in the previous exercise.
-
-### 
-
-Change the values to `x <- 6` and `y <- 10`. Click "Run Code." You should get the answer `[1] 16`.
-
-### 
-
-Note that the assignment symbol, `<-`, is a less-than sign followed by a dash. We often pronounce this symbol as "gets." So we might read this code aloud as "x gets 6."
-
-### 
-
-Did you remember to hit the "Run Code" button above? Lots of people forget! You must hit the button for your answer to be recorded.
-
-### Exercise 4
-
-Create a new R Terminal by pressing the down arrow next to the plus button in the right side of the Panel Toolbar and selecting "New R Terminal."
-
-```{r}
-include_graphics("images/cs-new-R-terminal.png")
-```
-
-In the new terminal, type `version[['version.string']]` and press `return` (on Mac) or `enter` (on Windows). To avoid repeating both terms in every question, we use `enter` to mean either the `return` or `enter` key, as appropriate.
-
-**Do not just type the command into the answer box!** You must paste the command into the terminal and then execute the command.
-
-**C**opy and **P**aste both the **C**ommand *and* the **R**esponse from the terminal into this box. We will abbreviate this instruction in the future as **CP**/**CR**.
-
-```{r exercises-4}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 3)
-```
-
-### 
-
-We typically provide example answers, like the one below, after you submit your own response. Do not be concerned if your answer differs from the example we show.
-
-```
-> version[['version.string']]
-[1] "R version 4.5.3 (2026-03-11)"
-```
-
-Your version of R may be more recent, but it should not be older. It is OK if your formatting differs from ours. Exact formatting does not matter. What matters is that you show that you executed the command as instructed.
-
-### 
-
-Tutorial workflow will often look like this: we tell you to run a command **in the Terminal**, you run it, and then we ask you to copy and paste both the command itself and the response it returns. Because we ask you to **C**opy/**P**aste the **C**ommand/**R**esponse so often, we usually shorten this instruction to CP/CR.
-
-### Exercise 5
-
-Now press the plus button in the bottom right. This opens a new bash terminal. A bash terminal is a text-based interface where you type commands to tell your Codespace what to do.
+To do the exercises, you need a bash Terminal in which to type commands. Press the plus button (`+`) on the right side of the Panel to open one.
 
 ```{r}
 include_graphics("images/cs-open-bash.png")
 ```
 
-###
+### Exercise 1
 
-From the terminal, run `echo $0`. (To "run" a command in the Terminal or the Console means to type the command and then press `enter`.)
+In the bash Terminal, type `whoami` and then press `return` (on Mac) or `enter` (on Windows). To "run" a command means to type it and then press this key. To avoid repeating both terms in every question, we use `Enter` to mean either the `return` or `enter` key, as appropriate.
 
-CP/CR.
+**Do not just type the command into the answer box!** You must run the command in the Terminal and then copy the result.
 
-```{r exercises-5}
+**C**opy and **P**aste both the **C**ommand *and* the **R**esponse from the Terminal into the box below. We will abbreviate this instruction in the future as **CP**/**CR**.
+
+```{r bash-terminal-1}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -197,7 +82,34 @@ question_text(NULL,
 
 ###
 
-I get:
+We typically provide example answers, like the one below, after you submit your own response. Do not be concerned if your answer differs from the example we show.
+
+````
+@ppbds-student ➜ /workspaces/codespace-starter $ whoami
+ppbds-student
+@ppbds-student ➜ /workspaces/codespace-starter $
+````
+
+###
+
+`whoami` prints the username of the account you are signed in as. Your Codespace is a complete computer running in the cloud, and you interact with it as the `ppbds-student` user. It is OK if your formatting differs from ours. What matters is that you show that you executed the command as instructed.
+
+### Exercise 2
+
+In the bash Terminal, run `echo $0`. (Again, "run" means to type the command and then press `enter`.)
+
+CP/CR.
+
+```{r bash-terminal-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
 
 ````
 @ppbds-student ➜ /workspaces/codespace-starter $ echo $0
@@ -205,15 +117,17 @@ I get:
 @ppbds-student ➜ /workspaces/codespace-starter $
 ````
 
-This means that, in the Terminal, I am using the [Bash shell](https://en.wikipedia.org/wiki/Bash_(Unix_shell)), a Unix-like shell.
+###
 
-### Exercise 6
+A "shell" is the program that reads and interprets the commands you type in the Terminal. `echo $0` prints the name of the shell you are using: `/bin/bash`, the [Bash shell](https://en.wikipedia.org/wiki/Bash_(Unix_shell)). Every command you run in this Terminal --- starting with the `whoami` you just ran --- is interpreted by bash.
 
-Let us make the Terminal "sleep" by typing the command `sleep 5` in the Terminal. Hit `enter`. The `sleep 5` command pauses execution for 5 seconds.
+### Exercise 3
 
-CP/CR. 
+In the bash Terminal, run `pwd`.
 
-```{r exercises-6}
+CP/CR.
+
+```{r bash-terminal-3}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -224,22 +138,23 @@ question_text(NULL,
 
 ###
 
-```
-@ppbds-student ➜ /workspaces/codespace-starter $ sleep 5
+````
+@ppbds-student ➜ /workspaces/codespace-starter $ pwd
+/workspaces/codespace-starter
 @ppbds-student ➜ /workspaces/codespace-starter $
-```
+````
 
-We can change the sleep duration using this format: `sleep [number]`. The number you enter is the number of seconds for which the Terminal pauses.
+###
 
-### Exercise 7
+`pwd` stands for **p**rint **w**orking **d**irectory --- the folder the Terminal is currently "in." GitHub Codespaces place your repository under `/workspaces/`, so that is where you begin. Almost every command you run acts on this directory unless you tell it otherwise.
 
-Run `sleep 60` in the Terminal. (Again, "run" means to type the command and then press the `enter` key.) This command makes the Terminal sleep for 60 seconds. To cancel the running `sleep` command, press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
+### Exercise 4
 
-When you press `Ctrl + C` while `sleep` is running, it immediately terminates the `sleep` command and returns you to the command prompt.
+In the bash Terminal, run `ls`.
 
 CP/CR.
 
-```{r exercises-7}
+```{r bash-terminal-4}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -248,7 +163,149 @@ question_text(NULL,
 	rows = 3)
 ```
 
-### 
+###
+
+````
+@ppbds-student ➜ /workspaces/codespace-starter $ ls
+@ppbds-student ➜ /workspaces/codespace-starter $
+````
+
+###
+
+`ls` **l**i**s**ts the files in the working directory. Notice that nothing was printed! That is because, by default, `ls` hides any file or folder whose name begins with a dot (`.`). The directory is not actually empty, as we will see next.
+
+### Exercise 5
+
+In the bash Terminal, run `ls -a`.
+
+CP/CR.
+
+```{r bash-terminal-5}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+````
+@ppbds-student ➜ /workspaces/codespace-starter $ ls -a
+.  ..  .devcontainer  .git
+@ppbds-student ➜ /workspaces/codespace-starter $
+````
+
+###
+
+The `-a` flag (for "all") tells `ls` to reveal the hidden entries. `.` is the current directory and `..` is the directory just above it. `.git` stores the project's version history, and `.devcontainer` holds the configuration for your Codespace. A "flag" like `-a` is an option that changes how a command behaves.
+
+### Exercise 6
+
+In the bash Terminal, run `ls .devcontainer`.
+
+CP/CR.
+
+```{r bash-terminal-6}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+````
+@ppbds-student ➜ /workspaces/codespace-starter $ ls .devcontainer
+STUDENT_WORKFLOW.md  connect-repo.sh  devcontainer.json  welcome.sh
+@ppbds-student ➜ /workspaces/codespace-starter $
+````
+
+###
+
+Giving `ls` a directory name lists what is inside that directory. The `.devcontainer` folder tells GitHub Codespaces how to build your workshop --- which version of R, Python, and Quarto to install, and which AI tools to include --- so that every student gets an identical setup.
+
+### Exercise 7
+
+In the bash Terminal, run `head .devcontainer/STUDENT_WORKFLOW.md`.
+
+CP/CR.
+
+```{r bash-terminal-7}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 12)
+```
+
+###
+
+````
+@ppbds-student ➜ /workspaces/codespace-starter $ head .devcontainer/STUDENT_WORKFLOW.md
+# Student workflow
+
+This Codespace is your **workshop** — it already has R, Python (with the usual
+data-science libraries), Quarto, the AI assistants, and all the right settings. But this `codespace-starter` repo isn't
+*yours*, so you won't save your work here. Instead, you'll make your **own
+repo** and work in it. The tools travel with the Codespace, so your repo needs
+no setup of its own.
+
+## 1. Create or connect to your repo (one command)
+
+@ppbds-student ➜ /workspaces/codespace-starter $
+````
+
+###
+
+`head` prints the first ten lines of a file, a quick way to peek at its contents without opening it. `STUDENT_WORKFLOW.md` explains the most important habit for this course: because `codespace-starter` is not your own repo, you create your own with `.devcontainer/connect-repo.sh` and do your work there.
+
+### Exercise 8
+
+Let us make the Terminal "sleep" by running `sleep 5` in the bash Terminal. The `sleep 5` command pauses execution for 5 seconds.
+
+CP/CR.
+
+```{r bash-terminal-8}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+````
+@ppbds-student ➜ /workspaces/codespace-starter $ sleep 5
+@ppbds-student ➜ /workspaces/codespace-starter $
+````
+
+###
+
+Many commands do their work silently and print nothing --- success is simply the return of the prompt. We can change the duration with `sleep [number]`, where the number is how many seconds the Terminal pauses.
+
+### Exercise 9
+
+Run `sleep 60` in the bash Terminal. This command makes the Terminal sleep for 60 seconds. To cancel the running `sleep` command, press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
+
+CP/CR.
+
+```{r bash-terminal-9}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
 
 ````
 @ppbds-student ➜ /workspaces/codespace-starter $ sleep 60
@@ -256,18 +313,105 @@ question_text(NULL,
 @ppbds-student ➜ /workspaces/codespace-starter $
 ````
 
-`Ctrl + C` can stop any process running in the Terminal.
+###
+
+`Ctrl + C` interrupts whatever process is currently running in the Terminal and returns you to the prompt; the `^C` marks where you pressed it. This is one of the most useful things to know: when a command hangs or you change your mind, `Ctrl + C` stops it. You will use it again in the next exercise to stop the tutorial itself.
+
+### Exercise 10
+
+Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
+
+* Return to your Codespace and click the tab titled "R Tutorial" in the Panel.
+
+```{r}
+include_graphics("images/r-tutorial-terminal.png")
+```
+
+* Stop the tutorial by pressing `Ctrl + C` in the terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
+
+* To restart the tutorial, press the play button next to the "getting-started" tutorial.
+
+* Finally, open the tutorial.
 
 
-### Exercise 8
+Now that you have read all the instructions, go ahead and follow them.
 
-It is useful to understand where the R process is currently running in your Codespace.
+###
 
-In the R Terminal that is not running your tutorial, run `getwd()`. This stands for **get** **w**orking **d**irectory, meaning that we want to know the directory in which the R process is currently located.
+Notice that all of your answers to previous questions have been saved. It is not a problem to quit a tutorial. In fact, if you leave a tutorial idle, it will eventually quit automatically.
+
+## R Terminal
+###
+
+The bash Terminal lets you talk to the computer. The R Terminal lets you talk to R, the programming language you will use for data science. The two work the same way: you type a command, press `Enter`, and the Terminal executes the command and gives you something back. The only real difference is the language --- bash commands like `ls` and `pwd` on the one hand, R commands like `sqrt(16)` on the other. Each exercise in this section asks you to run a one-line command and then CP/CR.
+
+Create a new R Terminal by pressing the down arrow next to the plus button on the right side of the Panel Toolbar and selecting "New R Terminal."
+
+```{r}
+include_graphics("images/cs-new-R-terminal.png")
+```
+
+### Exercise 1
+
+In the R Terminal, run `4 + 5`.
 
 CP/CR.
 
-```{r exercises-8}
+```{r r-terminal-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+````
+R 4.5.3> 4 + 5
+[1] 9
+R 4.5.3>
+````
+
+###
+
+At its simplest, R is a calculator. Just as the bash Terminal took `whoami` and handed back your username, the R Terminal takes `4 + 5` and hands back the result. You send a command; the Terminal sends something back. The `[1]` at the start of the output is a counter telling you that the line begins with the first element of the result --- useful when a result has many values spread across several lines.
+
+### Exercise 2
+
+In the R Terminal, run `sqrt(16)`.
+
+CP/CR.
+
+```{r r-terminal-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+````
+R 4.5.3> sqrt(16)
+[1] 4
+R 4.5.3>
+````
+
+###
+
+`sqrt()` is a **function**. You "call" a function by writing its name followed by parentheses, placing any input --- here, `16` --- inside them. That input is called an **argument**. Almost everything you do in R involves calling functions on arguments.
+
+### Exercise 3
+
+In the R Terminal, run `getwd()`. This stands for **get** **w**orking **d**irectory, meaning that we want to know the directory in which the R process is currently located.
+
+CP/CR.
+
+```{r r-terminal-3}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -276,9 +420,7 @@ question_text(NULL,
     rows = 3)
 ```
 
-### 
-
-Your answer should look something like:
+###
 
 ````
 R 4.5.3> getwd()
@@ -286,32 +428,44 @@ R 4.5.3> getwd()
 R 4.5.3>
 ````
 
-In an R Terminal running inside GitHub Codespaces, `getwd()` prints the current working directory—here showing that R is operating inside your Codespace at `/workspaces/codespace-starter`.
+###
 
+`getwd()` is the R equivalent of the bash command `pwd` you ran earlier. Here it shows that R is operating inside your Codespace at `/workspaces/codespace-starter`. Note that `getwd()` takes no arguments, but you still need the parentheses to call it.
 
-### Exercise 9
+### Exercise 4
 
-Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are simply copies of R commands and their results. Other times, we will ask you to write one or more sentences of prose.
+In the R Terminal, run `R.version.string`.
 
-Copy and paste everything from the exercise header above, beginning with "Exercise 9," through the end of this sentence into the answer box below. In other words, you are copying from this tutorial, not from the Console. Press "Submit Answer."
+CP/CR.
 
-```{r exercises-9}
+```{r r-terminal-4}
 question_text(NULL,
-    message = "We will sometimes provide an answer to written questions, as we do here. Other times, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",          
-    answer(NULL, 
-           correct = TRUE),
-    allow_retry = FALSE,
-    incorrect = NULL,
-    rows = 6)
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
 ```
 
-### Exercise 10
+###
+
+````
+R 4.5.3> R.version.string
+[1] "R version 4.5.3 (2026-03-11)"
+R 4.5.3>
+````
+
+###
+
+Your version of R may be more recent, but it should not be older. `R.version.string` is not a function call --- it has no parentheses --- but a built-in variable whose value R simply prints.
+
+### Exercise 5
 
 `show_file()` is a commonly used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file that you have edited.
 
 You can generally call a function by giving its name followed by parentheses, as with `getwd()`. However, it can be safer to prefix the function name with the name of the package in which the function is found, separated by two colons. Since `show_file()` is in the **tutorial.helpers** package, we can call it using this "double-colon" notation: `tutorial.helpers::show_file()`.
 
-From the Console, run this command:
+In the R Terminal, run this command:
 
 ```
 tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
@@ -319,7 +473,7 @@ tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 
 CP/CR.
 
-```{r exercises-10}
+```{r r-terminal-5}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -330,13 +484,29 @@ question_text(NULL,
 
 ###
 
-```{r exercises-10-test, include = FALSE}
+```{r r-terminal-5-test, include = FALSE}
 tutorial.helpers::show_file(file.path(R.home(), "COPYING"), end = 7)
 ```
 
-For now, don't worry about what `R.home()` and `file.path()` are doing, although you can read about them by running `?R.home` and `?file.path` at the R prompt. Those details are less important than seeing the intended usage of `show_file()`. 
+For now, don't worry about what `R.home()` and `file.path()` are doing, although you can read about them by running `?R.home` and `?file.path` in the R Terminal. Those details are less important than seeing the intended usage of `show_file()`.
 
-### Exercise 11
+### Exercise 6
+
+Tutorials can include written responses. You have already seen several examples. Sometimes those written answers are simply copies of commands and their results. Other times, we will ask you to write one or more sentences of prose.
+
+Copy and paste everything from the exercise header above, beginning with "Exercise 6," through the end of this sentence into the answer box below. In other words, you are copying from this tutorial, not from the Terminal. Press "Submit Answer."
+
+```{r r-terminal-6}
+question_text(NULL,
+    message = "We will sometimes provide an answer to written questions, as we do here. Other times, we won't. In the former case, we will not allow you to resubmit your answer. Don't stress! Most instructors grade tutorials on pass/fail basis, so, as long as you make an honest effort, you will do fine.",
+    answer(NULL,
+           correct = TRUE),
+    allow_retry = FALSE,
+    incorrect = NULL,
+    rows = 6)
+```
+
+### Exercise 7
 
 We frequently ask you to `copy` content from an HTML file such as a webpage. Do not worry if what you copy appears messy or loses its formatting; that is perfectly fine. Our main concern is that what you paste contains roughly the information it is supposed to contain.
 
@@ -346,7 +516,7 @@ Go to [the homepage](https://ppbds.github.io/tutorial.helpers/) of the **tutoria
 
 CP/CR.
 
-```{r exercises-11}
+```{r r-terminal-7}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -359,47 +529,99 @@ question_text(NULL,
 
 ````
 tutorial.helpers
-0.5.0.9003
+0.6.2.9000
 Reference
 Articles
 Changelog
 Search for
 Tutorial Helper Functions
 About this package
-tutorial.helpers provides functions and RStudio Addins to help you write R tutorials, especially if you follow my advice about the best way to do so. This approach is currently used in several packages, including r4ds.tutorials and positron.tutorials.
+tutorial.helpers provides functions to help you write R tutorials, especially if you follow my advice about the best way to do so.
 ````
 
 Again, your answer never needs to match ours exactly.
 
-### Exercise 12
+## GitHub Copilot
+###
 
-Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
+GitHub Copilot is the AI coding assistant built into VS Code. In your Codespace it can answer questions, explain code, and write code for you. Learning to work with AI is now a core data science skill, and the rest of your tutorials will lean on it heavily.
 
-<!-- Move this till later so that they know about `Ctrl - C` and are familiar with other parts of the panel. -->
+Open the Copilot Chat panel by clicking the Copilot icon at the top of the VS Code window. The Chat view opens on the right-hand side, where you can type a message to Copilot just as you would in any chat interface.
 
-* Return to your Codespace and click the tab titled "R Tutorial" in the Panel.
+### Exercise 1
 
-```{r}
-include_graphics("images/r-tutorial-terminal.png")
+In the Copilot Chat panel, type the following message and press `Enter`. Replace `<your-name>` with your actual name.
+
+```
+Hello! My name is <your-name>
 ```
 
-* Stop the tutorial by pressing `Ctrl + C` in the terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
+Copy Copilot's response into the box below. This is the only exercise in which we ask you to copy what Copilot says back; usually we will confirm Copilot's work in another way.
 
-* To restart the tutorial, press the play button next to the "getting-started" tutorial.
+```{r github-copilot-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
 
-* This command tells the terminal to run `Rscript`, which calls the `run_tutorial()` function from the `learnr` package.
+###
 
-* Finally, open the tutorial.
+```
+Hello David! How can I help you today?
+```
 
+###
 
-Now that you have read all the instructions, go ahead and follow them.
+Copilot is a conversational AI assistant, the same kind of technology behind tools like ChatGPT. You "talk" to it in plain English, and it responds. Your exact response will differ from ours --- Copilot does not give the same answer twice --- and that is fine.
 
-### 
+### Exercise 2
 
-Notice that all of your answers to previous questions have been saved. It is not a problem to quit a tutorial. In fact, if you leave a tutorial idle, it will eventually quit automatically.
+Copilot can do much more than chat: it can create and edit files for you. In the Copilot Chat panel, type the following message and press `Enter`.
+
+```
+Make a file called presidents.txt which includes the names of the first 5 US Presidents.
+```
+
+Copilot will create the file in your working directory. To confirm that it did, switch to your R Terminal and run:
+
+```
+tutorial.helpers::show_file("presidents.txt")
+```
+
+CP/CR.
+
+```{r github-copilot-2}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+###
+
+````
+R 4.5.3> tutorial.helpers::show_file("presidents.txt")
+George Washington
+John Adams
+Thomas Jefferson
+James Madison
+James Monroe
+R 4.5.3>
+````
+
+###
+
+You can also see the new file without the Terminal. Click the Explorer icon at the top of the Activity Bar, on the far left of the VS Code window. The Explorer lists every file in your working directory, and `presidents.txt` should now appear there. Click on it to open the file in the Editor and read its contents directly. The Explorer is the easiest way to keep an eye on the files Copilot creates and edits for you --- and you should always check, because AI makes mistakes.
+
+<!-- XX: The GitHub Copilot section still needs more exercises (about eight). Likely arc: ask Copilot to edit presidents.txt (e.g. add more presidents or a column), confirm with show_file(); ask Copilot to create a small R script and run it; ask Copilot to explain a piece of code. Each exercise follows the same instruction -> confirm-with-show_file()/ls -> answer / ### / knowledge-drop format. (No Copilot image exists yet in images/; add one when available.) -->
 
 ## Your answers
-### 
+###
 
 At the end of every tutorial, you will save your work and, if your instructor requests it, submit it. We will do this in the next topic, labeled "Download answers." Follow the instructions there.
 
@@ -413,7 +635,7 @@ Unless your instructor tells you otherwise, you should use the default file name
 ```
 
 ## Summary
-### 
+###
 
 You now understand how tutorials work and how to download a copy of your answers. Good luck with your data science journey!
 

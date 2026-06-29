@@ -37,11 +37,11 @@ inclusions in the tutorial files.
     tutorial_paths = return_tutorial_paths("tutorial.helpers")
   )
   
-  # Check for specific libraries only
+  # Check for specific libraries and child documents
   check_tutorial_defaults(
     tutorial_paths = return_tutorial_paths("tutorial.helpers"),
     libraries = c("learnr", "knitr"),
-    children = c("copy_button")
+    children = c("info_section")
   )
 
 }

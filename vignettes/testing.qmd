@@ -40,11 +40,11 @@ test_that("All tutorials have the expected components", {
 })
 ````
 
-The first step in testing the tutorials in your package is to determine the the full paths to all those tutorials. The `return_tutorial_paths()` returns a vector of those paths.
+The first step in testing the tutorials in your package is to determine the full paths to all those tutorials. The `return_tutorial_paths()` returns a vector of those paths.
 
 The second step is to confirm that all your tutorials knit without error. `knit_tutorials()`, perhaps the most useful function in the entire package, accomplishes this. If a tutorial does not knit, an error is generated and the test fails.
 
-The third step is only relevant for tutorial creators who follow [our advice](ai.html) concerning tutorial construction. In particular, `check_tutorial_defaults()` ensures that, somewhere in each tutorial, you have included the same key components as exist in the "Tutorial Helpers" R Markdown template.
+The third step is only relevant for tutorial creators who follow [our advice](ai.html) concerning tutorial construction. In particular, `check_tutorial_defaults()` ensures that, somewhere in each tutorial, you have included the required child documents: the `info_section` and `download_answers` chunks.
 
 `check_tutorial_defaults()` also fails if you do not have `library(learnr)` and `library(tutorial.helpers)` in your tutorial. 
 
