@@ -2,15 +2,17 @@
 
 * `show_file()` now prints "File is empty." for empty files (or files containing only blank lines) instead of erroring.
 
+* Remove the RMarkdown tutorial template (`skeleton.Rmd`). Tutorials are now created by hand, as described in the "Tutorials in the Age of AI" vignette.
+
+* Remove unused `submission-temp.Rmd` file.
+
+* Remove all tutorials except "Getting Started," which now uses VS Code on GitHub Codespaces. The removed tutorials include "Introduction to R," "Introduction to Python," and "Getting Started with Positron."
+
 * Finalize "Tutorials in the Age of AI" vignette.
 
 * Fix word wrapping for verbatim sections in vignettes.
 
 * Remove VS Code extension material.
-
-* Move current Getting Started to Getting Started with Positron.
-
-* Create new Getting Started which uses VS Code on GitHub Codespaces.
 
 * Remove two vignettes.
 
