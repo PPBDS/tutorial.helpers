@@ -43,7 +43,7 @@ contain:
     })
 
 The first step in testing the tutorials in your package is to determine
-the the full paths to all those tutorials. The
+the full paths to all those tutorials. The
 [`return_tutorial_paths()`](https://ppbds.github.io/tutorial.helpers/reference/return_tutorial_paths.md)
 returns a vector of those paths.
 
@@ -58,8 +58,8 @@ The third step is only relevant for tutorial creators who follow [our
 advice](https://ppbds.github.io/tutorial.helpers/articles/ai.md)
 concerning tutorial construction. In particular,
 [`check_tutorial_defaults()`](https://ppbds.github.io/tutorial.helpers/reference/check_tutorial_defaults.md)
-ensures that, somewhere in each tutorial, you have included the same key
-components as exist in the “Tutorial Helpers” R Markdown template.
+ensures that, somewhere in each tutorial, you have included the required
+child documents: the `info_section` and `download_answers` chunks.
 
 [`check_tutorial_defaults()`](https://ppbds.github.io/tutorial.helpers/reference/check_tutorial_defaults.md)
 also fails if you do not have

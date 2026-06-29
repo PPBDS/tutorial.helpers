@@ -64,7 +64,7 @@
 <div class="section level2">
 <h2 id="about-this-package">About this package<a class="anchor" aria-label="anchor" href="#about-this-package"></a>
 </h2>
-<p><strong>tutorial.helpers</strong> provides functions to help you write R tutorials, especially if you follow <a href="https://ppbds.github.io/tutorial.helpers/articles/ai.html">my advice</a> about the best way to do so. This approach is currently used in several packages, <a href="https://ppbds.github.io/positron.tutorials/" class="external-link"><strong>positron.tutorials</strong></a>.</p>
+<p><strong>tutorial.helpers</strong> provides functions to help you write R tutorials, especially if you follow <a href="https://ppbds.github.io/tutorial.helpers/articles/ai.html">my advice</a> about the best way to do so.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -93,9 +93,9 @@
 <div class="section level4">
 <h4 id="tutorials">Tutorials<a class="anchor" aria-label="anchor" href="#tutorials"></a>
 </h4>
-<p>The package includes three tutorials: “Getting Started,” “Introduction to R,” and “Introduction to Python.” You should require your students to complete the “Getting Started” tutorial if you are creating your own tutorials with <strong>tutorial.helpers</strong> package. For example, in Positron, have students run:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(getting<span class="sc">-</span>started<span class="st">", package = "</span>tutorial.helpers<span class="st">")</span></span></code></pre></div>
-<p>This will teach them enough about how tutorials work to be able to complete the tutorials you write. If you are also teaching R, we strongly recommend the “Introduction to R” tutorial.</p>
+<p>The package includes the “Getting Started” tutorial, which uses VS Code on GitHub Codespaces. You should require your students to complete it if you are creating your own tutorials with the <strong>tutorial.helpers</strong> package. Have students run:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="st">"getting-started"</span>, <span class="at">package =</span> <span class="st">"tutorial.helpers"</span>)</span></code></pre></div>
+<p>This will teach them enough about how tutorials work to be able to complete the tutorials you write.</p>
 </div>
 <div class="section level4">
 <h4 id="download-answers">Download answers<a class="anchor" aria-label="anchor" href="#download-answers"></a>

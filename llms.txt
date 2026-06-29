@@ -5,9 +5,7 @@
 **tutorial.helpers** provides functions to help you write R tutorials,
 especially if you follow [my
 advice](https://ppbds.github.io/tutorial.helpers/articles/ai.html) about
-the best way to do so. This approach is currently used in several
-packages,
-[**positron.tutorials**](https://ppbds.github.io/positron.tutorials/).
+the best way to do so.
 
 ## Installation
 
@@ -60,19 +58,17 @@ for details on their use.
 
 #### Tutorials
 
-The package includes three tutorials: “Getting Started,” “Introduction
-to R,” and “Introduction to Python.” You should require your students to
-complete the “Getting Started” tutorial if you are creating your own
-tutorials with **tutorial.helpers** package. For example, in Positron,
-have students run:
+The package includes the “Getting Started” tutorial, which uses VS Code
+on GitHub Codespaces. You should require your students to complete it if
+you are creating your own tutorials with the **tutorial.helpers**
+package. Have students run:
 
 ``` R
-learnr::run_tutorial(getting-started", package = "tutorial.helpers")
+learnr::run_tutorial("getting-started", package = "tutorial.helpers")
 ```
 
 This will teach them enough about how tutorials work to be able to
-complete the tutorials you write. If you are also teaching R, we
-strongly recommend the “Introduction to R” tutorial.
+complete the tutorials you write.
 
 #### Download answers
 
