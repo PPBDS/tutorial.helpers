@@ -28,24 +28,15 @@ remotes::install_github("PPBDS/tutorial.helpers")
 
 ## Useful tools
 
-#### Tutorial template
+#### Creating a tutorial
 
 To create a new tutorial, you first need a new directory, located in the
-`inst/tutorials` directory of your package. Once you create that
-directory, make sure that your R session is located within it. Then,
-issue this command:
-
-``` R
-> rmarkdown::draft("tutorial.Rmd", 
-                   template = "tutorial_template", 
-                   package = "tutorial.helpers",
-                   edit = TRUE)
-```
-
-This will create a new file, `tutorial.Rmd` in the current directory.
-This highly opinionated template provides [a framework for teaching
-students how to use AI to do data
-science](https://ppbds.github.io/tutorial.helpers/articles/ai.html).
+`inst/tutorials` directory of your package. Create a `tutorial.Rmd` file
+within it. The [AI
+vignette](https://ppbds.github.io/tutorial.helpers/articles/ai.html)
+provides a highly opinionated framework for teaching students how to use
+AI to do data science, including the required `info_section` and
+`download-answers` chunks which every tutorial should contain.
 
 #### Testing
 

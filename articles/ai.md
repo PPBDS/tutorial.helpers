@@ -23,20 +23,25 @@ using the latest development version. Install it with
 
 To create a new tutorial, you first need a new directory, located in the
 `inst/tutorials` directory of your package. Create that directory and
-then move to it with [`setwd()`](https://rdrr.io/r/base/getwd.html).
-Then, run:
+then add a `tutorial.Rmd` file inside it. Tutorials must be named
+`tutorial.Rmd`.
 
-    > rmarkdown::draft("tutorial.Rmd",
-                      template = "tutorial_template",
-                      package = "tutorial.helpers",
-                      edit = TRUE)
+Every tutorial begins with the `info_section`, some default code which
+records a student’s name, email and (optionally) id. Include it near the
+top of the tutorial with a child document chunk:
 
-The template, which is actually
-`inst/rmarkdown/templates/tutoral_template/skeleton.Rmd` in the
-**tutorial.helpers** package, starts with the `info_section`, some
-default code which records a student’s name, email and (optionally) id.
-The template ends with the `download-answers` code chunk which provides
-students with instructions on how to download a copy of their answers.
+```` default
+```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```
+````
+
+Every tutorial ends with the `download-answers` chunk, which provides
+students with instructions on how to download a copy of their answers:
+
+```` default
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
+````
 
 There is a `setup` code chunk at the top of a tutorial. You must have
 [`library(learnr)`](https://rstudio.github.io/learnr/) and, if you use
@@ -1036,12 +1041,14 @@ before submitting a pull request.
   test.
 
 - `devtools::check()`, if you use our recommended test functions from
-  **tutorial.helpers**, will test that all tutorials have the default
-  code chunks exactly as they are in the `tutorial_template` template.
-  So, use the template when you first create your tutorial. If either
-  the “Information” or “Download answers” chunks are missing,
-  `devtools::check()` will return something like “Missing a component
-  part from file /path/to/your/tutorial/tutorial.Rmd”.
+  **tutorial.helpers**, will test that all tutorials include the
+  required child chunks — the `info_section` (the “Information” chunk)
+  and `download_answers` (the “Download answers” chunk) — as well as the
+  required [`library()`](https://rdrr.io/r/base/library.html) calls. So,
+  make sure to include these in every tutorial you create. If either
+  chunk is missing, `devtools::check()` will return something like
+  “Missing child document ‘info_section’ in file
+  /path/to/your/tutorial/tutorial.Rmd”.
 
 - Be careful of the way that Github is sloppy in how it deals with
   capitalization changes, especially when you change the name of a file.
