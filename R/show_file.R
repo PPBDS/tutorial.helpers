@@ -1,9 +1,16 @@
 #' Display the contents of a text file that match a pattern
 #'
 #' This function reads the contents of a text file and either prints the specified range of rows
-#' that match a given regular expression pattern, prints the code lines within R code chunks,
+#' that match a given regular expression pattern, prints the code lines within code chunks,
 #' or extracts the YAML header. If start is a negative number, it prints the last abs(start) lines,
 #' ignoring missing lines at the end of the file. If start is 0, it prints the entire file.
+#'
+#' The arguments are resolved in a fixed order of precedence: `chunk = "YAML"`
+#' is handled first, then `start == 0` (whole file), then `start < 0` (last
+#' abs(start) lines), then `chunk %in% c("All", "Last")` (code chunks), and
+#' finally the `start`/`end` row range. The `pattern` filter is applied within
+#' the whole-file, last-lines, and row-range cases, but is ignored when `chunk`
+#' selects code chunks or the YAML header.
 #'
 #' @param path A character vector representing the path to the text file.
 #' @param start An integer specifying the starting row number (inclusive) to consider. Default is 1.
@@ -11,10 +18,13 @@
 #'              If 0, prints the entire file.
 #' @param end An integer specifying the ending row number (inclusive) to consider. Default is the last row.
 #' @param pattern A regular expression pattern to match against each row. Default is NULL (no pattern matching).
-#' @param chunk A character string indicating what content to extract. 
+#'              Applied to the whole-file (`start == 0`), last-lines (`start < 0`), and row-range cases;
+#'              ignored when `chunk` is "All", "Last", or "YAML".
+#' @param chunk A character string indicating what content to extract.
 #'              Possible values are "None" (default - no chunk processing),
-#'              "All" (print all R code chunks), "Last" (print only the last R code chunk),
-#'              or "YAML" (extract the YAML header without delimiters).
+#'              "All" (print all code chunks), "Last" (print only the last code chunk),
+#'              or "YAML" (extract the YAML header without delimiters). Code chunks of
+#'              any language are recognized (e.g. `r`, `python`, `bash`), not just R.
 #' @return The function prints the contents of the specified range of rows that match the pattern (if provided),
 #'         the code lines within R code chunks (if chunk is "All" or "Last"),
 #'         or the YAML header content (if chunk is "YAML") to the console. If no rows match the pattern,
@@ -83,9 +93,11 @@ show_file <- function(path, start = 1, end = NULL, pattern = NULL, chunk = "None
       stop("No YAML header found.")
     }
     
-    # Find the closing --- for the YAML header
+    # Find the closing --- for the YAML header. seq_len(length(contents))[-1]
+    # gives the indices from 2 to the end, and is empty (rather than c(2, 1))
+    # when the file has only a single line.
     yaml_end <- NULL
-    for (i in 2:length(contents)) {
+    for (i in seq_len(length(contents))[-1]) {
       if (grepl("^---\\s*$", contents[i])) {
         yaml_end <- i
         break
@@ -106,25 +118,38 @@ show_file <- function(path, start = 1, end = NULL, pattern = NULL, chunk = "None
   
   # If start is 0, print the entire file
   if (start == 0) {
-    cat(contents, sep = "\n")
+    selected_contents <- contents
+    if (!is.null(pattern)) {
+      selected_contents <- selected_contents[grepl(pattern, selected_contents)]
+    }
+    if (length(selected_contents) > 0) {
+      cat(selected_contents, sep = "\n")
+    }
     return(invisible(NULL))
   }
-  
+
   # If start is negative, print the last abs(start) lines
   if (start < 0) {
     selected_contents <- tail(contents, abs(start))
-    cat(selected_contents, sep = "\n")
+    if (!is.null(pattern)) {
+      selected_contents <- selected_contents[grepl(pattern, selected_contents)]
+    }
+    if (length(selected_contents) > 0) {
+      cat(selected_contents, sep = "\n")
+    }
     return(invisible(NULL))
   }
   
-  # If chunk is "All" or "Last", print code lines within R code chunks
+  # If chunk is "All" or "Last", print code lines within code chunks. We match
+  # the opening fence of any language (```{r}, ```{python}, ```{bash}, ...),
+  # not just R, so that "Last"/"All" work for every kind of tutorial chunk.
   if (chunk %in% c("All", "Last")) {
     in_chunk <- FALSE
     code_chunks <- list()
     current_chunk <- character()
-    
+
     for (line in contents) {
-      if (grepl("^```\\{r", line)) {
+      if (grepl("^```\\{", line)) {
         in_chunk <- TRUE
         if (length(current_chunk) > 0) {
           code_chunks <- c(code_chunks, list(current_chunk))

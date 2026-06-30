@@ -1,0 +1,18 @@
+---
+title: "Python Test Document"
+---
+
+# Introduction
+
+This is a test document with Python chunks.
+
+```{python}
+import pandas as pd
+```
+
+Some text here.
+
+```{python}
+df = pd.DataFrame({"x": [1, 2, 3]})
+df.head()
+```

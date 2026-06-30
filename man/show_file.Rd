@@ -15,12 +15,15 @@ If 0, prints the entire file.}
 
 \item{end}{An integer specifying the ending row number (inclusive) to consider. Default is the last row.}
 
-\item{pattern}{A regular expression pattern to match against each row. Default is NULL (no pattern matching).}
+\item{pattern}{A regular expression pattern to match against each row. Default is NULL (no pattern matching).
+Applied to the whole-file (\code{start == 0}), last-lines (\code{start < 0}), and row-range cases;
+ignored when \code{chunk} is "All", "Last", or "YAML".}
 
 \item{chunk}{A character string indicating what content to extract.
 Possible values are "None" (default - no chunk processing),
-"All" (print all R code chunks), "Last" (print only the last R code chunk),
-or "YAML" (extract the YAML header without delimiters).}
+"All" (print all code chunks), "Last" (print only the last code chunk),
+or "YAML" (extract the YAML header without delimiters). Code chunks of
+any language are recognized (e.g. \code{r}, \code{python}, \code{bash}), not just R.}
 }
 \value{
 The function prints the contents of the specified range of rows that match the pattern (if provided),
@@ -31,9 +34,17 @@ missing lines at the end of the file. If start is 0, the function prints the ent
 }
 \description{
 This function reads the contents of a text file and either prints the specified range of rows
-that match a given regular expression pattern, prints the code lines within R code chunks,
+that match a given regular expression pattern, prints the code lines within code chunks,
 or extracts the YAML header. If start is a negative number, it prints the last abs(start) lines,
 ignoring missing lines at the end of the file. If start is 0, it prints the entire file.
+}
+\details{
+The arguments are resolved in a fixed order of precedence: \code{chunk = "YAML"}
+is handled first, then \code{start == 0} (whole file), then \code{start < 0} (last
+abs(start) lines), then \code{chunk \%in\% c("All", "Last")} (code chunks), and
+finally the \code{start}/\code{end} row range. The \code{pattern} filter is applied within
+the whole-file, last-lines, and row-range cases, but is ignored when \code{chunk}
+selects code chunks or the YAML header.
 }
 \examples{
 \dontrun{
