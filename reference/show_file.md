@@ -2,7 +2,7 @@
 
 This function reads the contents of a text file and either prints the
 specified range of rows that match a given regular expression pattern,
-prints the code lines within R code chunks, or extracts the YAML header.
+prints the code lines within code chunks, or extracts the YAML header.
 If start is a negative number, it prints the last abs(start) lines,
 ignoring missing lines at the end of the file. If start is 0, it prints
 the entire file.
@@ -33,14 +33,17 @@ show_file(path, start = 1, end = NULL, pattern = NULL, chunk = "None")
 - pattern:
 
   A regular expression pattern to match against each row. Default is
-  NULL (no pattern matching).
+  NULL (no pattern matching). Applied to the whole-file (`start == 0`),
+  last-lines (`start < 0`), and row-range cases; ignored when `chunk` is
+  "All", "Last", or "YAML".
 
 - chunk:
 
   A character string indicating what content to extract. Possible values
-  are "None" (default - no chunk processing), "All" (print all R code
-  chunks), "Last" (print only the last R code chunk), or "YAML" (extract
-  the YAML header without delimiters).
+  are "None" (default - no chunk processing), "All" (print all code
+  chunks), "Last" (print only the last code chunk), or "YAML" (extract
+  the YAML header without delimiters). Code chunks of any language are
+  recognized (e.g. `r`, `python`, `bash`), not just R.
 
 ## Value
 
@@ -51,6 +54,16 @@ chunk is "All" or "Last"), or the YAML header content (if chunk is
 printed. If start is negative, the function prints the last abs(start)
 lines, ignoring missing lines at the end of the file. If start is 0, the
 function prints the entire file.
+
+## Details
+
+The arguments are resolved in a fixed order of precedence:
+`chunk = "YAML"` is handled first, then `start == 0` (whole file), then
+`start < 0` (last abs(start) lines), then `chunk %in% c("All", "Last")`
+(code chunks), and finally the `start`/`end` row range. The `pattern`
+filter is applied within the whole-file, last-lines, and row-range
+cases, but is ignored when `chunk` selects code chunks or the YAML
+header.
 
 ## Examples
 

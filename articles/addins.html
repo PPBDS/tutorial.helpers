@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,8 +74,8 @@
 
     <section class="level2"><h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>We have provided two functions which help in the writing of tutorials: <code><a href="../reference/exercise_creation.html">make_exercise()</a></code> and <code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code>. The first creates a new exercise in the open RMD at the current location of your cursor. The key argument of <code><a href="../reference/exercise_creation.html">make_exercise()</a></code> is <code>type</code>, which is <code>"no-answer"</code> by default. The other allowed values of <code>type</code> are <code>"yes-answer"</code> and <code>"code"</code>. The latter is rarely used. <code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code> reformats the entire open tutorial, mainly ordering exercises correctly and ensuring that chunk labels are correct.</p>
-<p>Make sure that your cursor is located in the correct location.</p>
+<p>We have provided two functions which help in the writing of tutorials: <code><a href="../reference/exercise_creation.html">make_exercise()</a></code> and <code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code>. The first creates a new exercise in the open <code>tutorial.Rmd</code> at the current location of your cursor. The key argument of <code><a href="../reference/exercise_creation.html">make_exercise()</a></code> is <code>type</code>, which is <code>"no-answer"</code> by default. The other allowed values of <code>type</code> are <code>"yes-answer"</code> and <code>"code"</code>. The latter is rarely used. <code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code> reformats the entire open tutorial, mainly ordering exercises correctly and ensuring that chunk labels are correct.</p>
+<p>Both functions act on the file open in your editor, using the active document reported by <code>rstudioapi</code>. They work in any editor which supports that interface, including RStudio, Positron, and VS Code. Make sure that the tutorial you want to edit is the active file and that your cursor is located in the correct location.</p>
 <section class="level3"><h3 id="tutorial-written-exercise-without-and-with-answers">Tutorial Written Exercise (without and with answers)<a class="anchor" aria-label="anchor" href="#tutorial-written-exercise-without-and-with-answers"></a>
 </h3>
 <p><code><a href="../reference/exercise_creation.html">make_exercise()</a></code>, by default, sets <code>type</code> to <code>"no-answer"</code>. It produces a new exercise skeleton with an exercise title and with auto-generated code chunk labels. The Topic, of which this Exercise is a part, is titled “Plotting” so the code chunk id is <code>plotting</code>.</p>
@@ -114,7 +114,7 @@
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>###</span></code></pre></div>
 <p>The “yes-answer” exercises require the tutorial author to provide an (excellent!) answer to the question. This is harder than it looks, especially for questions without a single “right” answer. But it is also a rare opportunity since students will usually study the supplied answer quite closely. They want to check that their answer matches. We can’t allow students to edit their answers to these questions since they might (misuse) that option to just copy/paste/modify our supplied answer.</p>
 <p>The <strong>learnr</strong> package does not allow for hints to written exercises. We could add a test chunk, but that rarely makes sense for a written exercise.</p>
-<p><code>make_exercise(type = "exercise")</code> is not used very often, at least by tutorial authors who believe that teaching students to use AI is of utmost importance.</p>
+<p><code>make_exercise(type = "code")</code> is not used very often, at least by tutorial authors who believe that teaching students to use AI is of utmost importance.</p>
 </section><section class="level3"><h3 id="format-exercise-numbers-and-chunk-labels">Format exercise numbers and chunk labels<a class="anchor" aria-label="anchor" href="#format-exercise-numbers-and-chunk-labels"></a>
 </h3>
 <p>We often need to add a new exercise in the middle of a collection of other exercises. Or, we want to delete one exercise from the middle of the collection. In either scenario, our exercises are now mis-numbered. We either have two Exercise 5’s or we go straight from Exercise 4 to Exercise 6. We want to renumber all the remaining exercises so that there are no duplicates or missing numbers.</p>

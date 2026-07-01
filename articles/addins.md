@@ -6,8 +6,8 @@ We have provided two functions which help in the writing of tutorials:
 [`make_exercise()`](https://ppbds.github.io/tutorial.helpers/reference/exercise_creation.md)
 and
 [`check_current_tutorial()`](https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.md).
-The first creates a new exercise in the open RMD at the current location
-of your cursor. The key argument of
+The first creates a new exercise in the open `tutorial.Rmd` at the
+current location of your cursor. The key argument of
 [`make_exercise()`](https://ppbds.github.io/tutorial.helpers/reference/exercise_creation.md)
 is `type`, which is `"no-answer"` by default. The other allowed values
 of `type` are `"yes-answer"` and `"code"`. The latter is rarely used.
@@ -15,7 +15,11 @@ of `type` are `"yes-answer"` and `"code"`. The latter is rarely used.
 reformats the entire open tutorial, mainly ordering exercises correctly
 and ensuring that chunk labels are correct.
 
-Make sure that your cursor is located in the correct location.
+Both functions act on the file open in your editor, using the active
+document reported by `rstudioapi`. They work in any editor which
+supports that interface, including RStudio, Positron, and VS Code. Make
+sure that the tutorial you want to edit is the active file and that your
+cursor is located in the correct location.
 
 ### Tutorial Written Exercise (without and with answers)
 
@@ -86,7 +90,7 @@ The **learnr** package does not allow for hints to written exercises. We
 could add a test chunk, but that rarely makes sense for a written
 exercise.
 
-`make_exercise(type = "exercise")` is not used very often, at least by
+`make_exercise(type = "code")` is not used very often, at least by
 tutorial authors who believe that teaching students to use AI is of
 utmost importance.
 

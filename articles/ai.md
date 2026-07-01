@@ -83,7 +83,7 @@ cool plots which the student has created. The URL for this new webpage
 is usually the answer to the last exercise in Summary, thereby
 completing the tutorial.
 
-Anytime you ask a student to execute something in the Console, you
+Anytime you ask a student to execute something in the R Terminal, you
 confirm that they have done so with CP/CR, the abbreviation for
 **C**opy/**P**aste the **C**ommand/**R**esponse.
 
@@ -102,9 +102,9 @@ especially useful if you add or delete an exercise in the middle of a
 section.
 
 In olden days, students always needed more practice working in a Quarto
-document (the QMD) and the R Console at the same time. Good data
+document (the QMD) and the R Terminal at the same time. Good data
 scientists used to go back and forth between these two modes, writing
-something in the QMD, executing it in the R Console, editing the QMD,
+something in the QMD, executing it in the R Terminal, editing the QMD,
 executing again, and so on. We used to force students to do that
 repeatedly.
 
@@ -511,7 +511,7 @@ execute:
 
 Render the file again, using `quarto render`. Only the title and author should appear in the HTML.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -533,15 +533,15 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-The third question generally loads the **tidyverse** library into the
-Console:
+The third question generally loads the **tidyverse** library into the R
+Terminal:
 
 ```` default
 ### Exercise 3
 
 Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Enter` to execute that line.
 
-Note how this command causes `library(tidyverse)` to be copied down to the Console and then executed. 
+Note how this command causes `library(tidyverse)` to be copied down to the R Terminal and then executed. 
 
 CP/CR.
 
@@ -567,14 +567,14 @@ I recommend offering these explicit instructions in every tutorial.
 First, students need lots of practice. Second, each time you tell them
 to add something to the QMD, you give yourself an opportunity for a
 knowledge drop. The same applies when you tell students to execute, in
-the Console, a new addition to the QMD.
+the R Terminal, a new addition to the QMD.
 
 ```` default
 ### Exercise 4
 
 <!-- XX: Delete this question if you do not make use of a `data` directory in this tutorial. Note the extra spaces after the command. These are needed to ensure separate lines for each command when students copy/paste. -->
 
-From the Console, run these three commands:
+From the R Terminal, run these three commands:
 
 `getwd()`  
 `dir.create("data")`  
@@ -634,7 +634,7 @@ first exercise of a Section.
 
 We begin by downloading XX directly from GitHub to the `data` directory using `download.file()`. 
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 download.file(
@@ -678,7 +678,7 @@ Consider this example:
 
 Prompt AI to generate R code that ... Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -726,9 +726,9 @@ pipe and compare. We check their code with
 ```` default
 ### Exercise 3
 
-Before creating a plot, we need to ensure that your data matches ours. Run your pipe in the Console and compare your output to the result shown below.
+Before creating a plot, we need to ensure that your data matches ours. Run your pipe in the R Terminal and compare your output to the result shown below.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```
 show_file("analysis.qmd", chunk = "Last")
@@ -794,10 +794,10 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-Note that we need `x` to be created in the QMD, not just in the Console,
-because later chunks will use `x` to create the plot.
+Note that we need `x` to be created in the QMD, not just in the R
+Terminal, because later chunks will use `x` to create the plot.
 
-The third question tells the student to type `x` in the Console,
+The third question tells the student to type `x` in the R Terminal,
 followed by “CP/CR.” The purpose is both to have the student look at the
 tibble and also to set the stage for the actual graphics question. In
 defining `x`, you should probably require that the students keep only a
@@ -806,7 +806,7 @@ reasonable number of variables.
 ```` default
 ### Exercise 5
 
-Within the Console, type `x`, which we previously assigned to a pipe and ran in the Console. Hit `Enter`.
+Within the R Terminal, type `x`, which we previously assigned to a pipe and ran in the R Terminal. Hit `Enter`.
 
 CP/CR.
 
@@ -853,11 +853,11 @@ their own code.
 ```` default
 ### Exercise 6
 
-Ask AI to generate R code that uses `x` to plot a basic graph or calculate and present summary statistics showing XX ... Mention you want to use the data from `x`. If using a chat interface copy/paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
+Ask AI to generate R code that uses `x` to plot a basic graph or calculate and present summary statistics showing XX ... Mention you want to use the data from `x`. If using a chat interface copy/paste the `x` you ran in the R Terminal with the resulting tibble. You only need the top 3 lines, mainly to include column names.
 
 Consider adding a title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `quarto render` to ensure that everything works. Make your plot look nice.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -911,7 +911,7 @@ The last three questions are fairly self-explanatory.
 
 Run `quarto render` to ensure that everything works.  The resulting HTML page should be attractive, showing clean versions of your plot(s).
 
-At the Console, run:
+At the R Terminal, run:
 
 ```
 show_file("analysis.qmd")
@@ -936,7 +936,7 @@ question_text(NULL,
 ```` default
 ### Exercise 2
 
-Publish your rendered QMD to GitHub Pages. In the Terminal --- not the Console! --- run:
+Publish your rendered QMD to GitHub Pages. In the bash Terminal --- not the R Terminal! --- run:
 
 ```
 quarto publish gh-pages analysis.qmd
@@ -987,11 +987,11 @@ Once you are done editing a tutorial, you need to make sure it works,
 either on your own behalf or before you submit a pull request to the
 package maintainer. There are three ways to check:
 
-1.  Type `rmarkdown::render("file_path/tutorial.Rmd")` in the Console.
-    This produces `tutorial.html` in the tutorial directory. Right click
-    the file and select `Open in Browser`. It is smart to use
-    `rmarkdown::render("file_path")` regularly since it will identify
-    syntax errors quickly.
+1.  Type `rmarkdown::render("file_path/tutorial.Rmd")` in the R
+    Terminal. This produces `tutorial.html` in the tutorial directory.
+    Right click the file and select `Open in Browser`. It is smart to
+    use `rmarkdown::render("file_path")` regularly since it will
+    identify syntax errors quickly.
 
 2.  Do a full test, which means running `devtools::check()`, the
     shortcut key for which is `Cmd/Ctrl + Shift + E`. This is the
