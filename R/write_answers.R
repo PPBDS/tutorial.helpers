@@ -22,9 +22,9 @@ write_answers <- function(file, obj) {
   }
 
   out <- tibble::tibble(
-    id = purrr::map_chr(objs, ~ if (is.null(.x$id) || length(.x$id) == 0) NA_character_ else as.character(.x$id)),
-    submission_type = purrr::map_chr(objs, ~ if (is.null(.x$type) || length(.x$type) == 0) NA_character_ else as.character(.x$type)),
-    answer = purrr::map_chr(objs, function(.x) {
+    id = vapply(objs, function(.x) if (is.null(.x$id) || length(.x$id) == 0) NA_character_ else as.character(.x$id), character(1)),
+    submission_type = vapply(objs, function(.x) if (is.null(.x$type) || length(.x$type) == 0) NA_character_ else as.character(.x$type), character(1)),
+    answer = vapply(objs, function(.x) {
       ans <- .x$answer
       if (is.null(ans) || length(ans) == 0) {
         NA_character_
@@ -33,7 +33,7 @@ write_answers <- function(file, obj) {
       } else {
         as.character(ans)
       }
-    })
+    }, character(1))
   )
 
   out <- rbind(c(id = "tutorial-id", submission_type = "none", answer = tutorial_id), out)

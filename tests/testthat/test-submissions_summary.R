@@ -170,16 +170,16 @@ test_that("submissions_summary returns the expected summary tibble with keep_fil
     ),
     `information-name` = c("Aaditya Gupta", "Mithru Narayan Naidu", "Ivy Spratt"),
     answers = c(29L, 29L, 29L)
-  ) %>%
-    dplyr::arrange(source)
+  )
+  expected_output <- expected_output[order(expected_output$source), ]
 
   actual_output <- submissions_summary(
     path = Sys.getenv("TEST_DIR"),
     title = "introduction",
     vars = c("information-name"),
     keep_file_name = "All"
-  ) %>%
-    dplyr::arrange(source)
+  )
+  actual_output <- actual_output[order(actual_output$source), ]
 
   expect_equal(actual_output, expected_output)
 })
@@ -194,16 +194,16 @@ test_that("submissions_summary returns the expected summary tibble with keep_fil
     ),
     `information-name` = c("Aaditya Gupta", "Mithru Narayan Naidu", "Ivy Spratt"),
     answers = c(29L, 29L, 29L)
-  ) %>%
-    dplyr::arrange(`information-name`)
+  )
+  expected_output <- expected_output[order(expected_output$`information-name`), ]
 
   actual_output <- submissions_summary(
     path = Sys.getenv("TEST_DIR"),
     title = "introduction",
     vars = c("information-name"),
     keep_file_name = "Space"
-  ) %>%
-    dplyr::arrange(`information-name`)
+  )
+  actual_output <- actual_output[order(actual_output$`information-name`), ]
 
   expect_equal(actual_output, expected_output)
 })
@@ -217,17 +217,17 @@ test_that("submissions_summary returns the expected summary tibble with keep_fil
     ),
     `information-name` = c("Aaditya Gupta", "Mithru Narayan Naidu", "Ivy Spratt"),
     answers = c(29L, 29L, 29L)
-  ) %>%
-    dplyr::arrange(`information-name`)
-  
+  )
+  expected_output <- expected_output[order(expected_output$`information-name`), ]
+
   actual_output <- submissions_summary(
     path = Sys.getenv("TEST_DIR"),
     title = "introduction",
     vars = c("information-name"),
     keep_file_name = "Underscore"
-  ) %>%
-    dplyr::arrange(`information-name`)
-  
+  )
+  actual_output <- actual_output[order(actual_output$`information-name`), ]
+
   expect_equal(actual_output, expected_output)
 })
 

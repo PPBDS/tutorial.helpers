@@ -15,8 +15,6 @@
 #'   document is used, which is the default behavior. An actual file path is
 #'   used for testing.
 #'
-#' @importFrom rstudioapi getActiveDocumentContext insertText
-#'
 #' @returns Exercise skeleton corresponding to the `type` argument.
 #'
 #' @export

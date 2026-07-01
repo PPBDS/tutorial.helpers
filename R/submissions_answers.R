@@ -19,10 +19,6 @@
 #' @return A tibble with one row per valid submission, columns for each variable,
 #'         and optionally a "source" column
 #'
-#' @importFrom dplyr mutate select
-#' @importFrom tibble tibble as_tibble add_column
-#' @importFrom purrr map_dfr
-#'
 #' @examples
 #' \dontrun{
 #' # Extract specific variables from submissions matching title pattern
@@ -155,7 +151,7 @@ submissions_answers <- function(path, title, key_var = NULL, membership = NULL, 
   }
   
   # Step 3: Extract answers and create final tibble
-  result <- purrr::map_dfr(names(valid_tibbles), function(file_name) {
+  result_rows <- lapply(names(valid_tibbles), function(file_name) {
     tibble_data <- valid_tibbles[[file_name]]
     
     # Create base row with source information if requested
@@ -199,6 +195,8 @@ submissions_answers <- function(path, title, key_var = NULL, membership = NULL, 
     # Convert to tibble
     tibble::as_tibble(row_data)
   })
-  
-  return(result)
+
+  result <- do.call(rbind, result_rows)
+
+  return(tibble::as_tibble(result))
 }

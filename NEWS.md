@@ -2,6 +2,12 @@
 
 * `show_file()` now prints "File is empty." for empty files (or files containing only blank lines) instead of erroring.
 
+* `show_file()` with `chunk = "Last"` or `chunk = "All"` now recognizes code chunks of any language (e.g. Python, bash), not just R.
+
+* `show_file()` now applies the `pattern` filter when `start = 0` (whole file) or `start` is negative (last lines); previously `pattern` was silently ignored in those cases.
+
+* Drop the `dplyr`, `purrr`, and `mime` dependencies, slimming the package's Imports.
+
 * Remove the RMarkdown tutorial template (`skeleton.Rmd`). Tutorials are now created by hand, as described in the "Tutorials in the Age of AI" vignette.
 
 * Remove unused `submission-temp.Rmd` file.

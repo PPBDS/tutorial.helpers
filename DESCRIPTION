@@ -10,7 +10,7 @@ Authors@R:
 Description: Helper functions for creating, editing, and testing tutorials
     created with the 'learnr' package. Provides a simple method for allowing
     students to download their answers to tutorial questions. For examples
-    of its use, see the 'positron.tutorials' and 'r4ds.tutorials' packages.
+    of its use, see the 'r4ds.tutorials' package.
 Depends: 
     R (>= 4.1.0)
 License: MIT + file LICENSE
@@ -28,16 +28,14 @@ Suggests:
     testthat (>= 3.0.0),
     tidyverse
 Config/testthat/edition: 3
-Imports: 
-    dplyr,
+Imports:
     jsonlite,
     learnr,
-    mime,
-    purrr,
     rmarkdown,
     rstudioapi,
     rvest,
     shiny,
-    tibble
+    tibble,
+    utils
 BugReports: https://github.com/PPBDS/tutorial.helpers/issues
 URL: https://ppbds.github.io/tutorial.helpers/, https://github.com/PPBDS/tutorial.helpers

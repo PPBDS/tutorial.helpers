@@ -63,11 +63,11 @@ After the Introduction, there are 1 or 2 sections --- the official **learnr** no
 
 The last section is the *Summary*. It starts with the same overview with which the Introduction began, but in the past tense. It then has a couple exercises which finish up the tutorial by using `quarto publish gh-pages analysis.qmd` to create a webpage featuring the cool plots which the student has created. The URL for this new webpage is usually the answer to the last exercise in Summary, thereby completing the tutorial.
 
-Anytime you ask a student to execute something in the Console, you confirm that they have done so with CP/CR, the abbreviation for **C**opy/**P**aste the **C**ommand/**R**esponse.
+Anytime you ask a student to execute something in the R Terminal, you confirm that they have done so with CP/CR, the abbreviation for **C**opy/**P**aste the **C**ommand/**R**esponse.
 
 [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) includes two particularly helpful functions: `make_exercise()` and `check_current_tutorial()`. Use `make_exercise()` to add a new exercise to the current tutorial. It will number the exercise, and the code chunk labels, automatically. Use `check_current_tutorial()` to renumber all the exercises and relabel the code chunks. This is especially useful if you add or delete an exercise in the middle of a section.
 
-In olden days, students always needed more practice working in a Quarto document (the QMD) and the R Console at the same time. Good data scientists used to go back and forth between these two modes, writing something in the QMD, executing it in the R Console, editing the QMD, executing again, and so on. We used to force students to do that repeatedly.
+In olden days, students always needed more practice working in a Quarto document (the QMD) and the R Terminal at the same time. Good data scientists used to go back and forth between these two modes, writing something in the QMD, executing it in the R Terminal, editing the QMD, executing again, and so on. We used to force students to do that repeatedly.
 
 But that was the pre-AI world. With AI, we rarely edit our Quarto documents directly. Instead, we tell the AI what we want and it edits and then renders the Quarto document, usually showing us the result as an HTML file, viewable in the browser. Our purpose is no longer to teach students how to code. The AI codes. Our purpose is to teach students how to ensure that the results produced by the AI are correct.
 
@@ -318,7 +318,7 @@ execute:
 
 Render the file again, using `quarto render`. Only the title and author should appear in the HTML.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -340,14 +340,14 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-The third question generally loads the **tidyverse** library into the Console:
+The third question generally loads the **tidyverse** library into the R Terminal:
 
 ````{verbatim}
 ### Exercise 3
 
 Place your cursor in the QMD file on the `library(tidyverse)` line. Use `Cmd/Ctrl + Enter` to execute that line.
 
-Note how this command causes `library(tidyverse)` to be copied down to the Console and then executed. 
+Note how this command causes `library(tidyverse)` to be copied down to the R Terminal and then executed. 
 
 CP/CR.
 
@@ -367,7 +367,7 @@ question_text(NULL,
 
 If the target audience for the tutorial is more experienced, you can be less didactic, leaving out several of these instructions. You could also add more steps, like loading more libraries at once.
 
-I recommend offering these explicit instructions in every tutorial. First, students need lots of practice. Second, each time you tell them to add something to the QMD, you give yourself an opportunity for a knowledge drop. The same applies when you tell students to execute, in the Console, a new addition to the QMD. 
+I recommend offering these explicit instructions in every tutorial. First, students need lots of practice. Second, each time you tell them to add something to the QMD, you give yourself an opportunity for a knowledge drop. The same applies when you tell students to execute, in the R Terminal, a new addition to the QMD. 
 
 
 ````{verbatim}
@@ -375,7 +375,7 @@ I recommend offering these explicit instructions in every tutorial. First, stude
 
 <!-- XX: Delete this question if you do not make use of a `data` directory in this tutorial. Note the extra spaces after the command. These are needed to ensure separate lines for each command when students copy/paste. -->
 
-From the Console, run these three commands:
+From the R Terminal, run these three commands:
 
 `getwd()`  
 `dir.create("data")`  
@@ -432,7 +432,7 @@ If you are downloading some data, the natural place to do so is in the first exe
 
 We begin by downloading XX directly from GitHub to the `data` directory using `download.file()`. 
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 download.file(
@@ -468,7 +468,7 @@ Consider this example:
 
 Prompt AI to generate R code that ... Add the code to your QMD in a new chunk. Place your cursor on the first line of the code and run `Cmd/Ctrl + Enter`.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -510,9 +510,9 @@ The first of the three prior questions ensures that the student's data matches o
 ````{verbatim}
 ### Exercise 3
 
-Before creating a plot, we need to ensure that your data matches ours. Run your pipe in the Console and compare your output to the result shown below.
+Before creating a plot, we need to ensure that your data matches ours. Run your pipe in the R Terminal and compare your output to the result shown below.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```
 show_file("analysis.qmd", chunk = "Last")
@@ -573,14 +573,14 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-Note that we need `x` to be created in the QMD, not just in the Console, because later chunks will use `x` to create the plot.
+Note that we need `x` to be created in the QMD, not just in the R Terminal, because later chunks will use `x` to create the plot.
 
-The third question tells the student to type `x` in the Console, followed by "CP/CR." The purpose is both to have the student look at the tibble and also to set the stage for the actual graphics question. In defining `x`, you should probably require that the students keep only a reasonable number of variables.
+The third question tells the student to type `x` in the R Terminal, followed by "CP/CR." The purpose is both to have the student look at the tibble and also to set the stage for the actual graphics question. In defining `x`, you should probably require that the students keep only a reasonable number of variables.
 
 ````{verbatim}
 ### Exercise 5
 
-Within the Console, type `x`, which we previously assigned to a pipe and ran in the Console. Hit `Enter`.
+Within the R Terminal, type `x`, which we previously assigned to a pipe and ran in the R Terminal. Hit `Enter`.
 
 CP/CR.
 
@@ -617,11 +617,11 @@ Now, we can move on to the plotting question. In the age of AI, students will ha
 ````{verbatim}
 ### Exercise 6
 
-Ask AI to generate R code that uses `x` to plot a basic graph or calculate and present summary statistics showing XX ... Mention you want to use the data from `x`. If using a chat interface copy/paste the `x` you ran in the Console with the resulting tibble. You only need the top 3 lines, mainly to include column names.
+Ask AI to generate R code that uses `x` to plot a basic graph or calculate and present summary statistics showing XX ... Mention you want to use the data from `x`. If using a chat interface copy/paste the `x` you ran in the R Terminal with the resulting tibble. You only need the top 3 lines, mainly to include column names.
 
 Consider adding a title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `quarto render` to ensure that everything works. Make your plot look nice.
 
-In the Console, run:
+In the R Terminal, run:
 
 ```         
 show_file("analysis.qmd", chunk = "Last")
@@ -671,7 +671,7 @@ The last three questions are fairly self-explanatory.
 
 Run `quarto render` to ensure that everything works.  The resulting HTML page should be attractive, showing clean versions of your plot(s).
 
-At the Console, run:
+At the R Terminal, run:
 
 ```
 show_file("analysis.qmd")
@@ -697,7 +697,7 @@ question_text(NULL,
 ````{verbatim}
 ### Exercise 2
 
-Publish your rendered QMD to GitHub Pages. In the Terminal --- not the Console! --- run:
+Publish your rendered QMD to GitHub Pages. In the bash Terminal --- not the R Terminal! --- run:
 
 ```
 quarto publish gh-pages analysis.qmd
@@ -746,7 +746,7 @@ In the age of AI, the purpose of a tutorial is to teach students how to create w
 
 Once you are done editing a tutorial, you need to make sure it works, either on your own behalf or before you submit a pull request to the package maintainer. There are three ways to check:
 
-1. Type `rmarkdown::render("file_path/tutorial.Rmd")` in the Console. This produces `tutorial.html` in the tutorial directory. Right click the file and select `Open in Browser`. It is smart to use `rmarkdown::render("file_path")` regularly since it will identify syntax errors quickly. 
+1. Type `rmarkdown::render("file_path/tutorial.Rmd")` in the R Terminal. This produces `tutorial.html` in the tutorial directory. Right click the file and select `Open in Browser`. It is smart to use `rmarkdown::render("file_path")` regularly since it will identify syntax errors quickly. 
 
 2. Do a full test, which means running `devtools::check()`, the shortcut key for which is `Cmd/Ctrl + Shift + E`. This is the equivalent of `R CMD check`. It validates package structure, documentation, tests, and compliance with CRAN standards. A good result would be `0 errors ✔ | 0 warnings ✔ | 0 notes ✔`, but don't worry too much about NOTES.
 

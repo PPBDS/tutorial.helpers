@@ -13,9 +13,7 @@
 #' @param verbose Logical. If TRUE (default), prints detailed progress messages.
 #'
 #' @return Character string. The path to the directory where files were downloaded.
-#' 
-#' @importFrom utils capture.output
-#' 
+#'
 #' @examples
 #' \dontrun{
 #' # Download all files to current directory

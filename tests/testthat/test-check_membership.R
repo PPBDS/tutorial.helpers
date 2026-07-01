@@ -32,10 +32,46 @@ test_that("check_membership returns all tibbles when all emails are included", {
 
 # Test 3: Non-existent key variable - should return empty list
 test_that("check_membership returns empty list for non-existent key variable", {
-  result <- check_membership(tibble_list_test, 
-                           key_var = "nonexistent_var", 
-                           membership = "umaira.nazar09@gmail.com", 
+  result <- check_membership(tibble_list_test,
+                           key_var = "nonexistent_var",
+                           membership = "umaira.nazar09@gmail.com",
                            verbose = FALSE)
-  
+
+  expect_length(result, 0)
+})
+
+# Test 4: verbose = TRUE reports the email summary while returning the same
+# result as verbose = FALSE.
+test_that("check_membership verbose output reports the email summary", {
+  membership <- c("ryanbansal04@gmail.com", "not.a.real.student@gmail.com")
+
+  expect_message(
+    result <- check_membership(tibble_list_test, key_var = "email",
+                               membership = membership, verbose = TRUE),
+    "Email summary:")
+
+  # The kept set still resolves to exactly Ryan's submission.
+  expect_length(result, 1)
+  expect_true("probability_answers - Ryan.html" %in% names(result))
+
+  # Specific summary lines are emitted.
+  expect_message(
+    check_membership(tibble_list_test, key_var = "email",
+                     membership = membership, verbose = TRUE),
+    "Membership emails not found")
+  expect_message(
+    check_membership(tibble_list_test, key_var = "email",
+                     membership = membership, verbose = TRUE),
+    "Final result: 1 tibble")
+})
+
+# Test 5: verbose = TRUE on a key variable that no tibble has reports the
+# early-exit message and returns an empty list.
+test_that("check_membership verbose reports when no tibble has the key var", {
+  expect_message(
+    result <- check_membership(tibble_list_test, key_var = "nonexistent_var",
+                               membership = "ryanbansal04@gmail.com",
+                               verbose = TRUE),
+    "No tibbles contain the required key variable")
   expect_length(result, 0)
 })

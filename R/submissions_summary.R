@@ -19,10 +19,6 @@
 #'         and an additional "answers" column indicating the number of rows in each tibble.
 #'         If `return_value` is "All", returns a tibble with all the data combined from all the files.
 #'
-#' @importFrom dplyr select slice mutate bind_rows all_of
-#' @importFrom purrr map_dfr
-#' @importFrom tibble as_tibble tibble add_column
-#'
 #' @examples
 #' \dontrun{
 #' # Process submissions from local directory
@@ -123,10 +119,10 @@ submissions_summary <- function(path,
     # Process results for this pattern based on return_value
     if (return_value == "Summary") {
       if (length(filtered_tibble_list) > 0) {
-        summary_tibble <- purrr::map_dfr(names(filtered_tibble_list), function(file_name) {
+        summary_rows <- lapply(names(filtered_tibble_list), function(file_name) {
           tibble_data <- filtered_tibble_list[[file_name]]
           answers <- nrow(tibble_data)
-          
+
           if (!is.null(keep_file_name)) {
             if (keep_file_name == "All") {
               source_name <- file_name
@@ -138,32 +134,32 @@ submissions_summary <- function(path,
           } else {
             source_name <- NULL
           }
-          
-          summary_row <- dplyr::slice(tibble_data, 1) |>
-            dplyr::select(all_of(vars)) |>
-            dplyr::mutate(answers = answers)
-          
+
+          # First row, keeping only the requested vars, plus an answers count.
+          summary_row <- tibble_data[1, vars, drop = FALSE]
+          summary_row[["answers"]] <- answers
+
           if (!is.null(source_name)) {
             summary_row <- tibble::add_column(summary_row, source = source_name, .before = 1)
           }
-          
+
           summary_row
         })
-        all_pattern_results[[current_title]] <- summary_tibble
+        all_pattern_results[[current_title]] <- do.call(rbind, summary_rows)
       }
     }
     else if (return_value == "All") {
       if (length(filtered_tibble_list) > 0) {
-        all_tibble <- dplyr::bind_rows(filtered_tibble_list)
+        all_tibble <- do.call(rbind, filtered_tibble_list)
         all_pattern_results[[current_title]] <- all_tibble
       }
     }
   }
-  
+
   # Combine results from all patterns
   if (length(all_pattern_results) > 0) {
-    combined_results <- dplyr::bind_rows(all_pattern_results)
-    return(combined_results)
+    combined_results <- do.call(rbind, all_pattern_results)
+    return(tibble::as_tibble(combined_results))
   } else {
     return(tibble::tibble())
   }

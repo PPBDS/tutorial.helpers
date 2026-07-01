@@ -104,7 +104,6 @@
 #'   )
 #' }
 #'
-#' @importFrom jsonlite read_json write_json toJSON
 #' @export
 
 set_positron_settings <- function(home_dir = path.expand("~"), 

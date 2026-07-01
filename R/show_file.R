@@ -58,8 +58,6 @@
 #' show_file("path/to/your/file.txt", start = -5)
 #' }
 #'
-#' @importFrom utils tail
-#'
 #' @export
 
 show_file <- function(path, start = 1, end = NULL, pattern = NULL, chunk = "None") {
@@ -130,7 +128,7 @@ show_file <- function(path, start = 1, end = NULL, pattern = NULL, chunk = "None
 
   # If start is negative, print the last abs(start) lines
   if (start < 0) {
-    selected_contents <- tail(contents, abs(start))
+    selected_contents <- utils::tail(contents, abs(start))
     if (!is.null(pattern)) {
       selected_contents <- selected_contents[grepl(pattern, selected_contents)]
     }

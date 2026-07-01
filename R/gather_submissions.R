@@ -142,7 +142,7 @@ handle_google_drive_url <- function(path, title, keep_loc, verbose) {
   
   # Capture output to suppress the cat() messages if not verbose
   if (!verbose) {
-    invisible(capture.output({
+    invisible(utils::capture.output({
       downloaded_path <- download_google_drive(url = path, path = download_base_path, title = title)
     }))
   } else {
@@ -183,24 +183,13 @@ filter_html_xml_files <- function(all_files, real_path, verbose) {
     return(character(0))
   }
   
-  # Check if mime package is available
-  if (!requireNamespace("mime", quietly = TRUE)) {
-    stop("Package 'mime' is required. Please install it with: install.packages('mime')")
-  }
-  
   full_file_paths <- file.path(real_path, all_files)
-  
+
   html_xml_files <- sapply(full_file_paths, function(file) {
     if (!file.exists(file)) return(FALSE)
-    
-    # Check MIME type
-    mime_type <- tryCatch({
-      mime::guess_type(file)
-    }, error = function(e) "")
-    
-    # Check both MIME type and extension
-    grepl("html|xml", mime_type, ignore.case = TRUE) || 
-      grepl("\\.(html?|xml)$", basename(file), ignore.case = TRUE)
+
+    # Identify HTML/XML files by their extension.
+    grepl("\\.(html?|xml)$", basename(file), ignore.case = TRUE)
   })
   
   html_xml_file_names <- all_files[html_xml_files]
