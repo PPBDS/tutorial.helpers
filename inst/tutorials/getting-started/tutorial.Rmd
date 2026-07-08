@@ -249,11 +249,7 @@ question_text(NULL,
 @ppbds-student ➜ /workspaces/codespace-starter $ head .devcontainer/STUDENT_WORKFLOW.md
 # Student workflow
 
-This Codespace is your **workshop** — it already has R, Python (with the usual
-data-science libraries), Quarto, the AI assistants, and all the right settings. But this `codespace-starter` repo isn't
-*yours*, so you won't save your work here. Instead, you'll make your **own
-repo** and work in it. The tools travel with the Codespace, so your repo needs
-no setup of its own.
+This Codespace is your **workshop** — it already has R, Python (with the usual data-science libraries), Quarto, the AI assistants, and all the right settings. But this` `codespace-starter` repo isn't *yours*, so you won't save your work here. Instead, you'll make your **own repo** and work in it. The tools travel with the Codespace, so your repo needs no setup of its own.
 
 ## 1. Create or connect to your repo (one command)
 
@@ -619,6 +615,8 @@ R 4.5.3>
 You can also see the new file without the Terminal. Click the Explorer icon at the top of the Activity Bar, on the far left of the VS Code window. The Explorer lists every file in your working directory, and `presidents.txt` should now appear there. Click on it to open the file in the Editor and read its contents directly. The Explorer is the easiest way to keep an eye on the files Copilot creates and edits for you --- and you should always check, because AI makes mistakes.
 
 <!-- XX: The GitHub Copilot section still needs more exercises (about eight). Likely arc: ask Copilot to edit presidents.txt (e.g. add more presidents or a column), confirm with show_file(); ask Copilot to create a small R script and run it; ask Copilot to explain a piece of code. Each exercise follows the same instruction -> confirm-with-show_file()/ls -> answer / ### / knowledge-drop format. (No Copilot image exists yet in images/; add one when available.) -->
+
+<!-- Explain the key different ways we can "run" something. -->
 
 ## Your answers
 ###
