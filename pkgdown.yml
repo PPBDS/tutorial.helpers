@@ -1,12 +1,12 @@
 pandoc: 3.8.3
-pkgdown: 2.2.0
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   addins: addins.html
   ai: ai.html
   downloads: downloads.html
   testing: testing.html
-last_built: 2026-07-01T02:27Z
+last_built: 2026-07-08T21:47Z
 urls:
   reference: https://ppbds.github.io/tutorial.helpers/reference
   article: https://ppbds.github.io/tutorial.helpers/articles
