@@ -1,0 +1,16 @@
+---
+title: "Test Document"
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+penguins
+<div data-pagedtable="false">
+  <script data-pagedtable-source type="application/json">
+{"columns":[{"label":["species"],"name":[1],"type":["fct"]}],"data":[["Adelie"]]}
+  </script>
+</div>
+```

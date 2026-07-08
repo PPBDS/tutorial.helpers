@@ -219,4 +219,45 @@ test_that("show_file function works correctly", {
   writeLines("only one line", one_line_file)
   on.exit(unlink(one_line_file), add = TRUE)
   expect_error(show_file(one_line_file, chunk = "YAML"), "No YAML header found.")
+
+  # Test case 28: chunk = "Last" strips embedded pagedtable HTML that VS
+  # Code's interactive chunk execution can cache back into a .qmd file
+  test_file_pagedtable <- test_path("fixtures", "show_file_pagedtable_test.qmd")
+  expect_equal(paste(capture.output(show_file(test_file_pagedtable, chunk = "Last")), collapse = "\n"),
+               "penguins")
+
+  # Test case 29: chunk = "All" strips pagedtable HTML from every chunk
+  expect_equal(paste(capture.output(show_file(test_file_pagedtable, chunk = "All")), collapse = "\n"),
+               paste(c(
+                 "library(tidyverse)",
+                 "",
+                 "penguins"
+               ), collapse = "\n"))
+
+  # Test case 30: pagedtable HTML is stripped even outside chunk mode
+  expect_false(grepl("pagedtable",
+                      paste(capture.output(show_file(test_file_pagedtable, start = 0)), collapse = "\n")))
+
+  # Test case 31: nested <div> tags inside the pagedtable JSON payload do
+  # not confuse the stripping logic
+  nested_div_file <- tempfile(fileext = ".qmd")
+  writeLines(c(
+    "```{r}",
+    "df",
+    '<div data-pagedtable="false">',
+    '  <script data-pagedtable-source type="application/json">',
+    '{"data":[["<div>nested</div>"]]}',
+    "  </script>",
+    "</div>",
+    "```"
+  ), nested_div_file)
+  on.exit(unlink(nested_div_file), add = TRUE)
+  expect_equal(paste(capture.output(show_file(nested_div_file, chunk = "Last")), collapse = "\n"),
+               "df")
+
+  # Test case 32: strip_pagedtable_html() is a no-op on ordinary lines
+  expect_equal(strip_pagedtable_html(c("a <- 1", "b <- 2")), c("a <- 1", "b <- 2"))
+
+  # Test case 33: strip_pagedtable_html() handles an empty vector
+  expect_equal(strip_pagedtable_html(character(0)), character(0))
 })
