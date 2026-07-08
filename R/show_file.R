@@ -1,3 +1,51 @@
+#' Remove embedded pagedtable HTML artifacts from a vector of lines
+#'
+#' VS Code's interactive chunk execution can cache a chunk's rendered output
+#' directly back into the .qmd/.Rmd source file. When the chunk's output is a
+#' tibble, that cached output is a pagedtable HTML widget (a `<div
+#' data-pagedtable="false">` block wrapping a `<script
+#' data-pagedtable-source>` JSON blob). Because this cached output can end up
+#' inside the same fenced region as the code itself, show_file()'s chunk
+#' extraction can otherwise return this HTML noise instead of clean source
+#' code. This helper strips any such blocks out of a character vector of
+#' lines before they are printed.
+#'
+#' @param lines A character vector of lines (as returned by readLines()).
+#' @return A character vector with any pagedtable HTML blocks removed.
+#' @keywords internal
+strip_pagedtable_html <- function(lines) {
+  if (length(lines) == 0) {
+    return(lines)
+  }
+
+  keep <- rep(TRUE, length(lines))
+  depth <- 0
+  in_block <- FALSE
+
+  for (i in seq_along(lines)) {
+    line <- lines[i]
+
+    # A pagedtable block always starts with a <div data-pagedtable...> tag.
+    if (!in_block && grepl("^\\s*<div\\s+data-pagedtable", line)) {
+      in_block <- TRUE
+      depth <- 0
+    }
+
+    if (in_block) {
+      keep[i] <- FALSE
+      # Track nested <div ...> / </div> tags so we find the *matching*
+      # closing tag rather than the first </div> we see.
+      depth <- depth + lengths(regmatches(line, gregexpr("<div\\b", line)))
+      depth <- depth - lengths(regmatches(line, gregexpr("</div>", line)))
+      if (depth <= 0) {
+        in_block <- FALSE
+      }
+    }
+  }
+
+  lines[keep]
+}
+
 #' Display the contents of a text file that match a pattern
 #'
 #' This function reads the contents of a text file and either prints the specified range of rows
@@ -74,6 +122,16 @@ show_file <- function(path, start = 1, end = NULL, pattern = NULL, chunk = "None
   
   # Read the contents of the file
   contents <- readLines(path)
+
+  # VS Code's interactive chunk execution can cache a chunk's rendered
+  # output directly back into the .qmd/.Rmd source file. When the chunk's
+  # output is a tibble, that cached output is a pagedtable HTML widget (a
+  # `<div data-pagedtable="false">` block wrapping a `<script
+  # data-pagedtable-source>` JSON blob), and it can end up inside the same
+  # fenced region as the code itself. Strip any such blocks here, up front,
+  # so every code path below (YAML, whole-file, tail, chunk extraction, and
+  # row-range) sees clean source text rather than rendered-output noise.
+  contents <- strip_pagedtable_html(contents)
   
   # Remove trailing empty lines from the contents
   while (length(contents) > 0 && contents[length(contents)] == "") {
