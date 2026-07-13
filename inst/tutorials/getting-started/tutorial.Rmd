@@ -601,18 +601,16 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> tutorial.helpers::show_file("presidents.txt")
 George Washington
 John Adams
 Thomas Jefferson
 James Madison
 James Monroe
-R 4.5.3>
 ````
 
 ###
 
-You can also see the new file without the Terminal. Click the Explorer icon at the top of the Activity Bar, on the far left of the VS Code window. The Explorer lists every file in your working directory, and `presidents.txt` should now appear there. Click on it to open the file in the Editor and read its contents directly. The Explorer is the easiest way to keep an eye on the files AI creates and edits for you --- and you should always check, because AI makes mistakes.
+You can also see the new file without the Terminal. Click the Explorer icon at the top of the Activity Bar, on the far left of the VS Code window. The Explorer lists every file in your working directory, and `presidents.txt` should now appear there. Click on it to open the file in the Editor and see its contents directly. The Explorer is the easiest way to keep an eye on the files AI creates and edits for you --- and you should always check, because AI makes mistakes.
 
 ### Exercise 3
 
@@ -642,7 +640,6 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> tutorial.helpers::show_file("presidents.txt")
 George Washington
 John Adams
 Thomas Jefferson
@@ -653,7 +650,6 @@ Andrew Jackson
 Martin Van Buren
 William Henry Harrison
 John Tyler
-R 4.5.3>
 ````
 
 ###
