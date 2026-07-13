@@ -453,7 +453,7 @@ R 4.5.3>
 
 ###
 
-Your version of R may be more recent, but it should not be older. `R.version.string` is not a function call --- it has no parentheses --- but a built-in variable whose value R simply prints.
+Your version of R may differ from the example above --- that's fine, as long as it's reasonably recent. `R.version.string` is not a function call --- it has no parentheses --- but a built-in variable whose value R simply prints.
 
 ### Exercise 5
 
