@@ -540,7 +540,7 @@ Again, your answer never needs to match ours exactly.
 ## GitHub Copilot
 ###
 
-Your Codespace includes **GitHub Copilot**, an AI coding assistant that can answer questions, explain code, create and edit files, and run commands for you. Learning to work with AI is now a core data science skill, and the rest of your tutorials will lean on it heavily.
+Your Codespace includes **GitHub Copilot**, an AI coding assistant that can answer questions, explain code, create and edit files, and run commands for you. 
 
 Copilot Chat usually opens automatically when your Codespace starts. If it is not open, click the menu button in the top-left corner, marked with a red circle below. Select **View**, and then click **Chat**, marked with a red rectangle. You can also open Chat by pressing `Ctrl + Alt + I`.
 
@@ -577,7 +577,7 @@ Hello David! How can I help you today?
 
 ###
 
-GitHub Copilot is a conversational AI assistant, the same kind of technology behind tools like ChatGPT. You "talk" to it in plain English, and it responds. Your exact response will differ from ours --- AI does not give the same answer twice --- and that is fine.
+GitHub Copilot works like like ChatGPT. You "talk" to it in plain English, and it responds. Your exact response will differ from ours --- AI does not give the same answer twice --- and that is fine.
 
 ### Exercise 2
 
@@ -587,9 +587,7 @@ Copilot can do much more than chat: in Agent mode, it can create and edit files 
 Make a file called presidents.txt which includes the names of the first 5 US Presidents.
 ```
 
-Copilot will create the file in your working directory. If it asks you to keep or accept the change, do so. To confirm that the file exists, switch to your R Terminal and run:
-
-Copilot may open the new file in the Editor and display a **Keep** button. Click **Keep** to accept the file.
+Copilot will create the file in your working directory. Copilot may open the new file in the Editor and display a **Keep** button. Click **Keep** to accept the file.
 
 ```{r}
 include_graphics("images/cs-copilot-keep-editor.png")
@@ -600,6 +598,8 @@ The **Keep** button may also appear in a smaller change summary near the Copilot
 ```{r, out.width = '45%'}
 include_graphics("images/cs-copilot-keep-summary.png")
 ```
+
+From the R Terminal, run:
 
 ```
 tutorial.helpers::show_file("presidents.txt")
@@ -705,7 +705,7 @@ R 4.5.3>
 
 ###
 
-Your path may differ from ours. The Run Source button saves the open file and sends a `source()` command with its full path to the active R Terminal. The setting `echo = TRUE` displays each instruction before R executes it.
+The Run Source button saves the open file and sends a `source()` command with its full path to the active R Terminal. The setting `echo = TRUE` results in each instruction being displayed before R executes it.
 
 ### Exercise 5
 
@@ -732,7 +732,7 @@ R 4.5.3>
 
 ###
 
-`Cmd` refers to macOS and `Ctrl` to Windows, Linux, and most Chromebook keyboards. The Editor must have focus so VS Code knows which line to send to the active R Terminal.
+The Editor must have focus so VS Code knows which line to send to the active R Terminal.
 
 ### Exercise 6
 
@@ -800,7 +800,7 @@ AI can also run files for you. Return to Copilot Chat and tell your AI:
 Run script.R
 ```
 
-Copilot will usually choose a command such as `Rscript script.R`. If it asks for permission, confirm that the proposed command runs `script.R`, and then approve it. Copilot should report the result in the Chat view. Enter that result in the box below.
+Copilot will usually choose a command such as `Rscript script.R`. If it asks for permission, provide it. Copilot should report the result in the Chat view. Enter that result in the box below.
 
 ```{r ai-assistant-8}
 question_text(NULL,
@@ -817,7 +817,7 @@ question_text(NULL,
 
 ###
 
-You have now run the same script five ways: with the Run Source button, with two Editor keyboard shortcuts, by typing `Rscript` in a bash Terminal, and by asking Copilot to run `Rscript`. Asking Copilot delegates the work, but Copilot still uses commands on the computer to carry it out.
+You have now run the same script five ways: with the Run Source button, with two keyboard shortcuts, by typing `Rscript` in a bash Terminal, and by asking Copilot to run `Rscript`. Asking Copilot delegates the work, but Copilot still uses commands on the computer to carry it out.
 
 ### Exercise 9
 
