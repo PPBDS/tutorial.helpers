@@ -39,7 +39,7 @@ include_graphics("images/cs-start-tutorial.png")
 
 ###
 
-Complete the tutorial in your Codespace. At the end, you will press a button to download a copy of your answers to the `Downloads` folder on your computer. Finally, submit your answers to your instructor and/or keep a copy for yourself.
+Complete the tutorial in your Codespace. At the end, you will press a button to download a copy of your answers to the `Downloads` folder on your computer. Downloading only saves the file on your computer. If your instructor wants a copy, they will tell you how to send it to them.
 
 ###
 
@@ -537,22 +537,28 @@ tutorial.helpers provides functions to help you write R tutorials, especially if
 
 Again, your answer never needs to match ours exactly.
 
-## AI Assistant
+## GitHub Copilot
 ###
 
-Your Codespace includes AI coding assistants that run in a bash Terminal. They can answer questions, explain code, create and edit files, and run commands for you. Learning to work with AI is now a core data science skill, and the rest of your tutorials will lean on it heavily.
+Your Codespace includes **GitHub Copilot**, an AI coding assistant that can answer questions, explain code, create and edit files, and run commands for you. Learning to work with AI is now a core data science skill, and the rest of your tutorials will lean on it heavily.
 
-We will use **Codex** in this tutorial. Press the plus button (`+`) on the right side of the Panel to open a new bash Terminal. Run `codex` and follow the sign-in instructions if they appear. Codex then displays a prompt in the Terminal where you can type messages. Keep that Terminal open throughout this section. If your instructor asks you to use a different installed assistant, such as `claude`, the same prompts should work, although the screen and responses will differ.
+Copilot Chat usually opens automatically when your Codespace starts. If it is not open, click the menu button in the top-left corner, marked with a red circle below. Select **View**, and then click **Chat**, marked with a red rectangle. You can also open Chat by pressing `Ctrl + Alt + I`.
+
+```{r}
+include_graphics("images/cs-open-copilot-chat.png")
+```
+
+When the Copilot Chat view opens, select **Agent** from the mode menu near the chat box. Agent mode lets Copilot work with files and Terminals in your Codespace. If you are asked to sign in or authorize GitHub Copilot, follow the instructions on the screen. Keep the Chat view open throughout this section.
 
 ### Exercise 1
 
-At the Codex prompt, type the following message and press `Enter`. Replace `<your-name>` with your actual name.
+In the Copilot chat box, type the following message and press `Enter`. Replace `<your-name>` with your actual name.
 
 ```
 Hello! My name is <your-name>
 ```
 
-Copy Codex's response into the box below. This is the only exercise in which we ask you to copy what the AI says back; usually we will confirm its work in another way.
+Copy Copilot's response into the box below. This is the only exercise in which we ask you to copy what the AI says back; usually we will confirm its work in another way.
 
 ```{r ai-assistant-1}
 question_text(NULL,
@@ -571,17 +577,29 @@ Hello David! How can I help you today?
 
 ###
 
-Codex is a conversational AI assistant, the same kind of technology behind tools like ChatGPT. You "talk" to it in plain English, and it responds. Your exact response will differ from ours --- AI does not give the same answer twice --- and that is fine.
+GitHub Copilot is a conversational AI assistant, the same kind of technology behind tools like ChatGPT. You "talk" to it in plain English, and it responds. Your exact response will differ from ours --- AI does not give the same answer twice --- and that is fine.
 
 ### Exercise 2
 
-Codex can do much more than chat: it can create and edit files for you. At the Codex prompt, type the following message and press `Enter`.
+Copilot can do much more than chat: in Agent mode, it can create and edit files for you. Send this message:
 
 ```
 Make a file called presidents.txt which includes the names of the first 5 US Presidents.
 ```
 
-Codex will create the file in your working directory. To confirm that it did, switch to your R Terminal and run:
+Copilot will create the file in your working directory. If it asks you to keep or accept the change, do so. To confirm that the file exists, switch to your R Terminal and run:
+
+Copilot may open the new file in the Editor and display a **Keep** button. Click **Keep** to accept the file.
+
+```{r}
+include_graphics("images/cs-copilot-keep-editor.png")
+```
+
+The **Keep** button may also appear in a smaller change summary near the Copilot chat box.
+
+```{r, out.width = '45%'}
+include_graphics("images/cs-copilot-keep-summary.png")
+```
 
 ```
 tutorial.helpers::show_file("presidents.txt")
@@ -610,20 +628,26 @@ James Monroe
 
 ###
 
-You can also see the new file without the Terminal. Click the Explorer icon at the top of the Activity Bar, on the far left of the VS Code window. The Explorer lists every file in your working directory, and `presidents.txt` should now appear there. Click on it to open the file in the Editor and see its contents directly. The Explorer is the easiest way to keep an eye on the files AI creates and edits for you --- and you should always check, because AI makes mistakes.
+You can also see the new file without using the Terminal. Click the Explorer icon at the top of the Activity Bar. The Explorer lists every file in your working directory, and `presidents.txt` should now appear there. Click on it to open the file in the Editor and see its contents directly. The Explorer is useful whenever you want to inspect a file that AI created or edited.
+
+The Explorer icon is marked with a red square below.
+
+```{r}
+include_graphics("images/cs-open-explorer.png")
+```
 
 ### Exercise 3
 
-Codex can edit a file as well as create one. At the Codex prompt, send this message:
+We are done with the presidents example. Now ask Copilot to create a very small R program. Send this message:
 
 ```
-Add the sixth through tenth U.S. presidents to presidents.txt. The finished file must have exactly ten lines, with one unnumbered name on each line and no heading or blank lines.
+Create an R script called script.R containing only this line: 2 + 2. Do not run the script.
 ```
 
-After Codex finishes, verify its work in the R Terminal by running:
+If Copilot asks you to keep or accept the file, do so. Then run this command in the R Terminal:
 
 ```
-tutorial.helpers::show_file("presidents.txt")
+tutorial.helpers::show_file("script.R")
 ```
 
 CP/CR.
@@ -634,41 +658,29 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 13)
+	rows = 5)
 ```
 
 ###
 
 ````
-George Washington
-John Adams
-Thomas Jefferson
-James Madison
-James Monroe
-John Quincy Adams
-Andrew Jackson
-Martin Van Buren
-William Henry Harrison
-John Tyler
+2 + 2
 ````
 
 ###
 
-When you ask AI to edit a file, always inspect the result. A confident response does not guarantee that it used the right file, preserved the existing content, or followed every instruction.
+An R script is a plain-text file whose name ends in `.R`. Creating or opening a script does not run it. Running the script means asking R to execute the instructions saved inside it.
 
 ### Exercise 4
 
-Now ask Codex to turn the text file into a small R program. Send this message:
+In the Explorer, click `script.R` to open it in the Editor. Click the triangular **Run Source** button in the upper-right corner of the Editor. Look in the R Terminal for the generated `source()` command, the line of code, and its result.
 
-```
-Create an R script named presidents.R. In the script, use readLines("presidents.txt") to save the names in an object called presidents, and then print presidents. Do not run the script yet.
-```
+The Run Source button is marked with a red square below.
 
-Verify the new script in the R Terminal by running:
-
-```
-tutorial.helpers::show_file("presidents.R")
-```
+<div style="position: relative; width: 90%; margin: 1em auto;">
+  <img src="images/cs-run-source.png" alt="VS Code Editor with script.R open" style="display: block; width: 100%; height: auto;">
+  <div aria-hidden="true" style="position: absolute; left: 93.1%; top: 0.5%; width: 1.9%; height: 4.5%; border: 4px solid red; box-sizing: border-box;"></div>
+</div>
 
 CP/CR.
 
@@ -678,25 +690,26 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 6)
+	rows = 10)
 ```
 
 ###
 
 ````
-R 4.5.3> tutorial.helpers::show_file("presidents.R")
-presidents <- readLines("presidents.txt")
-print(presidents)
+R 4.5.3> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
+
+> 2 + 2
+[1] 4
 R 4.5.3>
 ````
 
 ###
 
-An R script is a plain-text file whose name ends in `.R`. Creating or opening a script does not run it. Running the script means asking R to execute the instructions saved inside it.
+Your path may differ from ours. The Run Source button saves the open file and sends a `source()` command with its full path to the active R Terminal. The setting `echo = TRUE` displays each instruction before R executes it.
 
 ### Exercise 5
 
-In the Explorer, click `presidents.R` to open it in the Editor. Click the triangular **Run Source** button in the upper-right corner of the Editor. Look in the R Terminal for the `source()` command and its response.
+Make sure `script.R` is still open. Place your cursor on the line `2 + 2` and press `Cmd/Ctrl + Enter`. This runs the current line rather than sourcing the entire file.
 
 CP/CR.
 
@@ -706,38 +719,125 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 18)
+	rows = 7)
 ```
 
 ###
 
-Your path and the formatting of the output may differ from ours.
-
 ````
-R 4.5.3> source("/workspaces/codespace-starter/presidents.R", encoding = "UTF-8", echo = TRUE)
-
-> presidents <- readLines("presidents.txt")
-
-> print(presidents)
- [1] "George Washington"       "John Adams"
- [3] "Thomas Jefferson"        "James Madison"
- [5] "James Monroe"            "John Quincy Adams"
- [7] "Andrew Jackson"          "Martin Van Buren"
- [9] "William Henry Harrison"  "John Tyler"
+R 4.5.3> 2 + 2
+[1] 4
 R 4.5.3>
 ````
 
 ###
 
-The Run Source button saves the open file and sends a `source()` command with its full path to the active R Terminal. This Codespace adds `echo = TRUE`, which displays each instruction from the script as R executes it. The printed names are the response produced by the script.
+`Cmd` refers to macOS and `Ctrl` to Windows, Linux, and most Chromebook keyboards. The Editor must have focus so VS Code knows which line to send to the active R Terminal.
 
 ### Exercise 6
 
-Make sure `presidents.R` is still open and that your cursor is in the Editor. Run the entire script again, this time without clicking the button: press `Cmd/Ctrl + Shift + S`.
-
-When it finishes, copy the generated `source()` command from the R Terminal into the box below. On the next line, write whether the names printed by the shortcut match those printed by the button.
+Keep your cursor in the `script.R` Editor and press `Cmd/Ctrl + Shift + Enter`. This sources the entire file with echo, just like the Run Source button. CP/CR.
 
 ```{r ai-assistant-6}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 10)
+```
+
+###
+
+````
+R 4.5.3> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
+
+> 2 + 2
+[1] 4
+R 4.5.3>
+````
+
+###
+
+The button and the keyboard shortcut both source the saved file in your current R session. Running the current line also uses that session, but it sends only the line where your cursor is located.
+
+### Exercise 7
+
+Now run the script outside your open R session. Press the plus button (`+`) on the right side of the Panel to open a new bash Terminal. At the bash prompt, run:
+
+```
+Rscript script.R
+```
+
+CP/CR.
+
+```{r ai-assistant-7}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 8)
+```
+
+###
+
+````
+/workspaces/codespace-starter (main) $ Rscript script.R
+[1] 4
+/workspaces/codespace-starter (main) $
+````
+
+###
+
+`Rscript` starts a new R process, runs the file, and closes that process when the script finishes. It does not use the R session that is already open in your other Terminal.
+
+### Exercise 8
+
+AI can also run files for you. Return to Copilot Chat and tell your AI:
+
+```
+Run script.R
+```
+
+Copilot will usually choose a command such as `Rscript script.R`. If it asks for permission, confirm that the proposed command runs `script.R`, and then approve it. Copilot should report the result in the Chat view. Enter that result in the box below.
+
+```{r ai-assistant-8}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 2)
+```
+
+###
+
+`4`
+
+###
+
+You have now run the same script five ways: with the Run Source button, with two Editor keyboard shortcuts, by typing `Rscript` in a bash Terminal, and by asking Copilot to run `Rscript`. Asking Copilot delegates the work, but Copilot still uses commands on the computer to carry it out.
+
+### Exercise 9
+
+So far, `script.R` calculates `2 + 2` and displays the result, but it does not give that result a name. In R, an **object** is a name used to store a value so you can use it again. The instruction `x <- 2 + 2` creates an object named `x` and stores the value `4` in it. An object exists only in the R session where it was created.
+
+Then ask Copilot to edit and run the script:
+
+```
+Edit script.R so its only line is x <- 2 + 2. Then run it with Rscript.
+```
+
+If Copilot asks for permission, inspect and approve the command. When it finishes, return to the same R Terminal and run:
+
+```
+exists("x")
+```
+
+CP/CR.
+
+```{r ai-assistant-9}
 question_text(NULL,
 	answer(NULL, correct = TRUE),
 	allow_retry = TRUE,
@@ -749,154 +849,24 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> source("/workspaces/codespace-starter/presidents.R", encoding = "UTF-8", echo = TRUE)
-The shortcut printed the same names as the button.
-````
-
-###
-
-`Cmd/Ctrl + Shift + S` is the keyboard shortcut for the same Run Source action as the button. `Cmd` refers to macOS and `Ctrl` to Windows, Linux, and most Chromebook keyboards. The Editor must have focus so that VS Code knows which file to source.
-
-### Exercise 7
-
-The button and shortcut both construct a command that you can type yourself. In the R Terminal, run these two commands:
-
-```
-source("presidents.R", echo = TRUE)
-exists("presidents")
-```
-
-CP/CR.
-
-```{r ai-assistant-7}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 20)
-```
-
-###
-
-````
-R 4.5.3> source("presidents.R", echo = TRUE)
-
-> presidents <- readLines("presidents.txt")
-
-> print(presidents)
- [1] "George Washington"       "John Adams"
- [3] "Thomas Jefferson"        "James Madison"
- [5] "James Monroe"            "John Quincy Adams"
- [7] "Andrew Jackson"          "Martin Van Buren"
- [9] "William Henry Harrison"  "John Tyler"
-R 4.5.3> exists("presidents")
-[1] TRUE
+R 4.5.3> exists("x")
+[1] FALSE
 R 4.5.3>
 ````
 
 ###
 
-This command uses a relative path, `presidents.R`, instead of the full path generated by the Editor. It works because the R Terminal and the file are in the same working directory. The result `TRUE` confirms that `source()` created `presidents` inside your current R session.
-
-### Exercise 8
-
-First, remove `presidents` from your current R session and confirm that it is gone. In the R Terminal, run:
-
-```
-rm(presidents)
-exists("presidents")
-```
-
-Now ask Codex to run the script another way. At the Codex prompt, send this message:
-
-```
-Run presidents.R from the bash Terminal with Rscript. Do not edit the script. Save its output in a file named presidents-output.txt.
-```
-
-If Codex asks for permission to run a command, inspect the proposed command first. Approve it only if it runs `presidents.R` and writes to `presidents-output.txt` as requested. After it finishes, return to the same R Terminal and run:
-
-```
-exists("presidents")
-tutorial.helpers::show_file("presidents-output.txt")
-```
-
-CP/CR.
-
-```{r ai-assistant-8}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 18)
-```
-
-###
-
-````
-R 4.5.3> rm(presidents)
-R 4.5.3> exists("presidents")
-[1] FALSE
-R 4.5.3> exists("presidents")
-[1] FALSE
-R 4.5.3> tutorial.helpers::show_file("presidents-output.txt")
- [1] "George Washington"       "John Adams"
- [3] "Thomas Jefferson"        "James Madison"
- [5] "James Monroe"            "John Quincy Adams"
- [7] "Andrew Jackson"          "Martin Van Buren"
- [9] "William Henry Harrison"  "John Tyler"
-R 4.5.3>
-````
-
-###
-
-Codex will generally use a bash command like `Rscript presidents.R > presidents-output.txt`. `Rscript` starts a new R process, runs the file, and exits. The second `FALSE` shows that the separate process did not recreate `presidents` in your open R Terminal, even though the saved output proves that the script ran.
-
-### Exercise 9
-
-Ask Codex to explain the distinction you just observed:
-
-```
-In two or three sentences, explain the difference between source("presidents.R") in an R Terminal and Rscript presidents.R in a bash Terminal.
-```
-
-Based on Codex's explanation and your own observations, describe the difference in your own words in the box below.
-
-```{r ai-assistant-9}
-question_text(NULL,
-	answer(NULL, correct = TRUE),
-	allow_retry = TRUE,
-	try_again_button = "Edit Answer",
-	incorrect = NULL,
-	rows = 5)
-```
-
-###
-
-`source("presidents.R")` executes the file in the current R session, so the objects it creates are still available afterward. `Rscript presidents.R` starts a separate R process from the bash Terminal and closes that process when the script finishes. Both commands execute the same file and can display the same result, but they run it in different R sessions.
-
-###
-
-Asking AI for an explanation is useful, but writing the idea in your own words forces you to check whether the explanation matches what you observed. If it does not, ask a follow-up question or test the commands again.
+Copilot used `Rscript`, which created `x` in a separate R process and then closed that process. Your open R session therefore still reports `FALSE`: it does not know about the `x` that briefly existed in the other session.
 
 ### Exercise 10
 
-Finally, ask Codex to edit and run the script in one request:
+Open `script.R` in the Editor. It should now contain `x <- 2 + 2`. Keep your cursor in the Editor and press `Cmd/Ctrl + Shift + Enter` to source the file in your open R session. Then run this command in the R Terminal:
 
 ```
-Edit presidents.R so that, after printing the names, it prints a sentence reporting how many presidents are in presidents.txt. Then run the updated script.
-```
-
-Verify both the edit and the result yourself. In the R Terminal, run:
-
-```
-source("presidents.R", echo = TRUE)
+x
 ```
 
 CP/CR.
-
-Because `echo = TRUE` displays each saved line before executing it, your transcript lets you inspect both the edited code and its result.
 
 ```{r ai-assistant-10}
 question_text(NULL,
@@ -904,44 +874,40 @@ question_text(NULL,
 	allow_retry = TRUE,
 	try_again_button = "Edit Answer",
 	incorrect = NULL,
-	rows = 24)
+	rows = 10)
 ```
 
 ###
 
-Your code, final sentence, and output formatting may differ from ours, as long as the script reports the correct count.
-
 ````
-R 4.5.3> source("presidents.R", echo = TRUE)
+R 4.5.3> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
 
-> presidents <- readLines("presidents.txt")
-
-> print(presidents)
- [1] "George Washington"       "John Adams"
- [3] "Thomas Jefferson"        "James Madison"
- [5] "James Monroe"            "John Quincy Adams"
- [7] "Andrew Jackson"          "Martin Van Buren"
- [9] "William Henry Harrison"  "John Tyler"
-
-> cat("The file contains", length(presidents), "presidents.\n")
-The file contains 10 presidents.
+> x <- 2 + 2
+R 4.5.3> x
+[1] 4
 R 4.5.3>
 ````
 
 ###
 
-One request can ask AI to create or edit code and run it. Still, treat those as separate claims to verify: inspect the saved code, then run it yourself and inspect the result.
+This time, `x` exists because the Editor sourced `script.R` in your open R session. The five ways to run the script do not all use the same R session:
 
-The word "run" described several related actions in this section. The Run Source button and `Cmd/Ctrl + Shift + S` are two ways to make the Editor send `source()` to the current R session; typing `source()` yourself performs the same R operation by hand. Asking AI to run the script delegates the request, but the command it used here was `Rscript`, which ran the file in a separate R process.
+| Method | R session used |
+|---|---|
+| Run Source button | Your open R Terminal |
+| `Cmd/Ctrl + Enter` | Your open R Terminal; current line only |
+| `Cmd/Ctrl + Shift + Enter` | Your open R Terminal; entire file |
+| `Rscript script.R` in bash | A new process that closes afterward |
+| Ask Copilot to use `Rscript` | A new process that closes afterward |
 
 ## Your answers
 ###
 
-At the end of every tutorial, you will save your work and, if your instructor requests it, submit it. We will do this in the next topic, labeled "Download answers." Follow the instructions there.
+At the end of every tutorial, you will download a copy of your answers. We will do this in the next topic, labeled "Download answers." Follow the instructions there.
 
 Make sure to answer the question about how many **minutes** you spent on the tutorial and to click "Submit Answer."
 
-After clicking the "Download" button, you will be prompted to save a file named `getting-started_answers.html`. By default, this file will be saved in the `Downloads` folder on your computer.
+After clicking the "Download" button, you will be prompted to save a file named `getting-started_answers.html`. By default, this file will be saved in the `Downloads` folder on your computer. This action only downloads the file; it does not send the file to anyone.
 
 Unless your instructor tells you otherwise, you should use the default file name, which will usually be of the form `short-name-of-tutorial` + `_answers` + `.html`.
 
@@ -951,7 +917,7 @@ Unless your instructor tells you otherwise, you should use the default file name
 ## Summary
 ###
 
-You now understand how tutorials work, how to use bash and R Terminals, how to ask AI to create and edit files, and several ways to run an R script. You also know how to download a copy of your answers. Good luck with your data science journey!
+You now understand how tutorials work, how to use bash and R Terminals, how to ask GitHub Copilot to create and edit files, and five ways to run an R script. You also know how to download a copy of your answers. Good luck with your data science journey!
 
 <p>
   <img src="images/neo-cs.gif" alt="Neo learns codespaces" width="320">
