@@ -24,13 +24,12 @@
 #'         that matches any of the specified patterns and has valid table structure.
 #'
 #' @examples
-#' \dontrun{
 #' # Find submissions from local directory
-#' 
-#' path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
-#' 
+#' path <- system.file("extdata", "answers_html", package = "tutorial.helpers")
+#'
 #' tibble_list <- gather_submissions(path = path, title = "stop", verbose = TRUE)
 #'
+#' \dontrun{
 #' # Find submissions from Google Drive folder (temporary download)
 #' drive_url <- "https://drive.google.com/drive/folders/10do12t0fZsfrIrKePxwjpH8IqBNVO86N"
 #' tibble_list <- gather_submissions(

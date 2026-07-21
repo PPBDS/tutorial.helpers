@@ -1,5 +1,9 @@
 # tutorial.helpers (development version)
 
+* Ship three sample answer files under `inst/extdata/answers_html/` and use them in the examples for `gather_submissions()`, `submissions_answers()`, `submissions_summary()`, `check_membership()`, `check_key_vars()`, and `match_questions()`, which now run instead of being wrapped in `\dontrun{}`.
+
+* Skip the full-tutorial render test on CRAN; `knit_tutorials()` is still tested there directly.
+
 * Remove `set_positron_settings()` and `set_rprofile_settings()`. We no longer support configuring Positron or `.Rprofile` settings. This also drops the `jsonlite` dependency.
 
 * `show_file()` now prints "File is empty." for empty files (or files containing only blank lines) instead of erroring.

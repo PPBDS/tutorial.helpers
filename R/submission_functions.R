@@ -44,9 +44,6 @@ submission_server <- function() {
     output$downloadHtml <- shiny::downloadHandler(
       filename = paste0(learnr::get_tutorial_info()$tutorial_id, "_answers.html"),
       content = function(file) {
-        # browser()
-        # subs <- tutorial.helpers:::get_submissions_from_learnr_session(session)
-        # saveRDS(subs, testthat::test_path("fixtures", "session_save.rds"))
         write_answers(file, session)
       }
     )

@@ -20,10 +20,9 @@
 #'         and optionally a "source" column
 #'
 #' @examples
-#' \dontrun{
 #' # Extract specific variables from submissions matching title pattern
-#' path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
-#' 
+#' path <- system.file("extdata", "answers_html", package = "tutorial.helpers")
+#'
 #' result <- submissions_answers(
 #'   path = path,
 #'   title = c("stop"), 
@@ -42,7 +41,8 @@
 #'   vars = "*",
 #'   verbose = TRUE
 #' )
-#' 
+#'
+#' \dontrun{
 #' drive_url <- "https://drive.google.com/drive/folders/10do12t0fZsfrIrKePxwjpH8IqBNVO86N"
 #' x <- submissions_answers(
 #'   path = drive_url, 

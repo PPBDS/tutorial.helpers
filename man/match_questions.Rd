@@ -22,17 +22,16 @@ that contain a specified pattern. It returns the question IDs (from the 'id' col
 for rows where the answer contains the pattern.
 }
 \examples{
-\dontrun{
-# Search in an HTML file
-question_ids <- match_questions("path/to/submission.html", "temperance")
-# Returns: c("temperance-16", "temperance-19")
-
 # Search in a tibble
-
-path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
+path <- system.file("extdata", "answers_html", package = "tutorial.helpers")
 
 tibble <- gather_submissions(path, title = "stop")[[1]]
 
 result <- match_questions(tibble, "http")
+
+\dontrun{
+# Search in an HTML file
+question_ids <- match_questions("path/to/submission.html", "temperance")
+# Returns: c("temperance-16", "temperance-19")
 }
 }

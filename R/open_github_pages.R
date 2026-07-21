@@ -38,8 +38,8 @@
 #' open_github_pages(student_sites, verbose = TRUE)
 #'
 #' # Open from tibble/data.frame
-#' path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
-#' 
+#' path <- system.file("extdata", "answers_html", package = "tutorial.helpers")
+#'
 #' result <- submissions_answers(
 #'   path = path,
 #'   title = c("stop"), 

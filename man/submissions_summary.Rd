@@ -43,14 +43,14 @@ It extracts tables from the files, filters them based on a pattern and key varia
 and returns either a summary tibble or a combined tibble with all the data.
 }
 \examples{
-\dontrun{
 # Process submissions from local directory
-path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
+path <- system.file("extdata", "answers_html", package = "tutorial.helpers")
 
 result <- submissions_summary(path = path,
                              vars = "email",
                              title = "stop")
 
+\dontrun{
 drive_url <- "https://drive.google.com/drive/folders/10do12t0fZsfrIrKePxwjpH8IqBNVO86N"
 x <- submissions_summary(
   path = drive_url, 

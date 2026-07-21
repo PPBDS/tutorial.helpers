@@ -11,16 +11,13 @@
 #' @return A list of tibbles that contain all required key variables
 #'
 #' @examples
-#' \dontrun{
 #' # Create sample data
-#' path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
-#' 
-#' tibble_list <- gather_submissions(path, "stop")
-#' 
-#' result <- check_key_vars(tibble_list, 
-#'                          key_vars = c("name", "email"))
+#' path <- system.file("extdata", "answers_html", package = "tutorial.helpers")
 #'
-#' }
+#' tibble_list <- gather_submissions(path, "stop")
+#'
+#' result <- check_key_vars(tibble_list,
+#'                          key_vars = c("name", "email"))
 #' @export
 check_key_vars <- function(tibble_list, key_vars, verbose = FALSE) {
   

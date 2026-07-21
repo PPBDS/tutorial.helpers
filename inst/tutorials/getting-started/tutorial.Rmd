@@ -25,7 +25,7 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-This tutorial, intended for beginners, teaches students how to use [VS Code](https://code.visualstudio.com/) within GitHub Codespaces](https://github.com/features/codespaces) to run R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. We also introduce students to the use of the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant.
+This tutorial, intended for beginners, teaches students how to use [VS Code](https://code.visualstudio.com/) within [GitHub Codespaces](https://github.com/features/codespaces) to run R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. We also introduce students to the use of the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant.
 
 Most students begin this tutorial after completing the setup steps outlined [here](https://ppbds.github.io/primer/getting-started.html). If you have not done that, some of these questions may be confusing.
 
@@ -102,7 +102,7 @@ codespace-starter $
 
 ### Exercise 2
 
-In the bash Terminal, run `echo $0`. (Again, "run" means to type the command and then press `enter`.)
+In the bash Terminal, run `echo $0`. (Again, "run" means to type the command and then press `Enter`.)
 
 CP/CR.
 

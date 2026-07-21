@@ -22,14 +22,11 @@ This function checks if specified key variables are present in each tibble's "id
 and returns only tibbles that contain all required key variables.
 }
 \examples{
-\dontrun{
 # Create sample data
-path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
+path <- system.file("extdata", "answers_html", package = "tutorial.helpers")
 
 tibble_list <- gather_submissions(path, "stop")
 
-result <- check_key_vars(tibble_list, 
+result <- check_key_vars(tibble_list,
                          key_vars = c("name", "email"))
-
-}
 }

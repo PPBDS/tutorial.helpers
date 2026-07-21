@@ -11,18 +11,17 @@
 #' @return A character vector of question IDs where the answer contains the pattern
 #'
 #' @examples
+#' # Search in a tibble
+#' path <- system.file("extdata", "answers_html", package = "tutorial.helpers")
+#'
+#' tibble <- gather_submissions(path, title = "stop")[[1]]
+#'
+#' result <- match_questions(tibble, "http")
+#'
 #' \dontrun{
 #' # Search in an HTML file
 #' question_ids <- match_questions("path/to/submission.html", "temperance")
 #' # Returns: c("temperance-16", "temperance-19")
-#'
-#' # Search in a tibble
-#'
-#' path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
-#' 
-#' tibble <- gather_submissions(path, title = "stop")[[1]]
-#' 
-#' result <- match_questions(tibble, "http")
 #' }
 #' @export
 match_questions <- function(x, pattern, ignore.case = TRUE) {
