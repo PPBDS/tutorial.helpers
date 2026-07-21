@@ -92,13 +92,13 @@ We typically provide example answers, like the one below, after you submit your 
 
 ````
 codespace-starter $ whoami
-ppbds-student
+rstudio
 codespace-starter $
 ````
 
 ###
 
-`whoami` prints the username of the account you are signed in as. Your Codespace is a complete computer running in the cloud, and you interact with it as the `ppbds-student` user. It is OK if your formatting differs from ours. What matters is that you show that you executed the command as instructed.
+`whoami` prints the username of the account you are signed in as. Your Codespace is a complete computer running in the cloud, and you interact with it as the `rstudio` user. It is OK if your formatting differs from ours. What matters is that you show that you executed the command as instructed.
 
 ### Exercise 2
 
@@ -226,7 +226,7 @@ question_text(NULL,
 
 ````
 codespace-starter $ ls .devcontainer
-STUDENT_WORKFLOW.md  connect-repo.sh  devcontainer.json  welcome.sh
+AGENTS.md  STUDENT_WORKFLOW.md  connect-repo.sh  devcontainer.json  welcome.sh
 codespace-starter $
 ````
 
@@ -255,7 +255,11 @@ question_text(NULL,
 codespace-starter $ head .devcontainer/STUDENT_WORKFLOW.md
 # Student workflow
 
-This Codespace is your **workshop** — it already has R, Python (with the usual data-science libraries), Quarto, the AI assistants, and all the right settings. But this` `codespace-starter` repo isn't *yours*, so you won't save your work here. Instead, you'll make your **own repo** and work in it. The tools travel with the Codespace, so your repo needs no setup of its own.
+This Codespace is your **workshop** — it already has R, Python (with the usual
+data-science libraries), Quarto, the AI assistants, and all the right settings. But this `codespace-starter` repo isn't
+*yours*, so you won't save your work here. Instead, you'll make your **own
+repo** and work in it. The tools travel with the Codespace, so your repo needs
+no setup of its own.
 
 ## 1. Create or connect to your repo (one command)
 
@@ -531,7 +535,7 @@ question_text(NULL,
 
 ````
 tutorial.helpers
-0.6.2.9000
+0.6.2.9006
 Reference
 Articles
 Changelog
@@ -583,7 +587,7 @@ Hello David! How can I help you today?
 
 ###
 
-GitHub Copilot works like like ChatGPT. You "talk" to it in plain English, and it responds. Your exact response will differ from ours --- AI does not give the same answer twice --- and that is fine.
+GitHub Copilot works like ChatGPT. You "talk" to it in plain English, and it responds. Your exact response will differ from ours --- AI does not give the same answer twice --- and that is fine.
 
 ### Exercise 2
 
