@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="tutorialhelpers-development-version">tutorial.helpers (development version)<a class="anchor" aria-label="anchor" href="#tutorialhelpers-development-version"></a></h2>
-<ul><li><p><code><a href="../reference/show_file.html">show_file()</a></code> now prints “File is empty.” for empty files (or files containing only blank lines) instead of erroring.</p></li>
+<ul><li><p>Remove <code>set_positron_settings()</code> and <code>set_rprofile_settings()</code>. We no longer support configuring Positron or <code>.Rprofile</code> settings. This also drops the <code>jsonlite</code> dependency.</p></li>
+<li><p><code><a href="../reference/show_file.html">show_file()</a></code> now prints “File is empty.” for empty files (or files containing only blank lines) instead of erroring.</p></li>
 <li><p><code><a href="../reference/show_file.html">show_file()</a></code> with <code>chunk = "Last"</code> or <code>chunk = "All"</code> now recognizes code chunks of any language (e.g. Python, bash), not just R.</p></li>
 <li><p><code><a href="../reference/show_file.html">show_file()</a></code> now applies the <code>pattern</code> filter when <code>start = 0</code> (whole file) or <code>start</code> is negative (last lines); previously <code>pattern</code> was silently ignored in those cases.</p></li>
 <li><p>Drop the <code>dplyr</code>, <code>purrr</code>, and <code>mime</code> dependencies, slimming the package’s Imports.</p></li>

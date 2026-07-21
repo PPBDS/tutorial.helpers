@@ -32,10 +32,6 @@
   : Open Multiple GitHub Pages in Browser Tabs
 - [`return_tutorial_paths()`](https://ppbds.github.io/tutorial.helpers/reference/return_tutorial_paths.md)
   : Return all the paths to the tutorials in a package
-- [`set_positron_settings()`](https://ppbds.github.io/tutorial.helpers/reference/set_positron_settings.md)
-  : Configure Positron Settings
-- [`set_rprofile_settings()`](https://ppbds.github.io/tutorial.helpers/reference/set_rprofile_settings.md)
-  : Configure R Profile Settings for Better User Experience
 - [`show_file()`](https://ppbds.github.io/tutorial.helpers/reference/show_file.md)
   : Display the contents of a text file that match a pattern
 - [`submission_server()`](https://ppbds.github.io/tutorial.helpers/reference/submission_functions.md)
