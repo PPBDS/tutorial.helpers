@@ -1,5 +1,7 @@
 # tutorial.helpers (development version)
 
+* Remove `set_positron_settings()` and `set_rprofile_settings()`. We no longer support configuring Positron or `.Rprofile` settings. This also drops the `jsonlite` dependency.
+
 * `show_file()` now prints "File is empty." for empty files (or files containing only blank lines) instead of erroring.
 
 * `show_file()` with `chunk = "Last"` or `chunk = "All"` now recognizes code chunks of any language (e.g. Python, bash), not just R.

@@ -1,6 +1,6 @@
 Package: tutorial.helpers
 Title: Helper Functions for Creating Tutorials
-Version: 0.6.2.9003
+Version: 0.6.2.9004
 Authors@R: 
     person(given = "David",
            family = "Kane",
@@ -20,14 +20,11 @@ RoxygenNote: 7.3.3
 VignetteBuilder: quarto
 Suggests:
     googledrive,
-    knitr,
     quarto,
-    roxygen2,
-    testthat (>= 3.0.0),
-    tidyverse
+    testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports:
-    jsonlite,
+    knitr,
     learnr,
     rmarkdown,
     rstudioapi,

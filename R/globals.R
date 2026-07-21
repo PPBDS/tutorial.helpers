@@ -1,2 +1,2 @@
 # R/globals.R
-globalVariables("session")
+globalVariables(c("session", "output"))
