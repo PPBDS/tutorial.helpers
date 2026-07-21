@@ -25,7 +25,7 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-This tutorial, intended for beginners, teaches students how to use [GitHub Codespaces](https://github.com/features/codespaces) to run R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. We also introduce students to the use of the bash Terminal, the R Terminal, and an AI coding assistant within VS Code.
+This tutorial, intended for beginners, teaches students how to use [VS Code](https://code.visualstudio.com/) within GitHub Codespaces](https://github.com/features/codespaces) to run R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. We also introduce students to the use of the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant.
 
 Most students begin this tutorial after completing the setup steps outlined [here](https://ppbds.github.io/primer/getting-started.html). If you have not done that, some of these questions may be confusing.
 
@@ -53,11 +53,17 @@ If you are completing this tutorial as part of a class, use the same email addre
 ## Bash Terminal
 ###
 
-Each tutorial includes exercises for you to complete. Most exercises ask you to run a command in a terminal and then copy the result into the answer box. After writing your answer, click the "Submit Answer" button, as you did above for your name and email address.
+Each tutorial includes exercises for you to complete. Most exercises ask you to run a command in a Terminal and then copy the result into the answer box. After writing your answer, click the "Submit Answer" button, as you did above for your name and email address.
 
-The **bash** Terminal is a text-based interface where you type commands to tell your Codespace what to do. The pattern is always the same: you send a command, the Terminal executes it, and it gives you something back. In this section you will practice the most common bash commands. (In the next section you will see that the R Terminal works exactly the same way.)
+###
+
+The **bash** Terminal is a text-based interface in which you type commands to tell your Codespace what to do. The pattern is always the same: you send a command, the Terminal executes it, and it gives you something back. In this section you will practice the most common bash commands. (In the next section you will see that the R Terminal works exactly the same way.)
+
+###
 
 To do the exercises, you need a bash Terminal in which to type commands. Press the plus button (`+`) on the right side of the Panel to open one.
+
+<!-- DK: Image needs to focus on that portion of the screen. -->
 
 ```{r}
 include_graphics("images/cs-open-bash.png")
