@@ -38,16 +38,13 @@ membership list
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
 # Create sample data with student emails
-path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
+path <- system.file("extdata", "answers_html", package = "tutorial.helpers")
 
 tibble_list <- gather_submissions(path, "stop")
 
-result <- check_membership(tibble_list, 
-                           key_var = "email", 
-                           membership = c("bluebird.jack.xu@gmail.com", 
+result <- check_membership(tibble_list,
+                           key_var = "email",
+                           membership = c("bluebird.jack.xu@gmail.com",
                                           "hassan.alisoni007@gmail.com"))
-
-} # }
 ```

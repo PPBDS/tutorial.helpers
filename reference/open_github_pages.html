@@ -11,7 +11,7 @@ a vector of URLs or a tibble/data.frame containing URLs."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2.9005</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -121,7 +121,7 @@ system performance and browser behavior.</p>
 <span class="r-in"><span><span class="fu">open_github_pages</span><span class="op">(</span><span class="va">student_sites</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Open from tibble/data.frame</span></span></span>
-<span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/find.package.html" class="external-link">find.package</a></span><span class="op">(</span><span class="st">"tutorial.helpers"</span><span class="op">)</span>, <span class="st">"tests/testthat/fixtures/answers_html"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"answers_html"</span>, package <span class="op">=</span> <span class="st">"tutorial.helpers"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="submissions_answers.html">submissions_answers</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  path <span class="op">=</span> <span class="va">path</span>,</span></span>

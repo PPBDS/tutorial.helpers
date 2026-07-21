@@ -2,6 +2,21 @@
 
 ## tutorial.helpers (development version)
 
+- Ship three sample answer files under `inst/extdata/answers_html/` and
+  use them in the examples for
+  [`gather_submissions()`](https://ppbds.github.io/tutorial.helpers/reference/gather_submissions.md),
+  [`submissions_answers()`](https://ppbds.github.io/tutorial.helpers/reference/submissions_answers.md),
+  [`submissions_summary()`](https://ppbds.github.io/tutorial.helpers/reference/submissions_summary.md),
+  [`check_membership()`](https://ppbds.github.io/tutorial.helpers/reference/check_membership.md),
+  [`check_key_vars()`](https://ppbds.github.io/tutorial.helpers/reference/check_key_vars.md),
+  and
+  [`match_questions()`](https://ppbds.github.io/tutorial.helpers/reference/match_questions.md),
+  which now run instead of being wrapped in `\dontrun{}`.
+
+- Skip the full-tutorial render test on CRAN;
+  [`knit_tutorials()`](https://ppbds.github.io/tutorial.helpers/reference/knit_tutorials.md)
+  is still tested there directly.
+
 - Remove `set_positron_settings()` and `set_rprofile_settings()`. We no
   longer support configuring Positron or `.Rprofile` settings. This also
   drops the `jsonlite` dependency.

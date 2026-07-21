@@ -71,14 +71,14 @@ files.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
 # Process submissions from local directory
-path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
+path <- system.file("extdata", "answers_html", package = "tutorial.helpers")
 
 result <- submissions_summary(path = path,
                              vars = "email",
                              title = "stop")
 
+if (FALSE) { # \dontrun{
 drive_url <- "https://drive.google.com/drive/folders/10do12t0fZsfrIrKePxwjpH8IqBNVO86N"
 x <- submissions_summary(
   path = drive_url, 

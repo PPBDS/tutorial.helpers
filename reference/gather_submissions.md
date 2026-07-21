@@ -53,13 +53,13 @@ will overwrite the first, potentially resulting in data loss.
 ## Examples
 
 ``` r
-if (FALSE) { # \dontrun{
 # Find submissions from local directory
-
-path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")
+path <- system.file("extdata", "answers_html", package = "tutorial.helpers")
 
 tibble_list <- gather_submissions(path = path, title = "stop", verbose = TRUE)
+#> Found 3 file(s) matching pattern 'stop': 'stops_answers_Abdul_Hannan.html', 'stops_answers_Hassan_Ali.html', 'stops_answers_Jack_Xu.html'
 
+if (FALSE) { # \dontrun{
 # Find submissions from Google Drive folder (temporary download)
 drive_url <- "https://drive.google.com/drive/folders/10do12t0fZsfrIrKePxwjpH8IqBNVO86N"
 tibble_list <- gather_submissions(
