@@ -17,7 +17,7 @@ Our purpose is no longer to teach students how to code.
 The [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/)
 package will help you to create good tutorials. Make sure that you are
 using the latest development version. Install it with
-`pak::pak(PPBDS/tutorial.helpers)`.
+`pak::pak("PPBDS/tutorial.helpers")`.
 
 ## Overview
 
@@ -377,9 +377,7 @@ environments create a plain code block and content inside is displayed
 as-is. No syntax highlighting or execution is applied, and they show
 example code or text exactly as typed. Four backtick environments allow
 three backticks to be written within the block. This works often, but
-not always. Comment characters like `#` are especially problematic. We
-also use the [**parsermd**](https://rundel.github.io/parsermd/) package
-behind the scenes. It does not work as well as one might like.
+not always. Comment characters like `#` are especially problematic.
 
 Further complexity arises because tutorials are R markdown whereas all
 our other work is in Quarto. In Quarto documents (like this vignette),
@@ -425,8 +423,7 @@ displays R code chunks verbatim.
 
 Students need some background in order to complete these sorts of
 tutorials, some familiarity with R, GitHub and so on. Students should
-have completed the “Getting Started” and “Introduction to R” tutorials
-from the
+have completed the “Getting Started” tutorial from the
 [**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers)
 package. They should also complete the first four VS Code tutorials
 (i.e., through “VS Code and GitHub Introduction”) from
@@ -756,7 +753,7 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-Note that the numbering of theses questions is arbitrary. Just run
+Note that the numbering of these questions is arbitrary. Just run
 [`check_current_tutorial()`](https://ppbds.github.io/tutorial.helpers/reference/check_current_tutorial.md)
 to fix it.
 
@@ -772,7 +769,7 @@ Within the latest code chunk, add the option: `#| cache: true`. Assign the resul
 
 Run `quarto render` in the bash Terminal. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.
 
-If you have not done so already, you should add `analysis_cache` to the `.gitginore`. The content of the cache file does not belong on GitHub.
+If you have not done so already, you should add `analysis_cache` to the `.gitignore`. The content of the cache file does not belong on GitHub.
 
 Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Enter`, thus ensuring that the workspace also includes a copy of `x`.
 

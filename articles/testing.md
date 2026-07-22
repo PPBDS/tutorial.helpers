@@ -16,7 +16,7 @@ framework for testing, the `tests` directory would have a file called
     library(testthat)
     library(your.package)
 
-    test_check("your.packge")
+    test_check("your.package")
 
 Note how the name of **your.package** is not quoted with
 [`library()`](https://rdrr.io/r/base/library.html) but is quoted with

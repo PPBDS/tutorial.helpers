@@ -19,3 +19,8 @@ write_answers(file, obj)
 
   Either a Shiny session object (from learnr) or a list of submissions
   (as returned by get_submissions_from_learnr_session()).
+
+## Value
+
+No return value, called for the side effect of writing an HTML file of
+submitted answers to `file`.

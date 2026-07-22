@@ -2,58 +2,35 @@
 
 ## tutorial.helpers (development version)
 
-- Ship three sample answer files under `inst/extdata/answers_html/` and
-  use them in the examples for
-  [`gather_submissions()`](https://ppbds.github.io/tutorial.helpers/reference/gather_submissions.md),
-  [`submissions_answers()`](https://ppbds.github.io/tutorial.helpers/reference/submissions_answers.md),
-  [`submissions_summary()`](https://ppbds.github.io/tutorial.helpers/reference/submissions_summary.md),
-  [`check_membership()`](https://ppbds.github.io/tutorial.helpers/reference/check_membership.md),
-  [`check_key_vars()`](https://ppbds.github.io/tutorial.helpers/reference/check_key_vars.md),
-  and
-  [`match_questions()`](https://ppbds.github.io/tutorial.helpers/reference/match_questions.md),
-  which now run instead of being wrapped in `\dontrun{}`.
-
-- Skip the full-tutorial render test on CRAN;
-  [`knit_tutorials()`](https://ppbds.github.io/tutorial.helpers/reference/knit_tutorials.md)
-  is still tested there directly.
-
 - Remove `set_positron_settings()` and `set_rprofile_settings()`. We no
-  longer support configuring Positron or `.Rprofile` settings. This also
-  drops the `jsonlite` dependency.
-
-- [`show_file()`](https://ppbds.github.io/tutorial.helpers/reference/show_file.md)
-  now prints “File is empty.” for empty files (or files containing only
-  blank lines) instead of erroring.
-
-- [`show_file()`](https://ppbds.github.io/tutorial.helpers/reference/show_file.md)
-  with `chunk = "Last"` or `chunk = "All"` now recognizes code chunks of
-  any language (e.g. Python, bash), not just R.
-
-- [`show_file()`](https://ppbds.github.io/tutorial.helpers/reference/show_file.md)
-  now applies the `pattern` filter when `start = 0` (whole file) or
-  `start` is negative (last lines); previously `pattern` was silently
-  ignored in those cases.
-
-- Drop the `dplyr`, `purrr`, and `mime` dependencies, slimming the
-  package’s Imports.
-
-- Remove the RMarkdown tutorial template (`skeleton.Rmd`). Tutorials are
-  now created by hand, as described in the “Tutorials in the Age of AI”
-  vignette.
-
-- Remove unused `submission-temp.Rmd` file.
+  longer support configuring Positron or `.Rprofile` settings.
 
 - Remove all tutorials except “Getting Started,” which now uses VS Code
-  on GitHub Codespaces. The removed tutorials include “Introduction to
-  R,” “Introduction to Python,” and “Getting Started with Positron.”
+  on GitHub Codespaces.
+
+- Fix bugs in the submissions functions:
+  [`submissions_summary()`](https://ppbds.github.io/tutorial.helpers/reference/submissions_summary.md)
+  ignored its `emails` argument and duplicated rows for overlapping
+  `title` patterns, and it and
+  [`check_membership()`](https://ppbds.github.io/tutorial.helpers/reference/check_membership.md)
+  mishandled older submission files.
+
+- Fix
+  [`format_tutorial()`](https://ppbds.github.io/tutorial.helpers/reference/format_tutorial.md)
+  and
+  [`determine_exercise_number()`](https://ppbds.github.io/tutorial.helpers/reference/determine_exercise_number.md)
+  bugs that produced malformed chunk labels and exercise numbers.
+
+- Improve
+  [`show_file()`](https://ppbds.github.io/tutorial.helpers/reference/show_file.md):
+  empty files no longer error, code chunks of any language are
+  recognized, and the `pattern` filter applies in all modes.
+
+- Drop the `dplyr`, `purrr`, `mime`, and `jsonlite` dependencies.
+  Examples for the `submissions_*` functions now run on shipped sample
+  files instead of being wrapped in `\dontrun{}`.
 
 - Finalize “Tutorials in the Age of AI” vignette.
-
-- Fix word wrapping for verbatim sections in vignettes.
-
-- Remove VS Code extension material.
-
-- Remove two vignettes.
 
 ## tutorial.helpers 0.6.1
 

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2.9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,20 +41,13 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="tutorialhelpers-development-version">tutorial.helpers (development version)<a class="anchor" aria-label="anchor" href="#tutorialhelpers-development-version"></a></h2>
-<ul><li><p>Ship three sample answer files under <code>inst/extdata/answers_html/</code> and use them in the examples for <code><a href="../reference/gather_submissions.html">gather_submissions()</a></code>, <code><a href="../reference/submissions_answers.html">submissions_answers()</a></code>, <code><a href="../reference/submissions_summary.html">submissions_summary()</a></code>, <code><a href="../reference/check_membership.html">check_membership()</a></code>, <code><a href="../reference/check_key_vars.html">check_key_vars()</a></code>, and <code><a href="../reference/match_questions.html">match_questions()</a></code>, which now run instead of being wrapped in <code>\dontrun{}</code>.</p></li>
-<li><p>Skip the full-tutorial render test on CRAN; <code><a href="../reference/knit_tutorials.html">knit_tutorials()</a></code> is still tested there directly.</p></li>
-<li><p>Remove <code>set_positron_settings()</code> and <code>set_rprofile_settings()</code>. We no longer support configuring Positron or <code>.Rprofile</code> settings. This also drops the <code>jsonlite</code> dependency.</p></li>
-<li><p><code><a href="../reference/show_file.html">show_file()</a></code> now prints “File is empty.” for empty files (or files containing only blank lines) instead of erroring.</p></li>
-<li><p><code><a href="../reference/show_file.html">show_file()</a></code> with <code>chunk = "Last"</code> or <code>chunk = "All"</code> now recognizes code chunks of any language (e.g. Python, bash), not just R.</p></li>
-<li><p><code><a href="../reference/show_file.html">show_file()</a></code> now applies the <code>pattern</code> filter when <code>start = 0</code> (whole file) or <code>start</code> is negative (last lines); previously <code>pattern</code> was silently ignored in those cases.</p></li>
-<li><p>Drop the <code>dplyr</code>, <code>purrr</code>, and <code>mime</code> dependencies, slimming the package’s Imports.</p></li>
-<li><p>Remove the RMarkdown tutorial template (<code>skeleton.Rmd</code>). Tutorials are now created by hand, as described in the “Tutorials in the Age of AI” vignette.</p></li>
-<li><p>Remove unused <code>submission-temp.Rmd</code> file.</p></li>
-<li><p>Remove all tutorials except “Getting Started,” which now uses VS Code on GitHub Codespaces. The removed tutorials include “Introduction to R,” “Introduction to Python,” and “Getting Started with Positron.”</p></li>
+<ul><li><p>Remove <code>set_positron_settings()</code> and <code>set_rprofile_settings()</code>. We no longer support configuring Positron or <code>.Rprofile</code> settings.</p></li>
+<li><p>Remove all tutorials except “Getting Started,” which now uses VS Code on GitHub Codespaces.</p></li>
+<li><p>Fix bugs in the submissions functions: <code><a href="../reference/submissions_summary.html">submissions_summary()</a></code> ignored its <code>emails</code> argument and duplicated rows for overlapping <code>title</code> patterns, and it and <code><a href="../reference/check_membership.html">check_membership()</a></code> mishandled older submission files.</p></li>
+<li><p>Fix <code><a href="../reference/format_tutorial.html">format_tutorial()</a></code> and <code><a href="../reference/determine_exercise_number.html">determine_exercise_number()</a></code> bugs that produced malformed chunk labels and exercise numbers.</p></li>
+<li><p>Improve <code><a href="../reference/show_file.html">show_file()</a></code>: empty files no longer error, code chunks of any language are recognized, and the <code>pattern</code> filter applies in all modes.</p></li>
+<li><p>Drop the <code>dplyr</code>, <code>purrr</code>, <code>mime</code>, and <code>jsonlite</code> dependencies. Examples for the <code>submissions_*</code> functions now run on shipped sample files instead of being wrapped in <code>\dontrun{}</code>.</p></li>
 <li><p>Finalize “Tutorials in the Age of AI” vignette.</p></li>
-<li><p>Fix word wrapping for verbatim sections in vignettes.</p></li>
-<li><p>Remove VS Code extension material.</p></li>
-<li><p>Remove two vignettes.</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.1" id="tutorialhelpers-061">tutorial.helpers 0.6.1<a class="anchor" aria-label="anchor" href="#tutorialhelpers-061"></a></h2><p class="text-muted">CRAN release: 2025-12-23</p>

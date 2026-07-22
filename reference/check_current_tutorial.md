@@ -12,3 +12,8 @@ number.
 ``` r
 check_current_tutorial()
 ```
+
+## Value
+
+No return value, called for the side effect of rewriting the tutorial
+file in the active editor window.

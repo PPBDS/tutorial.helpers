@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2.9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2.9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +89,7 @@ No need for nearly as much testing.
 <blockquote>
 <p><em>Our purpose is to teach students how to use AI to create.</em></p>
 </blockquote>
-<p>The <a href="https://ppbds.github.io/tutorial.helpers/"><strong>tutorial.helpers</strong></a> package will help you to create good tutorials. Make sure that you are using the latest development version. Install it with <code>pak::pak(PPBDS/tutorial.helpers)</code>.</p>
+<p>The <a href="https://ppbds.github.io/tutorial.helpers/"><strong>tutorial.helpers</strong></a> package will help you to create good tutorials. Make sure that you are using the latest development version. Install it with <code>pak::pak("PPBDS/tutorial.helpers")</code>.</p>
 </section><section class="level2"><h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <p>To create a new tutorial, you first need a new directory, located in the <code>inst/tutorials</code> directory of your package. Create that directory and then add a <code>tutorial.Rmd</code> file inside it. Tutorials must be named <code>tutorial.Rmd</code>.</p>
@@ -207,7 +207,7 @@ No need for nearly as much testing.
 <p>Because students will complete the tutorials using screens of very different widths, it is a good idea to put <code>knitr::opts_chunk$set(out.width = '90%')</code> in your <code>setup</code> code chunk. In this way, images will appear at a sensible size regardless of whether students are using a phone screen or a big monitor.</p>
 </section><section class="level4"><h4 id="complex-text">Complex text<a class="anchor" aria-label="anchor" href="#complex-text"></a>
 </h4>
-<p>You sometimes want to include “complex” text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which R markdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. The plain three or four backtick environments create a plain code block and content inside is displayed as-is. No syntax highlighting or execution is applied, and they show example code or text exactly as typed. Four backtick environments allow three backticks to be written within the block. This works often, but not always. Comment characters like <code>#</code> are especially problematic. We also use the <a href="https://rundel.github.io/parsermd/" class="external-link"><strong>parsermd</strong></a> package behind the scenes. It does not work as well as one might like.</p>
+<p>You sometimes want to include “complex” text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which R markdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. The plain three or four backtick environments create a plain code block and content inside is displayed as-is. No syntax highlighting or execution is applied, and they show example code or text exactly as typed. Four backtick environments allow three backticks to be written within the block. This works often, but not always. Comment characters like <code>#</code> are especially problematic.</p>
 <p>Further complexity arises because tutorials are R markdown whereas all our other work is in Quarto. In Quarto documents (like this vignette), you can use an environment started by four backticks along with <code>{verbatim}</code> and then ended with four more backticks. This won’t work in R markdown.</p>
 <p>The <code>&lt;pre&gt;&lt;code&gt;</code> trick solves this problem. You add this before and after a code chunk to a tutorial.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>&lt;pre&gt;&lt;code&gt;```{r}</span>
@@ -232,7 +232,7 @@ No need for nearly as much testing.
 <p>The <code>&lt;pre&gt;&lt;code&gt;</code> serves the same purpose as the four backticks but it displays R code chunks verbatim.</p>
 </section></section></section><section class="level2"><h2 id="tutorial-introduction">Tutorial Introduction<a class="anchor" aria-label="anchor" href="#tutorial-introduction"></a>
 </h2>
-<p>Students need some background in order to complete these sorts of tutorials, some familiarity with R, GitHub and so on. Students should have completed the “Getting Started” and “Introduction to R” tutorials from the <a href="https://CRAN.R-project.org/package=tutorial.helpers" class="external-link"><strong>tutorial.helpers</strong></a> package. They should also complete the first four VS Code tutorials (i.e., through “VS Code and GitHub Introduction”) from <a href="https://ppbds.github.io/vscode.tutorials/" class="external-link"><strong>vscode.tutorials</strong></a>.</p>
+<p>Students need some background in order to complete these sorts of tutorials, some familiarity with R, GitHub and so on. Students should have completed the “Getting Started” tutorial from the <a href="https://CRAN.R-project.org/package=tutorial.helpers" class="external-link"><strong>tutorial.helpers</strong></a> package. They should also complete the first four VS Code tutorials (i.e., through “VS Code and GitHub Introduction”) from <a href="https://ppbds.github.io/vscode.tutorials/" class="external-link"><strong>vscode.tutorials</strong></a>.</p>
 <p>Always begin by having students set up a repo and a Quarto document to work in. Again, you must replace <code>XX</code> with something sensible and usually different from the other <code>XX</code>’s. So, in the below example, the name of the repo and the title of the QMD will be different even though we hold their places with <code>XX</code> in both cases.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>### Exercise 1</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -477,7 +477,7 @@ No need for nearly as much testing.
 <span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>###</span>
 <span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
-<p>Note that the numbering of theses questions is arbitrary. Just run <code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code> to fix it.</p>
+<p>Note that the numbering of these questions is arbitrary. Just run <code><a href="../reference/check_current_tutorial.html">check_current_tutorial()</a></code> to fix it.</p>
 <p>The second question tells the student to, in the QMD, assign the result of the pipe to a new variable, often <code>x</code>. We then tell the student to <code>Cmd/Ctrl + Enter</code> this code so that the workspace includes a copy of <code>x</code>.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>### Exercise 4</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -485,7 +485,7 @@ No need for nearly as much testing.
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>Run `quarto render` in the bash Terminal. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>If you have not done so already, you should add `analysis_cache` to the `.gitginore`. The content of the cache file does not belong on GitHub.</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>If you have not done so already, you should add `analysis_cache` to the `.gitignore`. The content of the cache file does not belong on GitHub.</span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Enter`, thus ensuring that the workspace also includes a copy of `x`.</span>
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
