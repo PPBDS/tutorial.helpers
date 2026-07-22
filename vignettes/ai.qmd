@@ -31,7 +31,7 @@ This document describes the best way to write R tutorials using the [**learnr**]
 
 > *Our purpose is to teach students how to use AI to create.* 
 
-The [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package will help you to create good tutorials. Make sure that you are using the latest development version. Install it with `pak::pak(PPBDS/tutorial.helpers)`.
+The [**tutorial.helpers**](https://ppbds.github.io/tutorial.helpers/) package will help you to create good tutorials. Make sure that you are using the latest development version. Install it with `pak::pak("PPBDS/tutorial.helpers")`.
 
 ## Overview
 
@@ -215,7 +215,7 @@ Because students will complete the tutorials using screens of very different wid
 
 #### Complex text
 
-You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which R markdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. The plain three or four backtick environments create a plain code block and content inside is displayed as-is. No syntax highlighting or execution is applied, and they show example code or text exactly as typed. Four backtick environments allow three backticks to be written within the block. This works often, but not always. Comment characters like `#` are especially problematic. We also use the [**parsermd**](https://rundel.github.io/parsermd/) package behind the scenes. It does not work as well as one might like.
+You sometimes want to include "complex" text in a tutorial. This is most common when trying to teach students how to use R code chunks and other strings which R markdown wants to process in certain ways. You can sometimes get away by placing such text in environments surrounded by three, or even four, backticks. The plain three or four backtick environments create a plain code block and content inside is displayed as-is. No syntax highlighting or execution is applied, and they show example code or text exactly as typed. Four backtick environments allow three backticks to be written within the block. This works often, but not always. Comment characters like `#` are especially problematic.
 
 Further complexity arises because tutorials are R markdown whereas all our other work is in Quarto. In Quarto documents (like this vignette), you can use an environment started by four backticks along with `{verbatim}` and then ended with four more backticks. This won't work in R markdown.
 
@@ -251,7 +251,7 @@ The `<pre><code>` serves the same purpose as the four backticks but it displays 
 
 ## Tutorial Introduction
 
-Students need some background in order to complete these sorts of tutorials, some familiarity with R, GitHub and so on. Students should have completed the "Getting Started" and "Introduction to R" tutorials from the [**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers) package. They should also complete the first four VS Code tutorials (i.e., through "VS Code and GitHub Introduction") from [**vscode.tutorials**](https://ppbds.github.io/vscode.tutorials/).
+Students need some background in order to complete these sorts of tutorials, some familiarity with R, GitHub and so on. Students should have completed the "Getting Started" tutorial from the [**tutorial.helpers**](https://CRAN.R-project.org/package=tutorial.helpers) package. They should also complete the first four VS Code tutorials (i.e., through "VS Code and GitHub Introduction") from [**vscode.tutorials**](https://ppbds.github.io/vscode.tutorials/).
 
 Always begin by having students set up a repo and a Quarto document to work in. Again, you must replace `XX` with something sensible and usually different from the other `XX`'s. So, in the below example, the name of the repo and the title of the QMD will be different even though we hold their places with `XX` in both cases.
 
@@ -540,7 +540,7 @@ question_text(NULL,
 <!-- XX: Insert a knowledge drop related to this project. -->
 ````
 
-Note that the numbering of theses questions is arbitrary. Just run `check_current_tutorial()` to fix it.
+Note that the numbering of these questions is arbitrary. Just run `check_current_tutorial()` to fix it.
 
 The second question tells the student to, in the QMD, assign the result of the pipe to a new variable, often `x`. We then tell the student to `Cmd/Ctrl + Enter` this code so that the workspace includes a copy of `x`. 
 
@@ -551,7 +551,7 @@ Within the latest code chunk, add the option: `#| cache: true`. Assign the resul
 
 Run `quarto render` in the bash Terminal. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.
 
-If you have not done so already, you should add `analysis_cache` to the `.gitginore`. The content of the cache file does not belong on GitHub.
+If you have not done so already, you should add `analysis_cache` to the `.gitignore`. The content of the cache file does not belong on GitHub.
 
 Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Enter`, thus ensuring that the workspace also includes a copy of `x`.
 

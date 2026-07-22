@@ -6,6 +6,10 @@
 \usage{
 check_current_tutorial()
 }
+\value{
+No return value, called for the side effect of rewriting the
+tutorial file in the active editor window.
+}
 \description{
 A function which formats the exercise numbers and code chunk
 labels correctly. \code{check_current_tutorial()} reads in the tutorial

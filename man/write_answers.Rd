@@ -12,6 +12,10 @@ write_answers(file, obj)
 \item{obj}{Either a Shiny session object (from learnr) or a list of submissions
 (as returned by get_submissions_from_learnr_session()).}
 }
+\value{
+No return value, called for the side effect of writing an HTML
+file of submitted answers to \code{file}.
+}
 \description{
 Take a tutorial session (or a submission list), extract all submitted answers,
 and write out an HTML file with those answers.

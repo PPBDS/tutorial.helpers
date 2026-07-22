@@ -211,7 +211,7 @@ show_file <- function(path, start = 1, end = NULL, pattern = NULL, chunk = "None
           code_chunks <- c(code_chunks, list(current_chunk))
           current_chunk <- character()
         }
-      } else if (grepl("^```$", line)) {
+      } else if (grepl("^```\\s*$", line)) {
         in_chunk <- FALSE
         if (length(current_chunk) > 0) {
           code_chunks <- c(code_chunks, list(current_chunk))

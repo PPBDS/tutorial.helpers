@@ -123,6 +123,7 @@ format_tutorial <- function(file_path) {
       section_name <- tolower(section_title)
       section_name <- gsub("\\s+", "-", section_name)
       section_name <- gsub("[^a-z0-9-]", "", section_name)
+      section_name <- gsub("-+", "-", section_name)
       if (grepl("-$", section_name)) section_name <- sub("-$", "", section_name)
       exercise_counter <- 0
       i <- i + 1; next
@@ -160,6 +161,13 @@ format_tutorial <- function(file_path) {
         i <- i + 1; next
       }
 
+      # (4) Skip if not in a section or exercise. This must come before the
+      # -test/-hint relabeling so that pre-labeled chunks outside any
+      # section/exercise are left untouched rather than corrupted.
+      if (section_name == "" || exercise_counter == 0) {
+        i <- i + 1; next
+      }
+
       # -test and -hint labels (fix only label, preserve all options)
       if (grepl("-test(\\}|,|$)", current_line)) {
         new_base_label <- paste0(section_name, "-", exercise_counter, "-test")
@@ -169,16 +177,12 @@ format_tutorial <- function(file_path) {
       }
       if (grepl("-hint-\\d+(\\}|,|$)", current_line)) {
         hint_key <- paste0(section_name, "-", exercise_counter)
+        if (is.null(hint_counters[[hint_key]])) hint_counters[[hint_key]] <- 0
         hint_counters[[hint_key]] <- hint_counters[[hint_key]] + 1
         hint_number <- hint_counters[[hint_key]]
         new_base_label <- paste0(section_name, "-", exercise_counter, "-hint-", hint_number)
         chunk_options <- sub("^```\\{r\\s*[^,}]*\\s*(,.*)?\\s*\\}?\\s*$", "\\1", current_line)
         lines[i] <- format_chunk_header(new_base_label, chunk_options)
-        i <- i + 1; next
-      }
-
-      # (4) Skip if not in a section or exercise
-      if (section_name == "" || exercise_counter == 0) {
         i <- i + 1; next
       }
 

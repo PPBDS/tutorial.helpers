@@ -209,9 +209,14 @@ open_github_pages <- function(urls,
     # Get the appropriate command for this URL
     command <- get_browser_command(browser, url)
     
-    # Execute the command
+    # Execute the command. show.output.on.console is Windows-only; passing
+    # it on other platforms triggers a warning per call.
     tryCatch({
-      system(command, wait = FALSE, show.output.on.console = FALSE)
+      if (.Platform$OS.type == "windows") {
+        system(command, wait = FALSE, show.output.on.console = FALSE)
+      } else {
+        system(command, wait = FALSE)
+      }
     }, error = function(e) {
       warning("Failed to open URL", label, ": ", url, ". Error: ", e$message)
     })

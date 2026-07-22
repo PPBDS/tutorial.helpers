@@ -74,93 +74,100 @@ submissions_summary <- function(path,
     stop("Invalid keep_file_name. Allowed values are NULL, 'All', 'Space', or 'Underscore'.")
   }
   
-  # Call gather_submissions to get the list of tibbles
+  # Call gather_submissions to get the list of tibbles. It has already
+  # filtered by every pattern in `title` and deduplicated the files, so we
+  # process each file exactly once; re-looping over the patterns here would
+  # duplicate files matched by more than one pattern.
   tibble_list <- gather_submissions(path = path, title = title, verbose = verbose)
-  
-  # Initialize list to store results from each pattern
-  all_pattern_results <- list()
-  
-  # Process each pattern for filtering and formatting
-  for (current_title in title) {
-    
-    # Filter tibbles that match the current pattern
-    title_tibbles <- tibble_list[grep(current_title, names(tibble_list))]
-    
-    filtered_tibble_list <- list()
-    removed_files <- character()
-    removal_reasons <- character()
-    
-    for (file_name in names(title_tibbles)) {
-      tibble_data <- title_tibbles[[file_name]]
-      
-      if (!"id" %in% colnames(tibble_data)) {
+
+  filtered_tibble_list <- list()
+  removed_files <- character()
+  removal_reasons <- character()
+
+  for (file_name in names(tibble_list)) {
+    tibble_data <- tibble_list[[file_name]]
+
+    # Answers are stored in an 'answer' column or, in older files, a 'data'
+    # column.
+    answer_col <- if ("answer" %in% colnames(tibble_data)) {
+      "answer"
+    } else if ("data" %in% colnames(tibble_data)) {
+      "data"
+    } else {
+      NA_character_
+    }
+
+    if (!"id" %in% colnames(tibble_data) || is.na(answer_col)) {
+      removed_files <- c(removed_files, file_name)
+      removal_reasons <- c(removal_reasons, "no 'id' and 'answer' (or 'data') columns")
+      next
+    }
+
+    if (!is.null(vars) && !all(vars %in% tibble_data$id)) {
+      missing_vars <- setdiff(vars, tibble_data$id)
+      removed_files <- c(removed_files, file_name)
+      removal_reasons <- c(removal_reasons, paste("missing key variables:", paste(missing_vars, collapse = ", ")))
+      next
+    }
+
+    if (!is.null(emails) && !identical(emails, "*")) {
+      email_value <- tibble_data[[answer_col]][tibble_data$id == "email"][1]
+      if (is.na(email_value) || !email_value %in% emails) {
         removed_files <- c(removed_files, file_name)
-        removal_reasons <- c(removal_reasons, "no 'id' column")
-      } else if (!is.null(vars) && !all(vars %in% tibble_data$id)) {
-        missing_vars <- setdiff(vars, tibble_data$id)
-        removed_files <- c(removed_files, file_name)
-        removal_reasons <- c(removal_reasons, paste("missing key variables:", paste(missing_vars, collapse = ", ")))
-      } else {
-        for (key_var in vars) {
-          key_var_value <- tibble_data$answer[tibble_data$id == key_var]
-          tibble_data[[key_var]] <- key_var_value
-        }
-        filtered_tibble_list[[file_name]] <- tibble_data
+        removal_reasons <- c(removal_reasons, "email not in 'emails'")
+        next
       }
     }
-    
-    # Report removed files if verbose
-    if (verbose && length(removed_files) > 0) {
-      for (i in seq_along(removed_files)) {
-        message("Removed '", removed_files[i], "': ", removal_reasons[i])
-      }
+
+    for (key_var in vars) {
+      key_var_value <- tibble_data[[answer_col]][tibble_data$id == key_var][1]
+      tibble_data[[key_var]] <- key_var_value
     }
-    
-    # Process results for this pattern based on return_value
-    if (return_value == "Summary") {
-      if (length(filtered_tibble_list) > 0) {
-        summary_rows <- lapply(names(filtered_tibble_list), function(file_name) {
-          tibble_data <- filtered_tibble_list[[file_name]]
-          answers <- nrow(tibble_data)
+    filtered_tibble_list[[file_name]] <- tibble_data
+  }
 
-          if (!is.null(keep_file_name)) {
-            if (keep_file_name == "All") {
-              source_name <- file_name
-            } else if (keep_file_name == "Space") {
-              source_name <- sub("\\s.*", "", file_name)
-            } else if (keep_file_name == "Underscore") {
-              source_name <- sub("_.*", "", file_name)
-            }
-          } else {
-            source_name <- NULL
-          }
-
-          # First row, keeping only the requested vars, plus an answers count.
-          summary_row <- tibble_data[1, vars, drop = FALSE]
-          summary_row[["answers"]] <- answers
-
-          if (!is.null(source_name)) {
-            summary_row <- tibble::add_column(summary_row, source = source_name, .before = 1)
-          }
-
-          summary_row
-        })
-        all_pattern_results[[current_title]] <- do.call(rbind, summary_rows)
-      }
-    }
-    else if (return_value == "All") {
-      if (length(filtered_tibble_list) > 0) {
-        all_tibble <- do.call(rbind, filtered_tibble_list)
-        all_pattern_results[[current_title]] <- all_tibble
-      }
+  # Report removed files if verbose
+  if (verbose && length(removed_files) > 0) {
+    for (i in seq_along(removed_files)) {
+      message("Removed '", removed_files[i], "': ", removal_reasons[i])
     }
   }
 
-  # Combine results from all patterns
-  if (length(all_pattern_results) > 0) {
-    combined_results <- do.call(rbind, all_pattern_results)
-    return(tibble::as_tibble(combined_results))
-  } else {
+  if (length(filtered_tibble_list) == 0) {
     return(tibble::tibble())
   }
+
+  if (return_value == "Summary") {
+    summary_rows <- lapply(names(filtered_tibble_list), function(file_name) {
+      tibble_data <- filtered_tibble_list[[file_name]]
+      answers <- nrow(tibble_data)
+
+      if (!is.null(keep_file_name)) {
+        if (keep_file_name == "All") {
+          source_name <- file_name
+        } else if (keep_file_name == "Space") {
+          source_name <- sub("\\s.*", "", file_name)
+        } else if (keep_file_name == "Underscore") {
+          source_name <- sub("_.*", "", file_name)
+        }
+      } else {
+        source_name <- NULL
+      }
+
+      # First row, keeping only the requested vars, plus an answers count.
+      summary_row <- tibble_data[1, vars, drop = FALSE]
+      summary_row[["answers"]] <- answers
+
+      if (!is.null(source_name)) {
+        summary_row <- tibble::add_column(summary_row, source = source_name, .before = 1)
+      }
+
+      summary_row
+    })
+    combined_results <- do.call(rbind, summary_rows)
+  } else {
+    combined_results <- do.call(rbind, filtered_tibble_list)
+  }
+
+  tibble::as_tibble(combined_results)
 }

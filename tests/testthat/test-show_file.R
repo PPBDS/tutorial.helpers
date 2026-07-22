@@ -261,3 +261,14 @@ test_that("show_file function works correctly", {
   # Test case 33: strip_pagedtable_html() handles an empty vector
   expect_equal(strip_pagedtable_html(character(0)), character(0))
 })
+
+# Regression test: a closing fence with trailing whitespace used to go
+# unrecognized, so following prose leaked into the chunk output.
+
+test_that("closing fences with trailing whitespace are recognized", {
+  f <- tempfile(fileext = ".Rmd")
+  on.exit(unlink(f))
+  writeLines(c("```{r}", "x <- 1", "``` ", "Some prose."), f)
+  out <- capture.output(show_file(f, chunk = "Last"))
+  expect_equal(out, "x <- 1")
+})

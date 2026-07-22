@@ -75,3 +75,36 @@ test_that("check_membership verbose reports when no tibble has the key var", {
     "No tibbles contain the required key variable")
   expect_length(result, 0)
 })
+# Regression tests: tibbles storing answers in an old-format `data` column
+# used to be silently dropped, and a duplicated key variable in one file used
+# to abort the whole batch.
+
+test_that("tibbles with a 'data' column pass membership checks", {
+  tibble_list <- list(
+    old_format = tibble::tibble(
+      id = c("name", "email"),
+      submission_type = c("question", "question"),
+      data = c("Old Format", "old.format@example.com")))
+
+  result <- check_membership(tibble_list,
+                             key_var = "email",
+                             membership = "old.format@example.com")
+  expect_equal(names(result), "old_format")
+})
+
+test_that("a duplicated key variable does not abort the batch", {
+  tibble_list <- list(
+    dup = tibble::tibble(
+      id = c("email", "email"),
+      submission_type = "question",
+      answer = c("first@example.com", "second@example.com")),
+    ok = tibble::tibble(
+      id = "email",
+      submission_type = "question",
+      answer = "kept@example.com"))
+
+  result <- check_membership(tibble_list,
+                             key_var = "email",
+                             membership = c("first@example.com", "kept@example.com"))
+  expect_setequal(names(result), c("dup", "ok"))
+})

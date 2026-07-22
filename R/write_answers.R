@@ -7,14 +7,16 @@
 #' @param file Output file path (should end in .html).
 #' @param obj Either a Shiny session object (from learnr) or a list of submissions
 #'   (as returned by get_submissions_from_learnr_session()).
-#' @returns NULL
+#' @returns No return value, called for the side effect of writing an HTML
+#'   file of submitted answers to `file`.
 #' @export
 
 write_answers <- function(file, obj) {
   if (is.environment(obj)) {
     objs <- get_submissions_from_learnr_session(obj)
     tutorial_id <- learnr::get_tutorial_info()$tutorial_id
-  } else if (is.list(obj) && !is.null(obj[[1]]$id)) {
+  } else if (is.list(obj) && !is.data.frame(obj) && length(obj) > 0 &&
+             is.list(obj[[1]]) && !is.null(obj[[1]]$id)) {
     objs <- obj
     tutorial_id <- "test-tutorial"
   } else {

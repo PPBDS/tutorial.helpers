@@ -1,17 +1,9 @@
 
 ## Items
 
-* Finish Getting Started: Codespaces tutorial.
+* Getting Started tutorial.
 
-* Finish AI tutorial.
-
-* Should "Save and push" in the standard template be something more like "Save, commit and push?" Or should it be something shorter? Or maybe the words should be different, perhaps matching the Positron verbiage, like the use of "Sync?"
-
-* Should "in this setup chunk" in the standard template be different? In particular, should "setup" be enclosed in `backticks`? Probably would be better of "setup" were linked to a page which explains why we use this terminology and any weird effects it might have.
-
-* Should we explain why we can turn off echos in the YAML header but need to use a code chunk option for message?
-
-* Maybe we need a new essay which includes a dozen or so sections, each of which explains a specific item/complexity. Then, we can just link to the relevant section from the relevant sentence/phrase from the standard template. Every once in a while, we can urge the student to check a link and learn about some of the details.
+* CRAN release.
 
 * If we did the above, then we could get rid of some of the default knowledge drops, like the warning about ending `analysis.qmd` with a blank line. This is worth discussing in our `details.qmd` essay as discussed above. It is not worth repeating in every single tutorial.
 
@@ -27,9 +19,7 @@ Explain in the tutorial how the command "Ask AI and run the code." implicitly in
 
 ## Later Projects
 
-* There are some subtle issues with regard to return_tutorial_paths() when working in a renv environment. (I think.) If I am working on a tutorial package, I can run devtools::install() to install the latest changes. Running learnr::run_tutorial() gets the version which was just installed. But running devtools::test(), which calls return_tutorial_paths() when it is rendering the tutorials in order to test them, does not get the latest version installed by install(). Instead, it gets (?) whatever version of the package is installed in the renv environment itself. And, often enough, there is no package installed in the renv environment since this is the package we are working on. One way to confirm this issue, just within tutorial.helpers, is to run renv::remove("tutorial.helpers"). Then, run devtools::install(). Then, learnr::run_tutorial will work for getting-started but return_tutorial_paths("tutorial.helpers") will return nothing. At least, I think that that is what will happen . . . But, when I tried this sequence, I could not replicate the issue. Arrgh! Key point is that everything works as expected with check(), so, just use that to be sure things are working.
-
-* It is annoying that, in Introduction to R, the tutorial shows tibbles differently than what students see in the Console or what they would see with the same code in an R code chunk in a Quarto document. An example is pretending that a big tibble only has 1,000 rows when, in fact, it has much more. Is there a way to just have the output of code in a tutorial display like it would in a quarto document? Example:
+* It is annoying that, in Introduction to R, the tutorial shows tibbles differently than what students see in the Console or what they would see with the same code in an R code chunk in a Quarto document. An example is pretending that a big tibble only has 1,000 rows when, in fact, it has much more. Is there a way to just have the output of code in a tutorial display like it would in a quarto document? 
 
 * If you have a symbol like <td> in the text of a tutorial, it will still knit. But that symbol (or maybe anything with brackets) causes the side menu (and the download screen) not to appear. The solution is to use `<td>` in place of just <td>. To Do: Come up with some testing that prevents this scenario from happening in the future.
 
@@ -148,28 +138,29 @@ The below are projects that we probably won't get to this summer.
 
 ### Other Stuff
 
-* Think harder about the changes that will be allowed once we have a new Tutorial Selector Extension for Positron available.  In essence, there are three things we care about. One: What order do tutorials appear in the selector? They will be sorted by package, obviously, but we want package authors to be able to order them as they see fit, with perhaps the default ordering being the ordering of directory names. Second, we need to display a name of the tutorial which students will see. Presumably, this will just be the title of the tutorial. Third, we have the file name of the saved answers. Presumably, this will just use the id variable.
 
 * I think that there is a bug (or at least a change) in how to handle links within a vignette. That is, within instructions.qmd, I want to link discussion of knowledge drops to the Knowledge Drops section. The old way of doing that in Rmd files still *seemed* to work, in the sense that the links worked in the result html, but R CMD check seemed to identify those links as have an Empty URL, generating a NOTE in R CMD check which led to CRAN rejection. 
-
-* Which packages do we really need, either in Imports or in Suggests?
-
-* Related to the above is that the Github Actions files differ in that R CMD check uses renv and pkgdown.yml uses dependencies. The former ensures that the quarto package is available because it is in the renv.lock file. But with dependencies, I suspect that quarto must appear in the imports part of the DESCRIPTION file, but maybe Suggests would be enough?
 
 
 * Might be nice if the email entry field at least attempted to note/warn if the submitted information was not a legitimate email. Perhaps at least check if there is an `@`.
 
 * There are fewer and fewer reasons why we need a copy previous code option. Consider getting rid of Copy code button. Now that we can pre-place code from previous questions into the Exericise code chunk, we don't need to allow students to Copy from previous exercise. Since that is the only use case for the Copy code button, we can delete it, and all its associated junk. The counter-argument is that if you populate the starting code for Exercise N + 1, then a student working on Exercise N can cheat and just look at by skipping ahead. Counter-counter-argument is that students can already do this by looking at the Hint for Exercise N + 1. Since they don't (?), we don't really have to worry about them cheating in this way. Moreover, the vast majority of questions are so easy that cheating is actually more work. Just look at the provided hint!
 
-* Consider providing a simple hash to guarantee that students haven't cheated, even if they submit html. The function would run some R code which produced a string including things like date, time, pwd, whois, computer name, and whatever else. It then takes that string and turns it into a hash. That hash is output into the html. If there are concerns about cheating, an instructor can check the hash. 
+* Consider providing a simple hash to guarantee that students haven't cheated, even if they submit html. The function would run some R code which produced a string including things like date, time, pwd, whois, computer name, and whatever else. It then takes that string and turns it into a hash. That hash is output into the html. If there are concerns about cheating, an instructor can check the hash. He can run some code on the HTML answer file and get back that information in an easy to read form.
 
-* Ensure that this code handles our test code chunks in non-code questions. See Positron and Github (gert) for examples. Seems to work, but some test cases would be nice.
+Perhaps the the code first creates a JSON file --- or rather text string --- which is a paired list of command (or request) and result. So:
 
-* reactiveConsole(TRUE) might make it easier to experiment with reactivity in the Console.
+date, 2026-05-19
 
+And so on. A JSON list would be nice because, after unhashing, it is easy to process. Also, if some commands (or requests) don't work on some OSs, that would be OK. The JSON file would just contain:
 
+pwd, NULL
 
-## Downloading answers
+or whatever.
+
+Of course, we would also need to provide some functions for reading hashes from a bunch of answers in a folder, or whatever.
+
+# Downloading answers
 
 * Perhaps Section 9.2.3 Downloading reports in the Shiny book shows a much better way of handling our answer-saving problem: parameterised RMarkdown. 
 

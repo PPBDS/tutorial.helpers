@@ -9,6 +9,9 @@
 #' ensures that all code chunk labels are the correct function of the 
 #' section title and exercise number.
 #'
+#' @returns No return value, called for the side effect of rewriting the
+#'   tutorial file in the active editor window.
+#'
 #' @export
 
 check_current_tutorial <- function(){

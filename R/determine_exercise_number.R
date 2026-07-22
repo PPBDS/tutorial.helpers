@@ -25,29 +25,33 @@ determine_exercise_number <- function(file_path = NULL){
 
   }
 
-  exercise_number <- "1"
-
   for (l in cut_content){
 
-    # Find the latest exercise and make sure we have not already set the exercise number
+    # Find the latest exercise header. The match is anchored so that prose or
+    # code merely mentioning "### Exercise" does not alter the numbering.
 
-    if (grepl("### Exercise", l) & !grepl("str_detect", l)){
+    if (grepl("^### Exercise\\b", l)){
 
-      # Set the exercise number to 1 + the latest exercise number
+      # Extract only the number immediately following "Exercise", so headers
+      # like "### Exercise 2 (part 3)" yield 2, not 23. A bare "### Exercise"
+      # header has no number; treat it as exercise 0 so we return 1.
 
-      exercise_number <- as.integer(gsub("[^0-9]", "", l)) + 1
-      return(exercise_number)
+      num <- sub("^### Exercise\\s*", "", l)
+      num <- sub("^(\\d*).*$", "\\1", num)
+      latest <- if (nzchar(num)) as.integer(num) else 0L
+
+      return(latest + 1L)
     }
 
-    # Find the latest section
+    # Find the latest section. A section header before any exercise means
+    # the next exercise is the first one.
 
     if (grepl("^## ", l)){
-
-      # After finding a section, stop looping immediately
-
-      return(strtoi(exercise_number))
+      return(1L)
     }
   }
 
+  # No exercise or section header found above this point in the file.
 
+  return(1L)
 }

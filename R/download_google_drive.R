@@ -57,7 +57,12 @@ download_google_drive <- function(url, path = NULL, title = NULL, overwrite = TR
   }
   
   if (verbose) cat("Using folder ID:", folder_id, "\n")
-  
+
+  if (!requireNamespace("googledrive", quietly = TRUE)) {
+    stop("Package 'googledrive' is required to download files from Google Drive. ",
+         "Please install it with: install.packages('googledrive')")
+  }
+
   # Deauthorize for public access
   googledrive::drive_deauth()
   
@@ -127,7 +132,7 @@ download_google_drive <- function(url, path = NULL, title = NULL, overwrite = TR
       },
       error = function(e) {
         if (verbose) cat(" Failed -", e$message, "\n")
-        failed <- failed + 1
+        failed <<- failed + 1
       }
     )
   }

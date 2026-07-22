@@ -13,7 +13,7 @@ determine_code_chunk_name <- function(file_path = NULL){
   # Also, note to explore options of including special characters in code chunk names.
   # Currently, most special characters like "{#(.*)}" are excluded and check for the neccesity of some of the
   # trimws functions. Currently, cut_content represents a all the lines in a file in a list which is then reversed.
-  # Also note to perhaps explore expanding the 20 character limit for exercises headers. Explore splitting this function up
+  # Also note to perhaps explore expanding the 30 character limit for exercises headers. Explore splitting this function up
   # by creating a function that takes a section header and returns a code chunk name (both being character strings).
   # Ultimately this would greatly improve testing but may not be completely necessary.
 
@@ -62,4 +62,7 @@ determine_code_chunk_name <- function(file_path = NULL){
     }
   }
 
+  # No section header found above this point in the file.
+
+  return(section_id)
 }

@@ -64,12 +64,18 @@ check_membership <- function(tibble_list, key_var, membership, verbose = FALSE) 
       next
     }
     
-    # Check if tibble has an 'answer' column (where the values are stored)
-    if (!"answer" %in% colnames(tibble_data)) {
+    # Values are stored in an 'answer' column or, in older files, a 'data'
+    # column.
+    if ("answer" %in% colnames(tibble_data)) {
+      key_var_value <- tibble_data$answer[key_var_row]
+    } else if ("data" %in% colnames(tibble_data)) {
+      key_var_value <- tibble_data$data[key_var_row]
+    } else {
       next
     }
-    
-    key_var_value <- tibble_data$answer[key_var_row]
+
+    # A malformed file may repeat the key variable; use the first value.
+    key_var_value <- key_var_value[1]
     emails_found <- c(emails_found, key_var_value)
     
     # Check if the value is in the membership list

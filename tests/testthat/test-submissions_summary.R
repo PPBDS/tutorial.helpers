@@ -337,3 +337,45 @@ test_that("submissions_summary works with default emails parameter", {
   
   expect_equal(result_default, result_explicit)
 })
+
+# Regression tests: the `emails` argument used to be a silent no-op,
+# overlapping `title` patterns used to duplicate rows, and old-format files
+# storing answers in a `data` column used to fail with an opaque error.
+
+extdata_dir <- system.file("extdata", "answers_html", package = "tutorial.helpers")
+
+test_that("emails argument filters the summary", {
+  all_rows <- submissions_summary(path = extdata_dir, title = "stop", vars = "email")
+  expect_equal(nrow(all_rows), 3)
+
+  one <- submissions_summary(path = extdata_dir, title = "stop", vars = "email",
+                             emails = "bluebird.jack.xu@gmail.com")
+  expect_equal(one$email, "bluebird.jack.xu@gmail.com")
+
+  star <- submissions_summary(path = extdata_dir, title = "stop", vars = "email",
+                              emails = "*")
+  expect_equal(nrow(star), 3)
+})
+
+test_that("overlapping title patterns do not duplicate files", {
+  res <- submissions_summary(path = extdata_dir, title = c("stop", "st"), vars = "email")
+  expect_equal(nrow(res), 3)
+  expect_equal(anyDuplicated(res$email), 0L)
+})
+
+test_that("old-format files with a 'data' column are summarized", {
+  old_dir <- file.path(tempdir(), "old-format-summary")
+  dir.create(old_dir, showWarnings = FALSE)
+  on.exit(unlink(old_dir, recursive = TRUE))
+  writeLines(
+    c("<html><body><table>",
+      "<tr><th>id</th><th>submission_type</th><th>data</th></tr>",
+      "<tr><td>email</td><td>question</td><td>old.format@example.com</td></tr>",
+      "<tr><td>intro-1</td><td>question</td><td>An answer</td></tr>",
+      "</table></body></html>"),
+    file.path(old_dir, "sample_answers.html"))
+
+  res <- submissions_summary(path = old_dir, title = "sample", vars = "email")
+  expect_equal(res$email, "old.format@example.com")
+  expect_equal(res$answers, 2L)
+})

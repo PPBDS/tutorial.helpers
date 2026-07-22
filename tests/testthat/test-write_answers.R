@@ -76,3 +76,12 @@ testthat::test_that("write_answers() generates correct HTML output from answers 
 
 
 
+
+# Regression test: invalid inputs used to fail with low-level subscript
+# errors before the intended validation message could fire.
+
+test_that("invalid obj gives the intended error", {
+  f <- tempfile(fileext = ".html")
+  expect_error(write_answers(f, list()), "obj must be a Shiny session")
+  expect_error(write_answers(f, data.frame(a = 1)), "obj must be a Shiny session")
+})

@@ -17,3 +17,12 @@ test_that("Testing name cut off", {
     "really-long-name-to-cut-off-an"
   )
 })
+
+# Regression test: a file with no section headers used to return NULL.
+
+test_that("a file with no sections returns the default", {
+  f <- tempfile(fileext = ".Rmd")
+  on.exit(unlink(f))
+  writeLines("No sections here.", f)
+  expect_equal(determine_code_chunk_name(f), "NONE_SET")
+})

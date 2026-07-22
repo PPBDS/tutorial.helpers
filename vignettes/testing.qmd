@@ -16,7 +16,7 @@ If you are using the [**testthat**](https://testthat.r-lib.org/) framework for t
 library(testthat)
 library(your.package)
 
-test_check("your.packge")
+test_check("your.package")
 ````
 
 Note how the name of **your.package** is not quoted with `library()` but is quoted with `test_check()`.
