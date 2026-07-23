@@ -61,10 +61,13 @@ using the **ggplot2** library.
 Note that tutorials must be [R Markdown](https://rmarkdown.rstudio.com/)
 documents, meaning that their suffix is `.Rmd`. You can not (yet) use
 Quarto documents with tutorials. Fortunately, most of what you need
-which works in Quarto also works in R Markdown. The main difference is
-that code chunk options appear within the
-[`{}`](https://rdrr.io/r/base/Paren.html). Don’t worry about this
-detail.
+which works in Quarto also works in R Markdown. In particular, per-chunk
+options use Quarto’s `#| key: value` syntax on lines inside the chunk —
+not inline within the [`{}`](https://rdrr.io/r/base/Paren.html) — for
+`echo`, `message`, `cache`, and every other option. This works in `.Rmd`
+via modern **knitr**. The only inline options which remain on the header
+line are `include = FALSE` on the setup chunk and the `child = ...`
+argument on the info-section and download-answers child chunks.
 
 AI tutorials begin with an *Introduction* which provides a summary of
 the key packages/functions which the tutorial will cover. The
@@ -215,16 +218,18 @@ student to run some R code, include that code in the `test` chunk. It
 runs when we test the tutorial, ensuring correctness. Its output — a
 printed tibble, summary statistics, or plot — is shown to students after
 they click Continue, giving them something concrete to check their work
-against. We do not use `echo = TRUE` because, in the age of AI, we
-rarely want to show students code.
+against. Add `#| echo: true` when you want students to see our code as
+well as its output — we often show students our code so that they learn
+something from comparing it with their own. In output-focused tutorials,
+showing just the result is fine.
 
 ### Knowledge drops
 
 The most difficult part of tutorial creation is writing the “knowledge
 drops,” the snippets of wisdom (and the associated links) which are used
 at the end of each exercise. These generally come in two categories:
-details about R functions/packages/websites and background information
-about the substantive data science problem at hand.
+details about R packages/websites and background information about the
+substantive data science problem at hand.
 
 Do not expect this to be easy! Good knowledge drops are hard. Make them
 short. Students will not read more than a sentence or two.
@@ -243,10 +248,14 @@ section we will explore the data further.” Don’t waste time telling
 students what you expect to do next, or what you have just completed
 doing. Teach them something real!
 
-The most important knowledge drops mention packages and functions which
-we want students to be aware of, packages/functions which they might
-want to mention to the AI explicitly, given the topic under
-consideration.
+In normal, output-focused tutorials, the most important knowledge drops
+mention *packages* which we want students to be aware of — a map of the
+infrastructure. Since students don’t write the code, they rarely need
+individual function names; when a transformation matters, teach the
+concept, not the function which does it. Modeling tutorials are the
+exception: there the modeling functions themselves, like `reg_linear()`
+and `plot_predictions()`, are the curriculum, so knowledge drops may and
+should name them.
 
 ### Inputs
 
@@ -438,17 +447,15 @@ we hold their places with `XX` in both cases.
 ```` default
 ### Exercise 1
 
-Create a new repo using `codespace-starter` as a template and name it `r4ds-1`.
-
-If you haven't already, open the `r4ds-1` repo on GitHub and create a Codespace from it.
+You should be connected to a repo named `r4ds-1`. If you are not, create one and connect to it.
 
 You need two R Terminals: one for running this tutorial and one for your exercises.
 
 Create a new Quarto Document and save it as `analysis.qmd`. Add a YAML header at the top with a title (`"Analyzing the Billboard 100"`) and your name as author. 
 
-Render the document by running `quarto render` in the bash Terminal. Open the rendered `analysis.html` file in a new tab by right clicking it in the File Explorer and selecting "Open with Live Server". When you run `quarto render` from now on that tab will be updated with the newly rendered file.
+Render the document by running `quarto render` in the bash Terminal. Open the rendered `analysis.html` file in a new tab by right clicking it in the Explorer and selecting "Open with Live Server". When you run `quarto render` from now on that tab will be updated with the newly rendered file.
 
-Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.
+Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Commit and push.
 
 In the R Terminal, run:
 
@@ -569,15 +576,11 @@ the R Terminal, a new addition to the QMD.
 ```` default
 ### Exercise 4
 
-<!-- XX: Delete this question if you do not make use of a `data` directory in this tutorial. Note the extra spaces after the command. These are needed to ensure separate lines for each command when students copy/paste. -->
+<!-- XX: Delete this question if you do not make use of a `data` directory in this tutorial. -->
 
-From the R Terminal, run these three commands:
+Create a `data` directory at the top level of the `XX` repo. This is a good place to store any data that you are working with.
 
-`getwd()`  
-`dir.create("data")`  
-`list.files()`  
-
-This will create a `data` directory in your project. This is a good place to store any data that you are working with.
+In the bash Terminal, run `ls`.
 
 CP/CR.
 
@@ -592,21 +595,26 @@ question_text(NULL,
 
 ###
 
-You answer should look something like this, although your path will be different.
+You answer should look something like this:
 
 ```
-> getwd()  
-[1] "/Users/dkane/Desktop/projects/XX"  
-> dir.create("data")  
-> list.files()  
- [1] "analysis_files" "analysis.html"  "analysis.qmd"   "data"           "README.md"    
->  
+$ ls
+README.md  analysis.html  analysis.qmd  analysis_files  data
 ```
 
 ###
 
 <!-- XX: If you have downloaded some data, then you might want to create the tibbles that you will use here. (Of course, you also need to create those tibbles in the setup chunk so that any test code will run.) -->
 ````
+
+Note that we state the goal — create a `data` directory — rather than
+dictating the command. Students will usually have AI do it, which is
+fine. In introductory tutorials, though, when students are meeting these
+tools for the first time, you ought to provide the specific commands —
+for example, having them run
+[`getwd()`](https://rdrr.io/r/base/getwd.html), `dir.create("data")`,
+and [`list.files()`](https://rdrr.io/r/base/list.files.html) in the R
+Terminal — so they see exactly what is happening.
 
 ## Tutorial Topics
 
@@ -663,10 +671,13 @@ creating that plot. If you want the student to mimic a plot, you can
 place it in the `images` subdirectory and then use
 `knitr::include_graphics("images/plot.png")` to show it to students.
 
-We don’t show students our code because, in the age of AI, professionals
-don’t look at code very often. Instead, we show students the *result* —
-a plot or summary statistics — produced by our correct code. This gives
-students something concrete to check their AI-generated work against.
+Students never show *their* code in the rendered document — readers of
+an analysis want the graphics, not the code. But we, when writing
+tutorials, often show students *our* code so that they learn something.
+At a minimum, show the *result* — a plot or summary statistics —
+produced by our correct code, so students have something concrete to
+check their AI-generated work against; add `echo = TRUE` when the code
+itself is worth studying.
 
 Consider this example:
 
@@ -695,7 +706,7 @@ question_text(NULL,
 ###
 
 ```{r}
-# XX: Insert code that produces the correct result — a plot, summary statistics, or printed tibble. With echo = FALSE (the default), students see only the output, not this code.
+# XX: Insert code that produces the correct result — a plot, summary statistics, or printed tibble. With echo = FALSE (the default), students see only the output; add #| echo: true when you want them to study the code too.
 ```
 
 ### 
@@ -705,19 +716,20 @@ question_text(NULL,
 
 With `echo = FALSE` (the default), students see only the output of the
 chunk — a plot, printed tibble, or other result — not the code itself.
-If there is no meaningful output to show, omit the test chunk or set
-`eval = FALSE` explicitly.
+Add `#| echo: true` when the code is worth studying. If there is no
+meaningful output to show, omit the test chunk or set `eval = FALSE`
+explicitly.
 
 ## Plotting Questions
 
-Plotting exercises are generally handled with a sequence of four
+Plotting exercises are generally handled with a short sequence of
 questions. Prior to these, the tutorial will probably have the student
 practice gathering, organizing, and cleaning the data.
 
-The first of the three prior questions ensures that the student’s data
-matches ours. We show our result — the printed code that produces our
-tibble — in a test chunk, and ask students to copy and paste their own
-pipe and compare. We check their code with
+The first of these questions ensures that the student’s data matches
+ours. We show our result — the printed code that produces our tibble —
+in a test chunk, and ask students to copy and paste their own pipe and
+compare. We check their code with
 [`show_file()`](https://ppbds.github.io/tutorial.helpers/reference/show_file.md).
 
 ```` default
@@ -765,11 +777,7 @@ of the pipe to a new variable, often `x`. We then tell the student to
 ```` default
 ### Exercise 4
 
-Within the latest code chunk, add the option: `#| cache: true`. Assign the result of the pipe to `x`. 
-
-Run `quarto render` in the bash Terminal. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.
-
-If you have not done so already, you should add `analysis_cache` to the `.gitignore`. The content of the cache file does not belong on GitHub.
+Within the latest code chunk, assign the result of the pipe to `x`.
 
 Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Enter`, thus ensuring that the workspace also includes a copy of `x`.
 
@@ -794,20 +802,77 @@ question_text(NULL,
 Note that we need `x` to be created in the QMD, not just in the R
 Terminal, because later chunks will use `x` to create the plot.
 
-The third question tells the student to type `x` in the R Terminal,
+Caching gets its own questions — never fold `#| cache: true` into
+another step. Since the chunk already holds only the assignment to `x`,
+no cleanup is needed; the next two questions cache the chunk and then
+update `.gitignore`.
+
+```` default
+### Exercise 5
+
+Add the option `#| cache: true` to the chunk which creates `x`. This causes Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.
+
+Run `quarto render` in the bash Terminal. Rendering creates an `analysis_cache` directory next to the QMD.
+
+In the bash Terminal, run `ls`.
+
+CP/CR.
+
+```{r xx-first-section-use-sentence-case-5}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 5)
+```
+
+###
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+```` default
+### Exercise 6
+
+Add `analysis_cache` to the `.gitignore`. The contents of the cache directory do not belong on GitHub.
+
+In the R Terminal, run:
+
+```
+show_file(".gitignore")
+```
+
+CP/CR.
+
+```{r xx-first-section-use-sentence-case-6}
+question_text(NULL,
+    answer(NULL, correct = TRUE),
+    allow_retry = TRUE,
+    try_again_button = "Edit Answer",
+    incorrect = NULL,
+    rows = 3)
+```
+
+###
+
+<!-- XX: Insert a knowledge drop related to this project. -->
+````
+
+The next question tells the student to type `x` in the R Terminal,
 followed by “CP/CR.” The purpose is both to have the student look at the
 tibble and also to set the stage for the actual graphics question. In
 defining `x`, you should probably require that the students keep only a
 reasonable number of variables.
 
 ```` default
-### Exercise 5
+### Exercise 7
 
 Within the R Terminal, type `x`, which we previously assigned to a pipe and ran in the R Terminal. Hit `Enter`.
 
 CP/CR.
 
-```{r xx-first-section-use-sentence-case-5}
+```{r xx-first-section-use-sentence-case-7}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,
@@ -848,7 +913,7 @@ The purpose of this question is to ensure that the student has generated
 their own code.
 
 ```` default
-### Exercise 6
+### Exercise 8
 
 Ask AI to generate R code that uses `x` to plot a basic graph or calculate and present summary statistics showing XX ... Mention you want to use the data from `x`. If using a chat interface copy/paste the `x` you ran in the R Terminal with the resulting tibble. You only need the top 3 lines, mainly to include column names.
 
@@ -862,7 +927,7 @@ show_file("analysis.qmd", chunk = "Last")
 
 CP/CR.
 
-```{r xx-first-section-use-sentence-case-6}
+```{r xx-first-section-use-sentence-case-8}
 question_text(NULL,
     answer(NULL, correct = TRUE),
     allow_retry = TRUE,

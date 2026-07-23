@@ -23,7 +23,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tutorial.helpers</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2.9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.2.9008</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,11 +74,9 @@
 
     <!-- DK: Please incorporate these notes in this document, and then fix r4ds-* tutorials accordingly.
 
-Rarely show students code. No one looks at code anymore.
-
 Most questions ask students to ask AI to do one of two things. Calculate some summary statistics or make a plot. (Often these are combined. Make a plot of summary statistics.) This is how we do data science with AI. We need to practice checking, not coding. Our job is to make sure that the AI has not made a mistake or, more commonly, that we have not misunderstood the data.
 
-And, after they hit Continue, show (calculate on the fly) the summary statistics or show the plot. (But not the code that does this. Then SAY SOMETHING EDUCATIONAL, something that AI does not know, something that you might say to a student whose shoulder you are looking over.)
+And, after they hit Continue, show (calculate on the fly) the summary statistics or show the plot. (Then SAY SOMETHING EDUCATIONAL, something that AI does not know, something that you might say to a student whose shoulder you are looking over.)
 
 No need for nearly as much testing.
 
@@ -101,7 +99,7 @@ No need for nearly as much testing.
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
 <p>There is a <code>setup</code> code chunk at the top of a tutorial. You must have <code><a href="https://rstudio.github.io/learnr/" class="external-link">library(learnr)</a></code> and, if you use our tools, <code><a href="https://ppbds.github.io/tutorial.helpers/">library(tutorial.helpers)</a></code> in this chunk. If your tutorials are part of an R package, then you should ensure that <strong>tutorial.helpers</strong> is included under Imports in the DESCRIPTION file and that any library loaded in a tutorial is, at least, included under Suggests.</p>
 <p>Anything typed at the keyboard belongs in `backticks` (not “quotation marks”), except for package names, which are always <strong>bolded</strong>. Function names always include the parentheses: <code>read_csv()</code>, not <code>read_csv</code>. Example: the <code>+</code> sign is used to connect <code>ggplot()</code> components when using the <strong>ggplot2</strong> library.</p>
-<p>Note that tutorials must be <a href="https://rmarkdown.rstudio.com/" class="external-link">R Markdown</a> documents, meaning that their suffix is <code>.Rmd</code>. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. The main difference is that code chunk options appear within the <code><a href="https://rdrr.io/r/base/Paren.html" class="external-link">{}</a></code>. Don’t worry about this detail.</p>
+<p>Note that tutorials must be <a href="https://rmarkdown.rstudio.com/" class="external-link">R Markdown</a> documents, meaning that their suffix is <code>.Rmd</code>. You can not (yet) use Quarto documents with tutorials. Fortunately, most of what you need which works in Quarto also works in R Markdown. In particular, per-chunk options use Quarto’s <code>#| key: value</code> syntax on lines inside the chunk — not inline within the <code><a href="https://rdrr.io/r/base/Paren.html" class="external-link">{}</a></code> — for <code>echo</code>, <code>message</code>, <code>cache</code>, and every other option. This works in <code>.Rmd</code> via modern <strong>knitr</strong>. The only inline options which remain on the header line are <code>include = FALSE</code> on the setup chunk and the <code>child = ...</code> argument on the info-section and download-answers child chunks.</p>
 <p>AI tutorials begin with an <em>Introduction</em> which provides a summary of the key packages/functions which the tutorial will cover. The Introduction continues with a series of exercises which set up the repo/project/QMD in which most of the tutorial will be completed.</p>
 <p>After the Introduction, there are 1 or 2 sections — the official <strong>learnr</strong> nomenclature is <em>Topics</em> — which are the meat of the tutorial.</p>
 <p>The last section is the <em>Summary</em>. It starts with the same overview with which the Introduction began, but in the past tense. It then has a couple exercises which finish up the tutorial by using <code>quarto publish gh-pages analysis.qmd</code> to create a webpage featuring the cool plots which the student has created. The URL for this new webpage is usually the answer to the last exercise in Summary, thereby completing the tutorial.</p>
@@ -158,15 +156,15 @@ No need for nearly as much testing.
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>```</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>###</span></code></pre></div>
-<p>The question will almost always instruct the student to “CP/CR,” often after running <code>show_file(chunk = "Last")</code>. Adjust the value of <code>rows</code> to match the expected length of the pasted output. If the question asks the student to run some R code, include that code in the <code>test</code> chunk. It runs when we test the tutorial, ensuring correctness. Its output — a printed tibble, summary statistics, or plot — is shown to students after they click Continue, giving them something concrete to check their work against. We do not use <code>echo = TRUE</code> because, in the age of AI, we rarely want to show students code.</p>
+<p>The question will almost always instruct the student to “CP/CR,” often after running <code>show_file(chunk = "Last")</code>. Adjust the value of <code>rows</code> to match the expected length of the pasted output. If the question asks the student to run some R code, include that code in the <code>test</code> chunk. It runs when we test the tutorial, ensuring correctness. Its output — a printed tibble, summary statistics, or plot — is shown to students after they click Continue, giving them something concrete to check their work against. Add <code>#| echo: true</code> when you want students to see our code as well as its output — we often show students our code so that they learn something from comparing it with their own. In output-focused tutorials, showing just the result is fine.</p>
 </section><section class="level3"><h3 id="knowledge-drops">Knowledge drops<a class="anchor" aria-label="anchor" href="#knowledge-drops"></a>
 </h3>
-<p>The most difficult part of tutorial creation is writing the “knowledge drops,” the snippets of wisdom (and the associated links) which are used at the end of each exercise. These generally come in two categories: details about R functions/packages/websites and background information about the substantive data science problem at hand.</p>
+<p>The most difficult part of tutorial creation is writing the “knowledge drops,” the snippets of wisdom (and the associated links) which are used at the end of each exercise. These generally come in two categories: details about R packages/websites and background information about the substantive data science problem at hand.</p>
 <p>Do not expect this to be easy! Good knowledge drops are hard. Make them short. Students will not read more than a sentence or two.</p>
 <p>Perhaps the best place for a knowledge drop, especially for written questions, is at the start of the exercise. That is, instead of just asking the question immediately, provide a sentence or two of knowledge even if this information is not really needed to answer the question. Students tend to read those sentences closely since they might be relevant to the question they need to answer.</p>
 <p>Rhetorical questions (almost) always work poorly for knowledge drops.</p>
 <p>A knowledge drop should not be a road sign. Example: “In the next section we will explore the data further.” Don’t waste time telling students what you expect to do next, or what you have just completed doing. Teach them something real!</p>
-<p>The most important knowledge drops mention packages and functions which we want students to be aware of, packages/functions which they might want to mention to the AI explicitly, given the topic under consideration.</p>
+<p>In normal, output-focused tutorials, the most important knowledge drops mention <em>packages</em> which we want students to be aware of — a map of the infrastructure. Since students don’t write the code, they rarely need individual function names; when a transformation matters, teach the concept, not the function which does it. Modeling tutorials are the exception: there the modeling functions themselves, like <code>reg_linear()</code> and <code>plot_predictions()</code>, are the curriculum, so knowledge drops may and should name them.</p>
 </section><section class="level3"><h3 id="inputs">Inputs<a class="anchor" aria-label="anchor" href="#inputs"></a>
 </h3>
 <p>In addition to <code>tutorial.Rmd</code>, a tutorial will often use other inputs. The two most common locations for storing these inputs are <code>data</code> and <code>images</code> directories at the same level as the <code>tutorial.Rmd</code> file. Any file in <code>data</code> or <code>images</code> will be available at run time. (The directories must have these names. Something like <code>my_data</code> will not work.)</p>
@@ -236,42 +234,40 @@ No need for nearly as much testing.
 <p>Always begin by having students set up a repo and a Quarto document to work in. Again, you must replace <code>XX</code> with something sensible and usually different from the other <code>XX</code>’s. So, in the below example, the name of the repo and the title of the QMD will be different even though we hold their places with <code>XX</code> in both cases.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>### Exercise 1</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>Create a new repo using `codespace-starter` as a template and name it `r4ds-1`.</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>You should be connected to a repo named `r4ds-1`. If you are not, create one and connect to it.</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>If you haven't already, open the `r4ds-1` repo on GitHub and create a Codespace from it.</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>You need two R Terminals: one for running this tutorial and one for your exercises.</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>You need two R Terminals: one for running this tutorial and one for your exercises.</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>Create a new Quarto Document and save it as `analysis.qmd`. Add a YAML header at the top with a title (`"Analyzing the Billboard 100"`) and your name as author. </span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>Create a new Quarto Document and save it as `analysis.qmd`. Add a YAML header at the top with a title (`"Analyzing the Billboard 100"`) and your name as author. </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>Render the document by running `quarto render` in the bash Terminal. Open the rendered `analysis.html` file in a new tab by right clicking it in the Explorer and selecting "Open with Live Server". When you run `quarto render` from now on that tab will be updated with the newly rendered file.</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>Render the document by running `quarto render` in the bash Terminal. Open the rendered `analysis.html` file in a new tab by right clicking it in the File Explorer and selecting "Open with Live Server". When you run `quarto render` from now on that tab will be updated with the newly rendered file.</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Commit and push.</span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>Create a `.gitignore` file with `analysis_files` on the first line and then a blank line. Save and push.</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>In the R Terminal, run:</span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>In the R Terminal, run:</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>```         </span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>show_file(".gitignore")</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>```         </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>show_file(".gitignore")</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the R Terminal.</span>
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>If that fails, it is probably because you have not yet loaded `library(tutorial.helpers)` in the R Terminal.</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
 <span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>```{r introduction-1}</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    rows = 3)</span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>```{r introduction-1}</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    rows = 3)</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>### </span>
 <span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>### </span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span>
 <span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: By default, the next two questions just mention tidyverse. If there is more than one required library, you can just add those libraries to these steps, adjusting the grammar as needed. Or, you might have separate questions for each library, thereby providing more room for knowledge drops. --&gt;</span></code></pre></div>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: By default, the next two questions just mention tidyverse. If there is more than one required library, you can just add those libraries to these steps, adjusting the grammar as needed. Or, you might have separate questions for each library, thereby providing more room for knowledge drops. --&gt;</span></code></pre></div>
 <p>Feel free to copy/paste this question as-is, replacing <code>XX</code> with whatever makes sense for your assignment. That is, you need to provide your own repo name, Quarto document title and so on. The repo name should be descriptive and also not likely to have conflicts with other repos in the students GitHub account, i.e., <code>golf-scores</code> not <code>project-1</code>.</p>
 <p>You do not need to use <code>analysis.qmd</code> as the name of the QMD file which the student creates. But using the same name doesn’t hurt anything and is convenient since it decreases the number of things which the tutorial author needs to change.</p>
 <p>You are, obviously, responsible for adding a knowledge drop which teaches the students something about the larger topic. The most important things to mention are useful packages and functions.</p>
@@ -334,43 +330,36 @@ No need for nearly as much testing.
 <p>I recommend offering these explicit instructions in every tutorial. First, students need lots of practice. Second, each time you tell them to add something to the QMD, you give yourself an opportunity for a knowledge drop. The same applies when you tell students to execute, in the R Terminal, a new addition to the QMD.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>### Exercise 4</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Delete this question if you do not make use of a `data` directory in this tutorial. Note the extra spaces after the command. These are needed to ensure separate lines for each command when students copy/paste. --&gt;</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Delete this question if you do not make use of a `data` directory in this tutorial. --&gt;</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>From the R Terminal, run these three commands:</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>Create a `data` directory at the top level of the `XX` repo. This is a good place to store any data that you are working with.</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>`getwd()`  </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>`dir.create("data")`  </span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>`list.files()`  </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>In the bash Terminal, run `ls`.</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>This will create a `data` directory in your project. This is a good place to store any data that you are working with.</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>```{r introduction-4}</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    rows = 5)</span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>```{r introduction-4}</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    rows = 5)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>###</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>You answer should look something like this:</span>
 <span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>###</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>You answer should look something like this, although your path will be different.</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>&gt; getwd()  </span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>[1] "/Users/dkane/Desktop/projects/XX"  </span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>&gt; dir.create("data")  </span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>&gt; list.files()  </span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a> [1] "analysis_files" "analysis.html"  "analysis.qmd"   "data"           "README.md"    </span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>&gt;  </span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>###</span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: If you have downloaded some data, then you might want to create the tibbles that you will use here. (Of course, you also need to create those tibbles in the setup chunk so that any test code will run.) --&gt;</span></code></pre></div>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>$ ls</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>README.md  analysis.html  analysis.qmd  analysis_files  data</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>###</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: If you have downloaded some data, then you might want to create the tibbles that you will use here. (Of course, you also need to create those tibbles in the setup chunk so that any test code will run.) --&gt;</span></code></pre></div>
+<p>Note that we state the goal — create a <code>data</code> directory — rather than dictating the command. Students will usually have AI do it, which is fine. In introductory tutorials, though, when students are meeting these tools for the first time, you ought to provide the specific commands — for example, having them run <code><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd()</a></code>, <code>dir.create("data")</code>, and <code><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files()</a></code> in the R Terminal — so they see exactly what is happening.</p>
 </section><section class="level2"><h2 id="tutorial-topics">Tutorial Topics<a class="anchor" aria-label="anchor" href="#tutorial-topics"></a>
 </h2>
 <p>You will probably have one or two Topics, in between the Introduction and Summary. Any tutorial which both uses a lot of AI and is supposed to take an hour or so will only have, at most, two Topics.</p>
@@ -409,7 +398,7 @@ No need for nearly as much testing.
 <span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
 <p>The meat of a Topic generally involves asking AI to create a pipe which accomplishes some goal. The end of a Topic always finishes up with a plot. The last four questions set up and then guide the student to creating that plot. If you want the student to mimic a plot, you can place it in the <code>images</code> subdirectory and then use <code>knitr::include_graphics("images/plot.png")</code> to show it to students.</p>
-<p>We don’t show students our code because, in the age of AI, professionals don’t look at code very often. Instead, we show students the <em>result</em> — a plot or summary statistics — produced by our correct code. This gives students something concrete to check their AI-generated work against.</p>
+<p>Students never show <em>their</em> code in the rendered document — readers of an analysis want the graphics, not the code. But we, when writing tutorials, often show students <em>our</em> code so that they learn something. At a minimum, show the <em>result</em> — a plot or summary statistics — produced by our correct code, so students have something concrete to check their AI-generated work against; add <code>echo = TRUE</code> when the code itself is worth studying.</p>
 <p>Consider this example:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>### Exercise 6</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -435,18 +424,18 @@ No need for nearly as much testing.
 <span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>###</span>
 <span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>```{r}</span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a># XX: Insert code that produces the correct result — a plot, summary statistics, or printed tibble. With echo = FALSE (the default), students see only the output, not this code.</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a># XX: Insert code that produces the correct result — a plot, summary statistics, or printed tibble. With echo = FALSE (the default), students see only the output; add #| echo: true when you want them to study the code too.</span>
 <span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>```</span>
 <span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>### </span>
 <span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
-<p>With <code>echo = FALSE</code> (the default), students see only the output of the chunk — a plot, printed tibble, or other result — not the code itself. If there is no meaningful output to show, omit the test chunk or set <code>eval = FALSE</code> explicitly.</p>
+<p>With <code>echo = FALSE</code> (the default), students see only the output of the chunk — a plot, printed tibble, or other result — not the code itself. Add <code>#| echo: true</code> when the code is worth studying. If there is no meaningful output to show, omit the test chunk or set <code>eval = FALSE</code> explicitly.</p>
 </section><section class="level2"><h2 id="plotting-questions">Plotting Questions<a class="anchor" aria-label="anchor" href="#plotting-questions"></a>
 </h2>
-<p>Plotting exercises are generally handled with a sequence of four questions. Prior to these, the tutorial will probably have the student practice gathering, organizing, and cleaning the data.</p>
+<p>Plotting exercises are generally handled with a short sequence of questions. Prior to these, the tutorial will probably have the student practice gathering, organizing, and cleaning the data.</p>
 <!-- AR: This seems like a reasonable place to keep code. So students can be totally sure and copy and paste if lost. -->
-<p>The first of the three prior questions ensures that the student’s data matches ours. We show our result — the printed code that produces our tibble — in a test chunk, and ask students to copy and paste their own pipe and compare. We check their code with <code><a href="../reference/show_file.html">show_file()</a></code>.</p>
+<p>The first of these questions ensures that the student’s data matches ours. We show our result — the printed code that produces our tibble — in a test chunk, and ask students to copy and paste their own pipe and compare. We check their code with <code><a href="../reference/show_file.html">show_file()</a></code>.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>### Exercise 3</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>Before creating a plot, we need to ensure that your data matches ours. Run your pipe in the R Terminal and compare your output to the result shown below.</span>
@@ -481,167 +470,210 @@ No need for nearly as much testing.
 <p>The second question tells the student to, in the QMD, assign the result of the pipe to a new variable, often <code>x</code>. We then tell the student to <code>Cmd/Ctrl + Enter</code> this code so that the workspace includes a copy of <code>x</code>.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>### Exercise 4</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>Within the latest code chunk, add the option: `#| cache: true`. Assign the result of the pipe to `x`. </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>Within the latest code chunk, assign the result of the pipe to `x`.</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>Run `quarto render` in the bash Terminal. By including `#| cache: true` you cause Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Enter`, thus ensuring that the workspace also includes a copy of `x`.</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>If you have not done so already, you should add `analysis_cache` to the `.gitignore`. The content of the cache file does not belong on GitHub.</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>Place your cursor on the line where the pipe is assigned to `x`, run `Cmd/Ctrl + Enter`, thus ensuring that the workspace also includes a copy of `x`.</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>```{r xx-first-section-use-sentence-case-4}</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    rows = 8)</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>```{r xx-first-section-use-sentence-case-4}</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    rows = 8)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Show x here. --&gt;</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>###</span>
 <span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Show x here. --&gt;</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>###</span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
 <p>Note that we need <code>x</code> to be created in the QMD, not just in the R Terminal, because later chunks will use <code>x</code> to create the plot.</p>
-<p>The third question tells the student to type <code>x</code> in the R Terminal, followed by “CP/CR.” The purpose is both to have the student look at the tibble and also to set the stage for the actual graphics question. In defining <code>x</code>, you should probably require that the students keep only a reasonable number of variables.</p>
+<p>Caching gets its own questions — never fold <code>#| cache: true</code> into another step. Since the chunk already holds only the assignment to <code>x</code>, no cleanup is needed; the next two questions cache the chunk and then update <code>.gitignore</code>.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>### Exercise 5</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>Within the R Terminal, type `x`, which we previously assigned to a pipe and ran in the R Terminal. Hit `Enter`.</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>Add the option `#| cache: true` to the chunk which creates `x`. This causes Quarto to cache the results of the chunk. The next time you render your QMD, as long as you have not changed the code, Quarto will just load up the saved object.</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>Run `quarto render` in the bash Terminal. Rendering creates an `analysis_cache` directory next to the QMD.</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>```{r xx-first-section-use-sentence-case-5}</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    rows = 8)</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>###</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>Our result:</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>In the bash Terminal, run `ls`.</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>```{r xx-first-section-use-sentence-case-5}</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    rows = 5)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>```</span>
 <span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>```{r}</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a># x</span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>###</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>###</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>### Exercise 6</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>Add `analysis_cache` to the `.gitignore`. The contents of the cache directory do not belong on GitHub.</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>In the R Terminal, run:</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>show_file(".gitignore")</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>```{r xx-first-section-use-sentence-case-6}</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    rows = 3)</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>###</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
+<p>The next question tells the student to type <code>x</code> in the R Terminal, followed by “CP/CR.” The purpose is both to have the student look at the tibble and also to set the stage for the actual graphics question. In defining <code>x</code>, you should probably require that the students keep only a reasonable number of variables.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>### Exercise 7</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>Within the R Terminal, type `x`, which we previously assigned to a pipe and ran in the R Terminal. Hit `Enter`.</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>```{r xx-first-section-use-sentence-case-7}</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    rows = 8)</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>###</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>Our result:</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a># x</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>###</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
 <!-- AR: How relevant is this below paragraph given how students are using AI? -->
 <p>This also reminds students that they will often need to tell AI the variables in <code>x</code>, if they are using a chat interface, most easily by just copy/pasting the top of <code>x</code>.</p>
 <p>Could these questions be combined into one? Probably. But spreading things has two advantages. First, it ensures that even the weaker students do not get lost. Second, it provides us with more opportunities to drop some knowledge.</p>
 <p>Now, we can move on to the plotting question. In the age of AI, students will have AI write code for their plot. They will do that while specifying that their data is <code>x</code> from earlier. The student will add their new code to a new code cell, and we check that they have done so with <code><a href="../reference/show_file.html">show_file()</a></code>. The purpose of this question is to ensure that the student has generated their own code.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>### Exercise 6</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>Ask AI to generate R code that uses `x` to plot a basic graph or calculate and present summary statistics showing XX ... Mention you want to use the data from `x`. If using a chat interface copy/paste the `x` you ran in the R Terminal with the resulting tibble. You only need the top 3 lines, mainly to include column names.</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>Consider adding a title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `quarto render` to ensure that everything works. Make your plot look nice.</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>In the R Terminal, run:</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>```         </span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>show_file("analysis.qmd", chunk = "Last")</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>```{r xx-first-section-use-sentence-case-6}</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    rows = 12)</span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>###</span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>Our result:</span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>```{r}</span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a># XX: Insert plotting code. With echo = FALSE (the default), students see only the plot, not this code. Make sure the plot has a subtitle that states the take-away message and uses clean, concise code.</span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>###</span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>### Exercise 8</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>Ask AI to generate R code that uses `x` to plot a basic graph or calculate and present summary statistics showing XX ... Mention you want to use the data from `x`. If using a chat interface copy/paste the `x` you ran in the R Terminal with the resulting tibble. You only need the top 3 lines, mainly to include column names.</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>Consider adding a title, subtitle, and caption. If axis labels would be useful, add them, but if unnecessary, don't bother. Don't assign the code for the plot to any variable. Put the plot code in a new code chunk. Run `quarto render` to ensure that everything works. Make your plot look nice.</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>In the R Terminal, run:</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>```         </span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>show_file("analysis.qmd", chunk = "Last")</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>```{r xx-first-section-use-sentence-case-8}</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    rows = 12)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>###</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>Our result:</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a># XX: Insert plotting code. With echo = FALSE (the default), students see only the plot, not this code. Make sure the plot has a subtitle that states the take-away message and uses clean, concise code.</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>###</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
 <p>Create a few exercises where students iteratively improve a plot. Perhaps adding features and themes. Since students are using AI to generate plots, they can make more of them. They need lots of practice evaluating and improving AI outputs.</p>
 </section><section class="level2"><h2 id="tutorial-summary">Tutorial Summary<a class="anchor" aria-label="anchor" href="#tutorial-summary"></a>
 </h2>
 <p>Once you have completed one or two Topics, it is time for the Summary section.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>## Summary</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>###</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: The exact same two to four sentences about the main packages/functions used in the Introduction, but written here in the past tense. You made a promise and you kept it.  --&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>## Summary</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>###</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: The exact same two to four sentences about the main packages/functions used in the Introduction, but written here in the past tense. You made a promise and you kept it.  --&gt;</span></code></pre></div>
 <p>The last three questions are fairly self-explanatory.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>### Exercise 1</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>Run `quarto render` to ensure that everything works.  The resulting HTML page should be attractive, showing clean versions of your plot(s).</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>At the R Terminal, run:</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>show_file("analysis.qmd")</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>```{r summary-1}</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    rows = 30)</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>### </span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>### Exercise 2</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>Publish your rendered QMD to GitHub Pages. In the bash Terminal --- not the R Terminal! --- run:</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>quarto publish gh-pages analysis.qmd</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>Copy/paste the resulting URL below.</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>```{r summary-2}</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>    rows = 1)</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>### </span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>### Exercise 3</span>
+<div class="sourceCode" id="cb24"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>### Exercise 1</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>Commit and push all your files. Copy/paste the URL to your Github repo.</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>Run `quarto render` to ensure that everything works.  The resulting HTML page should be attractive, showing clean versions of your plot(s).</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>```{r summary-3}</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    rows = 3)</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>```</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>### </span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: The tutorial is now over. Add any necessary acknowledgements and/or provide a link to further high quality readings, ideally readings which you mentioned in at least one knowledge drop above. --&gt;</span></code></pre></div>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>At the R Terminal, run:</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>show_file("analysis.qmd")</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>CP/CR.</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>```{r summary-1}</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    rows = 30)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>### </span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>### Exercise 2</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>Publish your rendered QMD to GitHub Pages. In the bash Terminal --- not the R Terminal! --- run:</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>quarto publish gh-pages analysis.qmd</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>Copy/paste the resulting URL below.</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>```{r summary-2}</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>    rows = 1)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>### </span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: Insert a knowledge drop related to this project. --&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>### Exercise 3</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>Commit and push all your files. Copy/paste the URL to your Github repo.</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>```{r summary-3}</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>question_text(NULL,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    answer(NULL, correct = TRUE),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    allow_retry = TRUE,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    try_again_button = "Edit Answer",</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    incorrect = NULL,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    rows = 3)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>### </span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>&lt;!-- XX: The tutorial is now over. Add any necessary acknowledgements and/or provide a link to further high quality readings, ideally readings which you mentioned in at least one knowledge drop above. --&gt;</span></code></pre></div>
 <p>In the age of AI, the purpose of a tutorial is to teach students how to create with AI. We do that by forcing them to practice, and by providing intelligent advice along the way.</p>
 </section><section class="level2"><h2 id="appendix-checking-a-tutorial">Appendix: Checking a tutorial<a class="anchor" aria-label="anchor" href="#appendix-checking-a-tutorial"></a>
 </h2>
