@@ -22,19 +22,21 @@ options(tutorial.exercise.timelimit = 60,
         tutorial.storage = "local")
 ```
 
+<!-- Get rid of the images which use dark mode. They are unreadable! -->
+
 ## Introduction
 ###
 
 This tutorial, intended for beginners, teaches students how to use [VS Code](https://code.visualstudio.com/) within [GitHub Codespaces](https://github.com/features/codespaces) to run R tutorials created with the [**learnr**](https://rstudio.github.io/learnr/) package. We also introduce students to the use of the bash Terminal, the R Terminal, and [GitHub Copilot](https://github.com/copilot), an AI coding assistant.
 
-Most students begin this tutorial after completing the setup steps outlined [here](https://ppbds.github.io/primer/getting-started.html). If you have not done that, some of these questions may be confusing.
+Most students begin this tutorial after completing the setup steps outlined [here](https://ppbds.github.io/primer/getting-started.html). If you have not done that yet, do so now.
 
 ###
 
 After starting the tutorial, your Codespace looks something like this:
 
 ```{r}
-include_graphics("images/cs-start-tutorial.png")
+include_graphics("images/gs-1.png")
 ```
 
 ###
@@ -63,17 +65,24 @@ The **bash** Terminal is a text-based interface in which you type commands to te
 
 To do the exercises, you need a bash Terminal in which to type commands. Press the plus button (`+`) on the right side of the Panel to open one.
 
-<!-- DK: Image needs to focus on that portion of the screen. -->
 
 ```{r}
-include_graphics("images/cs-open-bash.png")
+include_graphics("images/gs-2.png")
 ```
 
 ### Exercise 1
 
 In the bash Terminal, type `whoami` and then press `return` (on Mac) or `enter` (on Windows). To "run" a command means to type it and then press this key. To avoid repeating both terms in every question, we use `Enter` to mean either the `return` or `enter` key, as appropriate.
 
-**Do not just type the command into the answer box!** You must run the command in the Terminal and then copy the result.
+###
+
+The other Mac/Windows issue to be aware of is the Command key (Mac) versus Control key (Windows). 
+
+Many shortcut key commands use the Command key --- abbreviated to `Cmd` --- or the Control key --- abbreviated to `Ctrl` --- to perform various actions, depending on the operating system you are using. We will use `Cmd/Ctrl` to mean either key, as appropriate.
+
+###
+
+**Do not just type the command into the answer box!** You must run the command in the bash Terminal and then copy the result.
 
 **C**opy and **P**aste both the **C**ommand *and* the **R**esponse from the Terminal into the box below. We will abbreviate this instruction in the future as **CP**/**CR**.
 
@@ -255,11 +264,11 @@ question_text(NULL,
 codespace-starter $ head .devcontainer/STUDENT_WORKFLOW.md
 # Student workflow
 
-This Codespace is your **workshop** — it already has R, Python (with the usual
-data-science libraries), Quarto, the AI assistants, and all the right settings. But this `codespace-starter` repo isn't
-*yours*, so you won't save your work here. Instead, you'll make your **own
-repo** and work in it. The tools travel with the Codespace, so your repo needs
-no setup of its own.
+This Codespace is your **workshop** — it already has R, Python (with the
+usual data-science libraries), Quarto, the AI assistants, and all the right
+settings. But this `codespace-starter` repo isn't *yours*, so you won't save
+your work here. Instead, you'll make your **own repo** and work in it. The
+tools travel with the Codespace, so your repo needs no setup of its own.
 
 ## 1. Create or connect to your repo (one command)
 
@@ -327,18 +336,17 @@ codespace-starter $
 
 Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
 
-* Return to your Codespace and click the tab titled "R Tutorial" in the Panel.
+* Return to your Codespace and click the Terminal tab titled "R Tutorial" in the Panel.
 
 ```{r}
-include_graphics("images/r-tutorial-terminal.png")
+include_graphics("images/gs-3.png")
 ```
 
 * Stop the tutorial by pressing `Ctrl + C` in the terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
 
-* To restart the tutorial, press the play button next to the "getting-started" tutorial.
+* To restart the tutorial, press the triangle button next to the "Getting Start" tutorial via the R Tutorials VS Code extension.
 
 * Finally, open the tutorial.
-
 
 Now that you have read all the instructions, go ahead and follow them.
 
@@ -349,13 +357,21 @@ Notice that all of your answers to previous questions have been saved. It is not
 ## R Terminal
 ###
 
-The bash Terminal lets you talk to the computer. The R Terminal lets you talk to R, the programming language you will use for data science. The two work the same way: you type a command, press `Enter`, and the Terminal executes the command and gives you something back. The only real difference is the language --- bash commands like `ls` and `pwd` on the one hand, R commands like `sqrt(16)` on the other. Each exercise in this section asks you to run a one-line command and then CP/CR.
+All the terminology associated with VS Code is confusing. The "Panel" is the bottom of the VS Code window. The are several "views" associated with the Panel, including "Output," "Ports," and "Terminal." Within the Terminal view, you can have multiple "terminals" running. Each terminal has an associated "tab" on the right side of the panel which you can use to select that terminal. Different terminals serve different purposes.
+###
+
+So far, we have learn about the "bash Terminal,"" which lets you talk to the computer. The "R Terminal" lets you talk to R, the programming language you will use for data science. The two work the same way: you type a command, press `Enter`, and the Terminal executes the command and gives you something back. The only real difference is the language --- bash commands like `ls` and `pwd` on the one hand, R commands like `sqrt(16)` on the other. Each exercise in this section asks you to run a one-line command and then CP/CR.
 
 Create a new R Terminal by pressing the down arrow next to the plus button on the right side of the Panel Toolbar and selecting "New R Terminal."
 
+
 ```{r}
-include_graphics("images/cs-new-R-terminal.png")
+include_graphics("images/gs-4.png")
 ```
+
+###
+
+You may need to click on the new  "R Interactive" tab at the bottom of the list of terminals in order to bring it to the top of the Panel.
 
 ### Exercise 1
 
@@ -552,7 +568,7 @@ Again, your answer never needs to match ours exactly.
 
 Your Codespace includes **GitHub Copilot**, an AI coding assistant that can answer questions, explain code, create and edit files, and run commands for you. 
 
-Copilot Chat usually opens automatically when your Codespace starts. If it is not open, click the menu button in the top-left corner, marked with a red circle below. Select **View**, and then click **Chat**, marked with a red rectangle. You can also open Chat by pressing `Ctrl + Alt + I`.
+Copilot Chat usually opens automatically when your Codespace starts. If it is not open, click the menu button in the top-left corner, marked with a red circle below. Select **View**, and then click **Chat**, marked with a red rectangle. You can also open Chat by pressing `Cmd/Ctrl + Alt + I`.
 
 ```{r}
 include_graphics("images/cs-open-copilot-chat.png")
@@ -562,13 +578,19 @@ When the Copilot Chat view opens, select **Agent** from the mode menu near the c
 
 ### Exercise 1
 
+The bottom of the Chat window looks like this:
+
+```{r}
+include_graphics("images/gs-5.png")
+```
+
 In the Copilot chat box, type the following message and press `Enter`. Replace `<your-name>` with your actual name.
 
 ```
 Hello! My name is <your-name>
 ```
 
-Copy Copilot's response into the box below. This is the only exercise in which we ask you to copy what the AI says back; usually we will confirm its work in another way.
+Copy Copilot's response into the box below. This is the only exercise in which we ask you to copy what the AI says back. Usually, we will confirm its work by checking the file which it has edited.
 
 ```{r ai-assistant-1}
 question_text(NULL,
@@ -587,11 +609,11 @@ Hello David! How can I help you today?
 
 ###
 
-GitHub Copilot works like ChatGPT. You "talk" to it in plain English, and it responds. Your exact response will differ from ours --- AI does not give the same answer twice --- and that is fine.
+GitHub Copilot works like ChatGPT. You "talk" to it in plain English, and it responds. Your exact response will differ from ours --- AI does not give usually the same answer twice --- and that is fine.
 
 ### Exercise 2
 
-Copilot can do much more than chat: in Agent mode, it can create and edit files for you. Send this message:
+Copilot can do much more than chat. In Agent mode, which is the default, it can create and edit files for you. Send this message:
 
 ```
 Make a file called presidents.txt which includes the names of the first 5 US Presidents.
@@ -643,7 +665,7 @@ You can also see the new file without using the Terminal. Click the Explorer ico
 The Explorer icon is marked with a red square below.
 
 ```{r}
-include_graphics("images/cs-open-explorer.png")
+include_graphics("images/gs-6.png")
 ```
 
 ### Exercise 3
@@ -686,6 +708,8 @@ An R script is a plain-text file whose name ends in `.R`. Creating or opening a 
 In the Explorer, click `script.R` to open it in the Editor. Click the triangular **Run Source** button in the upper-right corner of the Editor. Look in the R Terminal for the generated `source()` command, the line of code, and its result.
 
 The Run Source button is marked with a red square below.
+
+<!-- DK: Replace this nonsense. -->
 
 <div style="position: relative; width: 90%; margin: 1em auto;">
   <img src="images/cs-run-source.png" alt="VS Code Editor with script.R open" style="display: block; width: 100%; height: auto;">
@@ -827,7 +851,7 @@ question_text(NULL,
 
 ###
 
-You have now run the same script five ways: with the Run Source button, with two keyboard shortcuts, by typing `Rscript` in a bash Terminal, and by asking Copilot to run `Rscript`. Asking Copilot delegates the work, but Copilot still uses commands on the computer to carry it out.
+You have now run the same script five ways: with the Run Source button, with two keyboard shortcuts, by typing `Rscript` in a bash Terminal, and by asking Copilot to run the script. Asking Copilot delegates the work, but Copilot still uses commands on the computer to carry it out.
 
 ### Exercise 9
 
