@@ -11,13 +11,13 @@ Source:
 [`DESCRIPTION`](https://github.com/PPBDS/tutorial.helpers/blob/main/DESCRIPTION)
 
 Kane D (2026). *tutorial.helpers: Helper Functions for Creating
-Tutorials*. R package version 0.7.0,
+Tutorials*. R package version 0.7.0.9000,
 <https://ppbds.github.io/tutorial.helpers/>.
 
     @Manual{,
       title = {tutorial.helpers: Helper Functions for Creating Tutorials},
       author = {David Kane},
       year = {2026},
-      note = {R package version 0.7.0},
+      note = {R package version 0.7.0.9000},
       url = {https://ppbds.github.io/tutorial.helpers/},
     }
