@@ -1,39 +1,10 @@
-
 ## Items
 
-* Getting Started tutorial.
+* Review and clean up Getting Started.
 
-* CRAN release.
-
-* If we did the above, then we could get rid of some of the default knowledge drops, like the warning about ending `analysis.qmd` with a blank line. This is worth discussing in our `details.qmd` essay as discussed above. It is not worth repeating in every single tutorial.
-
-* Stuff like this is wordy:
-
-Copy and paste this code to continue the previous code and save the file. Place your cursor on the first line of code and run `Cmd/Ctrl + Enter`.
-
-Explain in the tutorial how the command "Ask AI and run the code." implicitly includes all the necessary steps. Maybe:
-
-> Going forward, you may assume that, whenever we tell you to "Ask AI," we always want you to then use the new code in the QMD, to execute that code with `Cmd/Ctrl + Enter`, and then **C**opy/**P**aste the **C**ode/**R**esponse as your answer. Recall that `Cmd/Ctrl + Enter` makes this easy because it takes the code from the QMD, copies it into the Console, and then hits `Enter`.
-
-
-
-## Later Projects
-
-* It is annoying that, in Introduction to R, the tutorial shows tibbles differently than what students see in the Console or what they would see with the same code in an R code chunk in a Quarto document. An example is pretending that a big tibble only has 1,000 rows when, in fact, it has much more. Is there a way to just have the output of code in a tutorial display like it would in a quarto document? 
+* Fix check_current_tutorial. See below for details.
 
 * If you have a symbol like <td> in the text of a tutorial, it will still knit. But that symbol (or maybe anything with brackets) causes the side menu (and the download screen) not to appear. The solution is to use `<td>` in place of just <td>. To Do: Come up with some testing that prevents this scenario from happening in the future.
-
-update make_exercises
-
-### check_current_tutorial
-
-Handles this case very poorly. 
-
-```
-tutorial.helpers::set_positron_settings()
-````
-
-Note the mismatched backticks. This may happen for other combinations besides this one. The problem, obviously, is that check_* has trouble in this case, but provides no warning. Need to add a warning for two cases: unmatched backtick combinations that are never resolved or backtick environments that include more than 20 lines of code, which should rarely happen. Probably the former, with the warning noting the lines around which the unmatching starts. Maybe there is a verbose option to which reports all matched sections.
 
 * I am most concerned about what happens when a student does not answer a question. The most common case is for `name` or `email`. But this can also arise for questions which ask for URLs. When this happens --- at least until we change write_answers() --- the resulting tibble will not have a row with that value for `id`. I don't think we handle this in any sort of consistent/sensible fashion.
 
@@ -41,59 +12,12 @@ Note the mismatched backticks. This may happen for other combinations besides th
 
 * Need better documentation of using submissions_* functions. They are the ones that people might use.
 
-* Would be cool if, instead of showing “Run Code”, we could show, in the tutorials, the actual blue Run Code button, just as it appears. 
 
 * Use: "path <- testthat::test_path("fixtures", "answers_html")" Instead of: "path <- file.path(find.package("tutorial.helpers"), "tests/testthat/fixtures/answers_html")" in the top documentation part of some R files. 
-
-* Think harder about whether write_answers() should write out questions which the student did not answer. Almost certainly Yes. Also, what about a header which include tutorial information, like name or, even id/version? 
 
 * Want to change the color of the OK box so that it is green when students enter
 their email or other text. This seem relevant:  https://stackoverflow.com/questions/33620133/change-the-color-of-action-button-in-shiny/35871042.
 
-* Add a touch of Python to Getting Started?
-
-### make_exercises
-
-* We need new options for make_exercises() which create the default questions for some of the new AI stuff.
-
-  + type = "introduction" gives you the first three questions in the Introduction of an ai.tutorial. (Note that make_exercises handles making the exercise number and chunk names for one question work automatically. Will it do that for three added questions?)
-
-  + type = "summary" gives you the 
-
-  + type = "plot" gives you the four questions which result in a plot, which is the usual fashion in which we complete a section (topic) within a tutorial.
-
-  + type = "ai" gives something like:
-
-````{verbatim}
-### Exercise 2
-
-Place your cursor in the QMD file in the last code chunk. Use `Cmd/Ctrl + Enter` to execute the last line or pipe.
-
-Note that this causes the code to be copied down to the Console and then executed. 
-
-CP/CR.
-
-```{r makeexercise-2}
-question_text(NULL,
-    answer(NULL, correct = TRUE),
-    allow_retry = TRUE,
-    try_again_button = "Edit Answer",
-    incorrect = NULL,
-    rows = 3)
-```
-
-###
-
-Our code:
-
-```{r, echo=TRUE}
-...
-```
-
-### 
-
-<!-- XX: Insert a knowledge drop related to this project. -->
-````
 
 * The determine_* functions are suspect. 
 
@@ -105,7 +29,7 @@ Our code:
 
 
 
-## check_current_tutorial(), meaning format_tutorial()
+## check_current_tutorial(), usually meaning format_tutorial()
 
 * Change format_tutorial() so it looks to see if you have any chunk names in your file with reserved names (name, email, ID, minutes, answers), and then warns you about that fact.
 
@@ -117,6 +41,13 @@ Our code:
 
 * Advanced: Get Format Code Chunk Labels add-in to catch the case in which a non-question code chunk is duplicated.
 
+* Handles this case very poorly. 
+
+```
+tutorial.helpers::set_positron_settings()
+````
+
+Note the mismatched backticks. This may happen for other combinations besides this one. The problem, obviously, is that check_* has trouble in this case, but provides no warning. Need to add a warning for two cases: unmatched backtick combinations that are never resolved or backtick environments that include more than 20 lines of code, which should rarely happen. Probably the former, with the warning noting the lines around which the unmatching starts. Maybe there is a verbose option to which reports all matched sections.
 
 ## Points about testing
 
@@ -131,11 +62,6 @@ Our code:
 
 
 
-## After This Summer
-
-The below are projects that we probably won't get to this summer.
-
-
 ### Other Stuff
 
 
@@ -144,7 +70,7 @@ The below are projects that we probably won't get to this summer.
 
 * Might be nice if the email entry field at least attempted to note/warn if the submitted information was not a legitimate email. Perhaps at least check if there is an `@`.
 
-* There are fewer and fewer reasons why we need a copy previous code option. Consider getting rid of Copy code button. Now that we can pre-place code from previous questions into the Exericise code chunk, we don't need to allow students to Copy from previous exercise. Since that is the only use case for the Copy code button, we can delete it, and all its associated junk. The counter-argument is that if you populate the starting code for Exercise N + 1, then a student working on Exercise N can cheat and just look at by skipping ahead. Counter-counter-argument is that students can already do this by looking at the Hint for Exercise N + 1. Since they don't (?), we don't really have to worry about them cheating in this way. Moreover, the vast majority of questions are so easy that cheating is actually more work. Just look at the provided hint!
+* There are fewer and fewer reasons why we need a copy previous code option. Consider getting rid of Copy code button. Now that we can pre-place code from previous questions into the Exercise code chunk, we don't need to allow students to Copy from previous exercise. Since that is the only use case for the Copy code button, we can delete it, and all its associated junk. The counter-argument is that if you populate the starting code for Exercise N + 1, then a student working on Exercise N can cheat and just look at by skipping ahead. Counter-counter-argument is that students can already do this by looking at the Hint for Exercise N + 1. Since they don't (?), we don't really have to worry about them cheating in this way. Moreover, the vast majority of questions are so easy that cheating is actually more work. Just look at the provided hint!
 
 * Consider providing a simple hash to guarantee that students haven't cheated, even if they submit html. The function would run some R code which produced a string including things like date, time, pwd, whois, computer name, and whatever else. It then takes that string and turns it into a hash. That hash is output into the html. If there are concerns about cheating, an instructor can check the hash. He can run some code on the HTML answer file and get back that information in an easy to read form.
 
@@ -160,24 +86,7 @@ or whatever.
 
 Of course, we would also need to provide some functions for reading hashes from a bunch of answers in a folder, or whatever.
 
-# Downloading answers
 
-* Perhaps Section 9.2.3 Downloading reports in the Shiny book shows a much better way of handling our answer-saving problem: parameterised RMarkdown. 
-
-* With rstudioapi, use selectFile and friends as an easier way of saving student answers.
-
-* The **downloadthis** package looks very interesting. It seems easy to download a file without all the rigamarole of the Shiny server. But it requires that the file exists. Can we automatically run the code to create the files? Yes! We can write the code in the final exercise and then tell students to hit Run Code. They can then hit the download button. But would that really work? Isn't an Exercise code chunk its own separate world, with no notion of the tutorial of which it is a part? Maybe the same local{()} nonsense that we use for submission_server() would do the trick. But that would make for some ugly code. Maybe we can hide the code, but they still press the Run Code button.
-
-
-
-
-## Using ___
-
-The latest version of learnr seems to allow for ____ as a useful placeholder in code which is left in the actual exercise code blocks without creating an error. Might be useful! Might be much better than always inserting code from previous question.
-
-So, in addition to hints, we could have each code block pre-populated with the code we want them to start with. No need for copy-code from previous exercise! But some diligent students probably don't use the hint. (But they do use Copy from Previous question.) We don't want to force them to see too much before they try out the question.
-
-Blanks are detected using regular expressions (since blanks may make the code unparsable), and learnr’s default pattern is to detect three or more consecutive underscores. Authors can choose the pattern for detecting blanks with the exercise.blanks chunk option. Setting exercise.blanks = "[.]{2}[a-z]+[.]{2}", for example, would allow the author to use valid R syntax for blanks. The warning message shown to students calls out the blanks they need to fill in.
 
 
 # Add this material as a technical appendix in instructions.qmd.
@@ -206,34 +115,3 @@ The first is the default location for packages. This is where things go unless y
 ```
 
 Whenever you `library()` a package, R looks through, in order, the values returned by `.libPaths()`. **renv** sets things up so that the first item is its collection of packages. Note that these are placed in a weird location, including a temp directory named something like `all.primer.tutorials-07f29d85`. I am not sure how **renv** decided to create a new one of these. It does not delete the old ones. In the case of major breakdowns, deleting these directories by hand can fix things.
-
-
-## Comments on .Rbuildignore
-
-For some reason, it is impossible to include comments in the `.Rbuildignore`, at least by using the "#" symbol. I think the key issue is that using `*` (or maybe a parenthesis) in a line which begins with `#` causes trouble. Regardless, here are some thoughts on the version we currently use in **primer.tutorials**.
-
-We would like to ensure that all the junk files which end up in the `tutorials/*` directories are not included in the build. Such files are often large. They also run the risk of messing things up in that they might cause certain tests to pass for us but which would fail for anyone who downloads from Github. (The `.gitignore` file does a reasonable job of ensuring that such files do not end up on Github.)
-
-The key line is:
-
-````
-tutorials/[^/]*/(?!(data|images|.*Rmd))
-````
-
-This excludes everything in any subdirectory of the tutorials directory except an `images` directory (a file named images would also be included) or a `data` directory or a file suffixed with `.Rmd`.
-
-
-## Extension
-
-* Update README.md. Special focus on the process of updating things. Make the README as good as you can. So good that I don't feel the need to bother you!
-
-* Make version number like 0.1.0
-
-* Make it so I know how (and do on Tuesday) start the submission process to the marketplace.
-
-* Provide Tutorial Pane functionality.
-  + Determine all installed R packages. 
-  + Determine all tutorials in those packages.
-  + Create table
-  + Allow user to search that table dynamically. So, I type "primer" and, instead of seeing all the packages/tutorials, I only see packages or tutorials which include "primer".
-  + In the results of the search bar, there is the package and tutorial name and a "Run" button which you can press to run the tutorial. Behind the scenes, that issues something like `learnr:run_tutorial("name", "package")`, presumably by copying the command to the live Console and then hitting return.
