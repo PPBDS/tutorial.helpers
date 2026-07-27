@@ -1,4 +1,4 @@
-# tutorial.helpers (development version)
+# tutorial.helpers 0.7.0
 
 * Remove `set_positron_settings()` and `set_rprofile_settings()`. We no longer support configuring Positron or `.Rprofile` settings.
 
