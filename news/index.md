@@ -1,6 +1,8 @@
 # Changelog
 
-## tutorial.helpers (development version)
+## tutorial.helpers 0.7.0
+
+CRAN release: 2026-07-27
 
 - Remove `set_positron_settings()` and `set_rprofile_settings()`. We no
   longer support configuring Positron or `.Rprofile` settings.
