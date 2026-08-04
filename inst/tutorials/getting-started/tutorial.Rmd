@@ -55,11 +55,11 @@ If you are completing this tutorial as part of a class, use the same email addre
 ## Bash Terminal
 ###
 
-Each tutorial includes exercises for you to complete. Most exercises ask you to run a command in a Terminal and then copy the result into the answer box. After writing your answer, click the "Submit Answer" button, as you did above for your name and email address.
+Each tutorial includes exercises for you to complete. Most exercises ask you to run a command in a terminal and then copy the result into the answer box. After writing your answer, click the "Submit Answer" button, as you did above for your name and email address.
 
 ###
 
-The **bash** Terminal is a text-based interface in which you type commands to tell your Codespace what to do. The pattern is always the same: you send a command, the Terminal executes it, and it gives you something back. In this section you will practice the most common bash commands. (In the next section you will see that the R Terminal works exactly the same way.)
+The **bash** Terminal is a text-based interface in which you type commands to tell your Codespace what to do. The pattern is always the same: you send a command, the terminal executes it, and it gives you something back. In this section you will practice the most common bash commands. (In the next section you will see that the R Terminal works exactly the same way.)
 
 ###
 
@@ -84,7 +84,7 @@ Many shortcut key commands use the Command key --- abbreviated to `Cmd` --- or t
 
 **Do not just type the command into the answer box!** You must run the command in the bash Terminal and then copy the result.
 
-**C**opy and **P**aste both the **C**ommand *and* the **R**esponse from the Terminal into the box below. We will abbreviate this instruction in the future as **CP**/**CR**.
+**C**opy and **P**aste both the **C**ommand *and* the **R**esponse from the bash Terminal into the box below. We will abbreviate this instruction in the future as **CP**/**CR**.
 
 ```{r bash-terminal-1}
 question_text(NULL,
@@ -134,7 +134,7 @@ codespace-starter $
 
 ###
 
-A "shell" is the program that reads and interprets the commands you type in the Terminal. `echo $0` prints the name of the shell you are using: `/bin/bash`, the [Bash shell](https://en.wikipedia.org/wiki/Bash_(Unix_shell)). Every command you run in this Terminal --- starting with the `whoami` you just ran --- is interpreted by bash.
+A "shell" is the program that reads and interprets the commands you type in a terminal. `echo $0` prints the name of the shell you are using: `/bin/bash`, the [Bash shell](https://en.wikipedia.org/wiki/Bash_(Unix_shell)). Every command you run in this bash Terminal --- starting with the `whoami` you just ran --- is interpreted by bash.
 
 ### Exercise 3
 
@@ -161,7 +161,7 @@ codespace-starter $
 
 ###
 
-`pwd` stands for **p**rint **w**orking **d**irectory --- the folder the Terminal is currently "in." GitHub Codespaces place your repository under `/workspaces/`, so that is where you begin. Almost every command you run acts on this directory unless you tell it otherwise.
+`pwd` stands for **p**rint **w**orking **d**irectory --- the folder the shell is currently "in." GitHub Codespaces place your repository under `/workspaces/`, so that is where you begin. Almost every command you run acts on this directory unless you tell it otherwise.
 
 ### Exercise 4
 
@@ -281,7 +281,7 @@ codespace-starter $
 
 ### Exercise 8
 
-Let us make the Terminal "sleep" by running `sleep 5` in the bash Terminal. The `sleep 5` command pauses execution for 5 seconds.
+Let us make the bash Terminal "sleep" by running `sleep 5`. The `sleep 5` command pauses execution for 5 seconds.
 
 CP/CR.
 
@@ -303,11 +303,11 @@ codespace-starter $
 
 ###
 
-Many commands do their work silently and print nothing --- success is simply the return of the prompt. We can change the duration with `sleep [number]`, where the number is how many seconds the Terminal pauses.
+Many commands do their work silently and print nothing --- success is simply the return of the prompt. We can change the duration with `sleep [number]`, where the number is how many seconds the pause lasts.
 
 ### Exercise 9
 
-Run `sleep 60` in the bash Terminal. This command makes the Terminal sleep for 60 seconds. To cancel the running `sleep` command, press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
+Run `sleep 60` in the bash Terminal. This command makes the terminal sleep for 60 seconds. To cancel the running `sleep` command, press `Ctrl + C` on your keyboard. Do so now, before `sleep 60` finishes.
 
 CP/CR.
 
@@ -330,19 +330,19 @@ codespace-starter $
 
 ###
 
-`Ctrl + C` interrupts whatever process is currently running in the Terminal and returns you to the prompt; the `^C` marks where you pressed it. This is one of the most useful things to know: when a command hangs or you change your mind, `Ctrl + C` stops it. You will use it again in the next exercise to stop the tutorial itself.
+`Ctrl + C` interrupts whatever process is currently running in the terminal and returns you to the prompt; the `^C` marks where you pressed it. This is one of the most useful things to know: when a command hangs or you change your mind, `Ctrl + C` stops it. You will use it again in the next exercise to stop the tutorial itself.
 
 ### Exercise 10
 
 Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
 
-* Return to your Codespace and click the Terminal tab titled "R Tutorial" in the Panel.
+* Return to your Codespace and click the terminal tab titled **R Tutorial** on the right side of the Panel.
 
 ```{r}
 include_graphics("images/gs-3.png")
 ```
 
-* Stop the tutorial by pressing `Ctrl + C` in the terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
+* Stop the tutorial by pressing `Ctrl + C` in that terminal. This is useful because it can interrupt any terminal process. A new line should appear where you can enter another command.
 
 * To restart the tutorial, press the triangle button next to the "Getting Start" tutorial via the R Tutorials VS Code extension.
 
@@ -357,10 +357,10 @@ Notice that all of your answers to previous questions have been saved. It is not
 ## R Terminal
 ###
 
-All the terminology associated with VS Code is confusing. The "Panel" is the bottom of the VS Code window. The are several "views" associated with the Panel, including "Output," "Ports," and "Terminal." Within the Terminal view, you can have multiple "terminals" running. Each terminal has an associated "tab" on the right side of the panel which you can use to select that terminal. Different terminals serve different purposes.
+All the terminology associated with VS Code is confusing. The "Panel" is the bottom of the VS Code window. There are several "views" associated with the Panel, including "Output," "Ports," and "Terminal." Within the Terminal view, you can have multiple "terminals" running. Each terminal has an associated "tab" on the right side of the Panel which you can use to select that terminal. A terminal is just a window for talking to a program: a bash Terminal runs the bash shell; an R Terminal runs R. Different terminals serve different purposes.
 ###
 
-So far, we have learn about the "bash Terminal,"" which lets you talk to the computer. The "R Terminal" lets you talk to R, the programming language you will use for data science. The two work the same way: you type a command, press `Enter`, and the Terminal executes the command and gives you something back. The only real difference is the language --- bash commands like `ls` and `pwd` on the one hand, R commands like `sqrt(16)` on the other. Each exercise in this section asks you to run a one-line command and then CP/CR.
+So far, we have learned about the "bash Terminal," which lets you talk to the computer. The "R Terminal" lets you talk to R, the programming language you will use for data science. The two work the same way: you type a command, press `Enter`, and the terminal executes the command and gives you something back. The only real difference is the language --- bash commands like `ls` and `pwd` on the one hand, R commands like `sqrt(16)` on the other. Each exercise in this section asks you to run a one-line command and then CP/CR.
 
 Create a new R Terminal by pressing the down arrow next to the plus button on the right side of the Panel Toolbar and selecting "New R Terminal."
 
@@ -398,7 +398,7 @@ R 4.5.3>
 
 ###
 
-At its simplest, R is a calculator. Just as the bash Terminal took `whoami` and handed back your username, the R Terminal takes `4 + 5` and hands back the result. You send a command; the Terminal sends something back. The `[1]` at the start of the output is a counter telling you that the line begins with the first element of the result --- useful when a result has many values spread across several lines.
+At its simplest, R is a calculator. Just as the bash Terminal took `whoami` and handed back your username, the R Terminal takes `4 + 5` and hands back the result. You send a command; the terminal sends something back. The `[1]` at the start of the output is a counter telling you that the line begins with the first element of the result --- useful when a result has many values spread across several lines.
 
 ### Exercise 2
 
