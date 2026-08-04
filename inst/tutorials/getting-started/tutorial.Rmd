@@ -362,7 +362,7 @@ All the terminology associated with VS Code is confusing. The "Panel" is the bot
 
 So far, we have learned about the "bash Terminal," which lets you talk to the computer. The "R Terminal" lets you talk to R, the programming language you will use for data science. The two work the same way: you type a command, press `Enter`, and the terminal executes the command and gives you something back. The only real difference is the language --- bash commands like `ls` and `pwd` on the one hand, R commands like `sqrt(16)` on the other. Each exercise in this section asks you to run a one-line command and then CP/CR.
 
-Create a new R Terminal by pressing the down arrow next to the plus button on the right side of the Panel Toolbar and selecting "New R Terminal."
+Create a new R Terminal by pressing the down arrow next to the plus button on the right side of the Panel Toolbar and selecting "R Terminal."
 
 
 ```{r}
