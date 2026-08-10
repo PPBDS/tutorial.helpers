@@ -575,7 +575,7 @@ Your Codespace includes **GitHub Copilot**, an AI coding assistant that can answ
 
 ###
 
-Copilot Chat usually opens automatically when your Codespace starts. If it is not open, click the menu button in the top-left corner, marked with a red circle below. Select **View**, and then click **Chat**, marked with a red rectangle. You can also open Chat by pressing `Cmd/Ctrl + Alt + I`.
+Copilot Chat usually opens automatically when your Codespace starts. If it is not open, click the menu button in the top-left corner, marked with a red arrow below. Select **View**, and then click **Chat**, marked with another red arrow. You can also open Chat by pressing `Cmd/Ctrl + Alt + I`.
 
 ```{r}
 include_graphics("images/cs-open-copilot-chat.png")
@@ -636,7 +636,7 @@ include_graphics("images/cs-copilot-keep-editor.png")
 
 The **Keep** button may also appear in a smaller change summary near the Copilot chat box.
 
-```{r, out.width = '45%'}
+```{r}
 include_graphics("images/cs-copilot-keep-summary.png")
 ```
 
