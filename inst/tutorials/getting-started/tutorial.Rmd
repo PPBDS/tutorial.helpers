@@ -277,7 +277,7 @@ codespace-starter $
 
 ###
 
-`head` prints the first ten lines of a file, a quick way to peek at its contents without opening it. `STUDENT_WORKFLOW.md` explains the most important habit for this course: because `codespace-starter` is not your own repo, you create your own with `.devcontainer/connect-repo.sh` and do your work there.
+`head` prints the first ten lines of a file, a quick way to peek at its contents without opening it. Because `codespace-starter` is not your own repo, you will soon learn to create your own with `.devcontainer/connect-repo.sh` and save your work there.
 
 ### Exercise 8
 
@@ -303,7 +303,7 @@ codespace-starter $
 
 ###
 
-Many commands do their work silently and print nothing --- success is simply the return of the prompt. We can change the duration with `sleep [number]`, where the number is how many seconds the pause lasts.
+Many commands do their work silently and print nothing. We can change the duration with `sleep [number]`, where the number is how many seconds the pause lasts.
 
 ### Exercise 9
 
@@ -330,7 +330,7 @@ codespace-starter $
 
 ###
 
-`Ctrl + C` interrupts whatever process is currently running in the terminal and returns you to the prompt; the `^C` marks where you pressed it. This is one of the most useful things to know: when a command hangs or you change your mind, `Ctrl + C` stops it. You will use it again in the next exercise to stop the tutorial itself.
+`Ctrl + C` interrupts whatever process is currently running in the terminal and returns you to the prompt; the `^C` marks where you pressed it. When a command hangs or you change your mind, `Ctrl + C` stops it. You will use it again in the next exercise to stop the tutorial itself.
 
 ### Exercise 10
 
@@ -358,9 +358,12 @@ Notice that all of your answers to previous questions have been saved. It is not
 ###
 
 All the terminology associated with VS Code is confusing. The "Panel" is the bottom of the VS Code window. There are several "views" associated with the Panel, including "Output," "Ports," and "Terminal." Within the Terminal view, you can have multiple "terminals" running. Each terminal has an associated "tab" on the right side of the Panel which you can use to select that terminal. A terminal is just a window for talking to a program: a bash Terminal runs the bash shell; an R Terminal runs R. Different terminals serve different purposes.
+
 ###
 
 So far, we have learned about the "bash Terminal," which lets you talk to the computer. The "R Terminal" lets you talk to R, the programming language you will use for data science. The two work the same way: you type a command, press `Enter`, and the terminal executes the command and gives you something back. The only real difference is the language --- bash commands like `ls` and `pwd` on the one hand, R commands like `sqrt(16)` on the other. Each exercise in this section asks you to run a one-line command and then CP/CR.
+
+###
 
 Create a new R Terminal by pressing the down arrow next to the plus button on the right side of the Panel Toolbar and selecting "R Terminal."
 
@@ -391,9 +394,9 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> 4 + 5
+R 4.6.1> 4 + 5
 [1] 9
-R 4.5.3>
+R 4.6.1>
 ````
 
 ###
@@ -418,9 +421,9 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> sqrt(16)
+R 4.6.1> sqrt(16)
 [1] 4
-R 4.5.3>
+R 4.6.1>
 ````
 
 ###
@@ -445,9 +448,9 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> getwd()
+R 4.6.1> getwd()
 [1] "/workspaces/codespace-starter"
-R 4.5.3>
+R 4.6.1>
 ````
 
 ###
@@ -472,9 +475,9 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> R.version.string
-[1] "R version 4.5.3 (2026-03-11)"
-R 4.5.3>
+R 4.6.1> R.version.string
+[1] "R version 4.6.1 (2026-06-24)"
+R 4.6.1> 
 ````
 
 ###
@@ -485,7 +488,9 @@ Your version of R may differ from the example above --- that's fine, as long as 
 
 `show_file()` is a commonly used function from the **tutorial.helpers** package. It makes it easy for you to share the contents of another file with your instructor, especially a file that you have edited.
 
-You can generally call a function by giving its name followed by parentheses, as with `getwd()`. However, it can be safer to prefix the function name with the name of the package in which the function is found, separated by two colons. Since `show_file()` is in the **tutorial.helpers** package, we can call it using this "double-colon" notation: `tutorial.helpers::show_file()`.
+###
+
+You can generally call a function by giving its name followed by parentheses, as with `getwd()`. However, we often prefix the function name with the name of the package in which the function is found, separated by two colons. Since `show_file()` is in the **tutorial.helpers** package, we can call it using this "double-colon" notation: `tutorial.helpers::show_file()`.
 
 In the R Terminal, run this command:
 
@@ -568,13 +573,15 @@ Again, your answer never needs to match ours exactly.
 
 Your Codespace includes **GitHub Copilot**, an AI coding assistant that can answer questions, explain code, create and edit files, and run commands for you. 
 
+###
+
 Copilot Chat usually opens automatically when your Codespace starts. If it is not open, click the menu button in the top-left corner, marked with a red circle below. Select **View**, and then click **Chat**, marked with a red rectangle. You can also open Chat by pressing `Cmd/Ctrl + Alt + I`.
 
 ```{r}
 include_graphics("images/cs-open-copilot-chat.png")
 ```
 
-When the Copilot Chat view opens, select **Agent** from the mode menu near the chat box. Agent mode lets Copilot work with files and Terminals in your Codespace. If you are asked to sign in or authorize GitHub Copilot, follow the instructions on the screen. Keep the Chat view open throughout this section.
+When the Copilot Chat view opens, **Agent** will probably be selected by default from mode menu near the chat box. Agent mode lets Copilot work with files and Terminals in your Codespace. If you are asked to sign in or authorize GitHub Copilot, follow the instructions on the screen. Keep the Chat view open throughout this section.
 
 ### Exercise 1
 
@@ -609,7 +616,7 @@ Hello David! How can I help you today?
 
 ###
 
-GitHub Copilot works like ChatGPT. You "talk" to it in plain English, and it responds. Your exact response will differ from ours --- AI does not give usually the same answer twice --- and that is fine.
+GitHub Copilot works like ChatGPT. You "talk" to it in plain English, and it responds. Your exact response will differ from ours --- AI does not usually give the same answer twice --- and that is fine.
 
 ### Exercise 2
 
@@ -619,7 +626,9 @@ Copilot can do much more than chat. In Agent mode, which is the default, it can 
 Make a file called presidents.txt which includes the names of the first 5 US Presidents.
 ```
 
-Copilot will create the file in your working directory. Copilot may open the new file in the Editor and display a **Keep** button. Click **Keep** to accept the file.
+Copilot might just create the file in your working directory without checking with you. 
+
+Or, Copilot might open the new file in the Editor and display a **Keep** button. Click **Keep** to accept the file.
 
 ```{r}
 include_graphics("images/cs-copilot-keep-editor.png")
@@ -630,6 +639,10 @@ The **Keep** button may also appear in a smaller change summary near the Copilot
 ```{r, out.width = '45%'}
 include_graphics("images/cs-copilot-keep-summary.png")
 ```
+
+Or maybe not. AI is changing all the time!
+
+###
 
 From the R Terminal, run:
 
@@ -707,14 +720,11 @@ An R script is a plain-text file whose name ends in `.R`. Creating or opening a 
 
 In the Explorer, click `script.R` to open it in the Editor. Click the triangular **Run Source** button in the upper-right corner of the Editor. Look in the R Terminal for the generated `source()` command, the line of code, and its result.
 
-The Run Source button is marked with a red square below.
+The Run Source button is marked with a red arrow below.
 
-<!-- DK: Replace this nonsense. -->
-
-<div style="position: relative; width: 90%; margin: 1em auto;">
-  <img src="images/cs-run-source.png" alt="VS Code Editor with script.R open" style="display: block; width: 100%; height: auto;">
-  <div aria-hidden="true" style="position: absolute; left: 93.1%; top: 0.5%; width: 1.9%; height: 4.5%; border: 4px solid red; box-sizing: border-box;"></div>
-</div>
+```{r}
+include_graphics("images/gs-6-b.png")
+```
 
 CP/CR.
 
@@ -730,11 +740,11 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
+R 4.6.1> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
 
 > 2 + 2
 [1] 4
-R 4.5.3>
+R 4.6.1>
 ````
 
 ###
@@ -759,9 +769,9 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> 2 + 2
+R 4.6.1> 2 + 2
 [1] 4
-R 4.5.3>
+R 4.6.1>
 ````
 
 ###
@@ -784,11 +794,11 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
+R 4.6.1> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
 
 > 2 + 2
 [1] 4
-R 4.5.3>
+R 4.6.1>
 ````
 
 ###
@@ -857,7 +867,7 @@ You have now run the same script five ways: with the Run Source button, with two
 
 So far, `script.R` calculates `2 + 2` and displays the result, but it does not give that result a name. In R, an **object** is a name used to store a value so you can use it again. The instruction `x <- 2 + 2` creates an object named `x` and stores the value `4` in it. An object exists only in the R session where it was created.
 
-Then ask Copilot to edit and run the script:
+Ask Copilot to edit and run the script:
 
 ```
 Edit script.R so its only line is x <- 2 + 2. Then run it with Rscript.
@@ -883,14 +893,14 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> exists("x")
+R 4.6.1> exists("x")
 [1] FALSE
-R 4.5.3>
+R 4.6.1>
 ````
 
 ###
 
-Copilot used `Rscript`, which created `x` in a separate R process and then closed that process. Your open R session therefore still reports `FALSE`: it does not know about the `x` that briefly existed in the other session.
+Copilot used `Rscript`, which created `x` in a separate R process and then closed that process. Your open R session therefore reports `FALSE`. it does not know about the `x` that briefly existed in the other session.
 
 ### Exercise 10
 
@@ -914,21 +924,23 @@ question_text(NULL,
 ###
 
 ````
-R 4.5.3> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
+R 4.6.1> source("/workspaces/codespace-starter/script.R", encoding = "UTF-8", echo = TRUE)
 
 > x <- 2 + 2
-R 4.5.3> x
+R 4.6.1> x
 [1] 4
-R 4.5.3>
+R 4.6.1>
 ````
 
 ###
 
-This time, `x` exists because the Editor sourced `script.R` in your open R session. The five ways to run the script do not all use the same R session:
+This time `x` exists because the Editor sourced `script.R` in your open R session. 
+
+The five ways to run the script do not all use the same R session:
 
 | Method | R session used |
 |---|---|
-| Run Source button | Your open R Terminal |
+| Click Source button | Your open R Terminal |
 | `Cmd/Ctrl + Enter` | Your open R Terminal; current line only |
 | `Cmd/Ctrl + Shift + Enter` | Your open R Terminal; entire file |
 | `Rscript script.R` in bash | A new process that closes afterward |
@@ -951,7 +963,7 @@ Unless your instructor tells you otherwise, you should use the default file name
 ## Summary
 ###
 
-You now understand how tutorials work, how to use bash and R Terminals, how to ask GitHub Copilot to create and edit files, and five ways to run an R script. You also know how to download a copy of your answers. Good luck with your data science journey!
+You now understand how tutorials work, how to use the bash and R Terminals, how to ask GitHub Copilot to create and edit files, and five ways to run R code. You also know how to download a copy of your answers. Good luck with your data science journey!
 
 <p>
   <img src="images/neo-cs.gif" alt="Neo learns codespaces" width="320">
