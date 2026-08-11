@@ -64,7 +64,7 @@ you are creating your own tutorials with the **tutorial.helpers**
 package. Have students run:
 
 ``` R
-learnr::run_tutorial("getting-started", package = "tutorial.helpers")
+learnr::run_tutorial("tutorials", package = "tutorial.helpers")
 ```
 
 This will teach them enough about how tutorials work to be able to
