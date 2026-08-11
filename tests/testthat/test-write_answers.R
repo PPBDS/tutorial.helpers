@@ -17,7 +17,7 @@
 #       devtools::install()
 #
 # Save a fresh fixture from the live tutorial
-# 5) Launch the tutorials tutorial and answer a few questions
+# 5) Launch the getting-started tutorial and answer a few questions
 #    including at least one multi-line answer.
 # 6) Temporarily add these two lines inside the downloadHandler content
 #    function in submission_server(), just before write_answers(file, session):

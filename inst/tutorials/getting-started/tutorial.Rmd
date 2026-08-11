@@ -1,8 +1,8 @@
 ---
-title: Tutorials
+title: Getting Started
 author: David Kane
 tutorial:
-  id: tutorials
+  id: getting-started
 output:
   learnr::tutorial:
     progressive: yes
@@ -93,7 +93,7 @@ At the end of every tutorial, you will download a copy of your answers. We will 
 
 Make sure to answer the question about how many **minutes** you spent on the tutorial and to click "Submit Answer."
 
-After clicking the "Download" button, you will be prompted to save a file named `tutorials_answers.html`. By default, this file will be saved in the `Downloads` folder on your computer. This action only downloads the file; it does not send the file to anyone.
+After clicking the "Download" button, you will be prompted to save a file named `getting-started_answers.html`. By default, this file will be saved in the `Downloads` folder on your computer. This action only downloads the file; it does not send the file to anyone.
 
 Unless your instructor tells you otherwise, you should use the default file name, which will usually be of the form `short-name-of-tutorial` + `_answers` + `.html`.
 

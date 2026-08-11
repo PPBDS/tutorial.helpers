@@ -64,7 +64,7 @@ on GitHub Codespaces. You should require your students to complete it if
 you are creating your own tutorials with the **tutorial.helpers**
 package. Have students run:
 
-    learnr::run_tutorial("tutorials", package = "tutorial.helpers")
+    learnr::run_tutorial("getting-started", package = "tutorial.helpers")
 
 This will teach them enough about how tutorials work to be able to
 complete the tutorials you write.
