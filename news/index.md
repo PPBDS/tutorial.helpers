@@ -2,6 +2,9 @@
 
 ## tutorial.helpers (development version)
 
+- Simplify Getting Started tutorial. Most material moved to
+  **vscode.tutorials**.
+
 ## tutorial.helpers 0.7.0
 
 CRAN release: 2026-07-27
