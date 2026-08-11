@@ -1,0 +1,106 @@
+---
+title: Tutorials
+author: David Kane
+tutorial:
+  id: tutorials
+output:
+  learnr::tutorial:
+    progressive: yes
+    allow_skip: yes
+runtime: shiny_prerendered
+description: A five-minute introduction to tutorials themselves - answer a question, copy a result from the Terminal, and download your answers.
+---
+
+```{r setup, include = FALSE}
+library(learnr)
+library(tutorial.helpers)
+library(knitr)
+
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(out.width = '90%')
+options(tutorial.exercise.timelimit = 60,
+        tutorial.storage = "local")
+```
+
+## Introduction
+###
+
+This tutorial teaches you how tutorials work. There are only three steps: answer a few questions about yourself, copy one result from the Terminal, and download a copy of your answers. It should take about five minutes. Every tutorial you complete after this one uses the same loop.
+
+Most students begin this tutorial after completing the setup steps outlined [here](https://ppbds.github.io/primer/getting-started.html). If you have not done that yet, do so now.
+
+###
+
+Complete the tutorial in your Codespace. At the end, you will press a button to download a copy of your answers to the `Downloads` folder on your computer. Downloading only saves the file on your computer. If your instructor wants a copy, they will tell you how to send it to them.
+
+###
+
+Most tutorials begin by asking for your name and email. Your instructor might also ask you to fill in the "ID" field so that your work can be matched to a grading database. If not, leave the "ID" field blank. Click "Continue," then enter your name and email. Click the **"Submit Answer"** button each time. If you make a mistake, click **"Try Again"** and submit a new answer.
+
+If you are completing this tutorial as part of a class, use the same email address for every tutorial.
+
+```{r info-section, child = system.file("child_documents/info_section.Rmd", package = "tutorial.helpers")}
+```
+
+## The bash Terminal
+###
+
+Tutorials include exercises. Most exercises ask you to run a command in a terminal and then copy the result into the answer box. You will do that once now.
+
+###
+
+Look at the bottom of your VS Code window. The horizontal area below the editor is called the "Panel," and it already contains a **bash** Terminal --- the text-based interface in which you type commands to tell your Codespace what to do. The pattern is always the same: you send a command, the terminal executes it, and it gives you something back. (If a welcome banner fills the terminal, that is fine --- just click anywhere in the terminal and type your command at the prompt.)
+
+### Exercise 1
+
+Click in the bash Terminal, type `pwd`, and then press `return` (on Mac) or `enter` (on Windows). To "run" a command means to type it and then press this key. To avoid repeating both terms in every question, we use `Enter` to mean either the `return` or `enter` key, as appropriate.
+
+###
+
+**Do not just type the command into the answer box!** You must run the command in the bash Terminal and then copy the result.
+
+**C**opy and **P**aste both the **C**ommand *and* the **R**esponse from the bash Terminal into the box below. We will abbreviate this instruction in the future as **CP**/**CR**.
+
+```{r the-bash-terminal-1}
+question_text(NULL,
+	answer(NULL, correct = TRUE),
+	allow_retry = TRUE,
+	try_again_button = "Edit Answer",
+	incorrect = NULL,
+	rows = 3)
+```
+
+###
+
+We typically provide example answers, like the one below, after you submit your own response. Do not be concerned if your answer differs from the example we show.
+
+````
+codespace-starter $ pwd
+/workspaces/codespace-starter
+codespace-starter $
+````
+
+###
+
+`pwd` stands for **p**rint **w**orking **d**irectory: it shows the directory in which the terminal is working. The response confirms that you are inside your Codespace, a complete computer running in the cloud. It is OK if your formatting differs from ours. What matters is that you show that you ran the command as instructed.
+
+That is the whole mechanic: run something in a terminal, copy the command and its response, paste them into the answer box. Almost every exercise in every later tutorial works this way.
+
+## Your answers
+###
+
+At the end of every tutorial, you will download a copy of your answers. We will do this in the next topic, labeled "Download answers." Follow the instructions there.
+
+Make sure to answer the question about how many **minutes** you spent on the tutorial and to click "Submit Answer."
+
+After clicking the "Download" button, you will be prompted to save a file named `tutorials_answers.html`. By default, this file will be saved in the `Downloads` folder on your computer. This action only downloads the file; it does not send the file to anyone.
+
+Unless your instructor tells you otherwise, you should use the default file name, which will usually be of the form `short-name-of-tutorial` + `_answers` + `.html`.
+
+```{r your-answers-0, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
+
+## Summary
+###
+
+You now know how tutorials work: answer the questions, CP/CR your work from the Terminal, and download a copy of your answers at the end. Every tutorial from here on uses this same loop. Good luck with your data science journey!
