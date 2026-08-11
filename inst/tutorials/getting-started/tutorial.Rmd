@@ -65,6 +65,10 @@ Press `+` This opens a new **bash** Terminal --- the text-based interface in whi
 
 Click into the bash Terminal, type `pwd`, and then press `return` (on Mac) or `enter` (on Windows). To "run" a command means to type it and then press this key. To avoid repeating both terms in every question, we use `Enter` to mean either the `return` or `enter` key, as appropriate.
 
+```{r}
+include_graphics("images/pwd.png")
+```
+
 ###
 
 **Do not just type the command into the answer box!** You must run the command in the bash Terminal and then copy the result.
@@ -94,7 +98,7 @@ codespace-starter $
 
 `pwd` stands for **p**rint **w**orking **d**irectory: it shows the directory in which the terminal is working. The response confirms that you are inside your Codespace, a complete computer running in the cloud. It is OK if your formatting differs from ours. What matters is that you show that you ran the command as instructed.
 
-That is the whole mechanic: run something in a terminal, copy the command and its response, paste them into the answer box. Almost every exercise in every later tutorial works this way.
+That is the usual process: Run something in a terminal, copy the command and the response, paste them into the answer box. Almost every exercise in every later tutorial works this way.
 
 ## Your answers
 ###
@@ -113,4 +117,4 @@ Unless your instructor tells you otherwise, you should use the default file name
 ## Summary
 ###
 
-You now know how tutorials work: answer the questions, CP/CR your work from the Terminal, and download a copy of your answers at the end. Every tutorial from here on uses this same loop. Good luck with your data science journey!
+You now know how tutorials work: Answer the questions about your name and email, CP/CR your work from the Terminal, and download a copy of your answers at the end. Every tutorial from here on uses this same loop. Good luck with your data science journey!
