@@ -100,6 +100,28 @@ codespace-starter $
 
 That is the usual process: Run something in a terminal, copy the command and the response, paste them into the answer box. Almost every exercise in every later tutorial works this way.
 
+### Exercise 2
+
+Read all of the following instructions before continuing. The purpose of this exercise is to demonstrate that your tutorial answers are saved automatically.
+
+* Return to your Codespace and click the terminal tab titled **R Tutorial** on the right side of the Panel.
+
+```{r}
+include_graphics("images/gs-3.png")
+```
+
+* Stop the tutorial by pressing `Ctrl + C` in that terminal. `Ctrl + C` interrupts whatever process is running in a terminal --- here, the tutorial itself. A new line should appear where you can enter another command.
+
+* To restart the tutorial, press the triangle button next to the "Getting Started" tutorial via the R Tutorials VS Code extension.
+
+* Finally, open the tutorial.
+
+Now that you have read all the instructions, go ahead and follow them.
+
+###
+
+Notice that all of your answers to previous questions have been saved. It is not a problem to quit a tutorial. In fact, if you leave a tutorial idle, it will eventually quit automatically. The same is true one level up: *stopping* your Codespace (as opposed to deleting it) also loses nothing --- when you reopen it, your work, including your tutorial answers, is right where you left it.
+
 ## Your answers
 ###
 
