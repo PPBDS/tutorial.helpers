@@ -25,7 +25,7 @@ options(tutorial.exercise.timelimit = 60,
 ## Introduction
 ###
 
-This tutorial teaches you how tutorials work. There are only three steps: answer a few questions about yourself, copy one result from the Terminal, and download a copy of your answers. It should take about five minutes. Every tutorial you complete after this one uses the same loop.
+This tutorial teaches you how tutorials work. There are only three steps: answer a few questions about yourself, copy one result from the Terminal, and download a copy of your answers. It should take about five minutes. Every tutorial you complete after this one uses the same sequence.
 
 Most students begin this tutorial after completing the setup steps outlined [here](https://ppbds.github.io/primer/getting-started.html). If you have not done that yet, do so now.
 
