@@ -49,11 +49,21 @@ Tutorials include exercises. Most exercises ask you to run a command in a termin
 
 ###
 
-Look at the bottom of your VS Code window. The horizontal area below the editor is called the "Panel," and it already contains a **bash** Terminal --- the text-based interface in which you type commands to tell your Codespace what to do. The pattern is always the same: you send a command, the terminal executes it, and it gives you something back. (If a welcome banner fills the terminal, that is fine --- just click anywhere in the terminal and type your command at the prompt.)
+Look at the bottom of your VS Code window. The horizontal area below the editor is called the "Panel." When you started this tutorial, the Panel switched to a terminal named "R Tutorial." That terminal is busy running this tutorial --- leave it alone.
+
+###
+
+The red arrow points to the new terminal plus button (`+`) on the right side of the Panel.
+
+```{r}
+include_graphics("images/get-bash.png")
+```
+
+Press `+` This opens a new **bash** Terminal --- the text-based interface in which you type commands to tell your Codespace what to do. The pattern is always the same: you send a command, the terminal executes it, and it gives you something back. (If a welcome banner fills the terminal, that is fine --- just click anywhere in the terminal and type your command at the prompt.)
 
 ### Exercise 1
 
-Click in the bash Terminal, type `pwd`, and then press `return` (on Mac) or `enter` (on Windows). To "run" a command means to type it and then press this key. To avoid repeating both terms in every question, we use `Enter` to mean either the `return` or `enter` key, as appropriate.
+Click into the bash Terminal, type `pwd`, and then press `return` (on Mac) or `enter` (on Windows). To "run" a command means to type it and then press this key. To avoid repeating both terms in every question, we use `Enter` to mean either the `return` or `enter` key, as appropriate.
 
 ###
 
