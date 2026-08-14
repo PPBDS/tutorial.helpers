@@ -1,5 +1,9 @@
 ## Items
 
+* tutorial.helpers saves files using the directory name, something like 00-workspace. We use prefix numbers so that the ordering works in the VS Code R Tutorials extension. But students never see 00. All they ever see is "Workspace," at least until they download their answers. This is somewhat confusing. Better for tutorial.helpers to use the actual title of the tutorial, mapped to lowercase with dashes replacing spaces and other weird characters. 
+
+* Add a test to ensure no duplications of tutorial titles in a package.
+
 * Fix check_current_tutorial. See below for details.
 
 * If you have a symbol like <td> in the text of a tutorial, it will still knit. But that symbol (or maybe anything with brackets) causes the side menu (and the download screen) not to appear. The solution is to use `<td>` in place of just <td>. To Do: Come up with some testing that prevents this scenario from happening in the future.
