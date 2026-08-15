@@ -1,3 +1,20 @@
+## Tutorial notes
+
+The restart section is confusing.
+
+* Ctrl + C is a confusing way to stop a tutorial. Maybe just click the trashcan on the R Tutorial entry in the Terminal list?
+
+* Add arrows to some of the images, like the `pwd` one. Arrow pointed at last bash Terminal and also at `pwd`.
+
+* Add something in which we check on the old tutorial after quiting from it. Show a picture. Should be greyed out. Try to reload. Doesn't work! Oh no! All my work is gone! But, no, starting the tutorial again (show the picture again) shows that we saved all your old answers.
+
+* Should include something about the "Start Over" button. Maybe after entering student information, since that is easy to fill in again. Show an image, with the "Edit" box highlighted. Maybe an earlier picture showing how to click on the "Submit Answer" box, both before you do it and after, with "Submit Answer" clearly now "Edit Answer".
+
+* At the very end (Summary), is there any way to have something besides a "Continue" button which turns into a "Previous Topic" button when clicked? At that point, we neither want to continue or go to a previous topic. We want to end or quit. Really, this should be built into the Download Answers code chunk.
+
+
+
+
 ## Items
 
 * tutorial.helpers saves files using the directory name, something like 00-workspace. We use prefix numbers so that the ordering works in the VS Code R Tutorials extension. But students never see 00. All they ever see is "Workspace," at least until they download their answers. This is somewhat confusing. Better for tutorial.helpers to use the actual title of the tutorial, mapped to lowercase with dashes replacing spaces and other weird characters. 
